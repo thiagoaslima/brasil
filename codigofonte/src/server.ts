@@ -58,6 +58,7 @@ function cacheControl(req, res, next) {
 }
 // Serve static files
 app.use('/assets', cacheControl, express.static(path.join(__dirname, 'assets'), {maxAge: 30}));
+app.use('/css', cacheControl, express.static(path.join(__dirname, 'css'), {maxAge: 30}));
 app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: false}));
 
 //
@@ -113,6 +114,6 @@ app.get('*', function(req, res) {
 
 // Server
 let server = app.listen(app.get('port'), () => {
-  console.log(`Listening on: http://localhost:${server.address().port}`);
+  console.log(`${(new Date()).toLocaleTimeString()}: on http://localhost:${server.address().port}`);
 });
 

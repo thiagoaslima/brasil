@@ -1,0 +1,53 @@
+*{
+    color: inherit;
+    text-decoration: inherit;
+    font-family: 'Open Sans', sans-serif;
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+html{
+   font-size: 62.5%;
+}
+
+body{
+    font-size: 1.5em;
+}
+
+header{
+    background-color: red;
+    height: 50px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+#container{
+    max-width: 1000px;
+    margin: auto;
+}
+
+aside{
+    background-color: #cccffc;
+    min-height: 100vh;
+    width: 18%;
+    float: left;
+}
+
+#sintese{
+    float: left;
+    width: 82%;
+}
+
+#sintese #dados{
+    background-color: #00f148;
+    float: left;
+    width: 38%;
+    min-height: 100vh;
+}
+
+#sintese #detalhes{
+    background-color: yellow;
+    float: left;
+    width: 62%;
+    min-height: 100vh;
+}
