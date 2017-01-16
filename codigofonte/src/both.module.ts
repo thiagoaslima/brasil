@@ -1,15 +1,15 @@
-import { AppModule } from './app/app.module';
-import { AppComponent } from './app/app.component';
+import { RootModule } from './app/root.module';
+import { RootComponent } from './app/root.component';
 import { SharedModule } from './app/shared/shared.module';
 
 const MODULES = [
     // include modules to be imported by client and server
-    AppModule,
+    RootModule,
     SharedModule.forRoot()
 ]
 
 const COMPONENTS = [
-    AppComponent
+    RootModule
 ]
 
 const PROVIDERS = [
@@ -22,4 +22,4 @@ export {
     PROVIDERS
 }
 
-export { AppComponent }
+export const BootstrapComponent = RootComponent;

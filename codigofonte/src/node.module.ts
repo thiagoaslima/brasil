@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule, isBrowser, isNode } from 'angular2-universal/node'; // for AoT we need to manually split universal packages
 
 import { CacheService } from './app/shared/cache.service';
-import { COMPONENTS, MODULES, AppComponent } from './both.module';
+import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
 // Will be merged into @angular/platform-browser in a later release
 // see https://github.com/angular/angular/pull/12322
@@ -24,7 +24,7 @@ export function getResponse() {
 export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
 @NgModule({
-  bootstrap: [ AppComponent ],
+  bootstrap: [ BootstrapComponent ],
   imports: [
     // MaterialModule.forRoot() should be included first
     UniversalModule, // BrowserModule, HttpModule, and JsonpModule are included

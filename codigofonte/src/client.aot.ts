@@ -25,7 +25,7 @@ export function main() {
   // https://github.com/typekit/webfontloader#configuration
   loadWebFont({
     google: {
-      families: ['Droid Sans']
+      families: ['Open Sans:400, 700']
     }
   });
 
