@@ -9,16 +9,38 @@
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="style/global.css">
+        <link rel="stylesheet" href="style/sintese-detalhes.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
 
         <header>
-            header
+            <div class="logo">
+                <img src="img/logo.png">
+            </div>
+            <input type="text" id='busca' placeholder="O que você procura?">
         </header>
 
         <div id='container'>
-            <aside>
-                sidebar
+            <aside class='aside--municipio'>
+                
+                <nav id='local'>
+                    <ul>
+                        <li><a href='?'>Brasil</a></li>
+                        <li><a href='?'>MT</a></li>
+                        <li><h1>Rio de Janeiro</h1></li>
+                    </ul>
+                </nav>
+                <button>Alterar localidade</button>
+                
+                <nav id="menu">
+                    <ul>
+                        <li class='menu--selecionado'>Sintese</li>
+                        <li>Tema</li>
+                        <li>Pesquisas</li>
+                    </ul>
+                </nav>
             </aside>
             
             <div id='sintese'>
@@ -28,19 +50,28 @@
 
                 <section id='detalhes'>
                     <div class="cabecalho">
-                        <div>
-                            <a>+PNAD</a>
-                            <a>+População</a>
-                            <h2>População estimada</h2>
-                        </div>
-                        <div>
+                        <div class="cabecalho__sub-container">
                             <div>
-                                <span>mapa</span>
-                                <span>tabela</span>
+                                <a class="cabecalho__link">+PNAD</a>
+                                <span class="cabecalho__bullet">&#8226;</span>
+                                <a class="cabecalho__link">+População</a>
                             </div>
-                            <div>
-                                <span>compartilhar</span>
-                                <span>download</span>
+                            <h2 class="cabecalho__titulo">População estimada</h2>
+                        </div>
+                        <div class="cabecalho__sub-container">
+                            <div class="cabecalho__sub-container cabecalho__sub-container--ta-right">
+                                <i class="fa fa-bar-chart fa-inverse cabecalho__meio-botao-esq"></i>
+                                <i class="fa fa-map fa-inverse cabecalho__meio-botao-dir"></i>
+                            </div>
+                            <div class="cabecalho__sub-container cabecalho__sub-container--ta-right">
+                                <span class="fa-stack cabecalho__botao-redondo">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <span class="fa-stack cabecalho__botao-redondo">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-download fa-stack-1x fa-inverse"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
