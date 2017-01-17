@@ -1,0 +1,29 @@
+<div class="cabecalho">
+    <div class="cabecalho__sub-container">
+        <div>
+            <a class="cabecalho__link">+PNAD</a>
+            <span class="cabecalho__bullet">&#8226;</span>
+            <a class="cabecalho__link">+População</a>
+        </div>
+        <h2 class="cabecalho__titulo">População estimada</h2>
+    </div>
+    <div class="cabecalho__sub-container">
+        <div class="cabecalho__sub-container cabecalho__sub-container--ta-right">
+            <i class="fa fa-bar-chart fa-inverse cabecalho__meio-botao-esq cabecalho__meio-botao--ativo" [class.cabecalho__meio-botao--ativo]="ativo=='grafico'" (click)="ativar('grafico')"></i>
+            <span class="cabecalho__meio-botao-dir" [class.cabecalho__meio-botao--ativo]="ativo=='cartograma'" (click)="ativar('cartograma')">
+                <img src="img/icon_cartograma.svg" class="cabecalho__icon-cartograma">
+            </span>
+            <!--<i class="fa fa-map fa-inverse cabecalho__meio-botao-dir"></i>-->
+        </div>
+        <div class="cabecalho__sub-container cabecalho__sub-container--ta-right">
+            <span class="fa-stack cabecalho__botao-redondo">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
+            </span>
+            <span class="fa-stack cabecalho__botao-redondo">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-download fa-stack-1x fa-inverse"></i>
+            </span>
+        </div>
+    </div>
+</div>
