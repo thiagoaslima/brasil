@@ -13,12 +13,31 @@
     <body>
 
         <header>
-            header
+            <div class="logo">
+                <img src="img/logo.png">
+            </div>
+            <input type="text" id='busca' placeholder="O que você procura?">
         </header>
 
         <div id='container'>
-            <aside>
-                sidebar
+            <aside class='aside--municipio'>
+                
+                <nav id='local'>
+                    <ul>
+                        <li><a href='?'>Brasil</a></li>
+                        <li><a href='?'>MT</a></li>
+                        <li><h1>Rio de Janeiro</h1></li>
+                    </ul>
+                </nav>
+                <button>Alterar localidade</button>
+                
+                <nav id="menu">
+                    <ul>
+                        <li class='menu--selecionado'>Sintese</li>
+                        <li>Tema</li>
+                        <li>Pesquisas</li>
+                    </ul>
+                </nav>
             </aside>
             
             <div id='sintese'>

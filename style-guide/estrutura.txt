@@ -1,0 +1,29 @@
+﻿
+Estrutura básica, conforme o angular style guide
+
+
++brasil-em-sintese
+|    +app
+|    |    root.component.ts
+|    |    root.routes.ts
+|    |    root.module.ts
+|    |    root.template.html
+|    |    +core (contém os componentes/singletons usados apenas uma vez na aplicação)
+|    |    |    +busca
+|    |    |    +menu-principal
+|    |    +shared (pasta dos códigos e css compartilhados)
+|    |    |    pesquisas.service.ts (serviço compartilhado)
+|    |    |    app.css (css compartilhado)
+|    |    |    +grafico-barras (pasta de um componente compartilhado)
+|    |    |    +sparkline (pasta de um componente compartilhado)
+|    |    +síntese (componente síntese)
+|    |    |    sintese.component.ts
+|    |    |    sintese.template.html
+|    |    |    sintese.style.css
+|    |    |    +cartograma (subcomponente específico da sintese, na sua própria subpasta)
+|    |    |    +tabela (subcomponente específico da sintese, na sua própria subpasta)
+|    |    |    +shared (pasta para os itens compartilhados pelos subcomponente da síntese)
+|    |    +temas
+|    |    +pesquisas
+
+
