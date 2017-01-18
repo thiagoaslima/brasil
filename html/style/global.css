@@ -110,9 +110,6 @@ aside #menu ul li:hover, aside #menu .menu--selecionado{
     background-color: #15696D;
 }
 
-
-
-
 #sintese{
     float: left;
     width: 79%;
@@ -128,7 +125,7 @@ sintese>dados
     background-color: #E6E6E6;
     float: left;
     width: 38%;
-    /*padding: 2% 1%;*/
+    padding: 2% 0%;
     min-height: 100%;
 }
 
