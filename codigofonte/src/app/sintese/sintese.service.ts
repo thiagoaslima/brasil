@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 /**
- * Serviço responsável por recuperar as informações as pesquisas.
+ * Serviço responsável por recuperar as informações de sínteses e pesquisas.
  */
 @Injectable()
 export class SinteseService{
@@ -127,6 +127,17 @@ export class SinteseService{
                         return nome;
                     });
             });
+    }
+
+
+    /**
+     * Recupera a síntese de uma dada localidade.
+     * 
+     * @local: string - código da localidade.
+     */
+    public getSinteseLocal(local: string){
+
+        return this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]);
     }
 
 }
