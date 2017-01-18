@@ -5,6 +5,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SinteseModule } from './sintese/sintese.module';
+import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
 
@@ -13,6 +14,7 @@ import { RootRoutingModule } from './root-routing.module';
         CoreModule,
         SharedModule,
         SinteseModule,
+        SandboxModule,
         RootRoutingModule
     ],
     declarations: [
