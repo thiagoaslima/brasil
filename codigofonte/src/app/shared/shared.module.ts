@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { RouterParamsService } from './router-params.service';
+import { LocalidadeService } from './localidade/localidade.service';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -21,7 +23,8 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
-
+    RouterParamsService,
+    LocalidadeService
 ]
 
 @NgModule({
