@@ -13,6 +13,10 @@
     text-align: right;
 }
 
+.cabecalho__sub-container--minw-100{
+    min-width: 100px;
+}
+
 .cabecalho__link{
     font-size: 0.9em;
     color: #148C99;
