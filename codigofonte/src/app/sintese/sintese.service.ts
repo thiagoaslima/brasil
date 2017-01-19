@@ -140,4 +140,16 @@ export class SinteseService{
         return this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]);
     }
 
+
+    /**
+     * Obtém os valores históricos de um dado indicador da síntese.
+     * 
+     * @local: string - código da localidade.
+     * @indicador: string - código do indicador.
+     */
+    public getDetalhesIndicadorSintese(local: string, indicador: string){
+
+        return this.getPesquisa('33', local, [indicador]);
+    }
+
 }
