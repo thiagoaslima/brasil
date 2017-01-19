@@ -154,9 +154,90 @@
 
                 <section id='detalhes'>
                     detalhes
+                    <div id="chart-legend"></div>
+                    <canvas id="myChart" width="400" height="400"></canvas>    
                 </section>
             </div>
         </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+        <script>
+            /*
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: { 
+                    labels: ["1980", "1981", "2000", "2010"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }//,responsive: false
+                }
+            });
+*/
+            //function barsChart() { 
+                var data = { 
+                    labels: ["1980", "1991", "2000", "2010"], 
+                    datasets : [ 
+                        { 
+                            backgroundColor: "#D00",
+                            data : [38,41,35,40],
+                            label : '0 a 14 anos' 
+                        }, 
+                        { 
+                            backgroundColor: "#F29220", 
+                            data : [55,39,50,51],
+                            label : '15 a 64 anos' 
+                        }, 
+                        { 
+                            backgroundColor: "#4365B0",
+                            data : [7,20,15,9], 
+                            label : '65 anos ou mais (idosos)' 
+                        }
+                    ] 
+                }; 
+                var options = {
+                        scales: {
+                            yAxes: [{
+                                stacked: true,
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }],
+                            xAxes: [{
+                                stacked: true
+                            }]
+                        },
+                        legend: {
+                            display: true,
+                            //position: 'top',
+                            horizontalAlign: "left",
+                            verticalAlign: "center",
+                            labels: {
+                                boxWidth: 30                                
+                            }
+                        }//,responsive: false
+                    };
+
+                    var ctx = document.getElementById("myChart").getContext("2d"); 
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data,
+                        options: options
+                    });
+
+                    document.getElementById("chart-legend").innerHTML = myChart.generateLegend();
+                 
+        </script>
 
     </body>
 </html>
