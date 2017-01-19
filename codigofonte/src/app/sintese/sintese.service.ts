@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/zip';
 
 /**
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
@@ -116,11 +117,11 @@ export class SinteseService{
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
 
-                debugger;
+               // debugger;
 
                 return (<any[]>nomes).map((nome) => {
 
-                        debugger;
+                        // debugger;
 
                         nome["res"] = dados[nome.id];
 
@@ -137,9 +138,48 @@ export class SinteseService{
      */
     public getSinteseLocal(local: string){
 
-        return this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]);
-    }
+        /*
+            codigo      33    29169
+            prefeito    33    29170
 
+            area        33    29167
+            altitude    ?
+
+            pop estimada    33    29171
+            dens demograf    33    29168
+
+            orçamento        ?
+            FPM            21    28160
+
+            PIB per capita   38    47001 
+            Salário médio    ?
+
+            IDHM     37    30255
+            IDEB    40    30277
+
+            Leitos hospitalares    32    28311
+
+            agricultura     necessário vir do servidor
+
+            Desocupação (não há no servidor ainda)
+        */
+        
+
+        return Observable.zip(
+                this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]),
+                this.getPesquisa('21', local, ['28160']),
+                this.getPesquisa('38', local, ['47001']),
+                this.getPesquisa('37', local, ['30255']),
+                this.getPesquisa('40', local, ['30277']),
+                this.getPesquisa('32', local, ['28311'])
+            ).map( (resp) => {
+                return resp.reduce( (agg, pesq) => agg.concat(pesq), []);
+            }).map( dados => dados.map(this.filterLastValidValue) )
+            .map( dados => dados.reduce( (agg, dado) => {
+                agg[dado.id] = dado;
+                return agg;
+            }, {}));
+    }
 
     /**
      * Obtém os valores históricos de um dado indicador da síntese.
@@ -150,6 +190,24 @@ export class SinteseService{
     public getDetalhesIndicadorSintese(local: string, indicador: string){
 
         return this.getPesquisa('33', local, [indicador]);
+    }
+
+    /**
+     * Simplifica a resposta do indicador, resumindo o objeto "res" para o ano mais próximo com dado válido
+     * 
+     * @dados: object - resposta de indicador do método getPesquisa
+     */
+    public filterLastValidValue(dados) {
+        dados.value = Object.keys(dados.res)
+            .map(ano => Number.parseInt(ano, 10))
+            .sort()
+            .reduce( (agg, ano) => {
+                let _ano = ano.toString();
+               return (!!dados.res[_ano]) 
+                   ? dados.res[_ano]
+                   : agg;
+            }, {});
+        return dados;
     }
 
 }
