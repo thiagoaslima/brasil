@@ -4,6 +4,9 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip';
+import 'rxjs/add/operator/switchMap';
+
+import { slugify } from '../utils/slug';
 
 /**
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
@@ -82,7 +85,7 @@ export class SinteseService{
      * Recupera somente os nomes dos indicadores da pesquisa, ignorando seus valores.
      * 
      * @pesquisa: string - código da pesquisa.
-     * @indicadores: string[] - lista de indicadores a serem recuperados.
+     * @indicadores: string[] - lista de indicadores a serem recuperados. Se não informado, obtém todos os indicadores da pesquisa.
      */
     public getNomesPesquisa(pesquisa: string, indicadores: string[] = []) {
 
@@ -117,14 +120,8 @@ export class SinteseService{
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
 
-               // debugger;
-
                 return (<any[]>nomes).map((nome) => {
-
-                        // debugger;
-
                         nome["res"] = dados[nome.id];
-
                         return nome;
                     });
             });
@@ -185,11 +182,11 @@ export class SinteseService{
      * Obtém os valores históricos de um dado indicador da síntese.
      * 
      * @local: string - código da localidade.
-     * @indicador: string - código do indicador.
+     * @indicador: string - codigo do indicador.
      */
     public getDetalhesIndicadorSintese(local: string, indicador: string){
-
-        return this.getPesquisa('33', local, [indicador]);
+ 
+        return this.getPesquisa('33', local, [indicador])
     }
 
     /**
