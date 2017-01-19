@@ -1,4 +1,5 @@
 export function slugify(text: string): string {
+
     return makeSlug(text, {
         replacement: '-',      // replace spaces with replacement 
         symbols: false,         // replace unicode symbols or not 
