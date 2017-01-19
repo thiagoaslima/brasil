@@ -6,9 +6,11 @@ import { LocalidadeService } from './shared/localidade/localidade.service';
     templateUrl: 'root.template.html'
 })
 export class RootComponent {
+    locais; 
+
     constructor(
         private localidadeService: LocalidadeService
     ) {
-        localidadeService.log();
+        this.locais = localidadeService.tree$;
     }
 }

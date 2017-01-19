@@ -12,8 +12,9 @@ interface UFParams {
 interface MunParams {
     codigo: number,
     codigoUf: number,
+    siglaUf: string,
     nome: string,
-    slug?: string
+    slug?: string,
 }
 
 export class UF {
@@ -22,12 +23,13 @@ export class UF {
     nome: string;
     sigla: string;
     slug: string;
+    link: string;
 
     capital: Municipio;
     municipios = <{
         lista: Municipio[],
-        porSlug: {[idx:string]: Municipio},
-        porCodigo: {[idx:string]: Municipio}
+        porSlug: { [idx: string]: Municipio },
+        porCodigo: { [idx: string]: Municipio }
     }>{
         lista: [],
         porSlug: {},
@@ -47,8 +49,9 @@ export class UF {
         this.nome = nome;
         this.sigla = sigla;
         this.slug = slug || slugify(nome);
+        this.link = `brasil/${this.sigla.toLowerCase()}`;
 
-        this.municipios.lista = municipios.sort( (a, b) => a.slug < b.slug ? 1 : -1 );
+        this.municipios.lista = municipios.sort((a, b) => a.slug < b.slug ? 1 : -1);
 
         municipios.forEach(mun => {
             this.municipios.porCodigo[mun.codigo] = mun;
@@ -60,7 +63,7 @@ export class UF {
         Object.freeze(this.municipios.porCodigo);
         Object.freeze(this.municipios);
         Object.freeze(this);
-     }
+    }
 }
 
 
@@ -69,10 +72,12 @@ export class Municipio {
     codigoUf: number;
     nome: string;
     slug: string;
+    link: string;
 
     constructor({
         codigo,
         codigoUf,
+        siglaUf,
         nome,
         slug
     }: MunParams) {
@@ -80,6 +85,7 @@ export class Municipio {
         this.codigoUf = codigoUf;
         this.nome = nome;
         this.slug = slug || slugify(nome);
+        this.link = `brasil/${siglaUf.toLowerCase()}/${this.slug}`;
 
         Object.freeze(this);
     }
@@ -89,5 +95,10 @@ export interface IBrasil {
     codigo: number;
     nome: string,
     slug: string,
-    ufs: UF[]
+    link: string,
+    ufs?: {
+        lista: UF[],
+        porSigla: { [idx: string]: UF },
+        porCodigo: { [idx: number]: UF }
+    }
 }

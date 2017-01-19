@@ -12,9 +12,11 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LocalidadeService {
-    private brasil: IBrasil;
-    private municipios = <Municipio[]>[];
-    private ufs = <UF[]>[];
+
+    private _brasil: IBrasil;
+    private _municipios = <Municipio[]>[];
+    private _ufs = <UF[]>[];
+    private _linkCache = <{ [idx: number]: string }>{};
 
     public tree$: Observable<any>;
     public selecionada$: Observable<IBrasil | UF | Municipio>;
@@ -27,10 +29,10 @@ export class LocalidadeService {
         this.tree$ = this._params.params$
             .map((params: { [idx: string]: string }) => ({ uf: params['uf'], municipio: params['municipio'] }))
             .map(slugs => {
-                let uf = this.getUfBySlug(slugs.uf);
+                let uf = this.getUfBySigla(slugs.uf);
                 let mun = this.getMunicipioBySlug(slugs.uf, slugs.municipio);
 
-                return [this.brasil, uf, mun].filter(value => !!value);
+                return [this._brasil, uf, mun].filter(value => !!value);
             });
 
         this.selecionada$ = this.tree$.map(tree => tree[tree.length - 1]);
@@ -41,27 +43,37 @@ export class LocalidadeService {
         return this._getUf('codigo', ufCodigo);
     }
 
-    public getUfBySlug(ufSlug): UF {
-        if (!ufSlug) return;
-        return this._getUf('slug', ufSlug);
+    public getUfBySigla(ufSigla): UF {
+        if (!ufSigla) return;
+        return this._getUf('sigla', ufSigla);
     }
 
-    public getMunicipioBySlug(ufSlug, munSlug): Municipio {
-        if (!ufSlug || !munSlug) return;
-        return this._getMun('slug', ufSlug, munSlug);
+    public getMunicipioBySlug(ufSigla, munSlug): Municipio {
+        if (!ufSigla || !munSlug) return;
+        return this._getMun('slug', ufSigla, munSlug);
     }
 
     private _getUf(where, ufKey) {
-        let prop = where === 'slug' ? 'porSlug' : 'porCodigo';
-        return this.brasil.ufs[prop][ufKey];
+        let prop = where === 'sigla' ? 'porSigla' : 'porCodigo';
+        return this._brasil.ufs[prop][ufKey];
     }
 
     private _getMun(where, ufKey, munKey) {
-        let prop = where === 'slug' ? 'porSlug' : 'porCodigo';
-        return this.brasil.ufs[prop][ufKey].municipios[prop][ufKey];
+        let munProp = where === 'slug' ? 'porSlug' : 'porCodigo';
+        let ufProp = where === 'slug' ? 'porSigla' : 'porCodigo';
+        return this._brasil.ufs[ufProp][ufKey].municipios[munProp][munKey];
     }
 
     private _buildLocalidadesTree() {
+        this._brasil = Object.assign({}, brasil, {
+            ufs: {
+                lista: [],
+                porSigla: {},
+                porCodigo: {}
+            },
+            link: 'brasil'
+        });
+
         let hashUfs = ufs.reduce((agg, uf) => {
             uf['municipios'] = [];
             agg[uf.codigo] = uf;
@@ -70,26 +82,31 @@ export class LocalidadeService {
 
         // build all municipios and registers on uf
         municipios.forEach(mun => {
-            mun = new Municipio(mun);
-            hashUfs[mun.codigoUf].municipios.push(mun);
-            this.municipios.push(mun);
+            let munParams = Object.assign({}, mun, { siglaUf: hashUfs[mun.codigoUf].sigla });
+            let munObj = new Municipio(munParams);
+            hashUfs[mun.codigoUf].municipios.push(munObj);
+            this._municipios.push(munObj);
         });
 
         // build all ufs
         Object.keys(hashUfs).forEach(codigoUf => {
             let uf = new UF(hashUfs[codigoUf]);
-            this.ufs.push(uf);
+            this._ufs.push(uf);
+            this._brasil.ufs.lista.push(uf);
+            this._brasil.ufs.porSigla[uf.sigla.toLowerCase()] = uf;
+            this._brasil.ufs.porCodigo[uf.codigo] = uf;
         });
 
-        this.brasil = brasil;
-        this.brasil.ufs = this.ufs;
-
-        Object.freeze(this.municipios);
-        Object.freeze(this.ufs);
-        Object.freeze(this.brasil);
+        Object.freeze(this._municipios);
+        Object.freeze(this._ufs);
+        Object.freeze(this._brasil.ufs.lista);
+        Object.freeze(this._brasil.ufs.porCodigo);
+        Object.freeze(this._brasil.ufs.porSigla);
+        Object.freeze(this._brasil.ufs);
+        Object.freeze(this._brasil);
     }
 
     log() {
-        console.log(this.brasil);
+        console.log(this._brasil);
     }
 }

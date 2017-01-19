@@ -10,11 +10,10 @@
     <aside class='aside--municipio'>
         <nav id='local'>
             <ul>
-                <li><a href='?'>Brasil</a></li>
-                <li><a href='?'>MT</a></li>
-                <li>
-                    <h1>Rio de Janeiro</h1>
-                </li>
+                <template ngFor let-local [ngForOf]="locais | async" let-last="last">
+                    <li *ngIf="!last"><a [routerLink]="'/'+local.link">{{local.nome}}</a></li>
+                    <li *ngIf="last"><h1>{{local.nome}}</h1></li>
+                </template>
             </ul>
         </nav>
         
