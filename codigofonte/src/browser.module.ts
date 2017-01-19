@@ -4,6 +4,8 @@ import { RouterModule, NoPreloading } from '@angular/router';
 import { UniversalModule, isBrowser, isNode, AUTO_PREBOOT } from 'angular2-universal/browser'; // for AoT we need to manually split universal packages
 import { IdlePreload, IdlePreloadModule } from '@angularclass/idle-preload';
 
+import 'chart.js';
+
 import { CacheService } from './app/shared/cache.service';
 import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
@@ -17,7 +19,7 @@ export function getLRU(lru?: any) {
   // use LRU for node
   // return lru || new LRU(10);
   return lru || new Map();
-}
+} 
 export function getRequest() {
   // the request object only lives on the server
   return { cookie: document.cookie };
@@ -42,7 +44,8 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     IdlePreloadModule.forRoot(),
     
-    ...MODULES
+    ...MODULES//,
+    //ChartsModule
   ],
   providers: [
     { provide: 'isBrowser', useValue: isBrowser },

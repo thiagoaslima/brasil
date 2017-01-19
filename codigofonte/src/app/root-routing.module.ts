@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SinteseComponent } from './sintese/sintese.component';
+import { SandboxComponent } from './sandbox/sandbox.component';
 
 const children = [
   { path: '', component: SinteseComponent, pathMatch: 'full' }
@@ -10,6 +11,10 @@ const children = [
 @NgModule({
   imports: [
     RouterModule.forChild([
+      {
+        path: 'brasil/sandbox',
+        component: SandboxComponent
+      },
       { 
         path: '',
         redirectTo: 'brasil',
