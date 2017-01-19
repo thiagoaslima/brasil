@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { CoreModule } from './core/core.module';
 
 import { SharedModule } from './shared/shared.module';
-import { AppRoutingModule } from './app-routing.module';
 
 import { SinteseModule } from './sintese/sintese.module';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
+
+import { ValidParametersGuard } from './valid-parameters.guard';
 
 @NgModule({
     imports: [
@@ -20,6 +21,9 @@ import { RootRoutingModule } from './root-routing.module';
     ],
     declarations: [
         RootComponent
+    ],
+    providers: [
+        ValidParametersGuard
     ]
 })
 export class RootModule {}

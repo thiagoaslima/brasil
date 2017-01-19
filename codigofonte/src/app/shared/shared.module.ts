@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import 'chart.js';
 import { ChartsModule } from './ng2-charts.module';
 
+import { RouterParamsService } from './router-params.service';
+import { LocalidadeService } from './localidade/localidade.service';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -23,7 +25,8 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
-
+    RouterParamsService,
+    LocalidadeService
 ]
 
 @NgModule({
