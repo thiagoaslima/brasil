@@ -104,6 +104,9 @@
     /*background-color: red;*/
     width: 6%;
     text-align: left;
-    -webkit-transition: padding-left 0.3s;
-    transition: padding-left 0.3s;
+    -webkit-transition: padding-left 0.3s ease;
+    -moz-transition: padding-left 0.3s ease;
+    -ms-transition: padding-left 0.3s ease;
+    -o-transition: padding-left 0.3s ease;
+    transition: padding-left 0.3s ease;
 }
