@@ -7,29 +7,36 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
-  { path: '', component: SinteseComponent, pathMatch: 'full' }
+  { path: '', component: SinteseComponent, pathMatch: 'full' },
+  { path: 'sintese', component: SinteseComponent, pathMatch: 'full' },
+  { path: 'sintese/:indicador', component: SinteseComponent, pathMatch: 'full' },
+  { path: 'sintese/:indicador/mapa', component: SinteseComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forChild([
+      { 
+        path: '',
+        redirectTo: 'brasil/rj/rio-de-janeiro',
+        pathMatch: 'full'
+      },
       {
         path: 'brasil/sandbox',
         component: SandboxComponent
       },
-      { 
-        path: '',
-        redirectTo: 'brasil',
+      {
+        path: 'brasil',
+        // children
+        redirectTo: 'brasil/rj/rio-de-janeiro',
         pathMatch: 'full'
       },
       {
-        path: 'brasil',
-        children
-      },
-      {
         path: 'brasil/:uf',
-        canActivate: [ValidParametersGuard],
-        children
+        redirectTo: 'brasil/rj/rio-de-janeiro',
+        pathMatch: 'full'
+        // canActivate: [ValidParametersGuard],
+        // children
       },
       {
         path: 'brasil/:uf/:municipio',
