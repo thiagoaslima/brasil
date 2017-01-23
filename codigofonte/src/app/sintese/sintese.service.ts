@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip';
 import 'rxjs/add/operator/switchMap';
 
-import { slugify } from '../utils/slug';
 
 /**
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
@@ -16,7 +15,6 @@ export class SinteseService{
 
     // Lista de pesquisas estão autorizadas a serem acessadas pelo serviço.
     private idPesquisasValidas: number[] = [11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 42, 43];
-
 
     constructor(private _http: Http) {  }
 
@@ -133,7 +131,7 @@ export class SinteseService{
      * 
      * @local: string - código da localidade.
      */
-    public getSinteseLocal(local: string){
+    public getSinteseLocal(local: string) {
 
         /*
             codigo      33    29169
@@ -181,12 +179,39 @@ export class SinteseService{
     /**
      * Obtém os valores históricos de um dado indicador da síntese.
      * 
+     * @Deprecated: utilize getPesquisa(pesquisa, local, indicadores: string[])
+     * 
      * @local: string - código da localidade.
      * @indicador: string - codigo do indicador.
      */
-    public getDetalhesIndicadorSintese(local: string, indicador: string){
+    public getDetalhesIndicadorSintese(local: string, indicador: string) {
  
-        return this.getPesquisa('33', local, [indicador])
+        return this.getPesquisa('33', local, [indicador]);
+    }
+
+    /**
+     * Obtém as informações da pesquisa que possui o indicador.
+     * 
+     * @indicador: string - codigo do indicador.
+     * 
+     * return {codigo: string, nome: string}
+     */
+    public getPesquisaByIndicadorDaSinteseMunicipal(indicador: string){
+
+        const indicadoresMap = {
+            '29169': {codigo: '33', nome: 'Síntese municipal'},
+            '29170': {codigo: '33', nome: 'Síntese municipal'},
+            '29167': {codigo: '33', nome: 'Síntese municipal'},
+            '29171': {codigo: '33', nome: 'Síntese municipal'},
+            '29168': {codigo: '33', nome: 'Síntese municipal'},
+            '28160': {codigo: '21', nome: 'Finanças públicas'},
+            '47001': {codigo: '38', nome: 'PIB municipal'},
+            '30255': {codigo: '37', nome: 'IDH'},
+            '30277': {codigo: '40', nome: 'IDEB'},
+            '28311': {codigo: '32', nome: 'Serviços de saúde'}
+        };
+
+        return indicadoresMap[indicador];
     }
 
     /**
