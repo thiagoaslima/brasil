@@ -1,14 +1,14 @@
-<div>
+<div *ngIf="content">
     <div class="dados__tema dados__tema--metade">
         <div class="dados__tema__titulo">   
             CÓDIGO <br/>
-            <span> 99999 </span>
+            <span>{{content['29169']?.value}}</span>
         </div>
     </div>
     <div class="dados__tema dados__tema--metade">
         <div class="dados__tema__titulo">   
             Prefeito <br/>
-            <span> Eduardo Paes <span>PMDB</span> </span>
+            <span> {{content['29170']?.value}} </span>
         </div>
     </div>
     
@@ -37,13 +37,13 @@
     <div class="dados__variavel">
         <div class="dados__variavel__nome">Área territorial</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">1.200 <span>Km</span></div>
+        <div class="dados__variavel__valor">{{content['29167']?.value}} <span>{{content['29167']?.unidade?.id}}</span></div>
     </div>
 
     <div class="dados__variavel">
         <div class="dados__variavel__nome">Altitude</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">32 <span>m</span></div>
+        <div class="dados__variavel__valor"> - <span>m</span></div>
     </div>
 
     <div class="dados__tema">
@@ -55,13 +55,13 @@
     <div class="dados__variavel">
         <div class="dados__variavel__nome">População estimada</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">206.000.000</div>
+        <div class="dados__variavel__valor">{{content['29171']?.value}}</div>
     </div>
 
     <div class="dados__variavel dados__variavel--selecionado">
         <div class="dados__variavel__nome">Densidade demográfica</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">46 <span>habitantes / km</span></div>
+        <div class="dados__variavel__valor">{{content['29168']?.value}} <span>{{content['29168']?.unidade?.id}}</span></div>
     </div>
 
     <div class="dados__tema">
@@ -73,30 +73,48 @@
     <div class="dados__variavel">
         <div class="dados__variavel__nome">Orçamento anual</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">84.225 <span>R$ trilhões</span></div>
+        <div class="dados__variavel__valor"> - <span>R$ trilhões</span></div>
     </div>
 
     <div class="dados__variavel">
         <div class="dados__variavel__nome">Fundo de Participação Municipal</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">9.600 <span>US$</span></div>
+        <div class="dados__variavel__valor">{{content['28160']?.value}} <span>{{content['28160']?.unidade?.id}}</span></div>
     </div>
 
     <div class="dados__variavel">
         <div class="dados__variavel__nome">PIB per capita</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">9.600 <span>US$</span></div>
+        <div class="dados__variavel__valor">{{content['47001']?.value}} <span>{{content['47001']?.unidade?.id}}</span></div>
     </div>
 
     <div class="dados__variavel">
         <div class="dados__variavel__nome">Salário médio</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">1.421<span>R$</span></div>
+        <div class="dados__variavel__valor"> - <span>R$</span></div>
+    </div>
+
+     <div class="dados__tema">
+        <div class="dados__tema__titulo">   
+            Educação
+        </div>
     </div>
 
     <div class="dados__variavel">
         <div class="dados__variavel__nome">IDEB</div>
         <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-        <div class="dados__variavel__valor">5,0</div>
+        <div class="dados__variavel__valor">{{content['30277']?.value}}</div>
+    </div>
+
+     <div class="dados__tema">
+        <div class="dados__tema__titulo">   
+            Saúde
+        </div>
+    </div>
+
+    <div class="dados__variavel">
+        <div class="dados__variavel__nome">Leitos hospitalares</div>
+        <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+        <div class="dados__variavel__valor">{{content['28311']?.value}}</div>
     </div>
 </div>
