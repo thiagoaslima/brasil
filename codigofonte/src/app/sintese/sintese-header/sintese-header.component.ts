@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import {RouterParamsService} from '../../shared/router-params.service'
 import {SinteseService} from '../sintese.service'
+import {LocalidadeService} from '../../shared/localidade/localidade.service'
 
 @Component({
     selector: 'sintese-header',
@@ -15,17 +16,20 @@ export class SinteseHeaderComponent {
 
     constructor(
         private _routerParams:RouterParamsService,
-        private _sintese:SinteseService
+        private _sintese:SinteseService,
+        private _localidade:LocalidadeService
     ){}
 
     ngOnInit(){
         this._routerParams.params$.subscribe((params)=>{
-            console.log(params);
-            this._sintese.getDetalhesIndicadorSintese('330455', '29171').subscribe((dados) => {
-                console.log(dados);
-            });
-            this.titulo = params.indicador; //pegar o nome real do indicador e da pesquisa de onde ele vem
-            this.pesquisa = 'Censo';
+            if(params.indicador){
+                let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
+                let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
+                this._sintese.getDetalhesIndicadorSintese(codigoMunicipio, params.indicador).subscribe((dados) => {
+                    this.titulo = dados[0].indicador;
+                    this.pesquisa = 'Censo'; //pegar nome real da pesquisa de onde esse indicador vem
+                });
+            }
         });
     }
 
