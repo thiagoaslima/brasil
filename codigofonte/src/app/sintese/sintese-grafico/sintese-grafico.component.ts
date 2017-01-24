@@ -1,65 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
+
+import { SinteseService } from '../sintese.service';
+import { LocalidadeService } from '../../shared/localidade/localidade.service';
+
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'sintese-grafico',
     templateUrl: 'sintese-grafico.template.html'
 })
-export class SinteseGraficoComponent {
+export class SinteseGraficoComponent implements OnInit, OnDestroy{
+    private _subscription: Subscription;
+
+    constructor(
+        private sinteseService: SinteseService,
+        private localidadeService: LocalidadeService
+    ) {}
 
     public isBrowser = isBrowser;
     
-    private datasets = [];
-    private labels = [];
-    private options = {};
-    private colors = [];
+    datasets = [];
+    dataItem = [];
+    labelItem = [];
+    dataSetItem = [];
+    dataSetLabelItem = [];
+    labels = [];
+    options = {};
+    colors = [];
 
-    ngOnInit(changes: any) { 
-        this.datasets = [
-            { 
-                data : [38,41,35,40],
-                label : '0 a 14 anos' 
-            }, 
-            { 
-                data : [55,39,50,51],
-                label : '15 a 64 anos' 
-            }, 
-            { 
-                data : [7,20,15,9], 
-                label : '65 anos ou mais (idosos)' 
-            }
-        ];
+    plotGrafico = false;
 
-        this.colors = [
-            {backgroundColor:'rgba(221,0,0,0.8)'},
-            {backgroundColor:'rgba(242,146,32,0.8)'},
-            {backgroundColor:'rgba(67,101,176,0.8)'}
-            ];
+    ngOnInit() {  
+        this._subscription = this.localidadeService.selecionada$
+            .flatMap(localidade => this.sinteseService.getPesquisa('33',localidade.codigo.toString(), ['29168']))
+            .subscribe(dados => {
+                 for (var item in dados) {
 
-        this.labels = ["1980", "1991", "2000", "2010"];
+                    this.labelItem = dados[item].indicador;
 
+                    for (var ano in dados[item].res) {
+                        if (dados[item].res.hasOwnProperty(ano)) {
+                            this.labels.push(ano);
+                            this.dataItem.push(dados[item].res[ano]);
+                        }
+                    }
+
+                    this.dataSetItem.push(this.dataItem);
+                    this.dataSetLabelItem.push(this.labelItem);
+
+                    this.datasets.push( { data : this.dataSetItem[item], label : this.dataSetLabelItem[item] } );
+                 }
+                 this.plotGrafico = true;
+            });
+
+        // this.colors = [
+        //     {backgroundColor:'rgba(221,0,0,0.8)'},
+        //     {backgroundColor:'rgba(242,146,32,0.8)'},
+        //     {backgroundColor:'rgba(67,101,176,0.8)'}
+        //     ];
+        
         this.options = {
             scales: {
                 yAxes: [{
                     stacked: true,
-                    ticks: {
-                        beginAtZero:true
-                    }
+                    ticks: { beginAtZero:true }
                 }],
                 xAxes: [{
                     stacked: true
                 }]
-            },
-            legend: {
-                display: true,
-                //position: 'top',
-                horizontalAlign: "left",
-                verticalAlign: "center",
-                labels: {
-                    boxWidth: 30                                
-                }
-            }//,responsive: false
+            }
         };
+
+    }
+
+    ngOnDestroy() {
+        this._subscription.unsubscribe();
     }
 
 }
