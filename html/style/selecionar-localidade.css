@@ -1,0 +1,269 @@
+#selecionar-localidade{
+    position: absolute;
+    top: 54px;
+    height: 100%;
+    color:#fff;
+    width: 100%;
+}
+
+#selecionar-localidade #primeira-coluna{
+    width: 21%;
+    background-color: #333333;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    float: left;
+}
+#selecionar-localidade #segunda-coluna{
+    width: 30%;
+    height: 100%;
+    float: left;
+    z-index: 1;
+    position: relative;
+}
+
+#selecionar-localidade #segunda-coluna ul{
+    margin-top: 10px;
+    list-style: none;
+}
+
+#selecionar-localidade #segunda-coluna ul li{
+    padding: 0px 15px;
+    cursor: pointer;
+}
+
+#selecionar-localidade #segunda-coluna ul li div{
+    padding: 10px 5px;
+    border-bottom: 1px solid #165D72;
+}
+
+#selecionar-localidade #segunda-coluna ul li div i{
+    float: right;
+}
+
+#selecionar-localidade.municipio #segunda-coluna ul li:hover,
+#selecionar-localidade.municipio #segunda-coluna ul li.selecionado{
+    background-color: #165D72;
+}
+
+#selecionar-localidade.estado #segunda-coluna ul li:hover,
+#selecionar-localidade.estado #segunda-coluna ul li.selecionado {
+    background-color: #104C4C;
+}
+
+#selecionar-localidade #bg{
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    position: fixed;
+    top: 0px;
+    position: absolute;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+#selecionar-localidade .selecionar-localidade__voltar{
+    padding: 9% 6% 3%;
+    font-size: .75em;
+}
+
+#selecionar-localidade .selecionar-localidade__titulo{
+    font-size: 1.1em;
+    line-height: 21px;
+    padding: 0% 6%;
+    font-weight: bold;
+    margin-bottom: 29px;
+}
+
+#selecionar-localidade nav ul li{
+    font-size: .95em;
+    padding: 11px 6%;
+    border-top: 4px solid;
+    background-color: #4D4D4D;
+    cursor: pointer;
+}
+
+#selecionar-localidade nav ul li i{
+    float: right;
+}
+
+#selecionar-localidade nav ul li:nth-child(1){
+    border-color: #1F9982;
+}
+
+#selecionar-localidade nav ul li:nth-child(1):hover,
+#selecionar-localidade nav ul li:nth-child(1).selecionado{
+    background-color: #1F9982;
+}
+
+#selecionar-localidade nav ul li:nth-child(2){
+    border-color: #148C99
+}
+
+#selecionar-localidade nav ul li:nth-child(2):hover,
+#selecionar-localidade nav ul li:nth-child(2).selecionado
+{
+    background-color: #148C99;
+}
+
+#selecionar-localidade nav ul li:nth-child(3){
+    border-color: #1B779B;
+}
+
+#selecionar-localidade nav ul li:nth-child(3):hover, 
+#selecionar-localidade nav ul li:nth-child(3).selecionado{
+    background-color: #1B779B;
+}
+
+
+
+#selecionar-localidade #terceira-coluna{
+    width: 49%;
+    background-color: #333333;
+    height: 100%;
+    float: left;
+    z-index: 1;
+    position: relative;
+    padding: 17px 2%;
+}
+
+#selecionar-localidade #terceira-coluna .estado-selecionado{
+    float: left;
+    font-weight: bold;
+    font-size: .98em;
+}
+
+#selecionar-localidade #terceira-coluna i.fa-times{
+    float: right
+}
+
+#selecionar-localidade #terceira-coluna input{
+    width: 100%;
+    margin-top: 10px;
+    color: #4D4D4D;
+    height: 31px;
+}
+
+
+#selecionar-localidade #terceira-coluna button{
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 21px;
+    font-size: .8em;
+    margin: 11px 0%;
+    padding: 5px 10px;
+    cursor: pointer;
+    -webkit-transition: background 200ms ease, color 200ms ease;
+    -moz-transition: background 200ms ease, color 200ms ease;
+    -ms-transition: background 200ms ease, color 200ms ease;
+    -o-transition: background 200ms ease, color 200ms ease;
+    transition: background 200ms ease, color 200ms ease;
+}
+
+#selecionar-localidade #terceira-coluna button:hover{
+    background-color: #FFFFFF;
+    color: #4D4D4D;
+}
+
+#selecionar-localidade #terceira-coluna #municipios{
+    margin: 0px 14px;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .estado{
+    font-size: .8em;
+    padding: 7px 12px;
+    border-bottom: 2px solid #979797;
+    line-height: 23px;
+    margin-top: 15px;
+    
+}
+
+#selecionar-localidade #terceira-coluna #municipios .circulo{
+    background-color: #4D4D4D;
+    float: left;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 102px;
+    width: 23px;
+    height: 23px;
+    text-align: center;
+    line-height: 13px;
+    font-size: 1.3em;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .estado .circulo{
+    font-size: 1em;
+    margin-right: 8px;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto{
+    /*float: left;*/
+    /* border-top: 2px solid #979797; */
+    width: 100%;
+    font-size: 0.8em;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid #979797;
+    display: table;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto:nth-child(2n) {
+    clear: left;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto:nth-child(2n+1){
+    float: right;
+}
+
+
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto .letra{
+    float: left;
+    padding-left: 14px;
+    padding-right: 10px;
+
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto .municipios{
+    float: left;
+    width: 92%;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul{
+    list-style: none;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul li{
+    float: left;
+    width: 33%;
+    padding-right: 4%;
+    margin-bottom: 15px;
+}
+
+#selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul li:nth-child(3n+4){
+    clear: both;
+    /*background-color: red;*/
+}
+
+
+@media screen and (max-width: 1400px) {
+    #selecionar-localidade #terceira-coluna #municipios .conjunto .municipios{
+        width: 82%;
+    }
+
+    #selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul li{
+        width: 50%;
+    }
+    
+    #selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul li:nth-child(2n+4){
+       clear: none;
+       /*background-color: red;*/
+    }
+
+    #selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul li:nth-child(2n+3){
+        clear: both;
+        /*background-color: powderblue;*/
+    }
+
+    
+}
