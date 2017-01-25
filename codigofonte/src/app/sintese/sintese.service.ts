@@ -220,6 +220,7 @@ export class SinteseService{
      * @dados: object - resposta de indicador do método getPesquisa
      */
     public filterLastValidValue(dados) {
+        if (!dados || !dados.res) return dados;
         dados.value = Object.keys(dados.res)
             .map(ano => Number.parseInt(ano, 10))
             .sort()

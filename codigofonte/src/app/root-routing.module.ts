@@ -27,16 +27,12 @@ const children = [
       },
       {
         path: 'brasil',
-        // children
-        redirectTo: 'brasil/rj/rio-de-janeiro',
-        pathMatch: 'full'
+        children
       },
       {
         path: 'brasil/:uf',
-        redirectTo: 'brasil/rj/rio-de-janeiro',
-        pathMatch: 'full'
-        // canActivate: [ValidParametersGuard],
-        // children
+        canActivate: [ValidParametersGuard],
+        children
       },
       {
         path: 'brasil/:uf/:municipio',

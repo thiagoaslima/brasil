@@ -7,21 +7,31 @@
 
 <div id='container'>
 
+    <seletor-localidade #seletor="seletor-localidade"></seletor-localidade>
+
     <aside class='aside--municipio'>
-        <nav id='local'>
-            <ul>
-                <template ngFor let-local [ngForOf]="locais | async" let-last="last">
-                    <li *ngIf="!last"><a [routerLink]="'/'+local.link">{{local.nome}}</a></li>
-                    <li *ngIf="last"><h1>{{local.nome}}</h1></li>
-                </template>
-            </ul>
-        </nav>
-        
-        <button>Alterar localidade</button>
+        <div id="localidade">
+            <nav id='local'>
+                <ul>
+                    <template ngFor let-local [ngForOf]="locais | async" let-last="last">
+                        <li *ngIf="!last">
+                            <a [routerLink]="'/'+local.link">{{local.nome}}</a>
+                        </li>
+                        <li *ngIf="last">
+                            <h1>{{local.nome}}</h1>
+                        </li>
+                    </template>
+                </ul>
+            </nav>
+
+            <button (click)="seletor.abrirSeletor()">Alterar localidade</button>
+        </div>
 
         <nav id="menu">
             <ul>
-                <li class='menu--selecionado'>Sintese</li>
+                <li class='menu--selecionado'>
+                    <a routerLink="${localidadeSelecionada.link}/sintese">Sintese</a>
+                </li>
                 <li>Tema</li>
                 <li>Pesquisas</li>
             </ul>
