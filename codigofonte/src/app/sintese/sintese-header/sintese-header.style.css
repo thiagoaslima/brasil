@@ -42,7 +42,7 @@
 }
 
 .cabecalho__meio-botao-esq{
-    background-color: #148C99;
+    background-color: #808080;
     display: inline-block;
     border-radius: 21px 0 0 21px;
     padding: 6px 6px 6px 10px;
@@ -56,7 +56,7 @@
 }
 
 .cabecalho__meio-botao-dir{
-    background-color: #148C99;
+    background-color: #808080;
     display: inline-block;
     border-radius: 0 21px 21px 0;
     padding: 5px 10px 0px 6px;
@@ -65,5 +65,5 @@
 }
 
 .cabecalho__meio-botao--ativo{
-    background-color: #808080;
+    background-color: #148C99;
 }

@@ -20,7 +20,7 @@ export class RouterParamsService {
             .filter(e => e instanceof NavigationEnd)
             .distinctUntilChanged()
             .map(e => this.extractParamsFromTree(this._route.snapshot))
-            .share();
+            //.share();
     }
 
 
