@@ -8,6 +8,7 @@ import { brasil } from '../../../api/brasil';
 import { RouterParamsService } from '../router-params.service';
 
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class LocalidadeService {
     private _ufs = <UF[]>[];
     private _linkCache = <{ [idx: number]: string }>{};
 
-    public tree$: Observable<any>;
+    public tree$: ReplaySubject<any>;
     public selecionada$: Observable<IBrasil | UF | Municipio>;
 
     constructor(
@@ -26,14 +27,17 @@ export class LocalidadeService {
     ) {
         this._buildLocalidadesTree();
 
-        this.tree$ = this._params.params$
+        this.tree$ = new ReplaySubject<any>(null);
+        
+        this._params.params$
             .map((params: { [idx: string]: string }) => ({ uf: params['uf'], municipio: params['municipio'] }))
             .map(slugs => {
                 let uf = this.getUfBySigla(slugs.uf);
                 let mun = this.getMunicipioBySlug(slugs.uf, slugs.municipio);
 
                 return [this._brasil, uf, mun].filter(value => !!value);
-            });
+            })
+            .subscribe(tree => this.tree$.next(tree));
 
         this.selecionada$ = this.tree$.map(tree => tree[tree.length - 1]);
     }

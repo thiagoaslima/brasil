@@ -1,9 +1,16 @@
-<div id='sintese'>
-    <section id='dados'>
-        <sintese-dados></sintese-dados>
+<div id="sintese">
+    <section id="dados">
+        <div [ngSwitch]="tipo">
+            <div *ngSwitchCase="1">Síntese Brasil</div>
+            
+            <div *ngSwitchCase="2">Síntese Estado</div>
+            
+            <!--Síntese Município-->
+            <sintese-dados *ngSwitchCase="3"></sintese-dados>
+        </div>
     </section>
 
-    <section id='detalhes'>
+    <section id="detalhes">
         <sintese-header></sintese-header>
         <sintese-grafico></sintese-grafico>
     </section>

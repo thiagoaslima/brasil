@@ -20,12 +20,15 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        console.log('init');
          this._subscription = this.localidadeService.selecionada$
-            .flatMap(localidade => this.sinteseService.getSinteseLocal(localidade.codigo.toString()))
+            //.do(resp => console.log(resp))
+            .flatMap(localidade => {return this.sinteseService.getSinteseLocal(localidade.codigo.toString())})
             .subscribe(dados => this.content = dados);
     }
 
     ngOnDestroy() {
+        //console.log('destroy');
         this._subscription.unsubscribe();
     }
 
