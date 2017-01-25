@@ -25,7 +25,7 @@
 
         <div id='container'>
 
-            <div id='selecionar-localidade' class='estado'>
+            <div id='selecionar-localidade'>
                 
                 <div id="primeira-coluna">
                     <div class="selecionar-localidade__voltar">
@@ -37,56 +37,36 @@
 
                     <nav>
                         <ul>
-                            <li>Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
-                            <li>Estados <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
-                            <li class='selecionado'>Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
+                            <li id='menu__brasil' onclick="abreSubMenu('brasil')">Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
+                            <li id='menu__estado' onclick="abreSubMenu('estado')">Estados <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
+                            <li id='menu__municipio' onclick="abreSubMenu('municipio')"class='selecionado'>Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
                         </ul>
                     </nav>
                 </div>
 
                 <div id="segunda-coluna" class='cor-fundo'>
                         <ul>
-                            <li>
+                            <li onclick="abreSubSubMenu()">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </div>
                             </li>
 
-                            <li>
+                            <li onclick="abreSubSubMenu()">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </div>
                             </li>
 
-                            <li class='selecionado'>
+                            <li class='selecionado' onclick="abreSubSubMenu()">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </div>
                             </li>
 
-                            <li>
-                                <div>
-                                    Acre
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div>
-                                    Acre
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div>
-                                    Acre
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </div>
-                            </li>
                         </ul>
                 </div>
 
@@ -255,7 +235,7 @@
                                 <li><h1>São Francisco de Assis do Piauí</h1></li>
                             </ul>
                         </nav>
-                        <button>Alterar localidade</button>
+                        <button  onclick="abreMenu()">Alterar localidade</button>
                 </div>
                 
                 <nav id="menu">
@@ -465,3 +445,81 @@
 
     </body>
 </html>
+
+
+<script>
+    seletorLocalidade = document.getElementById("selecionar-localidade");
+    menu = document.getElementById("primeira-coluna");
+    subMenu = document.getElementById("segunda-coluna");
+    subSubMenu = document.getElementById("terceira-coluna");
+
+    function abreMenu(){
+        seletorLocalidade.classList.add("aberto");
+        menu.classList.add("aberto");
+    }
+
+    function abreSubMenu(item){
+       
+        if(subMenu.classList.contains('aberto')) {
+            
+            if(subSubMenu.classList.contains('aberto')){
+                fechaSubSubMenu();
+
+                setTimeout( function(){
+                    fechaSubMenu();
+                    
+                    setTimeout( function(){
+                        adicionaClassSubMenu(item);
+                        subMenu.classList.add("aberto");
+                    }, 500 );
+                }, 500 );
+            
+            }else{
+                fechaSubMenu();
+                 setTimeout( function(){
+                    adicionaClassSubMenu(item);
+                    subMenu.classList.add("aberto");
+                }, 500 );
+            }
+
+        }else{
+            subMenu.classList.add("aberto");
+            adicionaClassSubMenu(item);    
+        }
+       
+    }
+
+    function abreSubSubMenu(){
+
+        if(subSubMenu.classList.contains('aberto')) {
+            fechaSubSubMenu();
+            setTimeout( function(){
+                subSubMenu.classList.add("aberto");
+            }, 500 );
+        }else{
+            subSubMenu.classList.add("aberto");
+        }
+    }
+
+
+    function fechaSubMenu(){
+         subMenu.classList.remove("aberto");
+    }
+
+    function fechaSubSubMenu(){
+        subSubMenu.classList.remove("aberto");
+    }
+
+
+
+    function adicionaClassSubMenu(item){
+        seletorLocalidade.classList.remove('brasil', 'estado', 'municipio');
+        seletorLocalidade.classList.add(item);
+    }
+
+    function fechaSeletorLocalidade(){
+        alert('fecha todo o seletor localidade');
+    }
+
+
+</script>

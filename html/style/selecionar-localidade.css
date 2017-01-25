@@ -1,9 +1,37 @@
+
+/*****
+ANIMAÇÃO
+*****/
+#selecionar-localidade.aberto{
+   left: 0px;
+}
+
+#selecionar-localidade #primeira-coluna.aberto{
+    left: 0%;
+}
+
+#selecionar-localidade #segunda-coluna.aberto{
+    left: 0%;
+}
+
+#segunda-coluna.aberto + #terceira-coluna {
+    left: -70%
+}
+
+#selecionar-localidade #terceira-coluna.aberto{
+    left: 0%;
+}
+
+
+
 #selecionar-localidade{
     position: absolute;
     top: 54px;
     height: 100%;
     color:#fff;
     width: 100%;
+    left: -9999999px;
+   
 }
 
 #selecionar-localidade #primeira-coluna{
@@ -11,15 +39,30 @@
     background-color: #333333;
     height: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 3;
     float: left;
+    left: -22%;
+
+    -webkit-transition: left 0.5s ease;
+    -moz-transition: left 0.5s ease;
+    -ms-transition: left 0.5s ease;
+    -o-transition: left 0.5s ease;
+    transition: left 0.5s ease;
 }
+
 #selecionar-localidade #segunda-coluna{
     width: 30%;
     height: 100%;
     float: left;
-    z-index: 1;
+    z-index: 2;
     position: relative;
+    left: -50%;
+
+    -webkit-transition: left 0.8s ease;
+    -moz-transition: left 0.8s ease;
+    -ms-transition: left 0.8s ease;
+    -o-transition: left 0.8s ease;
+    transition: left 0.8s ease;
 }
 
 #selecionar-localidade #segunda-coluna ul{
@@ -58,7 +101,7 @@
     position: fixed;
     top: 0px;
     position: absolute;
-    opacity: 0.5;
+    opacity: 0.7;
     filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
@@ -116,7 +159,6 @@
 }
 
 
-
 #selecionar-localidade #terceira-coluna{
     width: 49%;
     background-color: #333333;
@@ -125,6 +167,17 @@
     z-index: 1;
     position: relative;
     padding: 17px 2%;
+    left: -100%;
+
+    -webkit-transition: left .8s ease;
+    -moz-transition: left .8s ease;
+    -ms-transition: left .8s ease;
+    -o-transition: left .8s ease;
+    transition: left .8s ease;
+}
+
+#selecionar-localidade #segunda-coluna.aberto + #selecionar-localidade #terceira-coluna{
+    left:10%;
 }
 
 #selecionar-localidade #terceira-coluna .estado-selecionado{
