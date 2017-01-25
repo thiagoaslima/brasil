@@ -108,6 +108,7 @@ ANIMAÇÃO
 #selecionar-localidade .selecionar-localidade__voltar{
     padding: 9% 6% 3%;
     font-size: .75em;
+    cursor: pointer;
 }
 
 #selecionar-localidade .selecionar-localidade__titulo{

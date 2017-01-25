@@ -28,7 +28,7 @@
             <div id='selecionar-localidade'>
                 
                 <div id="primeira-coluna">
-                    <div class="selecionar-localidade__voltar">
+                    <div class="selecionar-localidade__voltar" onclick="fechaSeletorLocalidade()">
                         < Voltar
                     </div>
                     <div class="selecionar-localidade__titulo">
@@ -46,21 +46,21 @@
 
                 <div id="segunda-coluna" class='cor-fundo'>
                         <ul>
-                            <li onclick="abreSubSubMenu()">
+                            <li onclick="abreSubSubMenu(this)">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </div>
                             </li>
 
-                            <li onclick="abreSubSubMenu()">
+                            <li onclick="abreSubSubMenu(this)">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </div>
                             </li>
 
-                            <li class='selecionado' onclick="abreSubSubMenu()">
+                            <li class='selecionado' onclick="abreSubSubMenu(this)">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
                 <div id="terceira-coluna">
 
                     <div class="estado-selecionado">Municípios do Rio de Janeiro</div>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i class="fa fa-times" aria-hidden="true" onclick="fechaSeletorLocalidade()"></i>
                     <br/>
                     <input type="text" id='busca' placeholder="Qual município você procura?">
                     <button>Acessar o Estado do Rio de Janeiro</button>
@@ -448,6 +448,9 @@
 
 
 <script>
+    /******* 
+     SELECIONAR LOCALIDADE
+    ********/
     seletorLocalidade = document.getElementById("selecionar-localidade");
     menu = document.getElementById("primeira-coluna");
     subMenu = document.getElementById("segunda-coluna");
@@ -459,33 +462,38 @@
     }
 
     function abreSubMenu(item){
-       
-        if(subMenu.classList.contains('aberto')) {
-            
-            if(subSubMenu.classList.contains('aberto')){
-                fechaSubSubMenu();
+        if(item != 'brasil'){
+            if(subMenu.classList.contains('aberto')) {
+                
+                if(subSubMenu.classList.contains('aberto')){
+                    fechaSubSubMenu();
 
-                setTimeout( function(){
+                    setTimeout( function(){
+                        fechaSubMenu();
+                        
+                        setTimeout( function(){
+                            adicionaClassSubMenu(item);
+                            subMenu.classList.add("aberto");
+                        }, 500 );
+                    }, 500 );
+                
+                }else{
                     fechaSubMenu();
-                    
                     setTimeout( function(){
                         adicionaClassSubMenu(item);
                         subMenu.classList.add("aberto");
                     }, 500 );
-                }, 500 );
-            
-            }else{
-                fechaSubMenu();
-                 setTimeout( function(){
-                    adicionaClassSubMenu(item);
-                    subMenu.classList.add("aberto");
-                }, 500 );
-            }
+                }
 
+            }else{
+                subMenu.classList.add("aberto");
+                adicionaClassSubMenu(item);    
+            }
         }else{
-            subMenu.classList.add("aberto");
-            adicionaClassSubMenu(item);    
+            fechaSeletorLocalidade();
         }
+
+        adicionaClassSelecionadoSubMenu(item);
        
     }
 
@@ -499,8 +507,15 @@
         }else{
             subSubMenu.classList.add("aberto");
         }
+
     }
 
+    function fechaMenu(){
+        menu.classList.remove("aberto");
+        setTimeout( function(){
+            seletorLocalidade.classList.remove("aberto");
+        }, 500 );
+    }
 
     function fechaSubMenu(){
          subMenu.classList.remove("aberto");
@@ -517,9 +532,43 @@
         seletorLocalidade.classList.add(item);
     }
 
-    function fechaSeletorLocalidade(){
-        alert('fecha todo o seletor localidade');
+    function adicionaClassSelecionadoSubMenu(item){
+        itens = document.querySelectorAll("#primeira-coluna nav ul li");
+        for(i=0; i<3; i++){
+            if(itens[i].classList.contains('selecionado')){
+                itens[i].classList.remove('selecionado');
+            }
+        }
+
+        document.querySelector("#primeira-coluna nav ul li#menu__"+item).classList.add('selecionado');
+
     }
 
+
+    function fechaSeletorLocalidade(){
+        if(subSubMenu.classList.contains('aberto')){
+            fechaSubSubMenu();
+            setTimeout( function(){
+                fechaSubMenu();
+                setTimeout( function(){
+                    fechaMenu();
+                }, 500 );
+            }, 500 );
+
+        }else if(subMenu.classList.contains('aberto')){
+            fechaSubMenu();
+            setTimeout( function(){
+                fechaMenu();
+            }, 400 );
+        }else{
+            fechaMenu()
+        }
+    }
+
+    
+
+    /******* 
+        FIM SELECIONAR LOCALIDADE
+    ********/
 
 </script>
