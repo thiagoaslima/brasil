@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
 import { SinteseService } from '../sintese.service';
@@ -7,11 +7,14 @@ import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
-    selector: 'sintese-grafico',
-    templateUrl: 'sintese-grafico.template.html'
+    selector: 'grafico',
+    templateUrl: 'grafico.template.html'
 })
-export class SinteseGraficoComponent implements OnInit, OnDestroy{
+export class GraficoComponent implements OnInit, OnDestroy{
     private _subscription: Subscription;
+    @Input() tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
+    @Input() stacked = 'false';
+    @Input() beginAtZero = 'true';
 
     constructor(
         private sinteseService: SinteseService,
@@ -27,7 +30,7 @@ export class SinteseGraficoComponent implements OnInit, OnDestroy{
     dataSetLabelItem = [];
     labels = [];
     options = {};
-    colors = [];
+    @Input() colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
 
     plotGrafico = false;
 
@@ -35,12 +38,12 @@ export class SinteseGraficoComponent implements OnInit, OnDestroy{
         this._subscription = this.localidadeService.selecionada$
             .flatMap(localidade => this.sinteseService.getPesquisa('33',localidade.codigo.toString(), ['29168']))
             .subscribe(dados => {
-                 for (var item in dados) {
+                 for (let item in dados) {
 
                     this.labelItem = dados[item].indicador;
 
-                    for (var ano in dados[item].res) {
-                        if (dados[item].res.hasOwnProperty(ano)) {
+                    for (let ano in dados[item].res) {
+                        if (dados[item].res.hasOwnProperty(ano) && dados[item].res[ano] !== null) {
                             this.labels.push(ano);
                             this.dataItem.push(dados[item].res[ano]);
                         }
@@ -54,24 +57,17 @@ export class SinteseGraficoComponent implements OnInit, OnDestroy{
                  this.plotGrafico = true;
             });
 
-        // this.colors = [
-        //     {backgroundColor:'rgba(221,0,0,0.8)'},
-        //     {backgroundColor:'rgba(242,146,32,0.8)'},
-        //     {backgroundColor:'rgba(67,101,176,0.8)'}
-        //     ];
-        
         this.options = {
             scales: {
                 yAxes: [{
-                    stacked: true,
-                    ticks: { beginAtZero:true }
+                    stacked: this.stacked,
+                    ticks: { beginAtZero:this.beginAtZero }
                 }],
                 xAxes: [{
-                    stacked: true
+                    stacked: this.stacked
                 }]
             }
         };
-
     }
 
     ngOnDestroy() {
