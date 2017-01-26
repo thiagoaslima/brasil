@@ -54,6 +54,9 @@ export class UF {
         this.municipios.lista = municipios.sort((a, b) => a.slug < b.slug ? 1 : -1);
 
         municipios.forEach(mun => {
+            if (mun.codigo === codigoCapital) {
+                this.capital = mun;
+            }
             this.municipios.porCodigo[mun.codigo] = mun;
             this.municipios.porSlug[mun.slug] = mun;
         });

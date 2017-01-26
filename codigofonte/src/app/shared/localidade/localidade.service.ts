@@ -57,6 +57,10 @@ export class LocalidadeService {
         return this._getMun('slug', ufSigla, munSlug);
     }
 
+    public getRoot() {
+        return this._brasil;
+    }
+
     private _getUf(where, ufKey) {
         let prop = where === 'sigla' ? 'porSigla' : 'porCodigo';
         return this._brasil.ufs[prop][ufKey];
@@ -100,6 +104,7 @@ export class LocalidadeService {
             this._brasil.ufs.porSigla[uf.sigla.toLowerCase()] = uf;
             this._brasil.ufs.porCodigo[uf.codigo] = uf;
         });
+        this._brasil.ufs.lista.sort((a, b) => a.slug < b.slug ? -1 : 1);
 
         Object.freeze(this._municipios);
         Object.freeze(this._ufs);
@@ -110,7 +115,4 @@ export class LocalidadeService {
         Object.freeze(this._brasil);
     }
 
-    log() {
-        console.log(this._brasil);
-    }
 }

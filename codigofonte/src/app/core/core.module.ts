@@ -3,17 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { throwIfAlreadyLoaded } from './core.guard';
 
+import { SharedModule } from '../shared/shared.module';
 import { HeaderExampleComponent } from './header-example/header-example.component';
+import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   declarations: [
-    HeaderExampleComponent
+    HeaderExampleComponent,
+    SeletorLocalidadeComponent
   ],
   exports: [
-    HeaderExampleComponent
+    HeaderExampleComponent,
+    SeletorLocalidadeComponent
   ],
   providers: []
 })
