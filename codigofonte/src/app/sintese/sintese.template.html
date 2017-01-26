@@ -11,10 +11,14 @@
     </section>
 
     <section class="conteudo__detalhes">
-        <sintese-header></sintese-header>
-        <!--<grafico [tipo]="'line'"></grafico>-->
-        <div *ngIf="local != ''">
-            <mapa [codlocal]="local"></mapa>
+        <sintese-header (ativarComponente)="handleAtivarComponente($event)"></sintese-header>
+        <div *ngIf="comp === 'grafico'">
+            <grafico [tipo]="'line'"></grafico>
+        </div>
+        <div *ngIf="comp !== 'grafico'">
+            <div *ngIf="local != ''">
+                <mapa [codlocal]="local"></mapa>
+            </div>
         </div>
     </section>
 </div>

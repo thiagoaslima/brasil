@@ -9,6 +9,7 @@ export class SinteseComponent implements OnInit {
     
     tipo;
     local = '';
+    comp = 'mapa';
 
     constructor(
         private _localidade:LocalidadeService
@@ -28,6 +29,11 @@ export class SinteseComponent implements OnInit {
             }
             this.local = localidade.codigo.toString();
         });
+    }
+
+    handleAtivarComponente(comp) {
+        console.log(comp);
+        this.comp = comp;
     }
 
 }

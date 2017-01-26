@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import {RouterParamsService} from '../../shared/router-params.service'
 import {SinteseService} from '../sintese.service'
 import {LocalidadeService} from '../../shared/localidade/localidade.service'
@@ -10,10 +10,11 @@ import {LocalidadeService} from '../../shared/localidade/localidade.service'
 })
 export class SinteseHeaderComponent {
 
-    ativo = 'grafico'; //pode ser 'grafico' ou 'mapa'
+    ativo = 'cartograma'; //pode ser 'grafico' ou 'mapa'
     titulo;
     pesquisa;
     codPesquisa;
+    @Output() ativarComponente = new EventEmitter();
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -38,6 +39,7 @@ export class SinteseHeaderComponent {
 
     ativar(tipo){
         this.ativo = tipo;
+        this.ativarComponente.emit(this.ativo);
     }
 
 }
