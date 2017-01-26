@@ -13,7 +13,7 @@
                         Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
                 </li>
-                <li id='menu__estado' (click)="setSelecao('estado')" [ngClass]="{'selecionado': selecao === 'estado'}">
+                <li id='menu__estado' (click)="setSelecao('estado')" (click)="setUfVisualizada(null)" [ngClass]="{'selecionado': selecao === 'estado'}">
                     Estados <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
                 <li id='menu__municipio' (click)="setSelecao('municipios')" [ngClass]="{'selecionado': selecao === 'municipios'}">
@@ -39,7 +39,7 @@
             <template ngFor let-estado [ngForOf]="pais.ufs.lista">
                 <li (click)="setUfVisualizada(estado)">
                     <div>
-                        {{estado?.nome}} 
+                        {{estado?.nome}}
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </div>
                 </li>
@@ -52,8 +52,10 @@
         <div class="estado-selecionado">Municípios de {{ufVisualizada.nome}}</div>
         <i class="fa fa-times" aria-hidden="true" (click)="reset()"></i>
         <br/>
-        <input type="text" id='busca' placeholder="Qual município você procura?">
-        <button>Acessar o Estado de {{ufVisualizada.nome}}</button>
+        <input #input type="text" id='busca' placeholder="Qual município você procura?" (keyup)="buildListaMunicipios(ufVisualizada, input.value)">
+        <a [routerLink]="ufVisualizada.link" (click)="reset()">
+            <button>Acessar o Estado de {{ufVisualizada.nome}}</button>
+        </a>
 
         <div id="municipios">
             <div class="estado">
@@ -81,139 +83,6 @@
                     </div>
                 </div>
             </template>
-
-            <!--
-                <div class="letra">
-                    <div class="circulo">
-                        A
-                    </div>
-                </div>
-                <div class="municipios">
-                    <ul>
-                        <li>Vila Bela da Santíssima Trindade</li>
-                        <li>aaa</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd</li>
-                        <li>eee</li>
-                        <li>ffff</li>
-                    </ul>
-                </div>
-                -->
-
-
-            <!--
-            <div class="conjunto">
-                <div class="letra">
-                    <div class="circulo">
-                        B
-                    </div>
-                </div>
-                <div class="municipios">
-                    <ul>
-                        <li>aaa</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd</li>
-                        <li>eee</li>
-                        <li>ffff</li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-                        <li>10</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="conjunto">
-                <div class="letra">
-                    <div class="circulo">
-                        C
-                    </div>
-                </div>
-                <div class="municipios">
-                    <ul>
-                        <li>aaa</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd</li>
-                        <li>eee</li>
-                        <li>ffff</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="conjunto">
-                <div class="letra">
-                    <div class="circulo">
-                        D
-                    </div>
-                </div>
-                <div class="municipios">
-                    <ul>
-                        <li>aaa</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd</li>
-                        <li>eee</li>
-                        <li>ffff</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="conjunto">
-                <div class="letra">
-                    <div class="circulo">
-                        E
-                    </div>
-                </div>
-                <div class="municipios">
-                    <ul>
-                        <li>aaa</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd</li>
-                        <li>eee</li>
-                        <li>ffff</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="conjunto">
-                <div class="letra">
-                    <div class="circulo">
-                        F
-                    </div>
-                </div>
-                <div class="municipios">
-                    <ul>
-                        <li>aaa</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd</li>
-                        <li>eee</li>
-                        <li>ffff</li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-                        <li>10</li>
-                    </ul>
-                </div>
-            </div>
-            -->
-
 
         </div>
     </div>

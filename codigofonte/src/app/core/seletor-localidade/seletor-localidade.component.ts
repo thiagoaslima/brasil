@@ -3,6 +3,9 @@ import { UF } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { slugify } from '../../utils/slug';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+
 @Component({
     selector: 'seletor-localidade',
     templateUrl: 'seletor-localidade.template.html',
@@ -14,14 +17,13 @@ export class SeletorLocalidadeComponent {
 
     public pais;
     public selecao: string;
-    public ufVisualizada: UF|null;
+    public ufVisualizada: UF | null;
     public listaMunicipios = [];
 
     constructor(
         private _localidadeService: LocalidadeService
     ) {
         this.pais = this._localidadeService.getRoot();
-        console.log(this.pais);
     }
 
     abrirSeletor() {
@@ -36,7 +38,7 @@ export class SeletorLocalidadeComponent {
         this.selecao = str;
     }
 
-    setUfVisualizada(uf: UF|null) {
+    setUfVisualizada(uf: UF | null) {
         this.ufVisualizada = uf;
         if (uf) {
             this.buildListaMunicipios(uf);
@@ -49,25 +51,25 @@ export class SeletorLocalidadeComponent {
         this.setUfVisualizada(null);
     }
 
-    private buildListaMunicipios(uf, termo = '') {
+    buildListaMunicipios(uf, termo = '') {
         termo = slugify(termo);
-        
-        let hash = uf.municipios.lista.reduce( (agg, municipio) => {
+
+        let hash = uf.municipios.lista.reduce((agg, municipio) => {
             if (!municipio.slug.includes(termo)) {
                 return agg;
             }
 
             let initialLetter = municipio.slug.charAt(0);
-            
+
             if (!agg[initialLetter]) {
                 agg[initialLetter] = [];
             }
 
             agg[initialLetter].push(municipio);
-            
+
             return agg;
         }, {});
-        
+
         this.listaMunicipios = Object.keys(hash).sort().map(letter => {
             return {
                 letter,
