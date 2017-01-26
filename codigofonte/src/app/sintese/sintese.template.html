@@ -12,6 +12,9 @@
 
     <section id="detalhes">
         <sintese-header></sintese-header>
-        <grafico [tipo]="'line'"></grafico>
+        <!--<grafico [tipo]="'line'"></grafico>-->
+        <div *ngIf="local != ''">
+            <mapa [codlocal]="local"></mapa>
+        </div>
     </section>
 </div>

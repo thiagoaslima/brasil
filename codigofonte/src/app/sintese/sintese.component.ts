@@ -8,6 +8,7 @@ import { LocalidadeService } from '../shared/localidade/localidade.service';
 export class SinteseComponent implements OnInit {
     
     tipo;
+    local = '';
 
     constructor(
         private _localidade:LocalidadeService
@@ -25,6 +26,7 @@ export class SinteseComponent implements OnInit {
                 //sintese município
                 this.tipo = 3;
             }
+            this.local = localidade.codigo.toString();
         });
     }
 
