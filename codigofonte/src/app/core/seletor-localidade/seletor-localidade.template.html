@@ -59,11 +59,13 @@
 
         <div id="municipios">
             <div class="estado">
-                <div class='circulo'>
-                    <i class="fa fa-university" aria-hidden="true"></i>
+                <a [routerLink]="ufVisualizada.capital.link" class="seletor-localidade__link">
+                    <div class='circulo'>
+                        <i class="fa fa-university" aria-hidden="true"></i>
 
-                </div>
-                {{ufVisualizada.nome}}
+                    </div>
+                    {{ufVisualizada.capital.nome}}
+                </a>
             </div>
 
 
