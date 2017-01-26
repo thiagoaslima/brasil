@@ -1,0 +1,103 @@
+#dados-pesquisa{
+    width: 62%;
+    float: left;
+    font-size: 0.9em;
+}
+
+table{
+    width: 100%;
+    font-size: .9em;
+}
+
+td{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+tr:first-child td{
+    border-bottom: 3px solid #E2871A;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 0.86em;
+}
+
+tr:nth-child(2) td{
+    color: #E2871A;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-weight: bold;
+    line-height: 14px;
+    border-bottom: 2px solid #D9D8D7; 
+    font-size: .9em;
+}
+
+
+.nivel-1 td{
+    padding-top: 30px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+tr.nivel-1:nth-child(3) td{
+    padding-top: 11px;
+}
+
+.nivel-2 td{
+    background-color: #E6E6E6;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 4px solid #fff;
+    
+    font-size: 0.88em;
+}
+
+.nivel-2 td:first-child{
+    padding-left: 5%;
+}
+
+.nivel-2 td:nth-child(2){
+    width: 15%;
+}
+
+.nivel-2 td i{
+    color: #808080;
+}
+
+.nivel-3 td{
+    font-weight: bold;
+    font-size: 0.88em;
+}
+
+.nivel-3 td:first-child{
+    padding-left: 7%;
+    padding-top: 10px;
+}
+
+.nivel-4 td{
+    font-size: 0.88em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.nivel-4 td:first-child{
+    padding-left: 10%;
+}
+
+.nivel-5 td{
+    font-size: 0.88em;
+}
+
+.nivel-5 td:first-child{
+    padding-left: 15%;
+}
+
+.nivel-5 div{
+    border-left: 1px solid #B7B5B3;
+    padding-left: 5px;
+
+}
+
+.nivel-5:hover, .nivel-4:hover{
+    background-color: #f5f0f0;
+}
+
