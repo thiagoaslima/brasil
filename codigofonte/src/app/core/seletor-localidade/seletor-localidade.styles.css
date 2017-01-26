@@ -115,6 +115,8 @@ ANIMAÇÃO
     padding: 9% 6% 3%;
     font-size: .75em;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 #selecionar-localidade .selecionar-localidade__titulo{
