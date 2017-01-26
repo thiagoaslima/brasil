@@ -29,11 +29,13 @@
 
         <nav id="menu">
             <ul>
-                <li class='menu--selecionado'>
-                    <a routerLink="${localidadeSelecionada.link}/sintese">Sintese</a>
+                <li routerLinkActive='menu--selecionado'>
+                    <a [routerLink]="getLink('sintese')">Sintese</a>
                 </li>
-                <li>Tema</li>
-                <li routerLink="pesquisas">Pesquisas</li>
+                <li routerLinkActive='menu--selecionado'>Tema</li>
+                <li routerLinkActive='menu--selecionado'>
+                    <a [routerLink]="getLink('pesquisas')">Pesquisas</a>
+                </li>
             </ul>
         </nav>
 

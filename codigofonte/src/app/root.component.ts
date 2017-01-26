@@ -15,7 +15,7 @@ export class RootComponent implements OnInit, OnDestroy{
     constructor(
         private _localidadeService: LocalidadeService
     ) {
-        this.locais = _localidadeService.tree$;
+        this.locais = this._localidadeService.tree$;
     }
 
     ngOnInit() {
@@ -24,6 +24,12 @@ export class RootComponent implements OnInit, OnDestroy{
 
     ngOnDestroy() {
         this._localSelecionada$$.unsubscribe();
+    }
+
+    getLink(str) {
+        return this.localidadeSelecionada 
+            ? this.localidadeSelecionada.link + '/' + str
+            : '/brasil/' + str;
     }
 
 }

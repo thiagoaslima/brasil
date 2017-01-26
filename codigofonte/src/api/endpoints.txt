@@ -1,0 +1,119 @@
+/* Consumo base de dados */
+
+/**
+ * CLASSES
+ * ==================================
+ */
+
+class Periodo {
+    periodo: string,
+    publicacao: Date,
+    fonte: string[],
+    nota: string[]
+}
+
+class Pesquisa {
+    id: number,
+    nome: string,
+    descricao: string,
+    observacao: string,
+    periodos: Periodo[],
+    indicadores?: IndicadorFull[]
+}
+
+class IndicadorFlat {
+    pesquisa?: Pesquisa,
+    id: number,
+    posicao,
+    classe,
+    nota,
+    children: IndicadorFlat[]
+    unidade,
+    metadado
+}
+
+class Resultado {
+    localidade: string,
+    res: {ano: any}
+}
+
+class IndicadorFull {
+    pesquisa: Pesquisa,
+    id: number,
+    posicao,
+    classe,
+    nota,
+    children: IndicadorFull[]
+    unidade,
+    metadado,
+    resultados: Resultado[]
+}
+
+/**
+ *  ENDPOINTS
+ *  =====================================
+ */
+
+
+/* INDICADORES */
+
+/**
+ * getIndicador
+ * 
+ * quando o endpoint de getIndicador receber apenas a id do indicador, devolve um IndicadorFlat
+ * caso o cliente passe o codigo do local e/ou o periodo desejado, recebe o IndicadorFull, com todos os resultados que satisfação o local ou o período
+ */
+getIndicador(indicadorId: number) : IndicadorFlat + Pesquisa
+getIndicador(indicadorId: number, localCod?: number, periodo?: number): IndicadorFull + Pesquisa
+
+
+/**
+ * getIndicadores
+ */
+getIndicadores(pesquisaId: number, localCod: number, periodo?: number): IndcadorFull[]
+
+
+/* PESQUISAS */
+/**
+ * getPesquisas
+ * devolve todas as pesquisas
+ */
+getPesquisas(): Pesquisa[]
+
+/**
+ * getPesquisasPorNivelTerritorial
+ * devolve todas as pesquisas para um determinado nível territorial (pais, uf, municipio)
+ */
+getPesquisasPorNivelTerritorial(nivelTerritorial: string): Pesquisa[]
+
+/**
+ * getPesquisaCompleta
+ * pede todos os dados da pesquisa
+ * IndicadorId e periodo funcionam como filtros. Caso o cliente não passe nenhum dado nestes argumentos, retorna tudo.
+ */
+getPesquisaCompleta(pesquisaId: number, localCod: number, indicadorId?: number[], periodo?: string): Pesquisa + IndicadorFull
+
+
+/* RANKINGS */
+/**
+ * getRanking
+ * pede uma lista de locais e os valores respectivos, ordenados em ordem crescente (qtyLocal positivo) ou decrescente(qtyLocal negativo)
+ */
+getRanking(indicadorId: number, periodo: string, nivelTerritorial?: string, qtyLocal: number): <{ local: Local, valor: Indicador.res}>[]
+
+
+/**
+ * getRankingPorProximidade
+ * a partir de um local definido, o sistema retorna uma lista com os outros locais de valores parecidos, formando um ranking cujo total de locais seja igual ao qtyLocal indicado + 1 (o próprio local)
+ * preferencialmente, o ranking deve responder com {qtyLocal/2} locais com valores maiores que o local de referência e {qtyLocal/2} locais com valores menores. Caso isto não seja possível, completar a lista com o "lado" possível (maior ou menor) até somar {qtyLocal} locais
+ * 
+ */
+getRankingPorProximidade(indicadorId: number, localCod: number, periodo: string, nivelTerritorial?: string, qtyLocal: number)
+
+
+/* BUSCA */
+/**
+ * retorna todas as pesquisa e indicadores que se relacionam com o termo
+ * caso o cliente passe um local, deve retornar apenas as pesquisas e indicadores que, além de relacionados ao termo, sejam relacionados ao local
+ */
+search(termo: string, localCod: number): Pesquisa[] | IndicadorFlat[]
