@@ -1,5 +1,5 @@
-<div id="sintese">
-    <section id="dados">
+<div class="conteudo">
+    <section class="conteudo__dados">
         <div [ngSwitch]="tipo">
             <div *ngSwitchCase="1">Síntese Brasil</div>
             
@@ -10,7 +10,7 @@
         </div>
     </section>
 
-    <section id="detalhes">
+    <section class="conteudo__detalhes">
         <sintese-header></sintese-header>
         <grafico [tipo]="'line'"></grafico>
     </section>

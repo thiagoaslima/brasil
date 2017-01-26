@@ -158,7 +158,6 @@ aside #menu ul li:hover, aside #menu .menu--selecionado{
     height: 100%;
 }
 
-
 /*****************
 sintese>dados
 *****************/
@@ -173,6 +172,28 @@ sintese>dados
 
 #sintese #detalhes{
     background-color: yellow;
+    float: left;
+    width: 62%;
+    min-height: 100%;
+}
+
+/*******************/
+
+.conteudo{
+    float: left;
+    width: 79%;
+    height: 100%;
+}
+
+.conteudo__dados{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    padding: 2% 0%;
+    min-height: 100%;
+}
+
+.conteudo__detalhes{
     float: left;
     width: 62%;
     min-height: 100%;
