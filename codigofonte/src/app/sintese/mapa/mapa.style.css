@@ -14,3 +14,7 @@ g.checked polygon {
     stroke-width: 0.01px;
     fill: #0D4768;
 }
+
+g {
+    cursor: pointer;
+}

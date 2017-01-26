@@ -1,7 +1,8 @@
+<div>{{localHover}}</div>
 <div class="mapa" *ngIf="data">
     <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
         <g class="uf" transform="scale(1 -1)">
-            <g *ngFor="let item of data.geometry" [attr.class]="item.classe">
+            <g *ngFor="let item of data.geometry" [attr.class]="item.classe" [attr.codigo]="item.codigo" on-mouseover='over(item.codigo)'>
                 <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
             </g>
         </g>

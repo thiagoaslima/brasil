@@ -11,6 +11,7 @@ import { TopoJson, TOPOJSON } from '../../shared/topojson.v2';
 export class MapaComponent implements OnChanges {
 
     @Input() codlocal;
+    public localHover = '';
 
     public data;
     public geom;
@@ -77,6 +78,11 @@ export class MapaComponent implements OnChanges {
 
             });
             
+    }
+
+    over(cod){
+        console.log(cod);
+        this.localHover = cod.toString();
     }
 
 }
