@@ -6,6 +6,7 @@ import { SinteseDadosComponent } from './sintese-dados/sintese-dados.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from '../shared/ng2-charts.module';
+import { MapaComponent } from './mapa/mapa.component';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { ChartsModule } from '../shared/ng2-charts.module';
         SinteseComponent,
         SinteseHeaderComponent,
         SinteseDadosComponent,
-        GraficoComponent
+        GraficoComponent,
+        MapaComponent
     ]
 })
 export class SinteseModule {}
