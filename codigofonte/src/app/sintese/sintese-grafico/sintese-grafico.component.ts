@@ -1,42 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
 @Component({
     selector: 'sintese-grafico',
     templateUrl: 'sintese-grafico.template.html'
 })
-export class SinteseGraficoComponent {
+export class SinteseGraficoComponent implements OnChanges {
 
     public isBrowser = isBrowser;
     
-    private datasets = [];
-    private labels = [];
-    private options = {};
-    private colors = [];
+    @Input() dados = [];
 
-    ngOnInit(changes: any) { 
-        this.datasets = [
-            { 
-                data : [38,41,35,40],
-                label : '0 a 14 anos' 
-            }, 
-            { 
-                data : [55,39,50,51],
-                label : '15 a 64 anos' 
-            }, 
-            { 
-                data : [7,20,15,9], 
-                label : '65 anos ou mais (idosos)' 
+    public datasets = [];
+    public labels;
+    public options = {};
+    public colors = [];
+
+
+    ngOnChanges(changes: any) { 
+
+        debugger;
+
+        if(!!this.dados){
+
+            let dadosGrafico:string[] = [];
+            this.labels = []
+
+            for(var i in this.dados) {
+
+                dadosGrafico.push(this.dados[i]);
+                this.labels.push(i);
             }
-        ];
+
+            let valores = dadosGrafico.map(valor => {
+
+                return !!valor? valor.replace(',', '.') : valor;
+            });
+
+            this.datasets = [{data: valores, label: ''}];
+        }
+
+
 
         this.colors = [
             {backgroundColor:'rgba(221,0,0,0.8)'},
             {backgroundColor:'rgba(242,146,32,0.8)'},
             {backgroundColor:'rgba(67,101,176,0.8)'}
             ];
-
-        this.labels = ["1980", "1991", "2000", "2010"];
 
         this.options = {
             scales: {
@@ -61,5 +71,6 @@ export class SinteseGraficoComponent {
             }//,responsive: false
         };
     }
+    
 
 }

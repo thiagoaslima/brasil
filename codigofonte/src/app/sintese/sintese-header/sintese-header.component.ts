@@ -18,7 +18,7 @@ export class SinteseHeaderComponent {
 
     ngOnInit(){
         this._routerParams.params$.subscribe((params)=>{
-            console.log(params);
+
             this.titulo = params.indicador; //pegar o nome real do indicador e da pesquisa de onde ele vem
             this.pesquisa = 'Censo';
         })
