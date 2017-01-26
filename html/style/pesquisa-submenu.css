@@ -1,0 +1,63 @@
+.submenu{
+    list-style-type: none;
+    background-color: #CCC;
+    height: 100%;
+    display: block;
+}
+
+.submenu__item{
+    display: block;
+    padding: 16px 32px;
+    background-color: #CCC;
+    border-bottom: 1px solid #B2B2B2;
+}
+
+.submenu__item:hover{
+    color: white;
+    background-color: #333;
+    border-bottom: 1px solid #676767;
+}
+
+.submenu__item:last-child{
+    border-bottom: none;
+}
+
+.submenu__item--selecionado{
+    color: white;
+    background-color: #333;
+    border-bottom: 1px solid #676767;
+}
+
+.submenu__seta{
+    color: #1B779B;
+    margin: 4px 0px;
+    float: right;
+}
+
+.submenu__subitem{
+    color: white;
+    display: block;
+    padding: 16px 32px 16px 72px;
+    background-color: #4D4D4D;
+    border-bottom: 1px solid #676767;
+}
+
+.submenu__subitem:hover{
+    color: white;
+    background-color: #1B779B;
+}
+
+.submenu__subitem--selecionado{
+    color: white;
+    background-color: #1B779B;
+}
+
+.submenu__subseta{
+    color: #9B9B9B;
+    margin: 4px 0px;
+    float: right;
+}
+
+.submenu__subseta--selecionada{
+    color: white;
+}
