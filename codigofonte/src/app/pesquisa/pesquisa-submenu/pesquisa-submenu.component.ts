@@ -26,7 +26,6 @@ export class PesquisaSubmenuComponent {
                 return 0;
             });
             this.pesquisas = pesquisas;
-            console.log(this.pesquisas);
         });
     }
 }
