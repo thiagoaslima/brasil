@@ -10,15 +10,8 @@
         </div>
     </section>
 
+
     <section class="conteudo__detalhes">
-        <sintese-header (ativarComponente)="handleAtivarComponente($event)"></sintese-header>
-        <div *ngIf="comp === 'grafico'">
-            <grafico [tipo]="'line'"></grafico>
-        </div>
-        <div *ngIf="comp !== 'grafico'">
-            <div *ngIf="local != ''">
-                <mapa [codlocal]="local"></mapa>
-            </div>
-        </div>
+        <sintese-detalhes></sintese-detalhes>
     </section>
 </div>
