@@ -5,9 +5,13 @@
     display: block;
 }
 
-.submenu__item{
+.submenu__link{
     display: block;
     padding: 16px 32px;
+    position: relative;
+}
+
+.submenu__item{
     background-color: #CCC;
     border-bottom: 1px solid #B2B2B2;
 }
@@ -15,7 +19,7 @@
 .submenu__item:hover{
     color: white;
     background-color: #333;
-    border-bottom: 1px solid #676767;
+    /*border-bottom: 1px solid #676767;*/
 }
 
 .submenu__item:last-child{
@@ -25,26 +29,40 @@
 .submenu__item--selecionado{
     color: white;
     background-color: #333;
-    border-bottom: 1px solid #676767;
+    /*border-bottom: 1px solid #676767;*/
+}
+
+.submenu__texto{
+    width: 80%;
+    display: inline-block;
 }
 
 .submenu__seta{
     color: #1B779B;
-    margin: 4px 0px;
-    float: right;
+    position: absolute;
+    right: 32px;
+    top: 40%;
+}
+
+.submenu__sublink{
+    display: block;
+    padding: 16px 32px 16px 72px;
+    position: relative;
 }
 
 .submenu__subitem{
     color: white;
-    display: block;
-    padding: 16px 32px 16px 72px;
     background-color: #4D4D4D;
-    border-bottom: 1px solid #676767;
+    border-bottom: 1px solid #676767; 
 }
 
 .submenu__subitem:hover{
     color: white;
     background-color: #1B779B;
+}
+
+.submenu__subitem:last-child{
+    border-bottom: none;
 }
 
 .submenu__subitem--selecionado{
@@ -54,8 +72,9 @@
 
 .submenu__subseta{
     color: #9B9B9B;
-    margin: 4px 0px;
-    float: right;
+    position: absolute;
+    right: 32px;
+    top: 40%;
 }
 
 .submenu__subseta--selecionada{
