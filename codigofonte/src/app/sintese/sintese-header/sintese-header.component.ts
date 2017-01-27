@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
-import {RouterParamsService} from '../../shared/router-params.service'
-import {SinteseService} from '../sintese.service'
-import {LocalidadeService} from '../../shared/localidade/localidade.service'
+import { RouterParamsService } from '../../shared/router-params.service';
+import { SinteseService } from '../sintese.service';
+import { LocalidadeService } from '../../shared/localidade/localidade.service';
 
 @Component({
     selector: 'sintese-header',

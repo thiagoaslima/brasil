@@ -1,6 +1,13 @@
 <section class="conteudo__dados">
     <ul class="submenu">
-        <li class="submenu__item">
+        <li class="submenu__item" *ngFor="let pesquisa of pesquisas;">
+            <a class="submenu__link" href="">
+                <span class="submenu__texto">{{ pesquisa.descricao }}</span>
+                <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
+            </a>
+        </li>
+
+        <!--<li class="submenu__item">
             <a class="submenu__link" href="">
                 <span class="submenu__texto">Censo Agropecuário</span>
                 <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
@@ -55,6 +62,6 @@
                 <span class="submenu__texto">Pecuária</span>
                 <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
             </a>
-        </li>
+        </li>-->
     </ul>
 </section>
