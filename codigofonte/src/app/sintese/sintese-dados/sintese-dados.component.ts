@@ -16,15 +16,14 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
     public baseURL;
 
     private _subscription: Subscription;
-    
-
 
     constructor(
         private sinteseService: SinteseService,
         private localidadeService: LocalidadeService
-    ) {}
+    ) { }
 
     ngOnInit() {
+
          this._subscription = this.localidadeService.selecionada$
             .flatMap(localidade => {
 

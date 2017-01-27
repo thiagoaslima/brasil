@@ -26,15 +26,16 @@ header .logo{
     width: 21%;
     background-color: #fff;
     float: left;
+    height: 52px;
 }
 header .logo img{
-    padding: 5% 6% 2%;
+    padding: 14px 6% 4px;
 }
 
 
 header #busca{
     float: left;
-    margin: 0.7% 0% 0.7% 1%;
+    margin: 10px 1%;
     width: 76%;
     height: 30px;
 }
@@ -43,6 +44,30 @@ header #busca{
     max-width: 1900px;
     margin: auto;
     height: 100%;
+}
+
+.brasil .cor-fundo{
+     background-color: #1F9982;
+}
+
+.brasil .cor-borda{
+    border-color: #1F9982;
+}
+
+.estado .cor-fundo{
+    background-color: #148C99;
+}
+
+.estado .cor-borda{
+   background-color: #148C99;
+}
+
+.municipio .cor-fundo{
+    background-color: #1B779B;
+}
+
+.municipio .cor-borda{
+    background-color: #1B779B;
 }
 
 /*****************
@@ -112,9 +137,6 @@ aside #localidade button:hover{
 
 
 
-
-
-
 aside #menu ul{
     margin-top: 28px;
 }
@@ -150,7 +172,6 @@ sintese>dados
 }
 
 #sintese #detalhes{
-    background-color: yellow;
     float: left;
     width: 62%;
     min-height: 100%;

@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="style/global.css">
         <link rel="stylesheet" href="style/sintese-dados.css">
+        <link rel="stylesheet" href="style/selecionar-localidade.css">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -23,6 +24,208 @@
         </header>
 
         <div id='container'>
+
+            <div id='selecionar-localidade'>
+                
+                <div id="primeira-coluna">
+                    <div class="selecionar-localidade__voltar" onclick="fechaSeletorLocalidade()">
+                        < Voltar
+                    </div>
+                    <div class="selecionar-localidade__titulo">
+                        Alterar localidade
+                    </div>
+
+                    <nav>
+                        <ul>
+                            <li id='menu__brasil' onclick="abreSubMenu('brasil')">Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
+                            <li id='menu__estado' onclick="abreSubMenu('estado')">Estados <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
+                            <li id='menu__municipio' onclick="abreSubMenu('municipio')"class='selecionado'>Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i> </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div id="segunda-coluna" class='cor-fundo'>
+                        <ul>
+                            <li onclick="abreSubSubMenu(this)">
+                                <div>
+                                    Acre
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </li>
+
+                            <li onclick="abreSubSubMenu(this)">
+                                <div>
+                                    Acre
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </li>
+
+                            <li class='selecionado' onclick="abreSubSubMenu(this)">
+                                <div>
+                                    Acre
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </li>
+
+                        </ul>
+                </div>
+
+                <div id="terceira-coluna">
+
+                    <div class="estado-selecionado">Municípios do Rio de Janeiro</div>
+                    <i class="fa fa-times" aria-hidden="true" onclick="fechaSeletorLocalidade()"></i>
+                    <br/>
+                    <input type="text" id='busca' placeholder="Qual município você procura?">
+                    <button>Acessar o Estado do Rio de Janeiro</button>
+
+                    <div id="municipios">
+                        <div class="estado">
+                            <div class='circulo'> 
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                                
+                            </div>
+                            Rio de Janeiro
+                        </div>
+
+                        <div class="conjunto">
+                            <div class="letra">
+                                <div class="circulo">
+                                    A
+                                </div>
+                            </div>
+                            <div class="municipios">
+                                <ul>
+                                    <li>Vila Bela da Santíssima Trindade</li>
+                                    <li>aaa</li>
+                                    <li>bbb</li>
+                                    <li>ccc</li>
+                                    <li>ddd</li>
+                                    <li>eee</li>
+                                    <li>ffff</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="conjunto">
+                            <div class="letra">
+                                <div class="circulo">
+                                    B
+                                </div>
+                            </div>
+                            <div class="municipios">
+                               <ul>
+                                      <li>aaa</li>
+                                    <li>bbb</li>
+                                    <li>ccc</li>
+                                    <li>ddd</li>
+                                    <li>eee</li>
+                                    <li>ffff</li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                         <div class="conjunto">
+                            <div class="letra">
+                                <div class="circulo">
+                                    C
+                                </div>
+                            </div>
+                            <div class="municipios">
+                                <ul>
+                                    <li>aaa</li>
+                                    <li>bbb</li>
+                                    <li>ccc</li>
+                                    <li>ddd</li>
+                                    <li>eee</li>
+                                    <li>ffff</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="conjunto">
+                            <div class="letra">
+                                <div class="circulo">
+                                    D
+                                </div>
+                            </div>
+                            <div class="municipios">
+                                <ul>
+                                     <li>aaa</li>
+                                    <li>bbb</li>
+                                    <li>ccc</li>
+                                    <li>ddd</li>
+                                    <li>eee</li>
+                                    <li>ffff</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                         <div class="conjunto">
+                            <div class="letra">
+                                <div class="circulo">
+                                    E
+                                </div>
+                            </div>
+                            <div class="municipios">
+                                <ul>
+                                    <li>aaa</li>
+                                    <li>bbb</li>
+                                    <li>ccc</li>
+                                    <li>ddd</li>
+                                    <li>eee</li>
+                                    <li>ffff</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="conjunto">
+                            <div class="letra">
+                                <div class="circulo">
+                                    F
+                                </div>
+                            </div>
+                            <div class="municipios">
+                                <ul>
+                                     <li>aaa</li>
+                                    <li>bbb</li>
+                                    <li>ccc</li>
+                                    <li>ddd</li>
+                                    <li>eee</li>
+                                    <li>ffff</li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+
+                <div id="bg">
+                </div>
+                
+            </div>
+
             <aside class='aside--municipio'>
                 <div id="localidade">
                          <nav id='local'>
@@ -32,7 +235,7 @@
                                 <li><h1>São Francisco de Assis do Piauí</h1></li>
                             </ul>
                         </nav>
-                        <button>Alterar localidade</button>
+                        <button  onclick="abreMenu()">Alterar localidade</button>
                 </div>
                 
                 <nav id="menu">
@@ -242,3 +445,130 @@
 
     </body>
 </html>
+
+
+<script>
+    /******* 
+     SELECIONAR LOCALIDADE
+    ********/
+    seletorLocalidade = document.getElementById("selecionar-localidade");
+    menu = document.getElementById("primeira-coluna");
+    subMenu = document.getElementById("segunda-coluna");
+    subSubMenu = document.getElementById("terceira-coluna");
+
+    function abreMenu(){
+        seletorLocalidade.classList.add("aberto");
+        menu.classList.add("aberto");
+    }
+
+    function abreSubMenu(item){
+        if(item != 'brasil'){
+            if(subMenu.classList.contains('aberto')) {
+                
+                if(subSubMenu.classList.contains('aberto')){
+                    fechaSubSubMenu();
+
+                    setTimeout( function(){
+                        fechaSubMenu();
+                        
+                        setTimeout( function(){
+                            adicionaClassSubMenu(item);
+                            subMenu.classList.add("aberto");
+                        }, 500 );
+                    }, 500 );
+                
+                }else{
+                    fechaSubMenu();
+                    setTimeout( function(){
+                        adicionaClassSubMenu(item);
+                        subMenu.classList.add("aberto");
+                    }, 500 );
+                }
+
+            }else{
+                subMenu.classList.add("aberto");
+                adicionaClassSubMenu(item);    
+            }
+        }else{
+            fechaSeletorLocalidade();
+        }
+
+        adicionaClassSelecionadoSubMenu(item);
+       
+    }
+
+    function abreSubSubMenu(){
+
+        if(subSubMenu.classList.contains('aberto')) {
+            fechaSubSubMenu();
+            setTimeout( function(){
+                subSubMenu.classList.add("aberto");
+            }, 500 );
+        }else{
+            subSubMenu.classList.add("aberto");
+        }
+
+    }
+
+    function fechaMenu(){
+        menu.classList.remove("aberto");
+        setTimeout( function(){
+            seletorLocalidade.classList.remove("aberto");
+        }, 500 );
+    }
+
+    function fechaSubMenu(){
+         subMenu.classList.remove("aberto");
+    }
+
+    function fechaSubSubMenu(){
+        subSubMenu.classList.remove("aberto");
+    }
+
+
+
+    function adicionaClassSubMenu(item){
+        seletorLocalidade.classList.remove('brasil', 'estado', 'municipio');
+        seletorLocalidade.classList.add(item);
+    }
+
+    function adicionaClassSelecionadoSubMenu(item){
+        itens = document.querySelectorAll("#primeira-coluna nav ul li");
+        for(i=0; i<3; i++){
+            if(itens[i].classList.contains('selecionado')){
+                itens[i].classList.remove('selecionado');
+            }
+        }
+
+        document.querySelector("#primeira-coluna nav ul li#menu__"+item).classList.add('selecionado');
+
+    }
+
+
+    function fechaSeletorLocalidade(){
+        if(subSubMenu.classList.contains('aberto')){
+            fechaSubSubMenu();
+            setTimeout( function(){
+                fechaSubMenu();
+                setTimeout( function(){
+                    fechaMenu();
+                }, 500 );
+            }, 500 );
+
+        }else if(subMenu.classList.contains('aberto')){
+            fechaSubMenu();
+            setTimeout( function(){
+                fechaMenu();
+            }, 400 );
+        }else{
+            fechaMenu()
+        }
+    }
+
+    
+
+    /******* 
+        FIM SELECIONAR LOCALIDADE
+    ********/
+
+</script>

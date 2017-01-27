@@ -17,6 +17,8 @@ import { RouterParamsService } from '../../shared/router-params.service';
 export class SinteseDetalhesComponent implements OnInit {
 
     dadosIndicador;
+    comp = 'mapa';
+    local = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -25,7 +27,10 @@ export class SinteseDetalhesComponent implements OnInit {
         private _params: RouterParamsService
     ){}
 
+
     ngOnInit(){
+
+    this._localidadeService.selecionada$.subscribe((localidade)=> this.local = localidade.codigo.toString());
 
     // [OK] Incluir links nos indicadores dos dados da síntese 
 
@@ -47,4 +52,9 @@ export class SinteseDetalhesComponent implements OnInit {
     }
 
     // No gráfico, ler os dados e exibi-los
+
+    handleAtivarComponente(comp) {
+        console.log(comp);
+        this.comp = comp;
+    }
 }

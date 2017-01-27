@@ -1,0 +1,20 @@
+.mapa svg {
+    width: 90%;
+    margin: 5%;
+    /*height: 250px;   */
+}
+
+polygon {
+    stroke: #fff;
+    stroke-width: 0.01px;
+    fill: #E8E267;
+}
+g.checked polygon {
+    stroke: #fff;
+    stroke-width: 0.01px;
+    fill: #0D4768;
+}
+
+g {
+    cursor: pointer;
+}
