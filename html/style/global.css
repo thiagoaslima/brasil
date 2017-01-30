@@ -13,6 +13,14 @@ html, body{
     height: 100%;
 }
 
+body{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
 header{
     background-color: #E6E6E6;
     max-width: 1900px;
