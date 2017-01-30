@@ -13,12 +13,28 @@ html, body{
     height: 100%;
 }
 
-body{
+body, body.brasil{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: -o-linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: -moz-linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: linear-gradient( to right, #148C99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -webkit-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
+body.estado{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
+body.municipio{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
 header{
