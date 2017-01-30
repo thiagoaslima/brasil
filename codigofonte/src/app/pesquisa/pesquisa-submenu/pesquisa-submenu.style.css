@@ -14,6 +14,7 @@
 .submenu__item{
     background-color: #CCC;
     border-bottom: 1px solid #B2B2B2;
+    cursor: pointer;
 }
 
 .submenu__item:hover{

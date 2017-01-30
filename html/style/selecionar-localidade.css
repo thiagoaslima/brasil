@@ -31,6 +31,7 @@ ANIMAÇÃO
     color:#fff;
     width: 100%;
     left: -9999999px;
+    display: table
    
 }
 
@@ -40,7 +41,7 @@ ANIMAÇÃO
     height: 100%;
     position: relative;
     z-index: 3;
-    float: left;
+    display: inline-block;
     left: -22%;
 
     -webkit-transition: left 0.5s ease;
@@ -53,10 +54,11 @@ ANIMAÇÃO
 #selecionar-localidade #segunda-coluna{
     width: 30%;
     height: 100%;
-    float: left;
+    display: inline-block;
     z-index: 2;
     position: relative;
     left: -50%;
+    vertical-align: top;
 
     -webkit-transition: left 0.8s ease;
     -moz-transition: left 0.8s ease;
@@ -170,11 +172,12 @@ ANIMAÇÃO
     width: 49%;
     background-color: #333333;
     height: 100%;
-    float: left;
+    display: inline-block;
     z-index: 1;
     position: relative;
-    padding: 17px 2%;
+    padding: 0px 2%;
     left: -100%;
+    vertical-align: top;
 
     -webkit-transition: left .8s ease;
     -moz-transition: left .8s ease;
@@ -191,10 +194,12 @@ ANIMAÇÃO
     float: left;
     font-weight: bold;
     font-size: .98em;
+    margin-top: 17px;
 }
 
 #selecionar-localidade #terceira-coluna i.fa-times{
-    float: right
+    float: right;
+    margin-top: 21px;
 }
 
 #selecionar-localidade #terceira-coluna input{

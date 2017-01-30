@@ -1,10 +1,25 @@
-<!--<div>{{localHover}}</div>-->
-<div class="mapa" *ngIf="data">
-    <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
-        <g class="uf" transform="scale(1 -1)">
-            <g *ngFor="let item of data.geometry" [attr.class]="item.classe" [attr.codigo]="item.codigo" on-mouseover='over(item.codigo)'>
-                <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
-            </g>
-        </g>
-    </svg>
+<div *ngIf="mapauf === false">
+    <div>{{localHover}}</div>
+    <div class="mapa" *ngIf="data">
+        <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
+                <g class="uf" transform="scale(.18 -.18)">
+                    <g *ngFor="let item of data.geometry" [attr.class]="item.classe" [attr.codigo]="item.codigo" [attr.nome]="item.nome" [attr.sigla]="item.sigla" on-mouseover='over(item.nome)'>
+                        <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                    </g>
+                </g>
+        </svg>
+    </div>
+</div>
+
+<div *ngIf="mapauf === true">
+    <div>{{localHover}}</div>
+    <div class="mapa" *ngIf="data">
+        <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
+                <g class="uf" transform="scale(1 -1)">
+                    <g *ngFor="let item of data.geometry" [attr.class]="item.classe" [attr.codigo]="item.codigo" [attr.nome]="item.nome" on-mouseover='over(item.nome)'>
+                        <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                    </g>
+                </g>
+        </svg>
+    </div>
 </div>
