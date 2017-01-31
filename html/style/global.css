@@ -9,6 +9,10 @@
     box-sizing: border-box; 
 }
 
+.cb{
+    clear: both;
+}
+
 html, body{
     height: 100%;
 }
@@ -160,6 +164,10 @@ aside #localidade button{
     transition: background 200ms ease, color 200ms ease;
 }
 
+aside #localidade button#menu-principal{
+    display: none;
+}
+
 aside #localidade button:hover{
     background-color: #FFFFFF;
     color: #148C99;
@@ -221,6 +229,8 @@ sintese>dados
     header .logo {
         background-color: #333333;
         height: 42px;
+        padding-left: 5%;
+        width: auto;
     }
 
     header .logo--desk {
@@ -243,5 +253,52 @@ sintese>dados
         padding: 10px 15px;
         font-size: 20px;
     }
+
+
+    aside{
+        width: 100%;
+        min-height: 0px;
+    }
+
+    aside #localidade {
+        padding: 7px 5%;
+    }
+
+    aside #localidade button{
+        margin: 15px 0% 5px;
+        float: right;
+    }
+    
+    aside #localidade button#menu-principal{
+        float: left;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        padding: 0px;
+        display: block;
+    }
+
+    aside #menu{
+        position: absolute;
+        background-color: #148C99;
+        left: -75%;
+        min-height: 100%;
+        width: 75%;
+
+        -webkit-transition: left 500ms ease;
+        -moz-transition: left 500ms ease;
+        -ms-transition: left 500ms ease;
+        -o-transition: left 500ms ease;
+        transition: left 500ms ease;
+    }
+
+    aside #menu ul{
+        margin-top: 0px;
+    }
+
+    aside #menu.aberto{
+        left: 0%;
+    }
 }
+
 

@@ -238,7 +238,9 @@
                                 <li><h1>São Francisco de Assis do Piauí</h1></li>
                             </ul>
                         </nav>
-                        <button  onclick="abreMenu()">Alterar localidade</button>
+                        <button onclick="abreMenuLocalidade()">Alterar localidade</button>
+                        <button onclick="abreMenuPrincipal()" id='menu-principal'><i class="fa fa-bars" aria-hidden="true"></i></button>
+                        <div class="cb"></div>
                 </div>
                 
                 <nav id="menu">
@@ -250,6 +252,7 @@
                 </nav>
             </aside>
             
+
             <div id='sintese'>
                 <section id='dados'>
                     
@@ -459,7 +462,7 @@
     subMenu = document.getElementById("segunda-coluna");
     subSubMenu = document.getElementById("terceira-coluna");
 
-    function abreMenu(){
+    function abreMenuLocalidade(){
         seletorLocalidade.classList.add("aberto");
         menu.classList.add("aberto");
     }
@@ -568,6 +571,17 @@
         }
     }
 
+
+    function abreMenuPrincipal(){
+       menuPrincipal = document.querySelector("aside nav#menu");
+
+       if(menuPrincipal.classList.contains('aberto')){
+           menuPrincipal.classList.remove('aberto');
+       }else{
+           menuPrincipal.classList.add('aberto');
+       }
+       
+    }
     
 
     /******* 
