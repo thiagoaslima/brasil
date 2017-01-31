@@ -52,6 +52,11 @@ header .logo{
     float: left;
     height: 52px;
 }
+    
+header .logo--mobile {
+    display: none;
+}
+
 header .logo img{
     padding: 14px 6% 4px;
 }
@@ -62,6 +67,10 @@ header #busca{
     margin: 10px 1%;
     width: 76%;
     height: 30px;
+}
+
+header .fa-search{
+    display: none;
 }
 
 #container{
@@ -200,3 +209,39 @@ sintese>dados
     width: 62%;
     min-height: 100%;
 }
+
+
+
+@media screen and (max-width: 768px) {
+    header{
+        background-color: #333333;
+        border-bottom: none;
+    }
+
+    header .logo {
+        background-color: #333333;
+        height: 42px;
+    }
+
+    header .logo--desk {
+        display: none;
+    }
+    
+    header .logo--mobile {
+        display: block;
+    }
+
+    header #busca{
+        height: 24px;
+        display: none;
+    }
+
+    header .fa-search{
+        display: block;
+        color: #fff;
+        float: right;
+        padding: 10px 15px;
+        font-size: 20px;
+    }
+}
+
