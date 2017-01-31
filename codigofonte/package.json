@@ -7,7 +7,7 @@
     "url": "https://github.com/angular/universal-starter.git"
   },
   "scripts": {
-    "watch": "webpack --watch",
+    "watch": "webpack",
     "watch:dev": "npm run server & npm run watch",
     "clean:dist": "rimraf dist",
     "clean:ngc": "rimraf **/*.ngfactory.ts **/*.css.shim.ts",
@@ -20,7 +20,7 @@
     "ngc": "ngc -p tsconfig.aot.json",
     "prestart": "npm run build",
     "server2": "nodemon dist/server/index.js",
-    "server": "node --inspect dist/server/index.js",
+    "server": "node dist/server/index.js",
     "debug:server": "node-nightly --inspect --debug-brk dist/server/index.js",
     "start": "npm run watch:dev",
     "debug:start": "npm run build && npm run debug:server",
