@@ -43,7 +43,7 @@ class IndicadorFull {
     posicao
     classe
     nota
-    children: IndicadorFlat[]
+    children: IndicadorFull[]
     unidade
     metadado
     resultados: Resultado[]
@@ -70,12 +70,6 @@ getIndicador(indicadorId: number) : {indicador: IndicadorFlat, pesquisa: Pesquis
 getIndicador(indicadorId: number, localCod?: number, periodo?: number): {indicador: IndicadorFlat, pesquisa: Pesquisa, res: Resultado}
 
 
-/**
- * getIndicadores
- */
-getIndicadores(pesquisaId: number, localCod: number, periodo?: number): IndicadorFull[]
-
-
 /* PESQUISAS */
 /**
  * getPesquisas
@@ -94,7 +88,7 @@ getPesquisasPorNivelTerritorial(nivelTerritorial: string): Pesquisa[]
  * pede todos os dados da pesquisa
  * IndicadorId e periodo funcionam como filtros. Caso o cliente não passe nenhum dado nestes argumentos, retorna tudo.
  */
-getPesquisaCompleta(pesquisaId: number, localCod: number, indicadorId?: number[], periodo?: string): Pesquisa + IndicadorFull
+getPesquisaCompleta(pesquisaId: number, localCod?: number, indicadorId?: number[], periodo?: string): Pesquisa + IndicadorFull
 
 
 /* RANKINGS */

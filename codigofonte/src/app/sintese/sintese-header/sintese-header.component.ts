@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import { RouterParamsService } from '../../shared/router-params.service';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { GraficoComponent } from '../grafico/grafico.component';
+import { Subscription } from 'rxjs/Subscription';
 var FileSaver = require('file-saver');
 var converter = require('json-2-csv');
 
@@ -13,13 +14,15 @@ var converter = require('json-2-csv');
     templateUrl: 'sintese-header.template.html',
     styleUrls: ['sintese-header.style.css']
 })
-export class SinteseHeaderComponent implements OnInit {
+export class SinteseHeaderComponent implements OnInit, OnDestroy {
 
     public ativo = 'cartograma'; //pode ser 'grafico' ou 'mapa'
     public titulo;
     public pesquisa;
     public codPesquisa;
     public valoresIndicador;
+
+    private _subscription: Subscription
 
     @Output() ativarComponente = new EventEmitter();
 
@@ -30,7 +33,7 @@ export class SinteseHeaderComponent implements OnInit {
     ){}
 
     ngOnInit(){
-        this._routerParams.params$.subscribe((params)=>{
+        this._subscription = this._routerParams.params$.subscribe((params)=>{
 
             if(params.indicador){
                 let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
@@ -52,6 +55,10 @@ export class SinteseHeaderComponent implements OnInit {
             }
         });
 
+    }
+
+    ngOnDestroy() {
+        this._subscription.unsubscribe();
     }
 
     public ativar(tipo){

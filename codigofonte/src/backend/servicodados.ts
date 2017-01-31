@@ -96,10 +96,27 @@ export function mockServices() {
     });
 
 
-    router.route('/indicadores')
+    /*router.route('pesquisa/:id/completa')
         .get(function (req, res) {
-            return indicadores.then(res.json);
+           let {id} = req.params.id;
+            let {localidade, localidades, periodo, periodos} = req.query;
+            if (localidade && !localidades) localidades = localidade;
+            if (periodo && !periodos) periodos = periodo;
+            let pesquisa = hashPesquisas.then(hash => hash[id]);
+
+            let _indicadores = Promise.all([pesquisa, indicadores])
+                .then(([pesquisa, indicadores]) => {
+                    return indicadores.filter(indicadores => indicadores[0]['pesquisa'] === pesquisa.id);
+                });
+
+            _indicadores.then(indicadores => {
+                indicadores.map(indicador => {
+                    getResults(indicador)
+                })
+            })
         });
+        */
+    
 
     router.route('/indicador/:id')
         .get(function (req, res) {
@@ -111,7 +128,7 @@ export function mockServices() {
             let _indicador = hashIndicadores.then(hash => hash[id]);
 
             if (!localidades && !periodos) {
-                return Promise.all( [_indicador, hashPesquisas]).then( ([indicador, pesquisas]) => { 
+                return Promise.all([_indicador, hashPesquisas]).then(([indicador, pesquisas]) => {
                     res.json([{
                         indicador: indicador,
                         pesquisa: pesquisas[indicador.pesquisa]
