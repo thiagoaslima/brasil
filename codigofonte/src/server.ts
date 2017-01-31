@@ -67,8 +67,10 @@ app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: fal
 // ** Example API
 // Notice API should be in aseparate process
 import { serverApi, createTodoApi } from './backend/api';
+import { mockServices } from './backend/servicodados';
 // Our API for demos only
 app.get('/data.json', serverApi);
+app.use('/dados', mockServices());
 app.use('/api', createTodoApi());
 
 process.on('uncaughtException', function (err) { 
