@@ -47,7 +47,16 @@ export class MapaComponent implements OnChanges {
                         municipios.forEach(municipio => {
                             if(municipio.codigoUf.toString() == this.codlocal.substr(0, 2)){
                                 if(municipio.codigo.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6)){
+
                                     myGeom.nome = municipio.nome;
+
+                                    ufs.forEach(uf => {
+                                        if(uf.codigo.toString() == this.codlocal.substr(0, 2)){
+                                            myGeom.uf = uf.sigla;
+                                            myGeom.link = '/brasil/' + uf.sigla.toLowerCase() + '/' + municipio.slug;
+                                        }
+                                    });
+
                                 }
                             }
                         });
