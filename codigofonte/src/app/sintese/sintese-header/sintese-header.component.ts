@@ -41,6 +41,12 @@ export class SinteseHeaderComponent implements OnInit {
                     this.titulo = dados[0].indicador; //descrição textual do indicador presente na rota
                     this.pesquisa = dadosPesquisa.nome; //pega o nome da pesquisa de onde esse indicador vem
                     this.codPesquisa = dadosPesquisa.codigo; //pega o código da pesquida
+
+                    for (let k in dados[0].res) {
+
+                        dados[0].res[k] = <string>dados[0].res[k].replace(',', '.');
+                    }
+
                     this.valoresIndicador = dados[0].res;
                 });
             }
