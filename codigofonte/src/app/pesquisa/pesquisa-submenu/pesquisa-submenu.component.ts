@@ -37,8 +37,8 @@ export class PesquisaSubmenuComponent {
             this.idPesquisaSelecionada = params.pesquisa;
             
             //carrega indicadores que aparecem no submenu
+            this.indicadores = [];
             this._sintese.getNomesPesquisa(params.pesquisa).subscribe((indicadores) => {
-                this.indicadores = [];
                 for(var i = 0; i < indicadores.length; i++){
                     this.indicadores.push({'nome' : indicadores[i].indicador, 'id' : indicadores[i].id});
                 }

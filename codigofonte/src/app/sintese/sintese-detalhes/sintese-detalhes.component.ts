@@ -48,7 +48,7 @@ export class SinteseDetalhesComponent implements OnInit {
 
                 return indicador;
                 
-            }).subscribe(valoresIndicador => this.dadosIndicador = !!valoresIndicador[0] ? valoresIndicador[0].res :  '{}');
+            }).subscribe(valores => this.dadosIndicador = !!valores[0] ? valores[0].res :  '{}');
     }
 
     // No gráfico, ler os dados e exibi-los

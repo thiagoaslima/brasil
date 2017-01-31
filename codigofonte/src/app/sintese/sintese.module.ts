@@ -11,11 +11,13 @@ import { GraficoComponent } from './grafico/grafico.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from '../shared/ng2-charts.module';
 import { MapaComponent } from './mapa/mapa.component';
+import { RootRoutingModule } from '../root-routing.module';
 
 @NgModule({
     imports: [
         SharedModule,
-        ChartsModule
+        ChartsModule,
+        RootRoutingModule
     ],
     declarations: [
         SinteseComponent,

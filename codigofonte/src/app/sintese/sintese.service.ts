@@ -55,9 +55,11 @@ export class SinteseService{
      */
     public getDadosPesquisa(pesquisa: string, local: string, indicadores: string[] = []) {
 
+        debugger;
+
         const codigoLocal = local.substr(0, 6);
 
-        const codigoIndicadores = indicadores.length > 0 ? `indicadores=${indicadores.join(',')}` : '';
+        const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
 
         const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&${codigoIndicadores}`).map((res => res.json()));
 

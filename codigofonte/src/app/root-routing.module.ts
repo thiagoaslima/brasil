@@ -13,7 +13,8 @@ const children = [
   { path: 'sintese/:indicador', component: SinteseComponent, pathMatch: 'full' },
   { path: 'sintese/:indicador/mapa', component: SinteseComponent, pathMatch: 'full' },
   { path: 'pesquisas', redirectTo: 'pesquisas/23', pathMatch: 'full' },
-  { path: 'pesquisas/:pesquisa', component: PesquisaComponent }
+  { path: 'pesquisas/:pesquisa', component: PesquisaComponent },
+  { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent }
 ];
 
 @NgModule({
