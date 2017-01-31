@@ -32,3 +32,16 @@ i.cabecalho__duvida{
     padding-top: 1px;
     margin-right: 2%;
 }
+
+.cabecalho__combobox{
+    clear: both;
+    display: block;
+    margin: 3% 0% 1% 2%;
+    padding: 3px 6px;
+    width: 45%;
+    border-radius: 10px;
+    border: 1px solid #B3B3B3;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
+}
