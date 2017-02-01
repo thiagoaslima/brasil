@@ -2,7 +2,6 @@ import { Component, Input, Output, OnChanges, ViewChild, ElementRef } from '@ang
 import { isBrowser } from 'angular2-universal';
 
 import { SinteseService } from '../sintese.service';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { CommonService } from '../../shared/common.service';
 
 import { Observable, Subscription } from 'rxjs';

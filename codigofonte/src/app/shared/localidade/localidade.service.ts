@@ -111,10 +111,17 @@ export class LocalidadeService {
 
         municipios.forEach(municipio => {
             let uf = this.getUfByCodigo(municipio.codigoUf);
-            let _mun = LocalidadeService.criarUF(Object.assign({ parent: uf }, municipio));
+            let _mun = LocalidadeService.criarMunicipio(Object.assign({ parent: uf }, municipio));
             uf.registerChildren(_mun);
             this._municipios.registerElement(_mun);
-        })
+        });
+
+        ufs.forEach(uf => {
+            let _uf = this.getUfByCodigo(uf.codigo);
+            let _mun = this.getMunicipioByCodigo(uf.codigoCapital);
+            _uf.capital = _mun;
+        });
+
     }
 
 }

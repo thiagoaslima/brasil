@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UF } from '../../shared/localidade/localidade.interface';
+import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { slugify } from '../../utils/slug';
 
@@ -17,7 +17,7 @@ export class SeletorLocalidadeComponent {
 
     public pais;
     public selecao: string;
-    public ufVisualizada: UF | null;
+    public ufVisualizada: Localidade | null;
     public listaMunicipios = [];
 
     constructor(
@@ -38,7 +38,7 @@ export class SeletorLocalidadeComponent {
         this.selecao = str;
     }
 
-    setUfVisualizada(uf: UF | null) {
+    setUfVisualizada(uf: Localidade | null) {
         this.ufVisualizada = uf;
         if (uf) {
             this.buildListaMunicipios(uf);
@@ -51,15 +51,15 @@ export class SeletorLocalidadeComponent {
         this.setUfVisualizada(null);
     }
 
-    buildListaMunicipios(uf, termo = '') {
+    buildListaMunicipios(uf: Localidade, termo = '') {
         termo = slugify(termo);
 
-        let hash = uf.municipios.lista.reduce((agg, municipio) => {
-            if (!municipio.slug.includes(termo)) {
+        let hash = uf.children.reduce((agg, municipio) => {
+            if (!municipio.identificador.includes(termo)) {
                 return agg;
             }
 
-            let initialLetter = municipio.slug.charAt(0);
+            let initialLetter = municipio.identificador.charAt(0);
 
             if (!agg[initialLetter]) {
                 agg[initialLetter] = [];

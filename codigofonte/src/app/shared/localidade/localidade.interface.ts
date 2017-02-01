@@ -1,6 +1,6 @@
-import { OpaqueToken } from '@angular/core';
 import { slugify } from '../../utils/slug';
 
+/*
 interface UFParams {
     codigo: number,
     codigoCapital: number,
@@ -122,6 +122,7 @@ export class Pais {
         }
     }
 }
+*/
 
 export class Localidade {
     codigo: number;
@@ -140,7 +141,7 @@ export class Localidade {
 
     get link() {
         if (!this._link) {
-            this._link = this.parent ? this.parent.link + this.identificador : this.identificador;
+            this._link = this.parent ? this.parent.link + '/' + this.identificador : '/' + this.identificador;
         }
         return this._link;
     }
@@ -176,6 +177,6 @@ export class Localidade {
             this._childrenList.push(child);
         })
 
-        this._childrenList.sort( (a,b) => a.slug < b.slug ? 1 : -1);
+        this._childrenList.sort( (a,b) => a.slug < b.slug ? -1 : 1);
     }
 }
