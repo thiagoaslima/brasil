@@ -6,6 +6,7 @@
 .cabecalho__sub-container{
     float: left;
     width: 50%;
+    position: relative;
 }
 
 .cabecalho__sub-container--ta-right{
@@ -136,5 +137,14 @@
 
 .submenu__texto{
     width: 80%;
+    font-size: 0.8em;
     display: inline-block;
+}
+
+.oculto{
+    display: none;
+}
+
+.visivel{
+    display: block;
 }
