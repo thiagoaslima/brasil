@@ -301,6 +301,4 @@ export class SinteseService{
         })
 
     }
-
-
 }
