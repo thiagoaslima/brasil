@@ -279,7 +279,7 @@ sintese>dados
     }
 
     aside #menu{
-        position: absolute;
+        position: fixed;
         background-color: #148C99;
         left: -75%;
         min-height: 100%;
