@@ -1,4 +1,4 @@
-<div *ngIf="plotGrafico">
+<div>
     
     <canvas baseChart
         class="chart"
@@ -8,6 +8,7 @@
         [labels]="labels"
         [options]="options"
         [chartType]="tipo"
-        [colors]="colors">
+        [colors]="colors"
+        #grafico1>
     </canvas>
 </div>

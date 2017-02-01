@@ -25,7 +25,7 @@
 
     <div id="segunda-coluna" class='cor-fundo' [class.aberto]='selecao'>
         <ul *ngIf="selecao === 'estado'">
-            <template ngFor let-estado [ngForOf]="pais.ufs.lista">
+            <template ngFor let-estado [ngForOf]="pais.children">
                 <li>
                     <a class="seletor-localidade__localidade-item seletor-localidade__link" [routerLink]="estado.link" (click)="reset()">
                         {{estado?.nome}}
@@ -36,7 +36,7 @@
         </ul>
 
         <ul *ngIf="selecao === 'municipios'">
-            <template ngFor let-estado [ngForOf]="pais.ufs.lista">
+            <template ngFor let-estado [ngForOf]="pais.children">
                 <li (click)="setUfVisualizada(estado)">
                     <div>
                         {{estado?.nome}}

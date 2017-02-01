@@ -96,9 +96,10 @@ export function mockServices() {
     });
 
 
-    /*router.route('pesquisa/:id/completa')
+    router.route('/pesquisa/:id/completa')
         .get(function (req, res) {
-           let {id} = req.params.id;
+
+            let {id} = req.params;
             let {localidade, localidades, periodo, periodos} = req.query;
             if (localidade && !localidades) localidades = localidade;
             if (periodo && !periodos) periodos = periodo;
@@ -106,17 +107,17 @@ export function mockServices() {
 
             let _indicadores = Promise.all([pesquisa, indicadores])
                 .then(([pesquisa, indicadores]) => {
-                    return indicadores.filter(indicadores => indicadores[0]['pesquisa'] === pesquisa.id);
+                    return indicadores.filter(indicadores => indicadores.length && indicadores[0]['pesquisa'] === pesquisa.id)[0];
                 });
 
             _indicadores.then(indicadores => {
-                indicadores.map(indicador => {
-                    getResults(indicador)
-                })
+                let body = indicadores.map(indicador => {
+                    return _getResults(indicador, localidades)
+                });
+                return Promise.all(body).then(res.json);
             })
+
         });
-        */
-    
 
     router.route('/indicador/:id')
         .get(function (req, res) {
@@ -144,7 +145,7 @@ export function mockServices() {
                         resultados = _filtrarPeriodosResultados(resultados[0], periodos);
                     }
 
-                    hashPesquisas.then(pesquisas => {
+                    return hashPesquisas.then(pesquisas => {
                         let ind = Object.assign(
                             {},
                             indicador,
@@ -163,6 +164,27 @@ export function mockServices() {
     return router;
 }
 
+const _getResults = function (indicador, localidades) {
+    let url = URL.set(`/pesquisas/${indicador.pesquisa}/periodos/all/resultados?localidades=${localidades}&indicadores=${indicador.id}`);
+
+    let _resultados = getContent(url).then(JSON.parse);
+
+    let _childrenPromises = indicador.children.length
+        ? indicador.children.map(child => _getResults(child, localidades))
+        : Promise.resolve([]);
+        
+    let _indicador = Promise.all([_childrenPromises, _resultados])
+        .then(([children, resultados]) => {
+            return Object.assign(
+                {},
+                indicador,
+                { children },
+                { res: resultados }
+            );
+        });
+
+    return _indicador;
+}
 
 const _filtrarPeriodosResultados = (resultados, periodos) => {
     resultados.res = resultados.res.map(obj => {
