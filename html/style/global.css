@@ -221,6 +221,10 @@ sintese>dados
 
 
 @media screen and (max-width: 768px) {
+    body{
+        background: none;
+    }
+
     header{
         background-color: #333333;
         border-bottom: none;
@@ -299,6 +303,20 @@ sintese>dados
     aside #menu.aberto{
         left: 0%;
     }
+
+    #sintese{
+        width: 100%;
+    }
+
+    #sintese #dados{
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    #sintese #detalhes{
+        width: 100%;
+    }
+
 }
 
 
