@@ -67,3 +67,51 @@
 .cabecalho__meio-botao--ativo{
     background-color: #148C99;
 }
+
+
+
+.submenu{
+    list-style-type: none;
+    background-color: #CCC;
+    height: 100%;
+    display: block;
+    position: relative; 
+    z-index: 1; 
+}
+
+.submenu__lista{
+    list-style-type: none;
+}
+
+.submenu__link{
+    display: block;
+    padding: 16px 32px;
+    position: relative;
+}
+
+.submenu__item{
+    background-color: #CCC;
+    border-bottom: 1px solid #B2B2B2;
+    cursor: pointer;
+}
+
+.submenu__item:hover{
+    color: white;
+    background-color: #333;
+    /*border-bottom: 1px solid #676767;*/
+}
+
+.submenu__item:last-child{
+    border-bottom: none;
+}
+
+.submenu__item--selecionado{
+    color: white;
+    background-color: #333;
+    /*border-bottom: 1px solid #676767;*/
+}
+
+.submenu__texto{
+    width: 80%;
+    display: inline-block;
+}

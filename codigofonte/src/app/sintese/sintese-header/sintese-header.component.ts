@@ -1,11 +1,18 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, Input, EventEmitter } from '@angular/core';
+
 import { RouterParamsService } from '../../shared/router-params.service';
+import { Subscription } from 'rxjs';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
+import { CommonService } from '../../shared/common.service';
 import { GraficoComponent } from '../grafico/grafico.component';
-import { Subscription } from 'rxjs/Subscription';
+
+// Biblioteca usada no download de arquivos.
+// Possui um arquivo de definição de tipos file-saver.d.ts do typings.
 var FileSaver = require('file-saver');
+
+// Biblioteca usada a convesação de JSON para CSV.
 var converter = require('json-2-csv');
 
 
@@ -16,49 +23,90 @@ var converter = require('json-2-csv');
 })
 export class SinteseHeaderComponent implements OnInit, OnDestroy {
 
-    public ativo = 'cartograma'; //pode ser 'grafico' ou 'mapa'
-    public titulo;
-    public pesquisa;
-    public codPesquisa;
-    public valoresIndicador;
+    // Indica qual o componente está ativo. Pode ser 'grafico' ou 'mapa'.
+    private ativo = 'cartograma'; 
 
-    private _subscription: Subscription
+    // Nome do indicador
+    private titulo;
+
+    // Nome da pesquisa de origem
+    private pesquisa;
+
+    // Código da pesquisa de origem
+    //public codPesquisa;
+
+    // Valores do indicador a serem exportados como arquivo
+    private valoresIndicador;
+
+    dataURL;
+
+    isMenuOculto = true;
+
+    private _subscriptionSintese: Subscription;
+
+    private _subscriptionCommonService: Subscription;
+    
+
+    @Input() graficoBase64;
 
     @Output() ativarComponente = new EventEmitter();
 
     constructor(
         private _routerParams:RouterParamsService,
         private _sinteseService:SinteseService, 
-        private _localidade:LocalidadeService
-    ){}
+        private _localidade:LocalidadeService,
+        private _commonService: CommonService
+    ){ }
 
     ngOnInit(){
-        this._subscription = this._routerParams.params$.subscribe((params)=>{
+
+        this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
 
             if(params.indicador){
+
+                // Informações gerais do município
                 let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
+
+                // O código do município deve possuir somente 6 dígitos, sendo o último desprezado
                 let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
+
+                // Obtém as informações sobre a pesquisa, dado seu indicador
                 let dadosPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params.indicador);
+
+                // Recupera os valores da pesquisa
                 this._sinteseService.getPesquisa(dadosPesquisa.codigo, codigoMunicipio, [params.indicador]).subscribe((dados) => {
 
-                    this.titulo = dados[0].indicador; //descrição textual do indicador presente na rota
-                    this.pesquisa = dadosPesquisa.nome; //pega o nome da pesquisa de onde esse indicador vem
-                    this.codPesquisa = dadosPesquisa.codigo; //pega o código da pesquida
+                    //descrição textual do indicador presente na rota
+                    this.titulo = dados[0].indicador; 
 
-                    for (let k in dados[0].res) {
+                    //obtém o nome da pesquisa de origem do indicador
+                    this.pesquisa = dadosPesquisa.nome; 
 
-                        dados[0].res[k] = <string>dados[0].res[k].replace(',', '.');
-                    }
+                    //obtém o código da pesquida
+                    //this.codPesquisa = dadosPesquisa.codigo; 
 
-                    this.valoresIndicador = dados[0].res;
+                    // Valores utilizados na exportação de arquivo
+                    this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
                 });
+            }
+        });
+
+
+        this._subscriptionCommonService = this._commonService.notifyObservable$.subscribe((res) => {
+
+            if (res.hasOwnProperty('option') && res.option === 'dataURL') {
+
+               this.dataURL  = res['url'];
             }
         });
 
     }
 
+
+
     ngOnDestroy() {
-        this._subscription.unsubscribe();
+        this._subscriptionCommonService.unsubscribe();
+        this._subscriptionSintese.unsubscribe();
     }
 
     public ativar(tipo){
@@ -66,6 +114,58 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
         this.ativarComponente.emit(this.ativo);
     }
 
+    /**
+     * Substitui os valores de um objeto que possuam vírgula por ponto.
+     * 
+     * @objeto:Object - o objeto a ter os valores substituídos.
+     * 
+     * @returns objeto sem vígula nos valores de seus atributos.
+     */
+    private substituirVirgulasPorPontosNosValoresDoObjeto(objeto){
+
+        if(!objeto){
+            
+            return;
+        }
+
+        let novoObjeto = this.copiarObjeto(objeto);
+
+        for (let k in objeto) {
+
+            if(!novoObjeto[k]){
+                
+                continue;
+            }
+
+            novoObjeto[k] = novoObjeto[k].replace(',', '.');
+        }
+
+        return novoObjeto;
+    }
+
+    /**
+     * Clona um dado objeto.
+     * 
+     * @objeto:Object - objeto a ser copiado.
+     * 
+     * @returns o objeto copiado.
+     */
+    private copiarObjeto(objeto){
+
+        return JSON.parse(JSON.stringify(objeto));
+    }
+
+
+    private downloadImagem(){
+
+        this._commonService.notifyOther({option: 'getDataURL'});
+    }
+
+    /**
+     * Exibe o diálogo de download para salvar um arquivo CSV.
+     * 
+     * @conteudo:string - conteúdo a ser salvo.
+     */
     private downloadCSV(conteudo){
 
         converter.json2csv(conteudo, (erro, csv) => {
@@ -77,14 +177,28 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
         });
     }
 
-    public save(conteudo, tipo) {
+    /**
+     * Exibe o diálogo de download para o usuário salvar arquivo.
+     * 
+     * @conteudo:string - conteúdo a ser salvo.
+     * @tipo:string - mime type do arquivo a ser salvo.
+     */
+    private save(conteudo, tipo) {
 
         let extensao = tipo == 'image/jpeg' ? '.jpeg' : '.csv';
 
         let blob = new Blob([conteudo], { type: tipo });
 
         FileSaver.saveAs(blob, this.titulo + extensao);
-
     }
 
+    abrirMenu(){
+
+        this.isMenuOculto = false;
+    }
+
+    fecharMenu(){
+
+        this.isMenuOculto = true;
+    }
 }
