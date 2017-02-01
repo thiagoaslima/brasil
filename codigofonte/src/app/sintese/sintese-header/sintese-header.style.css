@@ -72,12 +72,19 @@
 
 
 .submenu{
-    list-style-type: none;
+    /*list-style-type: none;
     background-color: #CCC;
     display: block;
-    position: absolute; 
-    z-index: 2;
-    right: 0;
+    position: relative; 
+    z-index: 1; */
+    
+    list-style-type: none;
+    height: auto;
+    /* display: block; */
+    position: absolute;
+    z-index: 1;
+    /* right: 0; */
+    margin-left: 41px;
 }
 
 .submenu__lista{

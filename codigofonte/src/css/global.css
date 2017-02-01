@@ -52,9 +52,15 @@ header .logo{
     float: left;
     height: 52px;
 }
+    
+header .logo--mobile {
+    display: none;
+}
+
 header .logo img{
     padding: 14px 6% 4px;
 }
+
 
 
 header #busca{
@@ -156,6 +162,11 @@ aside #localidade button:hover{
     color: #148C99;
 }
 
+aside #localidade button#menu-principal{
+    display: none;
+}
+
+
 
 
 
@@ -220,4 +231,88 @@ sintese>dados
     float: left;
     width: 62%;
     min-height: 100%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    header{
+        background-color: #333333;
+        border-bottom: none;
+    }
+
+    header .logo {
+        background-color: #333333;
+        height: 42px;
+        padding-left: 5%;
+        width: auto;
+    }
+
+    header .logo--desk {
+        display: none;
+    }
+    
+    header .logo--mobile {
+        display: block;
+    }
+
+    header #busca{
+        height: 24px;
+        display: none;
+    }
+
+    header .fa-search{
+        display: block;
+        color: #fff;
+        float: right;
+        padding: 10px 15px;
+        font-size: 20px;
+    }
+
+
+    aside{
+        width: 100%;
+        min-height: 0px;
+    }
+
+    aside #localidade {
+        padding: 7px 5%;
+    }
+
+    aside #localidade button{
+        margin: 15px 0% 5px;
+        float: right;
+    }
+    
+    aside #localidade button#menu-principal{
+        float: left;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        padding: 0px;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    aside #menu{
+        position: fixed;
+        background-color: #148C99;
+        left: -75%;
+        min-height: 100%;
+        width: 75%;
+
+        -webkit-transition: left 500ms ease;
+        -moz-transition: left 500ms ease;
+        -ms-transition: left 500ms ease;
+        -o-transition: left 500ms ease;
+        transition: left 500ms ease;
+    }
+
+    aside #menu ul{
+        margin-top: 0px;
+    }
+
+    aside #menu.aberto{
+        left: 0%;
+    }
 }
