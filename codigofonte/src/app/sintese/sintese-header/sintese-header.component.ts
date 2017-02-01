@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, Input, EventEmitter } from '@angular/core';
+
 import { RouterParamsService } from '../../shared/router-params.service';
 import { Subscription } from 'rxjs';
 
@@ -20,7 +21,7 @@ var converter = require('json-2-csv');
     templateUrl: 'sintese-header.template.html',
     styleUrls: ['sintese-header.style.css']
 })
-export class SinteseHeaderComponent implements OnInit {
+export class SinteseHeaderComponent implements OnInit, OnDestroy {
 
     // Indica qual o componente está ativo. Pode ser 'grafico' ou 'mapa'.
     private ativo = 'cartograma'; 
@@ -41,7 +42,10 @@ export class SinteseHeaderComponent implements OnInit {
 
     isMenuOculto = true;
 
-    private _subscription: Subscription;
+    private _subscriptionSintese: Subscription;
+
+    private _subscriptionCommonService: Subscription;
+    
 
     @Input() graficoBase64;
 
@@ -56,7 +60,7 @@ export class SinteseHeaderComponent implements OnInit {
 
     ngOnInit(){
 
-        this._routerParams.params$.subscribe((params)=>{
+        this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
 
             if(params.indicador){
 
@@ -88,7 +92,7 @@ export class SinteseHeaderComponent implements OnInit {
         });
 
 
-        this._subscription = this._commonService.notifyObservable$.subscribe((res) => {
+        this._subscriptionCommonService = this._commonService.notifyObservable$.subscribe((res) => {
 
             if (res.hasOwnProperty('option') && res.option === 'dataURL') {
 
@@ -98,9 +102,14 @@ export class SinteseHeaderComponent implements OnInit {
 
     }
 
-    // Permite a alternancia entre o gráfico ou o mapa no template.
-    private ativar(tipo){
 
+
+    ngOnDestroy() {
+        this._subscriptionCommonService.unsubscribe();
+        this._subscriptionSintese.unsubscribe();
+    }
+
+    public ativar(tipo){
         this.ativo = tipo;
         this.ativarComponente.emit(this.ativo);
     }
