@@ -11,10 +11,15 @@ import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
   { path: '', component: SinteseComponent, pathMatch: 'full' },
-  { path: 'sintese', component: SinteseComponent, pathMatch: 'full' },
-  { path: 'sintese/:indicador', component: SinteseComponent, pathMatch: 'full'},
-  { path: 'sintese/:indicador/mapa', component: SinteseComponent, pathMatch: 'full' },
-  { path: 'pesquisas', redirectTo: 'pesquisas/23', pathMatch: 'full' },
+  { path: 'sintese', component: SinteseComponent },
+  { path: 'sintese/:indicador', 
+    component: SinteseComponent,
+    children: [
+      { path: '', component: GraficoComponent, pathMatch: 'full' },
+      { path: 'mapa', component: MapaComponent }
+    ]},
+  { path: 'sintese/:indicador/mapa', component: SinteseComponent },
+  { path: 'pesquisas', redirectTo: 'pesquisas/23' },
   { path: 'pesquisas/:pesquisa', component: PesquisaComponent },
   { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent }
 ];

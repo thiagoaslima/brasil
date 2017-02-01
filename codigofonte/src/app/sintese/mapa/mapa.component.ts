@@ -1,4 +1,7 @@
-import { Component, Input, OnChanges, Inject } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy, Inject } from '@angular/core';
+import { Subscription } from 'rxjs'
+
+import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { SinteseService } from '../sintese.service';
 import { TopoJson, TOPOJSON } from '../../shared/topojson.v2';
 import {ufs} from '../../../api/ufs';
@@ -11,7 +14,7 @@ import {Router} from '@angular/router';
     styleUrls: [ 'mapa.style.css' ]
 })
 
-export class MapaComponent implements OnChanges {
+export class MapaComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() codlocal;
     public localHover = '';
@@ -35,7 +38,10 @@ export class MapaComponent implements OnChanges {
 
     @Input() dados = [];
 
+    private _localidadeServiceSubscription: Subscription;
+
     constructor(
+        private _localidadeService: LocalidadeService,
         private _sinteseService: SinteseService,
         @Inject(TOPOJSON) private _topojson,
         private router: Router
@@ -43,7 +49,13 @@ export class MapaComponent implements OnChanges {
     }
 
 
+    ngOnInit(){
+
+        //this._localidadeServiceSubscription = this._localidadeService.selecionada$.subscribe(local => this.codlocal = );
+    }
+
     ngOnChanges(evt) {
+
 console.log(this.codlocal, this.dados.length);
         if(this.dados.length > 0){
             /**
@@ -68,8 +80,8 @@ console.log(this.codlocal, this.dados.length);
             this.geraMapa(0);
         }        
 
-        console.log('this.dados = ',this.dados); 
-        console.dir(this.faixas);       
+console.log('this.dados = ',this.dados); 
+console.dir(this.faixas);       
     }
 
     geraMapa(anoSelecionado){
@@ -355,6 +367,11 @@ console.log(this.codlocal, this.dados.length);
         console.log(ano);
         this.geraMapa(ano);
         console.dir(this.faixas);
+    }
+
+    ngOnDestroy(){
+
+        this._localidadeServiceSubscription.unsubscribe();
     }
 
 }
