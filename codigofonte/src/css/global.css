@@ -279,6 +279,19 @@ sintese>dados
         padding: 7px 5%;
     }
 
+    .localidade--static #localidade{
+        position: fixed;
+        transform: translateY(-100px);
+        width: 100%;
+        background: #148C99;
+        z-index: 2;
+    }
+
+    .localidade--static #menu {
+        z-index: 3;
+        transform: translateY(18px);
+    }
+
     aside #localidade button{
         margin: 15px 0% 5px;
         float: right;
