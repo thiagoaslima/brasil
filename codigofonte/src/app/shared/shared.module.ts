@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import 'chart.js';
+
 import { ChartsModule } from './ng2-charts.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 
@@ -28,7 +28,7 @@ const COMPONENTS = [
 const PROVIDERS = [
     RouterParamsService,
     LocalidadeService,
-    {provide: TOPOJSON, useValue: TopoJson }
+    { provide: TOPOJSON, useValue: TopoJson }
 ]
 
 @NgModule({
