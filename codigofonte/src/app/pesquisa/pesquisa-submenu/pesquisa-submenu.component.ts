@@ -22,13 +22,13 @@ export class PesquisaSubmenuComponent {
     // ){}
 
     ngOnChanges(){
-        let indicadoresFiltrados = [];
-        for(let i = 0; i < this.indicadores.length; i++){
-            if(this.indicadores[i].nivel == 0){
-                indicadoresFiltrados.push(this.indicadores[i]);
-            }
-        }
-        this.indicadores = indicadoresFiltrados;
+        // let indicadoresFiltrados = [];
+        // for(let i = 0; i < this.indicadores.length; i++){
+        //     if(this.indicadores[i].nivel == 0){
+        //         indicadoresFiltrados.push(this.indicadores[i]);
+        //     }
+        // }
+        // this.indicadores = indicadoresFiltrados;
 
         // this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
         //     pesquisas.sort((a, b) => {

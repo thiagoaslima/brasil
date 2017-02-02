@@ -1,18 +1,18 @@
-#cabecalho{
+.cabecalho{
     border-bottom: 1px solid #D9D8D7;
     display: table;
     width: 62%;
     margin-bottom: 10px;
 }
 
-h2{
+.cabecalho__titulo{
     font-weight: bold;
     padding: 2%;
     font-size: 1.3em;
     float: left;
 }
 
-i.cabecalho__duvida{
+.cabecalho__duvida{
     color: #F7931E;
     float: left;
     font-size: 1.3em;

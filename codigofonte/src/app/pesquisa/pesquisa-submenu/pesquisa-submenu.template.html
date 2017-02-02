@@ -12,7 +12,7 @@
             <ul class="submenu" *ngIf="pesquisa.id == idPesquisaSelecionada && indicadores.length > 0">
                 <li class="submenu__subitem" *ngFor="let indicador of indicadores;" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
                     <a class="submenu__sublink" routerLink="{{ baseURL + idPesquisaSelecionada + '/' + indicador.id }}" routerLinkActive="active">
-                        <span class="submenu__texto">{{ indicador.nome }}</span>
+                        <span class="submenu__texto">{{ indicador.indicador }}</span>
                         <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
                     </a>
                 </li>

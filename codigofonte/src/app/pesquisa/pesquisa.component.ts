@@ -44,39 +44,26 @@ export class PesquisaComponent {
             this.subIndicadores = [];
             this._sintese.getNomesPesquisa(params.pesquisa).subscribe((indicadores) => {
                 var indicadoresFlat = [];
-                var flat = (item, nivel) => {
-                    indicadoresFlat.push({'nome' : item.indicador, 'id' : item.id, 'nivel' : nivel});
+                var flat = (item, nivel, idPai) => {
+                    indicadoresFlat.push({'nome' : item.indicador, 'id' : item.id, 'nivel' : nivel, 'idPai' : idPai});
                     if(item.children && ((nivel == 0 && item.id == this.idIndicadorSelecionado) || nivel > 0)){
                         for(let i = 0; i < item.children.length; i++){
-                            flat(item.children[i], nivel + 1);
+                            flat(item.children[i], nivel + 1, item.id);
                         }
                     }
                 }
                 for(let i = 0; i < indicadores.length; i++){
-                    flat(indicadores[i], 0);
+                    flat(indicadores[i], 0, 0);
                 }
                 this.indicadores = indicadoresFlat;
+                
 
-                // for(var i = 0; i < indicadores.length; i++){
-                //     this.indicadores.push({'nome' : indicadores[i].indicador, 'id' : indicadores[i].id});
-                    
-                //     //carrega subindicadores que aparecem no combobox
-                //     if(indicadores[i].id == this.idIndicadorSelecionado){
-                //         console.log(indicadores[i]);
-                //         for(var j = 0; j < indicadores[i].children.length; j++){
-                //             this.subIndicadores.push({'nome' : indicadores[i].children[j].indicador, 'id' : indicadores[i].children[j].id});
-                //         }
-                //         console.log(this.subIndicadores);
-                //     }
-                // }
-                // this.indicadores.sort((a, b) => {
-                //     //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
-                //     a = slugify(a.nome);
-                //     b = slugify(b.nome);
-                //     if (a < b) {return -1;}
-                //     if (a > b) {return 1;}
-                //     return 0;
-                // });
+                for(let i = 0; i < indicadores.length; i++){
+                    if(indicadores[i].id != this.idIndicadorSelecionado){
+                        indicadores[i].children = []; //mantem só os filhos do indicador selecionado
+                    }
+                }
+                this.indicadores = indicadores;
             });
 
             if(params.uf && params.municipio){
