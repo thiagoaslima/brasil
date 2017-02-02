@@ -1,10 +1,14 @@
 .mapa svg {
     width: 90%;
-    margin: 5%;
+    margin: 0 5%;
     max-height: 700px;
+    /*margin-top: -20px;*/
     /*height: 250px;   */
 }
-
+.faixa1{ fill: #eae4dd; }
+.faixa2{ fill: #dcd2c5; }
+.faixa3{ fill: #c8b7a3; }
+.faixa4{ fill: #84786a; }
 polygon {
     stroke: #fff;
     stroke-width: 0.01px;
@@ -21,4 +25,25 @@ polygon:hover {
 
 g {
     cursor: pointer;
+}
+
+.mapa-legendalocal{
+    /*position: absolute;*/
+    margin-left: 50px;
+}
+.local-atual{
+    font-weight: bold;
+    color: #0d4768;
+}
+.local-selecionado{
+    font-size: small;
+    text-align: right;
+    margin-right: 50px;
+    float: right;
+}
+.local-selecionado a{
+    text-decoration: underline;
+}
+.local-selecionado a:hover{
+    color: #0d4768;
 }
