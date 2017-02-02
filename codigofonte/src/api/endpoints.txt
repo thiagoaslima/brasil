@@ -38,14 +38,14 @@ class Resultado {
 }
 
 class IndicadorFull {
-    pesquisa: Pesquisa,
-    id: number,
-    posicao,
-    classe,
-    nota,
+    pesquisa: Pesquisa
+    id: number
+    posicao
+    classe
+    nota
     children: IndicadorFull[]
-    unidade,
-    metadado,
+    unidade
+    metadado
     resultados: Resultado[]
 }
 
@@ -61,16 +61,13 @@ class IndicadorFull {
  * getIndicador
  * 
  * quando o endpoint de getIndicador receber apenas a id do indicador, devolve um IndicadorFlat
- * caso o cliente passe o codigo do local e/ou o periodo desejado, recebe o IndicadorFull, com todos os resultados que satisfação o local ou o período
+ * caso o cliente passe o codigo do local e/ou o periodo desejado, recebe o IndicadorFull, com todos os resultados que satisfaçam o local ou o período
  */
-getIndicador(indicadorId: number) : IndicadorFlat + Pesquisa
-getIndicador(indicadorId: number, localCod?: number, periodo?: number): IndicadorFull + Pesquisa
 
+/dados/indicador/{:indicadorId}?localidades=&periodos=
 
-/**
- * getIndicadores
- */
-getIndicadores(pesquisaId: number, localCod: number, periodo?: number): IndcadorFull[]
+getIndicador(indicadorId: number) : {indicador: IndicadorFlat, pesquisa: Pesquisa}
+getIndicador(indicadorId: number, localCod?: number, periodo?: number): {indicador: IndicadorFlat, pesquisa: Pesquisa, res: Resultado}
 
 
 /* PESQUISAS */
@@ -91,7 +88,7 @@ getPesquisasPorNivelTerritorial(nivelTerritorial: string): Pesquisa[]
  * pede todos os dados da pesquisa
  * IndicadorId e periodo funcionam como filtros. Caso o cliente não passe nenhum dado nestes argumentos, retorna tudo.
  */
-getPesquisaCompleta(pesquisaId: number, localCod: number, indicadorId?: number[], periodo?: string): Pesquisa + IndicadorFull
+getPesquisaCompleta(pesquisaId: number, localCod?: number, indicadorId?: number[], periodo?: string): Pesquisa + IndicadorFull
 
 
 /* RANKINGS */

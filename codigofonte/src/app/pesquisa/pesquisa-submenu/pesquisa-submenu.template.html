@@ -1,6 +1,6 @@
 <section class="conteudo__dados">
     <ul class="submenu">
-        <li class="submenu__item" [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada" *ngFor="let pesquisa of pesquisas;">
+        <li class="submenu__item" *ngFor="let pesquisa of pesquisas;" [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada">
             <!--botão-->
             <a class="submenu__link" routerLink="{{ baseURL + pesquisa.id }}" routerLinkActive="active">
                 <span class="submenu__texto">{{ pesquisa.descricao }}</span>
@@ -10,10 +10,10 @@
             </a>
             <!--submenu-->
             <ul class="submenu" *ngIf="pesquisa.id == idPesquisaSelecionada && indicadores.length > 0">
-                <li class="submenu__subitem" *ngFor="let indicador of indicadores;">
+                <li class="submenu__subitem" *ngFor="let indicador of indicadores;" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
                     <a class="submenu__sublink" routerLink="{{ baseURL + idPesquisaSelecionada + '/' + indicador.id }}" routerLinkActive="active">
                         <span class="submenu__texto">{{ indicador.nome }}</span>
-                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
                     </a>
                 </li>
             </ul>

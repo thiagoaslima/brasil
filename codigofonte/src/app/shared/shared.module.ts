@@ -2,12 +2,13 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import 'chart.js';
+
 import { ChartsModule } from './ng2-charts.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 
 import { RouterParamsService } from './router-params.service';
 import { LocalidadeService } from './localidade/localidade.service';
+import { CommonService } from './common.service';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -28,6 +29,7 @@ const COMPONENTS = [
 const PROVIDERS = [
     RouterParamsService,
     LocalidadeService,
+    CommonService,
     {provide: TOPOJSON, useValue: TopoJson }
 ]
 

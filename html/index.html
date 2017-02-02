@@ -18,9 +18,12 @@
 
         <header>
             <div class="logo">
-                <img src="img/logo.png">
+                <img src="img/logo.png" class='logo--desk'>
+                <img src="img/logo_mobile.png" class='logo--mobile'>
             </div>
+            
             <input type="text" id='busca' placeholder="O que você procura?">
+            <i class="fa fa-search" aria-hidden="true"></i>
         </header>
 
         <div id='container'>
@@ -235,7 +238,9 @@
                                 <li><h1>São Francisco de Assis do Piauí</h1></li>
                             </ul>
                         </nav>
-                        <button  onclick="abreMenu()">Alterar localidade</button>
+                        <button onclick="abreMenuLocalidade()">Alterar localidade</button>
+                        <button onclick="abreMenuPrincipal()" id='menu-principal'><i class="fa fa-bars" aria-hidden="true"></i></button>
+                        <div class="cb"></div>
                 </div>
                 
                 <nav id="menu">
@@ -247,6 +252,7 @@
                 </nav>
             </aside>
             
+
             <div id='sintese'>
                 <section id='dados'>
                     
@@ -456,7 +462,7 @@
     subMenu = document.getElementById("segunda-coluna");
     subSubMenu = document.getElementById("terceira-coluna");
 
-    function abreMenu(){
+    function abreMenuLocalidade(){
         seletorLocalidade.classList.add("aberto");
         menu.classList.add("aberto");
     }
@@ -565,6 +571,17 @@
         }
     }
 
+
+    function abreMenuPrincipal(){
+       menuPrincipal = document.querySelector("aside nav#menu");
+
+       if(menuPrincipal.classList.contains('aberto')){
+           menuPrincipal.classList.remove('aberto');
+       }else{
+           menuPrincipal.classList.add('aberto');
+       }
+       
+    }
     
 
     /******* 

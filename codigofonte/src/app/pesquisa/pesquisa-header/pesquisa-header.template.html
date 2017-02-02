@@ -4,4 +4,8 @@
     <div class="cabecalho__download">
         <i class="fa fa-download" aria-hidden="true"></i>
     </div>
+
+    <select class="cabecalho__combobox" (change)="onChange($event)">
+        <option *ngFor="let indicador of indicadores;">{{ indicador.nome }}</option>
+    </select>
 </div>

@@ -55,8 +55,6 @@ export class SinteseService{
      */
     public getDadosPesquisa(pesquisa: string, local: string, indicadores: string[] = []) {
 
-        debugger;
-
         const codigoLocal = local.substr(0, 6);
 
         const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
@@ -303,6 +301,4 @@ export class SinteseService{
         })
 
     }
-
-
 }

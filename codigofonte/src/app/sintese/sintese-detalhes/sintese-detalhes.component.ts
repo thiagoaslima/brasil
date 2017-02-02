@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { SinteseService } from '../sintese.service';
@@ -23,6 +23,8 @@ export class SinteseDetalhesComponent implements OnInit {
     dadosMapa;
     indicador = [];
 
+    urlDownloadGrafico = '';
+
     constructor(
         private route: ActivatedRoute,
         private _sinteseService: SinteseService, 
@@ -35,12 +37,6 @@ export class SinteseDetalhesComponent implements OnInit {
 
     this._localidadeService.selecionada$.subscribe((localidade)=> this.local = localidade.codigo.toString());
 
-    // [OK] Incluir links nos indicadores dos dados da síntese 
-
-    // [OK] Obter as informações do indicador selecionado na rota
-
-    // [OK] Obter os dados históricos do indicador
-    // [OK] Disponibilizar como parâmetro para o gráfico os dados do indicador
         this.route.params.filter(params => !!params['indicador'])
             .switchMap((params: Params) => { 
 
@@ -75,10 +71,13 @@ export class SinteseDetalhesComponent implements OnInit {
 */
     }
 
-    // No gráfico, ler os dados e exibi-los
-
     handleAtivarComponente(comp) {
-        console.log(comp);
         this.comp = comp;
+    }
+
+    setImagemGrafico(event: Event){
+
+
+        this.urlDownloadGrafico = event['url'];
     }
 }

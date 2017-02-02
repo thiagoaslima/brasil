@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { UF, Municipio } from '../../shared/localidade/localidade.interface';
+import { Localidade } from '../../shared/localidade/localidade.interface';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -27,7 +27,9 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
          this._subscription = this.localidadeService.selecionada$
             .flatMap(localidade => {
 
-                if(localidade instanceof Municipio) {
+                this.baseURL = localidade.link;
+                /*
+                if(localidade.tipo = 'municipio') {
 
                     // 'brasil/:uf/:municipio'
                     this.baseURL = '/brasil/' + this.localidadeService.getUfByCodigo( (<Municipio>localidade).codigoUf ).sigla.toLowerCase() + '/' + localidade.slug;
@@ -41,6 +43,7 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
 
                     this.baseURL = '/brasil';
                 }
+                */
 
                 return this.sinteseService.getSinteseLocal(localidade.codigo.toString())
             } ) 

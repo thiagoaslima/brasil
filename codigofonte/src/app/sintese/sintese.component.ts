@@ -17,10 +17,10 @@ export class SinteseComponent implements OnInit {
 
     ngOnInit(){
         this._localidade.selecionada$.subscribe((localidade)=>{
-            if(localidade.codigo == 0){
+            if(localidade.tipo === 'pais'){
                 //sintese Brasil
                 this.tipo = 1;
-            }else if(localidade.codigo > 0 && localidade.codigo < 100){
+            }else if(localidade.tipo === 'uf'){
                 //sintese UF
                 this.tipo = 2;
             }else{

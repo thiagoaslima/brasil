@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input} from '@angular/core';
 
 @Component({
     selector: 'pesquisa-header',
@@ -7,5 +7,19 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 })
 
 export class PesquisaHeaderComponent {
+    @Input() indicadores;
 
+    ngOnChanges(){
+        let indicadoresFiltrados = [];
+        for(let i = 0; i < this.indicadores.length; i++){
+            if(this.indicadores[i].nivel == 1){
+                indicadoresFiltrados.push(this.indicadores[i]);
+            }
+        }
+        this.indicadores = indicadoresFiltrados;
+    }
+
+    onChange(event){
+        //console.log(event);
+    }
 }
