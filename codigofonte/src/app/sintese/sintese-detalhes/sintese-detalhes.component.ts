@@ -20,7 +20,7 @@ export class SinteseDetalhesComponent implements OnInit {
     dadosIndicador;
     comp = 'mapa';
     local = '';
-    dadosMapa;
+    dadosMapa = [];
     indicador = [];
 
     urlDownloadGrafico = '';
@@ -51,6 +51,42 @@ export class SinteseDetalhesComponent implements OnInit {
 
 
             //DADOS PARA O MAPA COROPLÉTICO
+            let dados = [
+                {"codLocal":"3304557","2010":null,"2015":null,"2016":"6498837","2017":null},
+                {"codLocal":"3303609","2010":null,"2015":null,"2016":"8498837","2017":null},
+                {"codLocal":"3303708","2010":null,"2015":null,"2016":"2498837","2017":null},
+                {"codLocal":"3303807","2010":null,"2015":null,"2016":"5498837","2017":null},
+                {"codLocal":"3303401","2010":null,"2015":null,"2016":"3498837","2017":null},
+                {"codLocal":"3303906","2010":null,"2015":null,"2016":"7498837","2017":null}
+            ];
+            // let dados = [
+            //     {"codLocal":"33","2010":null,"2015":null,"2016":"6498837","2017":null},
+            //     {"codLocal":"11","2010":null,"2015":null,"2016":"8498837","2017":null},
+            //     {"codLocal":"52","2010":null,"2015":null,"2016":"2498837","2017":null},
+            //     {"codLocal":"31","2010":null,"2015":null,"2016":"5498837","2017":null},
+            //     {"codLocal":"32","2010":null,"2015":null,"2016":"3498837","2017":null},
+            //     {"codLocal":"41","2010":null,"2015":null,"2016":"7498837","2017":null}
+            // ];
+            //let dados = [];
+
+            // [{munic:'330455',anos:['2010','2016'], valores:['3252215',null], faixa:'faixa2'}]
+            dados.forEach(dado => {
+                //Object.keys(dado) //["2010", "2015", "2016", "2017", "codLocal"]
+                //Object.keys(dado).length //5
+                //dado["2016"] //"8498837"
+                //dado[Object.keys(dado)[2]] //"8498837"
+                let dadosMunic = {munic:'',anos:[], valores:[], faixa:''};
+                dadosMunic.munic = dado.codLocal.substr(0, 6);
+                Object.keys(dado).forEach(ano => {
+                    if(Object.keys(dado).length > dadosMunic.anos.length+1){
+                        dadosMunic.anos.push(ano);
+                        dadosMunic.valores.push(dado[ano]);
+                    }
+                });
+                this.dadosMapa.push(dadosMunic);  
+            });
+
+
   /*          this.route.params.filter(params => !!params['indicador'])
             .switchMap((params: Params) => { 
 
