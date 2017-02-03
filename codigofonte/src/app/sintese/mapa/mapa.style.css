@@ -5,10 +5,49 @@
     /*margin-top: -20px;*/
     /*height: 250px;   */
 }
-.faixa1{ fill: #eae4dd; }
-.faixa2{ fill: #dcd2c5; }
-.faixa3{ fill: #c8b7a3; }
-.faixa4{ fill: #84786a; }
+#faixas{
+    /*position:absolute; 
+    bottom:50px; 
+    border:1px solid #ccc; */
+    padding:0 0 7px 5%;
+}
+#faixas h4{ 
+    font-size: 0.85em; 
+    color: #FFF; 
+    margin:0 0 5px 0; 
+    padding:5px; 
+    text-align: center;
+    background-color: #888;
+}
+.txt-faixa{ 
+    font-size: 0.82em; 
+    line-height: 23px;
+    margin-left: 5px; 
+    vertical-align: bottom;
+}
+.ico-faixa{ 
+    display:inline-block; 
+    border:1px solid #aaa; 
+    width:20px; 
+    height:12px; 
+    margin-left: 10px; 
+}
+.seletor-periodos{
+    text-align: center;
+}
+.periodo-link:after {
+    content: ' /';
+}
+.ico-faixa.faixa1{ background: #eae4dd; }
+.ico-faixa.faixa0{ background: #e0db6b; }
+.ico-faixa.faixa2{ background: #c8b7a3; }
+.ico-faixa.faixa3{ background: #84786a; }
+.ico-faixa.selecionado{ background: #0D4768; }
+
+g.faixa1 polygon{ fill: #eae4dd; }
+/*g.faixa0 polygon{ fill: #dcd2c5; }*/
+g.faixa2 polygon{ fill: #c8b7a3; }
+g.faixa3 polygon{ fill: #84786a; }
 polygon {
     stroke: #fff;
     stroke-width: 0.01px;
@@ -23,7 +62,7 @@ polygon:hover {
     fill: #e0db6b;
 }
 
-g {
+g, .periodo-link {
     cursor: pointer;
 }
 
@@ -46,4 +85,7 @@ g {
 }
 .local-selecionado a:hover{
     color: #0d4768;
+}
+.hide{
+    display: none;
 }

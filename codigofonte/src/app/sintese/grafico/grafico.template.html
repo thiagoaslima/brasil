@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!!datasets && datasets.length > 0">
     
     <canvas baseChart
         class="chart"
@@ -11,4 +11,5 @@
         [colors]="colors"
         #grafico1>
     </canvas>
+
 </div>

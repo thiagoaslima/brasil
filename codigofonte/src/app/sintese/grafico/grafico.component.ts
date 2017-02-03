@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
 import { SinteseService } from '../sintese.service';
@@ -14,36 +14,60 @@ var FileSaver = require('file-saver');
     selector: 'grafico',
     templateUrl: 'grafico.template.html'
 })
-export class GraficoComponent implements OnChanges{
+export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
 
     @ViewChild("grafico1") graficoRef : ElementRef;
-
-    @Input() dados = [];
-    @Input() tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
-    @Input() colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
-    @Input() stacked = 'false';
-    @Input() beginAtZero = 'true';
-    
+  
     public isBrowser = isBrowser;
     
     public datasets = [];
-    public labels = [];
+    public labels;
     public options = {};
 
+    @Input() dados = [];
+    @Input() tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
+    @Input() nomeSerie = 'indicador';
+    @Input() private colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
+    @Input() private stacked = 'false';
+    @Input() private beginAtZero = 'true';
+
     private _subscription: Subscription;
+    
+    
+    constructor( 
+        private _commonService: CommonService,
+        private _render: Renderer 
+    ){ }
 
+    ngOnInit() {  
 
-    constructor( private _commonService: CommonService ){ }
-
-    ngOnInit() {
+        
+        this.labels = null;
+        this.labels = [];
 
         this._subscription = this._commonService.notifyObservable$.subscribe((res) => {
 
-            if (res.hasOwnProperty('option') && res.option === 'getDataURL') {
+            if (res.hasOwnProperty('option')) {
 
-                this._commonService.notifyOther({option: 'dataURL', url: this.graficoRef.nativeElement.toDataURL()});
+                if(res.option === 'getDataURL'){
+
+                    this._commonService.notifyOther({option: 'dataURL', url: this.graficoRef.nativeElement.toDataURL()});
+                }
             }
+
         });
+
+        this.plotChart();
+    }
+
+    ngOnChanges(changes){
+
+
+        this.labels = null;
+        this.labels = [];
+
+
+        this.plotChart();
     }
 
     ngOnDestroy() {
@@ -51,8 +75,22 @@ export class GraficoComponent implements OnChanges{
         this._subscription.unsubscribe();
     }
 
-    ngOnChanges() {  
+    private plotChart(){
 
+        let dadosGrafico:string[] = [];
+        for(var i in this.dados) {
+
+            dadosGrafico.push(this.dados[i]);
+            this.labels.push(i);
+        }
+
+        let valores = dadosGrafico.map(valor => {
+
+            return !!valor? Number(valor.replace(',', '.')) : Number(valor);
+        });
+
+        this.datasets = [{data: valores, label: this.nomeSerie}];
+        
         this.options = {
             scales: {
                 yAxes: [{
@@ -64,26 +102,6 @@ export class GraficoComponent implements OnChanges{
                 }]
             }
         };
-
-        if(!!this.dados){
-
-            let dadosGrafico:string[] = [];
-            this.labels = []
-
-            for(var i in this.dados) {
-
-                dadosGrafico.push(this.dados[i]);
-                this.labels.push(i);
-            }
-
-            let valores = dadosGrafico.map(valor => {
-
-                return !!valor? valor.replace(',', '.') : valor;
-            });
-
-            this.datasets = [{data: valores, label: ''}];
-
-            
-        }
     }
+
 }
