@@ -296,6 +296,7 @@ sintese>dados
         transition: left 500ms ease;
     }
 
+
     aside #menu ul{
         margin-top: 0px;
     }
@@ -303,6 +304,20 @@ sintese>dados
     aside #menu.aberto{
         left: 0%;
     }
+
+     .localidade--static #localidade{
+            position: fixed;
+            transform: translateY(-100px);
+            width: 100%;
+            background: #148C99;
+            z-index: 2;
+        }
+
+        .localidade--static #menu {
+            z-index: 3;
+            transform: translateY(18px);
+        }
+
 
     #sintese{
         width: 100%;

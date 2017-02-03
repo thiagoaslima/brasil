@@ -15,7 +15,6 @@ export class PesquisaComponent {
     public baseURL;
     public indicadores = [];
     public idIndicadorSelecionado;
-    public subIndicadores = [];
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -23,6 +22,7 @@ export class PesquisaComponent {
     ){}
 
     ngOnInit(){
+        //busca pesquisas disponíveis
         this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
             pesquisas.sort((a, b) => {
                 //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
@@ -35,50 +35,24 @@ export class PesquisaComponent {
             this.pesquisas = pesquisas;
         });
 
+        //pega a rota atual
         this._routerParams.params$.subscribe((params) => {
+            //pega o indicador e a pesquisa a partir da rota
             this.idPesquisaSelecionada = params.pesquisa;
             this.idIndicadorSelecionado = params.indicador;
             
             //carrega indicadores que aparecem no submenu e nos dados
             this.indicadores = [];
-            this.subIndicadores = [];
             this._sintese.getNomesPesquisa(params.pesquisa).subscribe((indicadores) => {
-                var indicadoresFlat = [];
-                var flat = (item, nivel) => {
-                    indicadoresFlat.push({'nome' : item.indicador, 'id' : item.id, 'nivel' : nivel});
-                    if(item.children && ((nivel == 0 && item.id == this.idIndicadorSelecionado) || nivel > 0)){
-                        for(let i = 0; i < item.children.length; i++){
-                            flat(item.children[i], nivel + 1);
-                        }
+                for(let i = 0; i < indicadores.length; i++){
+                    if(indicadores[i].id != this.idIndicadorSelecionado){
+                        indicadores[i].children = []; //mantem só os filhos do indicador selecionado
                     }
                 }
-                for(let i = 0; i < indicadores.length; i++){
-                    flat(indicadores[i], 0);
-                }
-                this.indicadores = indicadoresFlat;
-
-                // for(var i = 0; i < indicadores.length; i++){
-                //     this.indicadores.push({'nome' : indicadores[i].indicador, 'id' : indicadores[i].id});
-                    
-                //     //carrega subindicadores que aparecem no combobox
-                //     if(indicadores[i].id == this.idIndicadorSelecionado){
-                //         console.log(indicadores[i]);
-                //         for(var j = 0; j < indicadores[i].children.length; j++){
-                //             this.subIndicadores.push({'nome' : indicadores[i].children[j].indicador, 'id' : indicadores[i].children[j].id});
-                //         }
-                //         console.log(this.subIndicadores);
-                //     }
-                // }
-                // this.indicadores.sort((a, b) => {
-                //     //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
-                //     a = slugify(a.nome);
-                //     b = slugify(b.nome);
-                //     if (a < b) {return -1;}
-                //     if (a > b) {return 1;}
-                //     return 0;
-                // });
+                this.indicadores = indicadores;
             });
-
+            
+            //seta a variável de rota base
             if(params.uf && params.municipio){
                 this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/';
             }else if(params.uf){

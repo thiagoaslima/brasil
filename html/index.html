@@ -34,9 +34,23 @@
                     <div class="selecionar-localidade__voltar" onclick="fechaSeletorLocalidade()">
                         < Voltar
                     </div>
+                    <div class="selecionar-localidade__fechar--mobile">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                    <div class="selecionar-localidade__local-atual--mobile">
+                        <ul>
+                            <li>Brasil</li>
+                            <li>RJ</li>
+                            <li>Rio de Janeiro</li>
+                        </ul>
+                    </div>
                     <div class="selecionar-localidade__titulo">
                         Alterar localidade
                     </div>
+
+                    <button class='selecionar-localidade__voltar--mobile'>
+                        < &nbsp; Voltar
+                    </button>
 
                     <nav>
                         <ul>
@@ -48,22 +62,31 @@
                 </div>
 
                 <div id="segunda-coluna" class='cor-fundo'>
+                        <div class="segunda-coluna__titulo">
+                            Estados
+                        </div>
                         <ul>
-                            <li onclick="abreSubSubMenu(this)">
-                                <div>
-                                    Acre
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </div>
-                            </li>
-
-                            <li onclick="abreSubSubMenu(this)">
-                                <div>
-                                    Acre
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </div>
-                            </li>
-
                             <li class='selecionado' onclick="abreSubSubMenu(this)">
+                                <div>
+                                    Todos
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </li>
+                            <li onclick="abreSubSubMenu(this)">
+                                <div>
+                                    Acre
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </li>
+
+                            <li onclick="abreSubSubMenu(this)">
+                                <div>
+                                    Acre
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </li>
+
+                            <li onclick="abreSubSubMenu(this)">
                                 <div>
                                     Acre
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -73,155 +96,89 @@
                         </ul>
                 </div>
 
-                <div id="terceira-coluna">
+                <div id="terceira-coluna" class='todos-municipios'>
 
-                    <div class="estado-selecionado">Municípios do Rio de Janeiro</div>
-                    <i class="fa fa-times" aria-hidden="true" onclick="fechaSeletorLocalidade()"></i>
-                    <br/>
-                    <input type="text" id='busca' placeholder="Qual município você procura?">
-                    <button>Acessar o Estado do Rio de Janeiro</button>
-
-                    <div id="municipios">
-                        <div class="estado">
-                            <div class='circulo'> 
-                                <i class="fa fa-university" aria-hidden="true"></i>
-                                
-                            </div>
-                            Rio de Janeiro
+                    <div class="terceira-coluna__titulo">
+                        Municípios
+                    </div>
+                    
+                    <div class="terceira-coluna__menu--mobile">
+                        <div class="terceira-coluna__menu__todos selecionado">Todos</div>
+                        <div class="terceira-coluna__menu__estado">Por estado</div>
+                    </div>
+                    
+                    <div class="por-estado__selecionar-estado">
+                        
+                        <div class="selecione">
+                            Selecione o estado:
                         </div>
-
-                        <div class="conjunto">
-                            <div class="letra">
-                                <div class="circulo">
-                                    A
-                                </div>
-                            </div>
-                            <div class="municipios">
-                                <ul>
-                                    <li>Vila Bela da Santíssima Trindade</li>
-                                    <li>aaa</li>
-                                    <li>bbb</li>
-                                    <li>ccc</li>
-                                    <li>ddd</li>
-                                    <li>eee</li>
-                                    <li>ffff</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="conjunto">
-                            <div class="letra">
-                                <div class="circulo">
-                                    B
-                                </div>
-                            </div>
-                            <div class="municipios">
-                               <ul>
-                                      <li>aaa</li>
-                                    <li>bbb</li>
-                                    <li>ccc</li>
-                                    <li>ddd</li>
-                                    <li>eee</li>
-                                    <li>ffff</li>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                    <li>5</li>
-                                    <li>6</li>
-                                    <li>7</li>
-                                    <li>8</li>
-                                    <li>9</li>
-                                    <li>10</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                         <div class="conjunto">
-                            <div class="letra">
-                                <div class="circulo">
-                                    C
-                                </div>
-                            </div>
-                            <div class="municipios">
-                                <ul>
-                                    <li>aaa</li>
-                                    <li>bbb</li>
-                                    <li>ccc</li>
-                                    <li>ddd</li>
-                                    <li>eee</li>
-                                    <li>ffff</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="conjunto">
-                            <div class="letra">
-                                <div class="circulo">
-                                    D
-                                </div>
-                            </div>
-                            <div class="municipios">
-                                <ul>
-                                     <li>aaa</li>
-                                    <li>bbb</li>
-                                    <li>ccc</li>
-                                    <li>ddd</li>
-                                    <li>eee</li>
-                                    <li>ffff</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                         <div class="conjunto">
-                            <div class="letra">
-                                <div class="circulo">
-                                    E
-                                </div>
-                            </div>
-                            <div class="municipios">
-                                <ul>
-                                    <li>aaa</li>
-                                    <li>bbb</li>
-                                    <li>ccc</li>
-                                    <li>ddd</li>
-                                    <li>eee</li>
-                                    <li>ffff</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="conjunto">
-                            <div class="letra">
-                                <div class="circulo">
-                                    F
-                                </div>
-                            </div>
-                            <div class="municipios">
-                                <ul>
-                                     <li>aaa</li>
-                                    <li>bbb</li>
-                                    <li>ccc</li>
-                                    <li>ddd</li>
-                                    <li>eee</li>
-                                    <li>ffff</li>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                    <li>5</li>
-                                    <li>6</li>
-                                    <li>7</li>
-                                    <li>8</li>
-                                    <li>9</li>
-                                    <li>10</li>
-                                </ul>
-                            </div>
-                        </div>
-
+                        <ul>
+                            <li>Acre <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+                            <li>Rio de Janeiro <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+                            <li>São Paulo <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+                        </ul>
                         
 
                     </div>
+
+                    <div class="por-estado__selecionar-municipio">
+                        <div class="estado-selecionado"><span>Municípios do </span>Rio de Janeiro <i class="fa fa-times" aria-hidden="true"></i></div>
+                        <i class="fa fa-times" aria-hidden="true" onclick="fechaSeletorLocalidade()"></i>
+                        <div class='total-encontrado'>99 municípios</div>
+                        <br/>
+                        <input type="text" id='busca' placeholder="Qual município você procura?">
+                        <button>Acessar o Estado do Rio de Janeiro</button>
+
+                        <div id="municipios">
+                            <div class="estado">
+                                <div class='circulo'> 
+                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                    
+                                </div>
+                                Rio de Janeiro
+                            </div>
+
+                            <div class="conjunto">
+                                <div class="letra">
+                                    <div class="circulo">
+                                        A
+                                    </div>
+                                </div>
+                                <div class="municipios">
+                                    <ul>
+                                        <li>Vila Bela da Santíssima Trindade</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="conjunto">
+                                <div class="letra">
+                                    <div class="circulo">
+                                        B
+                                    </div>
+                                </div>
+                                <div class="municipios">
+                                    <ul>
+                                        <li>bbbbb</li>
+                                        <li>b</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="todos-municipios">
+                            <div class="todos-municipios__titulo">
+                                Mais acessados:
+                            </div>
+
+                            <ul>
+                                <li>Maricá <span>RJ</span></li>
+                                <li>Rio de Janeiro <span>RJ</span></li>
+                            </ul>
+                        </div>
+                        
+                   </div>
+
                 </div>
 
                 <div id="bg">

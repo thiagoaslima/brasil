@@ -1,14 +1,7 @@
-#dados-pesquisa{
-    width: 62%;
-    float: left;
-    font-size: 0.9em;
-}
-
 table{
     
     font-size: .9em;
-    float: left;
-    width: 62%;
+    width: 100%;
  
 }
 
@@ -66,6 +59,10 @@ tr.nivel-1:nth-child(3) td{
     color: #808080;
 }
 
+.nivel-2__cursor{
+    cursor: pointer;
+}
+
 .nivel-3 td{
     font-weight: bold;
     font-size: 0.88em;
@@ -104,3 +101,52 @@ tr.nivel-1:nth-child(3) td{
     background-color: #f5f0f0;
 }
 
+/*-----------------------------------*/
+
+.cabecalho{
+    border-bottom: 1px solid #D9D8D7;
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cabecalho__titulo{
+    font-weight: bold;
+    padding: 2%;
+    font-size: 1.3em;
+    float: left;
+}
+
+.cabecalho__duvida{
+    color: #F7931E;
+    float: left;
+    font-size: 1.3em;
+    margin-top: 2.6%;
+}
+
+.cabecalho__download{
+    float: right;
+    background-color: #2B93B2;
+    color: #fff;
+    margin-top: 2.5%;
+    border-radius: 22px;
+    width: 22px;
+    height: 22px;
+    font-size: .9em;
+    padding-left: 4px;
+    padding-top: 1px;
+    margin-right: 2%;
+}
+
+.cabecalho__combobox{
+    clear: both;
+    display: block;
+    margin: 3% 0% 1% 2%;
+    padding: 3px 6px;
+    width: 45%;
+    border-radius: 10px;
+    border: 1px solid #B3B3B3;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
+}
