@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { Subscription } from 'rxjs'
 
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
@@ -14,9 +14,10 @@ import {Router} from '@angular/router';
     styleUrls: [ 'mapa.style.css' ]
 })
 
-export class MapaComponent implements OnInit, OnChanges, OnDestroy {
+export class MapaComponent implements OnInit {
 
     @Input() codlocal;
+
     public localHover = '';
     public irPara = '';
     public localHoverLink = '';
@@ -49,12 +50,12 @@ export class MapaComponent implements OnInit, OnChanges, OnDestroy {
     }
 
 
-    ngOnInit(){
+    ngOnInit() {
 
-        //this._localidadeServiceSubscription = this._localidadeService.selecionada$.subscribe(local => this.codlocal = );
+        this.plotMap();
     }
 
-    ngOnChanges(evt) {
+    plotMap(){
 
 console.log(this.codlocal, this.dados.length);
         if(this.dados.length > 0){
@@ -86,13 +87,15 @@ console.dir(this.faixas);
 
     geraMapa(anoSelecionado){
         this.localHover = '';
+
         if(this.codlocal > 1){
+
             // mapa da UF dividida por municípios
             this.mapauf = true;
-            this._sinteseService.getMalha(this.codlocal.substr(0, 2), 1)
+            this._sinteseService.getMalha(this.codlocal.toString().substr(0, 2), 1)
                 .subscribe((malha) => {
 
-                    this.data = this._topojson.feature(malha, malha.objects[this.codlocal.substr(0, 2)]);
+                    this.data = this._topojson.feature(malha, malha.objects[this.codlocal.toString().substr(0, 2)]);
 
                     let myGeom;
                     let n = -90;
@@ -107,14 +110,14 @@ console.dir(this.faixas);
                          * iterando para captura dos nomes dos municipios/ufs para geração do link e municipio atual
                          */
                         municipios.forEach(municipio => {
-                            if(municipio.codigoUf.toString() == this.codlocal.substr(0, 2)){
+                            if(municipio.codigoUf.toString() == this.codlocal.toString().substr(0, 2)){
                                 if(municipio.codigo.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6)){
                                     myGeom.nome = municipio.nome;
                                     if(this.codlocal.substr(0, 6) == ft.properties.cod.toString().substr(0, 6)){
                                         this.localAtual = municipio.nome
                                     }
                                     ufs.forEach(uf => {
-                                        if(uf.codigo.toString() == this.codlocal.substr(0, 2)){
+                                        if(uf.codigo.toString() == this.codlocal.toString().substr(0, 2)){
                                             myGeom.uf = uf.sigla;
                                             myGeom.link = '/brasil/' + uf.sigla.toLowerCase() + '/' + municipio.slug;
                                         }
@@ -301,7 +304,6 @@ console.dir(this.faixas);
             });
 
         }
-            
     }
 
     over(nome, ano, valor, link){
@@ -367,11 +369,6 @@ console.dir(this.faixas);
         console.log(ano);
         this.geraMapa(ano);
         console.dir(this.faixas);
-    }
-
-    ngOnDestroy(){
-
-        this._localidadeServiceSubscription.unsubscribe();
     }
 
 }
