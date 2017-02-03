@@ -44,6 +44,10 @@ header{
     border-bottom: 2px solid #F7931E;
     display: table;
     width: 100%;
+    
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 header .logo{
@@ -74,6 +78,8 @@ header #busca{
     max-width: 1900px;
     margin: auto;
     height: 100%;
+
+    padding-top: 54px;
 }
 
 .brasil .cor-fundo{
@@ -224,13 +230,15 @@ sintese>dados
     background-color: #E6E6E6;
     float: left;
     width: 38%;
-    min-height: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .conteudo__detalhes{
     float: left;
     width: 62%;
-    min-height: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 

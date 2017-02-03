@@ -1,4 +1,4 @@
-<div>
+<div class="conteudo__detalhes">
     <div class="cabecalho">
         <h2 class="cabecalho__titulo">Educação</h2>
         <i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>
@@ -29,7 +29,7 @@
 
         <tr>
             <td colspan='2'>
-                {{ dadosCombo[indexCombo]?.indicador }}
+                {{ tituloTabela }}
             </td>
             <td>
                 633.986
@@ -43,7 +43,8 @@
         </tr>
 
         <template ngFor let-dado [ngForOf]="dadosTabela">
-            <tr [ngClass]="'nivel-' + dado.nivel" (click)="onClick(dado)" *ngIf="dado.visivel">
+            <tr [ngClass]="'nivel-' + dado.nivel" (click)="onClick(dado)" *ngIf="dado.visivel"
+                [class.nivel-2__cursor]="dado.nivel == 2 && dado.children.length > 0">
                 <td>
                     <div>
                         {{ dado.indicador }}

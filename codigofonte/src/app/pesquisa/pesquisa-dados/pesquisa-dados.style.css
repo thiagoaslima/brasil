@@ -1,14 +1,7 @@
-#dados-pesquisa{
-    width: 62%;
-    float: left;
-    font-size: 0.9em;
-}
-
 table{
     
     font-size: .9em;
-    float: left;
-    width: 62%;
+    width: 100%;
  
 }
 
@@ -66,6 +59,10 @@ tr.nivel-1:nth-child(3) td{
     color: #808080;
 }
 
+.nivel-2__cursor{
+    cursor: pointer;
+}
+
 .nivel-3 td{
     font-weight: bold;
     font-size: 0.88em;
@@ -109,7 +106,7 @@ tr.nivel-1:nth-child(3) td{
 .cabecalho{
     border-bottom: 1px solid #D9D8D7;
     display: table;
-    width: 62%;
+    width: 100%;
     margin-bottom: 10px;
 }
 

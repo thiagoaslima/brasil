@@ -15,7 +15,6 @@ export class PesquisaComponent {
     public baseURL;
     public indicadores = [];
     public idIndicadorSelecionado;
-    public subIndicadores = [];
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -23,6 +22,7 @@ export class PesquisaComponent {
     ){}
 
     ngOnInit(){
+        //busca pesquisas disponíveis
         this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
             pesquisas.sort((a, b) => {
                 //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
@@ -35,29 +35,15 @@ export class PesquisaComponent {
             this.pesquisas = pesquisas;
         });
 
+        //pega a rota atual
         this._routerParams.params$.subscribe((params) => {
+            //pega o indicador e a pesquisa a partir da rota
             this.idPesquisaSelecionada = params.pesquisa;
             this.idIndicadorSelecionado = params.indicador;
             
             //carrega indicadores que aparecem no submenu e nos dados
             this.indicadores = [];
-            this.subIndicadores = [];
             this._sintese.getNomesPesquisa(params.pesquisa).subscribe((indicadores) => {
-                var indicadoresFlat = [];
-                var flat = (item, nivel, idPai) => {
-                    indicadoresFlat.push({'nome' : item.indicador, 'id' : item.id, 'nivel' : nivel, 'idPai' : idPai});
-                    if(item.children && ((nivel == 0 && item.id == this.idIndicadorSelecionado) || nivel > 0)){
-                        for(let i = 0; i < item.children.length; i++){
-                            flat(item.children[i], nivel + 1, item.id);
-                        }
-                    }
-                }
-                for(let i = 0; i < indicadores.length; i++){
-                    flat(indicadores[i], 0, 0);
-                }
-                this.indicadores = indicadoresFlat;
-                
-
                 for(let i = 0; i < indicadores.length; i++){
                     if(indicadores[i].id != this.idIndicadorSelecionado){
                         indicadores[i].children = []; //mantem só os filhos do indicador selecionado
@@ -65,7 +51,8 @@ export class PesquisaComponent {
                 }
                 this.indicadores = indicadores;
             });
-
+            
+            //seta a variável de rota base
             if(params.uf && params.municipio){
                 this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/';
             }else if(params.uf){

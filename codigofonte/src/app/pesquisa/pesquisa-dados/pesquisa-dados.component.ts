@@ -12,29 +12,38 @@ export class PesquisaDadosComponent {
     public dadosCombo = [];
     public dadosTabela = [];
     public indexCombo = 0;
+    public tituloTabela = "";
 
     ngOnChanges(){
+        //adiciona duas novas propriedades aos indicadores: nível e visível
+        //nível é usado para aplicar o css para criar a impressão de hierarquia na tabela de dados
+        //visível é usado para definir se o indicador está visível ou não (dentro de um elemento pai fechado)
         let indicadores = this.flat(this.indicadores);
         for(let i = 0; i < indicadores.length; i++){
             indicadores[i].nivel = indicadores[i].posicao.split('.').length - 2;
             indicadores[i].visivel = indicadores[i].nivel <= 2 ? true : false;
         }
 
+        //seta os dados iniciais do combobox e da tabela de dados
         for(let i = 0; i < this.indicadores.length; i++){
             if(this.indicadores[i].id == this.idIndicadorSelecionado){
                 this.dadosCombo = this.indicadores[i].children;
                 if(this.dadosCombo.length > 0){
+                    this.tituloTabela = this.dadosCombo[0].indicador;
                     this.dadosTabela = this.flat(this.dadosCombo[0].children);
                 }
             }
         }
     }
 
+    //chamada quando muda o combobox
     onChange(event){
         this.indexCombo = event.target.selectedIndex;
+        this.tituloTabela = this.dadosCombo[this.indexCombo].indicador;
         this.dadosTabela = this.flat(this.dadosCombo[this.indexCombo].children);
     }
 
+    //chamada quando abre os nós nível 2 da tabela de dados
     onClick(item){
         if(item.nivel != 2)
             return;
