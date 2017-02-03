@@ -66,6 +66,7 @@ tr.nivel-1:nth-child(3) td{
 .nivel-3 td{
     font-weight: bold;
     font-size: 0.88em;
+    text-transform: uppercase;
 }
 
 .nivel-3 td:first-child{
@@ -85,6 +86,7 @@ tr.nivel-1:nth-child(3) td{
 
 .nivel-5 td{
     font-size: 0.88em;
+    text-transform: uppercase;
 }
 
 .nivel-5 td:first-child{
@@ -97,9 +99,25 @@ tr.nivel-1:nth-child(3) td{
 
 }
 
-.nivel-5:hover, .nivel-4:hover{
+.nivel-6 td{
+    font-size: 0.88em;
+}
+
+.nivel-6 td:first-child{
+    padding-left: 15%;
+}
+
+.nivel-6 div{
+    border-left: 1px solid #B7B5B3;
+    padding-left: 5px;
+
+}
+
+.nivel-6:hover, .nivel-5:hover, .nivel-4:hover{
     background-color: #f5f0f0;
 }
+
+
 
 /*-----------------------------------*/
 

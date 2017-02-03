@@ -13,6 +13,7 @@ export class PesquisaDadosComponent {
     public dadosTabela = [];
     public indexCombo = 0;
     public tituloTabela = "";
+    public tituloPrincipal = "";
 
     ngOnChanges(){
         //adiciona duas novas propriedades aos indicadores: nível e visível
@@ -27,6 +28,7 @@ export class PesquisaDadosComponent {
         //seta os dados iniciais do combobox e da tabela de dados
         for(let i = 0; i < this.indicadores.length; i++){
             if(this.indicadores[i].id == this.idIndicadorSelecionado){
+                this.tituloPrincipal = this.indicadores[i].indicador;
                 this.dadosCombo = this.indicadores[i].children;
                 if(this.dadosCombo.length > 0){
                     this.tituloTabela = this.dadosCombo[0].indicador;
