@@ -31,8 +31,8 @@ ANIMAÇÃO
     color:#fff;
     width: 100%;
     left: -9999999px;
-    display: table
-   
+    display: table;
+    z-index: 1;
 }
 
 #selecionar-localidade #primeira-coluna{
@@ -65,6 +65,10 @@ ANIMAÇÃO
     -ms-transition: left 0.8s ease;
     -o-transition: left 0.8s ease;
     transition: left 0.8s ease;
+}
+
+.segunda-coluna__titulo{
+    display: none;
 }
 
 #selecionar-localidade #segunda-coluna ul{
@@ -193,8 +197,19 @@ ANIMAÇÃO
 #selecionar-localidade #terceira-coluna .estado-selecionado{
     float: left;
     font-weight: bold;
-    font-size: .98em;
     margin-top: 17px;
+    font-size: .93em;
+}
+
+#selecionar-localidade #terceira-coluna .estado-selecionado i{
+    display: none;
+}
+
+#selecionar-localidade #terceira-coluna .total-encontrado{
+    float: right;
+    font-size: .8em;
+    margin-top: 20px;
+    margin-right: 9px;
 }
 
 #selecionar-localidade #terceira-coluna i.fa-times{
@@ -310,6 +325,73 @@ ANIMAÇÃO
     /*background-color: red;*/
 }
 
+#terceira-coluna #todos-municipios ul{
+    list-style: none;
+}
+
+#terceira-coluna  .todos-municipios__titulo{
+    font-weight: bold;
+    margin: 30px 0px 16px;
+    font-size: .9em;
+}
+
+#terceira-coluna #todos-municipios ul li{
+    border-bottom: 1px solid #737373;
+    font-size: .9em;
+    padding: 10px 0px;
+}
+
+#terceira-coluna #todos-municipios ul li span{
+    background-color: #4D4D4D;
+    border-radius: 30px;
+    padding: 4px 6px;
+    font-size: .7em;
+    margin-left: 8px;
+}
+
+
+#selecionar-localidade #terceira-coluna.todos-municipios button{
+    display: none;
+}
+
+#selecionar-localidade #terceira-coluna.todos-municipios #municipios{
+    display: none;
+}
+
+#selecionar-localidade #terceira-coluna #todos-municipios{
+    display: none;
+}
+
+#selecionar-localidade #terceira-coluna.todos-municipios #todos-municipios{
+    display: block
+}
+
+
+
+/**** só para mobile ****/
+  .selecionar-localidade__fechar--mobile{
+      display: none;
+  }
+
+  .selecionar-localidade__local-atual--mobile{
+      display: none;
+  }
+
+  .selecionar-localidade__voltar--mobile{
+      display: none;
+  }
+
+  .terceira-coluna__menu--mobile{
+      display: none;
+  }
+
+  .terceira-coluna__titulo{
+      display: none;
+  }
+
+  .por-estado__selecionar-estado{
+      display: none;
+  }
 
 @media screen and (max-width: 1400px) {
     #selecionar-localidade #terceira-coluna #municipios .conjunto .municipios{
@@ -329,6 +411,243 @@ ANIMAÇÃO
         clear: both;
         /*background-color: powderblue;*/
     }
+}
 
+
+@media screen and (max-width: 768px) {
+    #selecionar-localidade{
+        top: 42px;
+        left: -100%;
+        min-height: 100vh;
+        overflow: hidden;
+        display: block;
+
+
+    }
+
+    #selecionar-localidade #bg{
+        display: none
+    }
+
+    #selecionar-localidade #primeira-coluna{
+        width: 100%;
+        left: -100%;
+        border-top: 3px solid #666666;
+
+
+        -webkit-transition: left 0.5s cubic-bezier(0.42, 0, 0.51, 1);;
+        -moz-transition: left 0.5s cubic-bezier(0.42, 0, 0.51, 1);;
+        -ms-transition: left 0.5s cubic-bezier(0.42, 0, 0.51, 1);;
+        -o-transition: left 0.5s cubic-bezier(0.42, 0, 0.51, 1);;
+        transition: left 0.5s cubic-bezier(0.42, 0, 0.51, 1);;
+    }
     
+    #selecionar-localidade .selecionar-localidade__titulo{
+        margin-bottom: 0px;
+    }
+
+    .selecionar-localidade__voltar{
+        display: none;
+    }
+
+    .selecionar-localidade__fechar--mobile{
+        float: right;
+        padding-right: 15px;
+        font-size: 21px;
+        margin-top: 3px;
+        display: block;
+    }
+
+   .selecionar-localidade__local-atual--mobile{
+        padding: 8px 42px 8px 6%;
+        font-size: 0.77em;
+        display: block;
+    }
+
+
+    .selecionar-localidade__local-atual--mobile ul li{
+        display: inline;
+    }
+
+    .selecionar-localidade__local-atual--mobile ul li:not(:first-child):before{
+        content: ' / ';
+    }
+
+    .selecionar-localidade__voltar--mobile{
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 21px;
+        font-size: 0.8em;
+        margin: 25px 0 16px 6%;    
+        display: block;
+        padding: 5px 10px;
+        cursor: pointer;
+       /* visibility: hidden;*/
+    }
+
+
+
+    #selecionar-localidade #segunda-coluna{
+        left: 100%;
+        position: absolute;
+        margin-top: 0px;
+        z-index: 3;
+        width: 100%;
+        top: 128px;
+        background-color: #333333;
+
+        border-top: 2px solid #252525;
+    }
+
+     #selecionar-localidade #segunda-coluna ul li{
+        padding: 0px 6%;
+    }
+
+    .seletor-localidade__localidade-item, #selecionar-localidade #segunda-coluna ul li div{
+        border-bottom: 1px solid #4D4D4D;
+    }
+
+    .segunda-coluna__titulo{
+        color: #148C99;
+        margin-left: 6%;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 7px;
+        display: block;
+    }
+
+    #selecionar-localidade #terceira-coluna{
+        position: absolute;
+        top: 128px;
+        z-index: 3;
+        width: 100%;
+        left: 100%;
+        border-top: 2px solid #252525;
+        padding: 0px 6%;
+    }
+    #segunda-coluna.aberto + #terceira-coluna {
+        left: 100%;
+    }
+
+    #segunda-coluna.aberto + #terceira-coluna.aberto {
+        left: 0%;
+    }
+
+    #terceira-coluna.todos-municipios .total-encontrado{
+        display: none;
+    }
+
+    #terceira-coluna .fa-times{
+        display: none;
+    }
+
+    .terceira-coluna__titulo{
+        color: #178AAD;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 7px;
+        display: block;
+    }
+    
+    .terceira-coluna__menu--mobile{
+        width: 112%;
+        margin-left: -6%;
+        display: table;
+    }
+
+    .terceira-coluna__menu--mobile div{
+        float: left;
+        width: 50%;
+        text-align: center;
+        border-bottom: 5px solid #666666;
+        padding: 10px 0px;
+        font-weight: bold;
+    }
+
+    .terceira-coluna__menu--mobile div.selecionado{
+        border-color: #178AAD;
+    }
+
+    #terceira-coluna.todos-municipios .estado-selecionado{
+        display: none;
+    }
+    
+    #terceira-coluna .estado-selecionado{
+        color: #178AAD;
+    }
+
+    #selecionar-localidade #terceira-coluna .estado-selecionado i{
+        display: inline;
+        margin-top: 2px;
+        background-color: #178AAD;
+        width: 14px;
+        margin-left: 10px;
+        border-radius: 14px;
+        height: 18px;
+        width: 18px;
+        padding: 2px 4px;
+        color: #333333;
+        font-size: .9em;
+    }
+
+    #terceira-coluna .estado-selecionado span{
+        display: none;
+    }
+
+    #selecionar-localidade #terceira-coluna input{
+        margin-top: 25px;
+    }
+
+    .todos-municipios__titulo{
+        color: #178AAD;
+    }
+
+    #selecionar-localidade #terceira-coluna #municipios {
+        margin: 0px;
+        width: 112%;
+        margin-left: -6%;
+    }
+
+     #selecionar-localidade #terceira-coluna #municipios .conjunto .municipios ul li{
+        width: 100%;
+    }
+
+    .por-estado__selecionar-estado .por-estado__selecionar-municipio{
+        display: none;
+    }
+
+    .por-estado__selecionar-municipio .por-estado__selecionar-estado{
+        display: none;
+    }
+
+    .todos-municipios .por-estado__selecionar-estado{
+        display: none
+    }
+
+    .por-estado__selecionar-estado .selecione{
+        color: #178AAD;
+        margin-top: 25px;
+        font-weight: bold;
+        /* float: left; */
+        width: 100%;
+        /* clear: both; */
+    }
+    
+    .por-estado__selecionar-estado{
+        display: block;
+    }
+
+    .por-estado__selecionar-estado ul{
+        list-style: none;
+        margin-top: 11px;
+    }
+
+    .por-estado__selecionar-estado ul li{
+        border-bottom: 1px solid #4D4D4D;
+        padding: 10px 0%;
+    }
+
+    .por-estado__selecionar-estado ul li i{
+        float: right
+    }
 }
