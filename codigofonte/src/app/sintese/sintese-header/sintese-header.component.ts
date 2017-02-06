@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, Input, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { RouterParamsService } from '../../shared/router-params.service';
 import { Subscription } from 'rxjs';
@@ -19,7 +20,7 @@ var converter = require('json-2-csv');
 @Component({
     selector: 'sintese-header',
     templateUrl: 'sintese-header.template.html',
-    styleUrls: ['sintese-header.style.css']
+    styleUrls: ['sintese-header.style.css'],
 })
 export class SinteseHeaderComponent implements OnInit, OnDestroy {
 
@@ -46,6 +47,7 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
 
     private _subscriptionCommonService: Subscription;
     
+    private _link = [];
 
     @Input() graficoBase64;
 
@@ -55,14 +57,20 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
         private _routerParams:RouterParamsService,
         private _sinteseService:SinteseService, 
         private _localidade:LocalidadeService,
-        private _commonService: CommonService
+        private _commonService: CommonService,
+        private _router: Router,
+        private _activatedRoute: ActivatedRoute
     ){ }
 
     ngOnInit(){
 
+        this.ativo = this._activatedRoute.snapshot.data['tipo'];
+
         this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
 
             if(params.indicador){
+
+                this._link = ['brasil', params.uf, params.municipio, 'sintese', params.indicador]; 
 
                 // Informações gerais do município
                 let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
@@ -110,8 +118,22 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
     }
 
     public ativar(tipo){
+
         this.ativo = tipo;
         this.ativarComponente.emit(this.ativo);
+
+        if(tipo == 'cartograma'){
+
+            //this._link.push('mapa');
+
+            this._router.navigateByUrl(this._router.url + '/mapa');
+            
+
+        } else {
+
+            this._router.navigate(this._link);
+        }
+        
     }
 
     /**
@@ -166,9 +188,9 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
      * 
      * @conteudo:string - conteúdo a ser salvo.
      */
-    private downloadCSV(conteudo){
+    private downloadCSV(){
 
-        converter.json2csv(conteudo, (erro, csv) => {
+        converter.json2csv(this.valoresIndicador, (erro, csv) => {
 
             if(!erro){
 

@@ -27,11 +27,11 @@
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-download fa-stack-1x fa-inverse"></i>
                 </span>
-                <div class="submenu" (mouseleave)="fecharMenu()" [style.display]="isMenuOculto ? 'none' : 'block'">
+                <div class="submenu" (mouseleave)="fecharMenu()" [class.oculto]="isMenuOculto" [class.visivel]="!isMenuOculto">
                     <div class="seta"></div>
                     <ul class="submenu__lista">
                         <li class="submenu__item">
-                            <span  class="submenu__link submenu__texto" (click)="downloadCSV(valoresIndicador)">CSV</span>
+                            <span  class="submenu__link submenu__texto" (click)="downloadCSV()">CSV</span>
                         </li>
                         <li class="submenu__item">
                             <a class="submenu__link" href="{{dataURL}}" download="imagem.jpeg" (click)="downloadImagem()"><span class="submenu__texto">Imagem</span></a>                    
