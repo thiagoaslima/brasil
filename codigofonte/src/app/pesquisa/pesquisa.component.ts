@@ -57,8 +57,6 @@ export class PesquisaComponent {
                     }
                 }
                 this.indicadores = indicadores;
-
-                // console.log(indicadores);
             });
 
             //seta a variável de rota base
