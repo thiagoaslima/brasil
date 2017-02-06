@@ -16,12 +16,18 @@ export class PesquisaDadosComponent {
     public anos = ['-', '-'];
 
     ngOnChanges(){
+        //reseta as variáveis do template, evita exibir dados da pesquisa anterior em uma nova pesquisa
+        this.dadosCombo = [];
+        this.dadosTabela = [];
+        this.indexCombo = 0;
+        this.tituloPrincipal = "";
+        this.anos = ['-', '-'];
+
         //adiciona 3 novas propriedades aos indicadores: nível, visível e resultados
         //nível é usado para aplicar o css para criar a impressão de hierarquia na tabela de dados
         //visível é usado para definir se o indicador está visível ou não (dentro de um elemento pai fechado)
         //resultados contém o ano e os valores do indicador
         let indicadores = this.flat(this.indicadores);
-        this.anos = ['-', '-'];
         for(let i = 0; i < indicadores.length; i++){
             indicadores[i].nivel = indicadores[i].posicao.split('.').length - 2;
             indicadores[i].visivel = indicadores[i].nivel <= 2 ? true : false;

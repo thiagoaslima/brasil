@@ -16,6 +16,7 @@ export class PesquisaComponent {
     public baseURL;
     public indicadores = [];
     public idIndicadorSelecionado;
+    public codigoMunicipio;
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -41,7 +42,7 @@ export class PesquisaComponent {
         this._routerParams.params$.subscribe((params) => {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
             let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
-            let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
+            this.codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
 
             //pega o indicador e a pesquisa a partir da rota
             this.idPesquisaSelecionada = params.pesquisa;
@@ -50,7 +51,7 @@ export class PesquisaComponent {
             //carrega indicadores que aparecem no submenu e nos dados
             this.indicadores = [];
             //this._sintese.getNomesPesquisa(params.pesquisa).subscribe((indicadores) => {
-            this._sintese.getPesquisa(params.pesquisa, codigoMunicipio).subscribe((indicadores) => {
+            this._sintese.getPesquisa(params.pesquisa, this.codigoMunicipio).subscribe((indicadores) => {
                 for(let i = 0; i < indicadores.length; i++){
                     if(indicadores[i].id != this.idIndicadorSelecionado){
                         indicadores[i].children = []; //mantem só os filhos do indicador selecionado
