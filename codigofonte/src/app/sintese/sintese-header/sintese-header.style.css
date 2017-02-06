@@ -3,6 +3,10 @@
     overflow: hidden;
 }
 
+.cabecalho__voltar{
+    display: none;
+}
+
 .cabecalho__sub-container{
     float: left;
     width: 50%;
@@ -147,4 +151,44 @@
 
 .visivel{
     display: block;
+}
+
+
+@media screen and (max-width: 768px) {
+    .cabecalho{
+        padding: 5%;
+    }
+
+    .cabecalho__voltar{
+        background-color: transparent;
+        border: 1px solid #313131;
+        border-radius: 21px;
+        font-size: 0.8em;
+        display: block;
+        padding: 5px 10px;
+        cursor: pointer;
+        display: block;
+        margin: 12px;
+        margin-left: 0px;
+}
+    }
+    .cabecalho__sub-container{
+        width: 100%;
+    }
+
+    .cabecalho__sub-container.cabecalho__sub-container--ta-right.cabecalho__sub-container--minw-100{
+        float: left;
+        width: initial;
+        min-width: 0;
+    }
+    
+    .cabecalho__link{
+        font-size: 0.8em;
+    }
+
+    .cabecalho__sub-container.cabecalho__sub-container--ta-right{
+        width: initial;
+        float: right;
+    }
+
 }
