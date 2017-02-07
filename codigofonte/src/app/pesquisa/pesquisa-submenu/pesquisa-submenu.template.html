@@ -1,18 +1,18 @@
 <div class="conteudo__dados">
     <ul class="submenu">
         <li class="submenu__item" *ngFor="let pesquisa of pesquisas; let i = index;"
-            [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada || pesquisa.submenu">
+            [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada || pesquisa.visivel">
             <!--botão-->
             <!--<a class="submenu__link" routerLink="{{ baseURL + pesquisa.id }}" routerLinkActive="active">-->
                 <a class="submenu__link" (click)="onClick(i)">
                 <span class="submenu__texto">{{ pesquisa.descricao }}</span>
                 <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"
-                    [class.fa-chevron-right]="!pesquisa.submenu"
-                    [class.fa-chevron-down]="pesquisa.submenu"></i>
+                    [class.fa-chevron-right]="!pesquisa.visivel"
+                    [class.fa-chevron-down]="pesquisa.visivel"></i>
             </a>
             <!--submenu-->
-            <ul class="submenu" *ngIf="pesquisa.submenu">
-                <li class="submenu__subitem" *ngFor="let indicador of pesquisa.submenu;" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
+            <ul class="submenu" *ngIf="pesquisa.indicadores && pesquisa.visivel">
+                <li class="submenu__subitem" *ngFor="let indicador of pesquisa.indicadores;" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
                     <a class="submenu__sublink" routerLink="{{ baseURL + pesquisa.id + '/' + indicador.id }}" routerLinkActive="active">
                         <span class="submenu__texto">{{ indicador.indicador }}</span>
                         <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
