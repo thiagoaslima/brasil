@@ -367,6 +367,7 @@ console.dir(this.faixas);
 
     selectAno(ano){
         console.log(ano);
+        this.irPara = '';
         this.geraMapa(ano);
         console.dir(this.faixas);
     }
