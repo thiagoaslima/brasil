@@ -1,73 +1,91 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { SinteseService } from '../../sintese/sintese.service';
+import { RouterParamsService } from '../../shared/router-params.service';
+import { slugify } from '../../utils/slug';
+import { LocalidadeService } from '../../shared/localidade/localidade.service';
 
 @Component({
     selector: 'pesquisa-dados',
     templateUrl: 'pesquisa-dados.template.html',
     styleUrls: ['pesquisa-dados.style.css']
 })
-
 export class PesquisaDadosComponent {
-    @Input() indicadores;
-    @Input() idIndicadorSelecionado;
+    public indicadores;
+    public idIndicadorSelecionado;
     public dadosCombo = [];
     public dadosTabela = [];
     public indexCombo = 0;
     public tituloPrincipal = "";
     public anos = ['-', '-'];
 
-    ngOnChanges(){
-        //reseta as variáveis do template, evita exibir dados da pesquisa anterior em uma nova pesquisa
-        this.dadosCombo = [];
-        this.dadosTabela = [];
-        this.indexCombo = 0;
-        this.tituloPrincipal = "";
-        this.anos = ['-', '-'];
+    constructor(
+        private _routerParams:RouterParamsService,
+        private _sintese:SinteseService,
+        private _localidade:LocalidadeService
+    ){}
 
-        //adiciona 3 novas propriedades aos indicadores: nível, visível e resultados
-        //nível é usado para aplicar o css para criar a impressão de hierarquia na tabela de dados
-        //visível é usado para definir se o indicador está visível ou não (dentro de um elemento pai fechado)
-        //resultados contém o ano e os valores do indicador
-        let indicadores = this.flat(this.indicadores);
-        for(let i = 0; i < indicadores.length; i++){
-            indicadores[i].nivel = indicadores[i].posicao.split('.').length - 2;
-            indicadores[i].visivel = indicadores[i].nivel <= 2 ? true : false;
-            if(indicadores[i].res){
-                let resultados = [];
-                for(let key in indicadores[i].res){
-                    resultados.push({'ano' : parseInt(key), 'valor' : indicadores[i].res[key]});
-                }
-                //faz o sort(decrescente) dos resultados de acordo com o ano
-                resultados.sort((a, b) => {
-                    if(a.ano < b.ano) return 1;
-                    if(a.ano > b.ano) return -1;
-                    return 0;
-                });
-                //deixa apenas os dois últimos anos de resultados
-                resultados = resultados.slice(0, 2);
-                //faz o sort crescente para exibição dos dados
-                resultados.sort((a, b) => {
-                    if(a.ano > b.ano) return 1;
-                    if(a.ano < b.ano) return -1;
-                    return 0;
-                });
-                //seta a propriedade com os valores para montar no template
-                indicadores[i].resultados = resultados;
-                //seta os anos do cabeçalho da tabela
-                this.anos[0] = resultados.length >= 1 ? resultados[0].ano : '-';
-                this.anos[1] = resultados.length >= 2 ? resultados[1].ano : '-';
-            }
-        }
+    ngOnInit(){
+        //pega a rota atual
+        this._routerParams.params$.subscribe((params) => {
+            //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
+            let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
+            let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
 
-        //seta os dados iniciais do combobox e da tabela de dados
-        for(let i = 0; i < this.indicadores.length; i++){
-            if(this.indicadores[i].id == this.idIndicadorSelecionado){
-                this.tituloPrincipal = this.indicadores[i].indicador;
-                this.dadosCombo = this.indicadores[i].children;
-                if(this.dadosCombo.length > 0){
-                    this.dadosTabela = this.flat(this.dadosCombo[0]);
+            //pega o indicador a partir da rota
+            this.idIndicadorSelecionado = params.indicador;
+            
+            //carrega indicadores que aparecem nos dados
+            this._sintese.getPesquisa(params.pesquisa, codigoMunicipio).subscribe((indicadores) => {
+                //adiciona 3 novas propriedades aos indicadores: nível, visível e resultados
+                //nível é usado para aplicar o css para criar a impressão de hierarquia na tabela de dados
+                //visível é usado para definir se o indicador está visível ou não (dentro de um elemento pai fechado)
+                //resultados contém o ano e os valores do indicador
+                let ind = this.flat(indicadores);
+                for(let i = 0; i < ind.length; i++){
+                    ind[i].nivel = ind[i].posicao.split('.').length - 2;
+                    ind[i].visivel = ind[i].nivel <= 2 ? true : false;
+                    if(ind[i].res){
+                        let resultados = [];
+                        for(let key in ind[i].res){
+                            resultados.push({'ano' : parseInt(key), 'valor' : ind[i].res[key]});
+                        }
+                        //faz o sort(decrescente) dos resultados de acordo com o ano
+                        resultados.sort((a, b) => {
+                            if(a.ano < b.ano) return 1;
+                            if(a.ano > b.ano) return -1;
+                            return 0;
+                        });
+                        //deixa apenas os dois últimos anos de resultados
+                        resultados = resultados.slice(0, 2);
+                        //faz o sort crescente para exibição dos dados
+                        resultados.sort((a, b) => {
+                            if(a.ano > b.ano) return 1;
+                            if(a.ano < b.ano) return -1;
+                            return 0;
+                        });
+                        //seta a propriedade com os valores para montar no template
+                        ind[i].resultados = resultados;
+                        
+                        //seta os anos do cabeçalho da tabela
+                        this.anos[0] = resultados.length >= 1 ? resultados[0].ano : '-';
+                        this.anos[1] = resultados.length >= 2 ? resultados[1].ano : '-';
+                    }
                 }
-            }
-        }
+
+                //seta os dados iniciais do combobox e da tabela de dados
+                for(let i = 0; i < indicadores.length; i++){
+                    if(indicadores[i].id == this.idIndicadorSelecionado){
+                        this.tituloPrincipal = indicadores[i].indicador;
+                        this.dadosCombo = indicadores[i].children;
+                        if(this.dadosCombo.length > 0){
+                            this.dadosTabela = this.flat(this.dadosCombo[0]);
+                        }
+                    }
+                }
+
+                this.indicadores = indicadores;
+            });
+        });
     }
 
     //chamada quando muda o combobox
