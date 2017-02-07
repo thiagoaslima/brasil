@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
 import { SinteseService } from '../sintese.service';
@@ -34,15 +34,16 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
     private _subscription: Subscription;
     
     
-    constructor( private _commonService: CommonService ){ }
+    constructor( 
+        private _commonService: CommonService,
+        private _render: Renderer 
+    ){ }
 
     ngOnInit() {  
 
         
         this.labels = null;
         this.labels = [];
-
-        debugger;
 
         this._subscription = this._commonService.notifyObservable$.subscribe((res) => {
 
@@ -65,8 +66,6 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
         this.labels = null;
         this.labels = [];
 
-        debugger;
-        
 
         this.plotChart();
     }
@@ -77,8 +76,6 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
     }
 
     private plotChart(){
-
-        debugger;
 
         let dadosGrafico:string[] = [];
         for(var i in this.dados) {

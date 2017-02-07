@@ -1,6 +1,6 @@
 <div class="conteudo__detalhes">
     <div class="cabecalho">
-        <h2 class="cabecalho__titulo">Educação</h2>
+        <h2 class="cabecalho__titulo">{{ tituloPrincipal }}</h2>
         <i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>
         <div class="cabecalho__download">
             <i class="fa fa-download" aria-hidden="true"></i>
@@ -17,28 +17,13 @@
                 Indicador
             </td>
             <td>
-                2010
+                {{ anos[0] }}
             </td>
             <td>
-                2011
+                {{ anos[1] }}
             </td>
             <td>
-                2012
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan='2'>
-                {{ tituloTabela }}
-            </td>
-            <td>
-                633.986
-            </td>
-            <td>
-                633.986
-            </td>
-            <td>
-                633.986
+                -
             </td>
         </tr>
 
@@ -46,18 +31,21 @@
             <tr [ngClass]="'nivel-' + dado.nivel" (click)="onClick(dado)" *ngIf="dado.visivel"
                 [class.nivel-2__cursor]="dado.nivel == 2 && dado.children.length > 0">
                 <td>
+                    <!--nome do indicador-->
                     <div>
                         {{ dado.indicador }}
                     </div>
                 </td>
                 <td>
+                    <!--ícone da seta-->
                     <i *ngIf="dado.nivel == 2 && dado.children.length > 0" class="fa" aria-hidden="true"
                         [class.fa-chevron-right]="dado.children.length > 0 && !dado.children[0].visivel"
                         [class.fa-chevron-down]="dado.children.length > 0 && dado.children[0].visivel"></i>
                 </td>
-                <td>633.986</td>
-                <td>633.986</td>
-                <td>633.986</td>
+                <!--valores-->
+                <td>{{ dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ' }}</td>
+                <td>{{ dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ' }}</td>
+                <td>{{ dado.resultados ? '-' : ' ' }}</td>
             </tr>
         </template>
     </table>
