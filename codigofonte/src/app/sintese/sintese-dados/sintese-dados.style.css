@@ -110,3 +110,7 @@
     -webkit-transition: padding-left 0.3s;
     transition: padding-left 0.3s;
 }
+
+.hidden{
+    visibility: hidden;
+}
