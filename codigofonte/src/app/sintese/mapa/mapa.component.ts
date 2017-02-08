@@ -61,7 +61,6 @@ export class MapaComponent implements OnChanges {
 
     plotMap(codLocal, dados){
 
-        console.log(codLocal.toString(), dados.length);
         if(dados.length > 0){
             /**
              * Separa os períodos existentes para seleção do usuário 
@@ -76,7 +75,6 @@ export class MapaComponent implements OnChanges {
                     if(data.munic === dados[0].munic){
                         this.anosToSelect = data.anos; //anos para serem selecionados pelo usuário
                         this.ano = data.anos.length-1;
-                        console.log(codLocal.toString(), this.ano);
                     }
                 }
                 this.geraMapa(this.ano, codLocal, dados); //valor do índice do ano //pega o ultimo ano por default
@@ -371,8 +369,8 @@ export class MapaComponent implements OnChanges {
 
     selectAno(ano, codLocal, dados){
         console.log(ano);
+        this.irPara = '';
         this.geraMapa(ano, codLocal, dados);
-        console.dir(this.faixas);
     }
 
 }

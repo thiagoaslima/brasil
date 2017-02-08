@@ -7,11 +7,14 @@ import { SinteseDadosComponent } from './sintese-dados/sintese-dados.component';
 import { SinteseDetalhesComponent } from './sintese-detalhes/sintese-detalhes.component';
 
 import { GraficoComponent } from './grafico/grafico.component';
+import { TabelaComponent } from './tabela/tabela.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from '../shared/ng2-charts.module';
 import { MapaComponent } from './mapa/mapa.component';
 import { RootRoutingModule } from '../root-routing.module';
+
+import {ResultadoPipe} from '../utils/resultado';
 
 @NgModule({
     imports: [
@@ -27,7 +30,9 @@ import { RootRoutingModule } from '../root-routing.module';
         SinteseDetalhesComponent,
 
         GraficoComponent,
-        MapaComponent
+        TabelaComponent,
+        MapaComponent,
+        ResultadoPipe
 
     ]
 })
