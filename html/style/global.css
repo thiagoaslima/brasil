@@ -65,18 +65,6 @@ header .logo img{
     padding: 14px 6% 4px;
 }
 
-
-header #busca{
-    float: left;
-    margin: 10px 1%;
-    width: 76%;
-    height: 30px;
-}
-
-header .fa-search{
-    display: none;
-}
-
 #container{
     max-width: 1900px;
     margin: auto;
@@ -245,18 +233,7 @@ sintese>dados
         display: block;
     }
 
-    header #busca{
-        height: 24px;
-        display: none;
-    }
-
-    header .fa-search{
-        display: block;
-        color: #fff;
-        float: right;
-        padding: 10px 15px;
-        font-size: 20px;
-    }
+   
 
 
     aside{

@@ -186,3 +186,13 @@ tr.nivel-1:nth-child(3) td{
     -moz-appearance: none;
     background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
 }
+
+@media screen and (max-width: 768px) {
+    tr td:last-child {
+        display: none;
+    }
+
+    td.some{
+        display: none;
+    }
+}
