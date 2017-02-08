@@ -57,7 +57,6 @@ export class MapaComponent implements OnInit {
 
     plotMap(){
 
-console.log(this.codlocal, this.dados.length);
         if(this.dados.length > 0){
             /**
              * Separa os períodos existentes para seleção do usuário 
@@ -72,7 +71,6 @@ console.log(this.codlocal, this.dados.length);
                     if(data.munic === this.dados[0].munic){
                         this.anosToSelect = data.anos; //anos para serem selecionados pelo usuário
                         this.ano = data.anos.length-1;
-                        console.log(this.codlocal, this.ano);
                     }
                 }
                 this.geraMapa(this.ano); //valor do índice do ano //pega o ultimo ano por default
@@ -80,9 +78,7 @@ console.log(this.codlocal, this.dados.length);
         }else{
             this.geraMapa(0);
         }        
-
-console.log('this.dados = ',this.dados); 
-console.dir(this.faixas);       
+console.log('this.dados = ',this.dados);     
     }
 
     geraMapa(anoSelecionado){
@@ -369,7 +365,6 @@ console.dir(this.faixas);
         console.log(ano);
         this.irPara = '';
         this.geraMapa(ano);
-        console.dir(this.faixas);
     }
 
 }
