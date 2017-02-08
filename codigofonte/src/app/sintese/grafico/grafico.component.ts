@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnChanges, ViewChild, ElementRef, Renderer, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnChanges, AfterViewInit, ViewChild, ElementRef, Renderer, EventEmitter } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
 // Biblioteca usada no download de arquivos.
@@ -9,7 +9,7 @@ var FileSaver = require('file-saver');
     selector: 'grafico',
     templateUrl: 'grafico.template.html'
 })
-export class GraficoComponent implements OnChanges{
+export class GraficoComponent implements OnChanges, AfterViewInit{
 
     @Input() tipoGrafico: string;
     @Input() dadosIndicador: string[];
@@ -39,6 +39,14 @@ export class GraficoComponent implements OnChanges{
         if (!!this.dadosIndicador && !!this.nomeSerie && !!this.tipoGrafico) {
             
             this.plotChart(this.dadosIndicador, this.nomeSerie, this.tipoGrafico);
+        }
+    }
+
+    ngAfterViewInit(){
+
+        if(!!this.graficoRef && !!this.graficoRef.nativeElement){
+
+            this.dataURL.emit(this.graficoRef.nativeElement.toDataURL());
         }
     }
 
@@ -74,8 +82,6 @@ export class GraficoComponent implements OnChanges{
                 }]
             }
         };
-
-        //this.graficoRef.nativeElement.toDataURL()
     }
 
     private converterParaNumero(valor: string): number{

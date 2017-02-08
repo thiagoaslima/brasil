@@ -95,7 +95,7 @@ export class SinteseHeaderComponent implements OnChanges {
 
         if(tipo == 'cartograma'){
 
-            this._router.navigateByUrl(this._router.url + '/mapa');
+            this._router.navigate(this._link, {queryParams: { 'v': 'mapa' }});
             
 
         } else {

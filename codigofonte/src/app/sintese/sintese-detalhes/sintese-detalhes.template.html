@@ -2,7 +2,7 @@
 <sintese-header [graficoBase64]="urlDownloadImagemGrafico" (visualizacaoAlterada)="exibirComponente($event)"></sintese-header>
 
 <div *ngIf="componenteAtivo === 'grafico'">
-    <grafico [tipoGrafico]="tipoGrafico" [dadosIndicador]="dadosIndicador" [nomeSerie]="nomeIndicador"></grafico>
+    <grafico [tipoGrafico]="tipoGrafico" [dadosIndicador]="dadosIndicador" [nomeSerie]="nomeIndicador" (dataURL)="setDataURL($event)"></grafico>
 </div>
 
 <div *ngIf="componenteAtivo !== 'grafico'">

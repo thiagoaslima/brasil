@@ -3,7 +3,7 @@ import { Subscription, Subject, Observable } from 'rxjs';
 
 import { LocalidadeService } from '../shared/localidade/localidade.service';
 import { SinteseService } from './sintese.service';
-
+import { RouterParamsService } from '../shared/router-params.service';
 
 
 @Component({
@@ -21,25 +21,42 @@ export class SinteseComponent implements OnInit {
 
     constructor(
         private _localidadeService: LocalidadeService,
-        private _sinteseService: SinteseService
+        private _sinteseService: SinteseService,
+        private _routerParams:RouterParamsService,
     ){};
 
     ngOnInit(){
 
-        debugger;
         this.obterDadosSintese();
+        this.configurarBaseURL();
+    }
+    
+    private configurarBaseURL(){
+
+        this._routerParams.params$.subscribe((params) => {
+
+            //seta a variável de rota base
+            if (params.uf && params.municipio){
+
+                this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/';
+
+            } else if (params.uf){
+
+                this.baseURL = '/brasil/' + params.uf + '/';
+
+            } else{
+
+                this.baseURL = '/brasil/';
+            }
+        });
     }
 
     private obterDadosSintese(){
-
-        debugger;
 
         this._dadosSinteseSubscription = this._localidadeService.selecionada$
             .flatMap(localidade => {
 
                 this.tipoSintese = this.selecionarNivelSintese(localidade);
-
-                this.baseURL = localidade.link;
 
                 return this._sinteseService.getSinteseLocal(localidade.codigo.toString())
             } ) 

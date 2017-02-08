@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Localidade } from '../../shared/localidade/localidade.interface';
-
+import { RouterParamsService } from '../../shared/router-params.service';
 
 @Component({
     selector: 'sintese-detalhes',
@@ -16,12 +16,13 @@ export class SinteseDetalhesComponent implements OnInit {
 
     constructor(
         private _route: ActivatedRoute,
+        private _routerParams:RouterParamsService,
         private _sinteseService: SinteseService, 
         private _localidadeService: LocalidadeService,
     ){ }
 
     // Header
-    public urlDownloadImagemGrafico = '';
+    public urlDownloadImagemGrafico;
 
     // Componente a ser exibido
     public componenteAtivo: string = 'cartograma';
@@ -43,24 +44,31 @@ export class SinteseDetalhesComponent implements OnInit {
         this._localidadeService.selecionada$
             .subscribe(localidade => {
 
-                debugger;
+                this._route.queryParams.subscribe(params => {
 
-                if(this._route.params['visao'] == 'mapa'){
-                    
-                    this.exibirMapa(localidade);
-                    this.componenteAtivo = 'cartograma';
+                    if(params['v'] == 'mapa'){
+                        
+                        this.exibirMapa(localidade);
+                        this.componenteAtivo = 'cartograma';
 
-                } else {
+                    } else {
 
-                    this.exibirGrafico(localidade);
-                    this.componenteAtivo = 'grafico';
-                }
+                        this.exibirGrafico(localidade);
+                        this.componenteAtivo = 'grafico';
+                    }
+
+                });
             });
     }
 
     public exibirComponente(nomeComponente){
 
         this.componenteAtivo = nomeComponente;
+    }
+
+    public setDataURL(dataURL){
+
+        //this.urlDownloadImagemGrafico = dataURL;
     }
 
     private exibirMapa(localidade: Localidade){
