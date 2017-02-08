@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { RouterParamsService } from '../../shared/router-params.service';
@@ -6,8 +6,6 @@ import { Subscription } from 'rxjs';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { CommonService } from '../../shared/common.service';
-import { GraficoComponent } from '../grafico/grafico.component';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -22,51 +20,40 @@ var converter = require('json-2-csv');
     templateUrl: 'sintese-header.template.html',
     styleUrls: ['sintese-header.style.css'],
 })
-export class SinteseHeaderComponent implements OnInit, OnDestroy {
+export class SinteseHeaderComponent implements OnChanges {
 
     // Indica qual o componente está ativo. Pode ser 'grafico' ou 'mapa'.
-    private ativo = 'cartograma'; 
-
+    public ativo = 'cartograma'; 
     // Nome do indicador
-    private titulo;
-
+    public titulo;
     // Nome da pesquisa de origem
-    private pesquisa;
-
+    public pesquisa;
     // Código da pesquisa de origem
     //public codPesquisa;
+    public dataURL;
+    public isMenuOculto = true;
 
     // Valores do indicador a serem exportados como arquivo
     private valoresIndicador;
-
-    dataURL;
-
-    isMenuOculto = true;
-
     private _subscriptionSintese: Subscription;
-
-    private _subscriptionCommonService: Subscription;
-    
     private _link = [];
 
     @Input() graficoBase64;
+    @Output() visualizacaoAlterada = new EventEmitter();
 
-    @Output() ativarComponente = new EventEmitter();
 
     constructor(
         private _routerParams:RouterParamsService,
         private _sinteseService:SinteseService, 
         private _localidade:LocalidadeService,
-        private _commonService: CommonService,
         private _router: Router,
-        private _activatedRoute: ActivatedRoute
     ){ }
 
-    ngOnInit(){
 
-        this.ativo = this._activatedRoute.snapshot.data['tipo'];
+    ngOnChanges(){
 
         this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
+
 
             if(params.indicador){
 
@@ -99,32 +86,14 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
             }
         });
 
-
-        this._subscriptionCommonService = this._commonService.notifyObservable$.subscribe((res) => {
-
-            if (res.hasOwnProperty('option') && res.option === 'dataURL') {
-
-               this.dataURL  = res['url'];
-            }
-        });
-
-    }
-
-
-
-    ngOnDestroy() {
-        this._subscriptionCommonService.unsubscribe();
-        this._subscriptionSintese.unsubscribe();
     }
 
     public ativar(tipo){
 
         this.ativo = tipo;
-        this.ativarComponente.emit(this.ativo);
+        this.visualizacaoAlterada.emit(tipo);
 
         if(tipo == 'cartograma'){
-
-            //this._link.push('mapa');
 
             this._router.navigateByUrl(this._router.url + '/mapa');
             
@@ -132,8 +101,54 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
         } else {
 
             this._router.navigate(this._link);
-        }
-        
+        }        
+    }
+
+    public downloadImagem(){
+
+        // TODO: emitir evento
+        // this._commonService.notifyOther({"tipo": "obterImagem"});
+    }
+
+    /**
+     * Exibe o diálogo de download para salvar um arquivo CSV.
+     * 
+     * @conteudo:string - conteúdo a ser salvo.
+     */
+    public downloadCSV(){
+
+        converter.json2csv(this.valoresIndicador, (erro, csv) => {
+
+            if(!erro){
+
+                  this.save(csv, 'text/csv');
+            }
+        });
+    }
+
+    public abrirMenu(){
+
+        this.isMenuOculto = false;
+    }
+
+    public fecharMenu(){
+
+        this.isMenuOculto = true;
+    }
+
+    /**
+     * Exibe o diálogo de download para o usuário salvar arquivo.
+     * 
+     * @conteudo:string - conteúdo a ser salvo.
+     * @tipo:string - mime type do arquivo a ser salvo.
+     */
+    private save(conteudo, tipo) {
+
+        let extensao = tipo == 'image/jpeg' ? '.jpeg' : '.csv';
+
+        let blob = new Blob([conteudo], { type: tipo });
+
+        FileSaver.saveAs(blob, this.titulo + extensao);
     }
 
     /**
@@ -177,50 +192,4 @@ export class SinteseHeaderComponent implements OnInit, OnDestroy {
         return JSON.parse(JSON.stringify(objeto));
     }
 
-
-    private downloadImagem(){
-
-        this._commonService.notifyOther({option: 'getDataURL'});
-    }
-
-    /**
-     * Exibe o diálogo de download para salvar um arquivo CSV.
-     * 
-     * @conteudo:string - conteúdo a ser salvo.
-     */
-    private downloadCSV(){
-
-        converter.json2csv(this.valoresIndicador, (erro, csv) => {
-
-            if(!erro){
-
-                  this.save(csv, 'text/csv');
-            }
-        });
-    }
-
-    /**
-     * Exibe o diálogo de download para o usuário salvar arquivo.
-     * 
-     * @conteudo:string - conteúdo a ser salvo.
-     * @tipo:string - mime type do arquivo a ser salvo.
-     */
-    private save(conteudo, tipo) {
-
-        let extensao = tipo == 'image/jpeg' ? '.jpeg' : '.csv';
-
-        let blob = new Blob([conteudo], { type: tipo });
-
-        FileSaver.saveAs(blob, this.titulo + extensao);
-    }
-
-    abrirMenu(){
-
-        this.isMenuOculto = false;
-    }
-
-    fecharMenu(){
-
-        this.isMenuOculto = true;
-    }
 }

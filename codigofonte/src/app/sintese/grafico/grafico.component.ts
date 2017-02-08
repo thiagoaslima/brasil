@@ -1,10 +1,5 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, Input, Output, OnChanges, ViewChild, ElementRef, Renderer, EventEmitter } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
-
-import { SinteseService } from '../sintese.service';
-import { CommonService } from '../../shared/common.service';
-
-import { Observable, Subscription } from 'rxjs';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -14,82 +9,59 @@ var FileSaver = require('file-saver');
     selector: 'grafico',
     templateUrl: 'grafico.template.html'
 })
-export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
+export class GraficoComponent implements OnChanges{
+
+    @Input() tipoGrafico: string;
+    @Input() dadosIndicador: string[];
+    @Input() nomeSerie: string = 'Indicador';
+
+    @Output() dataURL = new EventEmitter();
 
     @ViewChild("grafico1") graficoRef : ElementRef;
   
     public isBrowser = isBrowser;
     
     public datasets = [];
-    public labels;
+    public labels = [];
     public options = {};
+    public tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
+    public colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
 
-    @Input() dados = [];
-    @Input() tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
-    @Input() nomeSerie = 'indicador';
-    @Input() private colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
-    @Input() private stacked = 'false';
-    @Input() private beginAtZero = 'true';
-
-    private _subscription: Subscription;
-    
+    private stacked = 'false';
+    private beginAtZero = 'true';
     
     constructor( 
-        private _commonService: CommonService,
         private _render: Renderer 
     ){ }
 
-    ngOnInit() {  
+    ngOnChanges(){
 
+        if (!!this.dadosIndicador && !!this.nomeSerie && !!this.tipoGrafico) {
+            
+            this.plotChart(this.dadosIndicador, this.nomeSerie, this.tipoGrafico);
+        }
+    }
+
+    private plotChart(dados, nomeSerie, tipoGrafico){
         
-        this.labels = null;
         this.labels = [];
 
-        this._subscription = this._commonService.notifyObservable$.subscribe((res) => {
-
-            if (res.hasOwnProperty('option')) {
-
-                if(res.option === 'getDataURL'){
-
-                    this._commonService.notifyOther({option: 'dataURL', url: this.graficoRef.nativeElement.toDataURL()});
-                }
-            }
-
-        });
-
-        this.plotChart();
-    }
-
-    ngOnChanges(changes){
-
-
-        this.labels = null;
-        this.labels = [];
-
-
-        this.plotChart();
-    }
-
-    ngOnDestroy() {
-
-        this._subscription.unsubscribe();
-    }
-
-    private plotChart(){
+        this.tipo = tipoGrafico;
 
         let dadosGrafico:string[] = [];
-        for(var i in this.dados) {
+        for(var i in dados) {
 
-            dadosGrafico.push(this.dados[i]);
+            dadosGrafico.push(dados[i]);
             this.labels.push(i);
         }
 
         let valores = dadosGrafico.map(valor => {
 
-            return !!valor? Number(valor.replace(',', '.')) : Number(valor);
+            return this.converterParaNumero(valor);
         });
+        
+        this.datasets = [{data: valores, label: nomeSerie, lineTension: 0}];
 
-        this.datasets = [{data: valores, label: this.nomeSerie}];
         
         this.options = {
             scales: {
@@ -102,6 +74,13 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
                 }]
             }
         };
+
+        //this.graficoRef.nativeElement.toDataURL()
+    }
+
+    private converterParaNumero(valor: string): number{
+
+        return !!valor? Number(valor.replace(',', '.')) : Number(valor)
     }
 
 }
