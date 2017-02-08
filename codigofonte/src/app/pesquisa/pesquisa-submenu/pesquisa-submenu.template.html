@@ -1,79 +1,24 @@
-<section class="conteudo__dados">
+<div class="conteudo__dados">
     <ul class="submenu">
-        <li class="submenu__item" [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada" *ngFor="let pesquisa of pesquisas;">
+        <li class="submenu__item" *ngFor="let pesquisa of pesquisas; let i = index;"
+            [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada || pesquisa.visivel">
             <!--botão-->
-            <a class="submenu__link" routerLink="{{ baseURL + pesquisa.id }}" routerLinkActive="active">
+            <!--<a class="submenu__link" routerLink="{{ baseURL + pesquisa.id }}" routerLinkActive="active">-->
+                <a class="submenu__link" (click)="onClick(i)">
                 <span class="submenu__texto">{{ pesquisa.descricao }}</span>
                 <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"
-                    [class.fa-chevron-right]="pesquisa.id != idPesquisaSelecionada"
-                    [class.fa-chevron-down]="pesquisa.id == idPesquisaSelecionada"></i>
+                    [class.fa-chevron-right]="!pesquisa.visivel"
+                    [class.fa-chevron-down]="pesquisa.visivel"></i>
             </a>
             <!--submenu-->
-            <ul class="submenu" *ngIf="pesquisa.id == idPesquisaSelecionada && indicadores.length > 0">
-                <li class="submenu__subitem" *ngFor="let indicador of indicadores;">
-                    <a class="submenu__sublink" routerLink="{{ baseURL + idPesquisaSelecionada + '/' + indicador.id }}" routerLinkActive="active">
-                        <span class="submenu__texto">{{ indicador.nome }}</span>
-                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true"></i>
+            <ul class="submenu" *ngIf="pesquisa.indicadores && pesquisa.visivel">
+                <li class="submenu__subitem" *ngFor="let indicador of pesquisa.indicadores;" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
+                    <a class="submenu__sublink" routerLink="{{ baseURL + pesquisa.id + '/' + indicador.id }}" routerLinkActive="active">
+                        <span class="submenu__texto">{{ indicador.indicador }}</span>
+                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
                     </a>
                 </li>
             </ul>
         </li>
-
-        <!--<li class="submenu__item">
-            <a class="submenu__link" href="">
-                <span class="submenu__texto">Censo Agropecuário</span>
-                <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
-            </a>
-        </li>
-        <li class="submenu__item submenu__item--selecionado">
-            <a class="submenu__link" href="">
-                <span class="submenu__texto">Censo</span>
-                <i class="fa fa-chevron-down submenu__seta" aria-hidden="true"></i>
-            </a>
-            <ul class="submenu">
-                <li class="submenu__subitem">
-                    <a class="submenu__sublink" href="">
-                        <span class="submenu__texto">Educação</span>
-                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="submenu__subitem">
-                    <a class="submenu__sublink" href="">
-                        <span class="submenu__texto">Família</span>
-                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="submenu__subitem submenu__subitem--selecionado">
-                    <a class="submenu__sublink" href="">
-                        <span class="submenu__texto">Religião</span>
-                        <i class="fa fa-chevron-right submenu__subseta submenu__subseta--selecionada" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="submenu__subitem">
-                    <a class="submenu__sublink" href="">
-                        <span class="submenu__texto">Trabalho</span>
-                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true"></i>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="submenu__item">
-            <a class="submenu__link" href="">
-                <span class="submenu__texto">Censo Agropecuário</span>
-                <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
-            </a>
-        </li>
-        <li class="submenu__item">
-            <a class="submenu__link" href="">
-                <span class="submenu__texto">frota</span>
-                <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
-            </a>
-        </li>
-        <li class="submenu__item">
-            <a class="submenu__link" href="">
-                <span class="submenu__texto">Pecuária</span>
-                <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"></i>
-            </a>
-        </li>-->
     </ul>
-</section>
+</div>

@@ -10,11 +10,10 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
-  { path: '', component: SinteseComponent, pathMatch: 'full' },
-  { path: 'sintese', component: SinteseComponent, pathMatch: 'full' },
-  { path: 'sintese/pesquisa/:pesquisa/indicador/:indicador', component: SinteseComponent, pathMatch: 'full'},
-  { path: 'sintese/pesquisa/:pesquisa/indicador/:indicador/mapa', component: SinteseComponent, pathMatch: 'full' },
-  { path: 'pesquisas', redirectTo: 'pesquisas/23', pathMatch: 'full' },
+  { path: '', redirectTo: 'sintese/29171/mapa', pathMatch: 'full' },
+  { path: 'sintese/:indicador', component: SinteseComponent, data: {tipo: 'grafico'} },
+  { path: 'sintese/:indicador/mapa', component: SinteseComponent, data: {tipo: 'cartograma'} },
+  { path: 'pesquisas', redirectTo: 'pesquisas/23' },
   { path: 'pesquisas/:pesquisa', component: PesquisaComponent },
   { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent }
 ];

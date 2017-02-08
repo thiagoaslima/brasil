@@ -31,7 +31,8 @@ ANIMAÇÃO
     color:#fff;
     width: 100%;
     left: -9999999px;
-    display: table
+    display: table;
+    z-index: 1;
 }
 
 #selecionar-localidade #primeira-coluna{

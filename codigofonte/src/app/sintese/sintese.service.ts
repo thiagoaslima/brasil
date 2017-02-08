@@ -122,13 +122,24 @@ export class SinteseService{
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
 
-                return (<any[]>nomes).map((nome) => {
-                        nome["res"] = dados[nome.id];
-                        return nome;
-                    });
+                this.atribuirValorIndicadoresPesquisa('children', nomes, dados);
+
+                return nomes;
             });
     }
+    
+    private atribuirValorIndicadoresPesquisa(attr, elements, valueList) {
 
+        elements.forEach((obj) => {
+
+            obj["res"] = valueList[obj.id];
+
+            if (obj[attr]) {
+
+                this.atribuirValorIndicadoresPesquisa(attr, obj[attr], valueList);
+            }
+        });
+    }
 
     /**
      * Recupera a síntese de uma dada localidade.

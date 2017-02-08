@@ -11,7 +11,7 @@
 
 html, body{
     height: 100%;
-}
+} 
 
 body, body.brasil{
     background: #fff; /* For browsers that do not support gradients */
@@ -44,6 +44,10 @@ header{
     border-bottom: 2px solid #F7931E;
     display: table;
     width: 100%;
+    
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 header .logo{
@@ -74,6 +78,8 @@ header #busca{
     max-width: 1900px;
     margin: auto;
     height: 100%;
+
+    padding-top: 54px;
 }
 
 .brasil .cor-fundo{
@@ -224,18 +230,24 @@ sintese>dados
     background-color: #E6E6E6;
     float: left;
     width: 38%;
-    min-height: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .conteudo__detalhes{
     float: left;
     width: 62%;
-    min-height: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 
 
 @media screen and (max-width: 768px) {
+    body, body.municipio, body.brasil, body.estado{
+        background: none;
+    }
+
     header{
         background-color: #333333;
         border-bottom: none;
@@ -269,6 +281,9 @@ sintese>dados
         font-size: 20px;
     }
 
+    #container{
+        padding-top: 42px;
+    }
 
     aside{
         width: 100%;
@@ -326,6 +341,35 @@ sintese>dados
     }
 
     aside #menu.aberto{
+        left: 0%;
+    }
+
+    .conteudo{
+        width: 100%;
+    }
+
+    .conteudo__dados{
+        overflow-y: initial;
+        width: 100%;
+        min-height: 100%;
+        display: table;
+    }
+
+    .conteudo__detalhes{
+        width: 100%;
+        position: fixed;
+        background-color: #fff;
+        top: 0;
+        left: 100%;
+
+        -webkit-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -moz-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -ms-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -o-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+    }
+
+    .conteudo__detalhes.aberto{
         left: 0%;
     }
 }

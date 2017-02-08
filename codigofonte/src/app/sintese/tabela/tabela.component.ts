@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
 import { SinteseService } from '../sintese.service';
@@ -11,36 +11,28 @@ import { Observable, Subscription } from 'rxjs';
 var FileSaver = require('file-saver');
 
 @Component({
-    selector: 'grafico',
-    templateUrl: 'grafico.template.html'
+    selector: 'tabela',
+    templateUrl: 'tabela.template.html',
+    styleUrls: [ 'tabela.style.css' ]
 })
-export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
+export class TabelaComponent implements OnInit, OnChanges, OnDestroy{
 
-    @ViewChild("grafico1") graficoRef : ElementRef;
+    @ViewChild("tabela1") tabelaRef : ElementRef;
   
     public isBrowser = isBrowser;
     
     public datasets = [];
     public labels;
-    public options = {};
 
     @Input() dados = [];
-    @Input() tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
-    @Input() nomeSerie = 'indicador';
-    @Input() private colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
-    @Input() private stacked = 'false';
-    @Input() private beginAtZero = 'true';
+    @Input() nomeSerie = '';
 
     private _subscription: Subscription;
     
     
-    constructor( 
-        private _commonService: CommonService,
-        private _render: Renderer 
-    ){ }
+    constructor( private _commonService: CommonService ){ }
 
     ngOnInit() {  
-
         
         this.labels = null;
         this.labels = [];
@@ -51,23 +43,21 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
 
                 if(res.option === 'getDataURL'){
 
-                    this._commonService.notifyOther({option: 'dataURL', url: this.graficoRef.nativeElement.toDataURL()});
+                    this._commonService.notifyOther({option: 'dataURL', url: this.tabelaRef.nativeElement.toDataURL()});
                 }
             }
 
         });
 
-        this.plotChart();
+        this.plotTable();
     }
 
     ngOnChanges(changes){
 
-
         this.labels = null;
-        this.labels = [];
+        this.labels = [];        
 
-
-        this.plotChart();
+        this.plotTable();
     }
 
     ngOnDestroy() {
@@ -75,7 +65,7 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
         this._subscription.unsubscribe();
     }
 
-    private plotChart(){
+    private plotTable(){
 
         let dadosGrafico:string[] = [];
         for(var i in this.dados) {
@@ -90,18 +80,9 @@ export class GraficoComponent implements OnInit, OnChanges, OnDestroy{
         });
 
         this.datasets = [{data: valores, label: this.nomeSerie}];
-        
-        this.options = {
-            scales: {
-                yAxes: [{
-                    stacked: this.stacked,
-                    ticks: { beginAtZero:this.beginAtZero }
-                }],
-                xAxes: [{
-                    stacked: this.stacked
-                }]
-            }
-        };
+        debugger;
     }
+
+       
 
 }

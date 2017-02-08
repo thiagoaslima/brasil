@@ -1,74 +1,93 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, Input} from '@angular/core';
 import { SinteseService } from '../../sintese/sintese.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { slugify } from '../../utils/slug';
-
-import { Subscription } from 'rxjs/Subscription';
+import { LocalidadeService } from '../../shared/localidade/localidade.service';
 
 @Component({
     selector: 'pesquisa-submenu',
     templateUrl: 'pesquisa-submenu.template.html',
     styleUrls: ['pesquisa-submenu.style.css']
 })
-export class PesquisaSubmenuComponent implements OnInit, OnDestroy {
+export class PesquisaSubmenuComponent {
 
     public pesquisas = [];
     public idPesquisaSelecionada;
-    public baseURL;
     public indicadores = [];
-
-    private _pesquisas$$: Subscription
-    private _route$$: Subscription
+    public idIndicadorSelecionado;
+    public codigoMunicipio;
+    public baseURL;
 
     constructor(
-        private _routerParams: RouterParamsService,
-        private _sintese: SinteseService
-    ) { }
+        private _routerParams:RouterParamsService,
+        private _sintese:SinteseService,
+        private _localidade:LocalidadeService
+    ){}
 
-    ngOnInit() {
-        this._pesquisas$$ = this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
+    ngOnInit(){
+        //busca pesquisas disponíveis e as organiza em ordem alfabética
+        this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
             pesquisas.sort((a, b) => {
                 //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
                 a = slugify(a.descricao);
                 b = slugify(b.descricao);
-                if (a < b) { return -1; }
-                if (a > b) { return 1; }
+                if (a < b) {return -1;}
+                if (a > b) {return 1;}
                 return 0;
             });
             this.pesquisas = pesquisas;
         });
 
-        this._route$$ = this._routerParams.params$.subscribe((params) => {
-            this.idPesquisaSelecionada = params.pesquisa;
+        //pega a rota atual
+        this._routerParams.params$.subscribe((params) => {
+            //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
+            let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
+            this.codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
 
+            //pega o indicador e a pesquisa a partir da rota
+            this.idPesquisaSelecionada = params.pesquisa;
+            this.idIndicadorSelecionado = params.indicador;
+            
             //carrega indicadores que aparecem no submenu
-            this.indicadores = [];
-            this._sintese.getNomesPesquisa(params.pesquisa).subscribe((indicadores) => {
-                for (var i = 0; i < indicadores.length; i++) {
-                    this.indicadores.push({ 'nome': indicadores[i].indicador, 'id': indicadores[i].id });
+            this._sintese.getPesquisa(params.pesquisa, this.codigoMunicipio).subscribe((indicadores) => {
+                let ind = []
+                for(let i = 0; i < indicadores.length; i++){
+                    ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});
                 }
-                this.indicadores.sort((a, b) => {
-                    //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
-                    a = slugify(a.nome);
-                    b = slugify(b.nome);
-                    if (a < b) { return -1; }
-                    if (a > b) { return 1; }
-                    return 0;
-                });
+                for(let i = 0; i < this.pesquisas.length; i++){                   
+                    if(this.pesquisas[i].id == this.idPesquisaSelecionada){
+                        this.pesquisas[i].indicadores = ind;
+                        this.pesquisas[i].visivel = true;
+                    }else{
+                        this.pesquisas[i].indicadores = undefined;
+                        this.pesquisas[i].visivel = false;
+                    }
+                }
             });
 
-            if (params.uf && params.municipio) {
+            //seta a variável de rota base
+            if(params.uf && params.municipio){
                 this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/';
-            } else if (params.uf) {
+            }else if(params.uf){
                 this.baseURL = '/brasil/' + params.uf + '/pesquisas/';
-            } else {
+            }else{
                 this.baseURL = '/brasil/pesquisas/';
             }
         });
     }
 
-    ngOnDestroy() {
-        this._route$$.unsubscribe();
-        this._pesquisas$$.unsubscribe();
+    onClick(index){
+        this.pesquisas[index].visivel = !this.pesquisas[index].visivel;
+        //carrega indicadores que aparecem no submenu
+        if(this.pesquisas[index].indicadores == undefined){
+            this._sintese.getPesquisa(this.pesquisas[index].id, this.codigoMunicipio).subscribe((indicadores) => {
+                let ind = [];
+                for(let i = 0; i < indicadores.length; i++){
+                    ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});
+                }
+                this.pesquisas[index].indicadores = ind;
+            });
+        }
     }
+
 }

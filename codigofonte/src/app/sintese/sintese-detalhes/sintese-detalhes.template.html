@@ -1,10 +1,13 @@
 
 <sintese-header (ativarComponente)="handleAtivarComponente($event)" [graficoBase64]="urlDownloadGrafico"></sintese-header>
 <div *ngIf="comp === 'grafico'">
-    <grafico [tipo]="'line'" [dados]="dadosIndicador" (graficoPronto)="setImagemGrafico($event)"></grafico>
+    <grafico [tipo]="tipoGrafico" [dados]="dadosIndicador" [nomeSerie]="nomeIndicador"></grafico>
+    <div>
+         <tabela [dados]="dadosIndicador" [nomeSerie]="nomeIndicador"></tabela>
+    </div>
 </div>
 <div *ngIf="comp !== 'grafico'">
     <div *ngIf="local != ''">
-        <mapa [codlocal]="local"></mapa>
+        <mapa [codlocal]="local" [dados]="dadosMapa"></mapa>
     </div>
 </div>
