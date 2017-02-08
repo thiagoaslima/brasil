@@ -7,6 +7,7 @@ import { IdlePreload, IdlePreloadModule } from '@angularclass/idle-preload';
 import 'chart.js';
 
 import { CacheService } from './app/shared/cache.service';
+import { PesquisaCacheService } from './app/shared/pesquisa/pesquisa-cache.service';
 import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
 // Will be merged into @angular/platform-browser in a later release
@@ -56,7 +57,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
 
-    CacheService,
+    { provide: CacheService, useClass: PesquisaCacheService },
 
     Meta,
 
@@ -64,7 +65,9 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
   ]
 })
 export class MainModule {
-  constructor(public cache: CacheService) {
+  constructor(
+    public cache: CacheService  
+  ) {
     // TODO(gdi2290): refactor into a lifecycle hook
     this.doRehydrate();
   }

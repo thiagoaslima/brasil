@@ -32,11 +32,11 @@
         <nav id="menu" [class.aberto]="menuGlobalAberto">
             <ul>
                 <li routerLinkActive='menu--selecionado'>
-                    <a [routerLink]="getLink('sintese')">Sintese</a>
+                    <a style="display:block" [routerLink]="getLink('sintese')">Sintese</a>
                 </li>
                 <li routerLinkActive='menu--selecionado'>Tema</li>
                 <li routerLinkActive='menu--selecionado'>
-                    <a [routerLink]="getLink('pesquisas')">Pesquisas</a>
+                    <a style="display:block" [routerLink]="getLink('pesquisas')">Pesquisas</a>
                 </li>
             </ul>
         </nav>

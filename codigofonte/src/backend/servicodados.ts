@@ -95,6 +95,58 @@ export function mockServices() {
         })
     });
 
+    router.route('/teste')
+        .get(function (req, res) {
+
+            function _resumeIndicador(indicador) {
+                indicador = Object.assign({}, indicador);
+
+                if (!indicador.unidade) {
+                    indicador.unidade = {id: ''};
+                }
+
+                if (indicador.children && indicador.children.length) {
+                    indicador.children = indicador.children.map(_resumeIndicador);
+                }
+                return ['id', 'indicador', 'unidade', 'classe', 'children'].reduce((obj, key) => {
+                    obj[key] = indicador[key];
+                    return obj;
+                }, {});
+            }
+
+            function _checkUnidade(indicador, unidade?) {
+                if (!unidade) {
+                    unidade = indicador.unidade.id;
+                }
+                let comp = indicador.unidade.id === unidade || indicador.unidade.id === '';
+                let childComp = true;
+
+                if (indicador.children && indicador.children.length) {
+                    childComp = indicador.children.reduce((agg, child) => {
+                        return agg && _checkUnidade(child, unidade);
+                    }, true);
+                }
+
+                return comp && childComp;
+            }
+
+            indicadores.then(indicadoresArr => {
+                return indicadoresArr
+                    .map(indicadoresPesquisa => {
+                        return indicadoresPesquisa
+                            .map(_resumeIndicador)
+                            .map(indicador => {
+                                return {
+                                    indicador,
+                                    mesmaUnidade: _checkUnidade(indicador)
+                                }
+                            });
+                    })
+            }).then(indicadores => {
+                return res.json(indicadores);
+            })
+        });
+
 
     router.route('/pesquisa/:id/completa')
         .get(function (req, res) {
@@ -172,7 +224,7 @@ const _getResults = function (indicador, localidades) {
     let _childrenPromises = indicador.children.length
         ? indicador.children.map(child => _getResults(child, localidades))
         : Promise.resolve([]);
-        
+
     let _indicador = Promise.all([_childrenPromises, _resultados])
         .then(([children, resultados]) => {
             return Object.assign(
@@ -204,6 +256,7 @@ const _filtrarPeriodosResultados = (resultados, periodos) => {
 
 const _registerPesquisa = function registerPesquisa(indicador, pesquisa) {
     indicador.pesquisa = pesquisa.id;
+    indicador.pesquisaObj = pesquisa;
     pesquisa.indicadores.push(indicador.id);
     if (indicador.children.length) {
         indicador.children.forEach(child => registerPesquisa(child, pesquisa));
