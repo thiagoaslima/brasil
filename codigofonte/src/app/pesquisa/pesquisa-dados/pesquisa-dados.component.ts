@@ -126,7 +126,9 @@ export class PesquisaDadosComponent {
             if(this.indicadores[i].id == this.idIndicadorSelecionado){
                 let ind = this.flat(this.indicadores[i]);
                 let csv = this.baseURL + '\n\n';
-                csv += "Nível;Indicador;" + (this.anos.length >= 1 ? this.anos[0] + ';' : '') + (this.anos.length >= 2 ? this.anos[1] + ';' : '') + 'Unidade\n';
+                csv += "Nível;Indicador;" +
+                    (this.anos.length >= 1 && this.anos[0] != '-' ? this.anos[0] + ';' : '') +
+                    (this.anos.length >= 2 && this.anos[1] != '-' ? this.anos[1] + ';' : '') + 'Unidade\n';
                 for(let j = 0; j < ind.length; j++){
                     csv += ind[j].posicao + ';' + ind[j].indicador
                     if(ind[j].resultados){
