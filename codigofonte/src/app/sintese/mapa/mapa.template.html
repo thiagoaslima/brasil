@@ -1,74 +1,84 @@
-<div *ngIf="mapauf === false">
-    <div class="mapa-legendalocal"><span class="local-atual">{{localAtual}}</span> 
-    <span class="local-selecionado">{{irPara}} <a [routerLink]="localHoverLink">{{localHover}}</a></span></div>
-    <div class="mapa" *ngIf="data">
-        <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
-                <g class="uf" transform="scale(.18 -.18)">
-                    <g *ngFor="let item of data.geometry" 
-                        [attr.class]="item.classe+ ' '+ item.faixa" 
-                        [attr.codigo]="item.codigo" 
-                        [attr.nome]="item.nome" 
-                        [attr.sigla]="item.sigla" 
-                        [attr.link]="item.link" 
-                        [attr.ano]="item.ano" 
-                        [attr.valor]="item.valor" 
-                        [attr.faixa]="item.faixa"
-                        on-mouseover='over(item.nome,item.ano,item.valor,item.link)' 
-                        (click)='over(item.nome,item.ano,item.valor,item.link)'>
-                        <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
-                    </g>
-                </g>
-        </svg>
-    </div>
-
-    <div  *ngIf="fx1 !== '0' && fx0 !== '0'" id="faixas">
-        <!--<h4></h4>-->
-        <span [attr.class]="faixa0"><span class="ico-faixa faixa0"></span> <span class="txt-faixa">sem informação</span> <br></span>
-        <span *ngIf="fx1 !== '0'" [attr.class]="faixa1"><span class="ico-faixa faixa1"></span> <span class="txt-faixa">abaixo de {{fx1}}</span> <br></span>
-        <span *ngIf="fx1 !== '0' && fx0 !== '0'" [attr.class]="faixa2"><span class="ico-faixa faixa2"></span> <span class="txt-faixa">de {{fx1}} a {{fx0}}</span> <br></span>
-        <span *ngIf="fx0 !== '0'" [attr.class]="faixa3"><span class="ico-faixa faixa3"></span> <span class="txt-faixa">acima de {{fx0}}</span> <br></span>
-        <!--<span class="ico-faixa maior"></span> <span class="txt-faixa">maior proporção</span> <br>-->
-        <span id="selecionado"><span class="ico-faixa selecionado"></span> <span class="txt-faixa">Local selecinado</span></span>
-    </div>
-
-    <div class="seletor-periodos"><span *ngFor="let anoExibido of anosToSelect; let i = index"><span class="periodo-link" (click)='selectAno(i)'>{{anoExibido}}</span> </span></div>
-
+<div class="loading" *ngIf="carregando">
+    <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
 </div>
 
-<div *ngIf="mapauf === true">
-    <div class="mapa-legendalocal">
-        <span class="local-atual">{{localAtual}}</span> 
-        <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
-    </div>
-    <div class="mapa" *ngIf="data">
-        <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
-                <g class="uf" transform="scale(1 -1)">
-                    <g *ngFor="let item of data.geometry" 
-                        [attr.class]="item.classe+ ' '+ item.faixa" 
-                        [attr.codigo]="item.codigo" 
-                        [attr.nome]="item.nome" 
-                        [attr.uf]="item.uf" 
-                        [attr.link]="item.link" 
-                        [attr.ano]="item.ano" 
-                        [attr.valor]="item.valor" 
-                        [attr.faixa]="item.faixa" 
-                        (click)='over(item.nome,item.ano,item.valor,item.link)'>
-                        <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+<div *ngIf="!carregando">
+    
+
+    <div *ngIf="mapauf === false">
+        <div class="mapa-legendalocal"><span class="local-atual">{{localAtual}}</span> 
+        <span class="local-selecionado">{{irPara}} <a [routerLink]="localHoverLink">{{localHover}}</a></span></div>
+        <div class="mapa" *ngIf="data">
+            <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
+                    <g class="uf" transform="scale(.18 -.18)">
+                        <g *ngFor="let item of data.geometry" 
+                            [attr.class]="item.classe+ ' '+ item.faixa" 
+                            [attr.codigo]="item.codigo" 
+                            [attr.nome]="item.nome" 
+                            [attr.sigla]="item.sigla" 
+                            [attr.link]="item.link" 
+                            [attr.ano]="item.ano" 
+                            [attr.valor]="item.valor" 
+                            [attr.faixa]="item.faixa"
+                            on-mouseover='over(item.nome,item.ano,item.valor,item.link)' 
+                            (click)='over(item.nome,item.ano,item.valor,item.link)'>
+                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                        </g>
                     </g>
-                </g>
-        </svg>
+            </svg>
+        </div>
+
+        <div  *ngIf="fx1 !== '0' && fx0 !== '0'" id="faixas">
+            <!--<h4></h4>-->
+            <span [attr.class]="faixa0"><span class="ico-faixa faixa0"></span> <span class="txt-faixa">sem informação</span> <br></span>
+            <span *ngIf="fx1 !== '0'" [attr.class]="faixa1"><span class="ico-faixa faixa1"></span> <span class="txt-faixa">abaixo de {{fx1}}</span> <br></span>
+            <span *ngIf="fx1 !== '0' && fx0 !== '0'" [attr.class]="faixa2"><span class="ico-faixa faixa2"></span> <span class="txt-faixa">de {{fx1}} a {{fx0}}</span> <br></span>
+            <span *ngIf="fx0 !== '0'" [attr.class]="faixa3"><span class="ico-faixa faixa3"></span> <span class="txt-faixa">acima de {{fx0}}</span> <br></span>
+            <!--<span class="ico-faixa maior"></span> <span class="txt-faixa">maior proporção</span> <br>-->
+            <span id="selecionado"><span class="ico-faixa selecionado"></span> <span class="txt-faixa">Local selecinado</span></span>
+        </div>
+
+        <div class="seletor-periodos"><span *ngFor="let anoExibido of anosToSelect; let i = index"><span class="periodo-link" (click)='selectAno(i)'>{{anoExibido}}</span> </span></div>
+
     </div>
 
-    <div  *ngIf="fx1 !== '0' && fx0 !== '0'" id="faixas">
-        <!--<h4></h4>-->
-        <span [attr.class]="faixa0"><span class="ico-faixa faixa0"></span> <span class="txt-faixa">sem informação</span> <br></span>
-        <span *ngIf="fx1 !== '0'" [attr.class]="faixa1"><span class="ico-faixa faixa1"></span> <span class="txt-faixa">abaixo de {{fx1}}</span> <br></span>
-        <span *ngIf="fx1 !== '0' && fx0 !== '0'" [attr.class]="faixa2"><span class="ico-faixa faixa2"></span> <span class="txt-faixa">de {{fx1}} a {{fx0}}</span> <br></span>
-        <span *ngIf="fx0 !== '0'" [attr.class]="faixa3"><span class="ico-faixa faixa3"></span> <span class="txt-faixa">acima de {{fx0}}</span> <br></span>
-        <!--<span class="ico-faixa maior"></span> <span class="txt-faixa">maior proporção</span> <br>-->
-        <span id="selecionado"><span class="ico-faixa selecionado"></span> <span class="txt-faixa">Local selecinado</span></span>
+    <div *ngIf="mapauf === true">
+        <div class="mapa-legendalocal">
+            <span class="local-atual">{{localAtual}}</span> 
+            <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
+        </div>
+        <div class="mapa" *ngIf="data">
+            <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
+                    <g class="uf" transform="scale(1 -1)">
+                        <g *ngFor="let item of data.geometry" 
+                            [attr.class]="item.classe+ ' '+ item.faixa" 
+                            [attr.codigo]="item.codigo" 
+                            [attr.nome]="item.nome" 
+                            [attr.uf]="item.uf" 
+                            [attr.link]="item.link" 
+                            [attr.ano]="item.ano" 
+                            [attr.valor]="item.valor" 
+                            [attr.faixa]="item.faixa" 
+                            (click)='over(item.nome,item.ano,item.valor,item.link)'>
+                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                        </g>
+                    </g>
+            </svg>
+        </div>
+
+        <div  *ngIf="fx1 !== '0' && fx0 !== '0'" id="faixas">
+            <!--<h4></h4>-->
+            <span [attr.class]="faixa0"><span class="ico-faixa faixa0"></span> <span class="txt-faixa">sem informação</span> <br></span>
+            <span *ngIf="fx1 !== '0'" [attr.class]="faixa1"><span class="ico-faixa faixa1"></span> <span class="txt-faixa">abaixo de {{fx1}}</span> <br></span>
+            <span *ngIf="fx1 !== '0' && fx0 !== '0'" [attr.class]="faixa2"><span class="ico-faixa faixa2"></span> <span class="txt-faixa">de {{fx1}} a {{fx0}}</span> <br></span>
+            <span *ngIf="fx0 !== '0'" [attr.class]="faixa3"><span class="ico-faixa faixa3"></span> <span class="txt-faixa">acima de {{fx0}}</span> <br></span>
+            <!--<span class="ico-faixa maior"></span> <span class="txt-faixa">maior proporção</span> <br>-->
+            <span id="selecionado"><span class="ico-faixa selecionado"></span> <span class="txt-faixa">Local selecinado</span></span>
+        </div>
+
+        <div class="seletor-periodos"><span *ngFor="let anoExibido of anosToSelect; let i = index"><span class="periodo-link" (click)='selectAno(i)'>{{anoExibido}}</span> </span></div>
+
     </div>
 
-    <div class="seletor-periodos"><span *ngFor="let anoExibido of anosToSelect; let i = index"><span class="periodo-link" (click)='selectAno(i)'>{{anoExibido}}</span> </span></div>
 
 </div>

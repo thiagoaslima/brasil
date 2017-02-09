@@ -3,7 +3,7 @@
         <h2 class="cabecalho__titulo">{{ tituloPrincipal }}</h2>
         <i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>
         <div class="cabecalho__download">
-            <i class="fa fa-download" aria-hidden="true"></i>
+            <i class="fa fa-download" aria-hidden="true" (click)="onDownload()"></i>
         </div>
 
         <select class="cabecalho__combobox" (change)="onChange($event)">
@@ -43,9 +43,17 @@
                         [class.fa-chevron-down]="dado.children.length > 0 && dado.children[0].visivel"></i>
                 </td>
                 <!--valores-->
-                <td>{{ dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ' }}</td>
-                <td>{{ dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ' }}</td>
-                <td>{{ dado.resultados ? '-' : ' ' }}</td>
+                <td>
+                    {{ dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ' }}
+                    <span *ngIf="dado.resultados && dado.resultados.length >= 1 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                </td>
+                <td>
+                    {{ dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ' }}
+                    <span *ngIf="dado.resultados && dado.resultados.length >= 2 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                </td>
+                <td>
+                    {{ dado.resultados ? '-' : ' ' }}
+                </td>
             </tr>
         </template>
     </table>

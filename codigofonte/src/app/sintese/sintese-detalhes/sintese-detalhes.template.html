@@ -1,8 +1,27 @@
 
-<sintese-header [graficoBase64]="urlDownloadImagemGrafico" (visualizacaoAlterada)="exibirComponente($event)"></sintese-header>
+<sintese-header [graficoBase64]="urlDownloadImagemGrafico" [ativo]="componenteAtivo" (visualizacaoAlterada)="exibirComponente($event)"></sintese-header>
 
 <div *ngIf="componenteAtivo === 'grafico'">
-    <grafico [tipoGrafico]="tipoGrafico" [dadosIndicador]="dadosIndicador" [nomeSerie]="nomeIndicador" (dataURL)="setDataURL($event)"></grafico>
+    <grafico [tipoGrafico]="tipoGrafico" [dadosIndicador]="dadosIndicador" [nomeSerie]="nomeIndicador" [carregando]="isGraficoCarregando" (dataURL)="setDataURL($event)"></grafico>
+
+    <div *ngIf="notasIndicador?.length > 0" class="pesq__info">
+        <br>
+        <p>
+            Notas:
+        </p>
+        <ol>
+            <li *ngFor="let nota of notasIndicador">{{nota}}</li>
+        </ol>
+    </div>
+    <br>
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <p>
+            Fonte:
+        </p>
+        <ol>
+            <li *ngFor="let fonte of fontesIndicador">{{fonte}}</li>
+        </ol>
+    </div>
 </div>
 
 <div *ngIf="componenteAtivo !== 'grafico'">
