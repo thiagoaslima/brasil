@@ -4,6 +4,10 @@ import { RouterParamsService } from '../../shared/router-params.service';
 import { slugify } from '../../utils/slug';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 
+// Biblioteca usada no download de arquivos.
+// Possui um arquivo de definição de tipos file-saver.d.ts do typings.
+var FileSaver = require('file-saver');
+
 @Component({
     selector: 'pesquisa-dados',
     templateUrl: 'pesquisa-dados.template.html',
@@ -17,6 +21,7 @@ export class PesquisaDadosComponent {
     public indexCombo = 0;
     public tituloPrincipal = "";
     public anos = ['-', '-'];
+    private baseURL = "";
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -84,7 +89,17 @@ export class PesquisaDadosComponent {
                 }
 
                 this.indicadores = indicadores;
+                //console.log(indicadores);
             });
+
+            //seta a variável de rota base
+            if(params.uf && params.municipio){
+                this.baseURL = '/brasil/' + params.uf + '/' + params.municipio;
+            }else if(params.uf){
+                this.baseURL = '/brasil/' + params.uf;
+            }else{
+                this.baseURL = '/brasil';
+            }
         });
     }
 
@@ -101,6 +116,35 @@ export class PesquisaDadosComponent {
         let children = this.flat(item.children);
         for(let i = 0; i < children.length; i++){
             children[i].visivel = !children[i].visivel;
+        }
+    }
+
+    //chamada quando se clica no botão de download
+    //exporta os dados da tabela para csv
+    onDownload(){
+        for(let i = 0; i < this.indicadores.length; i++){
+            if(this.indicadores[i].id == this.idIndicadorSelecionado){
+                let ind = this.flat(this.indicadores[i]);
+                let csv = this.baseURL + '\n\n';
+                csv += "Nível;Indicador;" +
+                    (this.anos.length >= 1 && this.anos[0] != '-' ? this.anos[0] + ';' : '') +
+                    (this.anos.length >= 2 && this.anos[1] != '-' ? this.anos[1] + ';' : '') + 'Unidade\n';
+                for(let j = 0; j < ind.length; j++){
+                    csv += ind[j].posicao + ';' + ind[j].indicador
+                    if(ind[j].resultados){
+                        for(let k = 0; k < ind[j].resultados.length; k++){
+                            if(this.anos.indexOf(ind[j].resultados[k].ano) >= 0){
+                                csv += ';' + ind[j].resultados[k].valor;
+                            }
+                        }
+                        csv += ';' + (ind[j].unidade ? ind[j].unidade.id : '');
+                    }
+                    csv += '\n';
+                }
+                let blob = new Blob([csv], { type: 'text/csv' });
+                FileSaver.saveAs(blob, 'tabela.csv');
+                break;
+            }
         }
     }
 
