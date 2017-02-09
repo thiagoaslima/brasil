@@ -27,6 +27,21 @@ tr:nth-child(2) td{
     font-size: .9em;
 }
 
+tr:first-child td:nth-child(2){
+    text-align: center;
+}
+
+tr td:nth-child(3){
+    text-align: right;
+}
+
+tr td:nth-child(4){
+    text-align: right;
+}
+
+tr td:nth-child(5){
+    text-align: right;
+}
 
 .nivel-1 td{
     padding-top: 30px;
@@ -172,6 +187,7 @@ tr.nivel-1:nth-child(3) td{
     padding-left: 4px;
     padding-top: 1px;
     margin-right: 2%;
+    cursor: pointer;
 }
 
 .cabecalho__combobox{
