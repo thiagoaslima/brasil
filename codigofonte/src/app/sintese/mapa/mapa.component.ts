@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnChanges, Inject } from '@angular/core';
 import { Subscription } from 'rxjs'
 
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
@@ -14,9 +14,10 @@ import {Router} from '@angular/router';
     styleUrls: [ 'mapa.style.css' ]
 })
 
-export class MapaComponent implements OnInit {
+export class MapaComponent implements OnChanges {
 
-    @Input() codlocal;
+    @Input() codigoLocalidade;
+    @Input() dadosMapa = [];
 
     public localHover = '';
     public irPara = '';
@@ -37,7 +38,7 @@ export class MapaComponent implements OnInit {
     anosToSelect = [];
     faixas = [];
 
-    @Input() dados = [];
+
 
     private _localidadeServiceSubscription: Subscription;
 
@@ -50,48 +51,53 @@ export class MapaComponent implements OnInit {
     }
 
 
-    ngOnInit() {
+    ngOnChanges() {
 
-        this.plotMap();
+        if(!!this.codigoLocalidade && !!this.dadosMapa){
+
+            this.plotMap(this.codigoLocalidade, this.dadosMapa);
+        }        
     }
 
-    plotMap(){
+    plotMap(codLocal, dados){
 
-        if(this.dados.length > 0){
+        if(dados.length > 0){
             /**
              * Separa os períodos existentes para seleção do usuário 
              * e deixa o mais recente selecionado por default 
              */
-            this.dados.forEach(data => {
-                if(data.munic === this.codlocal.substr(0,6)){
+            dados.forEach(data => {
+                if(data.munic === codLocal.toString().toString().substr(0,6)){
                     this.anosToSelect = data.anos; //anos para serem selecionados pelo usuário
                     this.ano = data.anos.length-1;
                 }
-                if(this.codlocal < 1){
-                    if(data.munic === this.dados[0].munic){
+                if(codLocal < 1){
+                    if(data.munic === dados[0].munic){
                         this.anosToSelect = data.anos; //anos para serem selecionados pelo usuário
                         this.ano = data.anos.length-1;
                     }
                 }
-                this.geraMapa(this.ano); //valor do índice do ano //pega o ultimo ano por default
+                this.geraMapa(this.ano, codLocal, dados); //valor do índice do ano //pega o ultimo ano por default
             });
         }else{
-            this.geraMapa(0);
+            this.geraMapa(0, codLocal, dados);
         }        
-console.log('this.dados = ',this.dados);     
+
+        console.log('this.dados = ', dados); 
+        console.dir(this.faixas);       
     }
 
-    geraMapa(anoSelecionado){
+    geraMapa(anoSelecionado, codLocal: number, dados: any[]){
         this.localHover = '';
 
-        if(this.codlocal > 1){
+        if(codLocal > 1){
 
             // mapa da UF dividida por municípios
             this.mapauf = true;
-            this._sinteseService.getMalha(this.codlocal.toString().substr(0, 2), 1)
+            this._localidadeServiceSubscription = this._sinteseService.getMalha(codLocal.toString().substr(0, 2), 1)
                 .subscribe((malha) => {
 
-                    this.data = this._topojson.feature(malha, malha.objects[this.codlocal.toString().substr(0, 2)]);
+                    this.data = this._topojson.feature(malha, malha.objects[codLocal.toString().substr(0, 2)]);
 
                     let myGeom;
                     let n = -90;
@@ -106,14 +112,14 @@ console.log('this.dados = ',this.dados);
                          * iterando para captura dos nomes dos municipios/ufs para geração do link e municipio atual
                          */
                         municipios.forEach(municipio => {
-                            if(municipio.codigoUf.toString() == this.codlocal.toString().substr(0, 2)){
+                            if(municipio.codigoUf.toString() == codLocal.toString().substr(0, 2)){
                                 if(municipio.codigo.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6)){
                                     myGeom.nome = municipio.nome;
-                                    if(this.codlocal.substr(0, 6) == ft.properties.cod.toString().substr(0, 6)){
+                                    if(codLocal.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6)){
                                         this.localAtual = municipio.nome
                                     }
                                     ufs.forEach(uf => {
-                                        if(uf.codigo.toString() == this.codlocal.toString().substr(0, 2)){
+                                        if(uf.codigo.toString() == codLocal.toString().substr(0, 2)){
                                             myGeom.uf = uf.sigla;
                                             myGeom.link = '/brasil/' + uf.sigla.toLowerCase() + '/' + municipio.slug;
                                         }
@@ -124,7 +130,7 @@ console.log('this.dados = ',this.dados);
                         });
 
                         // Adiciona a class checked para o local selecionado e unchecked para os demais
-                        myGeom.classe = this.codlocal.substr(0, 6) == ft.properties.cod.toString().substr(0, 6) ? "checked" : "unchecked";
+                        myGeom.classe = codLocal.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6) ? "checked" : "unchecked";
                         if (ft.geometry.type == "Polygon") {
                             myGeom.polys = ft.geometry.coordinates.map((poly) => {
                                 return [ poly.map((pt) => {
@@ -152,24 +158,24 @@ console.log('this.dados = ',this.dados);
                         /**
                          * Verifica se há dados suficientes para gerar o mapa coroplético
                          */
-                        if(this.dados.length !== 0 ){
+                        if(dados.length !== 0 ){
 
                             /**
                              * Criando as faixas coropléticas
                              */
-                            this.faixas = this.calculaFaixas(this.dados, anoSelecionado);
+                            this.faixas = this.calculaFaixas(dados, anoSelecionado);
 
                             /**
                              * Aplicando a legenda das faixas
                              */ 
-                            this.faixa0 = this.dados.length < 27 ? '' : 'hide' ;
+                            this.faixa0 = dados.length < 27 ? '' : 'hide' ;
                             this.fx1 = this.faixas[1] >= 0 ? parseFloat(this.faixas[1]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
                             this.fx0 = this.faixas[0] >= 0 ? parseFloat(this.faixas[0]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
 
                             /**
                              * Relacionando a qual faixa o local se enquadra e inserindo no attr.faixa na malha do mapa
                              */
-                            this.dados.forEach(data => {
+                            dados.forEach(data => {
                                 if(data.munic == ft.properties.cod.toString().substr(0, 6)){
                                     myGeom.ano =  data.anos[anoSelecionado];
                                     myGeom.valor = parseFloat(data.valores[anoSelecionado]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
@@ -178,7 +184,7 @@ console.log('this.dados = ',this.dados);
                                     myGeom.faixa === 'faixa2' ? this.faixa2 = '' : '';
                                     myGeom.faixa === 'faixa3' ? this.faixa3 = '' : '';
                                 }
-                                if(data.munic === this.codlocal.substr(0,6)){
+                                if(data.munic === codLocal.toString().substr(0,6)){
 
                                 }
                             });
@@ -220,7 +226,7 @@ console.log('this.dados = ',this.dados);
                         myGeom.nome = uf.nome;
                         myGeom.sigla = uf.sigla;
                         myGeom.link = '/brasil/' + uf.sigla.toLowerCase();
-                        myGeom.classe = this.codlocal.substr(0, 2) == ft.properties.cod.toString().substr(0, 2) ? "checked" : "unchecked";
+                        myGeom.classe = codLocal.toString().substr(0, 2) == ft.properties.cod.toString().substr(0, 2) ? "checked" : "unchecked";
                         if (ft.geometry.type == "Polygon") {
                             myGeom.polys = ft.geometry.coordinates.map((poly) => {
                                 return [ poly.map((pt) => {
@@ -248,24 +254,24 @@ console.log('this.dados = ',this.dados);
                         /**
                          * Verifica se há dados suficientes para gerar o mapa coroplético
                          */
-                        if(this.dados.length !== 0 ){
+                        if(dados.length !== 0 ){
 
                             /**
                              * Criando as faixas coropléticas
                              */
-                            this.faixas = this.calculaFaixas(this.dados, anoSelecionado);
+                            this.faixas = this.calculaFaixas(dados, anoSelecionado);
 
                             /**
                              * Aplicando a legenda das faixas
                              */ 
-                            this.faixa0 = this.dados.length < 27 ? '' : 'hide' ;
+                            this.faixa0 = dados.length < 27 ? '' : 'hide' ;
                             this.fx1 = this.faixas[1] >= 0 ? parseFloat(this.faixas[1]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
                             this.fx0 = this.faixas[0] >= 0 ? parseFloat(this.faixas[0]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
 
                             /**
                              * Relacionando a qual faixa o local se enquadra e inserindo no attr.faixa na malha do mapa
                              */
-                            this.dados.forEach(data => {
+                            dados.forEach(data => {
                                 if(data.munic == ft.properties.cod.toString().substr(0, 2)){
                                     myGeom.ano =  data.anos[anoSelecionado];
                                     myGeom.valor = parseFloat(data.valores[anoSelecionado]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
@@ -274,7 +280,7 @@ console.log('this.dados = ',this.dados);
                                     myGeom.faixa === 'faixa2' ? this.faixa2 = '' : '';
                                     myGeom.faixa === 'faixa3' ? this.faixa3 = '' : '';
                                 }
-                                if(data.munic === this.codlocal.substr(0,2)){
+                                if(data.munic === codLocal.toString().substr(0,2)){
 
                                 }
                             });
@@ -361,10 +367,10 @@ console.log('this.dados = ',this.dados);
         return faixaRecebida;
     }
 
-    selectAno(ano){
+    selectAno(ano, codLocal, dados){
         console.log(ano);
         this.irPara = '';
-        this.geraMapa(ano);
+        this.geraMapa(ano, codLocal, dados);
     }
 
 }

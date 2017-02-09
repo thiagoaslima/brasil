@@ -13,7 +13,6 @@ export const loadChildrenModule = (function (isAOT) {
 } (process.env.AOT));
 
 function _filepath(filename) {
-    debugger;
     return `/${filename}/${filename}.module`;
 }
 function _filepathAOT(filename) {

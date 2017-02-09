@@ -89,6 +89,16 @@ export class LocalidadeService {
         return this._ufs.buscarPorIdentificador(ufSigla)[0];
     }
 
+    public getMunicipios(identificador){
+
+        if( Number.isNaN(parseInt(identificador, 10)) ){
+
+            return this.getUfBySigla(identificador).children;
+        } 
+
+        return this.getUfByCodigo(identificador).children;
+    }
+
     public getMunicipioBySlug(ufSigla, munSlug) {
         if (!ufSigla || !munSlug) return;
         let arr = this._municipios.buscarPorIdentificador(munSlug);
