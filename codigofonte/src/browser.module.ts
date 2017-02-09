@@ -7,7 +7,7 @@ import { IdlePreload, IdlePreloadModule } from '@angularclass/idle-preload';
 import 'chart.js';
 
 import { CacheService } from './app/shared/cache.service';
-import { PesquisaCacheService } from './app/shared/pesquisa/pesquisa-cache.service';
+import { SystemCacheService } from './app/shared/system-cache.service';
 import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
 // Will be merged into @angular/platform-browser in a later release
@@ -41,7 +41,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
     UniversalModule, // BrowserModule, HttpModule, and JsonpModule are included
 
     FormsModule,
-    RouterModule.forRoot([], { useHash: false, preloadingStrategy: IdlePreload }),
+    RouterModule.forRoot([], { useHash: false, preloadingStrategy: IdlePreload, enableTracing: true }),
 
     IdlePreloadModule.forRoot(),
     
@@ -57,7 +57,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
 
-    { provide: CacheService, useClass: PesquisaCacheService },
+    { provide: CacheService, useClass: SystemCacheService },
 
     Meta,
 

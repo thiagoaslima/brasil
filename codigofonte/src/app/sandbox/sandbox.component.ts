@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { SinteseService } from '../sintese/sintese.service';
 import { PesquisaService } from '../shared/pesquisa/pesquisa.service';
 
+import { reduceOnTree } from '../utils/flatFunctions';
+
 @Component({
     selector: 'sandbox',
     templateUrl: 'sandbox.component.html'
 })
-export class SandboxComponent implements OnInit{ 
+export class SandboxComponent implements OnInit {
 
     titulo = 'Teste';
 
@@ -29,7 +31,7 @@ export class SandboxComponent implements OnInit{
     constructor(
         private _service$: SinteseService,
         private _pesquisaService: PesquisaService
-    ){
+    ) {
 
 
         _service$.getPesquisasDisponiveis().subscribe(pesquisas => this.listaPesquisas = JSON.stringify(pesquisas));
@@ -42,11 +44,9 @@ export class SandboxComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.censo = this._pesquisaService.getPesquisa(23);
-        this.pesquisas = this._pesquisaService.getAllPesquisas().map(pesquisas => pesquisas.map(pesquisa => ({id: pesquisa.id, nome: pesquisa.nome})));
-        this._pesquisaService.getIndicadores(13).subscribe(resp => this.indicadoresEducacao = resp);
-        this._pesquisaService.getIndicadores(13, [5909, 5913, 5917, 5938]).subscribe(resp => this.getIndicadores2 = resp.indicadores.map(indicador => ({id: indicador.id, nome: indicador.indicador})));
-        this._pesquisaService.getDadosIndicadores(13, 330455, [5909, 5913, 5917, 5938]).subscribe(resp => {this.resultados = resp; console.log(resp)});
+        this._pesquisaService.getPesquisa(23).subscribe(pesquisa => {
+            this.censo = pesquisa;
+        });
     }
 
 }

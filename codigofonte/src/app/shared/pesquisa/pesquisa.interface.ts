@@ -65,14 +65,20 @@ export class Indicador {
         this.indicador = obj.indicador;
         this.classe = obj.classe;
         this.unidade = obj.unidade;
-        this.nota = [].concat(obj.nota);
+        this.nota = obj.nota || [];
         this.metadado = Object.assign({}, obj.metadado);
         this.pesquisa = obj.pesquisa;
         this.parentId = obj.parentId || 0;
-        this.children = [].concat(obj.children.map(child => {
-            return Indicador.is(child) ? child : new Indicador(child);
-        }));
-        this.resultados = [].concat(obj.resultados);
+
+        if (obj.children && obj.children.length) {
+            this.children = obj.children.map(child => {
+                return Indicador.is(child) ? child : new Indicador(child);
+            });
+        } else {
+            this.children = [];
+        }
+
+        this.resultados = obj.resultados || [];
     }
 
     registerChildren(children: Indicador | Indicador[]) {

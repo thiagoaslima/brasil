@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule, isBrowser, isNode } from 'angular2-universal/node'; // for AoT we need to manually split universal packages
 
 import { CacheService } from './app/shared/cache.service';
-import { PesquisaCacheService } from './app/shared/pesquisa/pesquisa-cache.service';
+import { SystemCacheService } from './app/shared/system-cache.service';
 import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
 // Will be merged into @angular/platform-browser in a later release
@@ -44,7 +44,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
 
-    { provide: CacheService, useClass: PesquisaCacheService },
+    { provide: CacheService, useClass: SystemCacheService },
 
     Meta,
   ]

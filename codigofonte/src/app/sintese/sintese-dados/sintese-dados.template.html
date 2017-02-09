@@ -35,7 +35,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/29167/mapa"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/29167"}}' [queryParams]="{ v: 'mapa' }" routerLinkActive="active" >
             <div class="dados__variavel__nome">Área Territorial</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['29167']?.value}} <span>{{content['29167']?.unidade?.id}}</span></div>

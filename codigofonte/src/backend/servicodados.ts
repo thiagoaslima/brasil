@@ -97,18 +97,40 @@ export function mockServices() {
 
     router.route('/teste')
         .get(function (req, res) {
+            var unidades = {
+                maior: {
+                    indicadores: [],
+                    value: [],
+                    size: Number.MIN_SAFE_INTEGER
+                },
+                menor: {
+                    indicadores: [],
+                    value: [],
+                    size: Number.MAX_SAFE_INTEGER
+                },
+                busca: {
+                    indicadores: [],
+                    value: [],
+                    size: Number.MAX_SAFE_INTEGER
+                },
+                limite: Number.MAX_SAFE_INTEGER
+            };
+            let {size, limit} = req.query;
+
+            unidades.limite = limit ? parseInt(limit, 10) : Number.MAX_SAFE_INTEGER;
+            unidades.busca.size = size ? parseInt(size, 10) : -1;
 
             function _resumeIndicador(indicador) {
                 indicador = Object.assign({}, indicador);
 
                 if (!indicador.unidade) {
-                    indicador.unidade = {id: ''};
+                    indicador.unidade = { id: '' };
                 }
 
                 if (indicador.children && indicador.children.length) {
                     indicador.children = indicador.children.map(_resumeIndicador);
                 }
-                return ['id', 'indicador', 'unidade', 'classe', 'children'].reduce((obj, key) => {
+                return ['id', 'indicador', 'unidade', 'classe', 'children', 'pesquisa'].reduce((obj, key) => {
                     obj[key] = indicador[key];
                     return obj;
                 }, {});
@@ -118,6 +140,44 @@ export function mockServices() {
                 if (!unidade) {
                     unidade = indicador.unidade.id;
                 }
+
+                if (unidade.length > 0) {
+                    if (unidades.maior.size < unidade.length && unidade.length <= unidades.limite) {
+                        unidades.maior = {
+                            indicadores: [`${indicador.pesquisa}:${indicador.id}`],
+                            value: [unidade],
+                            size: unidade.length
+                        }
+                    }
+                    if (unidades.maior.size === unidade.length) {
+                        if (unidades.maior.value.indexOf(unidade) === -1) {
+                            unidades.maior.value.push(unidade);
+                            unidades.maior.indicadores.push(`${indicador.pesquisa}:${indicador.id}`);
+                        }
+                    }
+
+                    if (unidades.menor.size > unidade.length) {
+                        unidades.menor = {
+                            indicadores: [`${indicador.pesquisa}:${indicador.id}`],
+                            value: [unidade],
+                            size: unidade.length
+                        }
+                    }
+                    if (unidades.menor.size === unidade.length) {
+                        if (unidades.menor.value.indexOf(unidade) === -1) {
+                            unidades.menor.value.push(unidade);
+                            unidades.menor.indicadores.push(`${indicador.pesquisa}:${indicador.id}`);
+                        }
+                    }
+
+                    if (unidades.busca.size === unidade.length) {
+                        if (unidades.busca.value.indexOf(unidade) === -1) {
+                            unidades.busca.value.push(unidade);
+                            unidades.busca.indicadores.push(`${indicador.pesquisa}:${indicador.id}`);
+                        }
+                    }
+                }
+
                 let comp = indicador.unidade.id === unidade || indicador.unidade.id === '';
                 let childComp = true;
 
@@ -143,7 +203,7 @@ export function mockServices() {
                             });
                     })
             }).then(indicadores => {
-                return res.json(indicadores);
+                return res.json(unidades);
             })
         });
 

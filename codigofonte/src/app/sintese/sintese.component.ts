@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, Subject, Observable } from 'rxjs';
+
 import { LocalidadeService } from '../shared/localidade/localidade.service';
+import { SinteseService } from './sintese.service';
+import { RouterParamsService } from '../shared/router-params.service';
+
 
 @Component({
     selector: 'sintese',
@@ -7,30 +12,80 @@ import { LocalidadeService } from '../shared/localidade/localidade.service';
 })
 export class SinteseComponent implements OnInit {
     
-    tipo;
-    local = '';
+    public tipoSintese;
+    public conteudoSintese
+    public baseURL;
+
+    private _dadosSinteseSubscription: Subscription;
 
 
     constructor(
-        private _localidade:LocalidadeService
+        private _localidadeService: LocalidadeService,
+        private _sinteseService: SinteseService,
+        private _routerParams:RouterParamsService,
     ){};
 
     ngOnInit(){
-        this._localidade.selecionada$.subscribe((localidade)=>{
-            if(localidade.tipo === 'pais'){
-                //sintese Brasil
-                this.tipo = 1;
-            }else if(localidade.tipo === 'uf'){
-                //sintese UF
-                this.tipo = 2;
-            }else{
-                //sintese município
-                this.tipo = 3;
+
+        this.obterDadosSintese();
+        this.configurarBaseURL();
+    }
+    
+    private configurarBaseURL(){
+
+        this._routerParams.params$.subscribe((params) => {
+
+            //seta a variável de rota base
+            if (params.uf && params.municipio){
+
+                this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/';
+
+            } else if (params.uf){
+
+                this.baseURL = '/brasil/' + params.uf + '/';
+
+            } else{
+
+                this.baseURL = '/brasil/';
             }
-            this.local = localidade.codigo.toString();
         });
     }
 
+    private obterDadosSintese(){
 
+        this._dadosSinteseSubscription = this._localidadeService.selecionada$
+            .flatMap(localidade => {
+
+                this.tipoSintese = this.selecionarNivelSintese(localidade);
+
+                return this._sinteseService.getSinteseLocal(localidade.codigo.toString())
+            } ) 
+            .subscribe(dados => {
+
+                this.conteudoSintese = dados
+            });
+    }
+
+    private selecionarNivelSintese(localidade){
+
+        let nivel;
+        if(localidade.tipo === 'pais'){
+
+            //sintese Brasil
+            nivel = this.tipoSintese = 1;
+
+        } else if(localidade.tipo === 'uf'){
+
+            //sintese UF
+            nivel = this.tipoSintese = 2;
+
+        } else{
+
+            //sintese município
+            nivel = this.tipoSintese = 3;
+        }
+
+        return nivel;
+    }
 
 }

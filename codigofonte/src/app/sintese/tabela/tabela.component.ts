@@ -80,7 +80,6 @@ export class TabelaComponent implements OnInit, OnChanges, OnDestroy{
         });
 
         this.datasets = [{data: valores, label: this.nomeSerie}];
-        debugger;
     }
 
        
