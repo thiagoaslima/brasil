@@ -59,6 +59,8 @@ export class PesquisaServiceWithCache {
             subject.next(indicadoresTree);
             this._cache.set(cacheKey, indicadoresTree);
 
+            debugger;
+
             flatTree(indicadoresTree).map(indicador => {
                 let cacheKey = this._cache.buildKey.indicador(pesquisaId, indicador.id);
                 this._cache.set(cacheKey, indicadoresTree);
@@ -70,8 +72,14 @@ export class PesquisaServiceWithCache {
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
+        debugger;
+
         if (!indicadoresId) {
-            return this.getListaIndicadoresDaPesquisa(pesquisaId);
+            debugger;
+            return this.getListaIndicadoresDaPesquisa(pesquisaId).map(args => {
+                debugger;
+                return args;
+            });
         }
 
         let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
