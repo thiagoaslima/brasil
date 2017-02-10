@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule, isBrowser, isNode } from 'angular2-universal/node'; // for AoT we need to manually split universal packages
 
 import { CacheService } from './app/shared/cache.service';
+import { SystemCacheService } from './app/shared/system-cache.service';
 import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
 // Will be merged into @angular/platform-browser in a later release
@@ -24,7 +25,7 @@ export function getResponse() {
 export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
 @NgModule({
-  bootstrap: [ BootstrapComponent ],
+  bootstrap: [BootstrapComponent],
   imports: [
     // MaterialModule.forRoot() should be included first
     UniversalModule, // BrowserModule, HttpModule, and JsonpModule are included
@@ -43,13 +44,15 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
 
-    CacheService,
+    SystemCacheService,
 
     Meta,
   ]
 })
 export class MainModule {
-  constructor(public cache: CacheService) {
+  constructor(
+    public cache: SystemCacheService
+  ) {
 
   }
 
@@ -58,12 +61,12 @@ export class MainModule {
    * in Universal for now until it's fixed
    */
   universalDoDehydrate = (universalCache) => {
-    universalCache[CacheService.KEY] = JSON.stringify(this.cache.dehydrate());
+    universalCache[SystemCacheService.KEY] = JSON.stringify(this.cache.dehydrate());
   }
 
- /**
-  * Clear the cache after it's rendered
-  */
+  /**
+   * Clear the cache after it's rendered
+   */
   universalAfterDehydrate = () => {
     // comment out if LRU provided at platform level to be shared between each user
     this.cache.clear();

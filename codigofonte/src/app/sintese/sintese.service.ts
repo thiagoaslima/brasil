@@ -87,6 +87,9 @@ export class SinteseService{
      * @indicadores: string[] - lista de indicadores a serem recuperados. Se não informado, obtém todos os indicadores da pesquisa.
      */
     public getNomesPesquisa(pesquisa: string, indicadores: string[] = []) {
+        if (!pesquisa) {
+            debugger;
+        }
 
         const nomesPesquisa$ = this._http.get(
                 `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`

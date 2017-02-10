@@ -18,6 +18,7 @@ export class MapaComponent implements OnChanges {
 
     @Input() codigoLocalidade;
     @Input() dadosMapa = [];
+    public carregando: boolean = true;
 
     public localHover = '';
     public irPara = '';
@@ -54,6 +55,8 @@ export class MapaComponent implements OnChanges {
     ngOnChanges() {
 
         if(!!this.codigoLocalidade && !!this.dadosMapa){
+
+            this.carregando = true;
 
             this.plotMap(this.codigoLocalidade, this.dadosMapa);
         }        
@@ -203,6 +206,8 @@ export class MapaComponent implements OnChanges {
 
                     this.data.viewBox = [o, s, (l-o), (n-s)].join(" ");
 
+                    this.carregando = false;
+
                 });
                 
         } else {
@@ -301,11 +306,14 @@ export class MapaComponent implements OnChanges {
 
                     this.data.viewBox = "-13.45 -0.97 7.344 7.100";
 
+                    this.carregando = false;
+
                 });
                 
             });
 
         }
+
     }
 
     over(nome, ano, valor, link){

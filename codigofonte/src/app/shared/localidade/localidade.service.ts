@@ -75,8 +75,12 @@ export class LocalidadeService {
         this.selecionada$ = this.tree$.map(tree => tree[tree.length - 1]);
     }
 
-    public getRoot() {
+    public getRoot(): Localidade {
         return this._brasil;
+    }
+
+    public getUfs(): Localidade[] {
+        return this.getRoot().children;
     }
 
     public getUfByCodigo(ufCodigo: number) {
@@ -89,12 +93,14 @@ export class LocalidadeService {
         return this._ufs.buscarPorIdentificador(ufSigla)[0];
     }
 
-    public getMunicipios(identificador){
+    public getAllMunicipios() {
+        return this._municipios.todos;
+    }
 
-        if( Number.isNaN(parseInt(identificador, 10)) ){
-
+    public getMunicipios(identificador): Localidade[] {
+        if (Number.isNaN(parseInt(identificador, 10))) {
             return this.getUfBySigla(identificador).children;
-        } 
+        }
 
         return this.getUfByCodigo(identificador).children;
     }

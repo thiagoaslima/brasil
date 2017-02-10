@@ -8,6 +8,9 @@ import { TopoJson, TOPOJSON } from './topojson.v2';
 
 import { RouterParamsService } from './router-params.service';
 import { LocalidadeService } from './localidade/localidade.service';
+import { PesquisaService } from './pesquisa/pesquisa.service';
+import { PesquisaServiceWithCache } from './pesquisa/pesquisa-with-cache.service';
+import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
 
 const MODULES = [
@@ -30,6 +33,8 @@ const PROVIDERS = [
     RouterParamsService,
     LocalidadeService,
     CommonService,
+    BuscaService,
+    { provide: PesquisaService, useClass: PesquisaServiceWithCache },
     {provide: TOPOJSON, useValue: TopoJson }
 ]
 

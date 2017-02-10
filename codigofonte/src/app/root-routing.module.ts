@@ -8,9 +8,8 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
-  { path: '', redirectTo: '/brasil/rj/rio-de-janeiro/sintese/29171', pathMatch: 'full' },
-  
-  { path: 'sintese', redirectTo: 'sintese/29171' },
+  { path: '', redirectTo: 'sintese/29171', pathMatch: 'full' },
+  { path: 'sintese', redirectTo: 'sintese/29171'},
   { path: 'sintese/:indicador', component: SinteseComponent },
   
   { path: 'pesquisas', redirectTo: 'pesquisas/23' },
@@ -24,7 +23,7 @@ const children = [
     RouterModule.forChild([
       { 
         path: '',
-        redirectTo: 'brasil/rj/rio-de-janeiro',
+        redirectTo: 'brasil/rj/rio-de-janeiro/sintese/29171',
         pathMatch: 'full'
       },
       {

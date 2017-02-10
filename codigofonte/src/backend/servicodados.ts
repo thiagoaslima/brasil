@@ -95,6 +95,118 @@ export function mockServices() {
         })
     });
 
+    router.route('/teste')
+        .get(function (req, res) {
+            var unidades = {
+                maior: {
+                    indicadores: [],
+                    value: [],
+                    size: Number.MIN_SAFE_INTEGER
+                },
+                menor: {
+                    indicadores: [],
+                    value: [],
+                    size: Number.MAX_SAFE_INTEGER
+                },
+                busca: {
+                    indicadores: [],
+                    value: [],
+                    size: Number.MAX_SAFE_INTEGER
+                },
+                limite: Number.MAX_SAFE_INTEGER
+            };
+            let {size, limit} = req.query;
+
+            unidades.limite = limit ? parseInt(limit, 10) : Number.MAX_SAFE_INTEGER;
+            unidades.busca.size = size ? parseInt(size, 10) : -1;
+
+            function _resumeIndicador(indicador) {
+                indicador = Object.assign({}, indicador);
+
+                if (!indicador.unidade) {
+                    indicador.unidade = { id: '' };
+                }
+
+                if (indicador.children && indicador.children.length) {
+                    indicador.children = indicador.children.map(_resumeIndicador);
+                }
+                return ['id', 'indicador', 'unidade', 'classe', 'children', 'pesquisa'].reduce((obj, key) => {
+                    obj[key] = indicador[key];
+                    return obj;
+                }, {});
+            }
+
+            function _checkUnidade(indicador, unidade?) {
+                if (!unidade) {
+                    unidade = indicador.unidade.id;
+                }
+
+                if (unidade.length > 0) {
+                    if (unidades.maior.size < unidade.length && unidade.length <= unidades.limite) {
+                        unidades.maior = {
+                            indicadores: [`${indicador.pesquisa}:${indicador.id}`],
+                            value: [unidade],
+                            size: unidade.length
+                        }
+                    }
+                    if (unidades.maior.size === unidade.length) {
+                        if (unidades.maior.value.indexOf(unidade) === -1) {
+                            unidades.maior.value.push(unidade);
+                            unidades.maior.indicadores.push(`${indicador.pesquisa}:${indicador.id}`);
+                        }
+                    }
+
+                    if (unidades.menor.size > unidade.length) {
+                        unidades.menor = {
+                            indicadores: [`${indicador.pesquisa}:${indicador.id}`],
+                            value: [unidade],
+                            size: unidade.length
+                        }
+                    }
+                    if (unidades.menor.size === unidade.length) {
+                        if (unidades.menor.value.indexOf(unidade) === -1) {
+                            unidades.menor.value.push(unidade);
+                            unidades.menor.indicadores.push(`${indicador.pesquisa}:${indicador.id}`);
+                        }
+                    }
+
+                    if (unidades.busca.size === unidade.length) {
+                        if (unidades.busca.value.indexOf(unidade) === -1) {
+                            unidades.busca.value.push(unidade);
+                            unidades.busca.indicadores.push(`${indicador.pesquisa}:${indicador.id}`);
+                        }
+                    }
+                }
+
+                let comp = indicador.unidade.id === unidade || indicador.unidade.id === '';
+                let childComp = true;
+
+                if (indicador.children && indicador.children.length) {
+                    childComp = indicador.children.reduce((agg, child) => {
+                        return agg && _checkUnidade(child, unidade);
+                    }, true);
+                }
+
+                return comp && childComp;
+            }
+
+            indicadores.then(indicadoresArr => {
+                return indicadoresArr
+                    .map(indicadoresPesquisa => {
+                        return indicadoresPesquisa
+                            .map(_resumeIndicador)
+                            .map(indicador => {
+                                return {
+                                    indicador,
+                                    mesmaUnidade: _checkUnidade(indicador)
+                                }
+                            });
+                    })
+            }).then(indicadores => {
+                return res.json(unidades);
+            })
+        });
+
 
     router.route('/pesquisa/:id/completa')
         .get(function (req, res) {
@@ -172,7 +284,7 @@ const _getResults = function (indicador, localidades) {
     let _childrenPromises = indicador.children.length
         ? indicador.children.map(child => _getResults(child, localidades))
         : Promise.resolve([]);
-        
+
     let _indicador = Promise.all([_childrenPromises, _resultados])
         .then(([children, resultados]) => {
             return Object.assign(
@@ -204,6 +316,7 @@ const _filtrarPeriodosResultados = (resultados, periodos) => {
 
 const _registerPesquisa = function registerPesquisa(indicador, pesquisa) {
     indicador.pesquisa = pesquisa.id;
+    indicador.pesquisaObj = pesquisa;
     pesquisa.indicadores.push(indicador.id);
     if (indicador.children.length) {
         indicador.children.forEach(child => registerPesquisa(child, pesquisa));

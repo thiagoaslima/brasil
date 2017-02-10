@@ -7,13 +7,15 @@ var FileSaver = require('file-saver');
 
 @Component({
     selector: 'grafico',
-    templateUrl: 'grafico.template.html'
+    templateUrl: 'grafico.template.html',
+    styleUrls: ['grafico.style.css']
 })
 export class GraficoComponent implements OnChanges, AfterViewInit{
 
     @Input() tipoGrafico: string;
     @Input() dadosIndicador: string[];
     @Input() nomeSerie: string = 'Indicador';
+    @Input() carregando: boolean = true;
 
     @Output() dataURL = new EventEmitter();
 

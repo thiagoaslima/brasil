@@ -22,8 +22,7 @@ var converter = require('json-2-csv');
 })
 export class SinteseHeaderComponent implements OnChanges {
 
-    // Indica qual o componente está ativo. Pode ser 'grafico' ou 'mapa'.
-    public ativo = 'cartograma'; 
+ 
     // Nome do indicador
     public titulo;
     // Nome da pesquisa de origem
@@ -39,6 +38,8 @@ export class SinteseHeaderComponent implements OnChanges {
     private _subscriptionSintese: Subscription;
     private _link = [];
 
+    // Indica qual o componente está ativo. Pode ser 'grafico' ou 'mapa'.
+    @Input() ativo = 'cartograma';
     @Input() graficoBase64;
     @Output() visualizacaoAlterada = new EventEmitter();
 
