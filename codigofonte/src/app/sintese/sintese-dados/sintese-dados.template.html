@@ -35,7 +35,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/29167"}}' [queryParams]="{ v: 'mapa' }" routerLinkActive="active" >
+        <a routerLink='{{baseURL + "/sintese/29167"}}' [queryParams]="{ v: 'mapa', detalhes: 'true'}" routerLinkActive="active" >
             <div class="dados__variavel__nome">Área Territorial</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['29167']?.value}} <span>{{content['29167']?.unidade?.id}}</span></div>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/29171"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/29171"}}' [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">População estimada</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['29171']?.value}}</div>
@@ -65,7 +65,7 @@
     </div>
 
     <div class="dados__variavel dados__variavel--selecionado">
-        <a routerLink='{{baseURL + "/sintese/29168"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/29168"}}' [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">Densidade demográfica</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['29168']?.value}} <span>{{content['29168']?.unidade?.id}}</span></div>
@@ -85,7 +85,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/28160"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/28160"}}' [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">Fundo de Participação Municipal</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['28160']?.value}} <span>{{content['28160']?.unidade?.id}}</span></div>
@@ -93,7 +93,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/47001"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/47001"}}' [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">PIB per capita</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right hidden" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['47001']?.value}} <span>{{content['47001']?.unidade?.id}}</span></div>
@@ -113,7 +113,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/30277"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/30277"}}' [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">IDEB</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['30277']?.value}}</div>
@@ -127,7 +127,7 @@
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/28311"}}' routerLinkActive="active">
+        <a routerLink='{{baseURL + "/sintese/28311"}}' [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">Leitos hospitalares</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['28311']?.value}}</div>

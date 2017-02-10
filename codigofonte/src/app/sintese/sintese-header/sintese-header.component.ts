@@ -32,6 +32,7 @@ export class SinteseHeaderComponent implements OnChanges {
     //public codPesquisa;
     public dataURL;
     public isMenuOculto = true;
+    public queryParams = {};
 
     // Valores do indicador a serem exportados como arquivo
     private valoresIndicador;
@@ -47,16 +48,14 @@ export class SinteseHeaderComponent implements OnChanges {
         private _sinteseService:SinteseService, 
         private _localidade:LocalidadeService,
         private _router: Router,
+        private _route: ActivatedRoute
     ){ }
 
 
     ngOnChanges(){
 
         this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
-
-
             if(params.indicador){
-
                 this._link = ['brasil', params.uf, params.municipio, 'sintese', params.indicador]; 
 
                 // Informações gerais do município
@@ -86,21 +85,34 @@ export class SinteseHeaderComponent implements OnChanges {
             }
         });
 
+        //verifica se o componente de detalhes está aberto (mobile)
+        this._route.queryParams.subscribe(params => {
+            //copia os parâmetros
+            this.queryParams = {};
+            for(let key in params){
+                this.queryParams[key] = params[key];
+            }
+            //seta o parâmetro de detalhes para false
+            this.queryParams['detalhes'] = 'false';
+            
+            //reta a view ativa
+            if(params['v'] == 'mapa'){
+                this.ativo = 'cartograma';
+            } else {
+                this.ativo = 'grafico';
+            }
+        });
+
     }
 
     public ativar(tipo){
-
         this.ativo = tipo;
         this.visualizacaoAlterada.emit(tipo);
 
         if(tipo == 'cartograma'){
-
-            this._router.navigate(this._link, {queryParams: { 'v': 'mapa' }});
-            
-
+            this._router.navigate(this._link, {queryParams: { 'v' : 'mapa', 'detalhes' : 'true' }});
         } else {
-
-            this._router.navigate(this._link);
+            this._router.navigate(this._link, {queryParams: { 'detalhes' : 'true' }});
         }        
     }
 
