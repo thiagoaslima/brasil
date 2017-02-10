@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Subject, Observable } from 'rxjs';
-
+import { ActivatedRoute, Params } from '@angular/router';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
 import { SinteseService } from './sintese.service';
 import { RouterParamsService } from '../shared/router-params.service';
@@ -15,14 +15,16 @@ export class SinteseComponent implements OnInit {
     public tipoSintese;
     public conteudoSintese
     public baseURL;
+    public aberto;
 
     private _dadosSinteseSubscription: Subscription;
 
 
     constructor(
+        private _route: ActivatedRoute,
         private _localidadeService: LocalidadeService,
         private _sinteseService: SinteseService,
-        private _routerParams:RouterParamsService,
+        private _routerParams:RouterParamsService
     ){};
 
     ngOnInit(){
@@ -47,6 +49,15 @@ export class SinteseComponent implements OnInit {
             } else{
 
                 this.baseURL = '/brasil/';
+            }
+        });
+
+        //verifica se o componente de detalhes está aberto (mobile)
+        this._route.queryParams.subscribe(params => {
+            if(params['detalhes'] == 'true'){
+                this.aberto = true;
+            } else {
+                this.aberto = false;
             }
         });
     }

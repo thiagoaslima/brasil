@@ -1,0 +1,24 @@
+<div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" (click)="modoDigitacao = true" (mouseleave)="menuAberto = false">
+    <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?">
+    <i class="busca__icone fa fa-search" aria-hidden="true"></i>
+    <div class="busca__auto-completar">
+        <div class="busca__auto-completar__menu">
+            <ul>
+                <li class='selecionado'>Todos <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--todos'>{{qtdIndicadores + qtdPesquisas + qtdLocais}}</div></li>
+                <li>Indicadores <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--tema'>{{qtdIndicadores}}</div></li>
+                <li>Pesquisa <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--pesquisa'>{{qtdPesquisas}}</div></li>
+                <li>Locais <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--locais'>{{qtdLocais}}</div></li>
+            </ul>
+        </div>
+        <div class="busca__auto-completar__resultado">
+            <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
+                <div class='busca__auto-completar__resultado__item__nome'>
+                    {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
+                </div>
+                <div class='busca__auto-completar__resultado__item__tipo--municipio'>
+                    {{item['tipo']}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

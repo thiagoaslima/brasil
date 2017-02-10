@@ -34,35 +34,33 @@ export class BuscaService {
         }
 
         let filtro = this._filterSearchResponse(termo);
-        let _termo;
+        let _termo = termo.slice(0, -1);
 
-        while (_termo = termo.slice(0, -1)) {
+        while (_termo ) {
             if (this._cache.has(this._cacheKeys.busca(_termo))) {
                 break;
             }
+            _termo = _termo.slice(0, -1)
         }
 
-        let pesquisas$: Observable<Pesquisa[]> = _termo
-            ? this._cache.get(_termo).pesquisas
-            : this._pesquisaService.getAllPesquisas();
+        let pesquisas$ = this._pesquisaService.getAllPesquisas();
+        // let pesquisas$: Observable<Pesquisa[]> = _termo
+        //     ? this._cache.get(_termo).pesquisas
+        //     : this._pesquisaService.getAllPesquisas();
 
-        let indicadores$: Observable<Indicador[]> = _termo
-            ? this._cache.get(_termo).indicadores
-            : this._pesquisaService.getIndicadores(23);
+        let indicadores$: Observable<Indicador[]> = this._pesquisaService.getIndicadores(23);
 
-        let localidade$: Observable<Localidade[]> = _termo
-            ? Observable.of([this._cache.get(_termo).localidades])
-            : Observable.of([this._localidades]);
+
+        let localidade$: Observable<Localidade[]> = Observable.of(this._localidades);
 
         return Observable.zip(pesquisas$, indicadores$, localidade$)
-            .map(([pesquisas, indicadores, localidades]) => {
-                pesquisas = pesquisas.filter(filtro.pesquisa);
+            .map(([pesquisa, indicadores, localidades]) => {
+                let pesquisas = [pesquisa].filter(filtro.pesquisa);
                 indicadores = indicadores.filter(filtro.indicador);
                 localidades = localidades.filter(filtro.localidade);
 
                 return { pesquisas, indicadores, localidades }
-            })
-            .do(obj => this._cache.set(cacheKey, obj));
+            });
     }
 
     private _filterSearchResponse(termo: string) {

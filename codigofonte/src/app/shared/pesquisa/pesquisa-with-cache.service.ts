@@ -25,13 +25,21 @@ export class PesquisaServiceWithCache {
     }
 
     getAllPesquisas(): Observable<Pesquisa[]> {
-        let cacheKey = this._cache.buildKey.allPesquisas();
-        let callback = (cacheKey, subject, pesquisas) => {
-            subject.next(pesquisas);
-            this._cache.set(cacheKey, pesquisas);
+         let cacheKey = this._cache.buildKey.allPesquisas();
+
+         if (this._cache.has(cacheKey)) {
+            return Observable.of(this._cache.get(cacheKey));
         }
 
-        return this._cacheCallback('getAllPesquisas', cacheKey, callback);
+        let subject = new Subject<any>();
+
+        this._instance.getAllPesquisas().subscribe((pesquisas) => {
+            subject.next(pesquisas);
+            this._cache.set(cacheKey, pesquisas);
+        });
+
+        this._cache.set(cacheKey, subject);
+        return subject.asObservable();
     }
 
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
@@ -39,8 +47,15 @@ export class PesquisaServiceWithCache {
     }
 
     getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
-        let cacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
-        let callback = (cacheKey, subject, indicadoresTree) => {
+         let cacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+
+        if (this._cache.has(cacheKey)) {
+            return Observable.of(this._cache.get(cacheKey));
+        }
+
+        let subject = new Subject<any>();
+
+        this._instance.getListaIndicadoresDaPesquisa(pesquisaId).subscribe((indicadoresTree) => {
             subject.next(indicadoresTree);
             this._cache.set(cacheKey, indicadoresTree);
 
@@ -48,9 +63,10 @@ export class PesquisaServiceWithCache {
                 let cacheKey = this._cache.buildKey.indicador(pesquisaId, indicador.id);
                 this._cache.set(cacheKey, indicadoresTree);
             })
-        }
+        });
 
-        return this._cacheCallback('getListaIndicadoresDaPesquisa', cacheKey, callback);
+        this._cache.set(cacheKey, subject);
+        return subject.asObservable();
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
@@ -81,7 +97,7 @@ export class PesquisaServiceWithCache {
     getResultados(pesquisaId: number, localidadesCodigo: number | number[]): Observable<Indicador[]> {
         let _localidadesCodigo = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
 
-        let _notOnCache = _localidadesCodigo.filter(codigo => this._cache.buildKey.resultadosPesquisa(pesquisaId, codigo));
+        let _notOnCache = _localidadesCodigo.filter(codigo => this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo));
 
         if (_notOnCache.length === 0) {
             return this.getIndicadores(pesquisaId);
@@ -91,7 +107,7 @@ export class PesquisaServiceWithCache {
 
         this._instance.getResultados(pesquisaId, _localidadesCodigo)
             .flatMap(_ => {
-                _localidadesCodigo.forEach(codigo => this._cache.set(this._cache.buildKey.resultadosPesquisa(pesquisaId, codigo), true))
+                _localidadesCodigo.forEach(codigo => this._cache.set(this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo), true))
                 return this.getIndicadores(pesquisaId);
             })
             .subscribe(indicadores => subject.next(indicadores));

@@ -1,5 +1,5 @@
 <div class="cabecalho">
-    <button class="cabecalho__voltar">
+    <button class="cabecalho__voltar" routerLink="./" [queryParams]="queryParams" routerLinkActive="active" >
         < Voltar
     </button>
     <div class="cabecalho__sub-container">
@@ -23,20 +23,21 @@
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
             </span>
-                <span class="fa-stack cabecalho__botao-redondo" (click)="abrirMenu()">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-download fa-stack-1x fa-inverse"></i>
-                </span>
-                <div class="submenu" (mouseleave)="fecharMenu()" [class.oculto]="isMenuOculto" [class.visivel]="!isMenuOculto">
-                    <div class="seta"></div>
-                    <ul class="submenu__lista">
-                        <li class="submenu__item">
-                            <span  class="submenu__link submenu__texto" (click)="downloadCSV()">CSV</span>
-                        </li>
-                        <li class="submenu__item">
-                            <a class="submenu__link" href="{{dataURL}}" download="imagem.jpeg" (click)="downloadImagem()"><span class="submenu__texto">Imagem</span></a>                    
-                        </li>
-                    </ul>
-                </div>
+            <span class="fa-stack cabecalho__botao-redondo" (click)="abrirMenu()">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-download fa-stack-1x fa-inverse"></i>
+            </span>
+            <div class="submenu" (mouseleave)="fecharMenu()" [class.oculto]="isMenuOculto" [class.visivel]="!isMenuOculto">
+                <div class="seta"></div>
+                <ul class="submenu__lista">
+                    <li class="submenu__item">
+                        <span  class="submenu__link submenu__texto" (click)="downloadCSV()">CSV</span>
+                    </li>
+                    <li class="submenu__item">
+                        <a class="submenu__link" href="{{dataURL}}" download="imagem.jpeg" (click)="downloadImagem()"><span class="submenu__texto">Imagem</span></a>                    
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
