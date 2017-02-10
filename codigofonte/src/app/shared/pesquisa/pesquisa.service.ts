@@ -42,7 +42,7 @@ export class PesquisaService {
 
     }
 
-    private _getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
+    getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
         return this._http.get(this._server.path(`pesquisas/${pesquisaId}/periodos/all/indicadores`))
             .retry(3)
             .map(res => res.json())
@@ -56,12 +56,12 @@ export class PesquisaService {
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
         if (!indicadoresId) {
-            return this._getListaIndicadoresDaPesquisa(pesquisaId);
+            return this.getListaIndicadoresDaPesquisa(pesquisaId);
         }
 
         let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
 
-        return this._getListaIndicadoresDaPesquisa(pesquisaId)
+        return this.getListaIndicadoresDaPesquisa(pesquisaId)
             .map(indicadores => {
                 return flatTree(indicadores).filter(indicador => _indicadoresId.indexOf(indicador.id) > -1);
             });

@@ -60,7 +60,7 @@ export class SystemCacheService {
 
     buildKey = {
         allPesquisas: () => "pesquisas",
-        pesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}`,
+        // pesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}`,
         listaIndicadoresDaPesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}/indicadores`,
         indicador: (pesquisaId: number, indicadorId: number) => `indicadores/${indicadorId}`,
         resultadosIndicador: (pesquisaId: number, localidadeId: number, indicadorId: number) => `indicadores/${indicadorId}/resultados?localidades=${localidadeId}`,

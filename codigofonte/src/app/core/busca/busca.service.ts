@@ -48,7 +48,7 @@ export class BuscaService {
 
         let indicadores$: Observable<Indicador[]> = _termo
             ? this._cache.get(_termo).indicadores
-            : pesquisas$.switchMap(pesquisas => pesquisas.map(pesquisa => this._pesquisaService.getIndicadores(pesquisa.id)));
+            : this._pesquisaService.getIndicadores(23);
 
         let localidade$: Observable<Localidade[]> = _termo
             ? Observable.of([this._cache.get(_termo).localidades])
