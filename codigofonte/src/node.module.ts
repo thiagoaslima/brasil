@@ -44,14 +44,14 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
 
-    { provide: CacheService, useClass: SystemCacheService },
+    SystemCacheService,
 
     Meta,
   ]
 })
 export class MainModule {
   constructor(
-    public cache: CacheService
+    public cache: SystemCacheService
   ) {
 
   }
@@ -61,7 +61,7 @@ export class MainModule {
    * in Universal for now until it's fixed
    */
   universalDoDehydrate = (universalCache) => {
-    universalCache[CacheService.KEY] = JSON.stringify(this.cache.dehydrate());
+    universalCache[SystemCacheService.KEY] = JSON.stringify(this.cache.dehydrate());
   }
 
   /**

@@ -2,7 +2,7 @@ import { Inject, Injectable, isDevMode } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { CacheService } from '../cache.service';
-import { SystemCache } from '../system-cache.service';
+import { SystemCacheService } from '../system-cache.service';
 import { Pesquisa, Indicador } from './pesquisa.interface';
 import { PesquisaService } from './pesquisa.service';
 
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/do';
 export class PesquisaServiceWithCache {
 
     constructor(
-        _cache: CacheService,
+        _cache: SystemCacheService,
         _http: Http
     ) {
         let instance = new Proxy(new PesquisaService(_http), {
@@ -22,13 +22,13 @@ export class PesquisaServiceWithCache {
 
                 switch (propKey) {
                     case "getAllPesquisas":
-                        let cacheKey = SystemCache._buildKey.allPesquisas();
+                        let cacheKey = _cache.buildKey.allPesquisas();
 
                         if (_cache.has(cacheKey)) {
                             return () => Observable.of(_cache.get(cacheKey));
                         }
 
-                        return function() {
+                        return function () {
                             let subject = new Subject();
 
                             target.getAllPesquisas()

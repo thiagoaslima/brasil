@@ -6,7 +6,6 @@ import { IdlePreload, IdlePreloadModule } from '@angularclass/idle-preload';
 
 import 'chart.js';
 
-import { CacheService } from './app/shared/cache.service';
 import { SystemCacheService } from './app/shared/system-cache.service';
 import { COMPONENTS, MODULES, BootstrapComponent } from './both.module';
 
@@ -57,7 +56,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
 
-    { provide: CacheService, useClass: SystemCacheService },
+   SystemCacheService,
 
     Meta,
 
@@ -66,7 +65,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
 })
 export class MainModule {
   constructor(
-    public cache: CacheService  
+    public cache: SystemCacheService  
   ) {
     // TODO(gdi2290): refactor into a lifecycle hook
     this.doRehydrate();
@@ -74,7 +73,7 @@ export class MainModule {
 
   doRehydrate() {
     let defaultValue = {};
-    let serverCache = this._getCacheValue(CacheService.KEY, defaultValue);
+    let serverCache = this._getCacheValue(SystemCacheService.KEY, defaultValue);
     this.cache.rehydrate(serverCache);
   }
 

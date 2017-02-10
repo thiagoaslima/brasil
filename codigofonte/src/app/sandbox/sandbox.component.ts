@@ -47,6 +47,10 @@ export class SandboxComponent implements OnInit {
         this._pesquisaService.getPesquisa(23).subscribe(pesquisa => {
             this.censo = pesquisa;
         });
+
+        this.pesquisas = this._pesquisaService.getAllPesquisas().map(pesquisas => pesquisas.map(pesquisa => pesquisa.nome));
+
+        this.indicadoresEducacao = this._pesquisaService.getIndicadores(13).map(indicadores => reduceOnTree(indicadores, ['id', 'indicador'])).do(console.log.bind(console));
     }
 
 }

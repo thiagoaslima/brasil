@@ -4,7 +4,7 @@ import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
 import { PesquisaService } from '../../shared/pesquisa/pesquisa.service';
-import { CacheService } from '../../shared/cache.service';
+import { SystemCacheService } from '../../shared/system-cache.service';
 import { slugify } from '../../utils/slug';
 import { flatTree } from '../../utils/flatFunctions';
 
@@ -20,7 +20,7 @@ export class BuscaService {
     private _localidades = flatTree(this._localidadeService.getRoot());
 
     constructor(
-        private _cache: CacheService,
+        private _cache: SystemCacheService,
         private _localidadeService: LocalidadeService,
         private _pesquisaService: PesquisaService
     ) { }

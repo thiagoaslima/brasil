@@ -83,8 +83,8 @@
         </div>
 
         <div class="terceira-coluna__menu--mobile">
-            <div class="terceira-coluna__menu__todos" [class.selecionado]="states.municipiosTodos">Todos</div>
-            <div class="terceira-coluna__menu__estado" [class.selecionado]="states.municipios-estado">Por estado</div>
+            <div class="terceira-coluna__menu__todos" [class.selecionado]="states.municipiosTodos" (click)="setState('municipiosTodos')">Todos</div>
+            <div class="terceira-coluna__menu__estado" [class.selecionado]="states.municipiosEstados" (click)="setState('municipiosEstados')">Por estado</div>
         </div>
 
         <div class="por-estado__selecionar-estado">
@@ -108,7 +108,7 @@
                 <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
             </div>
             <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
-            <div class='total-encontrado'>{{listaMunicipios.base.length}} municípios</div>
+            <div class='total-encontrado'><span *ngIf="states.municipiosTodos">{{listaMunicipios.atual.length}} de </span>{{listaMunicipios.base.length}} municípios</div>
             <br/>
             <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?" (keyup)="search(buscaInput.value)">
             <button *ngIf="ufSelecionada"><a style="display: block">Acessar a UF {{ufSelecionada?.nome}}</a></button>
