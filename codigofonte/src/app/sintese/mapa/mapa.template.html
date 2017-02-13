@@ -44,7 +44,7 @@
 
     <div *ngIf="mapauf === true">
         <div class="mapa-legendalocal">
-            <span class="local-atual">{{localAtual}}</span> 
+            <span class="local-atual">{{localAtual}} ({{anoApresentado}})</span> 
             <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
         </div>
         <div class="mapa" *ngIf="data">

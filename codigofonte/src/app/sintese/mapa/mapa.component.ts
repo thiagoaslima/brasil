@@ -36,7 +36,9 @@ export class MapaComponent implements OnChanges {
     faixa3 = 'hide';
     faixa0 = 'hide' ;
     ano = 0;
+    anoWasSelected = false;
     anosToSelect = [];
+    anoApresentado = '';
     faixas = [];
 
 
@@ -57,12 +59,13 @@ export class MapaComponent implements OnChanges {
         if(!!this.codigoLocalidade && !!this.dadosMapa){
 
             this.carregando = true;
-
             this.plotMap(this.codigoLocalidade, this.dadosMapa);
         }        
     }
 
     plotMap(codLocal, dados){
+
+        console.log('dadosMapa',dados);
 
         if(dados.length > 0){
             /**
@@ -70,24 +73,22 @@ export class MapaComponent implements OnChanges {
              * e deixa o mais recente selecionado por default 
              */
             dados.forEach(data => {
-                if(data.munic === codLocal.toString().toString().substr(0,6)){
+                if(data.munic === codLocal.toString().substr(0,6)){
                     this.anosToSelect = data.anos; //anos para serem selecionados pelo usuário
-                    this.ano = data.anos.length-1;
+                    this.anoWasSelected !== true ? this.ano = data.anos.length-1 : '';
                 }
                 if(codLocal < 1){
                     if(data.munic === dados[0].munic){
                         this.anosToSelect = data.anos; //anos para serem selecionados pelo usuário
-                        this.ano = data.anos.length-1;
+                        this.anoWasSelected !== true ? this.ano = data.anos.length-1 : '';
                     }
                 }
                 this.geraMapa(this.ano, codLocal, dados); //valor do índice do ano //pega o ultimo ano por default
+                this.anoApresentado = this.anosToSelect[this.ano];
             });
         }else{
             this.geraMapa(0, codLocal, dados);
         }        
-
-        console.log('this.dados = ', dados); 
-        console.dir(this.faixas);       
     }
 
     geraMapa(anoSelecionado, codLocal: number, dados: any[]){
@@ -162,6 +163,8 @@ export class MapaComponent implements OnChanges {
                          * Verifica se há dados suficientes para gerar o mapa coroplético
                          */
                         if(dados.length !== 0 ){
+
+                            this.anosToSelect = dados[0].anos;
 
                             /**
                              * Criando as faixas coropléticas
@@ -261,6 +264,7 @@ export class MapaComponent implements OnChanges {
                          */
                         if(dados.length !== 0 ){
 
+                            this.anosToSelect = dados[0].anos;
                             /**
                              * Criando as faixas coropléticas
                              */
@@ -318,7 +322,7 @@ export class MapaComponent implements OnChanges {
 
     over(nome, ano, valor, link){
         this.irPara = 'Ir para:';
-        this.localHover = !!valor ? nome + ' (' + ano + ' - ' + valor + ' habitantes)' : nome;
+        this.localHover = !!valor ? nome + ' (' + ano + ' - ' + valor + ')' : nome;
         this.localHoverLink = link.toString();
     }
 
@@ -375,10 +379,12 @@ export class MapaComponent implements OnChanges {
         return faixaRecebida;
     }
 
-    selectAno(ano, codLocal, dados){
+    selectAno(ano){
         console.log(ano);
+        this.anoWasSelected = true;
+        this.ano = ano;
         this.irPara = '';
-        this.geraMapa(ano, codLocal, dados);
+        this.plotMap(this.codigoLocalidade, this.dadosMapa);
     }
 
 }
