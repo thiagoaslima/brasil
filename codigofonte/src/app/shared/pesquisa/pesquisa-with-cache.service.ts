@@ -136,18 +136,5 @@ export class PesquisaServiceWithCache {
             });
     }
 
-    private _cacheCallback(method: string, cacheKey: string, callback: Function): Observable<any> {
-        if (this._cache.has(cacheKey)) {
-            return Observable.of(this._cache.get(cacheKey));
-        }
-
-        let subject = new Subject<any>();
-
-        this._instance[method]().subscribe((...args) => callback(cacheKey, subject, ...args));
-
-        this._cache.set(cacheKey, subject);
-        return subject.asObservable();
-    }
-
 };
 
