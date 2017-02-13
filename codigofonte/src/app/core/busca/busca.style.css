@@ -4,7 +4,6 @@
     float: left;
 }
 
-
 .busca.aberto{
     background-color: #333333;
 }
@@ -15,6 +14,7 @@
 
 .busca.aberto .busca__auto-completar{
     display: block;
+    z-index: 1;
 }
 
 
