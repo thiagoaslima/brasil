@@ -38,6 +38,7 @@ export class MapaComponent implements OnChanges {
     ano = 0;
     anoWasSelected = false;
     anosToSelect = [];
+    anoApresentado = '';
     faixas = [];
 
 
@@ -83,6 +84,7 @@ export class MapaComponent implements OnChanges {
                     }
                 }
                 this.geraMapa(this.ano, codLocal, dados); //valor do índice do ano //pega o ultimo ano por default
+                this.anoApresentado = this.anosToSelect[this.ano];
             });
         }else{
             this.geraMapa(0, codLocal, dados);
@@ -382,7 +384,6 @@ export class MapaComponent implements OnChanges {
         this.anoWasSelected = true;
         this.ano = ano;
         this.irPara = '';
-        debugger;
         this.plotMap(this.codigoLocalidade, this.dadosMapa);
     }
 
