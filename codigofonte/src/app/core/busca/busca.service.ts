@@ -54,8 +54,8 @@ export class BuscaService {
         let localidade$: Observable<Localidade[]> = Observable.of(this._localidades);
 
         return Observable.zip(pesquisas$, indicadores$, localidade$)
-            .map(([pesquisa, indicadores, localidades]) => {
-                let pesquisas = [pesquisa].filter(filtro.pesquisa);
+            .map(([pesquisas, indicadores, localidades]) => {
+                pesquisas = pesquisas.filter(filtro.pesquisa);
                 indicadores = indicadores.filter(filtro.indicador);
                 localidades = localidades.filter(filtro.localidade);
 

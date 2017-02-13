@@ -82,8 +82,6 @@ export class SinteseDetalhesComponent implements OnInit {
 
     private exibirGrafico(localidade: Localidade) {
 
-        debugger;
-
         this.isGraficoCarregando = true;
 
         this._route.params.filter(params => !!params['indicador'])
@@ -95,8 +93,6 @@ export class SinteseDetalhesComponent implements OnInit {
                 return indicador;
 
             }).subscribe(valores => {
-
-                debugger;
 
                 let multiplicador = (valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
 
