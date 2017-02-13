@@ -16,9 +16,9 @@ export class SinteseDetalhesComponent implements OnInit {
 
     constructor(
         private _route: ActivatedRoute,
-        private _routerParams: RouterParamsService,
         private _sinteseService: SinteseService,
         private _localidadeService: LocalidadeService,
+        private _params: RouterParamsService
     ) { }
 
     // Header
@@ -38,7 +38,6 @@ export class SinteseDetalhesComponent implements OnInit {
     // Mapa
     public dadosMapa: any[];
     public codigoLocalidade: number;
-
 
     private _localidadeSubscription: Subscription;
 
@@ -77,7 +76,8 @@ export class SinteseDetalhesComponent implements OnInit {
     private exibirMapa(localidade: Localidade) {
 
         this.codigoLocalidade = localidade.codigo;
-        this.dadosMapa = this.obterDadosMapa();
+        this.obterDadosMapa();
+
     }
 
     private exibirGrafico(localidade: Localidade) {
@@ -112,32 +112,41 @@ export class SinteseDetalhesComponent implements OnInit {
     private obterDadosMapa() {
 
         //DADOS PARA O MAPA COROPLÉTICO
-        let dadosMapa = [];
+        this._route.params
+            .filter(params => !!params['indicador'])
+            .switchMap((params: Params) => {
+                
+                let municipios = this._localidadeService.getUfBySigla(params['uf']).children.map(munic => munic.codigo.toString());
+                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
+                return this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, municipios, params['indicador']);
 
-        let dadosOrigem = [
-            { "codLocal": "3304557", "2010": null, "2015": null, "2016": "6498837", "2017": null },
-            { "codLocal": "3303609", "2010": null, "2015": null, "2016": "8498837", "2017": null },
-            { "codLocal": "3303708", "2010": null, "2015": null, "2016": "2498837", "2017": null },
-            { "codLocal": "3303807", "2010": null, "2015": null, "2016": "5498837", "2017": null },
-            { "codLocal": "3303401", "2010": null, "2015": null, "2016": "3498837", "2017": null },
-            { "codLocal": "3303906", "2010": null, "2015": null, "2016": "7498837", "2017": null }
-        ];
+            })
+            .map((indicador: any[]) => {
 
-        dadosOrigem.forEach(dado => {
+                return indicador.map((obj) => {
+                    let dados = !!obj ? obj.res : '[]';
 
-            let dadosMunic = { munic: '', anos: [], valores: [], faixa: '' };
-            dadosMunic.munic = dado.codLocal.substr(0, 6);
-            Object.keys(dado).forEach(ano => {
-                if (Object.keys(dado).length > dadosMunic.anos.length + 1) {
-                    dadosMunic.anos.push(ano);
-                    dadosMunic.valores.push(dado[ano]);
-                }
+                    return dados.map((dado) => {
+                        let dadosMunic = { munic: dado.localidade, anos: [], valores: [], faixa: '' };// [{munic:'330455',anos:['2010','2016'], valores:['3252215',null], faixa:'faixa2'}]
+
+                        Object.keys(dado.res).forEach(ano => {
+                            dadosMunic.anos.push(ano);
+                            dadosMunic.valores.push(dado.res[ano]);
+                        });
+
+                        return dadosMunic;
+                    });
+                });
+
+            })
+            .subscribe(arrDados => {
+
+                this.dadosMapa = arrDados[0];
+
             });
+            
+            return this.dadosMapa;
 
-            dadosMapa.push(dadosMunic);
-        });
-
-        return dadosMapa;
     }
 
     private getTipoGraficoIndicador(indicador) {

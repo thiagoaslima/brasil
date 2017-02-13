@@ -315,4 +315,25 @@ export class SinteseService{
         })
 
     }
+
+    /**
+     * Recupera apenas os dados da pesquisa, ignorando os rótulos dos indicadores.
+     * 
+     * @pesquisa: string - código da pesquisa.
+     * @local: string[] - lista de códigos de localidade.
+     * @indicador: string - indicador a ser recuperado.
+     */
+    public getDadosPesquisaMapa(pesquisa: string, local: string[] = [], indicador: string): Observable<any> {
+
+        let locaisCorrigidos = local.map(local => local.substr(0,6));
+
+        const codigoLocal = locaisCorrigidos.length > 0 ? locaisCorrigidos.join(',') : "";
+
+        const codigoIndicador = indicador;
+
+        const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&indicadores=${codigoIndicador}`).map((res => res.json()));
+
+        return dadosPesquisa$;
+    }
+
 }
