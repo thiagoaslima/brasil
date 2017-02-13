@@ -12,7 +12,7 @@
         </div>
         <div class="busca__auto-completar__resultado">
             <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
-                <a [routerLink]="item['link']" (click)="modoDigitacao = false; menuAberto = false;">
+                <a [routerLink]="[item['link']]" (click)="modoDigitacao = false; menuAberto = false;">
                     <div class='busca__auto-completar__resultado__item__nome'>
                         {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
                     </div>

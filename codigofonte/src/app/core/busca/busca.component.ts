@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer, ElementRef, ViewChild } from '@angular/cor
 import { Observable } from 'rxjs';
 
 import { BuscaService } from './busca.service';
+import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 
@@ -30,20 +31,24 @@ export class BuscaComponent implements OnInit {
     categoria: number = 0;
 
 
-    qtdMinimaCaracteres = 3;
+    private _qtdMinimaCaracteres = 3;
+    private _localidadeAtual;
 
     constructor(
         private _renderer: Renderer,
-        private _buscaService: BuscaService
+        private _buscaService: BuscaService,
+        private _localidadeService: LocalidadeService
     ) { }
 
     ngOnInit() {
+
+        this._localidadeService.selecionada$.subscribe(localidade => this._localidadeAtual = localidade);
 
         Observable.fromEvent<KeyboardEvent>(this.campoBusca.nativeElement, "keyup")
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
-            .filter(value => value.length >= this.qtdMinimaCaracteres)
+            .filter(value => value.length >= this._qtdMinimaCaracteres)
             .flatMap(termo => this._buscaService.search(termo))
             .subscribe(resultados => this.list(resultados));
     }
@@ -70,7 +75,7 @@ export class BuscaComponent implements OnInit {
                 tipo: indicador.pesquisa.nome,
                 categoria: 1,
                 destaque: '',
-                link: 'sintese/' + indicador.id
+                link: this._localidadeAtual.link + '/sintese/' + indicador.id
             };
 
             this.resultadoIndicadores.push(itemResultado);
@@ -85,7 +90,7 @@ export class BuscaComponent implements OnInit {
                 tipo: pesquisa.descricao,
                 categoria: 2,
                 destaque: '',
-                link: 'pesquisas/' + pesquisa.id
+                link: this._localidadeAtual.link + '/pesquisas/' + pesquisa.id
             };
 
             this.resultadoPesquisas.push(itemResultado);
