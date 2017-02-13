@@ -18,9 +18,17 @@ export class BuscaComponent implements OnInit {
     menuAberto = false;
 
     resultadoBusca: ItemResultado[] = [];
+
+    resultadoIndicadores: ItemResultado[] = [];
+    resultadoPesquisas: ItemResultado[] = [];
+    resultadoLocais: ItemResultado[] = [];
+    resultadoTodos: ItemResultado[] = [];
     qtdIndicadores: number;
     qtdLocais: number;
     qtdPesquisas: number;
+
+    categoria: number = 0;
+
 
     qtdMinimaCaracteres = 3;
 
@@ -35,15 +43,19 @@ export class BuscaComponent implements OnInit {
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
-            .filter(value => value.length > this.qtdMinimaCaracteres)
-            .take(20)
+            .filter(value => value.length >= this.qtdMinimaCaracteres)
             .flatMap(termo => this._buscaService.search(termo))
             .subscribe(resultados => this.list(resultados));
     }
 
 
     list(resultado) {
+
         this.resultadoBusca = [];
+        this.resultadoIndicadores = [];
+        this.resultadoPesquisas = [];
+        this.resultadoLocais = [];
+        this.resultadoTodos = [];
 
         let indicadores: Indicador[] = resultado.indicadores;
         let pesquisas: Pesquisa[] = resultado.pesquisas;
@@ -56,11 +68,12 @@ export class BuscaComponent implements OnInit {
 
                 nome: indicador.indicador,
                 tipo: indicador.pesquisa.nome,
-                categoria: Categoria.INDICADOR,
-                destaque: ''
+                categoria: 1,
+                destaque: '',
+                link: 'sintese/' + indicador.id
             };
 
-            this.resultadoBusca.push(itemResultado);
+            this.resultadoIndicadores.push(itemResultado);
         });
 
         this.qtdPesquisas = pesquisas.length;
@@ -70,75 +83,79 @@ export class BuscaComponent implements OnInit {
 
                 nome: pesquisa.nome,
                 tipo: pesquisa.descricao,
-                categoria: Categoria.PESQUISA,
-                destaque: ''
+                categoria: 2,
+                destaque: '',
+                link: 'pesquisas/' + pesquisa.id
             };
 
-            this.resultadoBusca.push(itemResultado);
+            this.resultadoPesquisas.push(itemResultado);
         });
 
         this.qtdLocais = localidades.length;
         localidades.map(localidade => {
 
+            let tipo = '';
+            let destaque = '';
+            let link = '';
+
+            if(localidade.tipo == 'uf'){
+
+                tipo = 'Estado';
+                link = '/brasil/' + localidade.sigla.toLowerCase();
+            } 
+
+            if(localidade.tipo == 'municipio'){
+
+                tipo = 'Município';
+                destaque = localidade.parent.sigla;
+                link = '/brasil/' + localidade.parent.sigla.toLowerCase() + '/' + localidade.identificador;
+            }
+
             let itemResultado: ItemResultado = {
 
                 nome: localidade.nome,
-                tipo: 'Localidade',
-                categoria: Categoria.LOCAL,
-                destaque: localidade.tipo == 'municipio' ? localidade.parent.sigla : ''
+                tipo: tipo,
+                categoria: 3,
+                destaque: destaque,
+                link: link
             };
 
-            this.resultadoBusca.push(itemResultado);
+            this.resultadoLocais.push(itemResultado);
         });
 
+        this.resultadoTodos = this.resultadoIndicadores.concat(this.resultadoPesquisas.concat(this.resultadoLocais));
+
+        this.selecionarCategoria();
         this.menuAberto = true;
     }
 
+    selecionarCategoria(){
 
-    // let resultado: ItemResultado[] = [
-    //     {
-    //         nome: 'Ovos de galinha',
-    //         tipo: 'Pecuária Abate',
-    //         categoria: Categoria.INDICADOR,
-    //         destaque: ''
-    //     },
-    //     {
-    //         nome: 'Porto de Galinha',
-    //         tipo: 'Lacalidade',
-    //         categoria: Categoria.INDICADOR,
-    //         destaque: 'PE'
-    //     },
-    //     {
-    //         nome: 'Galináceosa',
-    //         tipo: 'Pecuária Abate',
-    //         categoria: Categoria.INDICADOR,
-    //         destaque: ''
-    //     }
+        switch (this.categoria) {
 
-    // ];
-
-    // this.qtdIndicadores = 2;
-    // this.qtdLocais = 1;
-    // this.qtdPesquisas = 0;
-
-    // this.resultadoBusca = resultado;
-
-    // this.menuAberto = true;
+            case 1:
+                this.resultadoBusca = this.resultadoIndicadores;
+                break;
+            case 2:
+                this.resultadoBusca = this.resultadoPesquisas;
+                break;
+            case 3:
+                this.resultadoBusca = this.resultadoLocais;  
+                break;
+            default:
+                this.resultadoBusca = this.resultadoTodos;
+                break;
+        }
+    }
 
 }
 
 
-enum Categoria {
-
-    INDICADOR,
-    PESQUISA,
-    LOCAL
-}
-
-class ItemResultado {
+interface ItemResultado {
 
     nome: string;
     tipo: string;
-    categoria: Categoria;
+    categoria: number;
     destaque: string;
+    link: string;
 }
