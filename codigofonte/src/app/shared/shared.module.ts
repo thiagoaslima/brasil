@@ -35,7 +35,7 @@ const PROVIDERS = [
     CommonService,
     BuscaService,
     { provide: PesquisaService, useClass: PesquisaServiceWithCache },
-    {provide: TOPOJSON, useValue: TopoJson }
+    { provide: TOPOJSON, useValue: TopoJson }
 ]
 
 @NgModule({

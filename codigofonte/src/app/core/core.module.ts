@@ -6,6 +6,7 @@ import { throwIfAlreadyLoaded } from './core.guard';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
+import { BuscaComponent } from './busca/busca.component';
 
 @NgModule({
   imports: [
@@ -14,11 +15,13 @@ import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localid
   ],
   declarations: [
     HeaderExampleComponent,
-    SeletorLocalidadeComponent
+    SeletorLocalidadeComponent,
+    BuscaComponent
   ],
   exports: [
     HeaderExampleComponent,
-    SeletorLocalidadeComponent
+    SeletorLocalidadeComponent,
+    BuscaComponent
   ],
   providers: []
 })

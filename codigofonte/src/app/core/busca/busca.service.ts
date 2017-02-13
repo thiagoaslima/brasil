@@ -6,7 +6,7 @@ import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
 import { PesquisaService } from '../../shared/pesquisa/pesquisa.service';
 import { SystemCacheService } from '../../shared/system-cache.service';
 import { slugify } from '../../utils/slug';
-import { flatTree } from '../../utils/flatFunctions';
+import { flatTree, flatMap } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -34,25 +34,35 @@ export class BuscaService {
         }
 
         let filtro = this._filterSearchResponse(termo);
-        let _termo;
+        let _termo = termo.slice(0, -1);
 
-        while (_termo = termo.slice(0, -1)) {
+        while (_termo) {
             if (this._cache.has(this._cacheKeys.busca(_termo))) {
                 break;
             }
+            _termo = _termo.slice(0, -1)
         }
 
-        let pesquisas$: Observable<Pesquisa[]> = _termo
-            ? this._cache.get(_termo).pesquisas
-            : this._pesquisaService.getAllPesquisas();
+        let pesquisas$ = this._pesquisaService.getAllPesquisas();
+        // let pesquisas$: Observable<Pesquisa[]> = _termo
+        //     ? this._cache.get(_termo).pesquisas
+        //     : this._pesquisaService.getAllPesquisas();
 
-        let indicadores$: Observable<Indicador[]> = _termo
-            ? this._cache.get(_termo).indicadores
-            : pesquisas$.switchMap(pesquisas => pesquisas.map(pesquisa => this._pesquisaService.getIndicadores(pesquisa.id)));
+        let indicadores$ = pesquisas$.switchMap(pesquisas => {
+            let ind$ = [{id: 13}, {id: 23}].map(p => {
+                return this._pesquisaService.getIndicadores(p.id).map(indTree => {
+                    debugger;
+                    return flatTree(indTree);
+                })
+            })
+            return Observable.zip(ind$).map(inds => {
+                debugger;
+                return flatMap(inds, (i) => i)
+            });
+        });
 
-        let localidade$: Observable<Localidade[]> = _termo
-            ? Observable.of([this._cache.get(_termo).localidades])
-            : Observable.of([this._localidades]);
+
+        let localidade$: Observable<Localidade[]> = Observable.of(this._localidades);
 
         return Observable.zip(pesquisas$, indicadores$, localidade$)
             .map(([pesquisas, indicadores, localidades]) => {
@@ -61,8 +71,7 @@ export class BuscaService {
                 localidades = localidades.filter(filtro.localidade);
 
                 return { pesquisas, indicadores, localidades }
-            })
-            .do(obj => this._cache.set(cacheKey, obj));
+            });
     }
 
     private _filterSearchResponse(termo: string) {

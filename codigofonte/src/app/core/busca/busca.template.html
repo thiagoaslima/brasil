@@ -1,0 +1,26 @@
+<div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" (click)="modoDigitacao = true" (mouseleave)="menuAberto = false">
+    <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?">
+    <i class="busca__icone fa fa-search" aria-hidden="true"></i>
+    <div class="busca__auto-completar">
+        <div class="busca__auto-completar__menu">
+            <ul>
+                <li [class.selecionado]="categoria == 0" (click)="categoria = 0; selecionarCategoria()">Todos <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--todos'>{{qtdIndicadores + qtdPesquisas + qtdLocais}}</div></li>
+                <li [class.selecionado]="categoria == 1" (click)="categoria = 1; selecionarCategoria()">Indicadores <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--tema'>{{qtdIndicadores}}</div></li>
+                <li [class.selecionado]="categoria == 2" (click)="categoria = 2; selecionarCategoria()">Pesquisa <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--pesquisa'>{{qtdPesquisas}}</div></li>
+                <li [class.selecionado]="categoria == 3" (click)="categoria = 3; selecionarCategoria()">Locais <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--locais'>{{qtdLocais}}</div></li>
+            </ul>
+        </div>
+        <div class="busca__auto-completar__resultado">
+            <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
+                <a [routerLink]="[item['link']]" (click)="modoDigitacao = false; menuAberto = false;">
+                    <div class='busca__auto-completar__resultado__item__nome'>
+                        {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
+                    </div>
+                    <div class='busca__auto-completar__resultado__item__tipo--municipio'>
+                        {{item['tipo']}}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,8 @@ import { SystemCacheService } from '../system-cache.service';
 import { Pesquisa, Indicador } from './pesquisa.interface';
 import { PesquisaService } from './pesquisa.service';
 
+import { flatTree } from '../../utils/flatFunctions';
+
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/do';
@@ -13,44 +15,125 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class PesquisaServiceWithCache {
 
+    private _instance: PesquisaService;
+
     constructor(
-        _cache: SystemCacheService,
+        private _cache: SystemCacheService,
         _http: Http
     ) {
-        let instance = new Proxy(new PesquisaService(_http), {
-            get(target, propKey) {
+        this._instance = new PesquisaService(_http);
+    }
 
-                switch (propKey) {
-                    case "getAllPesquisas":
-                        let cacheKey = _cache.buildKey.allPesquisas();
+    getAllPesquisas(): Observable<Pesquisa[]> {
+         let cacheKey = this._cache.buildKey.allPesquisas();
 
-                        if (_cache.has(cacheKey)) {
-                            return () => Observable.of(_cache.get(cacheKey));
-                        }
+         if (this._cache.has(cacheKey)) {
+            return Observable.of(this._cache.get(cacheKey));
+        }
 
-                        return function () {
-                            let subject = new Subject();
+        let subject = new Subject<any>();
 
-                            target.getAllPesquisas()
-                                .subscribe(pesquisas => {
-                                    subject.next(pesquisas);
-                                    _cache.set(cacheKey, pesquisas);
-                                });
-
-                            _cache.set(cacheKey, subject);
-                            return subject.asObservable();
-                        }
-
-
-                    default:
-                        return target[propKey];
-
-                }
-
-            }
+        this._instance.getAllPesquisas().subscribe((pesquisas) => {
+            subject.next(pesquisas);
+            this._cache.set(cacheKey, pesquisas);
         });
 
-        return instance;
+        this._cache.set(cacheKey, subject);
+        return subject.asObservable();
+    }
+
+    getPesquisa(pesquisaId: number): Observable<Pesquisa> {
+        return this._instance.getPesquisa(pesquisaId);
+    }
+
+    getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
+         let cacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+
+        if (this._cache.has(cacheKey)) {
+            return Observable.of(this._cache.get(cacheKey));
+        }
+
+        let subject = new Subject<any>();
+
+        this._instance.getListaIndicadoresDaPesquisa(pesquisaId).subscribe((indicadoresTree) => {
+            subject.next(indicadoresTree);
+            this._cache.set(cacheKey, indicadoresTree);
+
+            debugger;
+
+            flatTree(indicadoresTree).map(indicador => {
+                let cacheKey = this._cache.buildKey.indicador(pesquisaId, indicador.id);
+                this._cache.set(cacheKey, indicadoresTree);
+            })
+        });
+
+        this._cache.set(cacheKey, subject);
+        return subject.asObservable();
+    }
+
+    getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
+        debugger;
+
+        if (!indicadoresId) {
+            debugger;
+            return this.getListaIndicadoresDaPesquisa(pesquisaId).map(args => {
+                debugger;
+                return args;
+            });
+        }
+
+        let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
+
+        // como o cache de indicadores é feito a partir da lista de indicadores por pesquisa
+        // se 1 indicador estiver no cache, todos estarão!
+        let cacheKey = this._cache.buildKey.indicador(pesquisaId, _indicadoresId[0]);
+
+        if (this._cache.has(cacheKey)) {
+            let resp: Indicador[] = _indicadoresId.map(id => this._cache.get(this._cache.buildKey.indicador(pesquisaId, id)));
+            return Observable.of(resp);
+        }
+
+        let subject = new Subject<any>();
+
+        this._instance.getListaIndicadoresDaPesquisa(pesquisaId)
+            .subscribe(_ => this.getIndicadores(pesquisaId, _indicadoresId).map(indicadores => subject.next(indicadores)));
+
+        this._cache.set(cacheKey, subject);
+        return subject.asObservable();
+    }
+
+    getResultados(pesquisaId: number, localidadesCodigo: number | number[]): Observable<Indicador[]> {
+        let _localidadesCodigo = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
+
+        let _notOnCache = _localidadesCodigo.filter(codigo => this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo));
+
+        if (_notOnCache.length === 0) {
+            return this.getIndicadores(pesquisaId);
+        }
+
+        let subject = new Subject<any>();
+
+        this._instance.getResultados(pesquisaId, _localidadesCodigo)
+            .flatMap(_ => {
+                _localidadesCodigo.forEach(codigo => this._cache.set(this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo), true))
+                return this.getIndicadores(pesquisaId);
+            })
+            .subscribe(indicadores => subject.next(indicadores));
+
+        return subject.asObservable();
+    }
+
+    getDadosIndicadores(pesquisaId: number, localidadesCodigo: number | number[], indicadoresId?: number | number[]): Observable<Indicador[]> {   
+        return this.getResultados(pesquisaId, localidadesCodigo)
+            .flatMap(indicadores => {
+                
+                if (!indicadoresId) {
+                    return Observable.of(indicadores);
+                }
+
+                let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
+                return this.getIndicadores(pesquisaId, _indicadoresId);
+            });
     }
 
 };

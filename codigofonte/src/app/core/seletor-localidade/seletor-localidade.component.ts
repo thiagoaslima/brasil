@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { slugify } from '../../utils/slug';
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 
 @Component({
@@ -12,8 +15,11 @@ import 'rxjs/add/observable/fromEvent';
     styleUrls: ['seletor-localidade.styles.css'],
     exportAs: 'seletor-localidade'
 })
-export class SeletorLocalidadeComponent implements OnInit {
+export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     @Input() aberto = false;
+    @ViewChild('buscaInput') buscaInput: ElementRef;
+    private _buscaInput$$: Subscription;
+    private _selecionada$$: Subscription;
 
     public ufs: Localidade[] = [];
     public selecaoLocalidadesAtual: Observable<Localidade[]>;
@@ -23,6 +29,7 @@ export class SeletorLocalidadeComponent implements OnInit {
         maisVistos: <Localidade[]>[],
         base: <Localidade[]>[],
         atual: <Localidade[]>[],
+        totalAtual: 0,
 
         build(array, termo = '') {
             termo = slugify(termo);
@@ -50,7 +57,7 @@ export class SeletorLocalidadeComponent implements OnInit {
                 }
             });
 
-            this.total = array.length
+            this.totalAtual = this.atual.reduce( (sum, obj) => sum + obj.municipios.length, 0);
         }
     };
 
@@ -112,15 +119,28 @@ export class SeletorLocalidadeComponent implements OnInit {
 
 
     ngOnInit() {
-        this._localidadeService.selecionada$
+        this._selecionada$$ = this._localidadeService.selecionada$
             .distinctUntilChanged()
             .subscribe(_ => {
-                this.fecharSeletor()
+                this.fecharSeletor();
             });
+
+        this._buscaInput$$ = Observable.fromEvent<KeyboardEvent>(this.buscaInput.nativeElement, "keyup")
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .map(e => e.target['value'])
+            .filter(value => value.length >= 3)
+            .subscribe(termo => this.search(termo));
+    }
+
+    ngOnDestroy() {
+        this._selecionada$$.unsubscribe();
+        this._buscaInput$$.unsubscribe();
     }
 
     abrirSeletor() {
         this.aberto = true;
+        this.setState('municipiosTodos');
     }
 
     fecharSeletor() {
