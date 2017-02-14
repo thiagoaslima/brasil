@@ -27,12 +27,12 @@ export class PesquisaService {
     getAllPesquisas(): Observable<Pesquisa[]> {
         return this._http.get(this._server.path('pesquisas'))
             .retry(3)
-            .map(res => res.json())
-            .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
             .catch(err => {
                 debugger;
-                return Observable.of([]);
-            });
+                return Observable.of({ json: () => [] });
+            })
+            .map(res => res.json())
+            .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
     }
 
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
@@ -45,18 +45,24 @@ export class PesquisaService {
     getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
         return this._http.get(this._server.path(`pesquisas/${pesquisaId}/periodos/all/indicadores`))
             .retry(3)
-            .map(res => res.json())
-            .zip(this.getPesquisa(pesquisaId), (json, pesquisa) => json.map(indicador => this._createIndicadoresInstance(indicador, pesquisa)))
             .catch(err => {
-                debugger;
-                return Observable.of([]);
+                return Observable.of({ json: () => [] });
+            })
+            .map(res => res.json())
+            .zip(this.getPesquisa(pesquisaId), (json, pesquisa) => {
+                return json.map(indicador => this._createIndicadoresInstance(indicador, pesquisa))
             });
-
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
+        debugger; 
+        
         if (!indicadoresId) {
-            return this.getListaIndicadoresDaPesquisa(pesquisaId);
+            debugger;
+            return this.getListaIndicadoresDaPesquisa(pesquisaId).map(args => {
+                debugger;
+                return args;
+            });
         }
 
         let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
@@ -85,7 +91,7 @@ export class PesquisaService {
 
                 flatTree(indicadores).forEach(indicador => {
                     // nem todos os indicadores possuem valores
-                    return hashRes[indicador.id] 
+                    return hashRes[indicador.id]
                         ? indicador.saveResultados(hashRes[indicador.id].res)
                         : indicador
                 });

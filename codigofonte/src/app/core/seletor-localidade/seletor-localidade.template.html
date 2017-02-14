@@ -23,6 +23,7 @@
 
         <nav>
             <ul>
+                <!--                
                 <li id='menu__brasil'>
                     <a class="seletor-localidade__link" routerLink="/brasil">
                         Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
@@ -31,6 +32,7 @@
                 <li id='menu__estado' (click)="setState('estados')">
                     Unidades Federativas <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
+                -->
                 <li id='menu__municipio' (click)="setState('municipiosTodos')">
                     Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
@@ -108,9 +110,9 @@
                 <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
             </div>
             <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
-            <div class='total-encontrado'><span *ngIf="states.municipiosTodos">{{listaMunicipios.atual.length}} de </span>{{listaMunicipios.base.length}} municípios</div>
+            <div class='total-encontrado'><span *ngIf="states.municipiosTodos && listaMunicipios.totalAtual">{{listaMunicipios.totalAtual}} de </span>{{listaMunicipios.base.length}} municípios</div>
             <br/>
-            <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?" (keyup)="search(buscaInput.value)">
+            <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?">
             <button *ngIf="ufSelecionada"><a style="display: block">Acessar a UF {{ufSelecionada?.nome}}</a></button>
 
             <div id="municipios">
@@ -149,7 +151,7 @@
                 <ul *ngIf="!buscaInput.value">
                     <li *ngFor="let municipio of listaMunicipios.maisVistos">
                         <a style="display:block" [routerLink]="municipio.link">
-                            {{municipio.nome}} <span>{{municipio.parent.identificador}}</span>
+                            {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
                         </a>
                     </li>
                 </ul>

@@ -16,7 +16,7 @@ export function flatTree<T extends Tree<any>>(root: T|T[]): T[] {
     return arr;
 }
 
-export function flatMap<T, U>(array: T[], callbackfn: (value: T, index: number, array: T[]) => U[]): U[] {
+export function flatMap(array: Array<any|any[]>, callbackfn): any[] {
     return [].concat(...array.map(callbackfn));
 }
 

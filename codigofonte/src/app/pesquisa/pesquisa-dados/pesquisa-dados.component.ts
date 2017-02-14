@@ -3,6 +3,7 @@ import { SinteseService } from '../../sintese/sintese.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { slugify } from '../../utils/slug';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -22,11 +23,13 @@ export class PesquisaDadosComponent {
     public tituloPrincipal = "";
     public anos = ['-', '-'];
     private baseURL = "";
+    public aberto = false;
 
     constructor(
         private _routerParams:RouterParamsService,
         private _sintese:SinteseService,
-        private _localidade:LocalidadeService
+        private _localidade:LocalidadeService,
+        private _route: ActivatedRoute
     ){}
 
     ngOnInit(){
@@ -99,6 +102,13 @@ export class PesquisaDadosComponent {
                 this.baseURL = '/brasil/' + params.uf;
             }else{
                 this.baseURL = '/brasil';
+            }
+        });
+
+        //verifica se o componente de detalhes está aberto (mobile)
+        this._route.queryParams.subscribe(params => {
+            if(params['detalhes'] == 'true'){
+                this.aberto = true;
             }
         });
     }
