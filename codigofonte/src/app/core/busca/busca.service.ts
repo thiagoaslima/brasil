@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { isBrowser, isNode } from 'angular2-universal/browser';
 
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
@@ -10,6 +11,7 @@ import { flatTree, flatMap } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/forkJoin';
 
 @Injectable()
 export class BuscaService {
@@ -48,26 +50,34 @@ export class BuscaService {
         //     ? this._cache.get(_termo).pesquisas
         //     : this._pesquisaService.getAllPesquisas();
 
-        let indicadores$ = pesquisas$.switchMap(pesquisas => {
-            let ind$ = [{id: 13}, {id: 23}].map(p => {
-                return this._pesquisaService.getIndicadores(p.id).map(indTree => {
-                    debugger;
-                    return flatTree(indTree);
-                })
-            })
-            return Observable.zip(ind$).map(inds => {
-                debugger;
-                return flatMap(inds, (i) => i)
-            });
-        });
-
+        let indicadores$ = pesquisas$.flatMap(pesquisas => {
+            return Observable.forkJoin(...pesquisas.map(pesquisa => this._pesquisaService.getIndicadores(pesquisa.id).map(flatTree)));
+        }).map(indicadores => flatMap(indicadores, (ind) => ind));     
+    
+        if (isBrowser) {
+            window['indicadores'] = indicadores$;
+            window['_cache'] = this._cache;
+        }
 
         let localidade$: Observable<Localidade[]> = Observable.of(this._localidades);
 
         return Observable.zip(pesquisas$, indicadores$, localidade$)
             .map(([pesquisas, indicadores, localidades]) => {
+                debugger;
                 pesquisas = pesquisas.filter(filtro.pesquisa);
-                indicadores = indicadores.filter(filtro.indicador);
+                
+                let hash = indicadores.filter(filtro.indicador).reduce( (obj, indicador) => {
+                    obj[indicador.pesquisa.id] = indicador.pesquisa;
+                    return obj;
+                }, {});
+
+                Object.keys(hash).forEach(key => {
+                    let pesquisa = hash[key];
+                    if (pesquisas.indexOf(pesquisa) === -1) {
+                        pesquisas.push(pesquisa);
+                    }
+                })
+
                 localidades = localidades.filter(filtro.localidade);
 
                 return { pesquisas, indicadores, localidades }

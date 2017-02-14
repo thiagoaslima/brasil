@@ -28,10 +28,12 @@ export class SinteseHeaderComponent implements OnChanges {
     // Nome da pesquisa de origem
     public pesquisa;
     // Código da pesquisa de origem
-    //public codPesquisa;
+    public codPesquisa;
     public dataURL;
     public isMenuOculto = true;
     public queryParams = {};
+    // String do link para a pesquisa de origem
+    public linkPesquisa;
 
     // Valores do indicador a serem exportados como arquivo
     private valoresIndicador;
@@ -78,7 +80,10 @@ export class SinteseHeaderComponent implements OnChanges {
                     this.pesquisa = dadosPesquisa.nome; 
 
                     //obtém o código da pesquida
-                    //this.codPesquisa = dadosPesquisa.codigo; 
+                    this.codPesquisa = dadosPesquisa.codigo; 
+
+                    //constrói link para pesquisa de origem
+                    this.linkPesquisa = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/' + this.codPesquisa + '/' + params.indicador;
 
                     // Valores utilizados na exportação de arquivo
                     this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);

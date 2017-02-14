@@ -56,6 +56,9 @@ export class PesquisaDadosComponent {
                     ind[i].visivel = ind[i].nivel <= 2 ? true : false;
                     if(ind[i].res){
                         for(let key in ind[i].res){
+                            //formata o valor do dado
+                            ind[i].res[key] = isNaN(parseFloat(ind[i].res[key])) ? ind[i].res[key] : parseFloat(ind[i].res[key]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
+                            
                             //seta os anos da pesquisa
                             if(this.anos.indexOf(key) < 0)
                                 this.anos.push(key);
@@ -68,8 +71,8 @@ export class PesquisaDadosComponent {
                     return 0;
                 });
 
-                this.ano1 = this.anos.length >= 1 ? this.anos[0] : '-1';
-                this.ano2 = this.anos.length >= 2 ? this.anos[1] : '-1';
+                this.ano1 = this.anos.length >= 1 ? this.anos[0] : 0;
+                this.ano2 = this.anos.length >= 2 ? this.anos[1] : 0;
 
                 //seta os dados iniciais do combobox e da tabela de dados
                 for(let i = 0; i < indicadores.length; i++){
@@ -81,7 +84,7 @@ export class PesquisaDadosComponent {
                         }
                     }
                 }
-
+                
                 this.indicadores = indicadores;
                 //console.log(indicadores);
             });
@@ -138,17 +141,14 @@ export class PesquisaDadosComponent {
                 let ind = this.flat(this.indicadores[i]);
                 let csv = this.baseURL + '\n\n';
                 csv += "Nível;Indicador;" +
-                    (this.anos.length >= 1 && this.anos[0] != '-' ? this.anos[0] + ';' : '') +
-                    (this.anos.length >= 2 && this.anos[1] != '-' ? this.anos[1] + ';' : '') + 'Unidade\n';
+                    (this.ano1 != 0 ? this.ano1 + ';' : '') +
+                    (this.ano2 != 0 ? this.ano2 + ';' : '') + 'Unidade\n';
                 for(let j = 0; j < ind.length; j++){
                     csv += ind[j].posicao + ';' + ind[j].indicador
-                    if(ind[j].resultados){
-                        for(let k = 0; k < ind[j].resultados.length; k++){
-                            if(this.anos.indexOf(ind[j].resultados[k].ano) >= 0){
-                                csv += ';' + ind[j].resultados[k].valor;
-                            }
-                        }
-                        csv += ';' + (ind[j].unidade ? ind[j].unidade.id : '');
+                    if(ind[j].res){
+                        csv += this.ano1 != 0 ? ';' + (ind[j].res[this.ano1] ? ind[j].res[this.ano1] : '') : '';
+                        csv += this.ano2 != 0 ? ';' + (ind[j].res[this.ano2] ? ind[j].res[this.ano2] : '') : '';
+                        csv += ind[j].unidade ? ';' + ind[j].unidade.id : '';
                     }
                     csv += '\n';
                 }

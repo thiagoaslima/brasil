@@ -4,7 +4,7 @@
     </button>
     <div class="cabecalho__sub-container">
         <div>
-            <a class="cabecalho__link">+{{ pesquisa }}</a>
+            <a class="cabecalho__link" [routerLink]="linkPesquisa">+{{ pesquisa }}</a>
             <span class="cabecalho__bullet">&#8226;</span>
             <a class="cabecalho__link">+População</a>
         </div>
@@ -34,7 +34,7 @@
                         <span  class="submenu__link submenu__texto" (click)="downloadCSV()">CSV</span>
                     </li>
                     <li class="submenu__item">
-                        <a class="submenu__link" href="{{dataURL}}" download="imagem.jpeg" (click)="downloadImagem()"><span class="submenu__texto">Imagem</span></a>                    
+                        <a class="submenu__link" href="{{graficoBase64}}" download="imagem.jpeg" (click)="downloadImagem()"><span class="submenu__texto">Imagem</span></a>                    
                     </li>
                 </ul>
             </div>
