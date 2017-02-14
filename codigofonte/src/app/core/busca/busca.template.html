@@ -1,29 +1,27 @@
-<span (mouseleave)="desativarBusca()">
-    <div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" (click)="ativarBusca()">
-        <div class="busca__hit">
+<div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" (click)="ativarBusca()">
+    <div class="busca__hit" (click)="desativarBusca()">
+    </div>
+    <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?" [(ngModel)]="termo">
+    <i class="busca__icone fa fa-search" aria-hidden="true"></i>
+    <div class="busca__auto-completar">
+        <div class="busca__auto-completar__menu">
+            <ul>
+                <li [class.selecionado]="categoria == 0" (click)="selecionarCategoria(0)">Todos <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--todos'>{{qtdPesquisas + qtdLocais}}</div></li>
+                <li [class.selecionado]="categoria == 1" (click)="selecionarCategoria(1)">Pesquisa <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--pesquisa'>{{qtdPesquisas}}</div></li>
+                <li [class.selecionado]="categoria == 2" (click)="selecionarCategoria(2)">Locais <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--locais'>{{qtdLocais}}</div></li>
+            </ul>
         </div>
-        <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?" [(ngModel)]="termo">
-        <i class="busca__icone fa fa-search" aria-hidden="true"></i>
-        <div class="busca__auto-completar">
-            <div class="busca__auto-completar__menu">
-                <ul>
-                    <li [class.selecionado]="categoria == 0" (click)="selecionarCategoria(0)">Todos <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--todos'>{{qtdPesquisas + qtdLocais}}</div></li>
-                    <li [class.selecionado]="categoria == 1" (click)="selecionarCategoria(1)">Pesquisa <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--pesquisa'>{{qtdPesquisas}}</div></li>
-                    <li [class.selecionado]="categoria == 2" (click)="selecionarCategoria(2)">Locais <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--locais'>{{qtdLocais}}</div></li>
-                </ul>
-            </div>
-            <div class="busca__auto-completar__resultado">
-                <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
-                    <a [routerLink]="[item['link']]" (click)="selecionarItemBusca()">
-                        <div class='busca__auto-completar__resultado__item__nome'>
-                            {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
-                        </div>
-                        <div class='busca__auto-completar__resultado__item__tipo--municipio'>
-                            {{item['tipo']}}
-                        </div>
-                    </a>
-                </div>
+        <div class="busca__auto-completar__resultado">
+            <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
+                <a [routerLink]="[item['link']]" (click)="selecionarItemBusca()">
+                    <div class='busca__auto-completar__resultado__item__nome'>
+                        {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
+                    </div>
+                    <div class='busca__auto-completar__resultado__item__tipo--municipio'>
+                        {{item['tipo']}}
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-</span>
+</div>
