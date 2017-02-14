@@ -17,16 +17,15 @@ export class BuscaComponent implements OnInit {
 
     modoDigitacao = false;
     menuAberto = false;
+    termo;
 
     resultadoBusca: ItemResultado[] = [];
 
-    resultadoIndicadores: ItemResultado[] = [];
     resultadoPesquisas: ItemResultado[] = [];
     resultadoLocais: ItemResultado[] = [];
     resultadoTodos: ItemResultado[] = [];
-    qtdIndicadores: number;
-    qtdLocais: number;
-    qtdPesquisas: number;
+    qtdLocais: number = 0;
+    qtdPesquisas: number = 0;
 
     categoria: number = 0;
 
@@ -57,29 +56,12 @@ export class BuscaComponent implements OnInit {
     list(resultado) {
 
         this.resultadoBusca = [];
-        this.resultadoIndicadores = [];
         this.resultadoPesquisas = [];
         this.resultadoLocais = [];
         this.resultadoTodos = [];
 
-        let indicadores: Indicador[] = resultado.indicadores;
         let pesquisas: Pesquisa[] = resultado.pesquisas;
         let localidades: Localidade[] = resultado.localidades;
-
-        this.qtdIndicadores = indicadores.length;
-        indicadores.map(indicador => {
-
-            let itemResultado: ItemResultado = {
-
-                nome: indicador.indicador,
-                tipo: indicador.pesquisa.nome,
-                categoria: 1,
-                destaque: '',
-                link: this._localidadeAtual.link + '/sintese/' + indicador.id
-            };
-
-            this.resultadoIndicadores.push(itemResultado);
-        });
 
         this.qtdPesquisas = pesquisas.length;
         pesquisas.map(pesquisa => {
@@ -88,7 +70,7 @@ export class BuscaComponent implements OnInit {
 
                 nome: pesquisa.nome,
                 tipo: pesquisa.descricao,
-                categoria: 2,
+                categoria: 1,
                 destaque: '',
                 link: this._localidadeAtual.link + '/pesquisas/' + pesquisa.id
             };
@@ -120,7 +102,7 @@ export class BuscaComponent implements OnInit {
 
                 nome: localidade.nome,
                 tipo: tipo,
-                categoria: 3,
+                categoria: 2,
                 destaque: destaque,
                 link: link
             };
@@ -128,23 +110,22 @@ export class BuscaComponent implements OnInit {
             this.resultadoLocais.push(itemResultado);
         });
 
-        this.resultadoTodos = this.resultadoIndicadores.concat(this.resultadoPesquisas.concat(this.resultadoLocais));
+        this.resultadoTodos = this.resultadoPesquisas.concat(this.resultadoLocais);
 
-        this.selecionarCategoria();
+        this.selecionarCategoria(this.categoria);
         this.menuAberto = true;
     }
 
-    selecionarCategoria(){
+    selecionarCategoria(categoria){
 
-        switch (this.categoria) {
+        this.categoria = categoria;
+
+        switch (categoria) {
 
             case 1:
-                this.resultadoBusca = this.resultadoIndicadores;
-                break;
-            case 2:
                 this.resultadoBusca = this.resultadoPesquisas;
                 break;
-            case 3:
+            case 2:
                 this.resultadoBusca = this.resultadoLocais;  
                 break;
             default:
@@ -153,7 +134,35 @@ export class BuscaComponent implements OnInit {
         }
     }
 
+    ativarBusca(){
+
+        this.modoDigitacao = true;
+
+        if(this.resultadoBusca.length > 0){
+
+            this.menuAberto = true;
+        } 
+        else {
+
+            this.menuAberto = false;
+        }
+    }
+
+    desativarBusca(){
+
+        this.menuAberto = false;
+        this.modoDigitacao = false;
+    }
+
+    selecionarItemBusca(){
+
+        this.modoDigitacao = false; 
+        this.menuAberto = false;
+        this.resultadoBusca = [];
+        this.termo = ''
+    }
 }
+
 
 
 interface ItemResultado {

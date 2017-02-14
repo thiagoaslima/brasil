@@ -1,5 +1,8 @@
-import { Component, Input, Output, OnChanges, AfterViewInit, ViewChild, ElementRef, Renderer, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, ViewChild, ElementRef, Renderer, EventEmitter } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
+import { Observable, Observer } from 'rxjs';
+
+import { CommonService } from '../../shared/common.service';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -10,7 +13,7 @@ var FileSaver = require('file-saver');
     templateUrl: 'grafico.template.html',
     styleUrls: ['grafico.style.css']
 })
-export class GraficoComponent implements OnChanges, AfterViewInit{
+export class GraficoComponent implements OnInit, OnChanges{
 
     @Input() tipoGrafico: string;
     @Input() dadosIndicador: string[];
@@ -31,10 +34,25 @@ export class GraficoComponent implements OnChanges, AfterViewInit{
 
     private stacked = 'false';
     private beginAtZero = 'true';
+    private graficoRef$: Observable<ElementRef>;
     
     constructor( 
-        private _render: Renderer 
+        private _render: Renderer, 
+        private _commonService: CommonService
     ){ }
+
+    ngOnInit(){
+
+        this._commonService.notifyObservable$.subscribe((mensagem) => {
+
+            if(mensagem['tipo'] == 'getDataUrl'){
+
+                debugger;
+                // Envia por serviço a imagem do gráfico em base64
+                this._commonService.notifyOther({"tipo": "dataURL", "url": this.graficoRef.nativeElement.toDataURL()});
+            }
+        });
+    }
 
     ngOnChanges(){
 
@@ -44,13 +62,6 @@ export class GraficoComponent implements OnChanges, AfterViewInit{
         }
     }
 
-    ngAfterViewInit(){
-
-        if(!!this.graficoRef && !!this.graficoRef.nativeElement){
-
-            this.dataURL.emit(this.graficoRef.nativeElement.toDataURL());
-        }
-    }
 
     private plotChart(dados, nomeSerie, tipoGrafico){
         
@@ -84,6 +95,7 @@ export class GraficoComponent implements OnChanges, AfterViewInit{
                 }]
             }
         };
+
     }
 
     private converterParaNumero(valor: string): number{

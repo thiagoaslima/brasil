@@ -6,6 +6,7 @@ import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { CommonService } from '../../shared/common.service';
 
 @Component({
     selector: 'sintese-detalhes',
@@ -18,7 +19,8 @@ export class SinteseDetalhesComponent implements OnInit {
         private _route: ActivatedRoute,
         private _sinteseService: SinteseService,
         private _localidadeService: LocalidadeService,
-        private _params: RouterParamsService
+        private _params: RouterParamsService,
+        private _commonService: CommonService
     ) { }
 
     // Header
@@ -61,6 +63,21 @@ export class SinteseDetalhesComponent implements OnInit {
 
                 });
             });
+
+        // Obtém a imagem do gráfico em base64 para download, assim que o gráfico for desenhado.
+        // A imagem é recuperada pelo serviço
+        this._commonService.notifyObservable$.subscribe((mensagem) => {
+
+            debugger;
+
+            if(mensagem['tipo'] == 'dataURL'){
+
+                debugger;
+
+                this.setDataURL(mensagem['url']);
+            }
+        });
+            
     }
 
     public exibirComponente(nomeComponente) {
@@ -70,7 +87,7 @@ export class SinteseDetalhesComponent implements OnInit {
 
     public setDataURL(dataURL) {
 
-        //this.urlDownloadImagemGrafico = dataURL;
+        this.urlDownloadImagemGrafico = dataURL;
     }
 
     private exibirMapa(localidade: Localidade) {
