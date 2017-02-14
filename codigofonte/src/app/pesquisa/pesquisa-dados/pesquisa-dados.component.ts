@@ -55,7 +55,8 @@ export class PesquisaDadosComponent {
                     if(ind[i].res){
                         let resultados = [];
                         for(let key in ind[i].res){
-                            resultados.push({'ano' : parseInt(key), 'valor' : ind[i].res[key]});
+                            let v = isNaN(parseFloat(ind[i].res[key])) ? ind[i].res[key] : parseFloat(ind[i].res[key]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
+                            resultados.push({'ano' : parseInt(key), 'valor' : v});
                         }
                         //faz o sort(decrescente) dos resultados de acordo com o ano
                         resultados.sort((a, b) => {
@@ -73,7 +74,7 @@ export class PesquisaDadosComponent {
                         });
                         //seta a propriedade com os valores para montar no template
                         ind[i].resultados = resultados;
-                        
+
                         //seta os anos do cabeçalho da tabela
                         this.anos[0] = resultados.length >= 1 ? resultados[0].ano : '-';
                         this.anos[1] = resultados.length >= 2 ? resultados[1].ano : '-';
@@ -90,7 +91,7 @@ export class PesquisaDadosComponent {
                         }
                     }
                 }
-
+                
                 this.indicadores = indicadores;
                 //console.log(indicadores);
             });
