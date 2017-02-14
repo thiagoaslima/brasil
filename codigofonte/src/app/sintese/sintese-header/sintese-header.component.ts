@@ -28,8 +28,6 @@ export class SinteseHeaderComponent implements OnChanges {
     // Nome da pesquisa de origem
     public pesquisa;
     // Código da pesquisa de origem
-    //public codPesquisa;
-    public dataURL;
     public isMenuOculto = true;
     public queryParams = {};
 
