@@ -4,6 +4,21 @@
     float: left;
 }
 
+.busca__hit{
+    position: fixed;
+    /*background-color: red;*/
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0px;
+    z-index: 1;
+    display: none;
+}
+
+.busca.aberto .busca__hit{
+    display: block;
+}
+
 
 .busca.aberto{
     background-color: #333333;
@@ -15,6 +30,7 @@
 
 .busca.aberto .busca__auto-completar{
     display: block;
+    z-index: 1;
 }
 
 
@@ -23,6 +39,11 @@
     margin: 10px 1%;
     height: 30px;
     width: 98%;
+}
+
+.busca.aberto .busca__input{
+    z-index: 3;
+    position: relative;
 }
 
 .busca .busca__icone{

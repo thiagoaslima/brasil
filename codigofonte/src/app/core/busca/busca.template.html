@@ -1,5 +1,7 @@
 <span (mouseleave)="desativarBusca()">
     <div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" (click)="ativarBusca()">
+        <div class="busca__hit">
+        </div>
         <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?" [(ngModel)]="termo">
         <i class="busca__icone fa fa-search" aria-hidden="true"></i>
         <div class="busca__auto-completar">

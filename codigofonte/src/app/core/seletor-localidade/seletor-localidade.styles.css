@@ -421,8 +421,7 @@ ANIMAÇÃO
         min-height: 100vh;
         overflow: hidden;
         display: block;
-
-
+        z-index: 3;
     }
 
     #selecionar-localidade #bg{
@@ -456,6 +455,7 @@ ANIMAÇÃO
         font-size: 21px;
         margin-top: 3px;
         display: block;
+        cursor: pointer;
     }
 
    .selecionar-localidade__local-atual--mobile{
@@ -562,6 +562,7 @@ ANIMAÇÃO
         border-bottom: 5px solid #666666;
         padding: 10px 0px;
         font-weight: bold;
+        cursor: pointer;
     }
 
     .terceira-coluna__menu--mobile div.selecionado{
@@ -645,6 +646,7 @@ ANIMAÇÃO
     .por-estado__selecionar-estado ul li{
         border-bottom: 1px solid #4D4D4D;
         padding: 10px 0%;
+        cursor: pointer;
     }
 
     .por-estado__selecionar-estado ul li i{
