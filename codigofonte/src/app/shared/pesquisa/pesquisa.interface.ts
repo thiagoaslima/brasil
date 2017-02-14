@@ -106,7 +106,7 @@ export class Indicador {
             _periodos = this.pesquisa.getPeriodosValues();
         } else {
             _periodos = Array.isArray(periodos) ? periodos.map(periodo => periodo.toString()) : [periodos.toString()];
-            _periodos = flatMap<string, string>(_periodos, (periodo) => {
+            _periodos = flatMap(_periodos, (periodo) => {
                 if (periodo.toString().indexOf('-') === -1) {
                     return [periodo];
                 }

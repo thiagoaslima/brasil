@@ -6,7 +6,7 @@ import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
 import { PesquisaService } from '../../shared/pesquisa/pesquisa.service';
 import { SystemCacheService } from '../../shared/system-cache.service';
 import { slugify } from '../../utils/slug';
-import { flatTree } from '../../utils/flatFunctions';
+import { flatTree, flatMap } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -36,7 +36,7 @@ export class BuscaService {
         let filtro = this._filterSearchResponse(termo);
         let _termo = termo.slice(0, -1);
 
-        while (_termo ) {
+        while (_termo) {
             if (this._cache.has(this._cacheKeys.busca(_termo))) {
                 break;
             }
@@ -48,7 +48,18 @@ export class BuscaService {
         //     ? this._cache.get(_termo).pesquisas
         //     : this._pesquisaService.getAllPesquisas();
 
-        let indicadores$: Observable<Indicador[]> = this._pesquisaService.getIndicadores(23);
+        let indicadores$ = pesquisas$.switchMap(pesquisas => {
+            let ind$ = [{id: 13}, {id: 23}].map(p => {
+                return this._pesquisaService.getIndicadores(p.id).map(indTree => {
+                    debugger;
+                    return flatTree(indTree);
+                })
+            })
+            return Observable.zip(ind$).map(inds => {
+                debugger;
+                return flatMap(inds, (i) => i)
+            });
+        });
 
 
         let localidade$: Observable<Localidade[]> = Observable.of(this._localidades);
