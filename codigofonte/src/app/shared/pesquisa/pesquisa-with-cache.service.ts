@@ -1,5 +1,6 @@
 import { Inject, Injectable, isDevMode } from '@angular/core';
 import { Http } from '@angular/http';
+import { isBrowser, isNode } from 'angular2-universal/browser';
 
 import { CacheService } from '../cache.service';
 import { SystemCacheService } from '../system-cache.service';
@@ -9,8 +10,9 @@ import { PesquisaService } from './pesquisa.service';
 import { flatTree } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/multicast';
 
 @Injectable()
 export class PesquisaServiceWithCache {
@@ -24,22 +26,32 @@ export class PesquisaServiceWithCache {
         this._instance = new PesquisaService(_http);
     }
 
-    getAllPesquisas(): Observable<Pesquisa[]> {
-         let cacheKey = this._cache.buildKey.allPesquisas();
+    private _subjects = <{ [idx: string]: Observable<any> }>{};
 
-         if (this._cache.has(cacheKey)) {
-            return Observable.of(this._cache.get(cacheKey));
+    getAllPesquisas(): Observable<Pesquisa[]> {
+        let cacheKey = this._cache.buildKey.allPesquisas();
+
+        if (this._cache.has(cacheKey)) {
+            let value = this._cache.get(cacheKey);
+            return Observable.of(value);
         }
 
-        let subject = new Subject<any>();
+        if (this._subjects[cacheKey]) {
+            return this._subjects[cacheKey];
+        }
 
-        this._instance.getAllPesquisas().subscribe((pesquisas) => {
-            subject.next(pesquisas);
-            this._cache.set(cacheKey, pesquisas);
-        });
+        let pesquisas$ = this._instance.getAllPesquisas()
+            .finally(() => {
+                this._subjects[cacheKey] = null;
+                pesquisas$ = null;
+            });
 
-        this._cache.set(cacheKey, subject);
-        return subject.asObservable();
+        let _observable = pesquisas$.multicast(() => new ReplaySubject<Pesquisa[]>(1));
+
+        this._subjects[cacheKey] = _observable;
+        _observable.connect();
+
+        return _observable;
     }
 
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
@@ -47,39 +59,43 @@ export class PesquisaServiceWithCache {
     }
 
     getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
-         let cacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+        let cacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
 
         if (this._cache.has(cacheKey)) {
-            return Observable.of(this._cache.get(cacheKey));
+            let value = this._cache.get(cacheKey);
+            return Observable.of(value);
         }
 
-        let subject = new Subject<any>();
+        if (this._subjects[cacheKey]) {
+            return this._subjects[cacheKey];
+        }
 
-        this._instance.getListaIndicadoresDaPesquisa(pesquisaId).subscribe((indicadoresTree) => {
-            subject.next(indicadoresTree);
-            this._cache.set(cacheKey, indicadoresTree);
-
-            debugger;
-
-            flatTree(indicadoresTree).map(indicador => {
-                let cacheKey = this._cache.buildKey.indicador(pesquisaId, indicador.id);
+        let lista$ = this._instance.getListaIndicadoresDaPesquisa(pesquisaId)
+            .finally(() => this._subjects[cacheKey] = null)
+            .do((indicadoresTree) => {
                 this._cache.set(cacheKey, indicadoresTree);
-            })
-        });
 
-        this._cache.set(cacheKey, subject);
-        return subject.asObservable();
+                flatTree(indicadoresTree).map(indicador => {
+                    let cacheKey = this._cache.buildKey.indicador(pesquisaId, indicador.id);
+                    this._cache.set(cacheKey, indicador);
+                })
+
+                return indicadoresTree;
+            }
+            );
+
+        let _observable = lista$.multicast(() => new ReplaySubject<Indicador[]>(1));
+        this._subjects[cacheKey] = _observable;
+
+        _observable.connect();
+
+        return _observable;
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
-        debugger;
 
         if (!indicadoresId) {
-            debugger;
-            return this.getListaIndicadoresDaPesquisa(pesquisaId).map(args => {
-                debugger;
-                return args;
-            });
+            return this.getListaIndicadoresDaPesquisa(pesquisaId);
         }
 
         let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
@@ -93,13 +109,8 @@ export class PesquisaServiceWithCache {
             return Observable.of(resp);
         }
 
-        let subject = new Subject<any>();
-
-        this._instance.getListaIndicadoresDaPesquisa(pesquisaId)
-            .subscribe(_ => this.getIndicadores(pesquisaId, _indicadoresId).map(indicadores => subject.next(indicadores)));
-
-        this._cache.set(cacheKey, subject);
-        return subject.asObservable();
+        return this._instance.getListaIndicadoresDaPesquisa(pesquisaId)
+            .flatMap(_ => this.getIndicadores(pesquisaId, _indicadoresId));
     }
 
     getResultados(pesquisaId: number, localidadesCodigo: number | number[]): Observable<Indicador[]> {
@@ -111,22 +122,17 @@ export class PesquisaServiceWithCache {
             return this.getIndicadores(pesquisaId);
         }
 
-        let subject = new Subject<any>();
-
-        this._instance.getResultados(pesquisaId, _localidadesCodigo)
+        return this._instance.getResultados(pesquisaId, _localidadesCodigo)
             .flatMap(_ => {
                 _localidadesCodigo.forEach(codigo => this._cache.set(this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo), true))
                 return this.getIndicadores(pesquisaId);
-            })
-            .subscribe(indicadores => subject.next(indicadores));
-
-        return subject.asObservable();
+            });
     }
 
-    getDadosIndicadores(pesquisaId: number, localidadesCodigo: number | number[], indicadoresId?: number | number[]): Observable<Indicador[]> {   
+    getDadosIndicadores(pesquisaId: number, localidadesCodigo: number | number[], indicadoresId?: number | number[]): Observable<Indicador[]> {
         return this.getResultados(pesquisaId, localidadesCodigo)
             .flatMap(indicadores => {
-                
+
                 if (!indicadoresId) {
                     return Observable.of(indicadores);
                 }

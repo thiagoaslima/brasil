@@ -27,10 +27,7 @@ export class PesquisaService {
     getAllPesquisas(): Observable<Pesquisa[]> {
         return this._http.get(this._server.path('pesquisas'))
             .retry(3)
-            .catch(err => {
-                debugger;
-                return Observable.of({ json: () => [] });
-            })
+            .catch(err => Observable.of({ json: () => [] }))
             .map(res => res.json())
             .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
     }
@@ -55,14 +52,9 @@ export class PesquisaService {
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
-        debugger; 
         
         if (!indicadoresId) {
-            debugger;
-            return this.getListaIndicadoresDaPesquisa(pesquisaId).map(args => {
-                debugger;
-                return args;
-            });
+            return this.getListaIndicadoresDaPesquisa(pesquisaId);
         }
 
         let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];

@@ -89,12 +89,10 @@ export class SystemCacheService {
         const len = arr.length;
 
         const obj = arr.reduce((agg, str, idx) => {
-            let _obj = agg.filter(item => item.path === str);
-
-            if (_obj.length === 0) {
-                _obj = agg.filter(item => item.path === "any");
+            let _obj = agg.reduce( (obj, item) => item.path === str ? item : obj, null);
+            if (!_obj) {
+                _obj = agg.reduce( (obj, item) => item.path === "any" ? item : obj, null);
             }
-
             return idx === len - 1 ? _obj : _obj.children;
         }, keys);
 
