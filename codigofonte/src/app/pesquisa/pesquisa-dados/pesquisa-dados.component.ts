@@ -38,6 +38,7 @@ export class PesquisaDadosComponent {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
             let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
             let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
+            this.dadosTabela = [];
 
             //pega o indicador a partir da rota
             this.idIndicadorSelecionado = params.indicador;
@@ -56,7 +57,7 @@ export class PesquisaDadosComponent {
                         let resultados = [];
                         for(let key in ind[i].res){
                             let v = isNaN(parseFloat(ind[i].res[key])) ? ind[i].res[key] : parseFloat(ind[i].res[key]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
-                            resultados.push({'ano' : parseInt(key), 'valor' : v});
+                            resultados.push({'ano' : parseInt(key), 'valor' : ind[i].res[key]});
                         }
                         //faz o sort(decrescente) dos resultados de acordo com o ano
                         resultados.sort((a, b) => {
@@ -93,7 +94,7 @@ export class PesquisaDadosComponent {
                 }
                 
                 this.indicadores = indicadores;
-                //console.log(indicadores);
+                //debugger;//console.log(indicadores);
             });
 
             //seta a variável de rota base
@@ -116,6 +117,7 @@ export class PesquisaDadosComponent {
 
     //chamada quando muda o combobox
     onChange(event){
+        this.dadosTabela = [];
         this.indexCombo = event.target.selectedIndex;
         this.dadosTabela = this.flat(this.dadosCombo[this.indexCombo]);
     }

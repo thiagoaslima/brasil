@@ -14,8 +14,6 @@ import { ChartsModule } from '../shared/ng2-charts.module';
 import { MapaComponent } from './mapa/mapa.component';
 import { RootRoutingModule } from '../root-routing.module';
 
-import {ResultadoPipe} from '../utils/resultado';
-
 @NgModule({
     imports: [
         SharedModule,
@@ -31,9 +29,7 @@ import {ResultadoPipe} from '../utils/resultado';
 
         GraficoComponent,
         TabelaComponent,
-        MapaComponent,
-        ResultadoPipe
-
+        MapaComponent
     ]
 })
 export class SinteseModule {}
