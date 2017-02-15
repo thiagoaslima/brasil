@@ -38,6 +38,7 @@ export class PesquisaDadosComponent {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
             let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
             let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
+            this.dadosTabela = [];
 
             //pega o indicador a partir da rota
             this.idIndicadorSelecionado = params.indicador;
@@ -93,7 +94,7 @@ export class PesquisaDadosComponent {
                 }
                 
                 this.indicadores = indicadores;
-                //console.log(indicadores);
+                //debugger;//console.log(indicadores);
             });
 
             //seta a variável de rota base
@@ -116,6 +117,7 @@ export class PesquisaDadosComponent {
 
     //chamada quando muda o combobox
     onChange(event){
+        this.dadosTabela = [];
         this.indexCombo = event.target.selectedIndex;
         this.dadosTabela = this.flat(this.dadosCombo[this.indexCombo]);
     }
