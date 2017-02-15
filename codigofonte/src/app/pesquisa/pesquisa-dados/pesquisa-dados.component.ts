@@ -57,7 +57,7 @@ export class PesquisaDadosComponent {
                         let resultados = [];
                         for(let key in ind[i].res){
                             let v = isNaN(parseFloat(ind[i].res[key])) ? ind[i].res[key] : parseFloat(ind[i].res[key]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
-                            resultados.push({'ano' : parseInt(key), 'valor' : v});
+                            resultados.push({'ano' : parseInt(key), 'valor' : ind[i].res[key]});
                         }
                         //faz o sort(decrescente) dos resultados de acordo com o ano
                         resultados.sort((a, b) => {

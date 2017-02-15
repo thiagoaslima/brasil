@@ -44,11 +44,11 @@
                 </td>
                 <!--valores-->
                 <td>
-                    {{ dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ' | resultado }}
+                    {{ (dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ') | resultado: true }}
                     <span *ngIf="dado.resultados && dado.resultados.length >= 1 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
-                    {{ dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ' | resultado }}
+                    {{ (dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ') | resultado: true }}
                     <span *ngIf="dado.resultados && dado.resultados.length >= 2 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
