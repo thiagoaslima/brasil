@@ -231,10 +231,24 @@ sintese>dados
     float: left;
     width: 38%;
     height: 100%;
+}
+
+.conteudo__dados--com-scroll{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    height: 100%;
     overflow-y: auto;
 }
 
+
 .conteudo__detalhes{
+    float: left;
+    width: 62%;
+    height: 100%;
+}
+
+.conteudo__detalhes--com-scroll{
     float: left;
     width: 62%;
     height: 100%;
