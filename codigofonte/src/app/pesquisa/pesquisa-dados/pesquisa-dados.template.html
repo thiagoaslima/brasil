@@ -35,6 +35,9 @@
                     <option *ngFor="let ano of anos;" [selected]="ano == ano3">{{ ano }}</option>
                 </select>
             </td>
+            <td>
+                {{ ' ' }}
+            </td>
         </tr>
 
         <template ngFor let-dado [ngForOf]="dadosTabela">
@@ -55,15 +58,15 @@
                 <!--valores-->
                 <td>
                     {{ dado.res && dado.res[ano1] ? (dado.res[ano1] | resultado: true) : ' ' }}
-                    <span *ngIf="dado.res && dado.res[ano1] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
                     {{ dado.res && dado.res[ano2] ? (dado.res[ano2] | resultado: true) : ' ' }}
-                    <span *ngIf="dado.res && dado.res[ano2] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
                     {{ dado.res && dado.res[ano3] ? (dado.res[ano3] | resultado: true) : ' ' }}
-                    <span *ngIf="dado.res && dado.res[ano3] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                </td>
+                <td>
+                    {{ dado?.unidade?.id }}
                 </td>
             </tr>
         </template>

@@ -63,7 +63,7 @@ export class BuscaService {
 
         return Observable.zip(pesquisas$, indicadores$, localidade$)
             .map(([pesquisas, indicadores, localidades]) => {
-                debugger;
+
                 pesquisas = pesquisas.filter(filtro.pesquisa);
                 
                 let hash = indicadores.filter(filtro.indicador).reduce( (obj, indicador) => {

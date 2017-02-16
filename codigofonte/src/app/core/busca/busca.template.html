@@ -23,7 +23,7 @@
                 </a>
             </div>
         </div>
-        <div class='busca__respostas load'>
+        <div class='busca__respostas' [class.load]="!!carregando" [class.sem-resultado]="resultadoBusca.length == 0 && !carregando">
             <div class='busca__resposta--sem-resultado'>
                 Nenhum resultado foi encontrado! 
             </div>
