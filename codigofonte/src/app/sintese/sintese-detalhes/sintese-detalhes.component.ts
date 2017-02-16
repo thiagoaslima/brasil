@@ -11,7 +11,7 @@ import { CommonService } from '../../shared/common.service';
 @Component({
     selector: 'sintese-detalhes',
     templateUrl: 'sintese-detalhes.template.html',
-    styles: ['sintese-detalhes.style.css']
+    styleUrls: ['sintese-detalhes.style.css']
 })
 export class SinteseDetalhesComponent implements OnInit {
 
@@ -33,8 +33,10 @@ export class SinteseDetalhesComponent implements OnInit {
     public tipoGrafico: string;
     public dadosIndicador: string[];
     public nomeIndicador: string;
-    public notasIndicador: string;
-    public fontesIndicador: string;
+    public notasIndicador: string[];
+    public fontesIndicador: string[];
+    public temFonte: boolean = false;
+    public temNota: boolean = false;
     public isGraficoCarregando: boolean = false;
 
     // Mapa
@@ -54,6 +56,10 @@ export class SinteseDetalhesComponent implements OnInit {
 
                         this.exibirMapa(localidade);
                         this.componenteAtivo = 'cartograma';
+
+                    } else if(params['v'] == 'historico') {
+
+                        this.componenteAtivo = 'historico';
 
                     } else {
 
@@ -133,8 +139,11 @@ export class SinteseDetalhesComponent implements OnInit {
             }).subscribe(info => {
                 console.log(info);
                 debugger;
-                this.fontesIndicador = !!info.periodos[0].fonte ? info.periodos[0].fonte : [];
-                this.notasIndicador = !!info.periodos[0].nota ? info.periodos[0].nota : [];
+                this.fontesIndicador = !!info.periodos ? info.periodos : [];
+                info.periodos.forEach(periodo => {
+                    this.temFonte = periodo.fonte.length > 0 ? true : false;
+                    this.temNota = periodo.nota.length > 0 ? true : false;
+                });
             });
 
     }

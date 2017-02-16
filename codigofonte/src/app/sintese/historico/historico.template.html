@@ -1,0 +1,37 @@
+<div class="loading" *ngIf="isCarregando">
+    <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+</div>
+
+
+<div class="component" *ngIf="!isCarregando">
+
+    <div class="comp__info">
+        <h3 class="comp__titulo">Histórico</h3>
+    </div>
+
+    <div class="comp__conteudo" *ngIf="isHistoricoVazio()">
+        <p>Nenhum histórico encontrado.</p>
+    </div>
+    
+    <div class="comp__conteudo" *ngIf="!isHistoricoVazio()">
+
+        <!--histórico expandido-->
+        <div class="caixa">
+            <div class="caixa__cabecalho">
+                <h3 class="caixa__titulo">Histórico</h3>
+            </div>
+            <div class="caixa__conteudo">
+                {{ historico?.historico }}
+
+                <h4 class="hist__titulo">Formação Administrativa</h4>
+                {{ historico?.formacaoAdministrativa }}
+
+                <h4 class="hist__titulo">Fonte</h4>
+                {{ historico?.Fonte }}
+            </div>
+        </div>
+       
+
+    </div>
+    
+</div>

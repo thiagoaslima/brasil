@@ -13,9 +13,11 @@
     </div>
     
     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
-            HISTÓRICO
-        </div>
+        <a routerLink='{{baseURL + "/sintese"}}' [queryParams]="{ v: 'historico'}" routerLinkActive="active" >
+            <div class="dados__tema__titulo">   
+                HISTÓRICO
+            </div>
+        </a>
     </div>
 
     <div class="dados__variavel">
