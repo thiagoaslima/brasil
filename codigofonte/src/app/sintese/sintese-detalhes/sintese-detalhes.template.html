@@ -24,8 +24,13 @@
     </div>
 </div>
 
-<div *ngIf="componenteAtivo !== 'grafico'">
+<div *ngIf="componenteAtivo === 'historico'">
+    <historico></historico>
+</div>
+
+<div *ngIf="componenteAtivo != 'grafico' && componenteAtivo != 'historico'">
     <div *ngIf="local != ''">
         <mapa [codigoLocalidade]="codigoLocalidade" [dadosMapa]="dadosMapa"></mapa>
     </div>
 </div>
+

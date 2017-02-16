@@ -105,6 +105,42 @@ export class PesquisaService {
             });
     }
 
+    /**
+     * Obtém o histórico de um munucípio, dado seu código.
+     * 
+     */
+    public getHistorico(codigoLocalidade: number) {
+
+        debugger;
+
+        let codigo: string = codigoLocalidade.toString().substr(0, 6);
+
+        return this._http.get(`http://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
+            .map((res) => {
+
+                return res.json();
+            })
+            .map((res) => {
+
+                let key = Object.keys(res).find((key) => {
+                    return key.indexOf(codigo) == 0;
+                });
+
+                return res[key];
+            })
+            .map((res) => {
+
+                debugger;
+
+                return {
+
+                    historico: res && res.HISTORICO,
+                    fonte: res && res.HISTORICO_FONTE,
+                    formacaoAdministrativa: res && res.FORMACAO_ADMINISTRATIVA
+                }
+            });
+    }
+
 
 
     private _createIndicadoresInstance(protoIndicador, pesquisa, parentId = 0) {
@@ -124,5 +160,6 @@ export class PesquisaService {
             }
         ))
     }
+
 }
 
