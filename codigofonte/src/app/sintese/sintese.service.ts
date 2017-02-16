@@ -45,6 +45,25 @@ export class SinteseService{
             });
     }
 
+    /**
+     * Obtém notas e fontes da pesquisa solicitada.
+     */
+    public getInfoPesquisa(pesquisa: string) {
+
+        return this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}`)
+            .map((res) => res.json())
+            .map((pesquisa) => {
+
+                return {
+                    id: pesquisa.id,
+                    descricao: pesquisa.descricao || pesquisa.nome,
+                    periodos: pesquisa.periodos
+                }
+
+            });
+
+    }
+
 
     /**
      * Recupera apenas os dados da pesquisa, ignorando os rótulos dos indicadores.

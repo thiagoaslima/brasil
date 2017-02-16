@@ -11,7 +11,7 @@ import { CommonService } from '../../shared/common.service';
 @Component({
     selector: 'sintese-detalhes',
     templateUrl: 'sintese-detalhes.template.html',
-    styles: ['sintese-detalhes.style.css']
+    styleUrls: ['sintese-detalhes.style.css']
 })
 export class SinteseDetalhesComponent implements OnInit {
 
@@ -33,8 +33,10 @@ export class SinteseDetalhesComponent implements OnInit {
     public tipoGrafico: string;
     public dadosIndicador: string[];
     public nomeIndicador: string;
-    public notasIndicador: string;
-    public fontesIndicador: string;
+    public notasIndicador: string[];
+    public fontesIndicador: string[];
+    public temFonte: boolean = false;
+    public temNota: boolean = false;
     public isGraficoCarregando: boolean = false;
 
     // Mapa
@@ -116,14 +118,30 @@ export class SinteseDetalhesComponent implements OnInit {
                 this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
                 this.tipoGrafico = this.getTipoGraficoIndicador(valores[0].id);
                 this.nomeIndicador = valores[0].indicador + (!!valores[0].unidade ? ' (' + multiplicador + valores[0].unidade.id + ')' : '');
-                this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
-                this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
+                // this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
+                // this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
 
                 this.isGraficoCarregando = false;
 
                 console.log(this.dadosIndicador);
 
             });
+
+            this._route.params.filter(params => !!params['indicador'])
+            .switchMap((params: Params) => {
+                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
+                let infoPesquisa = this._sinteseService.getInfoPesquisa(codigoPesquisa);
+                return infoPesquisa;
+            }).subscribe(info => {
+                console.log(info);
+                debugger;
+                this.fontesIndicador = !!info.periodos ? info.periodos : [];
+                info.periodos.forEach(periodo => {
+                    this.temFonte = periodo.fonte.length > 0 ? true : false;
+                    this.temNota = periodo.nota.length > 0 ? true : false;
+                });
+            });
+
     }
 
     private obterDadosMapa() {
