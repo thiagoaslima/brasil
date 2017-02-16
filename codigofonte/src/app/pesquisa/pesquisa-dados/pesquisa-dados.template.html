@@ -1,5 +1,9 @@
 <div class="conteudo__detalhes--com-scroll" [class.aberto]="aberto">
     <div class="cabecalho">
+        <button class="cabecalho__voltar" routerLink="./" [queryParams]="queryParams" routerLinkActive="active" >
+            < Voltar
+        </button>
+
         <h2 class="cabecalho__titulo">{{ tituloPrincipal }}</h2>
         <i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>
         <div class="cabecalho__download">
