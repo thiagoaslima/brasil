@@ -88,7 +88,7 @@ export class PesquisaDadosComponent {
                 }
                 
                 this.indicadores = indicadores;
-                //debugger;//console.log(indicadores);
+                debugger;//console.log(indicadores);
             });
 
             //seta a variável de rota base
