@@ -27,7 +27,9 @@
                 </select>
             </td>
             <td>
-                {{ ' ' }}
+                <select class="tabela__combobox" (change)="mudaAno3($event)" *ngIf="anos && anos.length >= 3">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano3">{{ ano }}</option>
+                </select>
             </td>
         </tr>
 
@@ -56,7 +58,8 @@
                     <span *ngIf="dado.res && dado.res[ano2] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
-                    {{ ' ' }}
+                    {{ dado.res && dado.res[ano3] ? dado.res[ano3] : ' ' }}
+                    <span *ngIf="dado.res && dado.res[ano3] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
             </tr>
         </template>

@@ -25,7 +25,8 @@ export class PesquisaDadosComponent {
     private baseURL = "";
     public aberto = false;
     public ano1 = 0
-    public ano2 = 1;
+    public ano2 = 0;
+    public ano3 = 0;
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -73,6 +74,7 @@ export class PesquisaDadosComponent {
 
                 this.ano1 = this.anos.length >= 1 ? this.anos[0] : 0;
                 this.ano2 = this.anos.length >= 2 ? this.anos[1] : 0;
+                this.ano3 = this.anos.length >= 3 ? this.anos[2] : 0;
 
                 //seta os dados iniciais do combobox e da tabela de dados
                 for(let i = 0; i < indicadores.length; i++){
@@ -121,6 +123,11 @@ export class PesquisaDadosComponent {
     //chamada quando muda o combobox
     mudaAno2(event){
         this.ano2 = this.anos[event.target.selectedIndex];
+    }
+
+    //chamada quando muda o combobox
+    mudaAno3(event){
+        this.ano3 = this.anos[event.target.selectedIndex];
     }
 
     //chamada quando abre os nós nível 2 da tabela de dados
