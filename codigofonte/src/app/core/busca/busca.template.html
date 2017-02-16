@@ -1,8 +1,8 @@
-<div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" (click)="ativarBusca()">
+<div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" >
     <div class="busca__hit" (click)="desativarBusca()">
     </div>
-    <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?" [(ngModel)]="termo">
-    <i class="busca__icone fa fa-search" aria-hidden="true"></i>
+    <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?" [(ngModel)]="termo" (click)="ativarBusca()">
+    <i class="busca__icone fa" [class.fa-search]="!menuAberto" [class.fa-times]="menuAberto" aria-hidden="true" (click)="!menuAberto ? ativarBusca() : limparBusca()"></i>
     <div class="busca__auto-completar">
         <div class="busca__auto-completar__menu">
             <ul>
@@ -13,7 +13,7 @@
         </div>
         <div class="busca__auto-completar__resultado">
             <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
-                <a [routerLink]="[item['link']]" (click)="selecionarItemBusca()">
+                <a [routerLink]="[item['link']]" (click)="limparBusca()">
                     <div class='busca__auto-completar__resultado__item__nome'>
                         {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
                     </div>

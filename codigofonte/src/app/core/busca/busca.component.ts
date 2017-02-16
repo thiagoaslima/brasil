@@ -28,7 +28,7 @@ export class BuscaComponent implements OnInit {
     qtdPesquisas: number = 0;
 
     categoria: number = 0;
-
+    carregando = false;
 
     private _qtdMinimaCaracteres = 3;
     private _localidadeAtual;
@@ -48,7 +48,11 @@ export class BuscaComponent implements OnInit {
             .distinctUntilChanged()
             .map(e => e.target['value'])
             .filter(value => value.length >= this._qtdMinimaCaracteres)
-            .flatMap(termo => this._buscaService.search(termo))
+            .flatMap(termo => {
+
+                this.carregando = true;
+                return this._buscaService.search(termo);
+            })
             .subscribe(resultados => this.list(resultados));
     }
 
@@ -113,6 +117,7 @@ export class BuscaComponent implements OnInit {
         this.resultadoTodos = this.resultadoPesquisas.concat(this.resultadoLocais);
 
         this.selecionarCategoria(this.categoria);
+        this.carregando = false;
         this.menuAberto = true;
     }
 
@@ -154,7 +159,7 @@ export class BuscaComponent implements OnInit {
         this.modoDigitacao = false;
     }
 
-    selecionarItemBusca(){
+    limparBusca(){
 
         this.modoDigitacao = false; 
         this.menuAberto = false;
