@@ -61,7 +61,10 @@ export class SinteseDetalhesComponent implements OnInit {
 
                         this.componenteAtivo = 'historico';
 
-                    } else {
+                    } else if(params['v'] == 'fotos'){
+
+                        this.componenteAtivo = 'fotos';
+                    }else {
 
                         this.exibirGrafico(localidade);
                         this.componenteAtivo = 'grafico';
