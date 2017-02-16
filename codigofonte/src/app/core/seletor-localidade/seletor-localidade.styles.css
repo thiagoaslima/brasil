@@ -422,6 +422,9 @@ ANIMAÇÃO
         overflow: hidden;
         display: block;
         z-index: 3;
+
+        overflow: scroll;
+        position: fixed;
     }
 
     #selecionar-localidade #bg{
@@ -497,6 +500,7 @@ ANIMAÇÃO
         background-color: #333333;
 
         border-top: 2px solid #252525;
+        display: none;
     }
 
      #selecionar-localidade #segunda-coluna ul li{
@@ -524,6 +528,8 @@ ANIMAÇÃO
         left: 100%;
         border-top: 2px solid #252525;
         padding: 0px 6%;
+
+        height: auto;
     }
     #segunda-coluna.aberto + #terceira-coluna {
         left: 100%;

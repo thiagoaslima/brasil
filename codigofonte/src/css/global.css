@@ -386,4 +386,8 @@ sintese>dados
     .conteudo__detalhes.aberto{
         left: 0%;
     }
+
+    .no__scroll--mobile{
+        overflow: hidden;
+    }
 }
