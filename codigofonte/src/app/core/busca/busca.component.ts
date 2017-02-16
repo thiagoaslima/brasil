@@ -50,7 +50,9 @@ export class BuscaComponent implements OnInit {
             .filter(value => value.length >= this._qtdMinimaCaracteres)
             .flatMap(termo => {
 
+                this.menuAberto = true;
                 this.carregando = true;
+
                 return this._buscaService.search(termo);
             })
             .subscribe(resultados => this.list(resultados));
@@ -118,7 +120,6 @@ export class BuscaComponent implements OnInit {
 
         this.selecionarCategoria(this.categoria);
         this.carregando = false;
-        this.menuAberto = true;
     }
 
     selecionarCategoria(categoria){

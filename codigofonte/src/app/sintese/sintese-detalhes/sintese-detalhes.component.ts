@@ -74,11 +74,7 @@ export class SinteseDetalhesComponent implements OnInit {
         // A imagem é recuperada pelo serviço
         this._commonService.notifyObservable$.subscribe((mensagem) => {
 
-            debugger;
-
             if(mensagem['tipo'] == 'dataURL'){
-
-                debugger;
 
                 this.setDataURL(mensagem['url']);
             }
