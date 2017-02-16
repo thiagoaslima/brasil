@@ -3,7 +3,7 @@ import { SinteseService } from '../../sintese/sintese.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { slugify } from '../../utils/slug';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -27,6 +27,9 @@ export class PesquisaDadosComponent {
     public ano1 = 0
     public ano2 = 0;
     public ano3 = 0;
+    public fontesIndicador: string[];
+    public temFonte: boolean = false;
+    public temNota: boolean = false;
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -89,6 +92,22 @@ export class PesquisaDadosComponent {
                 
                 this.indicadores = indicadores;
                 debugger;//console.log(indicadores);
+            });
+
+            //insere notas e fontes da pesquisa por período
+            this._route.params.filter(params => !!params['indicador'])
+            .switchMap((params: Params) => {
+                let codigoPesquisa = this._sintese.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
+                let infoPesquisa = this._sintese.getInfoPesquisa(codigoPesquisa);
+                return infoPesquisa;
+            }).subscribe(info => {
+                console.log(info);
+                debugger;
+                this.fontesIndicador = !!info.periodos ? info.periodos : [];
+                info.periodos.forEach(periodo => {
+                    this.temFonte = periodo.fonte.length > 0 ? true : false;
+                    this.temNota = periodo.nota.length > 0 ? true : false;
+                });
             });
 
             //seta a variável de rota base

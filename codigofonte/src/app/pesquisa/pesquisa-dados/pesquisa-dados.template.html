@@ -64,4 +64,29 @@
             </tr>
         </template>
     </table>
+
+    <!-- fontes e notas -->
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <br>
+        <p *ngIf="temNota === true">Notas: </p>
+        <ul>
+            <li *ngFor="let fonte of fontesIndicador"><span *ngIf="fonte.nota.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let nota of fonte.nota">{{nota}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <p *ngIf="temFonte === true">Fonte: </p>
+        <ul>
+            <li *ngFor="let fonte of fontesIndicador"><span *ngIf="fonte.fonte.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let fonte of fonte.fonte">{{fonte}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+
 </div>
