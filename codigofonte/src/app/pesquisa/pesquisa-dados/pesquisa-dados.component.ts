@@ -169,12 +169,14 @@ export class PesquisaDadosComponent {
                 let csv = this.baseURL + '\n\n';
                 csv += "Nível;Indicador;" +
                     (this.ano1 != 0 ? this.ano1 + ';' : '') +
-                    (this.ano2 != 0 ? this.ano2 + ';' : '') + 'Unidade\n';
+                    (this.ano2 != 0 ? this.ano2 + ';' : '') +
+                    (this.ano3 != 0 ? this.ano3 + ';' : '') + 'Unidade\n';
                 for(let j = 0; j < ind.length; j++){
                     csv += ind[j].posicao + ';' + ind[j].indicador
                     if(ind[j].res){
                         csv += this.ano1 != 0 ? ';' + (ind[j].res[this.ano1] ? ind[j].res[this.ano1] : '') : '';
                         csv += this.ano2 != 0 ? ';' + (ind[j].res[this.ano2] ? ind[j].res[this.ano2] : '') : '';
+                        csv += this.ano3 != 0 ? ';' + (ind[j].res[this.ano3] ? ind[j].res[this.ano3] : '') : '';
                         csv += ind[j].unidade ? ';' + ind[j].unidade.id : '';
                     }
                     csv += '\n';

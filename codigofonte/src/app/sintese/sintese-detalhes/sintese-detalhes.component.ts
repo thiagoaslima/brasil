@@ -57,6 +57,10 @@ export class SinteseDetalhesComponent implements OnInit {
                         this.exibirMapa(localidade);
                         this.componenteAtivo = 'cartograma';
 
+                    } else if(params['v'] == 'historico') {
+
+                        this.componenteAtivo = 'historico';
+
                     } else {
 
                         this.exibirGrafico(localidade);
