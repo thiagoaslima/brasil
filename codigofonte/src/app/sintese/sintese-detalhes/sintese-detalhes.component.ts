@@ -116,14 +116,27 @@ export class SinteseDetalhesComponent implements OnInit {
                 this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
                 this.tipoGrafico = this.getTipoGraficoIndicador(valores[0].id);
                 this.nomeIndicador = valores[0].indicador + (!!valores[0].unidade ? ' (' + multiplicador + valores[0].unidade.id + ')' : '');
-                this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
-                this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
+                // this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
+                // this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
 
                 this.isGraficoCarregando = false;
 
                 console.log(this.dadosIndicador);
 
             });
+
+            this._route.params.filter(params => !!params['indicador'])
+            .switchMap((params: Params) => {
+                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
+                let infoPesquisa = this._sinteseService.getInfoPesquisa(codigoPesquisa);
+                return infoPesquisa;
+            }).subscribe(info => {
+                console.log(info);
+                debugger;
+                this.fontesIndicador = !!info.periodos[0].fonte ? info.periodos[0].fonte : [];
+                this.notasIndicador = !!info.periodos[0].nota ? info.periodos[0].nota : [];
+            });
+
     }
 
     private obterDadosMapa() {

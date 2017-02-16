@@ -2,4 +2,14 @@
     color: #666;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.9em;
+    font-size: small;
+    margin: 2px 5px 2px 10px;
+}
+
+.pesq__info ol {
+    padding-left: 15px;
+}
+
+.pesq__info p {
+    font-weight: bold;
 }
