@@ -88,7 +88,7 @@ export class PesquisaDadosComponent {
                 }
                 
                 this.indicadores = indicadores;
-                //console.log(indicadores);
+                //debugger;//console.log(indicadores);
             });
 
             //seta a variável de rota base
@@ -111,6 +111,7 @@ export class PesquisaDadosComponent {
 
     //chamada quando muda o combobox
     onChange(event){
+        this.dadosTabela = [];
         this.indexCombo = event.target.selectedIndex;
         this.dadosTabela = this.flat(this.dadosCombo[this.indexCombo]);
     }

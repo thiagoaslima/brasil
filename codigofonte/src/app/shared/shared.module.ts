@@ -13,6 +13,8 @@ import { PesquisaServiceWithCache } from './pesquisa/pesquisa-with-cache.service
 import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
 
+import {ResultadoPipe} from '../utils/resultado.pipe';
+
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
     CommonModule,
@@ -23,6 +25,7 @@ const MODULES = [
 
 const PIPES = [
     // put pipes here
+    ResultadoPipe
 ];
 
 const COMPONENTS = [
