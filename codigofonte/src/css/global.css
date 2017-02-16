@@ -362,14 +362,16 @@ sintese>dados
         width: 100%;
     }
 
-    .conteudo__dados{
+    .conteudo__dados, .conteudo__dados--com-scroll{
         overflow-y: initial;
         width: 100%;
         min-height: 100%;
         display: table;
     }
 
-    .conteudo__detalhes{
+
+
+    .conteudo__detalhes, .conteudo__detalhes--com-scroll{
         width: 100%;
         position: fixed;
         background-color: #fff;
@@ -383,7 +385,7 @@ sintese>dados
         transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
     }
 
-    .conteudo__detalhes.aberto{
+    .conteudo__detalhes.aberto, .conteudo__detalhes--com-scroll.aberto{
         left: 0%;
     }
 
