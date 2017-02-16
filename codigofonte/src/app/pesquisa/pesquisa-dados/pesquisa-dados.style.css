@@ -128,7 +128,7 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .nivel-6:hover, .nivel-5:hover, .nivel-4:hover{
-    background-color: #f5f0f0;
+    background-color: #E8E8E8;
 }
 
 
@@ -148,9 +148,15 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .nivel-7:hover, .nivel-5:hover, .nivel-4:hover{
-    background-color: #f5f0f0;
+    background-color: #E8E8E8;
 }
 
+.tabela__combobox{
+    border: none;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
+}
 
 /*-----------------------------------*/
 

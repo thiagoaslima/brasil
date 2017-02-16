@@ -17,13 +17,19 @@
                 Indicador
             </td>
             <td>
-                {{ anos[0] }}
+                <select class="tabela__combobox" (change)="mudaAno1($event)">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano1">{{ ano }}</option>
+                </select>
             </td>
             <td>
-                {{ anos[1] }}
+                <select class="tabela__combobox" (change)="mudaAno2($event)" *ngIf="anos && anos.length >= 2">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano2">{{ ano }}</option>
+                </select>
             </td>
             <td>
-                -
+                <select class="tabela__combobox" (change)="mudaAno3($event)" *ngIf="anos && anos.length >= 3">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano3">{{ ano }}</option>
+                </select>
             </td>
         </tr>
 
@@ -44,15 +50,16 @@
                 </td>
                 <!--valores-->
                 <td>
-                    {{ (dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ') | resultado: true }}
-                    <span *ngIf="dado.resultados && dado.resultados.length >= 1 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                    {{ (dado.res && dado.res[ano1] ? dado.res[ano1] : ' ') | resultado: true }}
+                    <span *ngIf="dado.res && dado.res[ano1] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
-                    {{ (dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ') | resultado: true }}
-                    <span *ngIf="dado.resultados && dado.resultados.length >= 2 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                    {{ (dado.res && dado.res[ano2] ? dado.res[ano2] : ' ')  | resultado: true }}
+                    <span *ngIf="dado.res && dado.res[ano2] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
                 <td>
-                    {{ dado.resultados ? '-' : ' ' }}
+                    {{ (dado.res && dado.res[ano3] ? dado.res[ano3] : ' ')  | resultado: true }}
+                    <span *ngIf="dado.res && dado.res[ano3] && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
                 </td>
             </tr>
         </template>
