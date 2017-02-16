@@ -1,57 +1,5 @@
-/*preview*/
-
-.historico{
-    height: 320px;
-    overflow-y: hidden;
-    line-height: 2em;
-    cursor: pointer;
-}
-
 .hist__titulo{
     margin: 10px 0px;
-}
-
-@media screen and (min-width: 48em) {
-    .historico{
-        height: 100%;
-    }
-}
-
-.hist__mais{
-    display: inline-block;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-    color: rgb(13, 71, 104);
-    background-color: rgb(232, 226, 103);
-    margin-bottom: -12px;
-    padding: 10px;
-    border-top-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-
-/*-----------------------------------------*/
-
-/*balao*/
-
-.overlay{
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-}
-
-.area-click{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: -1;
 }
 
 .caixa{
@@ -71,23 +19,13 @@
     width: 90%;
 }
 
-.caixa__close-icon{
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 10px;
-    font-size: 1.3em;
-    cursor: pointer;
-}
 
 .caixa__conteudo{
     width: auto;
     height: 80vh;
     margin: 10px;
-    max-width: 720px;
     overflow: auto;
-
+    max-width: 900px;
     line-height: 2em;
     font-size: 1em;
 }

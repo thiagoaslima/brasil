@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { PesquisaService } from '../../shared/pesquisa/pesquisa.service';
+import { SinteseService } from '../sintese.service';
 
 @Component({
     selector: 'historico',
@@ -12,49 +12,31 @@ import { PesquisaService } from '../../shared/pesquisa/pesquisa.service';
 export class HistoricoComponent implements OnInit {
 
     historico;
-    isCaixaVisivel = false;
     isCarregando = false;
 
     constructor(
         private _localidadeService: LocalidadeService,
-        private _pesquisaService: PesquisaService
+        private _sinteseService: SinteseService
     ) {  }
 
     ngOnInit(){
 
         this._localidadeService.selecionada$
                 .filter(localidade => localidade.tipo == 'municipio')
-                .subscribe(localidade => {
-
-                    debugger;
-
+                .flatMap(localidade => {
                     this.isCarregando = true;
-
-                    return this._pesquisaService.getHistorico(localidade.codigo).subscribe(historico => {
-
-                        debugger;
-
+                    return this._sinteseService.getHistorico(localidade.codigo);
+                }).subscribe(historico => {
                         this.historico = historico
                         this.isCarregando = false;
-                    });
                 });
+
     }
 
     isHistoricoVazio(): boolean {
 
         return  !this.historico.historico && 
-                !this.historico.historicoFonte &&
+                !this.historico.fonte &&
                 !this.historico.formacaoAdministrativa;
     }
-
-    mostrarCaixa(){
-
-        this.isCaixaVisivel = true;
-    }
-
-    esconderCaixa(){
-
-        this.isCaixaVisivel = false;
-    }
-
 }

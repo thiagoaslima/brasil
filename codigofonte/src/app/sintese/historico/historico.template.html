@@ -5,10 +5,6 @@
 
 <div class="component" *ngIf="!isCarregando">
 
-    <div class="comp__info">
-        <h3 class="comp__titulo">Histórico</h3>
-    </div>
-
     <div class="comp__conteudo" *ngIf="isHistoricoVazio()">
         <p>Nenhum histórico encontrado.</p>
     </div>
@@ -23,11 +19,15 @@
             <div class="caixa__conteudo">
                 {{ historico?.historico }}
 
-                <h4 class="hist__titulo">Formação Administrativa</h4>
-                {{ historico?.formacaoAdministrativa }}
+                <span *ngIf="!!historico.formacaoAdministrativa">
+                    <h4 class="hist__titulo">Formação Administrativa</h4>
+                    {{ historico?.formacaoAdministrativa }}
+                </span>
 
-                <h4 class="hist__titulo">Fonte</h4>
-                {{ historico?.Fonte }}
+                <span *ngIf="!!historico.fonte">
+                    <h4 class="hist__titulo">Fonte</h4>
+                    {{ historico?.fonte }}
+                </span>
             </div>
         </div>
        
