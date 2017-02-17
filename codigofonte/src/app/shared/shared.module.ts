@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ChartsModule } from './ng2-charts.module';
+import { WindowEventsModule } from './window-events/window-events.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 
 import { RouterParamsService } from './router-params.service';
@@ -14,11 +15,14 @@ import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
 
+import {ResultadoPipe} from '../utils/resultado.pipe';
+
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
     CommonModule,
     RouterModule,
     FormsModule,
+    WindowEventsModule,
     ReactiveFormsModule
 ];
 

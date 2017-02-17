@@ -47,7 +47,6 @@ export class GraficoComponent implements OnInit, OnChanges{
 
             if(mensagem['tipo'] == 'getDataUrl'){
 
-                debugger;
                 // Envia por serviço a imagem do gráfico em base64
                 this._commonService.notifyOther({"tipo": "dataURL", "url": this.graficoRef.nativeElement.toDataURL()});
             }

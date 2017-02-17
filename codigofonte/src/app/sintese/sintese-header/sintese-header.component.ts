@@ -101,10 +101,17 @@ export class SinteseHeaderComponent implements OnChanges {
             //seta o parâmetro de detalhes para false
             this.queryParams['detalhes'] = 'false';
             
-            //reta a view ativa
+            //seta a view ativa
             if(params['v'] == 'mapa'){
+
                 this.ativo = 'cartograma';
+
+            } else if(params['v'] == 'historico'){
+
+                this.ativo = 'historico';
+
             } else {
+
                 this.ativo = 'grafico';
             }
         });

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BuscaService } from './busca.service';
@@ -28,10 +28,12 @@ export class BuscaComponent implements OnInit {
     qtdPesquisas: number = 0;
 
     categoria: number = 0;
-
+    carregando = false;
 
     private _qtdMinimaCaracteres = 3;
     private _localidadeAtual;
+
+    @Output() buscaAberta = new EventEmitter();
 
     constructor(
         private _renderer: Renderer,
@@ -48,8 +50,15 @@ export class BuscaComponent implements OnInit {
             .distinctUntilChanged()
             .map(e => e.target['value'])
             .filter(value => value.length >= this._qtdMinimaCaracteres)
-            .flatMap(termo => this._buscaService.search(termo))
+            .flatMap(termo => {
+
+                this.menuAberto = true;
+                this.carregando = true;
+
+                return this._buscaService.search(termo);
+            })
             .subscribe(resultados => this.list(resultados));
+
     }
 
 
@@ -113,7 +122,7 @@ export class BuscaComponent implements OnInit {
         this.resultadoTodos = this.resultadoPesquisas.concat(this.resultadoLocais);
 
         this.selecionarCategoria(this.categoria);
-        this.menuAberto = true;
+        this.carregando = false;
     }
 
     selecionarCategoria(categoria){
@@ -146,6 +155,8 @@ export class BuscaComponent implements OnInit {
 
             this.menuAberto = false;
         }
+
+        this.buscaAberta.emit();
     }
 
     desativarBusca(){
@@ -154,7 +165,7 @@ export class BuscaComponent implements OnInit {
         this.modoDigitacao = false;
     }
 
-    selecionarItemBusca(){
+    limparBusca(){
 
         this.modoDigitacao = false; 
         this.menuAberto = false;

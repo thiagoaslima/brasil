@@ -28,7 +28,7 @@ tr:nth-child(2) td{
 }
 
 tr:first-child td:nth-child(2){
-    text-align: center;
+    text-align: right;
 }
 
 tr td:nth-child(3){
@@ -128,7 +128,7 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .nivel-6:hover, .nivel-5:hover, .nivel-4:hover{
-    background-color: #f5f0f0;
+    background-color: #E8E8E8;
 }
 
 
@@ -148,9 +148,15 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .nivel-7:hover, .nivel-5:hover, .nivel-4:hover{
-    background-color: #f5f0f0;
+    background-color: #E8E8E8;
 }
 
+.tabela__combobox{
+    border: none;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
+}
 
 /*-----------------------------------*/
 
@@ -159,6 +165,10 @@ tr.nivel-1:nth-child(3) td{
     display: table;
     width: 100%;
     margin-bottom: 10px;
+}
+
+.cabecalho__voltar{
+    display: none;
 }
 
 .cabecalho__titulo{
@@ -203,6 +213,25 @@ tr.nivel-1:nth-child(3) td{
     background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
 }
 
+/* fontes e notas */
+.pesq__info{
+    color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    font-size: small;
+    margin: 2px 5px 2px 10px;
+}
+
+.pesq__info ol, .pesq__info ul {
+    padding-left: 15px;
+}
+.pesq__info ul {
+    list-style-type: none;
+}
+.pesq__info p, .pesq__info ul span {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 768px) {
     tr td:last-child {
         display: none;
@@ -211,4 +240,18 @@ tr.nivel-1:nth-child(3) td{
     td.some{
         display: none;
     }
+
+    .cabecalho__voltar{
+        background-color: transparent;
+        border: 1px solid #313131;
+        border-radius: 21px;
+        font-size: 0.8em;
+        display: block;
+        padding: 5px 10px;
+        cursor: pointer;
+        display: block;
+        margin: 12px;
+        margin-left: 2%;
+    }
+
 }

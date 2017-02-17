@@ -114,6 +114,29 @@
     font-size: .7em;
 }
 
+.busca__respostas{
+    padding: 30px;
+    text-align: center;
+    font-style: italic;
+    display: none;
+}
+
+.busca__respostas div{
+    display: none;
+}
+
+.busca__respostas.sem-resultado, .busca__respostas.load{
+    display: block
+}
+
+.busca__respostas.sem-resultado .busca__resposta--sem-resultado{
+    display: block;
+}
+
+.busca__respostas.load .busca__resposta--load{
+    display: block;
+}
+
 @media screen and (max-width: 768px) {
     .busca{
         width: 100%;
@@ -133,6 +156,7 @@
         padding: 10px 15px;
         font-size: 20px;
         padding: 12px 6%;
+        z-index: 3;
     }
 
     .busca.digitacao{

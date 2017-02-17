@@ -4,28 +4,50 @@
 <div *ngIf="componenteAtivo === 'grafico'">
     <grafico [tipoGrafico]="tipoGrafico" [dadosIndicador]="dadosIndicador" [nomeSerie]="nomeIndicador" [carregando]="isGraficoCarregando" (dataURL)="setDataURL($event)"></grafico>
 
-    <div *ngIf="notasIndicador?.length > 0" class="pesq__info">
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
         <br>
-        <p>
+        <p *ngIf="temNota === true">
             Notas:
         </p>
-        <ol>
-            <li *ngFor="let nota of notasIndicador">{{nota}}</li>
-        </ol>
+        <ul>
+            <!--<li *ngFor="let nota of notasIndicador">{{nota}}</li>-->
+            <li *ngFor="let fonte of fontesIndicador"><span *ngIf="fonte.nota.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let nota of fonte.nota">{{nota}}</li>
+                </ol>
+            </li>
+            
+        </ul>
     </div>
     <br>
     <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
-        <p>
+        <p *ngIf="temFonte === true">
             Fonte:
         </p>
-        <ol>
-            <li *ngFor="let fonte of fontesIndicador">{{fonte}}</li>
-        </ol>
+        <ul>
+            <!--<li *ngFor="let fonte of fontesIndicador">{{fonte}}</li>-->
+            <li *ngFor="let fonte of fontesIndicador"><span *ngIf="fonte.fonte.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let fonte of fonte.fonte">{{fonte}}</li>
+                </ol>
+            </li>
+        </ul>
     </div>
 </div>
 
-<div *ngIf="componenteAtivo !== 'grafico'">
+<div *ngIf="componenteAtivo === 'historico'">
+
+    <fotos></fotos>
+
+    <br>
+
+    <historico></historico>
+</div>
+
+
+<div *ngIf="componenteAtivo != 'grafico' && componenteAtivo != 'historico'">
     <div *ngIf="local != ''">
         <mapa [codigoLocalidade]="codigoLocalidade" [dadosMapa]="dadosMapa"></mapa>
     </div>
 </div>
+

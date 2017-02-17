@@ -231,10 +231,24 @@ sintese>dados
     float: left;
     width: 38%;
     height: 100%;
+}
+
+.conteudo__dados--com-scroll{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    height: 100%;
     overflow-y: auto;
 }
 
+
 .conteudo__detalhes{
+    float: left;
+    width: 62%;
+    height: 100%;
+}
+
+.conteudo__detalhes--com-scroll{
     float: left;
     width: 62%;
     height: 100%;
@@ -348,14 +362,15 @@ sintese>dados
         width: 100%;
     }
 
-    .conteudo__dados{
+    .conteudo__dados, .conteudo__dados--com-scroll{
         overflow-y: initial;
         width: 100%;
         min-height: 100%;
         display: table;
     }
 
-    .conteudo__detalhes{
+
+    .conteudo__detalhes, .conteudo__detalhes--com-scroll{
         width: 100%;
         position: fixed;
         background-color: #fff;
@@ -369,7 +384,15 @@ sintese>dados
         transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
     }
 
-    .conteudo__detalhes.aberto{
+    .conteudo__detalhes.aberto, .conteudo__detalhes--com-scroll.aberto{
         left: 0%;
+    }
+
+    .conteudo__detalhes.aberto{
+        overflow-y: scroll; 
+    }
+
+    .no__scroll--mobile{
+        overflow: hidden;
     }
 }

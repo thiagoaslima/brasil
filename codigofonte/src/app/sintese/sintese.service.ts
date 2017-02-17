@@ -129,6 +129,25 @@ export class SinteseService {
             });
     }
 
+    /**
+     * Obtém notas e fontes da pesquisa solicitada.
+     */
+    public getInfoPesquisa(pesquisa: string) {
+
+        return this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}`)
+            .map((res) => res.json())
+            .map((pesquisa) => {
+
+                return {
+                    id: pesquisa.id,
+                    descricao: pesquisa.descricao || pesquisa.nome,
+                    periodos: pesquisa.periodos
+                }
+
+            });
+
+    }
+
 
     /**
      * Recupera apenas os dados da pesquisa, ignorando os rótulos dos indicadores.
@@ -211,6 +230,52 @@ export class SinteseService {
                 return nomes;
             });
     }
+    
+    /**
+     * Obtém o histórico de um munucípio, dado seu código.
+     * 
+     */
+    public getHistorico(codigoLocalidade: number) {
+
+        let codigo: string = codigoLocalidade.toString().substr(0, 6);
+
+        return this._http.get(`http://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
+            .map((res) => {
+
+                return res.json();
+            })
+            .map((res) => {
+
+                let key = Object.keys(res).find((key) => {
+                    return key.indexOf(codigo) == 0;
+                });
+
+                return res[key];
+            })
+            .map((res) => {
+
+                return {
+
+                    historico: res && res.HISTORICO,
+                    fonte: res && res.HISTORICO_FONTE,
+                    formacaoAdministrativa: res && res.FORMACAO_ADMINISTRATIVA
+                }
+            });
+    }
+
+    public getFotografias(codigoMunicipio:number) {
+
+        let codigo = codigoMunicipio.toString().substr(0,6);
+        
+        return this._http.get(
+            `http://servicodados.ibge.gov.br/api/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
+        )
+        .map(res => res.json())
+        .map((res) => {
+            return Object.keys(res).map((key) => res[key]);
+        });
+    }
+
 
     private atribuirValorIndicadoresPesquisa(attr, elements, valueList) {
 

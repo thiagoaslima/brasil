@@ -1,5 +1,9 @@
-<div class="conteudo__detalhes" [class.aberto]="aberto">
+<div class="conteudo__detalhes--com-scroll" [class.aberto]="aberto">
     <div class="cabecalho">
+        <button class="cabecalho__voltar" routerLink="./" [queryParams]="queryParams" routerLinkActive="active" >
+            < Voltar
+        </button>
+
         <h2 class="cabecalho__titulo">{{ tituloPrincipal }}</h2>
         <i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>
         <div class="cabecalho__download">
@@ -17,13 +21,22 @@
                 Indicador
             </td>
             <td>
-                {{ anos[0] }}
+                <select class="tabela__combobox" (change)="mudaAno1($event)">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano1">{{ ano }}</option>
+                </select>
             </td>
             <td>
-                {{ anos[1] }}
+                <select class="tabela__combobox" (change)="mudaAno2($event)" *ngIf="anos && anos.length >= 2">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano2">{{ ano }}</option>
+                </select>
             </td>
             <td>
-                -
+                <select class="tabela__combobox" (change)="mudaAno3($event)" *ngIf="anos && anos.length >= 3">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano3">{{ ano }}</option>
+                </select>
+            </td>
+            <td>
+                {{ ' ' }}
             </td>
         </tr>
 
@@ -44,17 +57,45 @@
                 </td>
                 <!--valores-->
                 <td>
-                    {{ dado.resultados ? (dado.resultados.length >= 1 ? dado.resultados[0].valor : '-') : ' ' }}
-                    <span *ngIf="dado.resultados && dado.resultados.length >= 1 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                    {{ dado.res && dado.res[ano1] ? (dado.res[ano1] | resultado: true) : ' ' }}
                 </td>
                 <td>
-                    {{ dado.resultados ? (dado.resultados.length >= 2 ? dado.resultados[1].valor : '-') : ' ' }}
-                    <span *ngIf="dado.resultados && dado.resultados.length >= 2 && dado.nivel == 0"> <br> {{ dado.unidade?.id }}</span>
+                    {{ dado.res && dado.res[ano2] ? (dado.res[ano2] | resultado: true) : ' ' }}
                 </td>
                 <td>
-                    {{ dado.resultados ? '-' : ' ' }}
+                    {{ dado.res && dado.res[ano3] ? (dado.res[ano3] | resultado: true) : ' ' }}
+                </td>
+                <td>
+                    {{ dado?.unidade?.id }}
                 </td>
             </tr>
         </template>
     </table>
+
+    <!-- fontes e notas -->
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <br>
+        <p *ngIf="temNota === true">Notas: </p>
+        <ul>
+            <li *ngFor="let fonte of fontesIndicador">
+                <span *ngIf="fonte.nota.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let nota of fonte.nota">{{nota}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <p *ngIf="temFonte === true">Fonte: </p>
+        <ul>
+            <li *ngFor="let fonte of fontesIndicador">
+                <span *ngIf="fonte.fonte.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let fonte of fonte.fonte">{{fonte}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+
 </div>

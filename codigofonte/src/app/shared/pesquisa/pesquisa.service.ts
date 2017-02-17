@@ -169,7 +169,6 @@ export class PesquisaService {
             .map(res => res.json());
     }
 
-
     private _createIndicadoresInstance(protoIndicador, pesquisa, parentId = 0) {
         let children = [];
 
@@ -187,5 +186,6 @@ export class PesquisaService {
             }
         ))
     }
+
 }
 
