@@ -179,6 +179,19 @@ export class SinteseService{
             });
     }
 
+    public getFotografias(codigoMunicipio:number) {
+
+        let codigo = codigoMunicipio.toString().substr(0,6);
+        
+        return this._http.get(
+            `http://servicodados.ibge.gov.br/api/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
+        )
+        .map(res => res.json())
+        .map((res) => {
+            return Object.keys(res).map((key) => res[key]);
+        });
+    }
+
     private atribuirValorIndicadoresPesquisa(attr, elements, valueList) {
 
         elements.forEach((obj) => {

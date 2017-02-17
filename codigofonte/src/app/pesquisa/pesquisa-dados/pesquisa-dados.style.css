@@ -167,6 +167,10 @@ tr.nivel-1:nth-child(3) td{
     margin-bottom: 10px;
 }
 
+.cabecalho__voltar{
+    display: none;
+}
+
 .cabecalho__titulo{
     font-weight: bold;
     padding: 2%;
@@ -236,4 +240,18 @@ tr.nivel-1:nth-child(3) td{
     td.some{
         display: none;
     }
+
+    .cabecalho__voltar{
+        background-color: transparent;
+        border: 1px solid #313131;
+        border-radius: 21px;
+        font-size: 0.8em;
+        display: block;
+        padding: 5px 10px;
+        cursor: pointer;
+        display: block;
+        margin: 12px;
+        margin-left: 2%;
+    }
+
 }

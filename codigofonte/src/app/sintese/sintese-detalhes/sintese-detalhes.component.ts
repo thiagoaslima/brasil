@@ -61,7 +61,10 @@ export class SinteseDetalhesComponent implements OnInit {
 
                         this.componenteAtivo = 'historico';
 
-                    } else {
+                    } else if(params['v'] == 'fotos'){
+
+                        this.componenteAtivo = 'fotos';
+                    }else {
 
                         this.exibirGrafico(localidade);
                         this.componenteAtivo = 'grafico';
@@ -100,6 +103,8 @@ export class SinteseDetalhesComponent implements OnInit {
     }
 
     private exibirGrafico(localidade: Localidade) {
+
+        debugger;
 
         this.isGraficoCarregando = true;
 
