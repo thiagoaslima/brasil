@@ -1,3 +1,55 @@
+.component{
+    color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+    /*border-top: 1px solid #ddd;*/
+    border-radius: none;
+    position: relative;
+}
+
+.comp__titulo{
+    margin: 0px;
+    padding: 10px;
+    display: inline-block;
+    width: 90%;
+}
+
+.comp__info{
+    position: relative;
+}
+
+.comp__info-icon{
+    color: lightgrey;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.comp__conteudo{
+    margin: 0px 10px 10px 10px;
+    
+    height: 320px;
+}
+
+.loading{
+    padding-top: 30px;
+    color: #999;
+    text-align: center;
+}
+
+@media screen and (min-width: 48em) {
+    .component{
+        /*border: 1px solid #ddd;
+        border-radius: 5px;*/
+    }
+
+    /*.comp__conteudo{
+        height: 320px;
+    }*/
+}
+
 /*Preview*/
 
 .preview{
