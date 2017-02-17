@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BuscaService } from './busca.service';
@@ -33,6 +33,8 @@ export class BuscaComponent implements OnInit {
     private _qtdMinimaCaracteres = 3;
     private _localidadeAtual;
 
+    @Output() buscaAberta = new EventEmitter();
+
     constructor(
         private _renderer: Renderer,
         private _buscaService: BuscaService,
@@ -56,6 +58,7 @@ export class BuscaComponent implements OnInit {
                 return this._buscaService.search(termo);
             })
             .subscribe(resultados => this.list(resultados));
+
     }
 
 
@@ -152,6 +155,8 @@ export class BuscaComponent implements OnInit {
 
             this.menuAberto = false;
         }
+
+        this.buscaAberta.emit();
     }
 
     desativarBusca(){
