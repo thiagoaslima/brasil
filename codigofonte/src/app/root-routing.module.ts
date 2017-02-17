@@ -12,10 +12,11 @@ const children = [
   { path: 'sintese', redirectTo: 'sintese/29171'},
   { path: 'sintese/:indicador', component: SinteseComponent },
   
-  { path: 'pesquisas', redirectTo: 'pesquisas/23' },
-  { path: 'pesquisas/mapa', component: PesquisaComponent },
+  { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent },
   { path: 'pesquisas/:pesquisa', component: PesquisaComponent },
-  { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent }
+  { path: 'pesquisas/mapa', component: PesquisaComponent },
+  { path: 'pesquisas', redirectTo: 'pesquisas/23' },
+
 ];
 
 @NgModule({
