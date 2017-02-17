@@ -20,6 +20,10 @@ export function flatMap(array: Array<any|any[]>, callbackfn): any[] {
     return [].concat(...array.map(callbackfn));
 }
 
+export function flat<T>(array: T[][]): T[] {
+    return [].concat(...array);
+}
+
 export function reduceOnTree<T extends Tree<any>>(array: T[], propKeys: string | string[]) {
     let _keys = Array.isArray(propKeys) ? propKeys : [propKeys];
 

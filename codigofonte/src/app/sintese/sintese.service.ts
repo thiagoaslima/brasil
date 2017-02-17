@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface';
+import { PesquisaService } from '../shared/pesquisa/pesquisa.service';
+import { LocalidadeService } from '../shared/localidade/localidade.service';
+import { SinteseConfigItem } from './sintese-config';
+import { flat } from '../utils/flatFunctions';
+
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip';
@@ -12,12 +18,92 @@ import { ufs } from '../../api/ufs';
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
  */
 @Injectable()
-export class SinteseService{
+export class SinteseService {
 
     // Lista de pesquisas estão autorizadas a serem acessadas pelo serviço.
     private idPesquisasValidas: number[] = [11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 42, 43];
 
-    constructor(private _http: Http) {  }
+    constructor(
+        private _http: Http,
+        private _pesquisaService: PesquisaService,
+        private _localidadeService: LocalidadeService
+    ) { }
+
+
+    /**
+     * Monta o array de dados a ser consumido pela view
+     */
+    getConteudo(temas: string[], lista: SinteseConfigItem[], codigoLocalidade: number) {
+
+        // let pesquisas = lista.reduce((agg, item) => {
+        //     if (item.pesquisa) {
+        //         agg[item.pesquisa] = true;
+        //     }
+
+        //     if (item.composicao && item.composicao.indicadores && item.composicao.indicadores.length) {
+        //         item.composicao.indicadores.forEach(item => {
+        //             if (item.pesquisa) {
+        //                 agg[item.pesquisa] = true;
+        //             }
+        //         })
+        //     }
+
+        //     return agg;
+        // }, {});
+
+        // let cache$ = Observable.zip(...Object.keys(pesquisas).map(pesquisaId => this._pesquisaService.getListaIndicadoresDaPesquisa(pesquisaId)));
+
+
+        let observables = lista.map(item => {
+            if (item.pesquisa && item.indicador) {
+                return this._pesquisaService.getDadosIndicadores(item.pesquisa, codigoLocalidade, item.indicador)
+                    .map(indicador => indicador[0])
+                    .map(indicador => ({
+                        nome: item.nome,
+                        link: indicador.id.toString(),
+                        valor: indicador.latestValidResult(codigoLocalidade),
+                        unidade: indicador.unidade ? indicador.unidade.id : "",
+                        tema: item.tema,
+                        largura: item.largura || 'full'
+                    }));
+            }
+
+            if (item.composicao) {
+
+                return this._pesquisaService.getDadosIndicadores(
+                    item.composicao.indicadores[0].pesquisa,
+                    codigoLocalidade,
+                    item.composicao.indicadores.map(indicador => indicador.indicador)
+                ).map((indicadores: Indicador[]) => {
+                    let valor = item.composicao.make(indicadores, codigoLocalidade);
+                    let pesquisa = indicadores[0].pesquisa;
+
+                    return {
+                        nome: item.nome,
+                        link: item.link,
+                        valor: { periodo: pesquisa.getPeriodos().slice(-1)[0], valor: valor },
+                        unidade: '',
+                        tema: item.tema,
+                        largura: item.largura || 'full'
+                    }
+                });
+            }
+
+            if (item.link) {
+                return Observable.of({
+                    nome: item.nome,
+                    link: item.link,
+                    valor: null,
+                    unidade: '',
+                    tema: item.tema,
+                    largura: item.largura || 'full'
+                });
+            }
+        })
+
+
+        return Observable.from(observables);
+    }
 
 
     /**
@@ -30,11 +116,9 @@ export class SinteseService{
             .map((pesquisas) => {
                 let _pesquisas = pesquisas
                     .filter((pesquisa) => {
-
                         return this.idPesquisasValidas.indexOf(pesquisa.id) >= 0;
                     })
                     .map((pesquisa) => {
-
                         return {
                             id: pesquisa.id,
                             descricao: pesquisa.descricao || pesquisa.nome
@@ -63,20 +147,20 @@ export class SinteseService{
 
         return dadosPesquisa$.map((dados) => {
 
-                let indicadores = {};
-                dados.map((dado: any) => {
+            let indicadores = {};
+            dados.map((dado: any) => {
 
-                    return dado.res.filter((res: any) => {
+                return dado.res.filter((res: any) => {
 
-                        return !!res.localidade && res.localidade === codigoLocal;
-                    })
+                    return !!res.localidade && res.localidade === codigoLocal;
+                })
                     .forEach((res: any) => {
                         indicadores[dado.id.toString()] = res.res;
                     });
-                });
-
-                return indicadores;
             });
+
+            return indicadores;
+        });
     }
 
 
@@ -92,8 +176,8 @@ export class SinteseService{
         }
 
         const nomesPesquisa$ = this._http.get(
-                `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`
-            ).map((res => res.json()));
+            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`
+        ).map((res => res.json()));
 
         return nomesPesquisa$
             .map((res) => {
@@ -127,7 +211,7 @@ export class SinteseService{
                 return nomes;
             });
     }
-    
+
     private atribuirValorIndicadoresPesquisa(attr, elements, valueList) {
 
         elements.forEach((obj) => {
@@ -151,45 +235,49 @@ export class SinteseService{
         /*
             codigo      33    29169
             prefeito    33    29170
-
+    
             area        33    29167
             altitude    ?
-
+    
             pop estimada    33    29171
             dens demograf    33    29168
-
+    
             orçamento        ?
             FPM            21    28160
-
+    
             PIB per capita   38    47001 
             Salário médio    ?
-
+    
             IDHM     37    30255
             IDEB    40    30277
-
+    
             Leitos hospitalares    32    28311
-
+    
             agricultura     necessário vir do servidor
-
+    
             Desocupação (não há no servidor ainda)
         */
-        
+
 
         return Observable.zip(
-                this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]),
-                this.getPesquisa('21', local, ['28160']),
-                this.getPesquisa('38', local, ['47001']),
-                this.getPesquisa('37', local, ['30255']),
-                this.getPesquisa('40', local, ['30277']),
-                this.getPesquisa('32', local, ['28311'])
-            ).map( (resp) => {
-                return resp.reduce( (agg, pesq) => agg.concat(pesq), []);
-            }).map( dados => dados.map(this.filterLastValidValue) )
-            .map( dados => dados.reduce( (agg, dado) => {
+            this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]),
+            this.getPesquisa('21', local, ['28160']),
+            this.getPesquisa('38', local, ['47001']),
+            this.getPesquisa('37', local, ['30255']),
+            this.getPesquisa('40', local, ['30277']),
+            this.getPesquisa('32', local, ['28311'])
+        ).map((resp) => {
+            return resp.reduce((agg, pesq) => agg.concat(pesq), []);
+        }).map(dados => dados.map(this.filterLastValidValue))
+            .map(dados => dados.reduce((agg, dado) => {
                 agg[dado.id] = dado;
                 return agg;
             }, {}));
     }
+
+    // public getDadosIndicadoresSintese() {
+    //     return this._pesquisaService.getIndicadores()
+    // }
 
     /**
      * Obtém os valores históricos de um dado indicador da síntese.
@@ -200,7 +288,7 @@ export class SinteseService{
      * @indicador: string - codigo do indicador.
      */
     public getDetalhesIndicadorSintese(local: string, indicador: string) {
- 
+
         return this.getPesquisa('33', local, [indicador]);
     }
 
@@ -211,19 +299,19 @@ export class SinteseService{
      * 
      * return {codigo: string, nome: string}
      */
-    public getPesquisaByIndicadorDaSinteseMunicipal(indicador: string){
+    public getPesquisaByIndicadorDaSinteseMunicipal(indicador: string) {
 
         const indicadoresMap = {
-            '29169': {codigo: '33', nome: 'Síntese municipal'},
-            '29170': {codigo: '33', nome: 'Síntese municipal'},
-            '29167': {codigo: '33', nome: 'Síntese municipal'},
-            '29171': {codigo: '33', nome: 'Síntese municipal'},
-            '29168': {codigo: '33', nome: 'Síntese municipal'},
-            '28160': {codigo: '21', nome: 'Finanças públicas'},
-            '47001': {codigo: '38', nome: 'PIB municipal'},
-            '30255': {codigo: '37', nome: 'IDH'},
-            '30277': {codigo: '40', nome: 'IDEB'},
-            '28311': {codigo: '32', nome: 'Serviços de saúde'}
+            '29169': { codigo: '33', nome: 'Síntese municipal' },
+            '29170': { codigo: '33', nome: 'Síntese municipal' },
+            '29167': { codigo: '33', nome: 'Síntese municipal' },
+            '29171': { codigo: '33', nome: 'Síntese municipal' },
+            '29168': { codigo: '33', nome: 'Síntese municipal' },
+            '28160': { codigo: '21', nome: 'Finanças públicas' },
+            '47001': { codigo: '38', nome: 'PIB municipal' },
+            '30255': { codigo: '37', nome: 'IDH' },
+            '30277': { codigo: '40', nome: 'IDEB' },
+            '28311': { codigo: '32', nome: 'Serviços de saúde' }
         };
 
         return indicadoresMap[indicador];
@@ -239,11 +327,11 @@ export class SinteseService{
         dados.value = Object.keys(dados.res)
             .map(ano => Number.parseInt(ano, 10))
             .sort()
-            .reduce( (agg, ano) => {
+            .reduce((agg, ano) => {
                 let _ano = ano.toString();
-               return (!!dados.res[_ano]) 
-                   ? dados.res[_ano]
-                   : agg;
+                return (!!dados.res[_ano])
+                    ? dados.res[_ano]
+                    : agg;
             }, {});
         return dados;
     }
@@ -270,7 +358,7 @@ export class SinteseService{
                 munics.forEach((munic) => {
                     let codMunic = munic[0];
                     let arcs = munic[1];
-                    let type = typeof(arcs[0][0][0]) === 'undefined' ? 'Polygon' : 'MultiPolygon'; // testa se é um array
+                    let type = typeof (arcs[0][0][0]) === 'undefined' ? 'Polygon' : 'MultiPolygon'; // testa se é um array
                     let geometry = {
                         arcs: arcs,
                         type: type,
@@ -301,7 +389,7 @@ export class SinteseService{
             let myStr = tarsus;
             let replaces = [["\\],\\[0", "a"], ["\\],\\[1", "b"], ["\\],\\[-1", "c"], ["\\],\\[2", "d"], ["\\],\\[-2", "e"], ["\\],\\[3", "f"], ["\\],\\[-3", "g"], ["\\],\\[4", "h"], ["\\],\\[-4", "i"], ["\\],\\[5", "j"], ["\\],\\[-5", "k"], ["\\],\\[6", "l"], ["\\],\\[-6", "m"], ["\\],\\[7", "n"], ["\\],\\[-7", "o"], ["\\],\\[8", "p"], ["\\],\\[-8", "q"], ["\\],\\[9", "r"], ["\\],\\[-9", "s"], ["\\]\\],\\[\\[", "t"], ["\\]\\]", "u"], [",\\[\\[", "v"], ["\\[\\[", "x"], [",0", "A"], [",1", "B"], [",-1", "C"], [",2", "D"], [",-2", "E"], [",3", "F"], [",-3", "G"], [",4", "H"], [",-4", "I"], [",5", "J"], [",-5", "K"], [",6", "L"], [",-6", "M"], [",7", "N"], [",-7", "O"], [",8", "P"], [",-8", "Q"], [",9", "R"], [",-9", "S"]];
             replaces.reverse().forEach((rep) => {
-                myStr = myStr.replace(new RegExp(rep[1], 'g'), rep[0].replace(/\\/g, '')); 
+                myStr = myStr.replace(new RegExp(rep[1], 'g'), rep[0].replace(/\\/g, ''));
             });
             let simpler = JSON.parse(myStr);
             return simpler;
@@ -309,9 +397,9 @@ export class SinteseService{
 
         return this._http.get(
             `http://servicomapas.ibge.gov.br/api/mapas/${codigo}/${nivel}`
-            ).map((res) => {
-                let data = res.json();
-                return convertTarsus2TopoJson(data.Tarsus);
+        ).map((res) => {
+            let data = res.json();
+            return convertTarsus2TopoJson(data.Tarsus);
         })
 
     }
@@ -325,7 +413,7 @@ export class SinteseService{
      */
     public getDadosPesquisaMapa(pesquisa: string, local: string[] = [], indicador: string): Observable<any> {
 
-        let locaisCorrigidos = local.map(local => local.substr(0,6));
+        let locaisCorrigidos = local.map(local => local.substr(0, 6));
 
         const codigoLocal = locaisCorrigidos.length > 0 ? locaisCorrigidos.join(',') : "";
 

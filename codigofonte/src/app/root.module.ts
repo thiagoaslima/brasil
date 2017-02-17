@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OpaqueToken } from '@angular/core';
 
 import { CoreModule } from './core/core.module';
 
@@ -11,6 +11,7 @@ import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
 
 import { ValidParametersGuard } from './valid-parameters.guard';
+import { BASES, PESQUISAS } from './global-config';
 
 @NgModule({
     imports: [
@@ -25,7 +26,9 @@ import { ValidParametersGuard } from './valid-parameters.guard';
         RootComponent
     ],
     providers: [
-        ValidParametersGuard
+        ValidParametersGuard,
+        PESQUISAS,
+        BASES
     ]
 })
-export class RootModule {}
+export class RootModule { }

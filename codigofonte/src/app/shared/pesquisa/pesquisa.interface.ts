@@ -29,7 +29,7 @@ export class Pesquisa {
         this.periodos = periodos;
     }
 
-    getPeriodosValues() {
+    getPeriodos() {
         return this.periodos.map(periodo => periodo.periodo);
     }
 }
@@ -55,7 +55,7 @@ export class Indicador {
         descricao: string,
         calculo: string
     }
-    resultados: Resultado[]
+    resultados: ResultadosIndicador
     pesquisa: Pesquisa
     parentId = 0;
 
@@ -67,7 +67,7 @@ export class Indicador {
         this.unidade = obj.unidade;
         this.nota = obj.nota || [];
         this.metadado = Object.assign({}, obj.metadado);
-        this.pesquisa = obj.pesquisa;
+        this.pesquisa = obj.pesquisa instanceof Pesquisa ? obj.pesquisa : new Pesquisa(obj.pesquisa);
         this.parentId = obj.parentId || 0;
 
         if (obj.children && obj.children.length) {
@@ -97,55 +97,95 @@ export class Indicador {
         return this;
     }
 
-    getResultados(localidadesCodigo: number | number[], periodos: number | string | Array<number | string> = 'all') {
+    getResultados(localidadesCodigo: number | number[], periodos: number | string | Array<number | string> = 'all'): ResultadosIndicador {
+        /**
+         * {
+         *     codLocal: {
+         *         ano: valor
+         *     }
+         * }
+         */
         let _localidadesCodigo = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
-        let localidadeFilter = _localidadesCodigo.length ? (localidade) => _localidadesCodigo.indexOf(localidade.codigo) > -1 : null;
-
         let _periodos = [];
+
         if (periodos === 'all') {
-            _periodos = this.pesquisa.getPeriodosValues();
-        } else {
-            _periodos = Array.isArray(periodos) ? periodos.map(periodo => periodo.toString()) : [periodos.toString()];
-            _periodos = flatMap(_periodos, (periodo) => {
-                if (periodo.toString().indexOf('-') === -1) {
-                    return [periodo];
-                }
-                let [start, end] = periodo.toString().split('-');
-                return range(start, end).map(n => n.toString());
-            });
+            return _localidadesCodigo.reduce((obj, codigo) => {
+                obj[codigo] = this.resultados[codigo];
+                return obj;
+            }, {});
         }
 
-        let res = _localidadesCodigo.length > 0 ? this.resultados.filter(obj => _localidadesCodigo.indexOf(parseInt(obj.localidade, 10)) > -1) : this.resultados;
+        _periodos = Array.isArray(periodos) ? periodos.map(periodo => periodo.toString()) : [periodos.toString()];
+        _periodos = flatMap(_periodos, (periodo) => {
+            if (periodo.toString().indexOf(':') === -1) {
+                return [periodo];
+            }
+            let [start, end] = periodo.toString().split(':');
+            return range(start, end).map(n => n.toString());
+        });
 
-        return res.reduce((agg, obj) => {
-            let key = obj.localidade;
-            agg.valores[key] = _periodos.map(periodo => obj.res[periodo]);
-            return agg;
-        }, { periodos: _periodos, valores: <{ [idx: string]: string[] }>{} });
-
+        return _localidadesCodigo.reduce((obj, codigo) => {
+            obj[codigo] = _periodos.reduce((obj, periodo) => {
+                obj[periodo] = this.resultados[codigo][periodo];
+                return obj;
+            }, {});
+            return obj;
+        }, {});
     }
 
+    latestResult(codigoLocalidade: number) {
+        return this.pesquisa.getPeriodos().slice(-1).map(periodo => {
+            let res = this.getResultados(codigoLocalidade, periodo)
+            return {
+                periodo,
+                valor: res[codigoLocalidade][periodo]
+            };
+        })[0];
+    }
 
-    saveResultados(resultados: Resultado[]) {
+    latestValidResult(codigoLocalidade: number) {
+        let periodos = this.pesquisa.getPeriodos().reverse();
+        let res = this.getResultados(codigoLocalidade);
+        let i = 0, len = periodos.length;
+        let ret = { periodo: '', valor: null };
+        while (i < len) {
+            if (res[codigoLocalidade][periodos[i]]) {
+                ret = {
+                    periodo: periodos[i],
+                    valor: res[codigoLocalidade][periodos[i]]
+                }
+                break;
+            }
+            i++;
+        }
+        return ret;
+    }
+
+    saveResultados(resultados) {
         resultados.forEach(resultado => {
-            let _res = this.resultados.filter(_res => _res.localidade === resultado.localidade)[0];
+            let codigoLocalidade = resultado.localidade;
 
-            if (!_res) {
-                let obj: Resultado = { localidade: resultado.localidade, res: {} };
-                this.resultados.push(obj);
-                _res = obj;
+            if (!this.resultados[codigoLocalidade]) {
+                this.resultados[codigoLocalidade] = {};
             }
 
-            Object.keys(resultado.res).forEach(key => {
-                _res[key] = resultado.res[key];
-            });
+            Object.assign(this.resultados[codigoLocalidade], resultado.res);
         });
+
         return this;
     }
 }
 
-export class Resultado {
-    localidade: string
-    res: { [ano: string]: string }
+export class ResultadoServer {
+    id: string
+    res: {
+        localidade: string
+        res: { [ano: string]: string }
+    }
+}
 
+export interface ResultadosIndicador {
+    [codigoLocalidade: string]: {
+        [ano: string]: string
+    }
 }

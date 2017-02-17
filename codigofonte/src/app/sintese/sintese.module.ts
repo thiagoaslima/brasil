@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
+import { SINTESE } from './sintese-config';
 import { SinteseComponent } from './sintese.component';
 import { SinteseHeaderComponent } from './sintese-header/sintese-header.component';
 import { SinteseDadosComponent } from './sintese-dados/sintese-dados.component';
-
 import { SinteseDetalhesComponent } from './sintese-detalhes/sintese-detalhes.component';
 
 import { GraficoComponent } from './grafico/grafico.component';
@@ -13,8 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from '../shared/ng2-charts.module';
 import { MapaComponent } from './mapa/mapa.component';
 import { RootRoutingModule } from '../root-routing.module';
-
-import {ResultadoPipe} from '../utils/resultado';
 
 @NgModule({
     imports: [
@@ -31,9 +29,11 @@ import {ResultadoPipe} from '../utils/resultado';
 
         GraficoComponent,
         TabelaComponent,
-        MapaComponent,
-        ResultadoPipe
+        MapaComponent
 
+    ],
+    providers: [
+        SINTESE
     ]
 })
-export class SinteseModule {}
+export class SinteseModule { }

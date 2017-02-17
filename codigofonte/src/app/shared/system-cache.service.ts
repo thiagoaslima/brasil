@@ -30,6 +30,10 @@ const keys = [
                         key: "listaIndicadoresDaPesquisa"
                     },
                     {
+                        path: "hash",
+                        key: "hashIndicadoresDaPesquisa"
+                    },
+                    {
                         path: "resultados",
                         key: "resultadosPesquisa"
                     },
@@ -76,9 +80,10 @@ export class SystemCacheService {
     buildKey = {
         allPesquisas: () => "pesquisas",
         // pesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}`,
-        listaIndicadoresDaPesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}/indicadores`,
-        indicador: (pesquisaId: number, indicadorId: number) => `indicadores/${indicadorId}`,
-        resultadosPesquisaLocalidade: (pesquisaId: number, localidadeCodigo: number) => `pesquisas/${pesquisaId}/localidades/${localidadeCodigo}/resultados`,
+        listaIndicadoresDaPesquisa: (pesquisaId: number | string) => `pesquisas/${pesquisaId}/indicadores`,
+        hashIndicadoresDaPesquisa: (pesquisaId: number | string) => `pesquisas/${pesquisaId}/hash`,
+        // indicador: (pesquisaId: number, indicadorId: number) => `indicadores/${indicadorId}`,
+        resultadosPesquisaLocalidade: (pesquisaId: number | string, localidadeCodigo: number | string) => `pesquisas/${pesquisaId}/localidades/${localidadeCodigo}/resultados`,
         // resultadosIndicador: (pesquisaId: number, localidadeCodigo: number, indicadorId: number) => `indicadores/${indicadorId}/resultados?localidades=${localidadeCodigo}`,
         //resultadosPesquisa: (pesquisaId: number, localidadeCodigo: number) => `pesquisas/${pesquisaId}/resultados`,
         busca: (termo: string) => `busca/${termo}`

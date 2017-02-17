@@ -60,7 +60,7 @@ export class LocalidadeService {
     ) {
         this._buildLocalidadesTree();
 
-        this.tree$ = new ReplaySubject<any>(null);
+        this.tree$ = new ReplaySubject<any>();
 
         this._params.params$
             .map((params: { [idx: string]: string }) => ({ uf: params['uf'], municipio: params['municipio'] }))
@@ -134,7 +134,7 @@ export class LocalidadeService {
 
         ufs.forEach(uf => {
             let _uf = this.getUfByCodigo(uf.codigo);
-            let _mun = this.getMunicipioByCodigo(uf.codigoCapital);
+            let _mun = this.getMunicipioByCodigo(uf.codigoCapital.toString().slice(0,6));
             _uf.capital = _mun;
         });
 

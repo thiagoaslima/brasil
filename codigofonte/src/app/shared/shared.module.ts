@@ -12,6 +12,7 @@ import { PesquisaService } from './pesquisa/pesquisa.service';
 import { PesquisaServiceWithCache } from './pesquisa/pesquisa-with-cache.service';
 import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
+import { ResultadoPipe } from './resultado.pipe';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -23,6 +24,7 @@ const MODULES = [
 
 const PIPES = [
     // put pipes here
+    ResultadoPipe
 ];
 
 const COMPONENTS = [
@@ -34,7 +36,7 @@ const PROVIDERS = [
     LocalidadeService,
     CommonService,
     BuscaService,
-    { provide: PesquisaService, useClass: PesquisaServiceWithCache },
+    { provide: PesquisaService, useClass: PesquisaService },
     { provide: TOPOJSON, useValue: TopoJson }
 ]
 

@@ -125,7 +125,9 @@ export class Pais {
 */
 
 export class Localidade {
+    digitoVerificador: number;
     codigo: number;
+    codigoCompleto: number;
     nome: string;
     tipo: 'pais' | 'uf' | 'municipio';
     slug: string;
@@ -158,7 +160,9 @@ export class Localidade {
         capital = null,
         parent = null
     }) { 
-        this.codigo = codigo;
+        this.codigo = parseInt(codigo.toString().slice(0,6), 10);
+        this.codigoCompleto = parseInt(codigo, 10);
+        this.digitoVerificador = parseInt(codigo.toString().slice(6), 10) || null;
         this.nome = nome;
         this.tipo = tipo;
         this.sigla = sigla;

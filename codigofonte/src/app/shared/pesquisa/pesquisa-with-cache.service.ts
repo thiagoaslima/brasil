@@ -4,8 +4,9 @@ import { isBrowser, isNode } from 'angular2-universal/browser';
 
 import { CacheService } from '../cache.service';
 import { SystemCacheService } from '../system-cache.service';
-import { Pesquisa, Indicador } from './pesquisa.interface';
+import { Pesquisa, Indicador, ResultadoServer } from './pesquisa.interface';
 import { PesquisaService } from './pesquisa.service';
+import { BASES, PESQUISAS } from '../../global-config';
 
 import { flatTree } from '../../utils/flatFunctions';
 
@@ -18,15 +19,16 @@ import 'rxjs/add/operator/multicast';
 export class PesquisaServiceWithCache {
 
     private _instance: PesquisaService;
+    private _server = {
+        path: this._bases.default.base
+    }
 
     constructor(
         private _cache: SystemCacheService,
-        _http: Http
-    ) {
-        this._instance = new PesquisaService(_http);
-    }
-
-    private _subjects = <{ [idx: string]: Observable<any> }>{};
+        private _pesquisas: PESQUISAS,
+        private _bases: BASES,
+        private _http: Http
+    ) { }
 
     getAllPesquisas(): Observable<Pesquisa[]> {
         let cacheKey = this._cache.buildKey.allPesquisas();
@@ -36,64 +38,32 @@ export class PesquisaServiceWithCache {
             return Observable.of(value);
         }
 
-        if (this._subjects[cacheKey]) {
-            return this._subjects[cacheKey];
-        }
-
-        let pesquisas$ = this._instance.getAllPesquisas()
-            .finally(() => {
-                this._subjects[cacheKey] = null;
-                pesquisas$ = null;
-            });
-
-        let _observable = pesquisas$.multicast(() => new ReplaySubject<Pesquisa[]>(1));
-
-        this._subjects[cacheKey] = _observable;
-        _observable.connect();
-
-        return _observable;
+        return this._getAllPesquisas()
+            .do(pesquisas => this._cache.set(cacheKey, pesquisas));
     }
 
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
-        return this._instance.getPesquisa(pesquisaId);
+        return this.getAllPesquisas()
+            .map(pesquisas => pesquisas.reduce((res, pesquisa) => pesquisa.id === pesquisaId ? pesquisa : res, null));
     }
 
     getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
-        let cacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+        let listaCacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+        let hashCacheKey = this._cache.buildKey.hashIndicadoresDaPesquisa(pesquisaId);
 
-        if (this._cache.has(cacheKey)) {
-            let value = this._cache.get(cacheKey);
+        if (this._cache.has(listaCacheKey)) {
+            let value = this._cache.get(listaCacheKey);
             return Observable.of(value);
         }
 
-        if (this._subjects[cacheKey]) {
-            return this._subjects[cacheKey];
-        }
-
-        let lista$ = this._instance.getListaIndicadoresDaPesquisa(pesquisaId)
-            .finally(() => this._subjects[cacheKey] = null)
+        return this._getListaIndicadoresDaPesquisa(pesquisaId)
             .do((indicadoresTree) => {
-                this._cache.set(cacheKey, indicadoresTree);
-
-                flatTree(indicadoresTree).map(indicador => {
-                    let cacheKey = this._cache.buildKey.indicador(pesquisaId, indicador.id);
-                    this._cache.set(cacheKey, indicador);
-                })
-
-                return indicadoresTree;
-            }
-            );
-
-        let _observable = lista$.multicast(() => new ReplaySubject<Indicador[]>(1));
-        this._subjects[cacheKey] = _observable;
-
-        _observable.connect();
-
-        return _observable;
+                this._cache.set(listaCacheKey, indicadoresTree);
+                this._cache.set(hashCacheKey, flatTree(indicadoresTree).reduce((hash, indicador) => Object.assign(hash, { [indicador.id]: indicador }), {}))
+            });
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
-
         if (!indicadoresId) {
             return this.getListaIndicadoresDaPesquisa(pesquisaId);
         }
@@ -102,44 +72,106 @@ export class PesquisaServiceWithCache {
 
         // como o cache de indicadores é feito a partir da lista de indicadores por pesquisa
         // se 1 indicador estiver no cache, todos estarão!
-        let cacheKey = this._cache.buildKey.indicador(pesquisaId, _indicadoresId[0]);
+        let hashCacheKey = this._cache.buildKey.hashIndicadoresDaPesquisa(pesquisaId);
 
-        if (this._cache.has(cacheKey)) {
-            let resp: Indicador[] = _indicadoresId.map(id => this._cache.get(this._cache.buildKey.indicador(pesquisaId, id)));
-            return Observable.of(resp);
+        if (this._cache.has(hashCacheKey)) {
+            let hash = this._cache.get(hashCacheKey);
+            return Observable.of(_indicadoresId.map(id => hash[id]));
         }
 
-        return this._instance.getListaIndicadoresDaPesquisa(pesquisaId)
+        return this.getListaIndicadoresDaPesquisa(pesquisaId)
             .flatMap(_ => this.getIndicadores(pesquisaId, _indicadoresId));
     }
 
     getResultados(pesquisaId: number, localidadesCodigo: number | number[]): Observable<Indicador[]> {
-        let _localidadesCodigo = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
+        console.warn('PesquisaServiceWithCache.getResultados@Deprecated: use getDadosIndicadores instead');
 
-        let _notOnCache = _localidadesCodigo.filter(codigo => this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo));
-
-        if (_notOnCache.length === 0) {
-            return this.getIndicadores(pesquisaId);
-        }
-
-        return this._instance.getResultados(pesquisaId, _localidadesCodigo)
-            .flatMap(_ => {
-                _localidadesCodigo.forEach(codigo => this._cache.set(this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo), true))
-                return this.getIndicadores(pesquisaId);
-            });
+        return this.getDadosIndicadores(pesquisaId, localidadesCodigo);
+      
     }
 
     getDadosIndicadores(pesquisaId: number, localidadesCodigo: number | number[], indicadoresId?: number | number[]): Observable<Indicador[]> {
-        return this.getResultados(pesquisaId, localidadesCodigo)
-            .flatMap(indicadores => {
+        let _localidadesCodigo = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
+        let _notOnCache = _localidadesCodigo.filter(codigo => this._cache.buildKey.resultadosPesquisaLocalidade(pesquisaId, codigo));
 
-                if (!indicadoresId) {
-                    return Observable.of(indicadores);
+        if (_notOnCache.length === 0) {
+            return this.getIndicadores(pesquisaId, indicadoresId);
+        }
+
+        let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
+        let listaCacheKey = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+        let hashCacheKey = this._cache.buildKey.hashIndicadoresDaPesquisa(pesquisaId);
+        let indicadores$ = this._cache.has(listaCacheKey)
+            ? Observable.of(this._cache.get(listaCacheKey))
+            : this.getListaIndicadoresDaPesquisa(pesquisaId);
+
+        return Observable.zip(
+            indicadores$,
+            this._getOnlyResults(pesquisaId, localidadesCodigo)
+        )
+            .map(([indicadores, results]) => {
+                let hash = this._cache.get(hashCacheKey);
+
+                results.forEach(result => {
+                    let indicador: Indicador = hash[result.id];
+                    indicador.saveResultados(result.res);
+                });
+
+                if (_indicadoresId) {
+                    return _indicadoresId.map(id => hash[id]);
+                } else {
+                    return indicadores;
                 }
-
-                let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
-                return this.getIndicadores(pesquisaId, _indicadoresId);
             });
+    }
+
+    private _getAllPesquisas(): Observable<Pesquisa[]> {
+        return this._http.get(this._server.path('pesquisas'))
+            .retry(3)
+            .catch(err => Observable.of({ json: () => [] }))
+            .map(res => res.json())
+            .map(json => json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id)))
+            .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
+    }
+
+    private _getOnlyResults(pesquisaId: number, localidadesCodigo: number | number[]): Observable<ResultadoServer[]> {
+        let _localidadesCodigoArray = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
+        let url = this._server.path(`pesquisas/${pesquisaId}/periodos/all/resultados?localidade=${_localidadesCodigoArray.join(',')}`);
+
+        return this._http.get(url)
+            .retry(3)
+            .catch(err => Observable.of({ json: () => [] }))
+            .map(res => res.json());
+    }
+
+    private _getListaIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
+        return this._http.get(this._server.path(`pesquisas/${pesquisaId}/periodos/all/indicadores`))
+            .retry(3)
+            .catch(err => {
+                return Observable.of({ json: () => [] });
+            })
+            .map(res => res.json())
+            .zip(this.getPesquisa(pesquisaId), (json, pesquisa) => {
+                return json.map(indicador => this._createIndicadoresInstance(indicador, pesquisa))
+            });
+    }
+
+    private _createIndicadoresInstance(protoIndicador, pesquisa, parentId = 0) {
+        let children = [];
+
+        if (protoIndicador.children.length) {
+            children = protoIndicador.children.map(child => this._createIndicadoresInstance(child, pesquisa, protoIndicador.id));
+        }
+
+        return new Indicador(Object.assign(
+            {},
+            protoIndicador,
+            {
+                children,
+                pesquisa,
+                parentId
+            }
+        ))
     }
 
 };

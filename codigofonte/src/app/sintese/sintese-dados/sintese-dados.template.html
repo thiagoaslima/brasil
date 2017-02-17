@@ -1,19 +1,57 @@
+<div>
+
+    <template ngFor let-item [ngForOf]="conteudo">
+
+        <div class="dados__tema" *ngIf="item.tema">
+            <div class="dados__tema__titulo">
+                {{item.tema.toUpperCase()}}
+            </div>
+        </div>
+
+        <template ngFor let-dado [ngForOf]="item.indicadores | async" [ngForTrackBy]="trackBy">
+
+            <div *ngIf="dado.largura !== 'full'" class="dados__tema dados__tema--metade">
+                <div class="dados__tema__titulo">
+                    {{dado.nome.toUpperCase()}} 
+                    <small *ngIf="dado.valor?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[ {{dado.valor?.periodo}} ]</small> 
+                    <br/>
+                    <span *ngIf="dado.valor">{{dado.valor?.valor}}</span>
+                </div>
+            </div>
+
+            <div *ngIf="dado.largura == 'full'" class="dados__variavel">
+                <a *ngIf="dado.link" [routerLink]='[dado.link]' routerLinkActive="active">
+                    <div class="dados__variavel__nome">{{dado.nome}} 
+                        <small *ngIf="dado.valor?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[ {{dado.valor?.periodo}} ]</small> 
+                    </div>
+                    <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                    <div class="dados__variavel__valor" *ngIf="dado.valor">{{dado.valor?.valor | resultado}} <span>{{dado.unidade}}</span></div>
+                </a>
+            </div>
+
+        </template>
+
+    </template>
+
+</div>
+
+<!--
 <div class="dados" *ngIf="content">
     <div class="dados__tema dados__tema--metade">
-        <div class="dados__tema__titulo">   
+        <div class="dados__tema__titulo">
             CÓDIGO <br/>
             <span>{{content['29169']?.value}}</span>
         </div>
     </div>
     <div class="dados__tema dados__tema--metade">
-        <div class="dados__tema__titulo">   
+        <div class="dados__tema__titulo">
             Prefeito <br/>
             <span> {{content['29170']?.value}} </span>
         </div>
     </div>
-    
+
     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
+        <div class="dados__tema__titulo">
             HISTÓRICO
         </div>
     </div>
@@ -29,13 +67,13 @@
     </div>
 
     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
+        <div class="dados__tema__titulo">
             TERRITÓRIO
         </div>
     </div>
 
     <div class="dados__variavel">
-        <a routerLink='{{baseURL + "/sintese/29167"}}' [queryParams]="{ v: 'mapa', detalhes: 'true'}" routerLinkActive="active" >
+        <a routerLink='{{baseURL + "/sintese/29167"}}' [queryParams]="{ v: 'mapa', detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">Área Territorial</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             <div class="dados__variavel__valor">{{content['29167']?.value}} <span>{{content['29167']?.unidade?.id}}</span></div>
@@ -43,15 +81,13 @@
     </div>
 
     <div class="dados__variavel">
-        <!--<a routerLink='{{baseURL + "/sintese/mapa"}}' routerLinkActive="active">-->
-            <div class="dados__variavel__nome">Altitude</div>
-            <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right hidden" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor"> - <span>m</span></div>
-        <!--</a>-->
+        <div class="dados__variavel__nome">Altitude</div>
+        <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right hidden" aria-hidden="true"></i></div>
+        <div class="dados__variavel__valor"> - <span>m</span></div>
     </div>
 
     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
+        <div class="dados__tema__titulo">
             População
         </div>
     </div>
@@ -73,7 +109,7 @@
     </div>
 
     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
+        <div class="dados__tema__titulo">
             Economia
         </div>
     </div>
@@ -106,8 +142,8 @@
         <div class="dados__variavel__valor"> - <span>R$</span></div>
     </div>
 
-     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
+    <div class="dados__tema">
+        <div class="dados__tema__titulo">
             Educação
         </div>
     </div>
@@ -120,8 +156,8 @@
         </a>
     </div>
 
-     <div class="dados__tema">
-        <div class="dados__tema__titulo">   
+    <div class="dados__tema">
+        <div class="dados__tema__titulo">
             Saúde
         </div>
     </div>
@@ -134,3 +170,4 @@
         </a>
     </div>
 </div>
+-->
