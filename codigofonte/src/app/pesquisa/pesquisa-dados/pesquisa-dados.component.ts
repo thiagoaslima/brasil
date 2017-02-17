@@ -91,22 +91,14 @@ export class PesquisaDadosComponent {
                 }
                 
                 this.indicadores = indicadores;
-                debugger;//console.log(indicadores);
-            });
-
-            //insere notas e fontes da pesquisa por período
-            this._route.params.filter(params => !!params['indicador'])
-            .switchMap((params: Params) => {
-                let codigoPesquisa = this._sintese.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
-                let infoPesquisa = this._sintese.getInfoPesquisa(codigoPesquisa);
-                return infoPesquisa;
-            }).subscribe(info => {
-                console.log(info);
-                debugger;
-                this.fontesIndicador = !!info.periodos ? info.periodos : [];
-                info.periodos.forEach(periodo => {
-                    this.temFonte = periodo.fonte.length > 0 ? true : false;
-                    this.temNota = periodo.nota.length > 0 ? true : false;
+                
+                //insere notas e fontes da pesquisa por período
+                this._sintese.getInfoPesquisa(params.pesquisa).subscribe(info => {
+                    this.fontesIndicador = !!info.periodos ? info.periodos : [];
+                    info.periodos.forEach(periodo => {
+                        this.temFonte = periodo.fonte.length > 0 ? true : false;
+                        this.temNota = periodo.nota.length > 0 ? true : false;
+                    });
                 });
             });
 
