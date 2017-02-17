@@ -84,9 +84,8 @@ export class PesquisaDadosComponent {
                     if(indicadores[i].id == this.idIndicadorSelecionado){
                         this.tituloPrincipal = indicadores[i].indicador;
                         this.dadosCombo = indicadores[i].children;
-                        if(this.dadosCombo.length > 0){
-                            this.dadosTabela = this.flat(this.dadosCombo[0]);
-                        }
+                        debugger;
+                        this.dadosTabela = this.dadosCombo.length > 0 ? this.flat(this.dadosCombo[0]) : [];
                     }
                 }
                 
