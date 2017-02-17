@@ -104,6 +104,8 @@ export class SinteseDetalhesComponent implements OnInit {
 
     private exibirGrafico(localidade: Localidade) {
 
+        debugger;
+
         this.isGraficoCarregando = true;
 
         this._route.params.filter(params => !!params['indicador'])

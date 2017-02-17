@@ -36,14 +36,16 @@
 </div>
 
 <div *ngIf="componenteAtivo === 'historico'">
+
+    <fotos></fotos>
+
+    <br>
+
     <historico></historico>
 </div>
 
-<div *ngIf="componenteAtivo === 'fotos'">
-    <fotos></fotos>
-</div>
 
-<div *ngIf="componenteAtivo != 'grafico' && componenteAtivo != 'historico' && componenteAtivo != 'fotos'">
+<div *ngIf="componenteAtivo != 'grafico' && componenteAtivo != 'historico'">
     <div *ngIf="local != ''">
         <mapa [codigoLocalidade]="codigoLocalidade" [dadosMapa]="dadosMapa"></mapa>
     </div>
