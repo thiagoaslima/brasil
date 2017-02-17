@@ -388,6 +388,10 @@ sintese>dados
         left: 0%;
     }
 
+    .conteudo__detalhes.aberto{
+        overflow-y: scroll; 
+    }
+
     .no__scroll--mobile{
         overflow: hidden;
     }
