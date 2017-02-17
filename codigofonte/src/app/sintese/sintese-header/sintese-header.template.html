@@ -1,8 +1,12 @@
 <div class="cabecalho">
+
+
     <button class="cabecalho__voltar" routerLink="./" [queryParams]="queryParams" routerLinkActive="active" >
         < Voltar
     </button>
-    <div class="cabecalho__sub-container">
+
+
+    <div class="cabecalho__sub-container" *ngIf="ativo != 'historico'">
         <div>
             <a class="cabecalho__link" [routerLink]="linkPesquisa">+{{ pesquisa }}</a>
             <!--<span class="cabecalho__bullet">&#8226;</span>
@@ -10,7 +14,12 @@
         </div>
         <h2 class="cabecalho__titulo">{{ titulo }}</h2>
     </div>
-    <div class="cabecalho__sub-container">
+
+    <div class="cabecalho__sub-container" *ngIf="ativo == 'historico'">
+        <h2 class="cabecalho__titulo">Histórico</h2>
+    </div>
+
+    <div class="cabecalho__sub-container" *ngIf="ativo != 'historico'">
         <div class="cabecalho__sub-container cabecalho__sub-container--ta-right cabecalho__sub-container--minw-100">
             <i class="fa fa-bar-chart fa-inverse cabecalho__meio-botao-esq" [class.cabecalho__meio-botao--ativo]="ativo=='grafico'" (click)="ativar('grafico')"></i>
             <span class="cabecalho__meio-botao-dir" [class.cabecalho__meio-botao--ativo]="ativo=='cartograma'" (click)="ativar('cartograma')">
@@ -40,4 +49,6 @@
             </div>
         </div>
     </div>
+
+
 </div>
