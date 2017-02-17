@@ -1,15 +1,5 @@
 <div class="component">
-    <div class="comp__info">
-        <h3 class="comp__titulo">Fotos</h3>
-        <!--<i class="fa fa-info-circle comp__info-icon" aria-hidden="true"></i>-->
-    </div>
-    <div class="comp__conteudo">
-
-        <!--preview-->
-        <div class="preview" (click)="mostrar()"  *ngIf="preview1 == '' && preview2 == '' && preview3 == ''">
-            <!--sem fotos-->
-            <p>Nenhuma foto encontrada.</p>
-        </div>
+    <div class="comp__conteudo"  *ngIf="preview1 != '' && preview2 != '' && preview3 != ''">
 
         <div class="preview" (click)="mostrar()"  *ngIf="preview1 != '' && preview2 == '' && preview3 == ''">
             <!--apenas uma foto-->
