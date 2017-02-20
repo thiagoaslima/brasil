@@ -30,6 +30,7 @@ export class PesquisaDadosComponent {
     public fontesIndicador: string[];
     public temFonte: boolean = false;
     public temNota: boolean = false;
+    public isMenuOculto = true;
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -177,6 +178,16 @@ export class PesquisaDadosComponent {
                 break;
             }
         }
+    }
+
+    public abrirMenu(){
+
+        this.isMenuOculto = false;
+    }
+
+    public fecharMenu(){
+
+        this.isMenuOculto = true;
     }
 
     //essa função dá um flat(transforma a árvore num array linear) na árvore de indicadores

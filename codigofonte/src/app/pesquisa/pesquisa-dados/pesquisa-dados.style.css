@@ -213,6 +213,79 @@ tr.nivel-1:nth-child(3) td{
     background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
 }
 
+/*submenu do botão de download*/
+
+.submenu{
+    list-style-type: none;
+    height: auto;
+    position: absolute;
+    z-index: 1;
+    right: 5px;
+    text-align: right;
+}
+
+.submenu .seta{
+    content: "";
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #148C99;
+}
+
+.submenu__lista{
+    list-style-type: none;
+}
+
+.submenu__link{
+    display: block;
+    padding: 9px 20px;
+    position: relative;
+}
+
+.submenu__item{
+    background-color: #148C99;
+    border-bottom: 1px solid #B2B2B2;
+    cursor: pointer;
+    text-align: left;
+    color: #fff;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
+
+.submenu__item:hover{
+    color: white;
+    background-color: #0b636d;
+    /*border-bottom: 1px solid #676767;*/
+}
+
+.submenu__item:last-child{
+    border-bottom: none;
+}
+
+.submenu__item--selecionado{
+    color: white;
+    background-color: #333;
+    /*border-bottom: 1px solid #676767;*/
+}
+
+.submenu__texto{
+    width: 80%;
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+.oculto{
+    display: none;
+}
+
+.visivel{
+    display: block;
+}
+
 /* fontes e notas */
 .pesq__info{
     color: #666;
