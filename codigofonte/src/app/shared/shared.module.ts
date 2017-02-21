@@ -39,7 +39,7 @@ const PROVIDERS = [
     LocalidadeService,
     CommonService,
     BuscaService,
-    { provide: PesquisaService, useClass: PesquisaService },
+    PesquisaService,
     { provide: TOPOJSON, useValue: TopoJson }
 ]
 

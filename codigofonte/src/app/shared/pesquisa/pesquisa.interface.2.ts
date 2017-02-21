@@ -105,23 +105,22 @@ export class Pesquisa {
         return this.periodos.map(periodo => periodo.periodo);
     }
 
-    constructor(
-        obj = {
-            id: 0,
-            nome: '',
-            descricao: '',
-            observacao: '',
-            periodos: [],
-            contexto: 0,
-            indicadoresRoot: []
-        }) {
-        this.id = obj.id;
-        this.nome = obj.nome;
-        this.descricao = obj.descricao;
-        this.observacao = obj.observacao;
-        this.periodos = obj.periodos;
-        this.contexto = new Contexto(obj.contexto);
-        this._indicadoresRoot = obj.indicadoresRoot;
+    constructor({
+        id = 0,
+        nome = '',
+        descricao = '',
+        observacao = '',
+        periodos = [],
+        contexto = 0,
+        indicadoresRoot = []
+    }) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao || '';
+        this.observacao = observacao || '';
+        this.periodos = periodos;
+        this.contexto = new Contexto(contexto || 0);
+        this._indicadoresRoot = indicadoresRoot || [];
     }
 
     /**
@@ -204,15 +203,13 @@ export class Indicador {
     classe: string
     unidade: UnidadeIndicador
     nota: any[]
-    metadado: {
+    metadado: MetadadoIndicador
 
-    }
-
-    private _parentId: number
-    private _children: number[]
-    private _pesquisaStrategy: RetrieveStrategy<Pesquisa> = { retrieve: (ids) => { throw new Error('No pesquisaStrategy was registred') } };
-    private _indicadoresStrategy: RetrieveStrategy<Indicador | Indicador[]> = { retrieve: (ids) => { throw new Error('No indicadoresStrategy was registred') } };
-    private _resultadosStrategy: RetrieveStrategy<Observable<ResultadosIndicador>> = { retrieve: (ids) => { throw new Error('No resultadosStrategy was registred') } };
+    private _parentId: number = 0;
+    private _children: number[] = [];
+    private _pesquisaStrategy: RetrieveStrategy<Pesquisa> //= { retrieve: (ids) => { throw new Error('No pesquisaStrategy was registred') } };
+    private _indicadoresStrategy: RetrieveStrategy<Indicador | Indicador[]> //= { retrieve: (ids) => { throw new Error('No indicadoresStrategy was registred') } };
+    private _resultadosStrategy: RetrieveStrategy<Observable<ResultadosIndicador>> //= { retrieve: (ids) => { throw new Error('No resultadosStrategy was registred') } };
 
     get nome() {
         return this.indicador;
@@ -235,34 +232,34 @@ export class Indicador {
         return this._resultadosStrategy.retrieve(this);
     }
 
-    constructor(obj = {
-        id: 0,
-        posicao: '',
-        indicador: '',
-        classe: '',
-        unidade: {},
-        nota: [],
-        metadado: {
+    constructor({
+        id = 0,
+        posicao = '',
+        indicador = '',
+        classe = '',
+        unidade = {},
+        nota = [],
+        metadado = {
             descricao: '',
             calculo: ''
         },
-        children: [],
-        pesquisa: null,
-        parent: null
+        children = [],
+        pesquisa = null,
+        parent = null
     }) {
-        this.id = obj.id;
-        this.posicao = obj.posicao;
-        this.indicador = obj.indicador;
-        this.classe = obj.classe;
-        this.unidade = new UnidadeIndicador(obj.unidade);
-        this.metadado = new MetadadoIndicador(obj.metadado);
+        this.id = id;
+        this.posicao = posicao;
+        this.indicador = indicador;
+        this.classe = classe;
+        this.unidade = new UnidadeIndicador(unidade || {});
+        this.metadado = new MetadadoIndicador(metadado || {});
 
-        if (obj.children.length) this.registerChildren(obj.children);
-        if (obj.pesquisa) this.registerPesquisa(obj.pesquisa);
-        if (obj.parent) this.registerParent(obj.parent);
+        if (children.length) this.registerChildren(children);
+        if (pesquisa) this.registerPesquisa(pesquisa);
+        if (parent) this.registerParent(parent);
     }
 
-    getResultados(codigosLocalidade: number | number[], periodos: string|string[] = 'all') {
+    getResultados(codigosLocalidade: number | number[], periodos: string | string[] = 'all') {
         let _codigosLocalidade = Array.isArray(codigosLocalidade) ? codigosLocalidade : [codigosLocalidade];
         let resultados$ = this._resultadosStrategy.retrieve(this, _codigosLocalidade);
 
@@ -271,7 +268,7 @@ export class Indicador {
                 return _codigosLocalidade.reduce((obj, codigo) => {
                     obj.resultados[codigo] = resultados[codigo];
                     return obj;
-                }, <ResultadosIndicador>{id: this.id, resultados: {}});
+                }, <ResultadosIndicador>{ id: this.id, resultados: {} });
             });
         } else {
             let _periodos = Array.isArray(periodos) ? periodos.map(periodo => periodo.toString()) : [periodos.toString()];
@@ -290,7 +287,7 @@ export class Indicador {
                         return obj;
                     }, {});
                     return obj;
-                }, <ResultadosIndicador>{id: this.id, resultados: {}});
+                }, <ResultadosIndicador>{ id: this.id, resultados: {} });
             });
         }
     }

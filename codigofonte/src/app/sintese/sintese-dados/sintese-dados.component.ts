@@ -19,34 +19,27 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
 
     public conteudo = <{ tema: string, indicadores: any[] }[]>[];
     private _conteudo$$: Subscription;
-    private _hashTemas;
 
     constructor(
         private _localidadeService: LocalidadeService,
         private _sinteseService: SinteseService,
         private _sinteseConfig: SINTESE
-    ) { 
-        this._hashTemas = this._sinteseConfig.temas.reduce( (agg, tema) => Object.assign(agg, {[tema]: []}), {});
-    }
+    ) { }
 
     ngOnInit() {
         let localidade$ = this._localidadeService.selecionada$
             .distinctUntilChanged()
-            // .map(localidade => {
-            //     this.conteudo = this.resetConteudo();
-            //     return localidade;
-            // });
+            .map(localidade => {
+                this.conteudo = this.resetConteudo();
+                return localidade;
+            });
 
-        let lista$ = localidade$
+        this._conteudo$$ = localidade$
             .distinctUntilChanged()
-            .map((localidade) => this._sinteseConfig[localidade.tipo])
-            .map;
-
-        this._conteudo$$ = Observable.zip(
-            localidade$,
-            lista$
-        ).map( ([localidade, lista]) => this._sinteseService.getConteudo(lista, localidade.codigo))
-           
+            .flatMap((localidade) => this._sinteseService.getConteudo(this._sinteseConfig[localidade.tipo], localidade.codigo))
+            .subscribe(item => {
+                this.conteudo.filter(cont => cont.tema === item['tema']).map(cont => { cont.indicadores.push(item)});
+            });
     }
 
     ngOnDestroy() {

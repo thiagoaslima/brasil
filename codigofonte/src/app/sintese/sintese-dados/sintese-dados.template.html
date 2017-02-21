@@ -8,24 +8,24 @@
             </div>
         </div>
 
-        <template ngFor let-dado [ngForOf]="item.indicadores | async" [ngForTrackBy]="trackBy">
+        <template ngFor let-dado [ngForOf]="item.indicadores" [ngForTrackBy]="trackBy">
 
             <div *ngIf="dado.largura !== 'full'" class="dados__tema dados__tema--metade">
                 <div class="dados__tema__titulo">
                     {{dado.nome.toUpperCase()}} 
-                    <small *ngIf="dado.valor?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[ {{dado.valor?.periodo}} ]</small> 
+                    <small *ngIf="dado.valor?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[{{(dado.valor | async)?.periodo}}]</small> 
                     <br/>
-                    <span *ngIf="dado.valor">{{dado.valor?.valor}}</span>
+                    <span *ngIf="dado.valor">{{(dado.valor | async)?.valor}}</span>
                 </div>
             </div>
 
             <div *ngIf="dado.largura == 'full'" class="dados__variavel">
                 <a *ngIf="dado.link" [routerLink]='[dado.link]' routerLinkActive="active">
                     <div class="dados__variavel__nome">{{dado.nome}} 
-                        <small *ngIf="dado.valor?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[ {{dado.valor?.periodo}} ]</small> 
+                        <small *ngIf="dado.valor?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[(dado.valor | async)?.periodo}}]</small> 
                     </div>
                     <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                    <div class="dados__variavel__valor" *ngIf="dado.valor">{{dado.valor?.valor | resultado}} <span>{{dado.unidade}}</span></div>
+                    <div class="dados__variavel__valor" *ngIf="dado.valor">{{(dado.valor | async)?.valor}} <span>{{dado.unidade | async}}</span></div>
                 </a>
             </div>
 
