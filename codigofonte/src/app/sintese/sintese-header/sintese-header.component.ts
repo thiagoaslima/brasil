@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { RouterParamsService } from '../../shared/router-params.service';
@@ -20,7 +20,7 @@ var converter = require('json-2-csv');
     templateUrl: 'sintese-header.template.html',
     styleUrls: ['sintese-header.style.css'],
 })
-export class SinteseHeaderComponent implements OnChanges {
+export class SinteseHeaderComponent implements OnInit {
 
  
     // Nome do indicador
@@ -55,7 +55,7 @@ export class SinteseHeaderComponent implements OnChanges {
     ){ }
 
 
-    ngOnChanges(){
+    ngOnInit(){
 
         this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
             if(params.indicador){
@@ -68,27 +68,31 @@ export class SinteseHeaderComponent implements OnChanges {
                 let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
 
                 // Obtém as informações sobre a pesquisa, dado seu indicador
-                let dadosPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params.indicador);
+                this._sinteseService.getPesquisaByIndicador(params.indicador)
+                        .retry(3)
+                        .flatMap(pesquisa => {
 
-                // Recupera os valores da pesquisa
-                this._sinteseService.getPesquisa(dadosPesquisa.codigo, codigoMunicipio, [params.indicador]).subscribe((dados) => {
+                            //obtém o nome da pesquisa de origem do indicador
+                            this.pesquisa = pesquisa.descricao; 
 
-                    //descrição textual do indicador presente na rota
-                    this.titulo = dados[0].indicador; 
+                            //obtém o código da pesquida
+                            this.codPesquisa = pesquisa.id; 
+                            
+                            return this._sinteseService.getPesquisa(pesquisa.id, codigoMunicipio, [params.indicador])
+                        })
+                        .subscribe((dados) => {
 
-                    //obtém o nome da pesquisa de origem do indicador
-                    this.pesquisa = dadosPesquisa.nome; 
+                            //descrição textual do indicador presente na rota
+                            this.titulo = dados[0].indicador; 
 
-                    //obtém o código da pesquida
-                    this.codPesquisa = dadosPesquisa.codigo; 
+                            //constrói link para pesquisa de origem
+                            this.linkPesquisa = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/' + this.codPesquisa + '/' + params.indicador;
 
-                    //constrói link para pesquisa de origem
-                    this.linkPesquisa = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/' + this.codPesquisa + '/' + params.indicador;
-
-                    // Valores utilizados na exportação de arquivo
-                    this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
-                });
+                            // Valores utilizados na exportação de arquivo
+                            this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
+                    });
             }
+
         });
 
         //verifica se o componente de detalhes está aberto (mobile)
