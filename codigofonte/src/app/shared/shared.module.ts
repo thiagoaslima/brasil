@@ -15,8 +15,6 @@ import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
 
-import {ResultadoPipe} from '../utils/resultado.pipe';
-
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
     CommonModule,

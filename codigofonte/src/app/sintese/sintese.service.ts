@@ -33,28 +33,8 @@ export class SinteseService {
     /**
      * Monta o array de dados a ser consumido pela view
      */
-    getConteudo(temas: string[], lista: SinteseConfigItem[], codigoLocalidade: number) {
-
-        // let pesquisas = lista.reduce((agg, item) => {
-        //     if (item.pesquisa) {
-        //         agg[item.pesquisa] = true;
-        //     }
-
-        //     if (item.composicao && item.composicao.indicadores && item.composicao.indicadores.length) {
-        //         item.composicao.indicadores.forEach(item => {
-        //             if (item.pesquisa) {
-        //                 agg[item.pesquisa] = true;
-        //             }
-        //         })
-        //     }
-
-        //     return agg;
-        // }, {});
-
-        // let cache$ = Observable.zip(...Object.keys(pesquisas).map(pesquisaId => this._pesquisaService.getListaIndicadoresDaPesquisa(pesquisaId)));
-
-
-        let observables = lista.map(item => {
+    getConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
+        return lista.map(item => {
             if (item.pesquisa && item.indicador) {
                 return this._pesquisaService.getDadosIndicadores(item.pesquisa, codigoLocalidade, item.indicador)
                     .map(indicador => indicador[0])
@@ -102,7 +82,11 @@ export class SinteseService {
         })
 
 
-        return Observable.from(observables);
+        //return Observable.of(observables).flatMap(val => val);
+    }
+
+    getDadosConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
+        lista
     }
 
 
@@ -111,22 +95,28 @@ export class SinteseService {
      */
     public getPesquisasDisponiveis() {
 
-        return this._http.get('http://servicodados.ibge.gov.br/api/v1/pesquisas/')
-            .map((res) => res.json())
-            .map((pesquisas) => {
-                let _pesquisas = pesquisas
-                    .filter((pesquisa) => {
-                        return this.idPesquisasValidas.indexOf(pesquisa.id) >= 0;
-                    })
-                    .map((pesquisa) => {
-                        return {
-                            id: pesquisa.id,
-                            descricao: pesquisa.descricao || pesquisa.nome
-                        }
-                    });
+        return this._pesquisaService.getAllPesquisas()
+            .map(pesquisas => pesquisas.map(pesquisa => ({
+                id: pesquisa.id,
+                descricao: pesquisa.descricao || pesquisa.nome
+            })));
 
-                return _pesquisas;
-            });
+        // return this._http.get('http://servicodados.ibge.gov.br/api/v1/pesquisas/')
+        //     .map((res) => res.json())
+        //     .map((pesquisas) => {
+        //         let _pesquisas = pesquisas
+        //             .filter((pesquisa) => {
+        //                 return this.idPesquisasValidas.indexOf(pesquisa.id) >= 0;
+        //             })
+        //             .map((pesquisa) => {
+        //                 return {
+        //                     id: pesquisa.id,
+        //                     descricao: pesquisa.descricao || pesquisa.nome
+        //                 }
+        //             });
+
+        //         return _pesquisas;
+        //     });
     }
 
     /**
@@ -230,7 +220,7 @@ export class SinteseService {
                 return nomes;
             });
     }
-    
+
     /**
      * Obtém o histórico de um munucípio, dado seu código.
      * 
@@ -263,17 +253,17 @@ export class SinteseService {
             });
     }
 
-    public getFotografias(codigoMunicipio:number) {
+    public getFotografias(codigoMunicipio: number) {
 
-        let codigo = codigoMunicipio.toString().substr(0,6);
-        
+        let codigo = codigoMunicipio.toString().substr(0, 6);
+
         return this._http.get(
             `http://servicodados.ibge.gov.br/api/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
         )
-        .map(res => res.json())
-        .map((res) => {
-            return Object.keys(res).map((key) => res[key]);
-        });
+            .map(res => res.json())
+            .map((res) => {
+                return Object.keys(res).map((key) => res[key]);
+            });
     }
 
 
