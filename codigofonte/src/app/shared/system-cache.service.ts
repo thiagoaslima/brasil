@@ -1,6 +1,6 @@
 import { Inject, Injectable, isDevMode } from '@angular/core';
 import { CacheService } from './cache.service';
-import { Pesquisa, Indicador } from './pesquisa/pesquisa.interface';
+import { Pesquisa, Indicador, ResultadosIndicador } from './pesquisa/pesquisa.interface.2';
 
 import { flatTree } from '../utils/flatFunctions';
 
@@ -15,6 +15,11 @@ const keys = [
                 children: []
             }
         ]
+    },
+
+    {
+        path: "hashPesquisas",
+        key: "hashPesquisas"
     },
 
     {
@@ -65,7 +70,7 @@ const keys = [
                 children: [
                     {
                         path: "resultados",
-                        key: "resultadosIndicador"
+                        key: "resultados"
                     }
                 ]
             }
@@ -77,14 +82,19 @@ const keys = [
 export class SystemCacheService {
     static KEY = 'SystemCacheService';
 
+    constructor(
+        @Inject('LRU') public _cache: Map<string, any>
+    ) { }
+
     buildKey = {
         allPesquisas: () => "pesquisas",
-        // pesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}`,
+        // hashPesquisas: () => "hashPesquisas",
+        pesquisa: (pesquisaId: number) => `pesquisas/${pesquisaId}`,
         listaIndicadoresDaPesquisa: (pesquisaId: number | string) => `pesquisas/${pesquisaId}/indicadores`,
         hashIndicadoresDaPesquisa: (pesquisaId: number | string) => `pesquisas/${pesquisaId}/hash`,
-        // indicador: (pesquisaId: number, indicadorId: number) => `indicadores/${indicadorId}`,
+        indicador: (pesquisaId: number, indicadorId: number) => `indicadores/${indicadorId}`,
+        resultados: (indicadorId: number) => `indicadores/${indicadorId}/resultados`,
         resultadosPesquisaLocalidade: (pesquisaId: number | string, localidadeCodigo: number | string) => `pesquisas/${pesquisaId}/localidades/${localidadeCodigo}/resultados`,
-        // resultadosIndicador: (pesquisaId: number, localidadeCodigo: number, indicadorId: number) => `indicadores/${indicadorId}/resultados?localidades=${localidadeCodigo}`,
         //resultadosPesquisa: (pesquisaId: number, localidadeCodigo: number) => `pesquisas/${pesquisaId}/resultados`,
         busca: (termo: string) => `busca/${termo}`
     }
@@ -94,9 +104,9 @@ export class SystemCacheService {
         const len = arr.length;
 
         const obj = arr.reduce((agg, str, idx) => {
-            let _obj = agg.reduce( (obj, item) => item.path === str ? item : obj, null);
+            let _obj = agg.reduce((obj, item) => item.path === str ? item : obj, null);
             if (!_obj) {
-                _obj = agg.reduce( (obj, item) => item.path === "any" ? item : obj, null);
+                _obj = agg.reduce((obj, item) => item.path === "any" ? item : obj, null);
             }
             return idx === len - 1 ? _obj : _obj.children;
         }, keys);
@@ -104,8 +114,41 @@ export class SystemCacheService {
         return obj.key;
     }
 
-    constructor( @Inject('LRU') public _cache: Map<string, any>) {
+    savePesquisas(pesquisas: Pesquisa[]) {
+        pesquisas.forEach(pesquisa => this._cache.set(
+            this.buildKey.pesquisa(pesquisa.id), pesquisa)
+        );
+    }
 
+    getPesquisa(id: number): Pesquisa {
+        return this._cache.get(this.buildKey.pesquisa(id));
+    }
+
+    saveIndicador(pesquisaId: number, indicador: Indicador) {
+        this._cache.set(
+            this.buildKey.indicador(pesquisaId, indicador.id),
+            indicador
+        );
+    }
+
+    getIndicador(pesquisaId: number, id: number): Indicador {
+        return this._cache.get(this.buildKey.indicador(pesquisaId, id));
+    }
+
+    getIndicadores(pesquisaId: number, ids: number[]): Indicador[] {
+        return ids.map(id => this.getIndicador(pesquisaId, id));
+    }
+
+    
+    saveResultados(indicadorId: number, resultados: ResultadosIndicador) {
+        this._cache.set(
+            this.buildKey.resultados(indicadorId),
+            resultados
+        );
+    }
+
+    getResultados(indicadorId: number): ResultadosIndicador { 
+        return this._cache.get(this.buildKey.resultados(indicadorId));
     }
 
     /**
@@ -129,7 +172,7 @@ export class SystemCacheService {
      */
     get(key: string | number): any {
         let _key = this.normalizeKey(key);
-        return this._cache.get(_key);
+        return this._cache.get(_key) || null;
     }
 
     /**
@@ -161,38 +204,36 @@ export class SystemCacheService {
     rehydrate(json: any): void {
         Object.keys(json).forEach((key: string) => {
             let _key = this.normalizeKey(key);
-            let value;
+            let value = json[_key];
 
             switch (this.checkKey(key)) {
                 case "pesquisas":
-                    value = json[_key].map(value => {
-                        const pesquisa = new Pesquisa(value);
-                    });
                     this._cache.set(_key, value);
                     break;
 
                 case "pesquisa":
+                    this._cache.set(_key, new Pesquisa(value));
                     break;
 
                 case "listaIndicadores":
-                /*
-                    let hashIndicadores = {};
-
-                    json[_key].forEach(value => {
-                        return flatTree(value).map(obj => {
-                            let ind = new Indicador(Object.assign(
-                                {},
-                                obj,
-                                { children: [] }
-                            ));
-                            hashIndicadores[ind.id] = ind;
-                            this._cache.set(this.buildKey.indicador(ind.pesquisa.id, ind.id), new Indicador(json[_key]));
-                            return ind;
+                    /*
+                        let hashIndicadores = {};
+    
+                        json[_key].forEach(value => {
+                            return flatTree(value).map(obj => {
+                                let ind = new Indicador(Object.assign(
+                                    {},
+                                    obj,
+                                    { children: [] }
+                                ));
+                                hashIndicadores[ind.id] = ind;
+                                this._cache.set(this.buildKey.indicador(ind.pesquisa.id, ind.id), new Indicador(json[_key]));
+                                return ind;
+                            });
                         });
-                    });
-
-                    Object.keys(hashIndicadores).map()
-                    */
+    
+                        Object.keys(hashIndicadores).map()
+                        */
                     break;
 
                 case "indicador":

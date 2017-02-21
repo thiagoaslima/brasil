@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface';
-import { PesquisaService } from '../shared/pesquisa/pesquisa.service';
+import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
 import { SinteseConfigItem } from './sintese-config';
 import { flat } from '../utils/flatFunctions';
@@ -36,25 +36,27 @@ export class SinteseService {
     getConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
         return lista.map(item => {
             if (item.pesquisa && item.indicador) {
-                return this._pesquisaService.getDadosIndicadores(item.pesquisa, codigoLocalidade, item.indicador)
-                    .map(indicador => indicador[0])
-                    .map(indicador => ({
+                return Observable.zip(
+                    this._pesquisaService.getIndicadores(item.pesquisa, item.indicador),
+                    this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade)
+                ).map( ([indicador, resultados]) => ({
                         nome: item.nome,
-                        link: indicador.id.toString(),
-                        valor: indicador.latestValidResult(codigoLocalidade),
-                        unidade: indicador.unidade ? indicador.unidade.id : "",
+                        link: indicador[0].id.toString(),
+                        valor: resultados.map(resultado => resultado.resultados),
+                        unidade: indicador[0].unidade.id,
                         tema: item.tema,
                         largura: item.largura || 'full'
                     }));
             }
 
             if (item.composicao) {
-
-                return this._pesquisaService.getDadosIndicadores(
-                    item.composicao.indicadores[0].pesquisa,
-                    codigoLocalidade,
-                    item.composicao.indicadores.map(indicador => indicador.indicador)
-                ).map((indicadores: Indicador[]) => {
+                let pesquisaId = item.composicao.indicadores[0].pesquisa;
+                let indicadoresId = item.composicao.indicadores.map(indicador => indicador.indicador);
+                return Observable.zip(
+                    this._pesquisaService.getIndicadores(pesquisaId, indicadoresId),
+                    this._pesquisaService.getResultados(pesquisaId, indicadoresId, codigoLocalidade)
+                )
+                .map(([indicadores, resultados]) => {
                     let valor = item.composicao.make(indicadores, codigoLocalidade);
                     let pesquisa = indicadores[0].pesquisa;
 
