@@ -4,11 +4,14 @@
             < Voltar
         </button>
 
-        <h2 class="cabecalho__titulo">{{ tituloPrincipal }}</h2>
-        <i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>
+        <h2 class="cabecalho__titulo">
+            {{ tituloPrincipal }}
+            <!--<i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>-->
+        </h2>
         
         <div class="cabecalho__download">
             <i class="fa fa-download" aria-hidden="true" (click)="abrirMenu()"></i>
+            
             <div class="submenu" (mouseleave)="fecharMenu()" [class.oculto]="isMenuOculto" [class.visivel]="!isMenuOculto">
                 <div class="seta"></div>
                 <ul class="submenu__lista">

@@ -46,7 +46,7 @@
         </div>
 
         <ul>
-            <li class='selecionado' *ngIf="states.municipios" (click)="setState('municipiosTodos')">
+            <li [class.selecionado]="!ufSelecionada" *ngIf="states.municipios" (click)="setState('municipiosTodos')">
                 <div>
                     Todos <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </div>
@@ -63,7 +63,7 @@
             </template>
 
             <template [ngIf]="states.municipios">
-                <li *ngFor="let uf of ufs" (click)="setState('municipiosMunicipios', uf)">
+                <li *ngFor="let uf of ufs" [class.selecionado]="ufSelecionada && ufSelecionada.codigo == uf.codigo" (click)="setState('municipiosMunicipios', uf)">
                     <div>
                         {{uf.nome}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </div>
