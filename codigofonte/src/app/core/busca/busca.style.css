@@ -62,7 +62,7 @@
 .busca__auto-completar__menu ul{
     padding: 24px 0px 0px;
     border-bottom: 5px solid #808080;
-    height: 61px;
+    height: 63px;
     width: 100%;
 }
 
@@ -191,7 +191,7 @@
     }
 
     .busca__auto-completar__menu ul{
-        height: 57px;
+        height: 59px;
         width: 100%;
     }
 
