@@ -482,4 +482,24 @@ export class SinteseService {
         return dadosPesquisa$;
     }
 
+    getPesquisaByIndicador(idIdentificador: number){
+
+        // Obter o código de todas as pesquisas
+        return Observable.from(this.idPesquisasValidas) 
+            .flatMap(idPesquisa => {
+
+                let pesquisa$ = this.getInfoPesquisa(idPesquisa.toString());
+                let indicadores$ = this.getNomesPesquisa(idPesquisa.toString(), [idIdentificador.toString()]);
+                
+                return Observable.zip(pesquisa$, indicadores$)
+                    .map(([pesquisa, indicadores]) => {
+
+                        pesquisa['indicadores'] = indicadores;
+
+                        return pesquisa;
+                    })
+            })
+            .filter(pesquisa => !!pesquisa && pesquisa['indicadores'].length > 0);
+    }
+
 }
