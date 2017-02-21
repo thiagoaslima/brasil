@@ -198,6 +198,7 @@ tr.nivel-1:nth-child(3) td{
     padding-top: 1px;
     margin-right: 2%;
     cursor: pointer;
+    position: relative;
 }
 
 .cabecalho__combobox{
@@ -220,7 +221,7 @@ tr.nivel-1:nth-child(3) td{
     height: auto;
     position: absolute;
     z-index: 1;
-    right: 5px;
+    right: -8px;
     text-align: right;
 }
 
