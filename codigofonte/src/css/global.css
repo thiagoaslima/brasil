@@ -39,7 +39,7 @@ body.municipio{
 
 header{
     background-color: #E6E6E6;
-    max-width: 1900px;
+    /*max-width: 1900px;*/
     margin: auto;
     border-bottom: 2px solid #F7931E;
     display: table;
@@ -75,7 +75,7 @@ header #busca{
 }
 
 #container{
-    max-width: 1900px;
+    /*max-width: 1900px;*/
     margin: auto;
     height: 100%;
 
@@ -255,8 +255,6 @@ sintese>dados
     overflow-y: auto;
 }
 
-
-
 @media screen and (max-width: 768px) {
     body, body.municipio, body.brasil, body.estado{
         background: none;
@@ -395,4 +393,26 @@ sintese>dados
     .no__scroll--mobile{
         overflow: hidden;
     }
+}
+
+
+@media screen and (min-width: 1200px) {
+    /*aside fica fixo em 250px;*/
+    body.estado{
+       background: linear-gradient( to right, #148c99 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff )
+    }
+
+    header .logo {
+        width: 250px;
+    }
+
+    aside{
+        width: 250px;    
+    }
+    
+    .conteudo{
+        width: calc(100% - 250px);
+    }
+
+    
 }

@@ -236,3 +236,14 @@
         padding-right: 8%;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .busca{
+        width: calc(100% - 250px);
+    }
+
+    .busca__auto-completar{
+        width: calc(100% - 250px);
+        max-width: 100%;
+    }
+}
