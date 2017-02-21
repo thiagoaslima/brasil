@@ -9,6 +9,7 @@
         
         <div class="cabecalho__download">
             <i class="fa fa-download" aria-hidden="true" (click)="abrirMenu()"></i>
+            
             <div class="submenu" (mouseleave)="fecharMenu()" [class.oculto]="isMenuOculto" [class.visivel]="!isMenuOculto">
                 <div class="seta"></div>
                 <ul class="submenu__lista">
