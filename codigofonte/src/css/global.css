@@ -23,10 +23,10 @@ body, body.brasil{
 
 body.estado{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: -o-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: -moz-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -webkit-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
 body.municipio{
@@ -39,7 +39,7 @@ body.municipio{
 
 header{
     background-color: #E6E6E6;
-    max-width: 1900px;
+    /*max-width: 1900px;*/
     margin: auto;
     border-bottom: 2px solid #F7931E;
     display: table;
@@ -75,7 +75,7 @@ header #busca{
 }
 
 #container{
-    max-width: 1900px;
+    /*max-width: 1900px;*/
     margin: auto;
     height: 100%;
 
@@ -91,11 +91,11 @@ header #busca{
 }
 
 .estado .cor-fundo{
-    background-color: #148C99;
+    background-color: #1B779B;
 }
 
 .estado .cor-borda{
-   background-color: #148C99;
+   background-color: #1B779B;
 }
 
 .municipio .cor-fundo{
@@ -120,7 +120,7 @@ aside{
 }
 
 aside.aside--municipio{
-    background-color: #148C99;
+    background-color: #1B779B;
 }
 
 aside ul li{
@@ -165,7 +165,7 @@ aside #localidade button{
 
 aside #localidade button:hover{
     background-color: #FFFFFF;
-    color: #148C99;
+    color: #1B779B;
 }
 
 aside #localidade button#menu-principal{
@@ -185,12 +185,16 @@ aside #menu ul{
 aside #menu ul li{
     padding: 5% 8%;
     font-size: .9em;
-    border-bottom: 1px solid #136568;
+    border-bottom: 1px solid #165D72;
     cursor:pointer;
 }
 
+aside #menu ul li:last-child{
+    border-bottom: none;
+}
+
 aside #menu ul li:hover, aside #menu .menu--selecionado{
-    background-color: #15696D;
+    background-color: #165D72;
 }
 
 #sintese{
@@ -255,8 +259,6 @@ sintese>dados
     overflow-y: auto;
 }
 
-
-
 @media screen and (max-width: 768px) {
     body, body.municipio, body.brasil, body.estado{
         background: none;
@@ -312,7 +314,7 @@ sintese>dados
         position: fixed;
         transform: translateY(-100px);
         width: 100%;
-        background: #148C99;
+        background: #1B779B;
         z-index: 2;
     }
 
@@ -338,7 +340,7 @@ sintese>dados
 
     aside #menu{
         position: fixed;
-        background-color: #148C99;
+        background-color: #1B779B;
         left: -75%;
         min-height: 100%;
         width: 75%;
@@ -395,4 +397,26 @@ sintese>dados
     .no__scroll--mobile{
         overflow: hidden;
     }
+}
+
+
+@media screen and (min-width: 1200px) {
+    /*aside fica fixo em 250px;*/
+    body.estado{
+       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff )
+    }
+
+    header .logo {
+        width: 250px;
+    }
+
+    aside{
+        width: 250px;    
+    }
+    
+    .conteudo{
+        width: calc(100% - 250px);
+    }
+
+    
 }
