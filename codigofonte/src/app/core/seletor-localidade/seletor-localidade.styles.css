@@ -369,6 +369,9 @@ ANIMAÇÃO
     display: block
 }
 
+.fa-times {
+    cursor: pointer;
+}
 
 
 /**** só para mobile ****/

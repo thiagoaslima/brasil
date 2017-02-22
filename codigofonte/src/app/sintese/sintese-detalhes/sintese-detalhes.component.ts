@@ -6,7 +6,6 @@ import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { RouterParamsService } from '../../shared/router-params.service';
-import { CommonService } from '../../shared/common.service';
 
 @Component({
     selector: 'sintese-detalhes',
@@ -19,8 +18,7 @@ export class SinteseDetalhesComponent implements OnInit {
         private _route: ActivatedRoute,
         private _sinteseService: SinteseService,
         private _localidadeService: LocalidadeService,
-        private _params: RouterParamsService,
-        private _commonService: CommonService
+        private _params: RouterParamsService
     ) { }
 
     // Header
@@ -49,40 +47,43 @@ export class SinteseDetalhesComponent implements OnInit {
 
         this._localidadeService.selecionada$
             .subscribe(localidade => {
+                
+                this._route.params.filter(params => !!params['indicador']).subscribe(params => {
 
-                this._route.queryParams.subscribe(params => {
-
-                    if (params['v'] == 'mapa') {
-
-                        this.exibirMapa(localidade);
-                        this.componenteAtivo = 'cartograma';
-
-                    } else if(params['v'] == 'historico') {
+                    if(params['indicador'] == 'historico') {
 
                         this.componenteAtivo = 'historico';
 
-                    } else if(params['v'] == 'fotos'){
+                    } else {
 
-                        this.componenteAtivo = 'fotos';
-                    }else {
+                        this._route.queryParams.subscribe(params => {
 
-                        this.exibirGrafico(localidade);
-                        this.componenteAtivo = 'grafico';
+                            if (params['v'] == 'mapa') {
+
+                                this.exibirMapa(localidade);
+                                this.componenteAtivo = 'cartograma';
+
+                            } else if(params['v'] == 'grafico') {
+
+                                this.componenteAtivo = 'grafico';
+                                this.exibirGrafico(localidade);
+
+                            } else if(params['v'] == 'fotos'){
+
+                                this.componenteAtivo = 'fotos';
+
+                            }else {
+
+                                this.componenteAtivo = 'historico';
+
+                            }
+
+                        });
+
                     }
 
                 });
             });
-
-        // Obtém a imagem do gráfico em base64 para download, assim que o gráfico for desenhado.
-        // A imagem é recuperada pelo serviço
-        this._commonService.notifyObservable$.subscribe((mensagem) => {
-
-            if(mensagem['tipo'] == 'dataURL'){
-
-                this.setDataURL(mensagem['url']);
-            }
-        });
-            
     }
 
     public exibirComponente(nomeComponente) {
