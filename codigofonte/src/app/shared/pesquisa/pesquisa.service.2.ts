@@ -10,10 +10,12 @@ import { BASES, PESQUISAS } from '../../global-config';
 import { SystemCacheService } from '../system-cache.service';
 
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/zip';
 
 @Injectable()
@@ -22,6 +24,8 @@ export class PesquisaService {
     private _server = {
         path: this._bases.default.base
     }
+
+    private _subjects = {};
 
     constructor(
         private _cache: SystemCacheService,
@@ -66,16 +70,28 @@ export class PesquisaService {
             return Observable.of(ids.map(id => this._cache.getPesquisa(id)));
         }
 
-        return this._http.get(this._server.path('pesquisas'))
+        if (this._subjects[listaPesquisas]) {
+            return this._subjects[listaPesquisas];
+        }
+
+        let _subject = new ReplaySubject(1);
+        this._subjects[listaPesquisas] = _subject.asObservable().share();
+
+        this._http.get(this._server.path('pesquisas'))
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
             .map(res => res.json())
             .map(json => {debugger; return json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id))})
             .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
-            .do(pesquisas => {
+            .subscribe(pesquisas => {
                 this._cache.set(listaPesquisas, pesquisas.map(pesquisa => pesquisa.id));
                 this._cache.savePesquisas(pesquisas);
-            });
+                _subject.next(pesquisas);
+                this._subjects[listaPesquisas] = null;
+                _subject = null;
+            })
+
+        return this._subjects[listaPesquisas];
     }
 
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
@@ -139,13 +155,18 @@ export class PesquisaService {
             .map((resultados: ResultadosServer[]) => {
                 return resultados.map(resultado => {
                     let resultadoObj = resultado.res.reduce((map, res) => {
-                        Object.assign(map, { [parseInt(res.localidade, 10)]: res.res })
+                        return Object.assign(map, { [parseInt(res.localidade, 10)]: res.res })
                     }, Object.create(null));
 
                     return <ResultadosIndicador>{
                         id: resultado.id,
                         resultados: resultadoObj
                     };
+                });
+            })
+            .do( resultados => {
+                resultados.forEach(resultado => {
+                    this._cache.saveResultados(resultado.id, resultado);
                 });
             });
             

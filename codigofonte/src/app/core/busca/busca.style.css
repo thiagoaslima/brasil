@@ -31,6 +31,7 @@
 .busca.aberto .busca__auto-completar{
     display: block;
     z-index: 1;
+    
 }
 
 
@@ -39,6 +40,7 @@
     margin: 10px 1%;
     height: 30px;
     width: 98%;
+    padding: 0px 10px;
 }
 
 .busca.aberto .busca__input{
@@ -62,7 +64,7 @@
 .busca__auto-completar__menu ul{
     padding: 24px 0px 0px;
     border-bottom: 5px solid #808080;
-    height: 61px;
+    height: 63px;
     width: 100%;
 }
 
@@ -70,6 +72,7 @@
     float: left;
     padding: 0px 20px 12px;
     list-style: none;
+    cursor: pointer;
 }
 
 .busca__auto-completar__menu ul li.selecionado{
@@ -191,7 +194,7 @@
     }
 
     .busca__auto-completar__menu ul{
-        height: 57px;
+        height: 59px;
         width: 100%;
     }
 

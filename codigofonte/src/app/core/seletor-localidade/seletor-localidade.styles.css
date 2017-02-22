@@ -12,6 +12,7 @@ ANIMAÇÃO
 
 #selecionar-localidade #segunda-coluna.aberto{
     left: 0%;
+    margin-left: -4px;
 }
 
 #segunda-coluna.aberto + #terceira-coluna {
@@ -20,6 +21,7 @@ ANIMAÇÃO
 
 #selecionar-localidade #terceira-coluna.aberto{
     left: 0%;
+    margin-left: -5px;
 }
 
 
@@ -367,6 +369,9 @@ ANIMAÇÃO
     display: block
 }
 
+.fa-times {
+    cursor: pointer;
+}
 
 
 /**** só para mobile ****/

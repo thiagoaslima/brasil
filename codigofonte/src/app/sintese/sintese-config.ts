@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/zip';
+
 export interface SinteseConfigItem {
     nome: string
     tema: string
@@ -120,15 +123,21 @@ export class SINTESE {
                 ],
 
                 make: function (indicadores, codigoLocalidade) {
-                    let first = Number.parseInt(indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
-                    let second = Number.parseInt(indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
-                    let total = first + second;
+                    return Observable.zip(
+                        indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade),
+                        indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade)
+                    ).map(([resultados1, resultados2]) => {
+                        let first = Number.parseInt(resultados1['resultados'], 10);
+                        let second = Number.parseInt(resultados1['resultados'], 10);
+                        let total = first + second;
 
-                    first = Number.parseFloat((first / total).toFixed(3)) * 100;
-                    second = Number.parseFloat((second / total).toFixed(3)) * 100;
-                    // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
+                        first = Number.parseFloat((first / total).toFixed(3)) * 100;
+                        second = Number.parseFloat((second / total).toFixed(3)) * 100;
+                        // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
 
-                    return `${first.toFixed(1)} / ${second.toFixed(1)}`;
+                        return `${first.toFixed(1)} / ${second.toFixed(1)}`;
+                    });
+
                 }
             }
         },
@@ -152,18 +161,23 @@ export class SINTESE {
                     }
                 ],
 
-                 make: function (indicadores, codigoLocalidade) {
-                    let first = Number.parseInt(indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
-                    first = Number.isNaN(first) ? 0 : first;
-                    let second = Number.parseInt(indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
-                    second = Number.isNaN(second) ? 0 : second;
-                    let total = first + second;
+                make: function (indicadores, codigoLocalidade) {
+                    return Observable.zip(
+                        indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade),
+                        indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade)
+                    ).map(([resultados1, resultados2]) => {
+                        let first = Number.parseInt(resultados1['resultados'], 10);
+                        first = Number.isNaN(first) ? 0 : first;
+                        let second = Number.parseInt(resultados2['resultados'], 10);
+                        second = Number.isNaN(second) ? 0 : second;
+                        let total = first + second;
 
-                    first = Number.parseFloat((first / total).toFixed(3)) * 100;
-                    second = Number.parseFloat((second / total).toFixed(3)) * 100;
-                    // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
+                        first = Number.parseFloat((first / total).toFixed(3)) * 100;
+                        second = Number.parseFloat((second / total).toFixed(3)) * 100;
+                        // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
 
-                    return `${first.toFixed(1)} / ${second.toFixed(1)}`;
+                        return `${first.toFixed(1)} / ${second.toFixed(1)}`;
+                    });
                 }
             }
         },
@@ -294,6 +308,6 @@ export class SINTESE {
             nome: "Casos de dengue registrados",
             tema: TEMAS.saude
         },
-        
+
     ]
 }

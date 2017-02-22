@@ -214,6 +214,7 @@ export class SystemCacheService {
     }
     rehydrate(json: any): void {
         return;
+        /*
         Object.keys(json).forEach((key: string) => {
             let _key = this.normalizeKey(key);
             let value = json[_key];
@@ -247,6 +248,7 @@ export class SystemCacheService {
                     break;
             }
         });
+        */
     }
 
     /**

@@ -351,6 +351,7 @@ sintese>dados
         left: -75%;
         min-height: 100%;
         width: 75%;
+        z-index: 10;
 
         -webkit-transition: left 500ms ease;
         -moz-transition: left 500ms ease;

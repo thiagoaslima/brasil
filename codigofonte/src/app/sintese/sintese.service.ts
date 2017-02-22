@@ -21,7 +21,7 @@ import { ufs } from '../../api/ufs';
 export class SinteseService {
 
     // Lista de pesquisas estão autorizadas a serem acessadas pelo serviço.
-    private idPesquisasValidas: number[] = [11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 42, 43];
+    private idPesquisasValidas: number[] = [11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43];
 
     constructor(
         private _http: Http,
@@ -36,10 +36,24 @@ export class SinteseService {
     getConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
         return lista.map(item => {
             if (item.pesquisa && item.indicador) {
+
+                let valor$ = Observable.zip(
+                    this._pesquisaService.getIndicadores(item.pesquisa, item.indicador),
+                    this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade)
+                ).flatMap(([indicadores, resultados]) => {
+                    let indicador = indicadores[0];
+                    return indicador.resultadosValidosMaisRecentes(codigoLocalidade).map(res => {
+                        return {
+                            periodo: res.periodos[0],
+                            valor: res.resultados[0]
+                        }
+                    });
+                });
+
                 return {
                     nome: item.nome,
                     link: item.indicador,
-                    valor: this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade),
+                    valor: valor$,
                     unidade: this._pesquisaService.getIndicadores(item.pesquisa, item.indicador).map((indicador: Indicador[]) => indicador[0].unidade.id),
                     tema: item.tema,
                     largura: item.largura || 'full'
@@ -50,16 +64,28 @@ export class SinteseService {
                 let pesquisaId = item.composicao.indicadores[0].pesquisa;
                 let indicadoresId = item.composicao.indicadores.map(indicador => indicador.indicador);
 
-                let valor$ = Observable.zip(
+                let indicadores$ = Observable.zip(
                     this._pesquisaService.getIndicadores(pesquisaId, indicadoresId),
                     this._pesquisaService.getResultados(pesquisaId, indicadoresId, codigoLocalidade)
                 )
-                    .map(([indicadores, resultados]) => {
-                        let valor = item.composicao.make(indicadores, codigoLocalidade);
-                        let pesquisa = indicadores[0].pesquisa;
 
-                        return { periodo: pesquisa.getPeriodos().slice(-1)[0], valor: valor }
-                    });
+                let periodo$ = indicadores$.flatMap(([indicadores, resultados]) => {
+                    return indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).map(res => res.periodos[0]);
+                })
+
+                let composicao$ = indicadores$.flatMap(([indicadores, resultados]) => {
+                    return item.composicao.make(indicadores, codigoLocalidade);
+                });
+
+                let valor$ = Observable.zip(
+                    periodo$,
+                    composicao$
+                ).map(([periodo, dados]) => {
+                    return {
+                        periodo: periodo,
+                        valor: dados
+                    }
+                });
 
                 return {
                     nome: item.nome,
@@ -482,15 +508,15 @@ export class SinteseService {
         return dadosPesquisa$;
     }
 
-    getPesquisaByIndicador(idIdentificador: number){
+    getPesquisaByIndicador(idIdentificador: number) {
 
         // Obter o código de todas as pesquisas
-        return Observable.from(this.idPesquisasValidas) 
+        return Observable.from(this.idPesquisasValidas)
             .flatMap(idPesquisa => {
 
                 let pesquisa$ = this.getInfoPesquisa(idPesquisa.toString());
                 let indicadores$ = this.getNomesPesquisa(idPesquisa.toString(), [idIdentificador.toString()]);
-                
+
                 return Observable.zip(pesquisa$, indicadores$)
                     .map(([pesquisa, indicadores]) => {
 

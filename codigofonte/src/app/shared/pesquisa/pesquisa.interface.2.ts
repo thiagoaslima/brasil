@@ -257,10 +257,10 @@ export class Indicador {
         this.metadado = new MetadadoIndicador(metadado || {});
 
         if (children.length) this.registerChildren(children);
-        if (pesquisaId) this.registerPesquisa(pesquisaId);
-        if (pesquisa) this.registerPesquisa(pesquisa);
-        if (parentId) this.registerParent(parentId);
-        if (parent) this.registerParent(parent);
+        if (pesquisaId !== null && pesquisaId !== undefined) this.registerPesquisa(pesquisaId);
+        if (pesquisa !== null && pesquisa !== undefined) this.registerPesquisa(pesquisa);
+        if (parent !== null && parent !== undefined) this.registerParent(parentId);
+        if (parentId !== null && parentId !== undefined) this.registerParent(parent);
     }
 
     getResultados(codigosLocalidade: number | number[], periodos: string | string[] = 'all') {
@@ -288,7 +288,7 @@ export class Indicador {
             return resultados$.map(resultados => {
                 return _codigosLocalidade.reduce((obj, codigo) => {
                     obj.resultados[codigo] = _periodos.reduce((obj, periodo) => {
-                        obj[periodo] = resultados[codigo][periodo];
+                        obj[periodo] = resultados.resultados[codigo][periodo];
                         return obj;
                     }, {});
                     return obj;
@@ -307,33 +307,24 @@ export class Indicador {
         });
     }
 
-    resultadosValidosMaisRecentes(codigoLocalidade: number, start = 0, size = 1) {
-        let periodos = this.pesquisa.getPeriodos().reverse();
-        return this.getResultados(codigoLocalidade, periodos).map(resultados => {
+    resultadosValidosMaisRecentes(codigoLocalidade: number, start = 0, size = 1) {      
+        return this.getResultados(codigoLocalidade).map(resultados => {
+            let res = Object.keys(resultados.resultados[codigoLocalidade]).reduce( (obj, periodo) => {
+                if (obj[periodo] !== null && obj[periodo] !== undefined) {
+                    obj[periodo] = resultados.resultados[codigoLocalidade][periodo];
+                }
+                
+                return obj;
+            }, {});
 
-            let resp = periodos
-                .map((periodo, idx) => (resultados.resultados[periodo]))
-                .reduce((agg, resultado, idx) => {
-                    if (!resultado) return agg;
-                    agg.periodos.push(periodos[idx]);
-                    resultados.resultados[periodos[idx]] = resultado;
-                }, {
-                    periodos: [],
-                    resultados: {
-                        id: this.id,
-                        resultados: {}
-                    }
-                });
-
-            let _periodos = resp.periodos.slice(start, size);
-
-            return {
-                periodos: _periodos,
-                resultados: _periodos.reduce((obj, periodo) => {
-                    obj[periodo] = resp.resultados.resultados[periodo];
-                    return obj;
-                }, {})
-            }
+            return Object.keys(res).reverse().slice(start, size).reduce( (obj,periodo) => {
+                obj.periodos.push(periodo);
+                obj.resultados[periodo] = res[periodo];
+                return obj;
+            }, {
+                periodos: [],
+                resultados: {}
+            })
         });
     }
 
