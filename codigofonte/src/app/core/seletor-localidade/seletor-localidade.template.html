@@ -110,7 +110,7 @@
                 <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
             </div>
             <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
-            <div class='total-encontrado'><span *ngIf="states.municipiosTodos && listaMunicipios.totalAtual">{{listaMunicipios.totalAtual}} de </span>{{listaMunicipios.base.length}} municípios</div>
+            <div class='total-encontrado'><span *ngIf="buscaInput.value && states.municipiosTodos && listaMunicipios.totalAtual >= 0">{{listaMunicipios.totalAtual}} de </span>{{listaMunicipios.base.length}} municípios</div>
             <br/>
             <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?">
             <button *ngIf="ufSelecionada"><a style="display: block">Acessar a UF {{ufSelecionada?.nome}}</a></button>
@@ -157,9 +157,10 @@
                 </ul>
 
                 <template [ngIf]="buscaInput.value">
+                    <p class="selecionar-localidade__mensagem" *ngIf="listaMunicipios.atual && listaMunicipios.atual.length == 0"> Nenhum município encontrado. </p>
                     <div class="conjunto"  *ngFor="let item of listaMunicipios.atual">
                         <div class="letra">
-                            <div class="circulo">
+                            <div class="selecionar-localidade__letra">
                                 {{item.letter.toUpperCase()}}
                             </div>
                         </div>

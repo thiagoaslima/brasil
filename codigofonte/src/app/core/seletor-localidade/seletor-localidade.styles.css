@@ -1,4 +1,21 @@
 
+.selecionar-localidade__mensagem{
+    padding: 15px 0px 0px 0px;
+}
+
+.selecionar-localidade__letra{
+    margin: 15px 0px 0px 0px;
+    background-color: #4D4D4D;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 102px;
+    width: 23px;
+    height: 23px;
+    text-align: center;
+    line-height: 13px;
+    font-size: 1.3em;
+}
+
 /*****
 ANIMAÇÃO
 *****/
