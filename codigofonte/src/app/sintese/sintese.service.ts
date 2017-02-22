@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface';
+import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface.2';
 import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
 import { SinteseConfigItem } from './sintese-config';
@@ -33,78 +33,63 @@ export class SinteseService {
     /**
      * Monta o array de dados a ser consumido pela view
      */
-    getConteudo(temas: string[], lista: SinteseConfigItem[], codigoLocalidade: number) {
-
-        // let pesquisas = lista.reduce((agg, item) => {
-        //     if (item.pesquisa) {
-        //         agg[item.pesquisa] = true;
-        //     }
-
-        //     if (item.composicao && item.composicao.indicadores && item.composicao.indicadores.length) {
-        //         item.composicao.indicadores.forEach(item => {
-        //             if (item.pesquisa) {
-        //                 agg[item.pesquisa] = true;
-        //             }
-        //         })
-        //     }
-
-        //     return agg;
-        // }, {});
-
-        // let cache$ = Observable.zip(...Object.keys(pesquisas).map(pesquisaId => this._pesquisaService.getListaIndicadoresDaPesquisa(pesquisaId)));
-
-
-        let observables = lista.map(item => {
+    getConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
+        return lista.map(item => {
             if (item.pesquisa && item.indicador) {
-                return Observable.zip(
-                    this._pesquisaService.getIndicadores(item.pesquisa, item.indicador),
-                    this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade)
-                ).map( ([indicador, resultados]) => ({
-                        nome: item.nome,
-                        link: indicador[0].id.toString(),
-                        valor: resultados.map(resultado => resultado.resultados),
-                        unidade: indicador[0].unidade.id,
-                        tema: item.tema,
-                        largura: item.largura || 'full'
-                    }));
+                return {
+                    nome: item.nome,
+                    link: item.indicador,
+                    valor: this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade),
+                    unidade: this._pesquisaService.getIndicadores(item.pesquisa, item.indicador).map((indicador: Indicador[]) => indicador[0].unidade.id),
+                    tema: item.tema,
+                    largura: item.largura || 'full'
+                };
             }
 
             if (item.composicao) {
                 let pesquisaId = item.composicao.indicadores[0].pesquisa;
                 let indicadoresId = item.composicao.indicadores.map(indicador => indicador.indicador);
-                return Observable.zip(
+
+                let valor$ = Observable.zip(
                     this._pesquisaService.getIndicadores(pesquisaId, indicadoresId),
                     this._pesquisaService.getResultados(pesquisaId, indicadoresId, codigoLocalidade)
                 )
-                .map(([indicadores, resultados]) => {
-                    let valor = item.composicao.make(indicadores, codigoLocalidade);
-                    let pesquisa = indicadores[0].pesquisa;
+                    .map(([indicadores, resultados]) => {
+                        let valor = item.composicao.make(indicadores, codigoLocalidade);
+                        let pesquisa = indicadores[0].pesquisa;
 
-                    return {
-                        nome: item.nome,
-                        link: item.link,
-                        valor: { periodo: pesquisa.getPeriodos().slice(-1)[0], valor: valor },
-                        unidade: '',
-                        tema: item.tema,
-                        largura: item.largura || 'full'
-                    }
-                });
+                        return { periodo: pesquisa.getPeriodos().slice(-1)[0], valor: valor }
+                    });
+
+                return {
+                    nome: item.nome,
+                    link: item.link,
+                    valor: valor$,
+                    unidade: Observable.of(item.unidade || ''),
+                    tema: item.tema,
+                    largura: item.largura || 'full'
+                }
+
             }
 
             if (item.link) {
-                return Observable.of({
+                return {
                     nome: item.nome,
                     link: item.link,
-                    valor: null,
-                    unidade: '',
+                    valor: Observable.of(null),
+                    unidade: Observable.of(''),
                     tema: item.tema,
                     largura: item.largura || 'full'
-                });
+                };
             }
         })
 
 
-        return Observable.from(observables);
+        //return Observable.of(observables).flatMap(val => val);
+    }
+
+    getDadosConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
+        lista
     }
 
 
@@ -113,22 +98,28 @@ export class SinteseService {
      */
     public getPesquisasDisponiveis() {
 
-        return this._http.get('http://servicodados.ibge.gov.br/api/v1/pesquisas/')
-            .map((res) => res.json())
-            .map((pesquisas) => {
-                let _pesquisas = pesquisas
-                    .filter((pesquisa) => {
-                        return this.idPesquisasValidas.indexOf(pesquisa.id) >= 0;
-                    })
-                    .map((pesquisa) => {
-                        return {
-                            id: pesquisa.id,
-                            descricao: pesquisa.descricao || pesquisa.nome
-                        }
-                    });
+        return this._pesquisaService.getAllPesquisas()
+            .map(pesquisas => pesquisas.map(pesquisa => ({
+                id: pesquisa.id,
+                descricao: pesquisa.descricao || pesquisa.nome
+            })));
 
-                return _pesquisas;
-            });
+        // return this._http.get('http://servicodados.ibge.gov.br/api/v1/pesquisas/')
+        //     .map((res) => res.json())
+        //     .map((pesquisas) => {
+        //         let _pesquisas = pesquisas
+        //             .filter((pesquisa) => {
+        //                 return this.idPesquisasValidas.indexOf(pesquisa.id) >= 0;
+        //             })
+        //             .map((pesquisa) => {
+        //                 return {
+        //                     id: pesquisa.id,
+        //                     descricao: pesquisa.descricao || pesquisa.nome
+        //                 }
+        //             });
+
+        //         return _pesquisas;
+        //     });
     }
 
     /**
@@ -489,6 +480,26 @@ export class SinteseService {
         const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&indicadores=${codigoIndicador}`).map((res => res.json()));
 
         return dadosPesquisa$;
+    }
+
+    getPesquisaByIndicador(idIdentificador: number){
+
+        // Obter o código de todas as pesquisas
+        return Observable.from(this.idPesquisasValidas) 
+            .flatMap(idPesquisa => {
+
+                let pesquisa$ = this.getInfoPesquisa(idPesquisa.toString());
+                let indicadores$ = this.getNomesPesquisa(idPesquisa.toString(), [idIdentificador.toString()]);
+                
+                return Observable.zip(pesquisa$, indicadores$)
+                    .map(([pesquisa, indicadores]) => {
+
+                        pesquisa['indicadores'] = indicadores;
+
+                        return pesquisa;
+                    })
+            })
+            .filter(pesquisa => !!pesquisa && pesquisa['indicadores'].length > 0);
     }
 
 }

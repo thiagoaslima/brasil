@@ -164,7 +164,7 @@ export class SystemCacheService {
      */
     set(key: string | number, value: any): void {
         let _key = this.normalizeKey(key);
-        this._cache.set(_key, value);
+        this._cache.set(_key, {value, _requested: 0});
     }
 
     /**
@@ -172,7 +172,12 @@ export class SystemCacheService {
      */
     get(key: string | number): any {
         let _key = this.normalizeKey(key);
-        return this._cache.get(_key) || null;
+        let value = this._cache.get(_key);
+        if (value) {
+            value._requested += 1;
+            return value;
+        }
+        return null;
     }
 
     /**

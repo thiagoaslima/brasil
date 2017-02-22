@@ -36,9 +36,9 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
 
         this._conteudo$$ = localidade$
             .distinctUntilChanged()
-            .flatMap((localidade) => this._sinteseService.getConteudo(this._sinteseConfig.temas, this._sinteseConfig[localidade.tipo], localidade.codigo))
+            .flatMap((localidade) => this._sinteseService.getConteudo(this._sinteseConfig[localidade.tipo], localidade.codigo))
             .subscribe(item => {
-                this.conteudo.filter(cont => cont.tema === item['tema']).map(cont => cont.indicadores.push(item));
+                this.conteudo.filter(cont => cont.tema === item['tema']).map(cont => { cont.indicadores.push(item)});
             });
     }
 

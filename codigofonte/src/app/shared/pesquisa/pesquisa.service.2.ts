@@ -30,6 +30,8 @@ export class PesquisaService {
         private _http: Http
     ) {
         Pesquisa.setStrategy(new PesquisaCacheStrategy(_cache));
+
+        Indicador.setPesquisaStrategy(new PesquisaCacheStrategy(_cache));
         
         Indicador.setIndicadoresStrategy(
             new IndicadorCacheStrategy(_cache),
@@ -68,7 +70,7 @@ export class PesquisaService {
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
             .map(res => res.json())
-            .map(json => json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id)))
+            .map(json => {debugger; return json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id))})
             .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
             .do(pesquisas => {
                 this._cache.set(listaPesquisas, pesquisas.map(pesquisa => pesquisa.id));
@@ -83,12 +85,8 @@ export class PesquisaService {
             return Observable.of(pesquisa);
         }
 
-        return this._http.get(this._server.path(`pesquisas/${pesquisaId}`))
-            .catch(err => Observable.of({ json: () => [] }))
-            .map(res => res.json())
-            .map(json => json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id)))
-            .map(json => json.map(pesquisa => new Pesquisa(pesquisa))[0])
-            .do(this._cache.savePesquisas);
+        return this.getAllPesquisas()
+            .map(pesquisas => pesquisas.filter(pesquisa => pesquisa.id === pesquisaId)[0]);
     }
 
     getIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
@@ -119,7 +117,7 @@ export class PesquisaService {
         // como o cache de indicadores é feito a partir da lista de indicadores por pesquisa
         // se 1 indicador estiver no cache, todos estarão!
         // let hashCacheKey = this._cache.buildKey.hashIndicadoresDaPesquisa(pesquisaId);
-        let indicadores = _indicadoresId.map(id => this._cache.getIndicador(pesquisaId, id));
+        let indicadores = _indicadoresId.map(id => this._cache.getIndicador(pesquisaId, id)).filter(v => !!v);
         if (indicadores.length) {
             return Observable.of(indicadores);
         }
