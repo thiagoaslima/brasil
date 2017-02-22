@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <select class="cabecalho__combobox" (change)="onChange($event)">
+        <select class="cabecalho__combobox" (change)="onChange($event)" *ngIf="dadosCombo && dadosCombo.length > 0">
             <option *ngFor="let dado of dadosCombo;">{{ dado.indicador }}</option>
         </select>
     </div>

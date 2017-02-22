@@ -15,7 +15,7 @@ const children = [
   { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent },
   { path: 'pesquisas/:pesquisa', component: PesquisaComponent },
   { path: 'pesquisas/mapa', component: PesquisaComponent },
-  { path: 'pesquisas', redirectTo: 'pesquisas/23' },
+  { path: 'pesquisas', redirectTo: 'pesquisas/23/27652' },
 
 ];
 
