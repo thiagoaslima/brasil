@@ -18,7 +18,6 @@ import { BASES, PESQUISAS } from './global-config';
         CoreModule,
         SharedModule,
         SinteseModule,
-        PesquisaModule,
         SandboxModule,
         RootRoutingModule
     ],

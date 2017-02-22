@@ -9,7 +9,6 @@ import { TopoJson, TOPOJSON } from './topojson.v2';
 
 import { RouterParamsService } from './router-params.service';
 import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaModule } from './pesquisa/pesquisa.module';
 import { PesquisaService } from './pesquisa/pesquisa.service.2';
 import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
@@ -21,8 +20,7 @@ const MODULES = [
     RouterModule,
     FormsModule,
     WindowEventsModule,
-    ReactiveFormsModule,
-    PesquisaModule
+    ReactiveFormsModule
 ];
 
 const PIPES = [
@@ -39,7 +37,7 @@ const PROVIDERS = [
     LocalidadeService,
     CommonService,
     BuscaService,
-    { provide: PesquisaService, useClass: PesquisaService },
+    PesquisaService,
     { provide: TOPOJSON, useValue: TopoJson }
 ]
 
