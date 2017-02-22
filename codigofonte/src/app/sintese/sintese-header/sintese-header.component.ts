@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
+import { CommonService } from '../../shared/common.service';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -49,6 +50,7 @@ export class SinteseHeaderComponent implements OnInit {
     constructor(
         private _routerParams:RouterParamsService,
         private _sinteseService:SinteseService, 
+        private _commonService: CommonService,
         private _localidade:LocalidadeService,
         private _router: Router,
         private _route: ActivatedRoute
@@ -120,6 +122,14 @@ export class SinteseHeaderComponent implements OnInit {
             }
         });
 
+        this._commonService.notifyObservable$.subscribe((mensagem) => {
+
+            if(mensagem['tipo'] == 'dataURL'){
+
+                this.graficoBase64 = mensagem['url'];
+            }
+        });
+
     }
 
     public ativar(tipo){
@@ -135,8 +145,7 @@ export class SinteseHeaderComponent implements OnInit {
 
     public downloadImagem(){
 
-        // TODO: emitir evento
-        // this._commonService.notifyOther({"tipo": "obterImagem"});
+        this._commonService.notifyOther({"tipo": "getDataUrl"});
     }
 
     /**
