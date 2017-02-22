@@ -139,15 +139,21 @@ export class SystemCacheService {
         return ids.map(id => this.getIndicador(pesquisaId, id));
     }
 
-    
+
     saveResultados(indicadorId: number, resultados: ResultadosIndicador) {
-        this._cache.set(
-            this.buildKey.resultados(indicadorId),
-            resultados
-        );
+        let resultado = this.getResultados(indicadorId);
+        
+        if (resultado) {
+            Object.assign(resultado, resultados);
+        } else {
+            this._cache.set(
+                this.buildKey.resultados(indicadorId),
+                resultados
+            );
+        }
     }
 
-    getResultados(indicadorId: number): ResultadosIndicador { 
+    getResultados(indicadorId: number): ResultadosIndicador {
         return this._cache.get(this.buildKey.resultados(indicadorId));
     }
 
@@ -164,7 +170,7 @@ export class SystemCacheService {
      */
     set(key: string | number, value: any): void {
         let _key = this.normalizeKey(key);
-        this._cache.set(_key, {value, _requested: 0});
+        this._cache.set(_key, { value, _requested: 0 });
     }
 
     /**
@@ -217,32 +223,21 @@ export class SystemCacheService {
                     break;
 
                 case "pesquisa":
-                    this._cache.set(_key, new Pesquisa(value));
-                    break;
-
-                case "listaIndicadores":
-                    /*
-                        let hashIndicadores = {};
-    
-                        json[_key].forEach(value => {
-                            return flatTree(value).map(obj => {
-                                let ind = new Indicador(Object.assign(
-                                    {},
-                                    obj,
-                                    { children: [] }
-                                ));
-                                hashIndicadores[ind.id] = ind;
-                                this._cache.set(this.buildKey.indicador(ind.pesquisa.id, ind.id), new Indicador(json[_key]));
-                                return ind;
-                            });
-                        });
-    
-                        Object.keys(hashIndicadores).map()
-                        */
+                    this.savePesquisas([new Pesquisa(value)]);
                     break;
 
                 case "indicador":
-                    this._cache.set(_key, new Indicador(json[_key]));
+                    let indicador = new Indicador(
+                        Object.assign(
+                            {},
+                            value,
+                            {
+                                children: value._children,
+                                pesquisa: value.pesquisaId,
+                                parent: value._parentId
+                            })
+                    );
+                    this.saveIndicador(value.pesquisaId, indicador);
                     break;
 
                 default:

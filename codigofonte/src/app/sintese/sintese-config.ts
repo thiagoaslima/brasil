@@ -120,8 +120,8 @@ export class SINTESE {
                 ],
 
                 make: function (indicadores, codigoLocalidade) {
-                    let first = Number.parseInt(indicadores[0].latestValidResult(codigoLocalidade).valor, 10);
-                    let second = Number.parseInt(indicadores[1].latestValidResult(codigoLocalidade).valor, 10);
+                    let first = Number.parseInt(indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
+                    let second = Number.parseInt(indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
                     let total = first + second;
 
                     first = Number.parseFloat((first / total).toFixed(3)) * 100;
@@ -153,9 +153,9 @@ export class SINTESE {
                 ],
 
                  make: function (indicadores, codigoLocalidade) {
-                    let first = Number.parseInt(indicadores[0].latestValidResult(codigoLocalidade).valor, 10);
+                    let first = Number.parseInt(indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
                     first = Number.isNaN(first) ? 0 : first;
-                    let second = Number.parseInt(indicadores[1].latestValidResult(codigoLocalidade).valor, 10);
+                    let second = Number.parseInt(indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade).valor, 10);
                     second = Number.isNaN(second) ? 0 : second;
                     let total = first + second;
 

@@ -245,7 +245,8 @@ export class Indicador {
         },
         children = [],
         pesquisa = null,
-        parent = null
+        parent = null,
+        pesquisaId
     }) {
         this.id = id;
         this.posicao = posicao;
@@ -256,6 +257,7 @@ export class Indicador {
 
         if (children.length) this.registerChildren(children);
         if (pesquisa) this.registerPesquisa(pesquisa);
+        if (pesquisaId) this.registerPesquisa(pesquisaId);
         if (parent) this.registerParent(parent);
     }
 
@@ -264,7 +266,8 @@ export class Indicador {
         let resultados$ = this._resultadosStrategy.retrieve(this, _codigosLocalidade);
 
         if (periodos === 'all') {
-            return resultados$.map(resultados => {
+            return resultados$
+            .map(resultados => {
                 return _codigosLocalidade.reduce((obj, codigo) => {
                     obj.resultados[codigo] = resultados[codigo];
                     return obj;
@@ -292,13 +295,43 @@ export class Indicador {
         }
     }
 
-    latestResult(codigoLocalidade: number, start = -1, size = 1) {
-        let periodos = this.pesquisa.getPeriodos().slice(start, size);
+    resultadosMaisRecentes(codigoLocalidade: number, start = 0, size = 1) {
+        let periodos = this.pesquisa.getPeriodos().reverse().slice(start, size);
         return this.getResultados(codigoLocalidade, periodos).map(resultados => {
             return {
                 periodos,
                 resultados
             };
+        });
+    }
+
+    resultadosValidosMaisRecentes(codigoLocalidade: number, start = 0, size = 1) {
+        let periodos = this.pesquisa.getPeriodos().reverse();
+        return this.getResultados(codigoLocalidade, periodos).map(resultados => {
+
+            let resp = periodos
+                .map((periodo, idx) => (resultados.resultados[periodo]))
+                .reduce((agg, resultado, idx) => {
+                    if (!resultado) return agg;
+                    agg.periodos.push(periodos[idx]);
+                    resultados.resultados[periodos[idx]] = resultado;
+                }, {
+                    periodos: [],
+                    resultados: {
+                        id: this.id,
+                        resultados: {}
+                    }
+                });
+
+            let _periodos = resp.periodos.slice(start, size); 
+
+            return {
+                periodos: _periodos,
+                resultados: _periodos.reduce( (obj, periodo) => {
+                    obj[periodo] = resp.resultados.resultados[periodo]; 
+                    return obj;
+                }, {})
+            }
         });
     }
 

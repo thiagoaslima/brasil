@@ -147,12 +147,8 @@ export class PesquisaService {
                         resultados: resultadoObj
                     };
                 });
-            })
-            .do(resultados => {
-                resultados.forEach(resultado => {
-                    this._cache.saveResultados(resultado.id, resultado);
-                });
             });
+            
     }
 
     private _createIndicadorAndSaveOnCache(protoIndicador, pesquisa: Pesquisa, parentId = 0) {
