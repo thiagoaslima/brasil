@@ -24,12 +24,12 @@
 
 .cabecalho__link{
     font-size: 0.9em;
-    color: #148C99;
+    color: #1B779B;
     text-decoration: underline;
 }
 
 .cabecalho__bullet{
-    color: #148C99;
+    color: #1B779B;
     display: inline-block;
     padding: 0px 3px;
     vertical-align: middle;
@@ -42,7 +42,7 @@
 }
 
 .cabecalho__botao-redondo{
-    color: #148C99;
+    color: #1B779B;
     cursor: pointer;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .cabecalho__meio-botao--ativo{
-    background-color: #148C99;
+    background-color: #1B779B;
 }
 
 
@@ -93,7 +93,7 @@
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 12px solid #148C99;
+    border-bottom: 12px solid #1B779B;
 }
 
 .submenu__lista{
@@ -115,7 +115,7 @@
 }
 
 .submenu__item{
-    background-color: #148C99;
+    background-color: #1B779B;
     border-bottom: 1px solid #B2B2B2;
     cursor: pointer;
     text-align: left;
@@ -125,7 +125,7 @@
 
 .submenu__item:hover{
     color: white;
-    background-color: #0b636d;
+    background-color: #165D72;
     /*border-bottom: 1px solid #676767;*/
 }
 
@@ -170,8 +170,8 @@
         display: block;
         margin: 12px;
         margin-left: 0px;
-}
     }
+    
     .cabecalho__sub-container{
         width: 100%;
     }

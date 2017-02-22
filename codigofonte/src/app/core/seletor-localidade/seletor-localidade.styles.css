@@ -146,12 +146,13 @@ ANIMAÇÃO
 }
 
 #selecionar-localidade nav ul li:nth-child(1){
-    border-color: #1F9982;
+    /*border-color: #1F9982;*/
+    border-color: #1B779B;
 }
 
 #selecionar-localidade nav ul li:nth-child(1):hover,
 #selecionar-localidade nav ul li:nth-child(1).selecionado{
-    background-color: #1F9982;
+    background-color: #1B779B;
 }
 
 #selecionar-localidade nav ul li:nth-child(2){

@@ -176,18 +176,18 @@ tr.nivel-1:nth-child(3) td{
     padding: 2%;
     font-size: 1.3em;
     float: left;
+    width: 90%;
 }
 
 .cabecalho__duvida{
     color: #F7931E;
-    float: left;
     font-size: 1.3em;
     margin-top: 2.6%;
 }
 
 .cabecalho__download{
     float: right;
-    background-color: #2B93B2;
+    background-color: #1B779B;
     color: #fff;
     margin-top: 2.5%;
     border-radius: 22px;
@@ -234,7 +234,7 @@ tr.nivel-1:nth-child(3) td{
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 12px solid #148C99;
+    border-bottom: 12px solid #1B779B;
 }
 
 .submenu__lista{
@@ -248,7 +248,7 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .submenu__item{
-    background-color: #148C99;
+    background-color: #1B779B;
     border-bottom: 1px solid #B2B2B2;
     cursor: pointer;
     text-align: left;
@@ -259,7 +259,7 @@ tr.nivel-1:nth-child(3) td{
 
 .submenu__item:hover{
     color: white;
-    background-color: #0b636d;
+    background-color: #165D72;
     /*border-bottom: 1px solid #676767;*/
 }
 
