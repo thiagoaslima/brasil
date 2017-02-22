@@ -49,25 +49,39 @@ export class SinteseDetalhesComponent implements OnInit {
 
         this._localidadeService.selecionada$
             .subscribe(localidade => {
+                
+                this._route.params.filter(params => !!params['indicador']).subscribe(params => {
 
-                this._route.queryParams.subscribe(params => {
-
-                    if (params['v'] == 'mapa') {
-
-                        this.exibirMapa(localidade);
-                        this.componenteAtivo = 'cartograma';
-
-                    } else if(params['v'] == 'historico') {
+                    if(params['indicador'] == 'historico') {
 
                         this.componenteAtivo = 'historico';
 
-                    } else if(params['v'] == 'fotos'){
+                    } else {
 
-                        this.componenteAtivo = 'fotos';
-                    }else {
+                        this._route.queryParams.subscribe(params => {
 
-                        this.exibirGrafico(localidade);
-                        this.componenteAtivo = 'grafico';
+                            if (params['v'] == 'mapa') {
+
+                                this.exibirMapa(localidade);
+                                this.componenteAtivo = 'cartograma';
+
+                            } else if(params['v'] == 'grafico') {
+
+                                this.componenteAtivo = 'grafico';
+                                this.exibirGrafico(localidade);
+
+                            } else if(params['v'] == 'fotos'){
+
+                                this.componenteAtivo = 'fotos';
+
+                            }else {
+
+                                this.componenteAtivo = 'historico';
+
+                            }
+
+                        });
+
                     }
 
                 });

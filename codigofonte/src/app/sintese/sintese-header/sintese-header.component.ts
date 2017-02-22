@@ -57,9 +57,9 @@ export class SinteseHeaderComponent implements OnInit {
 
     ngOnInit(){
 
-        this._subscriptionSintese = this._routerParams.params$.subscribe((params)=>{
-            if(params.indicador){
-                this._link = ['brasil', params.uf, params.municipio, 'sintese', params.indicador]; 
+        this._subscriptionSintese = this._routerParams.params$.subscribe((params) => {
+            if (params.indicador) {
+                this._link = ['brasil', params.uf, params.municipio, 'sintese', params.indicador];
 
                 // Informações gerais do município
                 let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
@@ -67,34 +67,36 @@ export class SinteseHeaderComponent implements OnInit {
                 // O código do município deve possuir somente 6 dígitos, sendo o último desprezado
                 let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
 
-                // Obtém as informações sobre a pesquisa, dado seu indicador
-                this._sinteseService.getPesquisaByIndicador(params.indicador)
+                if (params.indicador !== 'historico') {
+                    // Obtém as informações sobre a pesquisa, dado seu indicador
+                    this._sinteseService.getPesquisaByIndicador(params.indicador)
                         .retry(3)
                         .flatMap(pesquisa => {
 
                             //obtém o nome da pesquisa de origem do indicador
-                            this.pesquisa = pesquisa.descricao; 
+                            this.pesquisa = pesquisa.descricao;
 
                             //obtém o código da pesquida
-                            this.codPesquisa = pesquisa.id; 
-                            
+                            this.codPesquisa = pesquisa.id;
+
                             return this._sinteseService.getPesquisa(pesquisa.id, codigoMunicipio, [params.indicador])
                         })
                         .subscribe((dados) => {
 
                             //descrição textual do indicador presente na rota
-                            this.titulo = dados[0].indicador; 
+                            this.titulo = dados[0].indicador;
 
                             //constrói link para pesquisa de origem
                             this.linkPesquisa = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/' + this.codPesquisa + '/' + params.indicador;
 
                             // Valores utilizados na exportação de arquivo
                             this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
-                    });
+                        });
+                }
             }
 
         });
-
+        
         //verifica se o componente de detalhes está aberto (mobile)
         this._route.queryParams.subscribe(params => {
             //copia os parâmetros
@@ -110,14 +112,15 @@ export class SinteseHeaderComponent implements OnInit {
 
                 this.ativo = 'cartograma';
 
-            } else if(params['v'] == 'historico'){
+            } else if(params['v'] == 'grafico') {
 
-                this.ativo = 'historico';
+                this.ativo = 'grafico';
 
             } else {
 
-                this.ativo = 'grafico';
-            }
+                this.ativo = 'historico';
+
+            } 
         });
 
     }
