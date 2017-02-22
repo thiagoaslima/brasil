@@ -51,7 +51,7 @@ export class PesquisaDadosComponent {
             
             //carrega indicadores que aparecem nos dados
             this._sintese.getPesquisa(params.pesquisa, codigoMunicipio).subscribe((indicadores) => {
-                //adiciona 3 novas propriedades aos indicadores: nível e visível
+                //adiciona novas propriedades aos indicadores: nível e visível
                 //nível é usado para aplicar o css para criar a impressão de hierarquia na tabela de dados
                 //visível é usado para definir se o indicador está visível ou não (dentro de um elemento pai fechado)
                 let ind = this.flat(indicadores);
@@ -61,9 +61,6 @@ export class PesquisaDadosComponent {
                     ind[i].visivel = ind[i].nivel <= 2 ? true : false;
                     if(ind[i].res){
                         for(let key in ind[i].res){
-                            //formata o valor do dado
-                            //ind[i].res[key] = isNaN(parseFloat(ind[i].res[key])) ? ind[i].res[key] : parseFloat(ind[i].res[key]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
-                            
                             //seta os anos da pesquisa
                             if(this.anos.indexOf(key) < 0)
                                 this.anos.push(key);
@@ -84,9 +81,15 @@ export class PesquisaDadosComponent {
                 for(let i = 0; i < indicadores.length; i++){
                     if(indicadores[i].id == this.idIndicadorSelecionado){
                         this.tituloPrincipal = indicadores[i].indicador;
-                        this.dadosCombo = indicadores[i].children;
-                        debugger;
-                        this.dadosTabela = this.dadosCombo.length > 0 ? this.flat(this.dadosCombo[0]) : [];
+                        //caso especial onde a pesquisa só tem um nível: Ex.: IDH
+                        if(indicadores[i].children.length == 0){
+                            this.dadosCombo = [];
+                            this.dadosTabela = this.flat(indicadores[i]);
+                        //caso geral onde a pesquisa é uma árvore
+                        }else{
+                            this.dadosCombo = indicadores[i].children;
+                            this.dadosTabela = this.dadosCombo.length > 0 ? this.flat(this.dadosCombo[0]) : [];
+                        }
                     }
                 }
                 
