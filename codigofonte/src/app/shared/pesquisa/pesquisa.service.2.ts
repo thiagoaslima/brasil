@@ -118,12 +118,12 @@ export class PesquisaService {
         // se 1 indicador estiver no cache, todos estarão!
         // let hashCacheKey = this._cache.buildKey.hashIndicadoresDaPesquisa(pesquisaId);
         let indicadores = _indicadoresId.map(id => this._cache.getIndicador(pesquisaId, id)).filter(v => !!v);
-        if (indicadores.length) {
+        if (indicadores.length === _indicadoresId.length) {
             return Observable.of(indicadores);
         }
 
         return this.getIndicadoresDaPesquisa(pesquisaId)
-            .map(_ => _indicadoresId.map(id => this._cache.getIndicador(pesquisaId, id)));
+            .map(_ => this._cache.getIndicadores(pesquisaId, _indicadoresId));
     }
 
     getResultados(pesquisaId: number, indicadoresId: number | number[], localidadesCodigo: number | number[]): Observable<ResultadosIndicador[]> {

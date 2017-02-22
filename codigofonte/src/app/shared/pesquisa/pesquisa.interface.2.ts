@@ -200,12 +200,12 @@ export class Indicador {
     posicao: string
     indicador: string
     pesquisaId: number
+    parentId: number
     classe: string
     unidade: UnidadeIndicador
     nota: any[]
     metadado: MetadadoIndicador
 
-    private _parentId: number = 0;
     private _children: number[] = [];
     private _pesquisaStrategy: RetrieveStrategy<Pesquisa> //= { retrieve: (ids) => { throw new Error('No pesquisaStrategy was registred') } };
     private _indicadoresStrategy: RetrieveStrategy<Indicador | Indicador[]> //= { retrieve: (ids) => { throw new Error('No indicadoresStrategy was registred') } };
@@ -220,8 +220,8 @@ export class Indicador {
     }
 
     get parent() {
-        if (this._parentId === 0) { return null; }
-        return this._indicadoresStrategy.retrieve(this._parentId);
+        if (this.parentId === 0) { return null; }
+        return this._indicadoresStrategy.retrieve(this.parentId);
     }
 
     get pesquisa() {
@@ -245,8 +245,9 @@ export class Indicador {
         },
         children = [],
         pesquisa = null,
+        pesquisaId,
         parent = null,
-        pesquisaId
+        parentId,
     }) {
         this.id = id;
         this.posicao = posicao;
@@ -256,8 +257,9 @@ export class Indicador {
         this.metadado = new MetadadoIndicador(metadado || {});
 
         if (children.length) this.registerChildren(children);
-        if (pesquisa) this.registerPesquisa(pesquisa);
         if (pesquisaId) this.registerPesquisa(pesquisaId);
+        if (pesquisa) this.registerPesquisa(pesquisa);
+        if (parentId) this.registerParent(parentId);
         if (parent) this.registerParent(parent);
     }
 
@@ -267,12 +269,12 @@ export class Indicador {
 
         if (periodos === 'all') {
             return resultados$
-            .map(resultados => {
-                return _codigosLocalidade.reduce((obj, codigo) => {
-                    obj.resultados[codigo] = resultados[codigo];
-                    return obj;
-                }, <ResultadosIndicador>{ id: this.id, resultados: {} });
-            });
+                .map(resultados => {
+                    return _codigosLocalidade.reduce((obj, codigo) => {
+                        obj.resultados[codigo] = resultados[codigo];
+                        return obj;
+                    }, <ResultadosIndicador>{ id: this.id, resultados: {} });
+                });
         } else {
             let _periodos = Array.isArray(periodos) ? periodos.map(periodo => periodo.toString()) : [periodos.toString()];
             _periodos = flatMap(_periodos, (periodo) => {
@@ -323,12 +325,12 @@ export class Indicador {
                     }
                 });
 
-            let _periodos = resp.periodos.slice(start, size); 
+            let _periodos = resp.periodos.slice(start, size);
 
             return {
                 periodos: _periodos,
-                resultados: _periodos.reduce( (obj, periodo) => {
-                    obj[periodo] = resp.resultados.resultados[periodo]; 
+                resultados: _periodos.reduce((obj, periodo) => {
+                    obj[periodo] = resp.resultados.resultados[periodo];
                     return obj;
                 }, {})
             }
@@ -350,7 +352,7 @@ export class Indicador {
     }
 
     registerParent(parent: number | Indicador) {
-        this._parentId = Indicador.is(parent) ? parent['id'] : parent;
+        this.parentId = Indicador.is(parent) ? parent['id'] : parent;
     }
 }
 

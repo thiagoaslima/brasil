@@ -142,7 +142,7 @@ export class SystemCacheService {
 
     saveResultados(indicadorId: number, resultados: ResultadosIndicador) {
         let resultado = this.getResultados(indicadorId);
-        
+
         if (resultado) {
             Object.assign(resultado, resultados);
         } else {
@@ -213,15 +213,13 @@ export class SystemCacheService {
         });
     }
     rehydrate(json: any): void {
+        return;
         Object.keys(json).forEach((key: string) => {
             let _key = this.normalizeKey(key);
             let value = json[_key];
+            let caso = this.checkKey(_key);
 
-            switch (this.checkKey(key)) {
-                case "pesquisas":
-                    this._cache.set(_key, value);
-                    break;
-
+            switch (caso) {
                 case "pesquisa":
                     this.savePesquisas([new Pesquisa(value)]);
                     break;
@@ -237,11 +235,14 @@ export class SystemCacheService {
                                 parent: value._parentId
                             })
                     );
+                    if (indicador.parentId === 0) {
+                        let pesquisa = this.getPesquisa(indicador.pesquisaId);
+                        pesquisa.registerIndicadores([indicador.id]);
+                    }
                     this.saveIndicador(value.pesquisaId, indicador);
                     break;
 
                 default:
-                    value = json[_key];
                     this._cache.set(_key, value);
                     break;
             }
