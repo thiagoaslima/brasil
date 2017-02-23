@@ -271,7 +271,7 @@ export class Indicador {
             return resultados$
                 .map(resultados => {
                     return _codigosLocalidade.reduce((obj, codigo) => {
-                        obj.resultados[codigo] = resultados[codigo];
+                        obj.resultados[codigo] = resultados.resultados[codigo];
                         return obj;
                     }, <ResultadosIndicador>{ id: this.id, resultados: {} });
                 });
@@ -310,8 +310,9 @@ export class Indicador {
     resultadosValidosMaisRecentes(codigoLocalidade: number, start = 0, size = 1) {      
         return this.getResultados(codigoLocalidade).map(resultados => {
             let res = Object.keys(resultados.resultados[codigoLocalidade]).reduce( (obj, periodo) => {
-                if (obj[periodo] !== null && obj[periodo] !== undefined) {
-                    obj[periodo] = resultados.resultados[codigoLocalidade][periodo];
+                let _res = resultados.resultados[codigoLocalidade] && resultados.resultados[codigoLocalidade][periodo];
+                if (_res) {
+                    obj[periodo] = _res;
                 }
                 
                 return obj;

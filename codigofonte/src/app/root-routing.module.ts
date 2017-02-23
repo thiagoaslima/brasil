@@ -10,13 +10,12 @@ import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
   { path: '', redirectTo: 'sintese/historico', pathMatch: 'full' },
-  { path: 'sintese', redirectTo: 'sintese/historico', pathMatch: 'full' },
 
   {
     path: 'sintese',
     component: SinteseComponent,
     children: [
-      { path: '', redirectTo: '29171', pathMatch: 'full' },
+      { path: '', redirectTo: 'sintese/historico', pathMatch: 'full' },
       { path: ':indicador', component: SinteseDetalhesComponent }
     ]
   },

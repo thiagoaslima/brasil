@@ -115,24 +115,24 @@ export class SystemCacheService {
     }
 
     savePesquisas(pesquisas: Pesquisa[]) {
-        pesquisas.forEach(pesquisa => this._cache.set(
+        pesquisas.forEach(pesquisa => this.set(
             this.buildKey.pesquisa(pesquisa.id), pesquisa)
         );
     }
 
     getPesquisa(id: number): Pesquisa {
-        return this._cache.get(this.buildKey.pesquisa(id));
+        return this.get(this.buildKey.pesquisa(id));
     }
 
     saveIndicador(pesquisaId: number, indicador: Indicador) {
-        this._cache.set(
+        this.set(
             this.buildKey.indicador(pesquisaId, indicador.id),
             indicador
         );
     }
 
     getIndicador(pesquisaId: number, id: number): Indicador {
-        return this._cache.get(this.buildKey.indicador(pesquisaId, id));
+        return this.get(this.buildKey.indicador(pesquisaId, id));
     }
 
     getIndicadores(pesquisaId: number, ids: number[]): Indicador[] {
@@ -146,7 +146,7 @@ export class SystemCacheService {
         if (resultado) {
             Object.assign(resultado, resultados);
         } else {
-            this._cache.set(
+            this.set(
                 this.buildKey.resultados(indicadorId),
                 resultados
             );
@@ -154,7 +154,7 @@ export class SystemCacheService {
     }
 
     getResultados(indicadorId: number): ResultadosIndicador {
-        return this._cache.get(this.buildKey.resultados(indicadorId));
+        return this.get(this.buildKey.resultados(indicadorId));
     }
 
     /**
@@ -170,7 +170,7 @@ export class SystemCacheService {
      */
     set(key: string | number, value: any): void {
         let _key = this.normalizeKey(key);
-        this._cache.set(_key, { value, _requested: 0 });
+        this._cache.set(_key, value);
     }
 
     /**
@@ -179,11 +179,8 @@ export class SystemCacheService {
     get(key: string | number): any {
         let _key = this.normalizeKey(key);
         let value = this._cache.get(_key);
-        if (value) {
-            value._requested += 1;
-            return value;
-        }
-        return null;
+        
+        return value;
     }
 
     /**
@@ -213,8 +210,6 @@ export class SystemCacheService {
         });
     }
     rehydrate(json: any): void {
-        return;
-        /*
         Object.keys(json).forEach((key: string) => {
             let _key = this.normalizeKey(key);
             let value = json[_key];
@@ -248,7 +243,6 @@ export class SystemCacheService {
                     break;
             }
         });
-        */
     }
 
     /**

@@ -36,12 +36,12 @@ export class PesquisaService {
         Pesquisa.setStrategy(new PesquisaCacheStrategy(_cache));
 
         Indicador.setPesquisaStrategy(new PesquisaCacheStrategy(_cache));
-        
+
         Indicador.setIndicadoresStrategy(
             new IndicadorCacheStrategy(_cache),
             new IndicadoresCacheStrategy(_cache)
         );
-        
+
         let cacheStrategy = new ResultadosCacheStrategy(_cache);
         let httpStrategy = new ResultadosHttpStrategy(this);
         Indicador.setResultadosStrategy({
@@ -50,7 +50,7 @@ export class PesquisaService {
 
                 if (resultados) {
                     return Observable.of(resultados);
-                } 
+                }
 
                 if (!codigosLocalidade) {
                     return null;
@@ -81,13 +81,14 @@ export class PesquisaService {
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
             .map(res => res.json())
-            .map(json => {debugger; return json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id))})
+            .map(json => { debugger; return json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id)) })
             .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
             .subscribe(pesquisas => {
                 this._cache.set(listaPesquisas, pesquisas.map(pesquisa => pesquisa.id));
                 this._cache.savePesquisas(pesquisas);
                 _subject.next(pesquisas);
                 this._subjects[listaPesquisas] = null;
+                _subject.complete();
                 _subject = null;
             })
 
@@ -112,7 +113,15 @@ export class PesquisaService {
             return Observable.of(pesquisa.indicadores);
         }
 
-        return this._http.get(this._server.path(`pesquisas/${pesquisaId}/periodos/all/indicadores`))
+        let key = this._cache.buildKey.listaIndicadoresDaPesquisa(pesquisaId);
+        if (this._subjects[key]) {
+            return this._subjects[key];
+        }
+
+        let _subject = new ReplaySubject(1);
+        this._subjects[key] = _subject.asObservable().share();
+
+        this._http.get(this._server.path(`pesquisas/${pesquisaId}/periodos/all/indicadores`))
             .retry(3)
             .catch(err => {
                 return Observable.of({ json: () => [] });
@@ -120,7 +129,15 @@ export class PesquisaService {
             .map(res => res.json())
             .zip(this.getPesquisa(pesquisaId), (json, pesquisa) => {
                 return json.map(indicador => this._createIndicadorAndSaveOnCache(indicador, pesquisa));
+            })
+            .subscribe(indicadores => {
+                _subject.next(indicadores);
+                this._subjects[key] = null;
+                _subject.complete();
+                _subject = null;
             });
+
+        return this._subjects[key];
     }
 
     getIndicadores(pesquisaId: number, indicadoresId?: number | number[]): Observable<Indicador[]> {
@@ -148,6 +165,11 @@ export class PesquisaService {
         let queryIndicadores = _indicadoresId.length ? `&indicadores=${_indicadoresId.join(',')}` : '';
         let url = this._server.path(`pesquisas/${pesquisaId}/periodos/all/resultados?localidade=${_localidadesCodigoArray.join(',')}${queryIndicadores}`);
 
+        let _resultados = _indicadoresId.map(id => this._cache.getResultados(id)).filter(resultado => !!resultado && _localidadesCodigoArray.every(codigo => resultado.resultados[codigo] !== undefined));
+        if (_resultados.length === _indicadoresId.length) {
+            return Observable.of(_resultados);
+        }
+
         return this._http.get(url)
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
@@ -164,12 +186,12 @@ export class PesquisaService {
                     };
                 });
             })
-            .do( resultados => {
+            .do(resultados => {
                 resultados.forEach(resultado => {
                     this._cache.saveResultados(resultado.id, resultado);
                 });
             });
-            
+
     }
 
     private _createIndicadorAndSaveOnCache(protoIndicador, pesquisa: Pesquisa, parentId = 0) {

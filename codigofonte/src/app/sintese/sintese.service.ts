@@ -45,10 +45,10 @@ export class SinteseService {
                     return indicador.resultadosValidosMaisRecentes(codigoLocalidade).map(res => {
                         return {
                             periodo: res.periodos[0],
-                            valor: res.resultados[0]
+                            valor: res.resultados[res.periodos[0]]
                         }
                     });
-                });
+                }).share();
 
                 return {
                     nome: item.nome,
@@ -85,7 +85,7 @@ export class SinteseService {
                         periodo: periodo,
                         valor: dados
                     }
-                });
+                }).share();
 
                 return {
                     nome: item.nome,
