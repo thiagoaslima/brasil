@@ -39,7 +39,7 @@ export class PesquisaSubmenuComponent {
         });
 
         //pega a rota atual
-        this._routerParams.params$.subscribe((params) => {
+        this._routerParams.params$.subscribe(({params}) => {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
             let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
             this.codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);

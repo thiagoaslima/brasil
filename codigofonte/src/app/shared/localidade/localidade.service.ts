@@ -63,7 +63,7 @@ export class LocalidadeService {
         this.tree$ = new ReplaySubject<any>();
 
         this._params.params$
-            .map((params: { [idx: string]: string }) => ({ uf: params['uf'], municipio: params['municipio'] }))
+            .map(({params}) => ({ uf: params['uf'], municipio: params['municipio'] }))
             .map(slugs => {
                 let uf = this.getUfBySigla(slugs.uf);
                 let mun = this.getMunicipioBySlug(slugs.uf, slugs.municipio);

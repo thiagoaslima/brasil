@@ -41,7 +41,7 @@ export class SinteseComponent implements OnInit, OnDestroy {
 
     private configurarBaseURL() {
 
-        this._routerParams.params$.subscribe((params) => {
+        this._routerParams.params$.subscribe(({params}) => {
             //seta a variável de rota base
             if (params.uf && params.municipio){
                 this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/';

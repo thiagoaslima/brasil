@@ -20,7 +20,7 @@
             </div>
 
             <div *ngIf="dado.largura == 'full'" class="dados__variavel">
-                <a *ngIf="dado.link" [routerLink]='[dado.link]' routerLinkActive="active">
+                <a style="display: block" *ngIf="dado.link" [routerLink]='[dado.link]' [queryParams]="dado.query" routerLinkActive="active">
                     <div class="dados__variavel__nome">{{dado.nome}} 
                         <small *ngIf="(dado.valor | async)?.periodo" style="font-size:0.8em;opacity: 0.7; white-space: nowrap">[{{(dado.valor | async)?.periodo}}]</small> 
                     </div>

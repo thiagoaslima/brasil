@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface.2';
 import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
-import { SinteseConfigItem } from './sintese-config';
+import { SINTESE, SinteseConfigItem } from './sintese-config';
 import { flat } from '../utils/flatFunctions';
 
 import { Observable } from 'rxjs';
@@ -26,7 +26,8 @@ export class SinteseService {
     constructor(
         private _http: Http,
         private _pesquisaService: PesquisaService,
-        private _localidadeService: LocalidadeService
+        private _localidadeService: LocalidadeService,
+        private _sinteseConfig: SINTESE
     ) { }
 
 
@@ -53,6 +54,7 @@ export class SinteseService {
                 return {
                     nome: item.nome,
                     link: item.indicador,
+                    query: item.query || {},
                     valor: valor$,
                     unidade: this._pesquisaService.getIndicadores(item.pesquisa, item.indicador).map((indicador: Indicador[]) => indicador[0].unidade.id),
                     tema: item.tema,
@@ -90,6 +92,7 @@ export class SinteseService {
                 return {
                     nome: item.nome,
                     link: item.link,
+                    query: item.query || {},
                     valor: valor$,
                     unidade: Observable.of(item.unidade || ''),
                     tema: item.tema,
@@ -102,6 +105,7 @@ export class SinteseService {
                 return {
                     nome: item.nome,
                     link: item.link,
+                    query: item.query || {},
                     valor: Observable.of(null),
                     unidade: Observable.of(''),
                     tema: item.tema,
@@ -384,7 +388,8 @@ export class SinteseService {
      * return {codigo: string, nome: string}
      */
     public getPesquisaByIndicadorDaSinteseMunicipal(indicador: string) {
-
+        let _indicador = parseInt(indicador, 10);
+        /*
         const indicadoresMap = {
             '29169': { codigo: '33', nome: 'Síntese municipal' },
             '29170': { codigo: '33', nome: 'Síntese municipal' },
@@ -397,8 +402,18 @@ export class SinteseService {
             '30277': { codigo: '40', nome: 'IDEB' },
             '28311': { codigo: '32', nome: 'Serviços de saúde' }
         };
+        */
 
-        return indicadoresMap[indicador];
+        let item = this._sinteseConfig.municipio.filter(item => {
+            if (item.indicador) return item.indicador === _indicador;
+            if (item.composicao) return item.composicao.indicadores.map(ind => ind.indicador).indexOf(_indicador) > -1;
+        })[0];
+        
+        if (item.pesquisa) return {codigo: item.pesquisa};
+
+        return {codigo: item.composicao.indicadores[0].pesquisa};
+
+        // return indicadoresMap[indicador];
     }
 
     /**

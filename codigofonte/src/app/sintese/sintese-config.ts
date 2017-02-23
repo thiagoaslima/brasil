@@ -6,6 +6,7 @@ export interface SinteseConfigItem {
     tema: string
     largura?: string
     link?: string
+    query?: string
     pesquisa?: number
     indicador?: number
     composicao?: {
@@ -71,15 +72,9 @@ export class SINTESE {
         },
 
         {
-            nome: "Fotografia",
-            tema: TEMAS.historico,
-            link: "fotos"
-        },
-
-        {
             nome: "Histórico",
             tema: TEMAS.historico,
-            link: "historico"
+            link: 'historico'
         },
 
         // --- Território
@@ -88,7 +83,8 @@ export class SINTESE {
             pesquisa: 33,
             indicador: 29167,
             nome: "Área Territorial",
-            tema: TEMAS.territorio
+            tema: TEMAS.territorio,
+            query: { v: 'grafico' }
         },
 
         // --- População
@@ -97,27 +93,31 @@ export class SINTESE {
             pesquisa: 33,
             indicador: 29171,
             nome: "População estimada",
-            tema: TEMAS.populacao
+            tema: TEMAS.populacao,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 43,
             indicador: 30282,
             nome: "Número de domicílios",
-            tema: TEMAS.populacao
+            tema: TEMAS.populacao,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 33,
             indicador: 29168,
             nome: "Densidade demográfica",
-            tema: TEMAS.populacao
+            tema: TEMAS.populacao,
+            query: { v: 'grafico' }
         },
 
         {
             nome: "Razão entre sexos (Masculino/Feminino)",
             tema: TEMAS.populacao,
             link: '27689',
+            query: { v: 'grafico' },
             composicao: {
                 indicadores: [
                     {
@@ -171,6 +171,7 @@ export class SINTESE {
             nome: "Razão entre situação domiciliar (Urbana/Rural)",
             tema: TEMAS.populacao,
             link: '28912',
+            query: { v: 'grafico' },
             composicao: {
                 indicadores: [
                     {
@@ -210,56 +211,64 @@ export class SINTESE {
             pesquisa: 37,
             indicador: 30255,
             nome: "Índice de Desenvolvimento Humano Municipal (IDHM)",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 38,
             indicador: 46997,
             nome: "PIB a preços correntes",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 38,
             indicador: 47001,
             nome: "PIB per capita",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 21,
             indicador: 29749,
             nome: "Despesas orçamentárias empenhadas",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 21,
             indicador: 28141,
             nome: "Receitas orçamentárias realizadas",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 21,
             indicador: 28160,
             nome: "Valor do Fundo de Participação dos Municípios (FPM)",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 19,
             indicador: 29763,
             nome: "Pessoal ocupado",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 19,
             indicador: 29765,
             nome: "Salário médio mensal",
-            tema: TEMAS.economia
+            tema: TEMAS.economia,
+            query: { v: 'grafico' }
         },
 
         // --- Frota de Veículos
@@ -268,7 +277,8 @@ export class SINTESE {
             pesquisa: 22,
             indicador: 28120,
             nome: "Total de veículos",
-            tema: TEMAS.frota
+            tema: TEMAS.frota,
+            query: { v: 'grafico' }
         },
 
 
@@ -278,35 +288,40 @@ export class SINTESE {
             pesquisa: 40,
             indicador: 30277,
             nome: "Índice de Desenvolvimento da Educação Básica (IDEB)",
-            tema: TEMAS.educacao
+            tema: TEMAS.educacao,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 13,
             indicador: 5903,
             nome: "Matrículas no ensino pré-escolar",
-            tema: TEMAS.educacao
+            tema: TEMAS.educacao,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 13,
             indicador: 5908,
             nome: "Matrículas no ensino fundamental",
-            tema: TEMAS.educacao
+            tema: TEMAS.educacao,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 13,
             indicador: 5913,
             nome: "Matrículas no ensino médio",
-            tema: TEMAS.educacao
+            tema: TEMAS.educacao,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 13,
             indicador: 5918,
             nome: "Matrículas no ensino superior",
-            tema: TEMAS.educacao
+            tema: TEMAS.educacao,
+            query: { v: 'grafico' }
         },
 
         // --- Saúde
@@ -314,21 +329,24 @@ export class SINTESE {
             pesquisa: 39,
             indicador: 30279,
             nome: "Taxa de mortalidade infantil",
-            tema: TEMAS.saude
+            tema: TEMAS.saude,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 17,
             indicador: 15752,
             nome: "Total de óbitos hospitalares",
-            tema: TEMAS.saude
+            tema: TEMAS.saude,
+            query: { v: 'grafico' }
         },
 
         {
             pesquisa: 42,
             indicador: 30280,
             nome: "Casos de dengue registrados",
-            tema: TEMAS.saude
+            tema: TEMAS.saude,
+            query: { v: 'grafico' }
         },
 
     ]

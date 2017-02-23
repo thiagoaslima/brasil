@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/combineLatest';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { RouterParamsService } from '../../shared/router-params.service';
 
+
 @Component({
     selector: 'sintese-detalhes',
     templateUrl: 'sintese-detalhes.template.html',
     styleUrls: ['sintese-detalhes.style.css']
 })
-export class SinteseDetalhesComponent implements OnInit {
+export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
     constructor(
         private _route: ActivatedRoute,
@@ -44,46 +47,41 @@ export class SinteseDetalhesComponent implements OnInit {
     private _localidadeSubscription: Subscription;
 
     ngOnInit() {
+        const componentes = {
+            "mapa": "cartograma",
+            "grafico": "grafico",
+            "fotos": "fotos",
+            "default": "grafico"
+        };
 
-        this._localidadeService.selecionada$
-            .subscribe(localidade => {
-                
-                this._route.params.filter(params => !!params['indicador']).subscribe(params => {
+        this._localidadeSubscription = this._params.params$
+            .combineLatest(this._localidadeService.selecionada$)
+            // .distinctUntilChanged()
+            .subscribe(([{params, queryParams}, localidade]) => {
+                let indicador = params && params['indicador'];
+                let view = queryParams && queryParams['v'];
 
-                    if(params['indicador'] == 'historico') {
+                console.log(params, queryParams);
 
-                        this.componenteAtivo = 'historico';
+                if (indicador == 'historico') {
+                    this.componenteAtivo = 'historico';
+                    return;
+                }
 
-                    } else {
+                this.componenteAtivo = componentes[view] || componentes.default;
 
-                        this._route.queryParams.subscribe(params => {
+                if (indicador && this.componenteAtivo === "cartograma") {
+                    this.exibirMapa(localidade);
+                }
 
-                            if (params['v'] == 'mapa') {
-
-                                this.exibirMapa(localidade);
-                                this.componenteAtivo = 'cartograma';
-
-                            } else if(params['v'] == 'grafico') {
-
-                                this.componenteAtivo = 'grafico';
-                                this.exibirGrafico(localidade);
-
-                            } else if(params['v'] == 'fotos'){
-
-                                this.componenteAtivo = 'fotos';
-
-                            }else {
-
-                                this.componenteAtivo = 'historico';
-
-                            }
-
-                        });
-
-                    }
-
-                });
+                if (indicador && this.componenteAtivo === "grafico") {
+                    this.exibirGrafico(localidade, indicador);
+                }
             });
+    }
+
+    ngOnDestroy() {
+        this._localidadeSubscription.unsubscribe();
     }
 
     public exibirComponente(nomeComponente) {
@@ -103,50 +101,38 @@ export class SinteseDetalhesComponent implements OnInit {
 
     }
 
-    private exibirGrafico(localidade: Localidade) {
+    private exibirGrafico(localidade: Localidade, indicadorId) {
 
         debugger;
 
         this.isGraficoCarregando = true;
 
-        this._route.params.filter(params => !!params['indicador'])
-            .switchMap((params: Params) => {
+        let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(indicadorId).codigo.toString();
+        let indicador$ = this._sinteseService.getPesquisa(codigoPesquisa, localidade.codigo.toString(), [indicadorId]);
+        let infoPesquisa$ = this._sinteseService.getInfoPesquisa(codigoPesquisa);
 
-                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
-                let indicador = this._sinteseService.getPesquisa(codigoPesquisa, localidade.codigo.toString(), [params['indicador']]);
+        indicador$.subscribe(valores => {
+            
+            let multiplicador = (valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
 
-                return indicador;
+            this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
+            this.tipoGrafico = this.getTipoGraficoIndicador(valores[0].id);
+            this.nomeIndicador = valores[0].indicador + (!!valores[0].unidade ? ' (' + multiplicador + valores[0].unidade.id + ')' : '');
+            // this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
+            // this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
 
-            }).subscribe(valores => {
+            this.isGraficoCarregando = false;
+        });
 
-                let multiplicador = (valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
-
-                this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
-                this.tipoGrafico = this.getTipoGraficoIndicador(valores[0].id);
-                this.nomeIndicador = valores[0].indicador + (!!valores[0].unidade ? ' (' + multiplicador + valores[0].unidade.id + ')' : '');
-                // this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
-                // this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
-
-                this.isGraficoCarregando = false;
-
-                console.log(this.dadosIndicador);
-
+        infoPesquisa$.subscribe(info => {
+            // console.log(info);
+            //debugger;
+            this.fontesIndicador = !!info.periodos ? info.periodos : [];
+            info.periodos.forEach(periodo => {
+                this.temFonte = periodo.fonte.length > 0 ? true : false;
+                this.temNota = periodo.nota.length > 0 ? true : false;
             });
-
-            this._route.params.filter(params => !!params['indicador'])
-            .switchMap((params: Params) => {
-                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
-                let infoPesquisa = this._sinteseService.getInfoPesquisa(codigoPesquisa);
-                return infoPesquisa;
-            }).subscribe(info => {
-                console.log(info);
-                //debugger;
-                this.fontesIndicador = !!info.periodos ? info.periodos : [];
-                info.periodos.forEach(periodo => {
-                    this.temFonte = periodo.fonte.length > 0 ? true : false;
-                    this.temNota = periodo.nota.length > 0 ? true : false;
-                });
-            });
+        });
 
     }
 
@@ -156,9 +142,9 @@ export class SinteseDetalhesComponent implements OnInit {
         this._route.params
             .filter(params => !!params['indicador'])
             .switchMap((params: Params) => {
-                
+
                 let municipios = this._localidadeService.getUfBySigla(params['uf']).children.map(munic => munic.codigo.toString());
-                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo;
+                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo.toString();
                 return this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, municipios, params['indicador']);
 
             })
@@ -185,8 +171,8 @@ export class SinteseDetalhesComponent implements OnInit {
                 this.dadosMapa = arrDados[0];
 
             });
-            
-            return this.dadosMapa;
+
+        return this.dadosMapa;
 
     }
 
