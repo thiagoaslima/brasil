@@ -8,9 +8,9 @@
 
 </header>
 
-<div id='container'>
+<div id='container' [class.no__scroll--mobile]="menuAberto">
 
-    <seletor-localidade #seletor="seletor-localidade"></seletor-localidade>
+    <seletor-localidade #seletor="seletor-localidade" (isSeletorAberto)=handleSeletorAberto($event)></seletor-localidade>
 
     <aside class='aside--municipio' [class.localidade--static]="isHeaderStatic | async">
         <div id="localidade">
