@@ -5,7 +5,7 @@ import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface.2';
 import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
 import { SINTESE, SinteseConfigItem } from './sintese-config';
-import { flat } from '../utils/flatFunctions';
+import { flat, flatTree } from '../utils/flatFunctions';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -224,7 +224,7 @@ export class SinteseService {
         return nomesPesquisa$
             .map((res) => {
 
-                return res.filter((res) => {
+                return flatTree(res).filter((res) => {
 
                     if (indicadores.length > 0) {
                         return indicadores.indexOf((res.id).toString()) >= 0
@@ -247,7 +247,7 @@ export class SinteseService {
 
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
-
+                console.log(pesquisa, local, indicadores);
                 this.atribuirValorIndicadoresPesquisa('children', nomes, dados);
 
                 return nomes;
