@@ -41,7 +41,7 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
     public isGraficoCarregando: boolean = false;
 
     // Mapa
-    public dadosMapa: any[];
+    public dadosMapa: any[] = [];
     public codigoLocalidade: number;
 
     private _localidadeSubscription: Subscription;
@@ -71,7 +71,7 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
                 this.componenteAtivo = componentes[view] || componentes.default;
 
                 if (indicador && this.componenteAtivo === "cartograma") {
-                    this.exibirMapa(localidade);
+                    this.exibirMapa(localidade, params);
                 }
 
                 if (indicador && this.componenteAtivo === "grafico") {
@@ -94,10 +94,10 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
         this.urlDownloadImagemGrafico = dataURL;
     }
 
-    private exibirMapa(localidade: Localidade) {
+    private exibirMapa(localidade: Localidade, params: Params) {
 
         this.codigoLocalidade = localidade.codigo;
-        this.obterDadosMapa();
+        this.obterDadosMapa(localidade, params);
 
     }
 
@@ -112,8 +112,8 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
         let infoPesquisa$ = this._sinteseService.getInfoPesquisa(codigoPesquisa);
 
         indicador$.subscribe(valores => {
-            
-            let multiplicador = (valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
+            debugger;
+            let multiplicador = (valores.length && valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
 
             this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
             this.tipoGrafico = this.getTipoGraficoIndicador(valores[0].id);
@@ -136,18 +136,15 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
     }
 
-    private obterDadosMapa() {
+    private obterDadosMapa(localidade, params) {
 
         //DADOS PARA O MAPA COROPLÉTICO
-        this._route.params
-            .filter(params => !!params['indicador'])
-            .switchMap((params: Params) => {
 
-                let municipios = this._localidadeService.getUfBySigla(params['uf']).children.map(munic => munic.codigo.toString());
-                let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo.toString();
-                return this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, municipios, params['indicador']);
+        let municipios = this._localidadeService.getUfBySigla(params['uf']).children.map(munic => munic.codigo.toString());
+        let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo.toString();
 
-            })
+
+        this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, municipios, params['indicador'])
             .map((indicador: any[]) => {
 
                 return indicador.map((obj) => {
