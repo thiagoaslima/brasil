@@ -115,10 +115,12 @@ export class PesquisaDadosComponent {
             }
         });
 
-        //verifica se o componente de detalhes está aberto (mobile)
+         //verifica se o componente de detalhes está aberto (mobile)
         this._route.queryParams.subscribe(params => {
             if(params['detalhes'] == 'true'){
                 this.aberto = true;
+            } else {
+                this.aberto = false;
             }
         });
     }
