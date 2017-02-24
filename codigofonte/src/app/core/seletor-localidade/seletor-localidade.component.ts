@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { slugify } from '../../utils/slug';
@@ -17,6 +17,7 @@ import 'rxjs/add/observable/fromEvent';
 })
 export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     @Input() aberto = false;
+    @Output() isSeletorAberto = new EventEmitter();
     @ViewChild('buscaInput') buscaInput: ElementRef;
     private _buscaInput$$: Subscription;
     private _selecionada$$: Subscription;
@@ -141,11 +142,13 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     abrirSeletor() {
         this.aberto = true;
         this.setState('municipiosTodos');
+        this.isSeletorAberto.emit(true);
     }
 
     fecharSeletor() {
         this.setState('');
         this.aberto = false;
+        this.isSeletorAberto.emit(false);
     }
 
     setState(stateName: string, uf = null) {

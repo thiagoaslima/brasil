@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { LocalidadeService } from './shared/localidade/localidade.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
@@ -18,6 +19,7 @@ export class RootComponent implements OnInit, OnDestroy {
     public localidadeSelecionada;
     public isHeaderStatic;
     public menuGlobalAberto = false;
+    public menuAberto = false;
 
     private _localSelecionada$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
@@ -41,6 +43,7 @@ export class RootComponent implements OnInit, OnDestroy {
     }
 
     constructor(
+        private _route: ActivatedRoute,
         private _localidadeService: LocalidadeService
     ) {
         this.locais = this._localidadeService.tree$;
@@ -49,6 +52,15 @@ export class RootComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this._localSelecionada$$ = this._localidadeService.selecionada$.subscribe(localidade => this.localidadeSelecionada = localidade);
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
+
+        //verifica se o componente de detalhes está aberto (mobile)
+        this._route.queryParams.subscribe(params => {
+            if(params['detalhes'] == 'true'){
+                this.menuAberto = true;
+            } else {
+                this.menuAberto = false;
+            }
+        });
     }
 
     ngOnDestroy() {
@@ -59,6 +71,10 @@ export class RootComponent implements OnInit, OnDestroy {
         return this.localidadeSelecionada
             ? this.localidadeSelecionada.link + '/' + str
             : '/brasil/' + str;
+    }
+
+    handleSeletorAberto(seletorAberto){
+        this.menuAberto = seletorAberto;
     }
 
 }
