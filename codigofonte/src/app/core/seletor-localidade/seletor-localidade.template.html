@@ -124,6 +124,8 @@
                         {{ufSelecionada?.capital.nome}}
                     </a>
                 </div>
+                
+                <p class="selecionar-localidade__mensagem" *ngIf="listaMunicipios.atual && listaMunicipios.atual.length == 0"> Nenhum município encontrado. </p>
 
                 <div class="conjunto" *ngFor="let item of listaMunicipios.atual">
                     <div class="letra">
@@ -168,7 +170,7 @@
                             <ul>
                                 <li *ngFor="let municipio of item.municipios">
                                     <a style="display:block" [routerLink]="municipio.link">
-                                        {{municipio.nome}}
+                                        {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
                                     </a>
                                 </li>
                             </ul>
