@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
 export class FotosComponent implements OnInit {
    
     private servicoImagem = "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private servicoThumbs = "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=150&maxheight=100&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoThumbs = "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
     private urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
     private urlDownload = "http://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
 
@@ -147,7 +147,8 @@ export class FotosComponent implements OnInit {
 
     lazyLoad({element, value}, index){
        if (value && element && !element['src']) {
-            this.renderer.setElementAttribute(element, 'src', this.servicoThumbs + this.fotos[index].LINK);
+            //this.renderer.setElementAttribute(element, 'src', this.servicoThumbs + this.fotos[index].LINK);
+            this.renderer.setElementStyle(element, 'backgroundImage', 'url(' + this.servicoThumbs + this.fotos[index].LINK + ')');
         }
     }
 

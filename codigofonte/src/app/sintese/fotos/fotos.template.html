@@ -3,19 +3,19 @@
 
         <div class="preview" (click)="mostrar()"  *ngIf="preview1 != '' && preview2 == '' && preview3 == ''">
             <!--apenas uma foto-->
-            <img class="foto__preview" [src]="preview1"/>
+            <img class="foto__preview" [style.background-image]="'url(' + preview1 +')'"/>
         </div>
 
         <div class="preview" (click)="mostrar()" *ngIf="preview1 != '' && preview2 != '' && preview3 != ''">
             <!--3 ou mais fotos-->
             <div class="preview__foto-grande">
-                <img class="foto__preview" [src]="preview1"/>
+                <img class="foto__preview" [style.background-image]="'url(' + preview1 +')'"/>
             </div>
             <div class="preview__foto-pequena">
-                <img class="foto__preview" [src]="preview2"/>
+                <img class="foto__preview" [style.background-image]="'url(' + preview2 +')'"/>
             </div>
             <div class="preview__foto-pequena">
-                <img class="foto__preview" [src]="preview3"/>
+                <img class="foto__preview" [style.background-image]="'url(' + preview3 +')'"/>
             </div>
         </div>
 
