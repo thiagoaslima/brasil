@@ -147,6 +147,9 @@
     height: 100%;
     display: inline-block;
     margin: 3px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .galeria__miniatura-cont{
@@ -235,6 +238,9 @@
 .foto__preview{
     width: 100%;
     height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .foto__rodape{
