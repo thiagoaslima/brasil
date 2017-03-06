@@ -1,0 +1,430 @@
+*{
+    color: inherit;
+    text-decoration: inherit;
+    font-family: 'Open Sans', sans-serif;
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
+    outline: 0;
+    box-sizing: border-box; 
+}
+
+html, body{
+    height: 100%;
+} 
+
+body, body.brasil{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
+body.estado{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
+body.municipio{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
+header{
+    background-color: #E6E6E6;
+    /*max-width: 1900px;*/
+    margin: auto;
+    border-bottom: 2px solid #F7931E;
+    display: table;
+    width: 100%;
+    
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+header .logo{
+    width: 21%;
+    background-color: #fff;
+    float: left;
+    height: 52px;
+}
+    
+header .logo--mobile {
+    display: none;
+}
+
+header .logo img{
+    padding: 14px 6% 4px;
+}
+
+
+
+header #busca{
+    float: left;
+    margin: 10px 1%;
+    width: 76%;
+    height: 30px;
+}
+
+#container{
+    /*max-width: 1900px;*/
+    margin: auto;
+    height: 100%;
+
+    padding-top: 54px;
+}
+
+.brasil .cor-fundo{
+     background-color: #1F9982;
+}
+
+.brasil .cor-borda{
+    border-color: #1F9982;
+}
+
+.estado .cor-fundo{
+    background-color: #1B779B;
+}
+
+.estado .cor-borda{
+   background-color: #1B779B;
+}
+
+.municipio .cor-fundo{
+    background-color: #1B779B;
+}
+
+.municipio .cor-borda{
+    background-color: #1B779B;
+}
+
+/*****************
+aside
+*****************/
+
+aside{
+    /*background-color: #cccffc;*/
+    min-height: 100%;
+    width: 21%;
+    float: left;
+    color: #fff;
+    /*padding: 2% 0%;*/
+}
+
+aside.aside--municipio{
+    background-color: #1B779B;
+}
+
+aside ul li{
+    list-style: none;
+    
+}
+
+
+aside #localidade{
+    padding: 9% 6% 4%;
+    font-size: 0.9em;
+}
+
+
+aside #localidade ul li{
+    display: inline;
+}
+
+aside #localidade ul li:not(:first-child):before{
+    content: ' / ';
+}
+
+aside #localidade h1{
+    font-size: 1.6em;
+    line-height: 28px;
+}
+
+aside #localidade button{
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 21px;
+    font-size: .8em;
+    margin: 4% 0%;
+    padding: 5px 10px;
+    cursor: pointer;
+    -webkit-transition: background 200ms ease, color 200ms ease;
+    -moz-transition: background 200ms ease, color 200ms ease;
+    -ms-transition: background 200ms ease, color 200ms ease;
+    -o-transition: background 200ms ease, color 200ms ease;
+    transition: background 200ms ease, color 200ms ease;
+}
+
+aside #localidade button:hover{
+    background-color: #FFFFFF;
+    color: #1B779B;
+}
+
+aside #localidade button#menu-principal{
+    display: none;
+}
+
+
+
+
+
+
+
+aside #menu ul{
+    margin-top: 28px;
+}
+
+aside #menu ul li{
+    padding: 0;
+    font-size: .9em;
+    border-bottom: 1px solid #165D72;
+    cursor:pointer;
+}
+
+aside #menu ul li a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 5% 8%;
+}
+
+aside #menu ul li:last-child{
+    border-bottom: none;
+}
+
+aside #menu ul li:hover, aside #menu .menu--selecionado{
+    background-color: #165D72;
+}
+
+#sintese{
+    float: left;
+    width: 79%;
+    height: 100%;
+}
+
+/*****************
+sintese>dados
+*****************/
+
+#sintese #dados{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    padding: 2% 0%;
+    min-height: 100%;
+}
+
+#sintese #detalhes{
+    background-color: yellow;
+    float: left;
+    width: 62%;
+    min-height: 100%;
+}
+
+/*******************/
+
+.conteudo{
+    float: left;
+    width: 79%;
+    height: 100%;
+}
+
+.conteudo__dados{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    height: 100%;
+}
+
+.conteudo__dados--com-scroll{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+.conteudo__detalhes{
+    float: left;
+    width: 62%;
+    height: 100%;
+}
+
+.conteudo__detalhes--com-scroll{
+    float: left;
+    width: 62%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+    body, body.municipio, body.brasil, body.estado{
+        background: none;
+    }
+
+    header{
+        background-color: #333333;
+        border-bottom: none;
+    }
+
+    header .logo {
+        background-color: #333333;
+        height: 42px;
+        padding-left: 5%;
+        width: auto;
+    }
+
+    header .logo--desk {
+        display: none;
+    }
+    
+    header .logo--mobile {
+        display: block;
+    }
+
+    header #busca{
+        height: 24px;
+        display: none;
+    }
+
+    header .fa-search{
+        display: block;
+        color: #fff;
+        float: right;
+        padding: 10px 15px;
+        font-size: 20px;
+    }
+
+    #container{
+        padding-top: 42px;
+    }
+
+    aside{
+        width: 100%;
+        min-height: 0px;
+    }
+
+    aside #localidade {
+        padding: 7px 5%;
+    }
+
+    .localidade--static #localidade{
+        position: fixed;
+        transform: translateY(-100px);
+        width: 100%;
+        background: #1B779B;
+        z-index: 2;
+    }
+
+    .localidade--static #menu {
+        z-index: 3;
+        transform: translateY(18px);
+    }
+
+    aside #localidade button{
+        margin: 15px 0% 5px;
+        float: right;
+    }
+    
+    aside #localidade button#menu-principal{
+        float: left;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        padding: 0px;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    aside #menu{
+        position: fixed;
+        background-color: #1B779B;
+        left: -75%;
+        min-height: 100%;
+        width: 75%;
+        z-index: 10;
+
+        -webkit-transition: left 500ms ease;
+        -moz-transition: left 500ms ease;
+        -ms-transition: left 500ms ease;
+        -o-transition: left 500ms ease;
+        transition: left 500ms ease;
+    }
+
+    aside #menu ul{
+        margin-top: 0px;
+    }
+
+    aside #menu.aberto{
+        left: 0%;
+    }
+
+    .conteudo{
+        width: 100%;
+    }
+
+    .conteudo__dados, .conteudo__dados--com-scroll{
+        overflow-y: initial;
+        width: 100%;
+        min-height: 100%;
+        display: table;
+    }
+
+
+    .conteudo__detalhes, .conteudo__detalhes--com-scroll{
+        width: 100%;
+        position: fixed;
+        background-color: #fff;
+        top: 0;
+        left: 100%;
+
+        -webkit-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -moz-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -ms-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -o-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+    }
+
+    .conteudo__detalhes.aberto, .conteudo__detalhes--com-scroll.aberto{
+        left: 0%;
+    }
+
+    .conteudo__detalhes.aberto{
+        overflow-y: scroll; 
+    }
+
+    .no__scroll--mobile{
+        overflow: hidden;
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    /*aside fica fixo em 250px;*/
+    body.estado{
+       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff )
+    }
+
+    header .logo {
+        width: 250px;
+    }
+
+    aside{
+        width: 250px;    
+    }
+    
+    .conteudo{
+        width: calc(100% - 250px);
+    }
+
+    
+}
