@@ -65,9 +65,12 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     set ufSelecionada(uf) {
         this._ufSelecionada = uf;
         if (uf) {
+            debugger;
+            this.listaMunicipios.base = uf.children;
             this.listaMunicipios.build(uf.children);
         } else {
             this.listaMunicipios.build([]);
+            this.listaMunicipios.base = this._localidadeService.getAllMunicipios();
         }
 
     }

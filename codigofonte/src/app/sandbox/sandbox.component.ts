@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SinteseService } from '../sintese/sintese.service';
-import { PesquisaService } from '../shared/pesquisa/pesquisa.service';
+import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 
 import { reduceOnTree } from '../utils/flatFunctions';
 
@@ -49,7 +49,6 @@ export class SandboxComponent implements OnInit {
         });
 
         this.pesquisas = this._pesquisaService.getAllPesquisas().map(pesquisas => pesquisas.map(pesquisa => pesquisa.nome));
-        this.indicadoresEducacao = this._pesquisaService.getIndicadores(13).map(indicadores => reduceOnTree(indicadores, ['id', 'indicador']));
     }
 
 }

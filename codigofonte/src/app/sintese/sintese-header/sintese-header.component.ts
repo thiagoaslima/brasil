@@ -59,7 +59,7 @@ export class SinteseHeaderComponent implements OnInit {
 
     ngOnInit(){
 
-        this._subscriptionSintese = this._routerParams.params$.subscribe((params) => {
+        this._subscriptionSintese = this._routerParams.params$.subscribe(({params}) => {
             if (params.indicador) {
                 this._link = ['brasil', params.uf, params.municipio, 'sintese', params.indicador];
 

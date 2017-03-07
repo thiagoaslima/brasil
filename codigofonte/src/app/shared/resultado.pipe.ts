@@ -16,7 +16,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 99999999999991 - -
 - - -
 (NULL) - -
-*/    
+*/
 export class ResultadoPipe implements PipeTransform {
     transform(value: any, unidade?: string): any {
 
@@ -72,12 +72,12 @@ export class ResultadoPipe implements PipeTransform {
             case '-':
             case null:
                 return '-';
-            
+
             default:
                 if (!isNaN(Number(value))) {
                     value = Number(value);
-                    let isFloat = (n) => Number(n) === n && n%1 !== 0;
-                    let valueStr = float || (float === undefined && isFloat(value))? (<number>value).toFixed(2).toString() : value.toString();
+                    let isFloat = (n) => Number(n) === n && n % 1 !== 0;
+                    let valueStr = float || (float === undefined && isFloat(value)) ? (<number>value).toFixed(2).toString() : value.toString();
                     let [parteInteira, parteDecimal] = valueStr.split('.');
                     parteInteira = this.adicionaSeparadorMilhares(parteInteira, '.');
                     return parteDecimal ? [parteInteira, parteDecimal].join(',') : parteInteira;
@@ -86,13 +86,13 @@ export class ResultadoPipe implements PipeTransform {
                 }
         }
     }
-    private adicionaSeparadorMilhares(n:string, separador=' ') {
+    private adicionaSeparadorMilhares(n: string, separador = ' ') {
         let start = 0;
-        let next = n.length%3;
+        let next = n.length % 3;
         let r = [];
-        for(var curr = start; curr < n.length; curr=next, next+=3) {
-            if(next == 0){ continue; }
-            r.push(n.substring(curr,next));
+        for (var curr = start; curr < n.length; curr = next, next += 3) {
+            if (next == 0) { continue; }
+            r.push(n.substring(curr, next));
         }
         return r.join(separador);
     }
