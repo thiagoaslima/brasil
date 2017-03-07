@@ -167,7 +167,7 @@ export class BuscaComponent implements OnInit {
     }
 
     desativarBusca(){
-
+        this.limparBusca();
         this.menuAberto = false;
         this.modoDigitacao = false;
     }
