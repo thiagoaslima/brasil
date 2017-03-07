@@ -69,13 +69,13 @@
                 </td>
                 <!--valores-->
                 <td>
-                    {{ dado.res && dado.res[ano1] ? (dado.res[ano1] | resultado: true) : ' ' }}
+                    {{ dado.res && dado.res[ano1] ? (dado.res[ano1] | resultado: dado?.unidade?.id) : ' ' }}
                 </td>
                 <td>
-                    {{ dado.res && dado.res[ano2] ? (dado.res[ano2] | resultado: true) : ' ' }}
+                    {{ dado.res && dado.res[ano2] ? (dado.res[ano2] | resultado: dado?.unidade?.id) : ' ' }}
                 </td>
                 <td>
-                    {{ dado.res && dado.res[ano3] ? (dado.res[ano3] | resultado: true) : ' ' }}
+                    {{ dado.res && dado.res[ano3] ? (dado.res[ano3] | resultado: dado?.unidade?.id) : ' ' }}
                 </td>
                 <td>
                     {{ dado?.unidade?.id }}
