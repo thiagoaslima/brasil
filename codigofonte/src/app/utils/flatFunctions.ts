@@ -1,9 +1,9 @@
 interface Tree<T> {
-    children: T[]
+    children: any[]
 }
 
 
-export function flatTree<T extends Tree<any>>(root: T|T[]): T[] {
+export function flatTree(root) {
     if (Array.isArray(root)) {
         return [].concat(...root.map(flatTree));
     }
@@ -20,7 +20,11 @@ export function flatMap(array: Array<any|any[]>, callbackfn): any[] {
     return [].concat(...array.map(callbackfn));
 }
 
-export function reduceOnTree<T extends Tree<any>>(array: T[], propKeys: string | string[]) {
+export function flat<T>(array: T[][]): T[] {
+    return [].concat(...array);
+}
+
+export function reduceOnTree(array, propKeys: string | string[]) {
     let _keys = Array.isArray(propKeys) ? propKeys : [propKeys];
 
     return array.map(item => {

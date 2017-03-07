@@ -9,12 +9,10 @@ import { TopoJson, TOPOJSON } from './topojson.v2';
 
 import { RouterParamsService } from './router-params.service';
 import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaService } from './pesquisa/pesquisa.service';
-import { PesquisaServiceWithCache } from './pesquisa/pesquisa-with-cache.service';
+import { PesquisaService } from './pesquisa/pesquisa.service.2';
 import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
-
-import {ResultadoPipe} from '../utils/resultado.pipe';
+import { ResultadoPipe } from './resultado.pipe';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -39,7 +37,7 @@ const PROVIDERS = [
     LocalidadeService,
     CommonService,
     BuscaService,
-    { provide: PesquisaService, useClass: PesquisaServiceWithCache },
+    PesquisaService,
     { provide: TOPOJSON, useValue: TopoJson }
 ]
 

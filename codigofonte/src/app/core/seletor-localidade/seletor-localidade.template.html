@@ -10,7 +10,7 @@
         <div class="selecionar-localidade__local-atual--mobile">
             <ul>
                 <li *ngFor="let localidade of selecaoLocalidadesAtual | async">
-                    <a [routerLink]="localidade.link">{{localidade.sigla ? localidade.sigla.toUpperCase() : localidade.nome}}</a>
+                    <a [routerLink]="localidade?.link">{{localidade.sigla ? localidade.sigla.toUpperCase() : localidade.nome}}</a>
                 </li>
             </ul>
         </div>
@@ -55,7 +55,7 @@
             <template [ngIf]="states.estados">
                 <li *ngFor="let uf of ufs">
                     <div>
-                        <a style="display:block" [routerLink]="uf.link">
+                        <a style="display:block" [routerLink]="uf?.link">
                         {{uf.nome}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -117,7 +117,7 @@
 
             <div id="municipios">
                 <div class="estado" *ngIf="ufSelecionada">
-                    <a style="display: block" [routerLink]="ufSelecionada.capital.link">
+                    <a style="display: block" [routerLink]="ufSelecionada.capital?.link">
                         <div class='circulo'>
                             <i class="fa fa-university" aria-hidden="true"></i>
                         </div>
@@ -136,7 +136,7 @@
                     <div class="municipios">
                         <ul>
                             <li *ngFor="let municipio of item.municipios">
-                                <a style="display:block" [routerLink]="municipio.link" (click)="fecharSeletor()">
+                                <a style="display:block" [routerLink]="municipio?.link" (click)="fecharSeletor()">
                                     {{municipio.nome}}
                                 </a>
                             </li>
@@ -152,7 +152,7 @@
 
                 <ul *ngIf="!buscaInput.value">
                     <li *ngFor="let municipio of listaMunicipios.maisVistos">
-                        <a style="display:block" [routerLink]="municipio.link">
+                        <a style="display:block" [routerLink]="municipio?.link">
                             {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
                         </a>
                     </li>
@@ -169,8 +169,8 @@
                         <div class="municipios">
                             <ul>
                                 <li *ngFor="let municipio of item.municipios">
-                                    <a style="display:block" [routerLink]="municipio.link">
-                                        {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
+                                    <a style="display:block" [routerLink]="municipio?.link">
+                                        {{municipio.nome}}  <span>{{municipio.parent.identificador.toUpperCase()}}</span>
                                     </a>
                                 </li>
                             </ul>

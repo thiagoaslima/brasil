@@ -19,7 +19,7 @@ export class RouterParamsService {
         this.params$ = this._router.events
             .filter(e => e instanceof NavigationEnd)
             .distinctUntilChanged()
-            .map(e => this.extractParamsFromTree(this._route.snapshot))
+            .map(e => this.extractParamsFromTree(this._route.snapshot, {}));
             //.share();
     }
 
@@ -28,11 +28,18 @@ export class RouterParamsService {
         return route.children.reduce((agg, route) => route.outlet === outlet ? route : agg, null);
     }
 
-    private extractParamsFromTree(route, params = {}, outlet = 'primary') {
-        if (!route) return params;
-        params = Object.assign(params, route.params);
+    private extractParamsFromTree(route, {params = {}, queryParams = {}}, outlet = 'primary') {
+        let _params = {
+            params,
+            queryParams
+        };
 
-        return this.extractParamsFromTree(this.getActiveChildOnOutlet(route), params, outlet);
+        if (!route) return _params;
+        
+        Object.assign(_params.params, route.params);
+        Object.assign(_params.queryParams, route.queryParams);
+
+        return this.extractParamsFromTree(this.getActiveChildOnOutlet(route), _params, outlet);
     }
 
 }

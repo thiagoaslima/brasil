@@ -8,7 +8,7 @@
             "program": "${workspaceRoot}/codigofonte/dist/server/index.js",
             "stopOnEntry": false,
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/codigofonte",
             "preLaunchTask": null,
             "runtimeExecutable": null,
             "runtimeArgs": [
