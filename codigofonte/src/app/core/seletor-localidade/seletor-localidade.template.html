@@ -86,7 +86,7 @@
 
         <div class="terceira-coluna__menu--mobile">
             <div class="terceira-coluna__menu__todos" [class.selecionado]="states.municipiosTodos" (click)="setState('municipiosTodos')">Todos</div>
-            <div class="terceira-coluna__menu__estado" [class.selecionado]="states.municipiosEstados" (click)="setState('municipiosEstados')">Por estado</div>
+            <div class="terceira-coluna__menu__estado" [class.selecionado]="states.municipiosEstados || states.municipiosMunicipios" (click)="setState('municipiosEstados')">Por estado</div>
         </div>
 
         <div class="por-estado__selecionar-estado">
