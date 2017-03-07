@@ -116,11 +116,15 @@ export class BuscaComponent implements OnInit {
                 link: link
             };
             
-            // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS.
+            // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS. SÓ DELETAR ESSE IF
             if(localidade.tipo != 'uf'){
                 this.resultadoLocais.push(itemResultado);
             }
         });
+        
+        // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS. SÓ DELETAR A PRÓXIMA LINHA
+        this.qtdLocais = this.resultadoLocais.length;
+
 
         this.resultadoTodos = this.resultadoPesquisas.concat(this.resultadoLocais);
 
