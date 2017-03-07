@@ -1,0 +1,21 @@
+<div class="loading" *ngIf="carregando">
+    <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+</div>
+
+<div *ngIf="!carregando">
+    <div *ngIf="!!datasets && datasets.length > 0">
+        
+        <canvas baseChart
+            class="chart"
+            width="500" 
+            height="400"
+            [datasets]="datasets"
+            [labels]="labels"
+            [options]="options"
+            [chartType]="tipo"
+            [colors]="colors"
+            #grafico1>
+        </canvas>
+
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.pesq__info{
+    color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    font-size: small;
+    margin: 2px 5px 2px 10px;
+}
+
+.pesq__info ol, .pesq__info ul {
+    padding-left: 15px;
+}
+.pesq__info ul {
+    list-style-type: none;
+}
+.pesq__info p, .pesq__info ul span {
+    font-weight: bold;
+}

@@ -1,0 +1,113 @@
+<div class="conteudo__detalhes--com-scroll" [class.aberto]="aberto">
+    <div class="cabecalho">
+        <button class="cabecalho__voltar" routerLink="./" [queryParams]="queryParams" routerLinkActive="active" >
+            < Voltar
+        </button>
+
+        <h2 class="cabecalho__titulo">
+            {{ tituloPrincipal }}
+            <!--<i class="cabecalho__duvida fa fa-question-circle" aria-hidden="true"></i>-->
+        </h2>
+        
+        <div class="cabecalho__download">
+            <i class="fa fa-download" aria-hidden="true" (click)="abrirMenu()"></i>
+            
+            <div class="submenu" (mouseleave)="fecharMenu()" [class.oculto]="isMenuOculto" [class.visivel]="!isMenuOculto">
+                <div class="seta"></div>
+                <ul class="submenu__lista">
+                    <li class="submenu__item">
+                        <span  class="submenu__link submenu__texto" (click)="onDownload()">CSV</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <select class="cabecalho__combobox" (change)="onChange($event)" *ngIf="dadosCombo && dadosCombo.length > 0">
+            <option *ngFor="let dado of dadosCombo;">{{ dado.indicador }}</option>
+        </select>
+    </div>
+
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan='2'>
+                Indicador
+            </td>
+            <td>
+                <select class="tabela__combobox" (change)="mudaAno1($event)">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano1">{{ ano }}</option>
+                </select>
+            </td>
+            <td>
+                <select class="tabela__combobox" (change)="mudaAno2($event)" *ngIf="anos && anos.length >= 2">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano2">{{ ano }}</option>
+                </select>
+            </td>
+            <td>
+                <select class="tabela__combobox" (change)="mudaAno3($event)" *ngIf="anos && anos.length >= 3">
+                    <option *ngFor="let ano of anos;" [selected]="ano == ano3">{{ ano }}</option>
+                </select>
+            </td>
+            <td>
+                {{ ' ' }}
+            </td>
+        </tr>
+
+        <template ngFor let-dado [ngForOf]="dadosTabela">
+            <tr [ngClass]="'nivel-' + dado.nivel" (click)="onClick(dado)" *ngIf="dado.visivel"
+                [class.nivel-2__cursor]="dado.nivel == 2 && dado.children.length > 0">
+                <td>
+                    <!--nome do indicador-->
+                    <div>
+                        {{ dado.indicador }}
+                    </div>
+                </td>
+                <td>
+                    <!--ícone da seta-->
+                    <i *ngIf="dado.nivel == 2 && dado.children.length > 0" class="fa" aria-hidden="true"
+                        [class.fa-chevron-right]="dado.children.length > 0 && !dado.children[0].visivel"
+                        [class.fa-chevron-down]="dado.children.length > 0 && dado.children[0].visivel"></i>
+                </td>
+                <!--valores-->
+                <td>
+                    {{ dado.res && dado.res[ano1] ? (dado.res[ano1] | resultado: true) : ' ' }}
+                </td>
+                <td>
+                    {{ dado.res && dado.res[ano2] ? (dado.res[ano2] | resultado: true) : ' ' }}
+                </td>
+                <td>
+                    {{ dado.res && dado.res[ano3] ? (dado.res[ano3] | resultado: true) : ' ' }}
+                </td>
+                <td>
+                    {{ dado?.unidade?.id }}
+                </td>
+            </tr>
+        </template>
+    </table>
+
+    <!-- fontes e notas -->
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <br>
+        <p *ngIf="temNota === true">Notas: </p>
+        <ul>
+            <li *ngFor="let fonte of fontesIndicador">
+                <span *ngIf="fonte.nota.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let nota of fonte.nota">{{nota}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div *ngIf="fontesIndicador?.length > 0" class="pesq__info">
+        <p *ngIf="temFonte === true">Fonte: </p>
+        <ul>
+            <li *ngFor="let fonte of fontesIndicador">
+                <span *ngIf="fonte.fonte.length > 0">{{fonte.periodo}}</span>
+                <ol>
+                    <li *ngFor="let fonte of fonte.fonte">{{fonte}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+
+</div>
