@@ -18,7 +18,44 @@ import { Pipe, PipeTransform } from '@angular/core';
 (NULL) - -
 */
 export class ResultadoPipe implements PipeTransform {
-    transform(value: any, float?: boolean): any {
+    transform(value: any, unidade?: string): any {
+
+        let unidades = [
+            'unidades',
+            'frutos',
+            'casamentos',
+            'divórcios',
+            'separações',
+            'estabelecimentos',
+            'equipamentos',
+            'pessoas',
+            'domicílios',
+            'famílias',
+            'docentes',
+            'matrículas',
+            'escola',
+            'automóveis',
+            'caminhões',
+            'caminhões trator',
+            'caminhonetes',
+            'caminhonetas',
+            'micro-ônibus',
+            'motocicletas',
+            'motonetes',
+            'ônibus',
+            'tratores de roda',
+            'utilitários',
+            'veículos',
+            'agências',
+            'óbitos',
+            'notificações',
+            'cabeças',
+            'unidades habitacionais',
+            'leitos'
+        ];
+
+        let float = (typeof(unidade) != "undefined" && unidade != null) ? unidades.indexOf(unidade.toLocaleLowerCase()) < 0 ? true : false : false; 
+
         switch (value) {
             case '99999999999999':
                 return 'Ignorado';

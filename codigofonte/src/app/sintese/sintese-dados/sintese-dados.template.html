@@ -73,7 +73,7 @@
         <a routerLink='{{baseURL + "/sintese/29167"}}' [queryParams]="{ v: 'mapa', detalhes: 'true'}" routerLinkActive="active">
             <div class="dados__variavel__nome">Área Territorial</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['29167']?.value}} <span>{{content['29167']?.unidade?.id}}</span></div>
+            <div class="dados__variavel__valor">{{content['29167']?.value | resultado: content['29167']?.unidade?.id}} <span>{{content['29167']?.unidade?.id}}</span></div>
         </a>
     </div>
 
@@ -93,7 +93,7 @@
         <a routerLink='{{baseURL + "/sintese/29171"}}' [queryParams]="{ v: 'grafico', detalhes: 'true'}">
             <div class="dados__variavel__nome">População estimada</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['29171']?.value}}</div>
+            <div class="dados__variavel__valor">{{content['29171']?.value | resultado: content['29171']?.unidade?.id}}</div>
         </a>
     </div>
 
@@ -101,7 +101,7 @@
         <a routerLink='{{baseURL + "/sintese/29168"}}' [queryParams]="{ v: 'grafico', detalhes: 'true'}">
             <div class="dados__variavel__nome">Densidade demográfica</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['29168']?.value}} <span>{{content['29168']?.unidade?.id}}</span></div>
+            <div class="dados__variavel__valor">{{content['29168']?.value | resultado: content['29168']?.unidade?.id}} <span>{{content['29168']?.unidade?.id}}</span></div>
         </a>
     </div>
 
@@ -121,7 +121,7 @@
         <a routerLink='{{baseURL + "/sintese/28160"}}' [queryParams]="{ v: 'grafico', detalhes: 'true'}">
             <div class="dados__variavel__nome">Fundo de Participação Municipal</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['28160']?.value}} <span>{{content['28160']?.unidade?.id}}</span></div>
+            <div class="dados__variavel__valor">{{content['28160']?.value | resultado: content['28160']?.unidade?.id}} <span>{{content['28160']?.unidade?.id}}</span></div>
         </a>
     </div>
 
@@ -129,7 +129,7 @@
         <a routerLink='{{baseURL + "/sintese/47001"}}' [queryParams]="{ v: 'grafico', detalhes: 'true'}">
             <div class="dados__variavel__nome">PIB per capita</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right hidden" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['47001']?.value}} <span>{{content['47001']?.unidade?.id}}</span></div>
+            <div class="dados__variavel__valor">{{content['47001']?.value | resultado: content['47001']?.unidade?.id}} <span>{{content['47001']?.unidade?.id}}</span></div>
         </a>
     </div>
 
@@ -149,7 +149,7 @@
         <a routerLink='{{baseURL + "/sintese/30277"}}' [queryParams]="{ v: 'grafico', detalhes: 'true'}">
             <div class="dados__variavel__nome">IDEB</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['30277']?.value}}</div>
+            <div class="dados__variavel__valor">{{content['30277']?.value | resultado: content['30277']?.unidade?.id}}</div>
         </a>
     </div>
 
@@ -163,7 +163,7 @@
         <a routerLink='{{baseURL + "/sintese/28311"}}' [queryParams]="{ v: 'grafico', detalhes: 'true'}">
             <div class="dados__variavel__nome">Leitos hospitalares</div>
             <div class="dados__variavel__seta-detalhe"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-            <div class="dados__variavel__valor">{{content['28311']?.value}}</div>
+            <div class="dados__variavel__valor">{{content['28311']?.value | resultado: content['28311']?.unidade?.id}}</div>
         </a>
     </div>
 </div>
