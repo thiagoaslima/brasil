@@ -140,14 +140,16 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
         //DADOS PARA O MAPA COROPLÉTICO
 
-        let municipios = this._localidadeService.getUfBySigla(params['uf']).children.map(munic => munic.codigo.toString());
+        let uf = this._localidadeService.getUfBySigla(params['uf'])
+        let municipios = `${uf.codigo.toString()}xxxx`;
         let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo.toString();
 
 
-        this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, municipios, params['indicador'])
+        this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [municipios], params['indicador'])
             .map((indicador: any[]) => {
+debugger;
 
-                return indicador.map((obj) => {
+                return indicador[0].res.map((obj) => {
                     let dados = !!obj ? obj.res : '[]';
 
                     return dados.map((dado) => {

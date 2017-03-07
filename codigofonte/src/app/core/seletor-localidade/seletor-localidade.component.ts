@@ -133,6 +133,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
+            .filter( (termo: string) => termo.length >= 3)
             .subscribe(termo => this.search(termo));
     }
 
@@ -161,7 +162,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         //this.clearSearch();
     }
 
-    search(termo) {
+    search(termo = '') {
         if(this.ufSelecionada) {
             if(termo.length >= 3) //mostra o resultado da busca
                 return this.listaMunicipios.build(this.ufSelecionada.children, termo);

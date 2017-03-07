@@ -39,9 +39,10 @@ export class SinteseService {
             if (item.pesquisa && item.indicador) {
 
                 let valor$ = Observable.zip(
+                    this._pesquisaService.getPesquisa(item.pesquisa),
                     this._pesquisaService.getIndicadores(item.pesquisa, item.indicador),
                     this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade)
-                ).flatMap(([indicadores, resultados]) => {
+                ).flatMap(([pesquisa, indicadores, resultados]) => {
                     let indicador = indicadores[0];
                     return indicador.resultadosValidosMaisRecentes(codigoLocalidade).map(res => {
                         return {
@@ -67,15 +68,16 @@ export class SinteseService {
                 let indicadoresId = item.composicao.indicadores.map(indicador => indicador.indicador);
 
                 let indicadores$ = Observable.zip(
+                    this._pesquisaService.getPesquisa(pesquisaId),
                     this._pesquisaService.getIndicadores(pesquisaId, indicadoresId),
                     this._pesquisaService.getResultados(pesquisaId, indicadoresId, codigoLocalidade)
                 )
 
-                let periodo$ = indicadores$.flatMap(([indicadores, resultados]) => {
+                let periodo$ = indicadores$.flatMap(([pesquisa, indicadores, resultados]) => {
                     return indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).map(res => res.periodos[0]);
-                })
+                });
 
-                let composicao$ = indicadores$.flatMap(([indicadores, resultados]) => {
+                let composicao$ = indicadores$.flatMap(([pesquisa, indicadores, resultados]) => {
                     return item.composicao.make(indicadores, codigoLocalidade);
                 });
 
@@ -247,7 +249,6 @@ export class SinteseService {
 
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
-                console.log(pesquisa, local, indicadores);
                 this.atribuirValorIndicadoresPesquisa('children', nomes, dados);
 
                 return nomes;

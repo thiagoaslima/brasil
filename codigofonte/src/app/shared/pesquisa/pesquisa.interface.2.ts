@@ -87,13 +87,16 @@ export class Pesquisa {
     periodos: Periodo[]
     contexto: Contexto
     private _indicadoresRoot: number[]
-    private _strategy: RetrieveStrategy<Indicador[]> = { retrieve: (ids) => { throw new Error('No strategy was registred') } };
+    private _strategy: RetrieveStrategy<Indicador[]>;
 
     /**
      * Retorna os indicadores de primeira posicao da pesquisa
      * @returns {Indicador[]}
      */
     get indicadores() {
+        if (!this._strategy) {
+            throw new Error('No strategy was registered');
+        }
         return this._strategy.retrieve(this._indicadoresRoot);
     }
 
