@@ -29,17 +29,17 @@ export class PesquisaSubmenuComponent {
         this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
             pesquisas.sort((a, b) => {
                 //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
-                a = slugify(a.descricao);
-                b = slugify(b.descricao);
-                if (a < b) {return -1;}
-                if (a > b) {return 1;}
+                let _a = slugify(a.descricao);
+                let _b = slugify(b.descricao);
+                if (_a < _b) {return -1;}
+                if (_a > _b) {return 1;}
                 return 0;
             });
             this.pesquisas = pesquisas;
         });
 
         //pega a rota atual
-        this._routerParams.params$.subscribe((params) => {
+        this._routerParams.params$.subscribe(({params}) => {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
             let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
             this.codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);

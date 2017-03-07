@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { BuscaService } from './busca.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
+import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface.2';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 
 @Component({
@@ -167,7 +167,7 @@ export class BuscaComponent implements OnInit {
     }
 
     desativarBusca(){
-
+        this.limparBusca();
         this.menuAberto = false;
         this.modoDigitacao = false;
     }
