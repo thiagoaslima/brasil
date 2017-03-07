@@ -152,8 +152,9 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .tabela__combobox{
+    /*
     border: none;
-    /*-webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
     background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
 }
