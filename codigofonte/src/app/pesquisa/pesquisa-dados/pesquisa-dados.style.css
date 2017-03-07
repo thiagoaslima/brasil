@@ -201,6 +201,10 @@ tr.nivel-1:nth-child(3) td{
     position: relative;
 }
 
+.cabecalho__download:hover{
+    background-color: #165D72;
+}
+
 .cabecalho__combobox{
     clear: both;
     display: block;
