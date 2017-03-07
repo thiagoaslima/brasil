@@ -148,11 +148,14 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.setState('');
         this.aberto = false;
         this.isSeletorAberto.emit(false);
+        this.clearSearch();
     }
 
     setState(stateName: string, uf = null) {
         this.stateSelecionado = stateName;
         this.ufSelecionada = uf;
+        this.search(this.buscaInput.nativeElement.value);
+        //this.clearSearch();
     }
 
     search(termo) {
@@ -167,6 +170,10 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             if(termo.length == 0) //mostra a lista inicial
                 return this.listaMunicipios.build(this.listaMunicipios.base);
         }
+    }
+
+    clearSearch() {
+        this.buscaInput.nativeElement.value = null;
     }
 
     voltarMobile() {
