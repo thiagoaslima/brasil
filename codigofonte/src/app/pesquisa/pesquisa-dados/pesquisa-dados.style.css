@@ -328,4 +328,8 @@ tr.nivel-1:nth-child(3) td{
         margin-left: 2%;
     }
 
+    .cabecalho__combobox{
+        width: 96%;
+    }
+
 }
