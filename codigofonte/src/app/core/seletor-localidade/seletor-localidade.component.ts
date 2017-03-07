@@ -130,7 +130,6 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
-            .filter(value => value.length >= 3)
             .subscribe(termo => this.search(termo));
     }
 
@@ -157,7 +156,17 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     search(termo) {
-        return this.listaMunicipios.build(this.listaMunicipios.base, termo);
+        if(this.ufSelecionada) {
+            if(termo.length >= 3) //mostra o resultado da busca
+                return this.listaMunicipios.build(this.ufSelecionada.children, termo);
+            if(termo.length == 0) //mostra a lista inicial
+                return this.listaMunicipios.build(this.ufSelecionada.children);
+        } else {
+            if(termo.length >= 3) //mostra o resultado da busca
+                return this.listaMunicipios.build(this.listaMunicipios.base, termo);
+            if(termo.length == 0) //mostra a lista inicial
+                return this.listaMunicipios.build(this.listaMunicipios.base);
+        }
     }
 
     voltarMobile() {

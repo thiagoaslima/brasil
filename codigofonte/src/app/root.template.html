@@ -18,7 +18,8 @@
                 <ul>
                     <template ngFor let-local [ngForOf]="locais | async" let-last="last">
                         <li *ngIf="!last">
-                            <a [routerLink]="local.link">{{local.nome}}</a>
+                            <!--<a [routerLink]="local.link">{{local.nome}}</a>-->
+                            {{local.nome}}
                         </li>
                         <li *ngIf="last">
                             <h1>{{local.nome}}</h1>

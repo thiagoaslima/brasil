@@ -15,16 +15,16 @@
         <div class="caixa">
             
             <div class="caixa__conteudo">
-                {{ historico?.historico }}
+                <div class="hist__texto" [innerHTML]="historico?.historico"></div>
 
                 <span *ngIf="!!historico.formacaoAdministrativa">
                     <h4 class="hist__titulo">Formação Administrativa</h4>
-                    {{ historico?.formacaoAdministrativa }}
+                    <div class="hist__texto" [innerHTML]="historico?.formacaoAdministrativa"></div>
                 </span>
 
                 <span *ngIf="!!historico.fonte">
                     <h4 class="hist__titulo">Fonte</h4>
-                    {{ historico?.fonte }}
+                    <div class="hist__texto"> {{ historico?.fonte }} </div>
                 </span>
             </div>
         </div>
