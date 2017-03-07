@@ -95,6 +95,24 @@ export class MapaComponent implements OnChanges {
     geraMapa(anoSelecionado, codLocal: number, dados: any[]) {
         this.localHover = '';
 
+        if (dados.length !== 0) {
+            this.anosToSelect = dados[0].anos;
+
+            /**
+             * Criando as faixas coropléticas
+             */
+            this.faixas = this.calculaFaixas(dados, anoSelecionado);
+
+            /**
+             * Aplicando a legenda das faixas
+             */
+            this.faixa0 = dados.length < 27 ? '' : 'hide';
+            this.fx1 = this.faixas[1] >= 0 ? parseFloat(this.faixas[1]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
+            this.fx0 = this.faixas[0] >= 0 ? parseFloat(this.faixas[0]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
+        }
+
+        const hashDados = dados.reduce( (agg, dado) => Object.assign(agg, {[dado.munic]: dado}), Object.create(null));
+
         if (codLocal > 1) {
 
             // mapa da UF dividida por municípios
@@ -109,13 +127,27 @@ export class MapaComponent implements OnChanges {
                     let s = 90;
                     let l = -90;
                     let o = 90;
-                    this.data.geometry = this.data.features.map((ft) => {
-                        myGeom = {};
-                        myGeom.codigo = ft.properties.cod;
+                    this.data.geometry = this.data.features.map((feature) => {
+                        let codigoFeature = feature.properties.cod.toString().substr(0, 6);
 
+                        let municipio = this._localidadeService.getMunicipioByCodigo(codigoFeature);
+
+                        myGeom = {};
+                        myGeom.codigo = feature.properties.cod;
+
+                        myGeom.nome = municipio.nome;
+                        myGeom.uf = municipio.parent.identificador;
+                        myGeom.link = municipio.link;
+                        myGeom.classe = "unchecked";
+
+                        if (codLocal.toString().substr(0, 6) == codigoFeature) {
+                            myGeom.classe = "checked";
+                            this.localAtual = municipio.nome;
+                        }
                         /**
                          * iterando para captura dos nomes dos municipios/ufs para geração do link e municipio atual
                          */
+                        /*
                         municipios.forEach(municipio => {
                             if (municipio.codigoUf.toString() == codLocal.toString().substr(0, 2)) {
                                 if (municipio.codigo.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6)) {
@@ -133,11 +165,10 @@ export class MapaComponent implements OnChanges {
                                 }
                             }
                         });
+                        */
 
-                        // Adiciona a class checked para o local selecionado e unchecked para os demais
-                        myGeom.classe = codLocal.toString().substr(0, 6) == ft.properties.cod.toString().substr(0, 6) ? "checked" : "unchecked";
-                        if (ft.geometry.type == "Polygon") {
-                            myGeom.polys = ft.geometry.coordinates.map((poly) => {
+                        if (feature.geometry.type == "Polygon") {
+                            myGeom.polys = feature.geometry.coordinates.map((poly) => {
                                 return [poly.map((pt) => {
                                     if (n < pt[1]) n = pt[1];
                                     if (s > pt[1]) s = pt[1];
@@ -146,8 +177,8 @@ export class MapaComponent implements OnChanges {
                                     return pt.join(",");
                                 }).join(" ")];
                             })
-                        } else if (ft.geometry.type == "MultiPolygon") {
-                            myGeom.polys = ft.geometry.coordinates.map((MultiPoly) => {
+                        } else if (feature.geometry.type == "MultiPolygon") {
+                            myGeom.polys = feature.geometry.coordinates.map((MultiPoly) => {
                                 return MultiPoly.map((poly) => {
                                     return poly.map((pt) => {
                                         if (n < pt[1]) n = pt[1];
@@ -165,25 +196,26 @@ export class MapaComponent implements OnChanges {
                          */
                         if (dados.length !== 0) {
 
-                            this.anosToSelect = dados[0].anos;
+                            // this.anosToSelect = dados[0].anos;
 
                             /**
                              * Criando as faixas coropléticas
                              */
-                            this.faixas = this.calculaFaixas(dados, anoSelecionado);
+                            // this.faixas = this.calculaFaixas(dados, anoSelecionado);
 
                             /**
                              * Aplicando a legenda das faixas
                              */
-                            this.faixa0 = dados.length < 27 ? '' : 'hide';
-                            this.fx1 = this.faixas[1] >= 0 ? parseFloat(this.faixas[1]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
-                            this.fx0 = this.faixas[0] >= 0 ? parseFloat(this.faixas[0]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
+                            // this.faixa0 = dados.length < 27 ? '' : 'hide';
+                            // this.fx1 = this.faixas[1] >= 0 ? parseFloat(this.faixas[1]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
+                            // this.fx0 = this.faixas[0] >= 0 ? parseFloat(this.faixas[0]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
 
                             /**
                              * Relacionando a qual faixa o local se enquadra e inserindo no attr.faixa na malha do mapa
                              */
+                            /*
                             dados.forEach(data => {
-                                if (data.munic == ft.properties.cod.toString().substr(0, 6)) {
+                                if (data.munic == feature.properties.cod.toString().substr(0, 6)) {
                                     myGeom.ano = data.anos[anoSelecionado];
                                     myGeom.valor = parseFloat(data.valores[anoSelecionado]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
                                     myGeom.faixa = !!data.valores[anoSelecionado] ? this.escolheFaixa(data.valores[anoSelecionado], this.faixas) : '';
@@ -195,7 +227,15 @@ export class MapaComponent implements OnChanges {
 
                                 }
                             });
+                            */
 
+                            let data = hashDados[codigoFeature];
+                            myGeom.ano = data.anos[anoSelecionado];
+                            myGeom.valor = parseFloat(data.valores[anoSelecionado]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
+                            myGeom.faixa = !!data.valores[anoSelecionado] ? this.escolheFaixa(data.valores[anoSelecionado], this.faixas) : '';
+                            myGeom.faixa === 'faixa1' ? this.faixa1 = '' : '';
+                            myGeom.faixa === 'faixa2' ? this.faixa2 = '' : '';
+                            myGeom.faixa === 'faixa3' ? this.faixa3 = '' : '';
                         }
 
                         return myGeom;
