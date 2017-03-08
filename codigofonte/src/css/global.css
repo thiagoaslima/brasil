@@ -189,6 +189,8 @@ aside #menu ul li{
     font-size: .9em;
     border-bottom: 1px solid #165D72;
     cursor:pointer;
+    background-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 aside #menu ul li a{
@@ -204,6 +206,7 @@ aside #menu ul li:last-child{
 
 aside #menu ul li:hover, aside #menu .menu--selecionado{
     background-color: #165D72;
+    transition: background-color 0.3s;
 }
 
 #sintese{
