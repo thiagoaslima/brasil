@@ -59,6 +59,8 @@ header .logo{
     
 header .logo--mobile {
     display: none;
+    width: auto;
+    height: 34px;
 }
 
 header .logo img{
