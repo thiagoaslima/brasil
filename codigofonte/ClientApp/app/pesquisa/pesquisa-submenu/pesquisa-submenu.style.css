@@ -16,12 +16,14 @@
     background-color: #CCC;
     border-bottom: 1px solid #B2B2B2;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .submenu__item:hover{
     color: white;
     background-color: #333;
     /*border-bottom: 1px solid #676767;*/
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .submenu__item:last-child{
@@ -55,12 +57,14 @@
 .submenu__subitem{
     color: white;
     background-color: #4D4D4D;
-    border-bottom: 1px solid #676767; 
+    border-bottom: 1px solid #676767;
+    transition: background-color 0.3s;
 }
 
 .submenu__subitem:hover{
     color: white;
     background-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 .submenu__subitem:last-child{

@@ -59,10 +59,13 @@
     padding: 7px 2%;
     cursor: pointer;
     border-top: 1px solid #D9D8D7;
+    background-color: #E6E6E6;
+    transition: background-color 0.3s;
 }
 
 .dados__variavel:hover, .dados__variavel--selecionado{
     background-color: #CCCCCC;
+    transition: background-color 0.3s;
 }
 
 .dados__variavel:hover .dados__variavel__seta-detalhe, .dados__variavel--selecionado .dados__variavel__seta-detalhe{
