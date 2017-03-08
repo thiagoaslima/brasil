@@ -1,0 +1,94 @@
+<div id='selecionar-localidade' [class.aberto]='aberto' [class.estado]="selecao === 'estado'" [class.municipio]="selecao === 'municipios'">
+
+    <div id="primeira-coluna" [class.aberto]='aberto'>
+        <button (click)="reset()" class="selecionar-localidade__voltar">< Voltar </button>
+        <div class="selecionar-localidade__titulo">
+            Alterar localidade
+        </div>
+
+        <nav>
+            <ul>
+                <li id='menu__brasil'>
+                    <a class="seletor-localidade__link" routerLink="/brasil" (click)="reset()">
+                        Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
+                    </a>
+                </li>
+                <li id='menu__estado' (click)="setSelecao('estado')" (click)="setUfVisualizada(null)" [ngClass]="{'selecionado': selecao === 'estado'}">
+                    Estados <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li id='menu__municipio' (click)="setSelecao('municipios')" [ngClass]="{'selecionado': selecao === 'municipios'}">
+                    Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="segunda-coluna" class='cor-fundo' [class.aberto]='selecao'>
+        <ul *ngIf="selecao === 'estado'">
+            <template ngFor let-estado [ngForOf]="pais.children">
+                <li>
+                    <a class="seletor-localidade__localidade-item seletor-localidade__link" [routerLink]="estado.link" (click)="reset()">
+                        {{estado?.nome}}
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </template>
+        </ul>
+
+        <ul *ngIf="selecao === 'municipios'">
+            <template ngFor let-estado [ngForOf]="pais.children">
+                <li (click)="setUfVisualizada(estado)">
+                    <div>
+                        {{estado?.nome}}
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </li>
+            </template>
+        </ul>
+    </div>
+
+    <div id="terceira-coluna" *ngIf="ufVisualizada" [class.aberto]="ufVisualizada">
+
+        <div class="estado-selecionado">Municípios de {{ufVisualizada.nome}}</div>
+        <i class="fa fa-times" aria-hidden="true" (click)="reset()"></i>
+        <br/>
+        <input #input type="text" id='busca' placeholder="Qual município você procura?" (keyup)="buildListaMunicipios(ufVisualizada, input.value)">
+        <a [routerLink]="ufVisualizada.link" (click)="reset()">
+            <button>Acessar o Estado de {{ufVisualizada.nome}}</button>
+        </a>
+
+        <div id="municipios">
+            <div class="estado">
+                <a [routerLink]="ufVisualizada.capital.link" (click)="reset()" class="seletor-localidade__link">
+                    <div class='circulo'>
+                        <i class="fa fa-university" aria-hidden="true"></i>
+                    </div>
+                    {{ufVisualizada.capital.nome}}
+                </a>
+            </div>
+
+
+            <template ngFor let-item [ngForOf]="listaMunicipios">
+                <div class="conjunto">
+                    <div class="letra">
+                        <div class="circulo">
+                            {{item.letter.toUpperCase()}}
+                        </div>
+                    </div>
+                    <div class="municipios">
+                        <ul>
+                            <li *ngFor="let municipio of item.municipios">
+                                <a class="seletor-localidade__link" [routerLink]="municipio.link" (click)="reset()">{{municipio.nome}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+
+        </div>
+    </div>
+
+    <div id="bg" (click)="reset()">
+    </div>
+
+</div>

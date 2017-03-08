@@ -8,15 +8,17 @@ import { WindowEventsModule } from './window-events/window-events.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 
 import { RouterParamsService } from './router-params.service';
-import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaService } from './pesquisa/pesquisa.service';
-import { PesquisaServiceWithCache } from './pesquisa/pesquisa-with-cache.service';
-import { BuscaService } from '../core/busca/busca.service';
-import { CommonService } from './common.service';
 import { CacheService } from './cache.service';
 import { SystemCacheService } from './system-cache.service';
+import { LocalidadeService } from './localidade/localidade.service';
+import { PesquisaService } from './pesquisa/pesquisa.service.2';
+import { BuscaService } from '../core/busca/busca.service';
+import { CommonService } from './common.service';
+import { ResultadoPipe } from './resultado.pipe';
 
-import {ResultadoPipe} from '../utils/resultado.pipe';
+export function getLRU() {
+  return new Map();
+}
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -43,7 +45,7 @@ const PROVIDERS = [
     LocalidadeService,
     CommonService,
     BuscaService,
-    { provide: PesquisaService, useClass: PesquisaServiceWithCache },
+    PesquisaService,
     { provide: TOPOJSON, useValue: TopoJson },
     { provide: 'LRU', useFactory: getLRU, deps: [] }
 ]
@@ -71,8 +73,4 @@ export class SharedModule {
             ]
         };
     }
-}
-
-export function getLRU() {
-    return new Map();
 }

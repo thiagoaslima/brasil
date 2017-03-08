@@ -152,8 +152,9 @@ tr.nivel-1:nth-child(3) td{
 }
 
 .tabela__combobox{
+    /*
     border: none;
-    /*-webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
     background: url(http://webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;*/
 }
@@ -199,6 +200,10 @@ tr.nivel-1:nth-child(3) td{
     margin-right: 2%;
     cursor: pointer;
     position: relative;
+}
+
+.cabecalho__download:hover{
+    background-color: #165D72;
 }
 
 .cabecalho__combobox{
@@ -326,6 +331,10 @@ tr.nivel-1:nth-child(3) td{
         display: block;
         margin: 12px;
         margin-left: 2%;
+    }
+
+    .cabecalho__combobox{
+        width: 96%;
     }
 
 }

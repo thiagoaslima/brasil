@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { BuscaService } from './busca.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
+import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface.2';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 
 @Component({
@@ -116,11 +116,15 @@ export class BuscaComponent implements OnInit {
                 link: link
             };
             
-            // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS.
+            // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS. SÓ DELETAR ESSE IF
             if(localidade.tipo != 'uf'){
                 this.resultadoLocais.push(itemResultado);
             }
         });
+        
+        // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS. SÓ DELETAR A PRÓXIMA LINHA
+        this.qtdLocais = this.resultadoLocais.length;
+
 
         this.resultadoTodos = this.resultadoPesquisas.concat(this.resultadoLocais);
 
@@ -163,7 +167,7 @@ export class BuscaComponent implements OnInit {
     }
 
     desativarBusca(){
-
+        this.limparBusca();
         this.menuAberto = false;
         this.modoDigitacao = false;
     }
