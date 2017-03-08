@@ -27,7 +27,11 @@ export class HistoricoComponent implements OnInit {
                     this.isCarregando = true;
                     return this._sinteseService.getHistorico(localidade.codigo);
                 }).subscribe(historico => {
-                        this.historico = historico
+                        if(historico.historico)
+                            historico.historico = historico.historico.replace(/\n/g, '<br>');
+                        if(historico.formacaoAdministrativa)
+                            historico.formacaoAdministrativa = historico.formacaoAdministrativa.replace(/\n/g, '<br>');
+                        this.historico = historico;
                         this.isCarregando = false;
                 });
 

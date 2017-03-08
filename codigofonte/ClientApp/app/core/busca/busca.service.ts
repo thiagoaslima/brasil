@@ -3,11 +3,11 @@ import { isBrowser, isNode } from 'angular2-universal/browser';
 
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface';
-import { PesquisaService } from '../../shared/pesquisa/pesquisa.service';
+import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface.2';
+import { PesquisaService } from '../../shared/pesquisa/pesquisa.service.2';
 import { SystemCacheService } from '../../shared/system-cache.service';
 import { slugify } from '../../utils/slug';
-import { flatTree, flatMap } from '../../utils/flatFunctions';
+import { flat, flatTree, flatMap } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -51,8 +51,8 @@ export class BuscaService {
         //     : this._pesquisaService.getAllPesquisas();
 
         let indicadores$ = pesquisas$.flatMap(pesquisas => {
-            return Observable.forkJoin(...pesquisas.map(pesquisa => this._pesquisaService.getIndicadores(pesquisa.id).map(flatTree)));
-        }).map(indicadores => flatMap(indicadores, (ind) => ind));     
+            return Observable.forkJoin(...pesquisas.map(pesquisa => this._pesquisaService.getIndicadoresDaPesquisa(pesquisa.id).map(indicadores => flatTree(indicadores))));
+        }).map( (indicadores: Indicador[][]) => flat(indicadores));     
     
         if (isBrowser) {
             window['indicadores'] = indicadores$;

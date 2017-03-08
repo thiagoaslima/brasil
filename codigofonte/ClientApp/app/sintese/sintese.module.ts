@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
+import { SINTESE } from './sintese-config';
 import { SinteseComponent } from './sintese.component';
 import { SinteseHeaderComponent } from './sintese-header/sintese-header.component';
 import { SinteseDadosComponent } from './sintese-dados/sintese-dados.component';
-
 import { SinteseDetalhesComponent } from './sintese-detalhes/sintese-detalhes.component';
 
 import { GraficoComponent } from './grafico/grafico.component';
@@ -32,6 +32,9 @@ import { RootRoutingModule } from '../root-routing.module';
         GraficoComponent,
         TabelaComponent,
         MapaComponent
+    ],
+    providers: [
+        SINTESE
     ]
 })
-export class SinteseModule {}
+export class SinteseModule { }

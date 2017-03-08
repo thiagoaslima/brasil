@@ -9,10 +9,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 
-
 @Component({
     selector: 'seletor-localidade',
-    templateUrl: './seletor-localidade.template.html',
+    templateUrl: 'seletor-localidade.template.html',
     styleUrls: ['seletor-localidade.styles.css'],
     exportAs: 'seletor-localidade'
 })
@@ -66,9 +65,12 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     set ufSelecionada(uf) {
         this._ufSelecionada = uf;
         if (uf) {
+            debugger;
+            this.listaMunicipios.base = uf.children;
             this.listaMunicipios.build(uf.children);
         } else {
             this.listaMunicipios.build([]);
+            this.listaMunicipios.base = this._localidadeService.getAllMunicipios();
         }
 
     }
@@ -131,6 +133,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
+            .filter( (termo: string) => termo.length >= 3)
             .subscribe(termo => this.search(termo));
     }
 
@@ -149,14 +152,17 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.setState('');
         this.aberto = false;
         this.isSeletorAberto.emit(false);
+        this.clearSearch();
     }
 
     setState(stateName: string, uf = null) {
         this.stateSelecionado = stateName;
         this.ufSelecionada = uf;
+        this.search(this.buscaInput.nativeElement.value);
+        //this.clearSearch();
     }
 
-    search(termo) {
+    search(termo = '') {
         if(this.ufSelecionada) {
             if(termo.length >= 3) //mostra o resultado da busca
                 return this.listaMunicipios.build(this.ufSelecionada.children, termo);
@@ -168,6 +174,10 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             if(termo.length == 0) //mostra a lista inicial
                 return this.listaMunicipios.build(this.listaMunicipios.base);
         }
+    }
+
+    clearSearch() {
+        this.buscaInput.nativeElement.value = null;
     }
 
     voltarMobile() {

@@ -1,5 +1,5 @@
 .cabecalho{
-    padding: 16px 52px;
+    padding: 2% 5%;
     overflow: hidden;
 }
 
@@ -46,6 +46,10 @@
     cursor: pointer;
 }
 
+.cabecalho__botao-redondo:hover{
+    color: #165D72;
+}
+
 .cabecalho__meio-botao-esq{
     background-color: #808080;
     display: inline-block;
@@ -72,8 +76,6 @@
 .cabecalho__meio-botao--ativo{
     background-color: #1B779B;
 }
-
-
 
 .submenu{
     list-style-type: none;

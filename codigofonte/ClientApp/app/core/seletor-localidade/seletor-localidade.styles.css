@@ -96,6 +96,8 @@ ANIMAÇÃO
 #selecionar-localidade #segunda-coluna ul li{
     padding: 0px 15px;
     cursor: pointer;
+    background-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 .seletor-localidade__localidade-item,
@@ -117,6 +119,7 @@ ANIMAÇÃO
 #selecionar-localidade.estado #segunda-coluna ul li:hover,
 #selecionar-localidade.estado #segunda-coluna ul li.selecionado {
     background-color: #104C4C;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade #bg{
@@ -154,6 +157,7 @@ ANIMAÇÃO
     border-top: 4px solid;
     background-color: #4D4D4D;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li i{
@@ -163,30 +167,36 @@ ANIMAÇÃO
 #selecionar-localidade nav ul li:nth-child(1){
     /*border-color: #1F9982;*/
     border-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li:nth-child(1):hover,
 #selecionar-localidade nav ul li:nth-child(1).selecionado{
     background-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li:nth-child(2){
-    border-color: #148C99
+    border-color: #148C99;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li:nth-child(2):hover,
 #selecionar-localidade nav ul li:nth-child(2).selecionado
 {
     background-color: #148C99;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li:nth-child(3){
     border-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li:nth-child(3):hover, 
 #selecionar-localidade nav ul li:nth-child(3).selecionado{
     background-color: #1B779B;
+    transition: background-color 0.3s;
 }
 
 
@@ -357,6 +367,13 @@ ANIMAÇÃO
     border-bottom: 1px solid #737373;
     font-size: .9em;
     padding: 10px 0px;
+    transition: padding-left 0.3s, background-color 0.3s;
+}
+
+#terceira-coluna #todos-municipios ul li:hover{
+    padding: 10px;
+    background-color: #4D4D4D;
+    transition: padding-left 0.3s, background-color 0.3s;
 }
 
 #terceira-coluna #todos-municipios ul li span{

@@ -11,7 +11,7 @@ var FileSaver = require('file-saver');
 
 @Component({
     selector: 'pesquisa-dados',
-    templateUrl: './pesquisa-dados.template.html',
+    templateUrl: 'pesquisa-dados.template.html',
     styleUrls: ['pesquisa-dados.style.css']
 })
 export class PesquisaDadosComponent {
@@ -41,7 +41,7 @@ export class PesquisaDadosComponent {
 
     ngOnInit(){
         //pega a rota atual
-        this._routerParams.params$.subscribe((params) => {
+        this._routerParams.params$.subscribe(({params}) => {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
             let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
             let codigoMunicipio = dadosMunicipio ? (dadosMunicipio.codigo ? dadosMunicipio.codigo.toString().substr(0, 6) : '0') : '0';
