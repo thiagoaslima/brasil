@@ -27,6 +27,7 @@ var clientBundleOutputDir = './wwwroot/dist';
 var clientBundleConfig = merge(sharedConfig, {
     entry: { 'main-client': './ClientApp/boot-client.ts' },
     output: { path: path.join(__dirname, clientBundleOutputDir) },
+    devtool: 'source-map',
     plugins: [
         new webpack.DllReferencePlugin({
             context: __dirname,

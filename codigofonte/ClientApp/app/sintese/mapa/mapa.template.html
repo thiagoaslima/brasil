@@ -10,8 +10,8 @@
         <span class="local-selecionado">{{irPara}} <a [routerLink]="localHoverLink">{{localHover}}</a></span></div>
         <div class="mapa" *ngIf="data">
             <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
-                    <g class="uf" transform="scale(.18 -.18)">
-                        <g *ngFor="let item of data.geometry" 
+                    <svg:g class="uf" transform="scale(.18 -.18)">
+                        <svg:g *ngFor="let item of data.geometry" 
                             [attr.class]="item.classe+ ' '+ item.faixa" 
                             [attr.codigo]="item.codigo" 
                             [attr.nome]="item.nome" 
@@ -23,8 +23,8 @@
                             on-mouseover='over(item.nome,item.ano,item.valor,item.link)' 
                             (click)='over(item.nome,item.ano,item.valor,item.link)'>
                             <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
-                        </g>
-                    </g>
+                        </svg:g>
+                    </svg:g>
             </svg>
         </div>
 

@@ -1,25 +1,44 @@
-import { Component, Input, OnChanges, Inject } from '@angular/core';
-import { Subscription } from 'rxjs'
+import { Component, Input, OnInit, OnChanges, Inject, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { SinteseService } from '../sintese.service';
+import { MapaService } from './mapa.service';
 import { TopoJson, TOPOJSON } from '../../shared/topojson.v2';
 import { ufs } from '../../../api/ufs';
-import { municipios } from '../../../api/municipios';
-import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/filter';
+
+interface DadosMapa {
+    periodos: string[],
+    localidades: {
+        [codigoLocalidade: number]: string[]
+    }
+}
 
 @Component({
     selector: 'mapa',
     templateUrl: 'mapa.template.html',
     styleUrls: ['mapa.style.css']
 })
-
-export class MapaComponent implements OnChanges {
+export class MapaComponent implements OnInit, OnChanges {
 
     @Input() codigoLocalidade;
     @Input() dadosMapa = [];
     public carregando: boolean = true;
+
+    @Input() dados = {} as DadosMapa;
+    public codigoParent: BehaviorSubject<number>;
+    public malha$: Observable<any>;
+    public periodos = [] as string[];
+    public periodoSelecionado: BehaviorSubject<string>;
+    public geometries: Observable<any>;
+    public mapaModel$: Observable<any>;
 
     public localHover = '';
     public irPara = '';
@@ -49,18 +68,91 @@ export class MapaComponent implements OnChanges {
     constructor(
         private _localidadeService: LocalidadeService,
         private _sinteseService: SinteseService,
+        private _mapaService: MapaService,
         @Inject(TOPOJSON) private _topojson,
         private router: Router
-    ) {
+    ) { }
+
+    ngOnInit() {
+        this.malha$ = this.codigoParent
+            .filter(codigo => !!codigo)
+            .distinctUntilChanged()
+            .flatMap(this._mapaService.getMalhaSubdivisao);
+
+        this.mapaModel$ = Observable.zip(
+            this.malha$,
+            this.periodoSelecionado
+        ).map(([malha, periodo]) => {
+            let model = this._topojson.feature(malha, malha.objects[this.codigoParent.getValue()]);
+            model.viewBox = "90 90 -180 -180";
+            return model;
+        });
+
+        this.geometries = this.mapaModel$
+            .flatMap(model => Observable.of(model.features))
+            .map(feature => {
+                const codigoFeature = feature.properties.cod.toString().substr(0, 6);
+                const localidade = codigoFeature.length > 2
+                    ? this._localidadeService.getMunicipioByCodigo(codigoFeature)
+                    : this._localidadeService.getUfByCodigo(codigoFeature);
+
+                let polygons;
+                let n = -90; let s = 90; let l = -90; let o = 90;
+
+                if (feature.geometry.type == "Polygon") {
+                    polygons = feature.geometry.coordinates.map((poly) => {
+                        return [poly.map((point) => {
+                            if (n < point[1]) n = point[1];
+                            if (s > point[1]) s = point[1];
+                            if (l < point[0]) l = point[0];
+                            if (o > point[0]) o = point[0];
+                            return point.join(",");
+                        }).join(" ")];
+                    })
+                } else if (feature.geometry.type == "MultiPolygon") {
+                    polygons = feature.geometry.coordinates.map((MultiPoly) => {
+                        return MultiPoly.map((poly) => {
+                            return poly.map((point) => {
+                                if (n < point[1]) n = point[1];
+                                if (s > point[1]) s = point[1];
+                                if (l < point[0]) l = point[0];
+                                if (o > point[0]) o = point[0];
+                                return point.join(",");
+                            }).join(" ");
+                        })
+                    })
+                }
+
+
+                return {
+                    codigo: localidade.codigo,
+                    nome: localidade.nome,
+                    link: localidade.link,
+                    polys: polygons,
+                    ano: this.anoApresentado,
+                    valor: parseFloat(this.dados[localidade.codigo][this.anoApresentado])
+                }
+            })
+
     }
 
 
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
+
+        if (changes.codigoLocalidade && changes.codigoLocalidade.currentValue) {
+            let localidadeSelecionada = this._localidadeService.getMunicipioByCodigo(this.codigoLocalidade);
+            this.codigoParent.next(localidadeSelecionada.parent.codigo);
+        }
+
+        if (changes.dados && changes.dados.currentValue.length) {
+            this.periodos = this.dados.periodos;
+            this.periodoSelecionado.next(this.periodos[this.periodos.length - 1]);
+        }
 
         if (!!this.codigoLocalidade && !!this.dadosMapa) {
 
-            this.carregando = true;
-            this.plotMap(this.codigoLocalidade, this.dadosMapa);
+            // this.carregando = true;
+            // this.plotMap(this.codigoLocalidade, this.dadosMapa);
         }
     }
 
@@ -111,7 +203,7 @@ export class MapaComponent implements OnChanges {
             this.fx0 = this.faixas[0] >= 0 ? parseFloat(this.faixas[0]).toFixed(2).replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.") : '0';
         }
 
-        const hashDados = dados.reduce( (agg, dado) => Object.assign(agg, {[dado.munic]: dado}), Object.create(null));
+        const hashDados = dados.reduce((agg, dado) => Object.assign(agg, { [dado.munic]: dado }), Object.create(null));
 
         if (codLocal > 1) {
 
