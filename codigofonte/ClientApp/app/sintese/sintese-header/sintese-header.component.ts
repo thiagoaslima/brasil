@@ -200,12 +200,21 @@ export class SinteseHeaderComponent implements OnInit {
 
     private getFontesIndicador(): string[]{
 
+        debugger;
+
+        let fontes: string[] = [];
+
         if(!this.infoIndicador || this.infoIndicador.length == 0){
 
-            return ['Não Informado'];
+            fontes = ['Não Informado'];
         }
+        else {
 
-        return this.infoIndicador.map(info => info['fonte']);
+            this.infoIndicador.map(info => fontes.push('"' + info['fonte'] + '"'));
+        }
+       
+
+        return fontes;
     }
 
     /**
