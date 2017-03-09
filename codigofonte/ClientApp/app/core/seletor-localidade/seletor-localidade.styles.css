@@ -568,6 +568,7 @@ ANIMAÇÃO
         padding: 0px 6%;
 
         height: auto;
+        min-height: 150vh;
     }
     #segunda-coluna.aberto + #terceira-coluna {
         left: 100%;
