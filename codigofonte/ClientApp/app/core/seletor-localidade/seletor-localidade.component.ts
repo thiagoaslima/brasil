@@ -154,6 +154,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.aberto = false;
         this.isSeletorAberto.emit(false);
         this.clearSearch();
+        this.selecionarLocalidade.nativeElement.scrollTop = '0';
     }
 
     setState(stateName: string, uf = null) {
