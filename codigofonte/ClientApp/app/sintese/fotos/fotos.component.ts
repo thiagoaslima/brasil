@@ -61,8 +61,6 @@ export class FotosComponent implements OnInit {
             .flatMap(localidade => this._sinteseService.getFotografias(localidade.codigo))
             .subscribe((fotos) => {
 
-                debugger;
-
                 this.fotos = fotos;
                 if(fotos.length >= 3){
                     //mostra as 3 fotos de preview
