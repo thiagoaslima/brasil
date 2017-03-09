@@ -41,7 +41,7 @@ interface DadosMapa {
                     [attr.link]="link" 
                     [attr.ano]="ano" 
                     [attr.valor]="valor" 
-                    [attr.faixa]="faixa" 
+                    [attr.faixa]="faixa" >
                     
                     <polygon *ngFor="let poly of polygons" [attr.points]="poly" />
                 </svg:g>`
