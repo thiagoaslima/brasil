@@ -95,7 +95,9 @@ export class SinteseHeaderComponent implements OnInit {
                             // Valores utilizados na exportação de arquivo
                             this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
 
-                            this.valoresIndicador['fontes'] = this.getFontesIndicador();
+                            debugger;
+
+                            this.valoresIndicador['Fontes'] = this.getFontesIndicador();
 
                         });
                 }
@@ -198,23 +200,23 @@ export class SinteseHeaderComponent implements OnInit {
         this.isMenuOculto = true;
     }
 
-    private getFontesIndicador(): string[]{
+    private getFontesIndicador(): string{
 
         debugger;
 
-        let fontes: string[] = [];
+        let fontes: string = '';
 
         if(!this.infoIndicador || this.infoIndicador.length == 0){
 
-            fontes = ['Não Informado'];
+            fontes = 'Não Informado';
         }
         else {
 
-            this.infoIndicador.map(info => fontes.push('"' + info['fonte'] + '"'));
+            this.infoIndicador.map(info => fontes =  fontes + 'Ano Referência: ' + info['periodo'] + ' - Fonte: ' + info['fonte'] + '| ');
         }
        
 
-        return fontes;
+        return fontes.replace(', | ;', '');
     }
 
     /**
