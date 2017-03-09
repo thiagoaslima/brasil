@@ -187,7 +187,9 @@ export class SinteseService {
 
         const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
 
-        const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&${codigoIndicadores}`).map((res => res.json()));
+        const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&${codigoIndicadores}`)
+            .map((res => res.json()))
+            .map(this._excludeNullYearsFromResultados);
 
         return dadosPesquisa$.map((dados) => {
 
@@ -409,10 +411,10 @@ export class SinteseService {
             if (item.indicador) return item.indicador === _indicador;
             if (item.composicao) return item.composicao.indicadores.map(ind => ind.indicador).indexOf(_indicador) > -1;
         })[0];
-        
-        if (item.pesquisa) return {codigo: item.pesquisa};
 
-        return {codigo: item.composicao.indicadores[0].pesquisa};
+        if (item.pesquisa) return { codigo: item.pesquisa };
+
+        return { codigo: item.composicao.indicadores[0].pesquisa };
 
         // return indicadoresMap[indicador];
     }
@@ -519,7 +521,11 @@ export class SinteseService {
 
         const codigoIndicador = indicador;
 
-        const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&indicadores=${codigoIndicador}`).map((res => res.json()));
+        const dadosPesquisa$ = this._http.get(
+            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&indicadores=${codigoIndicador}`
+        )
+            .map((res => res.json()))
+            .map(this._excludeNullYearsFromResultados);
 
         return dadosPesquisa$;
     }
@@ -544,4 +550,27 @@ export class SinteseService {
             .filter(pesquisa => !!pesquisa && pesquisa['indicadores'].length > 0);
     }
 
+
+    _excludeNullYearsFromResultados(json) {
+        /* elimina os anos que todas as localidades tenham valor null */
+        return json.map(obj => {
+            let resultados = obj.res;
+            let periodos = Object.keys(resultados[0].res);
+
+            periodos = periodos.filter(periodo => resultados.some(({ res }) => res[periodo] != null));
+
+            resultados = resultados.map(resultado => {
+                let res = periodos.reduce((agg, periodo) => Object.assign(agg, { [periodo]: resultado.res[periodo] }), {});
+                return {
+                    localidade: resultado.localidade,
+                    res: res
+                }
+            });
+
+            return {
+                id: obj.id,
+                res: resultados
+            }
+        });
+    }
 }

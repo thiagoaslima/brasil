@@ -11,14 +11,51 @@ import { ufs } from '../../../api/ufs';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/scan';
+
+
+interface Resultado {
+    localidade: string,
+    res: {
+        [periodo: string]: string
+    }
+}
 
 interface DadosMapa {
     periodos: string[],
-    localidades: {
-        [codigoLocalidade: number]: string[]
-    }
+    resultados: Resultado[]
+    // localidades: {
+    //     [codigoLocalidade: number]: string[]
+    // }
+}
+
+@Component({
+    selector: 'regiao-mapa',
+    template: `<svg:g #item [attr.class]="classeCss" 
+                    [attr.codigo]="codigo" 
+                    [attr.nome]="nome" 
+                    [attr.uf]="uf" 
+                    [attr.link]="link" 
+                    [attr.ano]="ano" 
+                    [attr.valor]="valor" 
+                    [attr.faixa]="faixa" 
+                    
+                    <polygon *ngFor="let poly of polygons" [attr.points]="poly" />
+                </svg:g>`
+})
+export class RegiaoMapaComponent {
+    @Input() ano;
+    @Input() classeCss;
+    @Input() codigo;
+    @Input() nome;
+    @Input() uf;
+    @Input() link;
+    @Input() valor;
+    @Input() faixa;
+    @Input() polygons;
 }
 
 @Component({
@@ -33,12 +70,15 @@ export class MapaComponent implements OnInit, OnChanges {
     public carregando: boolean = true;
 
     @Input() dados = {} as DadosMapa;
-    public codigoParent: BehaviorSubject<number>;
+    public codigoParent = new BehaviorSubject<number>(null);
     public malha$: Observable<any>;
     public periodos = [] as string[];
-    public periodoSelecionado: BehaviorSubject<string>;
-    public geometries: Observable<any>;
+    public periodoSelecionado = new BehaviorSubject<string>('');
+    public geometries = [];
+    public geometries$: Observable<any>;
     public mapaModel$: Observable<any>;
+    public faixaLocalidades$ = new BehaviorSubject({});
+    public faixasObservable = this.faixaLocalidades$.asObservable().share();
 
     public localHover = '';
     public irPara = '';
@@ -59,7 +99,7 @@ export class MapaComponent implements OnInit, OnChanges {
     anoWasSelected = false;
     anosToSelect = [];
     anoApresentado = '';
-    faixas = [];
+    faixas;
 
 
 
@@ -77,21 +117,20 @@ export class MapaComponent implements OnInit, OnChanges {
         this.malha$ = this.codigoParent
             .filter(codigo => !!codigo)
             .distinctUntilChanged()
-            .flatMap(this._mapaService.getMalhaSubdivisao);
+            .flatMap(codigo => {
+                return this._mapaService.getMalhaSubdivisao(codigo);
+            });
 
-        this.mapaModel$ = Observable.zip(
-            this.malha$,
-            this.periodoSelecionado
-        ).map(([malha, periodo]) => {
+        this.mapaModel$ = this.malha$.map(malha => {
             let model = this._topojson.feature(malha, malha.objects[this.codigoParent.getValue()]);
-            model.viewBox = "90 90 -180 -180";
+            model.viewBox = "90 90 180 180";
             return model;
         });
 
-        this.geometries = this.mapaModel$
-            .flatMap(model => Observable.of(model.features))
+        this.mapaModel$
+            .flatMap(model => Observable.from(model.features))
             .map(feature => {
-                const codigoFeature = feature.properties.cod.toString().substr(0, 6);
+                const codigoFeature = feature['properties'].cod.toString().substr(0, 6);
                 const localidade = codigoFeature.length > 2
                     ? this._localidadeService.getMunicipioByCodigo(codigoFeature)
                     : this._localidadeService.getUfByCodigo(codigoFeature);
@@ -99,8 +138,8 @@ export class MapaComponent implements OnInit, OnChanges {
                 let polygons;
                 let n = -90; let s = 90; let l = -90; let o = 90;
 
-                if (feature.geometry.type == "Polygon") {
-                    polygons = feature.geometry.coordinates.map((poly) => {
+                if (feature['geometry'].type == "Polygon") {
+                    polygons = feature['geometry'].coordinates.map((poly) => {
                         return [poly.map((point) => {
                             if (n < point[1]) n = point[1];
                             if (s > point[1]) s = point[1];
@@ -108,9 +147,9 @@ export class MapaComponent implements OnInit, OnChanges {
                             if (o > point[0]) o = point[0];
                             return point.join(",");
                         }).join(" ")];
-                    })
-                } else if (feature.geometry.type == "MultiPolygon") {
-                    polygons = feature.geometry.coordinates.map((MultiPoly) => {
+                    });
+                } else if (feature['geometry'].type == "MultiPolygon") {
+                    polygons = feature['geometry'].coordinates.map((MultiPoly) => {
                         return MultiPoly.map((poly) => {
                             return poly.map((point) => {
                                 if (n < point[1]) n = point[1];
@@ -119,20 +158,92 @@ export class MapaComponent implements OnInit, OnChanges {
                                 if (o > point[0]) o = point[0];
                                 return point.join(",");
                             }).join(" ");
-                        })
-                    })
+                        });
+                    });
                 }
-
 
                 return {
                     codigo: localidade.codigo,
                     nome: localidade.nome,
                     link: localidade.link,
                     polys: polygons,
-                    ano: this.anoApresentado,
-                    valor: parseFloat(this.dados[localidade.codigo][this.anoApresentado])
+                    ano: this.anoApresentado
                 }
             })
+            .scan((agg, value) => agg.concat(value), [])
+            // .do(console.log.bind(console))
+            .subscribe(geom => this.geometries = geom);
+
+
+
+        const resultadosOrdenados$ = this.periodoSelecionado
+            .filter(periodo => !!periodo)
+            .map(periodo => {
+                let resultados = this.dados.resultados.sort((a, b) => a.res[periodo] < b.res[periodo] ? -1 : 1);
+                return {
+                    periodo,
+                    resultados: resultados.map(resultado => (
+                        {
+                            localidade: resultado.localidade,
+                            res: resultado.res[periodo]
+                        }
+                    ))
+                };
+            });
+
+        const faixas$ = resultadosOrdenados$
+            .map(({ periodo, resultados }) => {
+                let _resultados = resultados.filter(val => !!val.res).map(item => ({ localidade: item.localidade, res: parseFloat(item.res) }));
+
+                const qtdeFaixas = Math.ceil(resultados.length / 4) > 4 ? 4 : Math.ceil(resultados.length / 4);
+                const itensPorFaixa = resultados.length / qtdeFaixas;
+                const divisorias = Array(qtdeFaixas).fill(1).map((_, idx) => {
+                    let len = resultados.length;
+                    let indexQuartil = (len + 1) * (idx / len);
+
+                    if (Number.isInteger(indexQuartil)) {
+                        return resultados[indexQuartil].res;
+                    } else {
+                        let indexMenor = Math.floor(indexQuartil);
+                        let indexMaior = Math.ceil(indexQuartil);
+
+                        return (idx / len) * _resultados[indexMenor].res + ((len - idx) / len) * _resultados[indexMaior].res;
+                    }
+                });
+
+                return divisorias;
+            });
+
+        Observable.zip(
+            resultadosOrdenados$,
+            faixas$
+        ).map(([{ periodo, resultados }, divisorias]) => {
+            debugger;
+            return resultados.reduce((agg, resultado) => Object.assign(agg, { [resultado.localidade]: {
+                faixa: this._defineFaixa(resultado.res, divisorias), 
+                valor: resultado.res
+             }}));
+        }).subscribe(faixas => this.faixaLocalidades$.next(this.faixaLocalidades$));
+
+    }
+
+    trackByFn(index, item) {
+        return item.codigo
+    }
+
+    private _defineFaixa(valor, divisorias) {
+        if (valor === null) {
+            return `noValue`;
+        }
+
+        valor = parseFloat(valor);
+
+        for (let i = 0, len = divisorias.length; i < len; i++) {
+            if (valor < divisorias[i]) {
+                return `faixa${i + 1}`;
+            }
+        }
+        return `faixa${divisorias.length}`;
 
     }
 
@@ -144,7 +255,7 @@ export class MapaComponent implements OnInit, OnChanges {
             this.codigoParent.next(localidadeSelecionada.parent.codigo);
         }
 
-        if (changes.dados && changes.dados.currentValue.length) {
+        if (changes.dados && changes.dados.currentValue) {
             this.periodos = this.dados.periodos;
             this.periodoSelecionado.next(this.periodos[this.periodos.length - 1]);
         }
@@ -156,6 +267,25 @@ export class MapaComponent implements OnInit, OnChanges {
         }
     }
 
+    getFaixa(codigo) {
+        return this.faixasObservable.map(faixas => {
+            if (faixas[codigo]) {
+                return faixas[codigo]['faixa'];
+            } else {
+                return '';
+            } 
+        });
+    }
+
+    getValor(codigo) {
+        return this.faixasObservable.map(faixas => {
+            if (faixas[codigo]) {
+                return faixas[codigo]['valor'];
+            } else {
+                return '';
+            } 
+        });
+    }
     plotMap(codLocal, dados) {
 
         console.log('dadosMapa', dados);

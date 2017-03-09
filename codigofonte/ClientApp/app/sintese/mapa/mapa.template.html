@@ -1,8 +1,34 @@
-<div class="loading" *ngIf="carregando">
+<div class="loading" *ngIf="!geometries?.length">
     <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
 </div>
 
-<div *ngIf="!carregando">
+<div *ngIf="geometries?.length">
+    
+
+    
+        <div class="mapa-legendalocal">
+            <span class="local-atual">{{localAtual}} ({{periodoSelecionado | async}})</span> 
+            <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
+        </div>
+
+        <div class="mapa" *ngIf="mapaModel$ | async">
+            <svg viewBox="-44.889 20.76299998 3.929999999997 2.6060000000000016" preserveAspectRatio="xMidYMid meet">
+                    <svg:g class="uf" transform="scale(1 -1)">
+                        <svg:g *ngFor="let item of geometries; trackBy: trackByFn" 
+                            [attr.class]="getFaixa(item.codigo)| async" 
+                            [attr.codigo]="item.codigo" 
+                            [attr.nome]="item.nome" 
+                            [attr.uf]="item.uf" 
+                            [attr.link]="item.link" 
+                            [attr.ano]="(periodoSelecionado | async) || ''" 
+                            [attr.valor]="getValor(item.codigo)| async" 
+                            [attr.faixa]="item.faixa" 
+                            (click)='over(item.nome,item.ano,item.valor,item.link)'>
+                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                        </svg:g>
+                    </svg:g>
+            </svg>
+        </div>
     
 
     <div *ngIf="mapauf === false">
@@ -47,10 +73,11 @@
             <span class="local-atual">{{localAtual}} ({{anoApresentado}})</span> 
             <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
         </div>
+
         <div class="mapa" *ngIf="data">
             <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
-                    <g class="uf" transform="scale(1 -1)">
-                        <g *ngFor="let item of data.geometry" 
+                    <svg:g class="uf" transform="scale(1 -1)">
+                        <svg:g *ngFor="let item of data.geometry" 
                             [attr.class]="item.classe+ ' '+ item.faixa" 
                             [attr.codigo]="item.codigo" 
                             [attr.nome]="item.nome" 
@@ -61,8 +88,8 @@
                             [attr.faixa]="item.faixa" 
                             (click)='over(item.nome,item.ano,item.valor,item.link)'>
                             <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
-                        </g>
-                    </g>
+                        </svg:g>
+                    </svg:g>
             </svg>
         </div>
 

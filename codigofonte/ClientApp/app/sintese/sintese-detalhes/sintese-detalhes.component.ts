@@ -140,40 +140,41 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
     private obterDadosMapa(localidade, params) {
 
         //DADOS PARA O MAPA COROPLÉTICO
-
         let uf = this._localidadeService.getUfBySigla(params['uf'])
-        let municipios = `${uf.codigo.toString()}xxxx`;
+
+        let localidades;
+        if (params['municipio']) {
+            localidades = `${uf.codigo.toString()}xxxx`;   
+        } else {
+            localidades = `${uf.codigo.toString().charAt(0)}x`;   
+        }
+         
         let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo.toString();
 
-         this.dadosMapa = this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [municipios], params['indicador'])
-            .map((indicador: any[]) => {
-                return indicador[0].res.map((dados) => (
-                    {
-                        munic: dados.localidade,
-                        anos: Object.keys(dados.res),
-                        valores: Object.keys(dados.res).map(periodo => dados.res[periodo]),
-                        faixa: ''
-                    }
-                ));
-            });
+        //  this.dadosMapa = this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [localidades], params['indicador'])
+        //     .map((indicador: any[]) => {
+        //         return indicador[0].res.map((dados) => (
+        //             {
+        //                 munic: dados.localidade,
+        //                 anos: Object.keys(dados.res),
+        //                 valores: Object.keys(dados.res).map(periodo => dados.res[periodo]),
+        //                 faixa: ''
+        //             }
+        //         ));
+        //     });
 
-        this.dados = this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [municipios], params['indicador'])
+        this.dados = this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [localidades], params['indicador'])
             .map((resultadosParent: any[]) => {
-                let periodos = new Set();
-                let localidades = Object.create(null);
+                const resultados = resultadosParent[0].res;
 
-                resultadosParent[0].res.forEach(dados => {
-                    Object.keys(dados.res).forEach(periodo => periodos.add(periodo));
-                });
+                /* Os períodos são padrão para todas as localidades, permitindo que se selecione qualquer uma para obter o dado */
+                let periodos = Object.keys(resultados[0].res);
+                let localidades = resultados.reduce( (agg, resultado) => Object.assign(agg, {[resultado.localidade]: Object.keys(resultado.res).map(periodo => resultado.res[periodo])}), Object.create(null));
 
-                return resultadosParent[0].res.map((dados) => (
-                    {
-                        munic: dados.localidade,
-                        anos: Object.keys(dados.res),
-                        valores: Object.keys(dados.res).map(periodo => dados.res[periodo]),
-                        faixa: ''
-                    }
-                ));
+                return {
+                    periodos,
+                    resultados
+                };
             });
     }
 
