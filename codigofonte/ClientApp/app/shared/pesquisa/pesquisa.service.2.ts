@@ -81,7 +81,7 @@ export class PesquisaService {
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
             .map(res => res.json())
-            .map(json => { debugger; return json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id)) })
+            .map(json => { return json.filter(pesquisa => this._pesquisas.isValida(pesquisa.id)) })
             .map(json => json.map(pesquisa => new Pesquisa(pesquisa)))
             .subscribe(pesquisas => {
                 this._cache.set(listaPesquisas, pesquisas.map(pesquisa => pesquisa.id));

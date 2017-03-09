@@ -103,8 +103,6 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
     private exibirGrafico(localidade: Localidade, indicadorId) {
 
-        debugger;
-
         this.isGraficoCarregando = true;
 
         let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(indicadorId).codigo.toString();
@@ -112,7 +110,7 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
         let infoPesquisa$ = this._sinteseService.getInfoPesquisa(codigoPesquisa);
 
         indicador$.subscribe(valores => {
-            debugger;
+
             let multiplicador = (valores.length && valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
 
             this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
@@ -125,8 +123,7 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
         });
 
         infoPesquisa$.subscribe(info => {
-            // console.log(info);
-            //debugger;
+
             this.fontesIndicador = !!info.periodos ? info.periodos : [];
             info.periodos.forEach(periodo => {
                 this.temFonte = periodo.fonte.length > 0 ? true : false;
@@ -147,7 +144,6 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
         this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [municipios], params['indicador'])
             .map((indicador: any[]) => {
-debugger;
 
                 return indicador[0].res.map((obj) => {
                     let dados = !!obj ? obj.res : '[]';
