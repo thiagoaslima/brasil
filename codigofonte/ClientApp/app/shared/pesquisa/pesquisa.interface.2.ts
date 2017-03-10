@@ -97,7 +97,7 @@ export class Pesquisa {
         if (!this._strategy) {
             throw new Error('No strategy was registered');
         }
-        return this._strategy.retrieve(this._indicadoresRoot);
+        return this._strategy.retrieve(this._indicadoresRoot, this.id);
     }
 
     /**

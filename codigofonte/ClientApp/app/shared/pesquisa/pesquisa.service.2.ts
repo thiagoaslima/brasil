@@ -33,7 +33,7 @@ export class PesquisaService {
         private _bases: BASES,
         private _http: Http
     ) {
-        Pesquisa.setStrategy(new PesquisaCacheStrategy(_cache));
+        Pesquisa.setStrategy(new IndicadoresCacheStrategy(_cache));
 
         Indicador.setPesquisaStrategy(new PesquisaCacheStrategy(_cache));
 
@@ -107,6 +107,9 @@ export class PesquisaService {
     }
 
     getIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
+
+        debugger;
+
         let pesquisa = this._cache.getPesquisa(pesquisaId);
 
         if (pesquisa) {
