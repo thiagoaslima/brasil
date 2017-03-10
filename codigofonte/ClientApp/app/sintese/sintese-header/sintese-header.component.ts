@@ -43,6 +43,7 @@ export class SinteseHeaderComponent implements OnInit {
 
     // Indica qual o componente está ativo. Pode ser 'grafico' ou 'mapa'.
     @Input() ativo = 'cartograma';
+    @Input() infoIndicador: string[];
     @Input() graficoBase64;
     @Output() visualizacaoAlterada = new EventEmitter();
 
@@ -93,6 +94,11 @@ export class SinteseHeaderComponent implements OnInit {
 
                             // Valores utilizados na exportação de arquivo
                             this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
+
+                            debugger;
+
+                            this.valoresIndicador['Fontes'] = this.getFontesIndicador();
+
                         });
                 }
             }
@@ -158,13 +164,30 @@ export class SinteseHeaderComponent implements OnInit {
      */
     public downloadCSV(){
 
+        const defaults = {
+                            "DELIMITER" : {
+                            "FIELD" : ",",
+                            "ARRAY" : ";",
+                            "WRAP"  : "",
+                            "EOL"   : "\n"
+                            },
+                            "PREPEND_HEADER" : true,
+                            "TRIM_HEADER_FIELDS": false,
+                            "TRIM_FIELD_VALUES" : false,
+                            "SORT_HEADER" : false,
+                            "PARSE_CSV_NUMBERS" : false,
+                            "KEYS" : null,
+                            "CHECK_SCHEMA_DIFFERENCES": true,
+                            "EMPTY_FIELD_VALUE": "null"
+                        };
+
         converter.json2csv(this.valoresIndicador, (erro, csv) => {
 
             if(!erro){
 
-                  this.save(csv, 'text/csv');
+                this.save(csv, 'text/csv');
             }
-        });
+        }, defaults);
     }
 
     public abrirMenu(){
@@ -175,6 +198,25 @@ export class SinteseHeaderComponent implements OnInit {
     public fecharMenu(){
 
         this.isMenuOculto = true;
+    }
+
+    private getFontesIndicador(): string{
+
+        debugger;
+
+        let fontes: string = '';
+
+        if(!this.infoIndicador || this.infoIndicador.length == 0){
+
+            fontes = 'Não Informado';
+        }
+        else {
+
+            this.infoIndicador.map(info => fontes =  fontes + 'Ano Referência: ' + info['periodo'] + ' - Fonte: ' + info['fonte'] + '| ');
+        }
+       
+
+        return fontes.replace(', | ;', '');
     }
 
     /**
