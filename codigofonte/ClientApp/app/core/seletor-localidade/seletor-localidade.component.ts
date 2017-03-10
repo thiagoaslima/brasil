@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { Localidade } from '../../shared/localidade/localidade.interface';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { slugify } from '../../utils/slug';
@@ -26,6 +26,9 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     public selecaoLocalidadesAtual: Observable<Localidade[]>;
 
     private _ufSelecionada = null;
+
+    private hist = null; //guarda a referência para o objeto 'history' do browser
+
     public listaMunicipios = {
         maisVistos: <Localidade[]>[],
         base: <Localidade[]>[],
@@ -65,7 +68,6 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     set ufSelecionada(uf) {
         this._ufSelecionada = uf;
         if (uf) {
-            debugger;
             this.listaMunicipios.base = uf.children;
             this.listaMunicipios.build(uf.children);
         } else {
@@ -142,13 +144,34 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this._buscaInput$$.unsubscribe();
     }
 
+    //'popstate' é o evento gerado ao usar o botão de voltar do browser
+    @HostListener('window:popstate', ['$event'])
+    onPopState(event) {
+        //ao voltar no browser, se o seletor de localidade estiver aberto, fecha
+        this.fecharSeletor();
+    }
+
+    @HostListener('window:mousedown', ['$event'])
+    onMouseDown(event){
+        //guarda a referência da Window do browser (melhorar a forma de pegar essa referência???)
+        this.hist = event.view && event.view.history ? event.view.history : null;
+    }
+
     abrirSeletor() {
+        //insere um state fake(apenas uma vez) para fazer com que o voltar do browser feche o seletor de locais (não volte para a página anterior do histórico)
+        if(this.hist && !(this.hist.state && this.hist.state.seletor_localidade))
+            this.hist.pushState({seletor_localidade : true}, '', '');
+
         this.aberto = true;
         this.setState('municipiosTodos');
         this.isSeletorAberto.emit(true);
     }
 
     fecharSeletor() {
+        //se for fechando sem ser pelo voltar do browser, descarta o state fake do histórico
+        if(this.hist && this.hist.state && this.hist.state.seletor_localidade)
+            this.hist.back();
+
         this.setState('');
         this.aberto = false;
         this.isSeletorAberto.emit(false);

@@ -69,8 +69,6 @@ export class SinteseHeaderComponent implements OnInit {
                 // O código do município deve possuir somente 6 dígitos, sendo o último desprezado
                 let codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
 
-                debugger;
-
                 if (params.indicador !== 'historico') {
                     // Obtém as informações sobre a pesquisa, dado seu indicador
                     this._sinteseService.getPesquisaByIndicador(params.indicador)
