@@ -159,7 +159,7 @@ export class PesquisaService {
             .map(_ => this._cache.getIndicadores(pesquisaId, _indicadoresId));
     }
 
-    getFilhosIndicador(pesquisaId, posicaoIndicador) {
+    getFilhosIndicador(pesquisaId, posicaoIndicador = 0) {
         const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=one`;
 
         return this._http.get(url)
