@@ -95,8 +95,6 @@ export class SinteseHeaderComponent implements OnInit {
                             // Valores utilizados na exportação de arquivo
                             this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
 
-                            debugger;
-
                             this.valoresIndicador['Fontes'] = this.getFontesIndicador();
 
                         });
@@ -201,8 +199,6 @@ export class SinteseHeaderComponent implements OnInit {
     }
 
     private getFontesIndicador(): string{
-
-        debugger;
 
         let fontes: string = '';
 
