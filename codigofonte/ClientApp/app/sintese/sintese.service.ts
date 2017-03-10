@@ -226,14 +226,17 @@ export class SinteseService {
         return nomesPesquisa$
             .map((res) => {
 
-                return flatTree(res).filter((res) => {
 
-                    if (indicadores.length > 0) {
-                        return indicadores.indexOf((res.id).toString()) >= 0
-                    }
+                return res;
 
-                    return true;
-                })
+                // return flatTree(res).filter((res) => {
+
+                //     if (indicadores.length > 0) {
+                //         return indicadores.indexOf((res.id).toString()) >= 0
+                //     }
+
+                //     return true;
+                // })
             });
     }
 
@@ -249,6 +252,9 @@ export class SinteseService {
 
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
+
+                debugger;
+
                 this.atribuirValorIndicadoresPesquisa('children', nomes, dados);
 
                 return nomes;
