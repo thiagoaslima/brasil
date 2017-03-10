@@ -36,7 +36,11 @@ export class RouterParamsService {
 
         if (!route) return _params;
         
-        Object.assign(_params.params, route.params);
+        Object.assign(_params.params, Object.keys(route.params).reduce( (agg, key) => {
+            let val = decodeURIComponent(route.params[key]);
+            agg[key] = val;
+            return agg;
+        }, {}));
         Object.assign(_params.queryParams, route.queryParams);
 
         return this.extractParamsFromTree(this.getActiveChildOnOutlet(route), _params, outlet);

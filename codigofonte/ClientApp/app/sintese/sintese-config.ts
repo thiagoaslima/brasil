@@ -84,7 +84,7 @@ export class SINTESE {
             indicador: 29167,
             nome: "Área Territorial",
             tema: TEMAS.territorio,
-            query: { v: 'grafico' }
+            query: { v: 'mapa', detalhes: true }
         },
 
         // --- População
@@ -94,7 +94,7 @@ export class SINTESE {
             indicador: 29171,
             nome: "População estimada",
             tema: TEMAS.populacao,
-            query: { v: 'grafico' }
+            query: { v: 'mapa', detalhes: true }
         },
 
         {
@@ -110,14 +110,32 @@ export class SINTESE {
             indicador: 29168,
             nome: "Densidade demográfica",
             tema: TEMAS.populacao,
+            query: { v: 'mapa', detalhes: true }
+        },
+
+        {
+            pesquisa: 23,
+            indicador: 27690,
+            nome: "Sexo Masculino",
+            tema: TEMAS.populacao,
             query: { v: 'grafico' }
         },
 
         {
+            pesquisa: 23,
+            indicador: 27717,
+            nome: "Sexo Feminino",
+            tema: TEMAS.populacao,
+            query: { v: 'grafico' }
+        },
+        
+
+       /*
+        {
             nome: "Sexo – Masculino | Feminino",
             tema: TEMAS.populacao,
             unidade: '%',
-            link: '27689',
+            link: '27690,27717',
             query: { v: 'grafico' },
             composicao: {
                 indicadores: [
@@ -148,31 +166,32 @@ export class SINTESE {
 
                 make: function (indicadores, codigoLocalidade) {
                     return processComparacao(indicadores, codigoLocalidade, this.procedimento);
-                    /*
-                    return Observable.zip(
-                        indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade),
-                        indicadores[1].resultadosValidosMaisRecentes(codigoLocalidade)
-                    ).map(([resultados1, resultados2]) => {
-                        let first = Number.parseInt(resultados1['resultados'], 10);
-                        let second = Number.parseInt(resultados1['resultados'], 10);
-                        let total = first + second;
-
-                        first = Number.parseFloat((first / total).toFixed(3)) * 100;
-                        second = Number.parseFloat((second / total).toFixed(3)) * 100;
-                        // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
-
-                        return `${first.toFixed(1)} / ${second.toFixed(1)}`;
-                    });
-                    */
                 }
             }
         },
+        */
 
+         {
+            pesquisa: 23,
+            indicador: 28913,
+            nome: "Situação domiciliar – Urbana",
+            tema: TEMAS.populacao,
+            query: { v: 'grafico' }
+        },
+
+        {
+            pesquisa: 23,
+            indicador: 28914,
+            nome: "Situação domiciliar – Rural",
+            tema: TEMAS.populacao,
+            query: { v: 'grafico' }
+        },
+/*
         {
             nome: "Situação domiciliar – Urbana | Rural",
             tema: TEMAS.populacao,
             unidade: '%',
-            link: '28912',
+            link: '28913,28914',
             query: { v: 'grafico' },
             composicao: {
                 indicadores: [
@@ -206,7 +225,7 @@ export class SINTESE {
                 }
             }
         },
-
+*/
         // --- Economia
 
         {

@@ -33,29 +33,42 @@ interface DadosMapa {
 }
 
 @Component({
-    selector: 'regiao-mapa',
+    selector: '[regiao-mapa]',
     template: `<svg:g #item [attr.class]="classeCss" 
                     [attr.codigo]="codigo" 
                     [attr.nome]="nome" 
-                    [attr.uf]="uf" 
                     [attr.link]="link" 
                     [attr.ano]="ano" 
                     [attr.valor]="valor" 
                     [attr.faixa]="faixa" >
                     
                     <polygon *ngFor="let poly of polygons" [attr.points]="poly" />
-                </svg:g>`
+                </svg:g>`,
+    styleUrls: ['mapa.style.css']
 })
 export class RegiaoMapaComponent {
     @Input() ano;
-    @Input() classeCss;
+    @Input('classeCss') _classeCss;
     @Input() codigo;
     @Input() nome;
-    @Input() uf;
     @Input() link;
-    @Input() valor;
+    @Input('valor') _valor = '';
     @Input() faixa;
     @Input() polygons;
+    @Input() faixas;
+
+    get valor() {
+        return this.faixas && this.faixas[this.codigo] ? this.faixas[this.codigo]['valor'] : ''
+    }
+    get classeCss() {
+        return this.faixas && this.faixas[this.codigo] ? this.faixas[this.codigo]['faixa'] : ''
+    }
+
+    ngOnChanges(changes) {
+        if (this.codigo) {
+            console.log(this.codigo, changes, this);
+        }
+    }
 }
 
 @Component({
@@ -78,7 +91,7 @@ export class MapaComponent implements OnInit, OnChanges {
     public geometries$: Observable<any>;
     public mapaModel$: Observable<any>;
     public faixaLocalidades$ = new BehaviorSubject({});
-    public faixasObservable = this.faixaLocalidades$.asObservable().share();
+    public faixasObservable = this.faixaLocalidades$.asObservable();
 
     public localHover = '';
     public irPara = '';
@@ -101,8 +114,6 @@ export class MapaComponent implements OnInit, OnChanges {
     anoApresentado = '';
     faixas;
 
-
-
     private _localidadeServiceSubscription: Subscription;
 
     constructor(
@@ -122,21 +133,21 @@ export class MapaComponent implements OnInit, OnChanges {
             });
 
         this.mapaModel$ = this.malha$.map(malha => {
-            let model = this._topojson.feature(malha, malha.objects[this.codigoParent.getValue()]);
-            model.viewBox = "90 90 180 180";
-            return model;
-        });
+            return this._topojson.feature(malha, malha.objects[this.codigoParent.getValue()]);
+        }).map(model => {
 
-        this.mapaModel$
-            .flatMap(model => Observable.from(model.features))
-            .map(feature => {
+            // definição inicial do viewbox
+            let n = -90; let s = 90; let l = -90; let o = 90;
+
+            model.geometries = [];
+
+            model.features.forEach(feature => {
                 const codigoFeature = feature['properties'].cod.toString().substr(0, 6);
                 const localidade = codigoFeature.length > 2
                     ? this._localidadeService.getMunicipioByCodigo(codigoFeature)
                     : this._localidadeService.getUfByCodigo(codigoFeature);
 
                 let polygons;
-                let n = -90; let s = 90; let l = -90; let o = 90;
 
                 if (feature['geometry'].type == "Polygon") {
                     polygons = feature['geometry'].coordinates.map((poly) => {
@@ -162,17 +173,26 @@ export class MapaComponent implements OnInit, OnChanges {
                     });
                 }
 
-                return {
+                model.geometries.push({
                     codigo: localidade.codigo,
                     nome: localidade.nome,
                     link: localidade.link,
                     polys: polygons,
                     ano: this.anoApresentado
-                }
-            })
-            .scan((agg, value) => agg.concat(value), [])
-            // .do(console.log.bind(console))
-            .subscribe(geom => this.geometries = geom);
+                });
+            });
+
+            // inverte o mapa na vertical...
+            n *= -1; s *= -1; [n,s] = [s,n];
+
+            model.viewBox = [o, s, (l - o), (n - s)].join(" ");
+
+            return model;
+
+        })
+        //    .scan((agg, value) => agg.concat(value), [])
+        // .do(console.log.bind(console))
+
 
 
 
@@ -202,7 +222,7 @@ export class MapaComponent implements OnInit, OnChanges {
                     let indexQuartil = (len + 1) * (idx / len);
 
                     if (Number.isInteger(indexQuartil)) {
-                        return resultados[indexQuartil].res;
+                        return _resultados[indexQuartil].res;
                     } else {
                         let indexMenor = Math.floor(indexQuartil);
                         let indexMaior = Math.ceil(indexQuartil);
@@ -219,11 +239,15 @@ export class MapaComponent implements OnInit, OnChanges {
             faixas$
         ).map(([{ periodo, resultados }, divisorias]) => {
             debugger;
-            return resultados.reduce((agg, resultado) => Object.assign(agg, { [resultado.localidade]: {
-                faixa: this._defineFaixa(resultado.res, divisorias), 
-                valor: resultado.res
-             }}));
-        }).subscribe(faixas => this.faixaLocalidades$.next(this.faixaLocalidades$));
+            return resultados.reduce((agg, resultado) => Object.assign(agg, {
+                [resultado.localidade]: {
+                    faixa: this._defineFaixa(resultado.res, divisorias),
+                    valor: resultado.res
+                }
+            }));
+        }).subscribe(faixas => this.faixaLocalidades$.next(faixas));
+
+        this.faixasObservable.subscribe(console.log.bind(console));
 
     }
 
@@ -267,25 +291,6 @@ export class MapaComponent implements OnInit, OnChanges {
         }
     }
 
-    getFaixa(codigo) {
-        return this.faixasObservable.map(faixas => {
-            if (faixas[codigo]) {
-                return faixas[codigo]['faixa'];
-            } else {
-                return '';
-            } 
-        });
-    }
-
-    getValor(codigo) {
-        return this.faixasObservable.map(faixas => {
-            if (faixas[codigo]) {
-                return faixas[codigo]['valor'];
-            } else {
-                return '';
-            } 
-        });
-    }
     plotMap(codLocal, dados) {
 
         console.log('dadosMapa', dados);

@@ -1,30 +1,24 @@
-<div class="loading" *ngIf="!geometries?.length">
+<div class="loading" *ngIf="!(mapaModel$ | async)?.geometries.length">
     <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
 </div>
 
-<div *ngIf="geometries?.length">
-    
+<div *ngIf="(mapaModel$ | async)?.geometries.length">
 
-    
         <div class="mapa-legendalocal">
             <span class="local-atual">{{localAtual}} ({{periodoSelecionado | async}})</span> 
             <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
         </div>
 
-        <div class="mapa" *ngIf="mapaModel$ | async">
-            <svg viewBox="-44.889 20.76299998 3.929999999997 2.6060000000000016" preserveAspectRatio="xMidYMid meet">
+        <div class="mapa" *ngIf="(mapaModel$ | async)?.viewBox">
+            <svg [attr.viewBox]="(mapaModel$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
                     <svg:g class="uf" transform="scale(1 -1)">
-                        <svg:g *ngFor="let item of geometries; trackBy: trackByFn" 
-                            [attr.class]="getFaixa(item.codigo)| async" 
-                            [attr.codigo]="item.codigo" 
-                            [attr.nome]="item.nome" 
-                            [attr.uf]="item.uf" 
-                            [attr.link]="item.link" 
-                            [attr.ano]="(periodoSelecionado | async) || ''" 
-                            [attr.valor]="getValor(item.codigo)| async" 
-                            [attr.faixa]="item.faixa" 
-                            (click)='over(item.nome,item.ano,item.valor,item.link)'>
-                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                        <svg:g regiao-mapa *ngFor="let item of (mapaModel$ | async)?.geometries; trackBy: trackByFn" 
+                            [codigo]="item.codigo" 
+                            [nome]="item.nome" 
+                            [link]="item.link" 
+                            [ano]="periodoSelecionado | async" 
+                            [faixas]="faixasObservable | async"
+                            [polygons]="item.polys"> 
                         </svg:g>
                     </svg:g>
             </svg>
