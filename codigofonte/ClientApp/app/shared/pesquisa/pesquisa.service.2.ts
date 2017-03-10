@@ -162,6 +162,15 @@ export class PesquisaService {
             .map(_ => this._cache.getIndicadores(pesquisaId, _indicadoresId));
     }
 
+    getFilhosIndicador(pesquisaId, posicaoIndicador = 0) {
+        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=one`;
+
+        return this._http.get(url)
+            .retry(3)
+            .catch(err => Observable.of({ json: () => [] }))
+            .map(res => res.json());
+    }
+
     getResultados(pesquisaId: number, indicadoresId: number | number[], localidadesCodigo: number | number[]): Observable<ResultadosIndicador[]> {
         let _localidadesCodigoArray = Array.isArray(localidadesCodigo) ? localidadesCodigo : [localidadesCodigo];
         let _indicadoresId = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];

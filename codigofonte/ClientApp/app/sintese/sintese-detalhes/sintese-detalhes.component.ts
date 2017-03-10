@@ -41,7 +41,8 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
     public isGraficoCarregando: boolean = false;
 
     // Mapa
-    public dadosMapa: any[] = [];
+    public dados;
+    public dadosMapa;
     public codigoLocalidade: number;
 
     private _localidadeSubscription: Subscription;
@@ -57,7 +58,7 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
         this._localidadeSubscription = this._params.params$
             .combineLatest(this._localidadeService.selecionada$)
             // .distinctUntilChanged()
-            .subscribe(([{params, queryParams}, localidade]) => {
+            .subscribe(([{ params, queryParams }, localidade]) => {
                 let indicador = params && params['indicador'];
                 let view = queryParams && queryParams['v'];
 
@@ -136,39 +137,42 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
     private obterDadosMapa(localidade, params) {
 
         //DADOS PARA O MAPA COROPLÉTICO
-
         let uf = this._localidadeService.getUfBySigla(params['uf'])
-        let municipios = `${uf.codigo.toString()}xxxx`;
+
+        let localidades;
+        if (params['municipio']) {
+            localidades = `${uf.codigo.toString()}xxxx`;   
+        } else {
+            localidades = `${uf.codigo.toString().charAt(0)}x`;   
+        }
+         
         let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(params['indicador']).codigo.toString();
 
+        //  this.dadosMapa = this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [localidades], params['indicador'])
+        //     .map((indicador: any[]) => {
+        //         return indicador[0].res.map((dados) => (
+        //             {
+        //                 munic: dados.localidade,
+        //                 anos: Object.keys(dados.res),
+        //                 valores: Object.keys(dados.res).map(periodo => dados.res[periodo]),
+        //                 faixa: ''
+        //             }
+        //         ));
+        //     });
 
-        this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [municipios], params['indicador'])
-            .map((indicador: any[]) => {
+        this.dados = this._sinteseService.getDadosPesquisaMapa(codigoPesquisa, [localidades], params['indicador'])
+            .map((resultadosParent: any[]) => {
+                const resultados = resultadosParent[0].res;
 
-                return indicador[0].res.map((obj) => {
-                    let dados = !!obj ? obj.res : '[]';
+                /* Os períodos são padrão para todas as localidades, permitindo que se selecione qualquer uma para obter o dado */
+                let periodos = Object.keys(resultados[0].res);
+                let localidades = resultados.reduce( (agg, resultado) => Object.assign(agg, {[resultado.localidade]: Object.keys(resultado.res).map(periodo => resultado.res[periodo])}), Object.create(null));
 
-                    return dados.map((dado) => {
-                        let dadosMunic = { munic: dado.localidade, anos: [], valores: [], faixa: '' };// [{munic:'330455',anos:['2010','2016'], valores:['3252215',null], faixa:'faixa2'}]
-
-                        Object.keys(dado.res).forEach(ano => {
-                            dadosMunic.anos.push(ano);
-                            dadosMunic.valores.push(dado.res[ano]);
-                        });
-
-                        return dadosMunic;
-                    });
-                });
-
-            })
-            .subscribe(arrDados => {
-
-                this.dadosMapa = arrDados[0];
-
+                return {
+                    periodos,
+                    resultados
+                };
             });
-
-        return this.dadosMapa;
-
     }
 
     private getTipoGraficoIndicador(indicador) {
