@@ -1,4 +1,4 @@
-<div id='selecionar-localidade' [class.aberto]="aberto" [class.estado]="states.estados" [class.municipio]="states.municipios">
+<div id='selecionar-localidade' #selecionarLocalidade [class.aberto]="aberto" [class.estado]="states.estados" [class.municipio]="states.municipios">
 
     <div id="primeira-coluna" [class.aberto]="aberto">
         <div class="selecionar-localidade__voltar" (click)="fecharSeletor()">&lt; Voltar </div>
@@ -103,7 +103,7 @@
         <div class="por-estado__selecionar-municipio">
             <div class="estado-selecionado" *ngIf="states.municipiosMunicipios">
                 <span>Municípios de </span>{{ufSelecionada?.nome}} 
-                <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
+                <i class="fa fa-times" aria-hidden="true" (click)="setState('municipiosEstados'); clearSearch()"></i>
             </div>
             <div class="estado-selecionado" *ngIf="states.municipiosTodos">
                 <span>Todos os municípios</span>
@@ -112,7 +112,7 @@
             <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
             <div class='total-encontrado'><span *ngIf="buscaInput.value && listaMunicipios.totalAtual >= 0">{{listaMunicipios.totalAtual}} de </span>{{listaMunicipios.base.length}} municípios</div>
             <br/>
-            <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?">
+            <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?" (focus)="focusBuscaInputMobile()">
             <!--<button *ngIf="ufSelecionada"><a style="display: block">Acessar a UF {{ufSelecionada?.nome}}</a></button>-->
 
             <div id="municipios">

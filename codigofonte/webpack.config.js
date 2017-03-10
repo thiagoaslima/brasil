@@ -13,6 +13,9 @@ var sharedConfig = {
         publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
     },
     module: {
+        preLoaders: [
+            { test: /\.json$/, loader: 'json'},
+        ],
         loaders: [
             { test: /\.ts$/, include: /ClientApp/, loaders: ['ts', 'angular2-template-loader'] },
             { test: /\.html$/, loader: 'raw' },

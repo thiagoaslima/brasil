@@ -19,6 +19,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     @Input() aberto = false;
     @Output() isSeletorAberto = new EventEmitter();
     @ViewChild('buscaInput') buscaInput: ElementRef;
+    @ViewChild('selecionarLocalidade') selecionarLocalidade: ElementRef;
+
     private _buscaInput$$: Subscription;
     private _selecionada$$: Subscription;
 
@@ -65,7 +67,6 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     set ufSelecionada(uf) {
         this._ufSelecionada = uf;
         if (uf) {
-            debugger;
             this.listaMunicipios.base = uf.children;
             this.listaMunicipios.build(uf.children);
         } else {
@@ -153,6 +154,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.aberto = false;
         this.isSeletorAberto.emit(false);
         this.clearSearch();
+        this.selecionarLocalidade.nativeElement.scrollTop = '0';
     }
 
     setState(stateName: string, uf = null) {
@@ -186,5 +188,9 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         } else {
             this.fecharSeletor();
         }
+    }
+
+    focusBuscaInputMobile(){
+        this.selecionarLocalidade.nativeElement.scrollTop = '246';
     }
 }
