@@ -114,8 +114,9 @@ export class SINTESE {
         },
 
         {
-            nome: "Razão entre sexos (Masculino/Feminino)",
+            nome: "Sexo – Masculino | Feminino",
             tema: TEMAS.populacao,
+            unidade: '%',
             link: '27689',
             query: { v: 'grafico' },
             composicao: {
@@ -142,7 +143,7 @@ export class SINTESE {
                     second = Number.parseFloat((second / total).toFixed(3)) * 100;
                     // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
 
-                    return `${first.toFixed(1)} / ${second.toFixed(1)}`
+                    return `${first.toFixed(1)} | ${second.toFixed(1)}`
                 },
 
                 make: function (indicadores, codigoLocalidade) {
@@ -168,8 +169,9 @@ export class SINTESE {
         },
 
         {
-            nome: "Razão entre situação domiciliar (Urbana/Rural)",
+            nome: "Situação domiciliar – Urbana | Rural",
             tema: TEMAS.populacao,
+            unidade: '%',
             link: '28912',
             query: { v: 'grafico' },
             composicao: {
@@ -199,7 +201,7 @@ export class SINTESE {
                         second = Number.parseFloat((second / total).toFixed(3)) * 100;
                         // Number.parseInt( (this.indicadores[1]/(this.indicadores[0]+this.indicadores[1])).toFixed(3) ) * 100;
 
-                        return `${first.toFixed(1)} / ${second.toFixed(1)}`;
+                        return `${first.toFixed(1)} | ${second.toFixed(1)}`;
                     });
                 }
             }

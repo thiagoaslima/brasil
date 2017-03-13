@@ -13,7 +13,8 @@ import { FotosComponent } from './fotos/fotos.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from '../shared/ng2-charts.module';
-import { MapaComponent } from './mapa/mapa.component';
+import { MapaComponent, RegiaoMapaComponent } from './mapa/mapa.component';
+import { MapaService } from './mapa/mapa.service';
 import { RootRoutingModule } from '../root-routing.module';
 
 @NgModule({
@@ -31,10 +32,12 @@ import { RootRoutingModule } from '../root-routing.module';
         FotosComponent,
         GraficoComponent,
         TabelaComponent,
-        MapaComponent
+        MapaComponent,
+        RegiaoMapaComponent
     ],
     providers: [
-        SINTESE
+        SINTESE,
+        MapaService
     ]
 })
 export class SinteseModule { }

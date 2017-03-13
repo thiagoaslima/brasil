@@ -47,7 +47,7 @@
 
 <div *ngIf="componenteAtivo != 'grafico' && componenteAtivo != 'historico'">
     <div *ngIf="local != ''">
-        <mapa [codigoLocalidade]="codigoLocalidade" [dadosMapa]="dadosMapa"></mapa>
+        <mapa [codigoLocalidade]="codigoLocalidade" [dadosMapa]="dadosMapa | async" [dados]="dados | async"></mapa>
     </div>
 </div>
 

@@ -51,7 +51,14 @@ export class BuscaService {
         //     : this._pesquisaService.getAllPesquisas();
 
         let indicadores$ = pesquisas$.flatMap(pesquisas => {
-            return Observable.forkJoin(...pesquisas.map(pesquisa => this._pesquisaService.getIndicadoresDaPesquisa(pesquisa.id).map(indicadores => flatTree(indicadores))));
+
+            return Observable.forkJoin(...pesquisas.map(pesquisa => { 
+                
+                let indicadoresPesquisa = this._pesquisaService.getIndicadoresDaPesquisa(pesquisa.id);
+
+                return indicadoresPesquisa.map(indicadores => flatTree(indicadores));
+
+            }));
         }).map( (indicadores: Indicador[][]) => flat(indicadores));     
     
         if (isBrowser) {
