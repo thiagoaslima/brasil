@@ -228,17 +228,14 @@ export class SinteseService {
         return nomesPesquisa$
             .map((res) => {
 
+                return res.filter((res) => {
 
-                return res;
+                    if (indicadores.length > 0) {
+                        return indicadores.indexOf((res.id).toString()) >= 0;
+                    }
 
-                // return flatTree(res).filter((res) => {
-
-                //     if (indicadores.length > 0) {
-                //         return indicadores.indexOf((res.id).toString()) >= 0
-                //     }
-
-                //     return true;
-                // })
+                    return true;
+                })
             });
     }
 
@@ -255,7 +252,6 @@ export class SinteseService {
         return Observable.zip(this.getNomesPesquisa(pesquisa, indicadores), this.getDadosPesquisa(pesquisa, local, indicadores))
             .map(([nomes, dados]) => {
 
-                debugger;
 
                 this.atribuirValorIndicadoresPesquisa('children', nomes, dados);
 
@@ -553,7 +549,14 @@ export class SinteseService {
                         return pesquisa;
                     })
             })
-            .filter(pesquisa => !!pesquisa && pesquisa['indicadores'].length > 0);
+            .filter(pesquisa => { 
+                
+                return pesquisa['indicadores'].length > 0;
+        
+            }).map(resultado => {
+
+                return resultado;
+            });
     }
 
 
