@@ -218,7 +218,7 @@ export class MapaComponent implements OnInit, OnChanges {
             resultadosOrdenados$,
             faixas$
         ).map(([{ periodo, resultados }, divisorias]) => {
-            debugger;
+            
             return resultados.reduce((agg, resultado) => Object.assign(agg, { [resultado.localidade]: {
                 faixa: this._defineFaixa(resultado.res, divisorias), 
                 valor: resultado.res

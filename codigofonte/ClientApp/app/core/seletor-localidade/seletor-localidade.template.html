@@ -146,11 +146,11 @@
             </div>
 
             <div id="todos-municipios">
-                <div class="todos-municipios__titulo" *ngIf="!buscaInput.value">
+                <div class="todos-municipios__titulo" *ngIf="buscaInput.value.length < 3">
                     Mais acessados:
                 </div>
 
-                <ul *ngIf="!buscaInput.value">
+                <ul *ngIf="buscaInput.value.length < 3 ">
                     <li *ngFor="let municipio of listaMunicipios.maisVistos">
                         <a style="display:block" [routerLink]="municipio?.link">
                             {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
@@ -158,7 +158,7 @@
                     </li>
                 </ul>
 
-                <template [ngIf]="buscaInput.value">
+                <template [ngIf]="buscaInput.value.length>=3">
                     <p class="selecionar-localidade__mensagem" *ngIf="listaMunicipios.atual && listaMunicipios.atual.length == 0"> Nenhum município encontrado. </p>
                     <div class="conjunto"  *ngFor="let item of listaMunicipios.atual">
                         <div class="letra">

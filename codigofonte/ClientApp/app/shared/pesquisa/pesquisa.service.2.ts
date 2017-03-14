@@ -108,8 +108,6 @@ export class PesquisaService {
 
     getIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
 
-        debugger;
-
         let pesquisa = this._cache.getPesquisa(pesquisaId);
 
         if (pesquisa) {
