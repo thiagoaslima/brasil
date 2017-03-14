@@ -55,10 +55,7 @@ export class GraficoComponent implements OnInit, OnChanges{
 
     ngOnChanges(){
 
-        if (!!this.dadosIndicador && !!this.nomeSerie && !!this.tipoGrafico) {
-            
-            this.plotChart(this.dadosIndicador, this.nomeSerie, this.tipoGrafico);
-        }
+        this.plotChart(this.dadosIndicador, this.nomeSerie, this.tipoGrafico);
     }
 
 

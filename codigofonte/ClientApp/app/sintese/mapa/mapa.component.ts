@@ -249,6 +249,7 @@ export class MapaComponent implements OnInit, OnChanges {
 
         this.faixasObservable.subscribe(console.log.bind(console));
 
+
     }
 
     trackByFn(index, item) {

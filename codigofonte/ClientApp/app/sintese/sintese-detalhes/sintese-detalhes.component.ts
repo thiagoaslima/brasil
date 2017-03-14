@@ -59,6 +59,8 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
             .combineLatest(this._localidadeService.selecionada$)
             // .distinctUntilChanged()
             .subscribe(([{ params, queryParams }, localidade]) => {
+
+
                 let indicador = params && params['indicador'];
                 let view = queryParams && queryParams['v'];
 
@@ -104,6 +106,8 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
     private exibirGrafico(localidade: Localidade, indicadorId) {
 
+        
+
         this.isGraficoCarregando = true;
 
         let codigoPesquisa = this._sinteseService.getPesquisaByIndicadorDaSinteseMunicipal(indicadorId).codigo.toString();
@@ -112,19 +116,20 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
 
         indicador$.subscribe(valores => {
 
+
             let multiplicador = (valores.length && valores[0].unidade && valores[0].unidade.multiplicador && Number(valores[0].unidade.multiplicador) > 0 ? 'x' + valores[0].unidade.multiplicador + ' ' : '');
 
-            this.dadosIndicador = !!valores[0] ? valores[0].res : '{}';
-            this.tipoGrafico = this.getTipoGraficoIndicador(valores[0].id);
-            this.nomeIndicador = valores[0].indicador + (!!valores[0].unidade ? ' (' + multiplicador + valores[0].unidade.id + ')' : '');
-            // this.notasIndicador = !!valores[0] ? valores[0].nota : '{}';
-            // this.fontesIndicador = !!valores[0] ? valores[0].fonte : '{}';
+            this.dadosIndicador = !!valores[0] ? valores[0].res : [];
+            this.tipoGrafico = !!valores[0] ? this.getTipoGraficoIndicador(valores[0].id) : 'bar';
+            this.nomeIndicador = !!valores[0] ? ( valores[0].indicador + (!!valores[0].unidade ? ' (' + multiplicador + valores[0].unidade.id + ')' : '') ) : '';
+
 
             this.isGraficoCarregando = false;
         });
 
         infoPesquisa$.subscribe(info => {
-
+            // console.log(info);
+            //debugger;
             this.fontesIndicador = !!info.periodos ? info.periodos : [];
             info.periodos.forEach(periodo => {
                 this.temFonte = periodo.fonte.length > 0 ? true : false;

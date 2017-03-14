@@ -108,8 +108,6 @@ export class PesquisaService {
 
     getIndicadoresDaPesquisa(pesquisaId: number): Observable<Indicador[]> {
 
-        debugger;
-
         let pesquisa = this._cache.getPesquisa(pesquisaId);
 
         if (pesquisa) {
@@ -162,13 +160,34 @@ export class PesquisaService {
             .map(_ => this._cache.getIndicadores(pesquisaId, _indicadoresId));
     }
 
-    getFilhosIndicador(pesquisaId, posicaoIndicador = 0) {
-        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=one`;
+    getFilhosIndicador(pesquisaId, indicadorId = 0, tree?: boolean) {
+        const scope = tree ? 'one' : 'sub';
 
-        return this._http.get(url)
+        if (indicadorId === 0) {
+            const urlFilhos = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/$0?scope=${scope}`;
+            return this._http.get(urlFilhos)
+                .retry(3)
+                .catch(err => Observable.of({ json: () => [] }))
+                .map(res => res.json());
+        }
+
+        const urlFilhos = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/$0?scope=one`;
+        let indicador$ = this._http.get(urlFilhos)
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
-            .map(res => res.json());
+            .map(res => res.json())
+            .map(indicadores => indicadores.find(indicador => indicador.id === indicadorId));
+
+
+        return indicador$.flatMap(indicador => {
+                indicador = indicador || {}; 
+                const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${indicador.posicao}?scope=${scope}`;
+                return this._http.get(url)
+                    .retry(3)
+                    .catch(err => Observable.of({ json: () => [] }))
+            })
+
+
     }
 
     getResultados(pesquisaId: number, indicadoresId: number | number[], localidadesCodigo: number | number[]): Observable<ResultadosIndicador[]> {

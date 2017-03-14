@@ -73,7 +73,6 @@ export class SinteseHeaderComponent implements OnInit {
                 if (params.indicador !== 'historico') {
                     // Obtém as informações sobre a pesquisa, dado seu indicador
                     this._sinteseService.getPesquisaByIndicador(params.indicador)
-                        .retry(3)
                         .flatMap(pesquisa => {
 
                             //obtém o nome da pesquisa de origem do indicador
@@ -95,7 +94,9 @@ export class SinteseHeaderComponent implements OnInit {
                             // Valores utilizados na exportação de arquivo
                             this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);
 
-                            this.valoresIndicador['Fontes'] = this.getFontesIndicador();
+                            if(!!this.valoresIndicador){
+                                this.valoresIndicador['Fontes'] = this.getFontesIndicador();
+                            }
 
                         });
                 }
