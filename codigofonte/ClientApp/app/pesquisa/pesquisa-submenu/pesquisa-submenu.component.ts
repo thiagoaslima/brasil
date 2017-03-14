@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input} from '@angular/core';
 import { SinteseService } from '../../sintese/sintese.service';
+import { PesquisaService } from '../../shared/pesquisa/pesquisa.service.2';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { slugify } from '../../utils/slug';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
@@ -21,7 +22,8 @@ export class PesquisaSubmenuComponent {
     constructor(
         private _routerParams:RouterParamsService,
         private _sintese:SinteseService,
-        private _localidade:LocalidadeService
+        private _localidade:LocalidadeService,
+        private _pesquisa:PesquisaService
     ){}
 
     ngOnInit(){
@@ -47,9 +49,9 @@ export class PesquisaSubmenuComponent {
             //pega o indicador e a pesquisa a partir da rota
             this.idPesquisaSelecionada = params.pesquisa;
             this.idIndicadorSelecionado = params.indicador;
-            
-            //carrega indicadores que aparecem no submenu
-            this._sintese.getPesquisa(params.pesquisa, this.codigoMunicipio).subscribe((indicadores) => {
+
+            //this._sintese.getPesquisa(params.pesquisa, this.codigoMunicipio).subscribe((indicadores) => {
+            this._pesquisa.getFilhosIndicador(params.pesquisa, 0).subscribe((indicadores) => {
                 let ind = []
                 for(let i = 0; i < indicadores.length; i++){
                     ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});
@@ -80,7 +82,8 @@ export class PesquisaSubmenuComponent {
         this.pesquisas[index].visivel = !this.pesquisas[index].visivel;
         //carrega indicadores que aparecem no submenu
         if(this.pesquisas[index].indicadores == undefined){
-            this._sintese.getPesquisa(this.pesquisas[index].id, this.codigoMunicipio).subscribe((indicadores) => {
+            //this._sintese.getPesquisa(this.pesquisas[index].id, this.codigoMunicipio).subscribe((indicadores) => {
+            this._pesquisa.getFilhosIndicador(this.pesquisas[index].id, 0).subscribe((indicadores) => {
                 let ind = [];
                 for(let i = 0; i < indicadores.length; i++){
                     ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});

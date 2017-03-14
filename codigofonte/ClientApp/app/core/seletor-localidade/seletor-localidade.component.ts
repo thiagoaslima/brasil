@@ -170,10 +170,6 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     fecharSeletor() {
-        //se for fechando sem ser pelo voltar do browser, descarta o state fake do histórico
-        if(this.hist && this.hist.state && this.hist.state.seletor_localidade)
-            this.hist.back();
-
         this.setState('');
         this.aberto = false;
         this.isSeletorAberto.emit(false);
