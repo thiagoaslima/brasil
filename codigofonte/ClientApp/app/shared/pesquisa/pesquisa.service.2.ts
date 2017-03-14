@@ -164,14 +164,14 @@ export class PesquisaService {
         const scope = tree ? 'one' : 'sub';
 
         if (indicadorId === 0) {
-            const urlFilhos = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/$0?scope=${scope}`;
+            const urlFilhos = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${scope}`;
             return this._http.get(urlFilhos)
                 .retry(3)
                 .catch(err => Observable.of({ json: () => [] }))
                 .map(res => res.json());
         }
 
-        const urlFilhos = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/$0?scope=one`;
+        const urlFilhos = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=one`;
         let indicador$ = this._http.get(urlFilhos)
             .retry(3)
             .catch(err => Observable.of({ json: () => [] }))
