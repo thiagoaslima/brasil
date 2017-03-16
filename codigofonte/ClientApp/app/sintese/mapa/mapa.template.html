@@ -4,6 +4,44 @@
 
 <div *ngIf="(mapaModel$ | async)?.geometries.length">
 
+        <div class="barratitulo">
+            <div class="barratitulo__dados-container">
+                <i class="fa fa-map-marker barratitulo__icone" aria-hidden="true"></i>
+                <span>Rio de Janeiro</span>
+                <div class="barratitulo__valor-container">
+                    <span>6.000.000</span>
+                    <span class="barratitulo__unidade">pessoas</span>
+                </div>
+            </div>
+            <div class="barratitulo__link-container">
+                <a class="barratitulo__link">Acessar Local</a>
+                <i class="fa fa-chevron-right barratitulo__seta" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div class="legenda">
+            <div class="legenda__item">
+                <div class="legenda__cor faixa1"></div>
+                <span class="legenda__texto">Texto explicativo</span>
+            </div>
+            <div class="legenda__item">
+                <div class="legenda__cor faixa2"></div>
+                <span class="legenda__texto">Texto explicativo</span>
+            </div>
+            <div class="legenda__item">
+                <div class="legenda__cor faixa3"></div>
+                <span class="legenda__texto">Texto explicativo</span>
+            </div>
+            <div class="legenda__item">
+                <div class="legenda__cor faixa4"></div>
+                <span class="legenda__texto">Texto explicativo</span>
+            </div>
+            <div class="legenda__item">
+                <div class="legenda__cor faixa5"></div>
+                <span class="legenda__texto">Texto explicativo</span>
+            </div>
+        </div>
+
         <div class="mapa-legendalocal">
             <span class="local-atual">{{localAtual}} ({{periodoSelecionado | async}})</span> 
             <span class="local-selecionado">{{irPara}} <br> <a [routerLink]="localHoverLink">{{localHover}}</a></span>
@@ -26,27 +64,27 @@
     
 
     <div *ngIf="mapauf === false">
-        <div class="mapa-legendalocal"><span class="local-atual">{{localAtual}}</span> 
+        <!--<div class="mapa-legendalocal"><span class="local-atual">{{localAtual}}</span> 
         <span class="local-selecionado">{{irPara}} <a [routerLink]="localHoverLink">{{localHover}}</a></span></div>
         <div class="mapa" *ngIf="data">
             <svg [attr.viewBox]="data.viewBox" preserveAspectRatio="xMidYMid meet">
                     <svg:g class="uf" transform="scale(.18 -.18)">
                         <svg:g *ngFor="let item of data.geometry" 
-                            [attr.class]="item.classe+ ' '+ item.faixa" 
+                            [attr.class]="item.classe+ ' '+ (item.faixa + 1)" 
                             [attr.codigo]="item.codigo" 
                             [attr.nome]="item.nome" 
                             [attr.sigla]="item.sigla" 
                             [attr.link]="item.link" 
                             [attr.ano]="item.ano" 
                             [attr.valor]="item.valor" 
-                            [attr.faixa]="item.faixa"
+                            [attr.faixa]="(item.faixa + 1)"
                             on-mouseover='over(item.nome,item.ano,item.valor,item.link)' 
                             (click)='over(item.nome,item.ano,item.valor,item.link)'>
                             <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
                         </svg:g>
                     </svg:g>
             </svg>
-        </div>
+        </div>-->
 
         <div  *ngIf="fx1 !== '0' && fx0 !== '0'" id="faixas">
             <!--<h4></h4>-->
@@ -101,5 +139,23 @@
 
     </div>
 
+    <div class="linhatempo">
+        <div class="linhatempo__linha"></div>
+        
+        <div class="linhatempo__ano linhatempo__ano">
+            <div class="linhatempo__circulo"></div>
+            <span class="linhatempo__texto">1991</span>
+        </div>
+
+        <div class="linhatempo__ano linhatempo__ano--selecionado" [style.left]="'50%'">
+            <div class="linhatempo__circulo"></div>
+            <span class="linhatempo__texto">1991</span>
+        </div>
+
+        <div class="linhatempo__ano" [style.left]="'100%'">
+            <div class="linhatempo__circulo"></div>
+            <span class="linhatempo__texto">1991</span>
+        </div>
+    </div>
 
 </div>
