@@ -1,0 +1,205 @@
+/*
+.cabecalho{
+    background-color: red;
+    width: 100%;
+    display: table;
+}
+
+.cabecalho__nome-pesquisa{
+    float: left;
+    background-color: #E6E6E6;
+    width: 38%; 
+    padding: 1% 15px;
+}
+
+.cabecalho__nome-pesquisa span{
+    font-weight: bold;
+}
+
+.cabecalho__visualizacao-dados{
+    float: left;
+    width: 62%;
+}
+
+.cabecalho__visualizacao-dados__item{
+    float: left;
+    width: 25%;
+    background-color: yellow;
+    text-align: center;
+}
+*/
+
+table{
+    width: 100%;
+    font-size: .95em;
+}
+
+td.p{
+    width: 38%; 
+}
+
+td.s{
+    background-color: red;
+    width: 15.5%;
+}
+
+
+.nivel-2{
+    color: #E2871A;
+}
+
+.nivel-2 .label{
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 13px 0px;
+    padding-left: 15px; 
+}
+
+.nivel-3{
+    font-weight: bold;
+}
+
+.nivel-3 td{
+    padding: 13px 0px;
+}
+
+.nivel-3 .label{
+    background-color: #808080;
+    color: #fff;
+    background-image: url('../img/seta_terceiro_nivel.png');
+    background-repeat: no-repeat;
+    background-position: 10px -24px;
+    padding-left: 29px;
+}
+
+.nivel-3.aberto .label{
+    background-position: 10px 20px;
+}
+
+.nivel-4 td{
+    padding: 12px 0px;
+    color: #333333;
+}
+
+.nivel-4 .label{
+    background-color: #cccccc;
+    background-image: url('../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    background-repeat: no-repeat;
+    background-position: 10px -25px;
+    padding-left: 29px;
+    
+}
+
+.nivel-4.aberto .label{
+    background-position: 10px 20px;
+}
+
+.nivel-5 td{
+    padding: 12px 0px;
+    color: #333333;
+}
+
+.nivel-5 .label{
+    background-image: url('../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    background-repeat: no-repeat;
+    background-position: 10px -25px;
+    padding-left: 29px;
+    
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nivel-5.aberto .label{
+    background-position: 10px 20px;
+}
+
+
+.nivel-6 td{
+    padding: 7px 0px;
+    color: #333333;
+}
+
+.nivel-6 .label{
+    background-position: 22px -31px;
+    padding-left: 40px;
+    
+    text-transform: uppercase;
+
+    background-image: url('../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    background-repeat: no-repeat; 
+}
+
+.nivel-6 td{
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.nivel-6.aberto .label{
+    background-position: 22px 13px;
+}
+
+.nivel-7 td{
+    padding: 7px 0px;
+    color: #333333;
+}
+
+.nivel-7 .label{
+    background-position: 22px -31px;
+    padding-left: 40px;
+    font-weight: bold;
+    background-image: url('../img/seta_setimo_e_oitavo_nivel.png');
+    background-repeat: no-repeat; 
+}
+
+.nivel-7.aberto .label{
+    background-position: 22px 13px;
+}
+
+
+.nivel-8 td{
+    padding: 7px 0px;
+    color: #333333;
+}
+
+.nivel-8 .label{
+    background-position: 41px -31px;
+    padding-left: 60px;
+    background-image: url('../img/seta_setimo_e_oitavo_nivel.png');
+    background-repeat: no-repeat; 
+}
+
+.nivel-8.aberto .label{
+    background-position: 41px 13px;
+}
+
+
+.nivel-9 td{
+    padding: 7px 0px;
+    color: #333333;
+}
+
+.nivel-9 .label{
+    background-position: 41px -31px;
+    padding-left: 60px;
+    font-style: italic;
+}
+
+.sem-filho .label{
+    background-image: none;
+}
+
+.label--com--acao{
+    width: 72%;
+    float: left;
+    /*background-color: yellow;*/
+}
+
+.acoes{
+    float: right;
+    width: 28%;
+    /*background-color: red;*/
+}
+
+.valor{
+    font-size: 0.85em;
+    text-align: center;
+}
