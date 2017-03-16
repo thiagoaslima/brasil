@@ -9,13 +9,9 @@
     box-sizing: border-box; 
 }
 
-.cb{
-    clear: both;
-}
-
 html, body{
     height: 100%;
-}
+} 
 
 body, body.brasil{
     background: #fff; /* For browsers that do not support gradients */
@@ -27,10 +23,19 @@ body, body.brasil{
 
 body.estado{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: -o-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: -moz-linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: linear-gradient( to right, #148c99 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -webkit-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -o-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: -moz-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+}
+
+
+body.estado--apenas-aside{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: -o-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: -moz-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
 }
 
 body.municipio{
@@ -43,11 +48,15 @@ body.municipio{
 
 header{
     background-color: #E6E6E6;
-    max-width: 1900px;
+    /*max-width: 1900px;*/
     margin: auto;
-    border-bottom: 2px solid #F7931E;
+    border-bottom: 4px solid #F7931E;
     display: table;
     width: 100%;
+    
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 header .logo{
@@ -65,10 +74,21 @@ header .logo img{
     padding: 14px 6% 4px;
 }
 
+
+
+header #busca{
+    float: left;
+    margin: 10px 1%;
+    width: 76%;
+    height: 30px;
+}
+
 #container{
-    max-width: 1900px;
+    /*max-width: 1900px;*/
     margin: auto;
     height: 100%;
+
+    padding-top: 54px;
 }
 
 .brasil .cor-fundo{
@@ -80,11 +100,11 @@ header .logo img{
 }
 
 .estado .cor-fundo{
-    background-color: #148C99;
+    background-color: #1B779B;
 }
 
 .estado .cor-borda{
-   background-color: #148C99;
+   background-color: #1B779B;
 }
 
 .municipio .cor-fundo{
@@ -109,7 +129,7 @@ aside{
 }
 
 aside.aside--municipio{
-    background-color: #148C99;
+    background-color: #1B779B;
 }
 
 aside ul li{
@@ -152,14 +172,15 @@ aside #localidade button{
     transition: background 200ms ease, color 200ms ease;
 }
 
+aside #localidade button:hover{
+    background-color: #FFFFFF;
+    color: #1B779B;
+}
+
 aside #localidade button#menu-principal{
     display: none;
 }
 
-aside #localidade button:hover{
-    background-color: #FFFFFF;
-    color: #148C99;
-}
 
 
 
@@ -171,14 +192,28 @@ aside #menu ul{
 }
 
 aside #menu ul li{
-    padding: 5% 8%;
+    padding: 0;
     font-size: .9em;
-    border-bottom: 1px solid #136568;
+    border-bottom: 1px solid #165D72;
     cursor:pointer;
+    background-color: #1B779B;
+    transition: background-color 0.3s;
+}
+
+aside #menu ul li a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 5% 8%;
+}
+
+aside #menu ul li:last-child{
+    border-bottom: none;
 }
 
 aside #menu ul li:hover, aside #menu .menu--selecionado{
-    background-color: #15696D;
+    background-color: #165D72;
+    transition: background-color 0.3s;
 }
 
 #sintese{
@@ -186,7 +221,6 @@ aside #menu ul li:hover, aside #menu .menu--selecionado{
     width: 79%;
     height: 100%;
 }
-
 
 /*****************
 sintese>dados
@@ -201,15 +235,51 @@ sintese>dados
 }
 
 #sintese #detalhes{
+    background-color: yellow;
     float: left;
     width: 62%;
     min-height: 100%;
 }
 
+/*******************/
 
+.conteudo{
+    float: left;
+    width: 79%;
+    height: 100%;
+}
+
+.conteudo__dados{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    height: 100%;
+}
+
+.conteudo__dados--com-scroll{
+    background-color: #E6E6E6;
+    float: left;
+    width: 38%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+.conteudo__detalhes{
+    float: left;
+    width: 62%;
+    height: 100%;
+}
+
+.conteudo__detalhes--com-scroll{
+    float: left;
+    width: 62%;
+    height: 100%;
+    overflow-y: auto;
+}
 
 @media screen and (max-width: 768px) {
-    body{
+    body, body.municipio, body.brasil, body.estado{
         background: none;
     }
 
@@ -233,8 +303,22 @@ sintese>dados
         display: block;
     }
 
-   
+    header #busca{
+        height: 24px;
+        display: none;
+    }
 
+    header .fa-search{
+        display: block;
+        color: #fff;
+        float: right;
+        padding: 10px 15px;
+        font-size: 20px;
+    }
+
+    #container{
+        padding-top: 42px;
+    }
 
     aside{
         width: 100%;
@@ -243,6 +327,19 @@ sintese>dados
 
     aside #localidade {
         padding: 7px 5%;
+    }
+
+    .localidade--static #localidade{
+        position: fixed;
+        transform: translateY(-100px);
+        width: 100%;
+        background: #1B779B;
+        z-index: 2;
+    }
+
+    .localidade--static #menu {
+        z-index: 3;
+        transform: translateY(18px);
     }
 
     aside #localidade button{
@@ -257,14 +354,16 @@ sintese>dados
         font-size: 18px;
         padding: 0px;
         display: block;
+        margin-bottom: 12px;
     }
 
     aside #menu{
         position: fixed;
-        background-color: #148C99;
+        background-color: #1B779B;
         left: -75%;
         min-height: 100%;
         width: 75%;
+        z-index: 10;
 
         -webkit-transition: left 500ms ease;
         -moz-transition: left 500ms ease;
@@ -272,7 +371,6 @@ sintese>dados
         -o-transition: left 500ms ease;
         transition: left 500ms ease;
     }
-
 
     aside #menu ul{
         margin-top: 0px;
@@ -282,33 +380,72 @@ sintese>dados
         left: 0%;
     }
 
-     .localidade--static #localidade{
-            position: fixed;
-            transform: translateY(-100px);
-            width: 100%;
-            background: #148C99;
-            z-index: 2;
-        }
-
-        .localidade--static #menu {
-            z-index: 3;
-            transform: translateY(18px);
-        }
-
-
-    #sintese{
+    .conteudo{
         width: 100%;
     }
 
-    #sintese #dados{
+    .conteudo__dados, .conteudo__dados--com-scroll{
+        overflow-y: initial;
         width: 100%;
-        padding-top: 20px;
+        min-height: 100%;
+        display: table;
     }
 
-    #sintese #detalhes{
+
+    .conteudo__detalhes, .conteudo__detalhes--com-scroll{
         width: 100%;
+        position: fixed;
+        background-color: #fff;
+        top: 0;
+        left: 100%;
+
+        -webkit-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -moz-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -ms-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        -o-transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
+        transition: left 500ms cubic-bezier(0.25, 0.1, 0, 0.99);
     }
 
+    .conteudo__detalhes.aberto, .conteudo__detalhes--com-scroll.aberto{
+        left: 0%;
+    }
+
+    .conteudo__detalhes.aberto{
+        overflow-y: scroll; 
+    }
+
+    .no__scroll--mobile{
+        overflow: hidden;
+    }
 }
 
 
+@media screen and (min-width: 1200px) {
+    /*aside fica fixo em 250px;*/
+    body.estado{
+       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff )
+    }
+
+    body.estado--apenas-aside{
+        background: #fff; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: -o-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: -moz-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+    }
+
+
+    header .logo {
+        width: 250px;
+    }
+
+    aside{
+        width: 250px;    
+    }
+    
+    .conteudo{
+        width: calc(100% - 250px);
+    }
+
+    
+}

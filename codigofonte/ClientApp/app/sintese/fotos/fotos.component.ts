@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer } from '@angular/core';
+import {Http} from '@angular/http';
 
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
@@ -14,8 +15,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class FotosComponent implements OnInit {
    
-    private servicoImagem = "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private servicoThumbs = "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoImagem = "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoThumbs = "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
     private urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
     private urlDownload = "http://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
 
@@ -33,6 +34,7 @@ export class FotosComponent implements OnInit {
     private detalhes = "";
     private downloadLink = "";
     private downloadNome = "";
+    private http;
 
     //variável estática que guarda a referencia para o timer, precisa ser estática para evitar que dois timers sobrevivam ao mesmo tempo, criando um bug de flicking
     public static timer = null;
@@ -40,7 +42,8 @@ export class FotosComponent implements OnInit {
     constructor(
         private renderer: Renderer,
         private _sinteseService: SinteseService,
-        private _localidadeService: LocalidadeService
+        private _localidadeService: LocalidadeService,
+        http:Http
     ) {
         //destroi o timer anterior
         // if(FotosComponent.timer != null){
@@ -51,11 +54,26 @@ export class FotosComponent implements OnInit {
         //     () => this.lazyLoad(),
         //     1000
         // );
+
+        this.http = http;
+
     }
 
 
 
     ngOnInit() {
+
+        this.http
+            .get('http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
+            .map(res => {
+                // If request fails, return false
+                console.log(res.status);
+               return (res.status < 200 || res.status >= 300) ? false : true;
+            })
+            .subscribe( (retornaServico) => {
+                this.servicoImagem = retornaServico ? "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+                this.servicoThumbs = retornaServico ? "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+             }); // Reach true if res.status >= 200 && <= 299 // Reach false if fails
 
         this._localidadeService.selecionada$
             .flatMap(localidade => this._sinteseService.getFotografias(localidade.codigo))
