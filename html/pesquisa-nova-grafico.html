@@ -1,0 +1,496 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>IBGE | Brasil em Síntese</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+        <link rel="stylesheet" href="style/global.css">
+        <link rel="stylesheet" href="style/pesquisa.css">
+        
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body class='estado'>
+
+        <header>
+            <div class="logo">
+                <img src="img/logo.png">
+            </div>
+            <input type="text" id='busca' placeholder="O que você procura?">
+        </header>
+
+        <div id='container'>
+            <aside class='aside--municipio'>
+                
+                <nav id='local'>
+                    <ul>
+                        <li><a href='?'>Brasil</a></li>
+                        <li><a href='?'>MT</a></li>
+                        <li><h1>Rio de Janeiro</h1></li>
+                    </ul>
+                </nav>
+                <button>Alterar localidade</button>
+                
+                <nav id="menu">
+                    <ul>
+                        <li class='menu--selecionado'>Sintese</li>
+                        <li>Tema</li>
+                        <li>Pesquisas</li>
+                    </ul>
+                </nav>
+            </aside>
+            
+            <div class='conteudo'>
+                
+                <!--<div class="cabecalho">
+                    <div class="cabecalho__nome-pesquisa">
+                        Censo/
+                        <br/> 
+                        <span>Amostra - Educação</span>
+                    </div>
+                    <div class="cabecalho__visualizacao-dados">
+                        <div class="cabecalho__visualizacao-dados__item">TABELA</div>
+                        <div class="cabecalho__visualizacao-dados__item">GRÁFICOS</div>
+                        <div class="cabecalho__visualizacao-dados__item">CARTOGRAMA</div>
+                        <div class="cabecalho__visualizacao-dados__item">RANKING</div>
+                    </div>
+                </div>-->
+
+                <table cellspacing="0" border='0' class="table__pesquisa table--sem--colunas">
+                    <tr>
+                        <td class="p"></td>
+                        <td class='s'></td>
+                        <td class='s'></td>
+                        <td class='s'></td>
+                        <td class='s'></td>
+                    </tr>
+
+                    <tr class='nivel-2'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Pessoas de 10 ou mais anos</div> 
+                            <div class='acoes'></div>
+                        </td>  
+
+                        <td class='valor'>5.559.923</td>
+                        <td class='valor'>5.559.923</td>
+                        <td class='valor'>a</td>
+                        <td class='valor'>pessoas</td>  
+                    </tr>
+
+                    <tr class='nivel-3'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Frequência à escola</div> 
+                            <div class='acoes'>a</div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-4'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Frequentavam</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-4 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Não Frequentavam</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-5 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Sexo</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-6'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Masculino</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+                    <tr class='nivel-6'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Feminino</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-5'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Ocupação aqui</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-6 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>OCUPADAS</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-7 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Sexo</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-8 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Masculino</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+                    <tr class='nivel-9 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Heterossexual</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+
+                    <tr class='nivel-6 aberto'>
+                        <td class='label'>
+                            <div class='label--com--acao'>DESOCUPADAS</div> 
+                            <div class='acoes'></div>
+                        </td>
+                    </tr>
+
+
+                     <tr class='nivel-3'>
+                        <td class='label'>
+                            <div class='label--com--acao'>Nível de Escolaridade</div> 
+                            <div class='acoes'>a</div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <!-- GRÁFICO -->
+                <div class="grafico-container">
+
+                    <div class="grafico-cabecalho">
+                        <div class="grafico__breadcrumb"><a href="#"><span>Pessoas com 10 ou mais anos de idade</span>/ Frequência à escola</a></div>
+                        <h2 class="cabecalho__titulo cor-destaque">Pessoas com 10 ou mais anos de idade</h2>
+                    </div>
+                    <canvas id="lineChart" width="600" height="280" class="grafico"></canvas>
+
+                    <hr>
+
+                    <div class="grafico-cabecalho">
+                        <h2 class="cabecalho__titulo">Vila Bela de Santíssima Trindade</h2>
+                    </div>
+                    <div class="grafico-horizontal-bar__total">
+                        <span class="grafico-legenda__indicador">Pessoas com 10 ou mais anos de idade</span> <span class="grafico-legenda__total">5.555.989 pessoas</span>
+                    </div>
+                    <canvas id="horizontalBarChart" width="600" height="150" class="grafico"></canvas>
+
+                     <hr>
+
+                    <div class="grafico-cabecalho">
+                        <h2 class="cabecalho__titulo">Mato Grosso</h2>
+                    </div>
+                    <div class="grafico-horizontal-bar__total">
+                        <span class="grafico-legenda__indicador">Pessoas com 10 ou mais anos de idade</span> <span class="grafico-legenda__total">5.555.989 pessoas</span>
+                    </div>
+                    <canvas id="horizontalBarChart2" width="600" height="150" class="grafico"></canvas>
+
+                </div>
+                
+
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+         <script>
+            
+            var ctx = document.getElementById("horizontalBarChart");
+            var myChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: { 
+                    labels: ["2010"],
+                     datasets : [ 
+                        { 
+                            backgroundColor: "#ED79AC",
+                            data : [38],
+                            label : 'Frequentavam ('+38+' pessoas)' 
+                        }, 
+                        { 
+                            backgroundColor: "#29ABE2", 
+                            data : [45],
+                            label : 'Não Frequentavam ('+55+' pessoas)'
+                        }, 
+                        { 
+                            backgroundColor: "#F75E1E",
+                            data : [10], 
+                            label : 'Variavel 3 ('+10+' pessoas)'
+                        }, 
+                        { 
+                            backgroundColor: "#22B573",
+                            data : [7], 
+                            label : 'Variavel 34 ('+7+' pessoas)'
+                        }
+                    ] 
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            stacked: true,
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: true
+                        }]
+                    },
+                    responsive: true,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 100                                
+                        }
+                    }
+                }
+            });
+
+
+            var ctx1 = document.getElementById("horizontalBarChart2");
+            var myChart = new Chart(ctx1, {
+                type: 'horizontalBar',
+                data: { 
+                    labels: ["2010"],
+                     datasets : [ 
+                        { 
+                            backgroundColor: "#ED79AC",
+                            data : [38],
+                            label : 'Frequentavam ('+38+' pessoas)' 
+                        }, 
+                        { 
+                            backgroundColor: "#29ABE2", 
+                            data : [45],
+                            label : 'Não Frequentavam ('+55+' pessoas)'
+                        }, 
+                        { 
+                            backgroundColor: "#F75E1E",
+                            data : [10], 
+                            label : 'Variavel 3 ('+10+' pessoas)'
+                        }, 
+                        { 
+                            backgroundColor: "#22B573",
+                            data : [7], 
+                            label : 'Variavel 34 ('+7+' pessoas)'
+                        }
+                    ] 
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            stacked: true,
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: true
+                        }]
+                    },
+                    responsive: true,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 100                                
+                        }
+                    }
+                }
+            });
+
+
+            var ctx2 = document.getElementById("lineChart");
+            var lineChart = new Chart(ctx2, {
+                type: 'line',
+                data: { 
+                    labels: ["1980", "1981", "2000", "2010"],
+                     datasets : [ 
+                        { 
+                            backgroundColor: "rgba(250,250,250,0)",
+                            borderColor: "#4365B0",
+                            data : [38,41,35,40],
+                            label : 'Vila Bela de Santíssima Trindade' 
+                        }, 
+                        { 
+                            backgroundColor: "rgba(250,250,250,0)",
+                            borderColor: "#F29220", 
+                            data : [55,39,50,51],
+                            label : 'Mato Grosso' 
+                        }
+                    ] 
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            //stacked: true,
+                            ticks: {
+                                //beginAtZero:true
+                            }
+                        }],
+                        xAxes: [{
+                            //stacked: true
+                        }]
+                    },
+                    responsive: true,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 100                                
+                        }
+                    }
+                }
+            });
+
+/*
+            var label = ["1980", "1981", "2000", "2010"];
+            var data = [[38,41,35,40],[55,39,50,51],[7,20,15,9]];
+            var dataLabel = ['0 a 14 anos','15 a 64 anos','65 anos ou mais (idosos)']
+            var color = ["#D00","#F29220","#4365B0"];
+
+            var data = { 
+                labels: label,
+                    datasets : [ 
+                    { 
+                        backgroundColor: color[0],
+                        data : data[0],
+                        label : dataLabel[0] 
+                    }, 
+                    { 
+                        backgroundColor: color[1],
+                        data : data[1],
+                        label : dataLabel[1] 
+                    }, 
+                    { 
+                        backgroundColor: color[2],
+                        data : data[2],
+                        label : dataLabel[2] 
+                    }
+                ] 
+            };
+
+            var dataLine = { 
+                labels: label,
+                    datasets : [ 
+                    { 
+                        backgroundColor: color[0],
+                        data : data[0],
+                        label : dataLabel[0] 
+                    }, 
+                    { 
+                        backgroundColor: color[1],
+                        data : data[1],
+                        label : dataLabel[1] 
+                    }, 
+                    { 
+                        backgroundColor: color[2],
+                        data : data[2],
+                        label : dataLabel[2] 
+                    }
+                ] 
+            };
+
+            var options = {
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                responsive: true
+            };
+
+            var ctx = document.getElementById("horizontalBarChart");
+            var horizontalBarChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: data,
+                options: options
+            });
+
+            var ctx2 = document.getElementById("lineChart");
+            var lineChart = new Chart(ctx2, {
+                type: 'line',
+                data: dataLine,
+                options: {legend: {position: 'bottom'}}
+            });
+*/
+            //function barsChart() { 
+                // var data = { 
+                //     labels: ["1980", "1991", "2000", "2010"], 
+                //     datasets : [ 
+                //         { 
+                //             backgroundColor: "#D00",
+                //             data : [38,41,35,40],
+                //             label : '0 a 14 anos' 
+                //         }, 
+                //         { 
+                //             backgroundColor: "#F29220", 
+                //             data : [55,39,50,51],
+                //             label : '15 a 64 anos' 
+                //         }, 
+                //         { 
+                //             backgroundColor: "#4365B0",
+                //             data : [7,20,15,9], 
+                //             label : '65 anos ou mais (idosos)' 
+                //         }
+                //     ] 
+                // }; 
+                // var options = {
+                //         scales: {
+                //             yAxes: [{
+                //                 stacked: true,
+                //                 ticks: {
+                //                     beginAtZero:true
+                //                 }
+                //             }],
+                //             xAxes: [{
+                //                 stacked: true
+                //             }]
+                //         },
+                //         legend: {
+                //             display: true,
+                //             //position: 'top',
+                //             horizontalAlign: "left",
+                //             verticalAlign: "center",
+                //             labels: {
+                //                 boxWidth: 30                                
+                //             }
+                //         }//,responsive: false
+                //     };
+
+                //     var ctx = document.getElementById("myChart").getContext("2d"); 
+                //     var myChart = new Chart(ctx, {
+                //         type: 'bar',
+                //         data: data,
+                //         options: options
+                //     });
+
+                //     document.getElementById("chart-legend").innerHTML = myChart.generateLegend();
+        </script>
+
+    </body>
+</html>
