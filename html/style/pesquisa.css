@@ -55,6 +55,11 @@ td.s{
     padding-left: 15px; 
 }
 
+
+.nivel-2 .valor{
+    border-bottom: 2px solid #CCCCCC;
+}
+
 .nivel-3{
     font-weight: bold;
 }
@@ -79,10 +84,10 @@ td.s{
 .nivel-4 td{
     padding: 12px 0px;
     color: #333333;
+    background-color: #cccccc;
 }
 
 .nivel-4 .label{
-    background-color: #cccccc;
     background-image: url('../img/seta_quarta_e_quinto_e_sexto_nivel.png');
     background-repeat: no-repeat;
     background-position: 10px -25px;
@@ -187,7 +192,7 @@ td.s{
     background-image: none;
 }
 
-.label--com--acao{
+.label--com-acao{
     width: 72%;
     float: left;
     /*background-color: yellow;*/
@@ -199,7 +204,11 @@ td.s{
     /*background-color: red;*/
 }
 
+.acoes .acao{
+
+}
+
+
 .valor{
-    font-size: 0.85em;
     text-align: center;
 }
