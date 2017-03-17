@@ -38,16 +38,18 @@
 .periodo-link:after {
     content: ' /';
 }
-.ico-faixa.faixa1{ background: #eae4dd; }
-.ico-faixa.faixa0{ background: #e0db6b; }
-.ico-faixa.faixa2{ background: #c8b7a3; }
-.ico-faixa.faixa3{ background: #84786a; }
+.ico-faixa.faixa1{ background: #1B779B; }
+.ico-faixa.faixa0{ background: #308BC9; }
+.ico-faixa.faixa2{ background: #41B6C4; }
+.ico-faixa.faixa3{ background: #7FCDBB; }
+.ico-faixa.faixa3{ background: #C7E9B4; }
 .ico-faixa.selecionado{ background: #0D4768; }
 
-g.faixa1 polygon{ fill: #eae4dd; }
-/*g.faixa0 polygon{ fill: #dcd2c5; }*/
-g.faixa2 polygon{ fill: #c8b7a3; }
-g.faixa3 polygon{ fill: #84786a; }
+g.faixa1 polygon{ fill: #1B779B; }
+g.faixa2 polygon{ fill: #308BC9; }
+g.faixa3 polygon{ fill: #41B6C4; }
+g.faixa4 polygon{ fill: #7FCDBB; }
+g.faixa5 polygon{ fill: #C7E9B4; }
 polygon {
     stroke: #fff;
     stroke-width: 0.01px;
@@ -94,4 +96,163 @@ g, .periodo-link {
     color: #999;
     text-align: center;
     vertical-align: middle;
+}
+
+/*----------------------------------------*/
+
+/*barra de título*/
+
+.barratitulo{
+    width: 90%;
+    background-color: #E6E6E6;
+    color: #333333;
+    font-weight: bold;
+    margin: 0% 5%;
+    padding: 1.5% 2%;
+    overflow: hidden;
+}
+
+.barratitulo__icone{
+    font-weight: normal;
+    color: #1B779B;
+    padding-right: 5px;
+    font-size: 1.2em;
+    vertical-align: baseline;
+}
+
+.barratitulo__seta{
+    font-weight: normal;
+    color: #1F9982;
+    font-size: 1.2em;
+    vertical-align: middle;
+    padding-left: 15%;
+}
+
+.barratitulo__unidade{
+    font-size: 0.8em;
+    color: #999999;
+}
+
+.barratitulo__dados-container{
+    width: 60%;
+    float: left;
+}
+
+.barratitulo__link-container{
+    width: 30%;
+    float: right;
+    text-align: right;
+}
+
+.barratitulo__valor-container{
+    display: inline-block;
+    overflow: hidden;
+    padding-left: 5%;
+    vertical-align: bottom;
+}
+
+.barratitulo__link{
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+/*legenda*/
+
+.legenda{
+    width: 90%;
+    margin: 3% 5%;
+}
+
+.legenda__item{
+    display: inline-block;
+    width: 19%;
+    padding-right: 5px;
+}
+
+.legenda__cor{
+    width: 100%;
+    height: 6px;
+    margin-bottom: 5px;
+}
+
+.legenda__texto{
+    font-style: italic;
+}
+
+/*linha do tempo*/
+
+.linhatempo{
+    width: 90%;
+    margin: 3% 5%;
+    position: relative;
+}
+
+.linhatempo__linha{
+    width: 100%;
+    height: 2px;
+    background-color: #B3B3B3;
+}
+
+.linhatempo__ano{
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    width: 36px;
+    margin: -8px 0 0 -18px;
+}
+
+.linhatempo__circulo{
+    width: 14px;
+    height: 14px;
+    background-color: #CCCCCC;
+    border: 2px solid #B3B3B3;
+    border-radius: 7px;
+    margin: 0px auto;
+}
+
+.linhatempo__ano--selecionado{
+    margin: -11px 0 0 -18px;
+}
+
+.linhatempo__ano--selecionado .linhatempo__circulo{
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: #148C99;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.linhatempo__texto{
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+/*faixas de cores*/
+
+.faixa1{
+    background-color: #1B779B;
+    fill: #1B779B;
+}
+
+.faixa2{
+    background-color: #308BC9;
+    fill: #308BC9;
+}
+
+.faixa3{
+    background-color: #41B6C4;
+    fill: #41B6C4;
+}
+
+.faixa4{
+    background-color: #7FCDBB;
+    fill: #7FCDBB;
+}
+
+.faixa5{
+    background-color: #C7E9B4;
+    fill: #C7E9B4;
 }
