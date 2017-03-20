@@ -55,6 +55,11 @@ td.s{
     padding-left: 15px; 
 }
 
+
+.nivel-2 .valor{
+    border-bottom: 2px solid #CCCCCC;
+}
+
 .nivel-3{
     font-weight: bold;
 }
@@ -79,10 +84,10 @@ td.s{
 .nivel-4 td{
     padding: 12px 0px;
     color: #333333;
+    background-color: #cccccc;
 }
 
 .nivel-4 .label{
-    background-color: #cccccc;
     background-image: url('../img/seta_quarta_e_quinto_e_sexto_nivel.png');
     background-repeat: no-repeat;
     background-position: 10px -25px;
@@ -187,7 +192,7 @@ td.s{
     background-image: none;
 }
 
-.label--com--acao{
+.label--com-acao{
     width: 72%;
     float: left;
     /*background-color: yellow;*/
@@ -199,7 +204,85 @@ td.s{
     /*background-color: red;*/
 }
 
+.acoes .acao{
+
+}
+
+
 .valor{
-    font-size: 0.85em;
     text-align: center;
 }
+
+
+/**
+* GRÁFICO
+*/
+.table--sem--colunas {
+    width: 38%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.table--sem--colunas tr td {
+    display: none;
+}
+
+.table--sem--colunas tr td:first-child {
+    display: table-cell;
+    /*width: 100%;*/
+}
+
+.grafico-container {
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+}
+
+.grafico-container hr {
+    border: 2px solid #f1f1f1;
+}
+
+.grafico {
+    padding: 0 5% 5% 5%;
+}
+
+.grafico-cabecalho {
+    padding: 2% 5%;
+    overflow: hidden;
+}
+
+.cabecalho__titulo {
+    color: gray;
+    text-transform: uppercase;
+}
+
+.cor-destaque {
+    color: #F15A24;
+}
+
+.grafico__breadcrumb {
+    margin-bottom: 5%;
+}
+
+
+.grafico__breadcrumb span {
+    text-decoration: underline;
+}
+
+.grafico-horizontal-bar__total{
+    padding: 0 5%;
+    font-size: small;
+}
+
+.grafico-horizontal-bar__total span{
+    display: inline-block;
+}
+
+.grafico-legenda__indicador {
+    padding-left: 40px;
+}
+
+.grafico-legenda__total {
+    float: right;
+}
+
