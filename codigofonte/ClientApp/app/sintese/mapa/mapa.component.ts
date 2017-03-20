@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, Inject, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, Inject, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Localidade } from '../../shared/localidade/localidade.interface';
@@ -40,7 +40,8 @@ interface DadosMapa {
                     [attr.link]="link" 
                     [attr.ano]="ano" 
                     [attr.valor]="valor" 
-                    [attr.faixa]="faixa" >
+                    [attr.faixa]="faixa"
+                    (click)="selecionaRegiao()">
                     
                     <polygon *ngFor="let poly of polygons" [attr.points]="poly" />
                 </svg:g>`,
@@ -57,6 +58,8 @@ export class RegiaoMapaComponent {
     @Input() polygons;
     @Input() faixas;
 
+    @Output() onRegiao = new EventEmitter(); //evento emitido quando se clica em alguma região do mapa
+
     get valor() {
         return this.faixas && this.faixas[this.codigo] ? this.faixas[this.codigo]['valor'] : ''
     }
@@ -66,8 +69,12 @@ export class RegiaoMapaComponent {
 
     ngOnChanges(changes) {
         if (this.codigo) {
-            console.log(this.codigo, changes, this);
+            //console.log(this.codigo, changes, this);
         }
+    }
+
+    selecionaRegiao(){
+        this.onRegiao.emit({codigo: this.codigo, nome: this.nome, link: this.link, valor: this.valor, regiao: this}); //emite o evento do clique na região
     }
 }
 
@@ -101,7 +108,13 @@ export class MapaComponent implements OnInit, OnChanges {
     public mapauf = false;
     public geom;
     public svgMapPoly;
+
+    /*dados para a barra de título*/
     public localAtual = '';
+    public linkLocalAtual = '';
+    public valorLocalAtual = '';
+    public unidadeValorLocalAtual = '';
+
     fx1 = '0';
     fx0 = '0';
     faixa1 = 'hide';
@@ -215,9 +228,11 @@ export class MapaComponent implements OnInit, OnChanges {
             .map(({ periodo, resultados }) => {
                 let _resultados = resultados.filter(val => !!val.res).map(item => ({ localidade: item.localidade, res: parseFloat(item.res) }));
 
-                const qtdeFaixas = Math.ceil(resultados.length / 4) > 4 ? 4 : Math.ceil(resultados.length / 4);
+                const qtdeFaixas = Math.ceil(resultados.length / 5) > 5 ? 5 : Math.ceil(resultados.length / 5);
                 const itensPorFaixa = resultados.length / qtdeFaixas;
                 const divisorias = Array(qtdeFaixas).fill(1).map((_, idx) => {
+                    debugger;
+
                     let len = resultados.length;
                     let indexQuartil = (len + 1) * (idx / len);
 
@@ -231,6 +246,7 @@ export class MapaComponent implements OnInit, OnChanges {
                     }
                 });
 
+                window['div'] = divisorias;
                 return divisorias;
             });
 
@@ -650,10 +666,19 @@ export class MapaComponent implements OnInit, OnChanges {
 
     selectAno(ano) {
         console.log(ano);
+        this.periodoSelecionado.next(ano);
         this.anoWasSelected = true;
         this.ano = ano;
         this.irPara = '';
         this.plotMap(this.codigoLocalidade, this.dadosMapa);
+    }
+
+    atualizaBarraTitulo(evento){
+        this.localAtual = evento.nome;
+        this.linkLocalAtual = evento.link;
+        this.valorLocalAtual = evento.valor;
+        //TODO: a unidade ainda não vem na malha !!!!!!!!!!!
+        //this.unidadeValorLocalAtual = evento.unidade;
     }
 
 }
