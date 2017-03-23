@@ -52,8 +52,6 @@
 
 .cabecalho__seletor-visualizacao-dados{
     background-color: #fff;
-    /*height: 60px;*/
-    /*line-height: 30px;*/
     color: #E2871A;
 }
 
@@ -62,7 +60,6 @@
     width: 25%;
     text-align: center;
     font-size: small;
-    /*padding: 0 2%;*/
     padding-left: 20px;
 }
 
@@ -80,6 +77,10 @@
     display: block;
 }
 
+/*
+* mini-menu compartilhar / download
+*/
+
 .cabecalho .select__sub-menu {
     width: 45px;
     height: 25px;
@@ -90,16 +91,43 @@
     line-height: 25px;
     letter-spacing: 5px;
     color: #999;
+    margin-top: 17px;
+    cursor: pointer;
+}
+
+.select__sub-menu .select__submenu-aberto {
+    display: none;
+}
+
+.select__sub-menu.submenu-aberto .select__submenu-aberto {
+    display: block;
+}
+
+.select__sub-menu.submenu-aberto {
+    background-color: #CCC;
+    color: initial;
+    border: none;
 }
 
 .select__submenu-aberto{
     background-color: #ccc;
     position: relative; 
     text-align: left;
-    padding-left: 15px;
-    margin-top: -15px;
-    margin-left: -40px;
-    width: 145px;
+    margin-left: -95px;
+    width: 140px;
+}
+
+.select__submenu-aberto > div {
+    padding: 10px 0;
+    letter-spacing: initial;
+    color: initial;
+    cursor: pointer;
+    padding-left: 10px;
+
+}
+
+.select__submenu-aberto > div:hover {
+    background-color: #999;
 }
 
 .select__submenu-aberto i{
@@ -108,9 +136,13 @@
 
 .select__submenu-aberto span{
     background-color: #1B779B;
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 8px 10px; 
 }
+
+/*
+* estrutura tabela
+*/
 
 table{
     width: 100%;
