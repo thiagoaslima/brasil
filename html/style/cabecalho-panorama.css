@@ -1,0 +1,22 @@
+.cabecalho{
+    margin: 2% 5%;
+    overflow: hidden;
+}
+
+.cabecalho__celula-esquerda{
+    float: left;
+    width: 25%;
+}
+
+.cabecalho__celula-direita{
+    float: right;
+    width: 70%;
+}
+
+.cabecalho__titulo{
+    font-size: 1.7em;
+}
+
+.cabecalho__descricao{
+    font-size: 0.8em;
+}

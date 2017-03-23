@@ -9,8 +9,8 @@
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="style/global.css">
-        <link rel="stylesheet" href="style/sintese-detalhes.css">
         <link rel="stylesheet" href="style/lista-indicadores.css">
+        <link rel="stylesheet" href="style/cabecalho-panorama.css">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -83,7 +83,7 @@
 
                     <table class="lista">
                         <tr class="lista__cabecalho">
-                            <th class="lista__icone"><i class="fa fa-graduation-cap" aria-hidden="true"></i></th>
+                            <th class="lista__icone"><img src="img/trabalho.svg" width="16px" height="16px"/></th>
                             <th class="lista__titulo" colspan="3">Trabalho</th>
                         </tr>
                         <tr class="lista__indicador">
@@ -228,30 +228,23 @@
 
                 <section id='detalhes'>
                     <div class="cabecalho">
-                        <div class="cabecalho__sub-container">
-                            <div>
-                                <a class="cabecalho__link">+PNAD</a>
-                                <span class="cabecalho__bullet">&#8226;</span>
-                                <a class="cabecalho__link">+População</a>
-                            </div>
-                            <h2 class="cabecalho__titulo">População estimada</h2>
+                        <div class="cabecalho__celula-esquerda">
+                            <h2 class="cabecalho__titulo">Educação</h2>
                         </div>
-                        <div class="cabecalho__sub-container">
-                            <div class="cabecalho__sub-container cabecalho__sub-container--ta-right">
-                                <i class="fa fa-bar-chart fa-inverse cabecalho__meio-botao-esq cabecalho__meio-botao--ativo"></i>
-                                <span class="cabecalho__meio-botao-dir"><img src="img/icon_cartograma.svg" class="cabecalho__icon-cartograma"></span>
-                                <!--<i class="fa fa-map fa-inverse cabecalho__meio-botao-dir"></i>-->
-                            </div>
-                            <div class="cabecalho__sub-container cabecalho__sub-container--ta-right">
-                                <span class="fa-stack cabecalho__botao-redondo">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
-                                </span>
-                                <span class="fa-stack cabecalho__botao-redondo">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-download fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </div>
+                        <div class="cabecalho__celula-direita">
+                            <p class="cabecalho__descricao">
+                                Saquarema possui uma taxa de escolarização para crianças entre 4 e 6 anos de idade de
+                                90,7%, sendo considerado um valor muito elevado. Porém, ao compararmos com todos os
+                                municípios do Brasil, Saquarema encontra-se entre as 60% menos taxas.
+                            </p>
+                            <p class="cabecalho__descricao">
+                                Em relação aos municípios do Estado do Rio de Janeiro, essa taxa posiciona Saquarema entre
+                                os 40% menores.
+                            </p>
+                            <p class="cabecalho__descricao">
+                                Ao confrontarmos com os municípios brasileiros de mesmo porte populacional (maior que 50
+                                até 100 mil habitantes), a cidade situa-se entre os 60% menores.
+                            </p>
                         </div>
                     </div>
                 </section>
