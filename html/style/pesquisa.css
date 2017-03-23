@@ -52,8 +52,6 @@
 
 .cabecalho__seletor-visualizacao-dados{
     background-color: #fff;
-    /*height: 60px;*/
-    /*line-height: 30px;*/
     color: #E2871A;
 }
 
@@ -62,7 +60,6 @@
     width: 25%;
     text-align: center;
     font-size: small;
-    /*padding: 0 2%;*/
     padding-left: 20px;
 }
 
@@ -79,6 +76,10 @@
 .cabecalho__seletor-visualizacao-dados i {
     display: block;
 }
+
+/*
+* mini-menu compartilhar / download
+*/
 
 .cabecalho .select__sub-menu {
     width: 45px;
@@ -112,7 +113,6 @@
     background-color: #ccc;
     position: relative; 
     text-align: left;
-    padding-left: 15px;
     margin-left: -95px;
     width: 140px;
 }
@@ -122,6 +122,12 @@
     letter-spacing: initial;
     color: initial;
     cursor: pointer;
+    padding-left: 10px;
+
+}
+
+.select__submenu-aberto > div:hover {
+    background-color: #999;
 }
 
 .select__submenu-aberto i{
@@ -133,6 +139,10 @@
     border-radius: 20px;
     padding: 8px 10px; 
 }
+
+/*
+* estrutura tabela
+*/
 
 table{
     width: 100%;
