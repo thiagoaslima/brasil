@@ -7,7 +7,6 @@
 
 .cabecalho select {
     border: none;
-    width: 100%;
 }
 
 .cabecalho select:first-child {
@@ -17,12 +16,29 @@
 .cabecalho .select-ano-container {
     font-weight: bold;
     font-size: small;
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 .cabecalho select.select-ano {
     width: initial;
     font-weight: normal;
+}
+
+.notas {
+    font-size: small;
+    padding: 2px 5px;
+    float: right;
+    margin-top: 7%;
+    background: #ccc;
+    cursor: pointer;
+}
+
+.notas i {
+    color: #1B779B;
+}
+
+.notas:hover {
+    background: #999;
 }
 
 .cabecalho__nome-pesquisa{
@@ -48,6 +64,10 @@
     height: 55px;
     line-height: 55px;
     border-bottom: 3px solid #E2871A;
+}
+
+.cabecalho__visualizacao-dados select {
+    width: 100%;
 }
 
 .cabecalho__seletor-visualizacao-dados{
