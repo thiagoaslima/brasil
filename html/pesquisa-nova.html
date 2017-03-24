@@ -63,10 +63,75 @@
                     </div>
                     <div class="cabecalho__visualizacao-dados">
                         <div class="cabecalho__visualizacao-dados__item"><select><option>Vila Bela de Santíssima Trindade</option></select></div>
-                        
+
                         <div class="cabecalho__visualizacao-dados__item"><select><option>Mato Grosso</option><option>Ceará</option></select></div>
 
-                        <div class="cabecalho__visualizacao-dados__item"><select><option>Adicionar comparação</option></select></div>
+                        <div class="cabecalho__visualizacao-dados__item compara-blank">
+                            <div class="add-municipio" onclick="classList.toggle('submenu-aberto')">
+                                <button>Adicionar comparação <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+
+                                <!-- -->
+
+                                <div class="por-estado__selecionar-municipio">
+
+                                    <div class="estado-selecionado">
+                                        <!--<span>Todos os municípios</span>-->
+                                        <span class="selecionado">Município</span><span>Estado</span><span>Brasil</span>
+                                        <!--<i aria-hidden="true" class="fa fa-times"></i>-->
+                                    </div>
+                                    
+                                    <!--<div class="total-encontrado">5570 municípios</div>-->
+                                    
+                                    <input id="busca" placeholder="Qual município você procura?" type="text">
+                                    <!--<i class="fa fa-search" aria-hidden="true"></i>-->
+
+                                    <div id="todos-municipios">
+
+                                        <div class="todos-municipios__titulo">
+                                            Mais acessados:
+                                        </div>
+
+                                        <ul>
+                                            <li>
+                                                <a style="display:block" href="/brasil/se/aracaju">Aracaju <span>SE</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/pa/belem">Belém <span>PA</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/pr/curitiba">Curitiba <span>PR</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/sc/florianopolis">Florianópolis <span>SC</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/ce/fortaleza">Fortaleza <span>CE</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/go/goiania">Goiânia <span>GO</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/pb/joao-pessoa">João Pessoa <span>PB</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/ma/sao-luis">São Luís <span>MA</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/sp/sao-paulo">São Paulo <span>SP</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/pi/teresina">Teresina <span>PI</span></a>
+                                            </li>
+                                            <li>
+                                                <a style="display:block" href="/brasil/es/vitoria">Vitória <span>ES</span></a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
 
                         <div class="cabecalho__visualizacao-dados__item">
                             <span class="select__sub-menu" onclick="classList.toggle('submenu-aberto')">
@@ -99,7 +164,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>  
                     </tr>
 
@@ -120,7 +185,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
 
@@ -132,7 +197,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
 
@@ -151,7 +216,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
                     <tr class='nivel-6'>
@@ -162,7 +227,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
 
@@ -181,7 +246,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
 
@@ -200,7 +265,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
 
@@ -212,7 +277,7 @@
 
                         <td class='valor'>5.559.923</td>
                         <td class='valor'>5.559.923</td>
-                        <td class='valor'></td>
+                        <td class='valor compara-blank'></td>
                         <td class='valor'>pessoas</td>
                     </tr>
 
