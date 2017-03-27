@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="style/lista-indicadores.css">
         <link rel="stylesheet" href="style/cabecalho-panorama.css">
         <link rel="stylesheet" href="style/grafico-panorama.css">
+        <link rel="stylesheet" href="style/pesquisa-menu.css">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -226,6 +227,41 @@
                             <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
                         </tr>
                     </table>
+
+                    <!--menu de pesquisa-->
+                    <ul class="menu-pesq">
+                        <li class="menu-pesq__item menu-pesq__item--selecionado">
+                            <p class="menu-pesq__texto">Censo <i class="fa fa-chevron-down menu-pesq__seta menu-pesq__seta--selecionado" aria-hidden="true"></i></p>
+                            <ul class="menu-pesq__submenu">
+                                <li class="menu-pesq__subitem">
+                                    <p class="menu-pesq__subtexto">Sinopse <i class="fa fa-chevron-right menu-pesq__subseta" aria-hidden="true"></i></p>
+                                </li>
+                                <li class="menu-pesq__separador"></li>
+                                <li class="menu-pesq__subitem menu-pesq__subitem--selecionado">
+                                    <p class="menu-pesq__subtexto">Resultados Gerais <i class="fa fa-chevron-right menu-pesq__subseta menu-pesq__subseta--selecionada" aria-hidden="true"></i></p>
+                                </li>
+                                <li class="menu-pesq__separador"></li>
+                                <li class="menu-pesq__subitem">
+                                    <p class="menu-pesq__subtexto">Características da população <i class="fa fa-chevron-right menu-pesq__subseta" aria-hidden="true"></i></p>
+                                </li>
+                                <li class="menu-pesq__separador"></li>
+                                <li class="menu-pesq__subitem">
+                                    <p class="menu-pesq__subtexto">Deslocamento <i class="fa fa-chevron-right menu-pesq__subseta" aria-hidden="true"></i></p>
+                                </li>
+                                <li class="menu-pesq__separador"></li>
+                            </ul>
+                        </li>
+                        <li class="menu-pesq__separador"></li>
+                        <li class="menu-pesq__item">
+                            <p class="menu-pesq__texto">Censo Agropecuário <i class="fa fa-chevron-right menu-pesq__seta" aria-hidden="true"></i></p>
+                        </li>
+                        <li class="menu-pesq__separador"></li>
+                        <li class="menu-pesq__item">
+                            <p class="menu-pesq__texto">Ensino - Matrículas, Docentes e Rede Escolar <i class="fa fa-chevron-right menu-pesq__seta" aria-hidden="true"></i></p>
+                        </li>
+                        <li class="menu-pesq__separador"></li>
+                    </ul>
+
                 </section>
 
                 <section id='detalhes'>
