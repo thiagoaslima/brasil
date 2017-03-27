@@ -54,7 +54,20 @@
                             <span><select><option>Amostra - Educação</option></select></span>
                         </div>
                         
-                         <div class="notas"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas</div>
+                         <div class="notas"  onclick="classList.toggle('notas__aberto')"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas
+                            <div class="notas__lista-container">
+                                <ol>
+                                    <li>
+                                        Atribui-se zeros aos valores dos municípios onde não há
+                                        ocorrência da variável
+                                    </li>
+                                    <li>
+                                        Atribui-se a expressão "Dado não informado" às variáveis onde
+                                        os valores dos municípios não foram informados
+                                    </li>
+                                </ol>
+                            </div>
+                         </div>
                         <div class="select-ano-container">
                            Ano: <select class="select-ano"><option>2010</option></select>
                         </div>
@@ -69,7 +82,22 @@
                     <div class="cabecalho__visualizacao-dados">
                         <div class="cabecalho__visualizacao-dados__item"><select><option>Vila Bela de Santíssima Trindade</option></select></div>
 
-                        <div class="cabecalho__visualizacao-dados__item"><select><option>Mato Grosso</option><option>Ceará</option></select></div>
+                        <!--<div class="cabecalho__visualizacao-dados__item"><select><option>Mato Grosso</option><option>Ceará</option></select></div>-->
+                         <div class="cabecalho__visualizacao-dados__item">
+                            <div class="add-municipio" onclick="classList.toggle('submenu-aberto')">
+                                <button>Mato Grosso <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                <div class="por-estado__selecionar-municipio">
+                                    <ul>
+                                        <li>
+                                            <a style="display:block" href="/brasil/se/aracaju">Aracaju <span>SE</span></a>
+                                        </li>
+                                        <li>
+                                            <a style="display:block" href="/brasil/pa/belem">Belém <span>PA</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                         </div>
 
                         <div class="cabecalho__visualizacao-dados__item compara-blank">
                             <div class="add-municipio" onclick="classList.toggle('submenu-aberto')">

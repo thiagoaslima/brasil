@@ -41,6 +41,24 @@
     background: #999;
 }
 
+.notas__lista-container {
+    display: none;
+    position: absolute;
+    background: #fff;
+    padding: 20px 15px 15px 30px;
+    width: 450px;
+    border: 1px solid #ccc;
+    margin-left: -5px;
+}
+
+.notas__lista-container li {
+    margin-bottom: 10px; 
+}
+
+.notas.notas__aberto > .notas__lista-container {
+    display: block;
+}
+
 .cabecalho__nome-pesquisa{
     float: left;
     background-color: #E6E6E6;
