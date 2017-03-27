@@ -16,7 +16,7 @@
 .cabecalho .select-ano-container {
     font-weight: bold;
     font-size: small;
-    margin-top: 7%;
+    margin-top: 30px;
 }
 
 .cabecalho select.select-ano {
@@ -28,7 +28,7 @@
     font-size: small;
     padding: 2px 5px;
     float: right;
-    margin-top: 7%;
+    margin-top: 30px;
     background: #ccc;
     cursor: pointer;
 }
@@ -426,9 +426,11 @@ td.compara-blank {
 .estado-selecionado span {
     display: inline-block;
     height: 30px;
-    padding: 0 17px;
+    /*padding: 0 17px;*/
     border-bottom: 3px solid #ccc;
     margin-bottom: 10px;
+    width: 33%;
+    text-align: center;
 }
 
 .estado-selecionado span.selecionado {
@@ -445,7 +447,7 @@ td.compara-blank {
     position: relative;
     margin-left: -75px;
     padding: 0 10px;
-    width: 260px;
+    min-width: 260px;
 }
 
 .por-estado__selecionar-municipio .estado-selecionado {
@@ -453,6 +455,7 @@ td.compara-blank {
     font-weight: bold;
     margin-top: 17px;
     font-size: .93em;
+    width: 100%;
 }
 
 .por-estado__selecionar-municipio .total-encontrado {
