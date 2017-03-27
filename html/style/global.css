@@ -232,6 +232,7 @@ sintese>dados
     width: 38%;
     padding: 2% 0%;
     min-height: 100%;
+    position: relative;
 }
 
 #sintese #detalhes{

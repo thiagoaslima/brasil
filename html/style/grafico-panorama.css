@@ -17,6 +17,7 @@
 .grafico__info{
     padding-left: 5px;
     color: #1B779B;
+    cursor: pointer;
 }
 
 .grafico__detalhes{
@@ -32,7 +33,7 @@
 .grafico__legenda-item{
     width: 24%;
     float: right;
-    padding: 0px 5px;
+    padding-left: 15px;
     min-width: 100px;
 }
 
