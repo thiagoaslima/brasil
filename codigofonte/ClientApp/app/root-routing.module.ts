@@ -4,12 +4,17 @@ import { RouterModule } from '@angular/router';
 import { SinteseComponent } from './sintese/sintese.component';
 import { SinteseDetalhesComponent } from './sintese/sintese-detalhes/sintese-detalhes.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { PanoramaComponent } from './panorama/panorama.component';
 
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
   { path: '', redirectTo: 'sintese/historico', pathMatch: 'full' },
+
+  { path: 'panorama',
+    component: PanoramaComponent
+  },
 
   {
     path: 'sintese',

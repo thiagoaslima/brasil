@@ -5,6 +5,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { SinteseModule } from './sintese/sintese.module';
+import { PanoramaModule } from './panorama/panorama.module'
 import { PesquisaModule } from './pesquisa/pesquisa.module';
 import { PesquisaService } from './shared/pesquisa/pesquisa.service.2';
 import { SandboxModule } from './sandbox/sandbox.module';
@@ -20,7 +21,8 @@ import { BASES, PESQUISAS } from './global-config';
         SharedModule.forRoot(),
         PesquisaModule,
         SinteseModule,
-        SandboxModule,
+        PanoramaModule,
+        SandboxModule,  
         RootRoutingModule
     ],
     declarations: [

@@ -1,0 +1,131 @@
+
+.topo{
+    overflow: hidden;
+    margin: 0px 15px 0 15px;
+    border-bottom: 1px solid #D9D8D7;
+    padding-bottom: 10px;
+}
+
+.topo__celula-esquerda{
+    width: 49%;
+    float: left;
+}
+
+.topo__celula-direita{
+    width: 49%;
+    float: right;
+}
+
+.topo__titulo{
+    font-size: 0.9em;
+    color: #1B779B;
+    font-weight: normal;
+}
+
+.topo__valor{
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.topo__unidade{
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #747474;
+}
+
+.topo__separador{
+    overflow: hidden;
+    border-bottom: 1px solid #D9D8D7;
+    padding: 3% 0%;
+}
+
+/*---------------------------------*/
+
+.lista{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lista__cabecalho{
+    color: #1B779B;
+    text-align: left;
+}
+
+.lista__cabecalho--selecionado{
+    color: #F15A24;
+}
+
+.lista__icone{
+    min-width: 40px;
+    text-align: right;
+    padding: 10px 5px;
+}
+
+.lista__titulo{
+    font-weight: bold;
+    padding: 10px 5px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.lista__indicador{
+    cursor: pointer;
+    background-color: #E6E6E6;
+    transition: background-color 0.3s;
+}
+
+.lista__indicador:hover{
+    background-color: #CCCCCC;
+}
+
+.lista__indicador--selecionado{
+    background-color: #CCCCCC;
+}
+
+.lista__indicador--selecionado .lista__seta i{
+    margin-right: -5px;
+}
+
+.lista__nome{
+    font-size: 0.8em;
+    width: 60%;
+    padding: 5px;
+}
+
+.lista__valor{
+    width: 30%;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.lista__unidade{
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #747474;
+}
+
+.lista__seta{
+    min-width: 40px;
+    text-align: right;
+    color: #999999;
+    padding-right: 15px;
+    padding: 5px 15px 5px 5px;
+}
+
+.lista__seta i{
+    margin-right: 0px;
+    transition: margin-right 0.3s;
+}
+
+.lista__indicador:hover .lista__seta i{
+    margin-right: -5px
+}
+
+.lista__separador:last-child{
+    visibility: hidden;
+}
+
+.lista__linha{
+    border-bottom: 1px solid #D9D8D7;
+    margin: 0px 15px;
+}
