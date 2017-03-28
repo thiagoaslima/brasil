@@ -1,0 +1,186 @@
+.panorama{
+    width: 100%;
+    border-top: 2px solid #F7931E;
+}
+
+.panorama__titulo{
+    margin-top:10px;
+    font-weight: bold;
+}
+
+.panorama__sub-titulo{
+    font-size: .9em;
+}
+
+.panorama__mapa{
+    background-color: red;
+    float: left;
+    width: 80%;
+    height: 360px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.panorama__legenda{
+    width: 15%; 
+    float: right;
+    margin-top: 10px;
+}
+
+.panorama__legenda__item{
+        margin-bottom: 10px;
+}
+
+.panorama__legenda__item__cor{
+    height: 5px;
+    width: 100%;
+    background-color: red;
+}
+
+.panorama__legenda__item__legenda{
+    font-size: .8em;
+}
+
+.card{
+    border: 1px solid #B3B3B3;
+    border-top: 3px solid #B3B3B3;
+    width: 238px;
+    height: 277px;
+    padding: 10px;
+    float: left;
+    margin-left: 30px;
+}
+
+.cards .card:nth-child(1) {
+    margin-left: 0px;
+}
+
+.card__titulo{
+    float: left;
+    font-size: .8em;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+.card__nota{
+    float: left;
+    color: #29ABE2;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-top: -2px;
+}
+
+.card__sub-titulo{
+    font-size: .7em;
+    clear: both;
+    float: left;
+    margin-top: -5px;
+}
+
+.card__reacao{
+    clear: both;
+    margin-top: 7px;
+    float: left;
+}
+
+.card__reacao__bola{
+    float: left;
+    width: 8px;
+    height: 8px;
+    border-radius: 20px;
+    margin-right: 4px;
+}
+
+.card__reacao__bola:nth-child(1){
+    background-color: #9E005D;
+}
+
+.card__reacao__bola:nth-child(2){
+    background-color: #662D91;
+}
+
+.card__reacao__bola:nth-child(3){
+    background-color: #0071BC;
+}
+
+.card__reacao__bola:nth-child(4){
+    background-color: #29ABE2;
+}
+
+.card__reacao__bola:nth-child(5){
+    background-color: #00B061;
+}
+
+.card__comparando{
+    font-size: .6em;
+    clear: both;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.card__regua-comparacao{
+    font-size: .6em;
+}
+
+.card__regua-comparacao__regua{
+    background-image: url(../img/barra-compacarao.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 100%;
+    height: 17px;
+}
+
+.card__regua-comparacao__regua__marcador{
+    background-image: url(../img/seta-marca-comparacao.png);
+    width: 11px;
+    height: 11px;
+    position: relative;
+}
+
+button{
+    border: none;
+    background-color: #E6E6E6;
+    padding: 2px 3px;
+    font-size: .8em;
+    float: right;
+    margin-left: 10px;
+    margin-top: 33px;
+}
+
+button .fa{
+    color: #1B779B;
+}
+
+
+
+.card.selecionado{
+    border-top-color: #F7931E;
+    height: 312px;    
+    width: 277px;
+}
+
+.selecionado .card__titulo{
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+.selecionado .card__nota{
+    font-size: 1.5em;
+}
+
+.selecionado .card__comparando{
+    font-size: .8em;
+    padding-top: 40px;
+}
+
+.selecionado .card__regua-comparacao{
+    font-size: .7em;
+}
+
+.selecionado .card__regua-comparacao__regua__marcador{
+    width: 14px;
+    height: 14px;
+    background-size: 100% auto;
+}
