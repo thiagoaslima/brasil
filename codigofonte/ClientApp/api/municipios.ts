@@ -21008,8 +21008,8 @@ export let municipios = [
     {
         "codigoUf": 35,
         "codigo": 3530805,
-        "nome": "Moji Mirim",
-        "slug": "moji-mirim"
+        "nome": "Mogi Mirim",
+        "slug": "mogi-mirim"
     },
     {
         "codigoUf": 35,

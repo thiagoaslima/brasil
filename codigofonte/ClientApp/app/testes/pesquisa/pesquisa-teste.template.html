@@ -1,0 +1,31 @@
+<h2>Pesquisa teste</h2>
+
+<div>
+    <h3>Lista de pesquisas</h3>
+    <p *ngFor="let pesquisa of pesquisas$ | async">
+        {{pesquisa.id}}: {{pesquisa.nome}}
+    </p>
+</div>
+
+<hr>
+
+<div>
+    <h3>Nome da pesquisa</h3>
+    <p>
+        {{ (pesquisa$ | async)?.id }}: {{ (pesquisa$ | async)?.nome }}
+    </p>
+
+    <h3>Descrição da pesquisa</h3>
+    <p>
+        {{ (pesquisa$ | async)?.descricao }}: {{ (pesquisa$ | async)?.observacao }}
+    </p>
+
+    <h3>Períodos</h3>
+    <p *ngFor="let periodo of (pesquisa$ | async)?.periodos">
+        {{ periodo.nome }}
+    </p>
+
+    <h3>Indicadores</h3>
+    <lista-indicadores [lista]="(pesquisa$ | async)?.indicadores | async"></lista-indicadores>
+    
+</div>

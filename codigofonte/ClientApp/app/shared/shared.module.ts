@@ -3,17 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ChartsModule } from './ng2-charts.module';
-import { WindowEventsModule } from './window-events/window-events.module';
-import { TopoJson, TOPOJSON } from './topojson.v2';
+import { PesquisaModule } from './pesquisas/pesquisa.module';
 
+import { TopoJson, TOPOJSON } from './topojson.v2';
 import { RouterParamsService } from './router-params.service';
-import { CacheService } from './cache.service';
-import { SystemCacheService } from './system-cache.service';
-import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaService } from './pesquisa/pesquisa.service.2';
-import { BuscaService } from '../core/busca/busca.service';
-import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
 
 export function getLRU() {
@@ -25,8 +18,8 @@ const MODULES = [
     CommonModule,
     RouterModule,
     FormsModule,
-    WindowEventsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PesquisaModule
 ];
 
 const PIPES = [
@@ -39,13 +32,7 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
-    SystemCacheService,
-    CacheService,
     RouterParamsService,
-    LocalidadeService,
-    CommonService,
-    BuscaService,
-    PesquisaService,
     { provide: TOPOJSON, useValue: TopoJson },
     { provide: 'LRU', useFactory: getLRU, deps: [] }
 ]

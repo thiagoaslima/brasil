@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { throwIfAlreadyLoaded } from './core.guard';
 
 import { SharedModule } from '../shared/shared.module';
-import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
-import { BuscaComponent } from './busca/busca.component';
+
 
 @NgModule({
   imports: [
@@ -13,14 +12,14 @@ import { BuscaComponent } from './busca/busca.component';
     SharedModule
   ],
   declarations: [
-    SeletorLocalidadeComponent,
-    BuscaComponent
+
   ],
   exports: [
-    SeletorLocalidadeComponent,
-    BuscaComponent
+
   ],
-  providers: []
+  providers: [
+    
+  ]
 })
 export class CoreModule {
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {

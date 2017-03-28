@@ -1,0 +1,45 @@
+<h2>Localidade Teste component</h2>
+
+<div>
+    <h3>País</h3>
+    <p>
+        nome: {{pais.nome}} [{{pais.codigo}}] <br>
+        capital: {{pais.capital.nome}}
+    </p>
+</div>
+
+<div>
+    <h3 #anchor id="listaEstados">Lista de Estados</h3>
+    <ul>
+        <li *ngFor="let uf of pais.children">
+            <p>
+                nome: {{uf.nome}} - {{uf.sigla}} [{{uf.codigo}}] <br>
+                capital: {{uf.capital.nome}} <br>
+                <a [routerLink]="['.']" fragment="{{uf.identificador}}">lista de municípios</a>
+            </p>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h3>Lista de Municípios</h3>
+    <ul>
+        <li *ngFor="let uf of pais.children">
+            <h4 #anchor [id]="uf.identificador">
+                {{uf.nome}} 
+                (<a [routerLink]="['.']" fragment="listaEstados">voltar &#x25B2;</a>)
+            </h4>
+
+            <ul>
+                <li *ngFor="let mun of uf.children">
+                    <p>
+                        nome: {{mun.nome}} [{{mun.codigo}}] <br>
+                        link: {{mun.link}} <br>
+                        uf: {{mun.parent.nome}}
+                    </p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
