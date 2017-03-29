@@ -2,10 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { ActivatedRoute } from '@angular/router';
 
 import { Pesquisa, Periodo } from '../../shared2/pesquisa/pesquisa.model';
-import { PesquisaService } from '../../shared2/pesquisa/pesquisa.service';
+import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { Indicador } from '../../shared2/indicador/indicador.model';
-import { IndicadorService } from '../../shared2/indicador/indicador.service';
-import { ResultadoService } from '../../shared2/resultado/resultado.service';
+import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
+import { ResultadoService2 } from '../../shared2/resultado/resultado.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
@@ -22,9 +22,9 @@ export class PesquisaTesteComponent implements OnInit {
 
     constructor(
         private _route: ActivatedRoute,
-        private _pesquisaService: PesquisaService,
-        private _indicadorService: IndicadorService,
-        private _resultadoService: ResultadoService
+        private _pesquisaService: PesquisaService2,
+        private _indicadorService: IndicadorService2,
+        private _resultadoService: ResultadoService2
     ) { }
 
     ngOnInit() {

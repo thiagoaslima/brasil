@@ -18,7 +18,7 @@ const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 @Injectable()
-export class ResultadoService {
+export class ResultadoService2 {
 
     constructor(
         private _http: Http

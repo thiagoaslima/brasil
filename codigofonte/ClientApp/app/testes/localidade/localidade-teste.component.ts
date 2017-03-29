@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Renderer, ViewChildren, QueryList, Elemen
 import { ActivatedRoute } from '@angular/router';
 
 import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService } from '../../shared2/localidade/localidade.service';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -18,7 +18,7 @@ export class LocalidadeTesteComponent implements OnInit, OnDestroy {
 
     constructor(
         private _route: ActivatedRoute,
-        private _localidadeService: LocalidadeService,
+        private _localidadeService: LocalidadeService2,
         private _renderer: Renderer
     ) { }
 
