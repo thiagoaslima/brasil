@@ -6,6 +6,7 @@
 
 .cabecalho select {
     border: none;
+    width: 100%;
 }
 
 .cabecalho select:first-child {
@@ -126,8 +127,7 @@
     width: 45px;
     height: 25px;
     border: 1px solid #999;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 5px;
     display: inline-block;
     line-height: 25px;
     letter-spacing: 5px;
