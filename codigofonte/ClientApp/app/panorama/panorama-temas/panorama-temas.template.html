@@ -24,28 +24,20 @@
     <div class="grafico__detalhes">
         <h3 class="grafico__subtitulo">Por nível de escolaridade</h3>
         <div class="grafico__legenda">
-            <div class="grafico__legenda-item">
-                <div class="grafico__legenda-cor grafico__legenda-cor--1"></div>
-                <p class="grafico__legenda-texto">Pré-escolar</p>
-            </div>
-            <div class="grafico__legenda-item">
-                <div class="grafico__legenda-cor grafico__legenda-cor--2"></div>
-                <p class="grafico__legenda-texto">Fundamental</p>
-            </div>
-            <div class="grafico__legenda-item">
-                <div class="grafico__legenda-cor grafico__legenda-cor--3"></div>
-                <p class="grafico__legenda-texto">Médio</p>
-            </div>
-            <div class="grafico__legenda-item">
-                <div class="grafico__legenda-cor grafico__legenda-cor--4"></div>
-                <p class="grafico__legenda-texto">Superior</p>
+            <div class="grafico__legenda-item" *ngFor="let indicador of nomeIndicador; let i = index">
+                <div class="grafico__legenda-cor grafico__legenda-cor--{{i+1}}"></div>
+                <p class="grafico__legenda-texto">{{indicador}}</p>
             </div>
         </div>
     </div>
-    <p class="grafico__texto-eixo-x">2013</p>
-    <p class="grafico__texto-eixo-y">100.000</p>
+    <grafico 
+        [tipoGrafico]="tipoGrafico" 
+        [dadosIndicador]="dadosIndicador" 
+        [nomeSerie]="nomeIndicador" 
+        [carregando]="isGraficoCarregando" 
+        (dataURL)="setDataURL($event)">
+    </grafico>
 </div>
 
-
-    <panorama-card>
-    </panorama-card>
+<panorama-card>
+</panorama-card>
