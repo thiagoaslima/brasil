@@ -7,6 +7,7 @@ import { ChartsModule } from './ng2-charts.module';
 import { WindowEventsModule } from './window-events/window-events.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 
+import { AppState } from './app-state';
 import { RouterParamsService } from './router-params.service';
 import { CacheService } from './cache.service';
 import { SystemCacheService } from './system-cache.service';
@@ -39,6 +40,7 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
+    AppState,
     SystemCacheService,
     CacheService,
     RouterParamsService,

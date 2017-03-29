@@ -7,7 +7,7 @@ export type NivelTerritorial = {
     codeLength: number
 };
 
-export const NiveisTerritoriais: {[index: string]: NivelTerritorial} = {
+export const NiveisTerritoriais = {
     pais: {
         label: "pais",
         codeLength: 0

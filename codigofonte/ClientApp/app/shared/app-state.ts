@@ -3,15 +3,18 @@ import { Injectable, Inject } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/scan';
 
 
-import { Localidade } from './localidade/localidade.interface';
-import { Pesquisa } from './pesquisa/pesquisa.interface';
-import { Indicador } from './pesquisa/pesquisa.interface';
+import { Localidade, NiveisTerritoriais } from '../shared2/localidade/localidade.model';
+import { Pesquisa } from '../shared2/pesquisa/pesquisa.model';
+import { Indicador } from '../shared2/indicador/indicador.model';
 
 
-import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaService } from './pesquisa/pesquisa.service';
+import { LocalidadeService2 } from '../shared2/localidade/localidade.service';
+import { PesquisaService2 } from '../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from './router-params.service';
 
 
@@ -44,11 +47,49 @@ export class AppState {
      * @memberOf AppState
      */
     public constructor(
-        private _localidadeService: LocalidadeService,
+        private _localidadeService: LocalidadeService2,
         private _routerParamsService: RouterParamsService,
-        private _pesquisaService: PesquisaService
+        private _pesquisaService: PesquisaService2
     ){
+        const _initialState = {
+            pesquisa: null,
+            localidade: null,
+            tipo: ''
+        }
 
+        const localidade$ = this._routerParamsService.params$.map( ({urlParams}) => {
+            let {uf, municipio} = urlParams;
+            
+            if (municipio) {
+                return {
+                    localidade: _localidadeService.getMunicipioBySlug(uf, municipio),
+                    tipo: NiveisTerritoriais.municipio.label
+                }
+            }
+
+            if (uf) {
+                return {
+                    localidade: _localidadeService.getUfBySigla(uf),
+                    tipo: NiveisTerritoriais.uf.label
+                }
+            }
+
+            return {
+                localidade: _localidadeService.getRoot(),
+                tipo: NiveisTerritoriais.pais.label
+            }
+        });
+
+        const pesquisa$ = this._routerParamsService.params$.flatMap( ({urlParams}) => _pesquisaService.getPesquisa(urlParams['pesquisa']))
+        
+        Observable.merge(
+            localidade$,
+            pesquisa$
+        )
+        .scan( (acc, obj) => Object.assign(acc, obj), _initialState)
+        .subscribe(state => this.notify(state));
+        
+        /*
         this._routerParamsService.params$
             .flatMap(({ urlParams, queryParams }) =>  _pesquisaService.getPesquisa(urlParams['pesquisa']))
             .combineLatest(this._localidadeService.selecionada$)
@@ -61,7 +102,8 @@ export class AppState {
                     "localidade": localidade,
                     "pesquisa": pesquisa
                 });
-            });        
+            });  
+            */      
     }    
 
 
