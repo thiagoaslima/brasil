@@ -1,53 +1,7 @@
-.panorama{
-    width: 100%;
-    border-top: 2px solid #F7931E;
-}
-
-.panorama__titulo{
-    margin-top:10px;
-    font-weight: bold;
-}
-
-.panorama__sub-titulo{
-    font-size: .9em;
-}
-
-.panorama__mapa{
-    background-color: red;
-    float: left;
-    width: 80%;
-    height: 360px;
-    margin-bottom: 30px;
-    margin-top: 10px;
-}
-
-.panorama__legenda{
-    width: 15%; 
-    float: right;
-    margin-top: 10px;
-}
-
-.panorama__legenda__item{
-    margin-bottom: 10px;
-    float: right;
-    clear: both;
-}
-
-.panorama__legenda__item__cor{
-    height: 5px;
-    width: 100%;
-    background-color: red;
-    max-width: 120px;
-}
-
-.panorama__legenda__item__legenda{
-    font-size: .8em;
-}
-
 .cards{
     clear: both;
+    margin: 2% 5%;
 }
-
 .card{
     border: 1px solid #B3B3B3;
     border-top: 3px solid #B3B3B3;
@@ -132,7 +86,7 @@
 }
 
 .card__regua-comparacao__regua{
-    background-image: url(../img/barra-compacarao.png);
+    background-image: url(./../../../../img/barra-compacarao.png);
     background-repeat: no-repeat;
     background-size: 100% auto;
     width: 100%;
@@ -140,7 +94,7 @@
 }
 
 .card__regua-comparacao__regua__marcador{
-    background-image: url(../img/seta-marca-comparacao.png);
+    background-image: url(./../../../../img/seta-marca-comparacao.png);
     width: 11px;
     height: 11px;
     position: relative;
