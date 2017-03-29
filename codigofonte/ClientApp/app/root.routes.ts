@@ -9,7 +9,21 @@ import { ResultadoTesteComponent } from './testes/resultado/resultado-teste.comp
 
 
 const routes = [
-    { path: '', redirectTo: 'testes', pathMatch: 'full' },
+    { 
+        path: '', 
+        redirectTo: 'testes', 
+        pathMatch: 'full' 
+    },
+    
+    // BASE
+    // =============================
+    // {
+    //     path: 'brasil/:uf/:municipio' 
+    // },
+    
+    // ROTAS DE TESTE
+    // retirar em produção
+    // =============================
     {
         path: 'testes',
         component: TestesComponent,

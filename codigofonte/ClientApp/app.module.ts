@@ -3,11 +3,11 @@ import { UniversalModule } from 'angular2-universal';
 import { CommonModule }  from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { SharedModule } from './app/shared2/shared.module';
+import { TesteModule } from './app/testes/testes.module';
 import { AppComponent } from './app/app/app.component';
 import { rootRouting } from './app/root.routes';
-import { RootModule } from './app/root.module';
 
-import { ValidParametersGuard } from './app/valid-parameters.guard';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -19,10 +19,10 @@ import { ValidParametersGuard } from './app/valid-parameters.guard';
         CommonModule,
         RouterModule,
         rootRouting,
-        RootModule
+        SharedModule.forRoot(),
+        TesteModule
     ],
     providers: [
-        ValidParametersGuard
     ]
 })
 export class AppModule {
