@@ -57,7 +57,7 @@ class LocalidadeCache {
 }
 
 @Injectable()
-export class LocalidadeService {
+export class LocalidadeService2 {
 
     private _brasil: Localidade;
     private _municipios = new LocalidadeCache();

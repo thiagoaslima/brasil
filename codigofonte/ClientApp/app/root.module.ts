@@ -3,6 +3,7 @@ import { NgModule, OpaqueToken } from '@angular/core';
 import { CoreModule } from './core/core.module';
 
 import { SharedModule } from './shared/shared.module';
+import { SharedModule2 } from './shared2/shared.module';
 
 import { SinteseModule } from './sintese/sintese.module';
 import { PanoramaModule } from './panorama/panorama.module'
@@ -20,6 +21,7 @@ import { BASES, PESQUISAS } from './global-config';
     imports: [
         CoreModule,
         SharedModule.forRoot(),
+        SharedModule2.forRoot(),
         PesquisaModule,
         PesquisaModule2,
         SinteseModule,

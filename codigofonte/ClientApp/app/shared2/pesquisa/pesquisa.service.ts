@@ -17,7 +17,7 @@ const headers = new Headers({ 'accept': '*/*'});
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 @Injectable()
-export class PesquisaService {
+export class PesquisaService2 {
     
     constructor(
         private _http: Http,

@@ -16,7 +16,7 @@ const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 @Injectable()
-export class IndicadorService {
+export class IndicadorService2 {
 
     constructor(
         private _http: Http

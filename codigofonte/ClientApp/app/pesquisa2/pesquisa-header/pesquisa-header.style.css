@@ -1,0 +1,298 @@
+.cabecalho{
+    background-color: #E6E6E6;
+    width: 100%;
+    display: table;
+}
+
+.cabecalho select {
+    border: none;
+}
+
+.cabecalho select:first-child {
+    background-color: transparent;
+}
+
+.cabecalho .select-ano-container {
+    font-weight: bold;
+    font-size: small;
+    margin-top: 30px;
+}
+
+.cabecalho select.select-ano {
+    width: initial;
+    font-weight: normal;
+}
+
+.notas {
+    font-size: small;
+    padding: 2px 5px;
+    float: right;
+    margin-top: 30px;
+    background: #ccc;
+    cursor: pointer;
+}
+
+.notas i {
+    color: #1B779B;
+}
+
+.notas:hover {
+    background: #999;
+}
+
+.notas__lista-container {
+    display: none;
+    position: absolute;
+    background: #fff;
+    padding: 20px 15px 15px 30px;
+    width: 450px;
+    border: 1px solid #ccc;
+    margin-left: -5px;
+}
+
+.notas__lista-container li {
+    margin-bottom: 10px; 
+}
+
+.notas.notas__aberto > .notas__lista-container {
+    display: block;
+}
+
+.cabecalho__nome-pesquisa{
+    float: left;
+    background-color: #E6E6E6;
+    width: 38%; 
+    height: 120px;
+    padding: 1% 15px;
+    border-bottom: 3px solid #E2871A;
+    border-right: 3px solid #fff;
+}
+
+.cabecalho__nome-pesquisa span, .cabecalho__nome-pesquisa span select:first-child{
+    font-weight: bold;
+}
+
+.cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
+    float: left;
+    width: 62%;
+}
+
+.cabecalho__visualizacao-dados {
+    height: 55px;
+    line-height: 55px;
+    border-bottom: 3px solid #E2871A;
+}
+
+.cabecalho__visualizacao-dados select {
+    width: 100%;
+}
+
+.cabecalho__seletor-visualizacao-dados{
+    background-color: #fff;
+    color: #E2871A;
+}
+
+.cabecalho__visualizacao-dados__item select:first-child, .cabecalho__seletor-visualizacao-dados__item select:first-child{
+    padding-left: 20px;
+}
+
+.cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
+    float: left;
+    width: 25%;
+    text-align: center;
+    font-size: small;
+    /*padding-left: 20px;*/
+}
+
+.cabecalho__seletor-visualizacao-dados__item{
+    border-bottom: 3px solid #CCC;
+    height: 65px;
+    padding-top: 15px;
+}
+
+.cabecalho__seletor-visualizacao-dados__item.selecionado{
+    border-bottom: 3px solid #E2871A;
+}
+
+.cabecalho__seletor-visualizacao-dados i {
+    display: block;
+}
+
+/*
+* mini-menu compartilhar / download
+*/
+
+.cabecalho .select__sub-menu {
+    width: 45px;
+    height: 25px;
+    border: 1px solid #999;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: inline-block;
+    line-height: 25px;
+    letter-spacing: 5px;
+    color: #999;
+    margin-top: 17px;
+    cursor: pointer;
+}
+
+.select__sub-menu .select__submenu-aberto {
+    display: none;
+}
+
+.select__sub-menu.submenu-aberto > div {
+    display: block;
+}
+
+.select__sub-menu.submenu-aberto {
+    background-color: #CCC;
+    color: initial;
+    border: none;
+}
+
+.select__submenu-aberto{
+    background-color: #ccc;
+    position: relative; 
+    text-align: left;
+    margin-left: -95px;
+    width: 140px;
+}
+
+.select__submenu-aberto > div {
+    padding: 10px 0;
+    letter-spacing: initial;
+    color: initial;
+    cursor: pointer;
+    padding-left: 10px;
+
+}
+
+.select__submenu-aberto > div:hover {
+    background-color: #999;
+}
+
+.select__submenu-aberto i{
+    color: #fff;
+}
+
+.select__submenu-aberto span{
+    background-color: #1B779B;
+    border-radius: 20px;
+    padding: 8px 10px; 
+}
+
+/*
+* menu adicionar comparação (lista municípios)
+*/
+
+.add-municipio {
+    /*width: 45px;
+    height: 25px;
+    border: 1px solid #999;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: inline-block;
+    line-height: 25px;
+    letter-spacing: 5px;
+    color: #999;
+    margin-top: 17px;*/
+    cursor: pointer;
+}
+
+.add-municipio button {
+    width: 100%;
+    height: 55px;
+    vertical-align: middle;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.estado-selecionado span {
+    display: inline-block;
+    height: 30px;
+    /*padding: 0 17px;*/
+    border-bottom: 3px solid #ccc;
+    margin-bottom: 10px;
+    width: 33%;
+    text-align: center;
+}
+
+.estado-selecionado span.selecionado {
+    border-bottom-color: #F15A24;
+    color: #F15A24;
+}
+
+.por-estado__selecionar-municipio {
+    display: none;
+    text-align: left;
+    background: #333;
+    color: #fff;
+    line-height: normal;
+    position: relative;
+    margin-left: -75px;
+    padding: 0 10px;
+    min-width: 260px;
+}
+
+.por-estado__selecionar-municipio .estado-selecionado {
+    float: left;
+    font-weight: bold;
+    margin-top: 17px;
+    font-size: .93em;
+    width: 100%;
+}
+
+.por-estado__selecionar-municipio .total-encontrado {
+    float: right;
+    font-size: .8em;
+    margin-top: 20px;
+    margin-right: 9px;
+}
+
+.por-estado__selecionar-municipio input {
+    width: 100%;
+    color: #4D4D4D;
+    height: 31px;
+    margin-bottom: 15px;
+}
+
+.por-estado__selecionar-municipio ul {
+    list-style-type: none;
+}
+
+.por-estado__selecionar-municipio ul li {
+    border-bottom: 1px solid #737373;
+    font-size: .9em;
+    padding: 10px 0px;
+    transition: padding-left 0.3s, background-color 0.3s;
+}
+
+.por-estado__selecionar-municipio ul li:hover {
+    padding: 10px;
+    background-color: #4D4D4D;
+    transition: padding-left 0.3s, background-color 0.3s;
+}
+
+.por-estado__selecionar-municipio ul li span {
+    background-color: #4D4D4D;
+    border-radius: 30px;
+    padding: 4px 6px;
+    font-size: .7em;
+    margin-left: 8px;
+}
+
+.submenu-aberto > div {
+    display: block;
+}
+
+.add-municipio.submenu-aberto {
+    background-color: #333;
+    color: #fff;
+}
+
+.todos-municipios__titulo {
+    font-weight: bold;
+    margin: 0px 0px 5px;
+    font-size: .9em;
+}

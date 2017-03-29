@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaService } from './pesquisa/pesquisa.service';
-import { IndicadorService } from './indicador/indicador.service';
-import { ResultadoService } from './resultado/resultado.service';
+import { LocalidadeService2 } from './localidade/localidade.service';
+import { PesquisaService2 } from './pesquisa/pesquisa.service';
+import { IndicadorService2 } from './indicador/indicador.service';
+import { ResultadoService2 } from './resultado/resultado.service';
 import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';
 
 
@@ -31,11 +31,11 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
-    LocalidadeService,
+    LocalidadeService2,
     PesquisaConfiguration,
-    PesquisaService, 
-    IndicadorService,
-    ResultadoService,
+    PesquisaService2, 
+    IndicadorService2,
+    ResultadoService2,
     { provide: 'LRU', useFactory: getLRU, deps: [] }
 ]
 
@@ -53,10 +53,10 @@ const PROVIDERS = [
         ...COMPONENTS
     ]
 })
-export class SharedModule {
+export class SharedModule2 {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: SharedModule,
+            ngModule: SharedModule2,
             providers: [
                 ...PROVIDERS
             ]
