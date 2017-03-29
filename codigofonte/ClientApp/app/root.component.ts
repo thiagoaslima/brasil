@@ -1,5 +1,9 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { LocalidadeService } from './shared/localidade/localidade.service';
+import { LocalidadeService2 } from './shared2/localidade/localidade.service';
+import { PesquisaService2 } from './shared2/pesquisa/pesquisa.service';
+import { IndicadorService2 } from './shared2/indicador/indicador.service';
+import { ResultadoService2 } from './shared2/resultado/resultado.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';

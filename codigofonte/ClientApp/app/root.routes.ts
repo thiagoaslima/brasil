@@ -7,6 +7,10 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
+import { TestesComponent } from './testes/testes/testes.component';
+import { PesquisaTesteComponent } from './testes/pesquisa/pesquisa-teste.component'
+import { LocalidadeTesteComponent } from './testes/localidade/localidade-teste.component'
+import { ResultadoTesteComponent } from './testes/resultado/resultado-teste.component'
 
 const rootRoutes = [
     {
@@ -42,8 +46,21 @@ const rootRoutes = [
             { path: 'pesquisas', redirectTo: 'pesquisas/23/27652' },
 
         ]
+    },
+
+
+    /* REMOVE ON PRODUCTION */
+    {
+        path: 'testes',
+        component: TestesComponent,
+        children: [
+            { path: '', redirectTo: 'pesquisa/13', pathMatch: 'full' },
+            { path: 'pesquisa', redirectTo: 'pesquisa/13', pathMatch: 'full' },
+            { path: 'pesquisa/:pesquisa', component: PesquisaTesteComponent },
+            { path: 'localidade', component: LocalidadeTesteComponent },
+            { path: 'resultado', component: ResultadoTesteComponent },
+        ]
     }
 ]
-
 
 export const rootRouting: ModuleWithProviders = RouterModule.forRoot(rootRoutes);

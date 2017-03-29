@@ -13,6 +13,7 @@ import { PesquisaService } from './shared/pesquisa/pesquisa.service.2';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
+import { TesteModule } from './testes/testes.module';
 
 import { ValidParametersGuard } from './valid-parameters.guard';
 import { BASES, PESQUISAS } from './global-config';
@@ -27,7 +28,8 @@ import { BASES, PESQUISAS } from './global-config';
         SinteseModule,
         PanoramaModule,
         SandboxModule,  
-        RootRoutingModule
+        RootRoutingModule,
+        TesteModule
     ],
     declarations: [
         RootComponent

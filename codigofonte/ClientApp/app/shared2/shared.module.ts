@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';
 
 
 export function getLRU() {
-  return new Map();
+    return new Map();
 }
 
 const MODULES = [
@@ -32,10 +32,10 @@ const COMPONENTS = [
 
 const PROVIDERS = [
     LocalidadeService2,
-    PesquisaConfiguration,
-    PesquisaService2, 
+    PesquisaService2,
     IndicadorService2,
     ResultadoService2,
+    PesquisaConfiguration,
     { provide: 'LRU', useFactory: getLRU, deps: [] }
 ]
 
@@ -58,8 +58,21 @@ export class SharedModule2 {
         return {
             ngModule: SharedModule2,
             providers: [
-                ...PROVIDERS
+                ...PROVIDERS,
+                {
+                    provide: APP_INITIALIZER,
+                    useFactory: loadConfig,
+                    deps: [
+                        LocalidadeService2,
+                        PesquisaService2,
+                        IndicadorService2,
+                        ResultadoService2,
+                        PesquisaConfiguration
+                    ],
+                    multi: true
+                }
             ]
         };
     }
 }
+export const loadConfig = (...args) => () => {};
