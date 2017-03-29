@@ -28,17 +28,24 @@
 }
 
 .panorama__legenda__item{
-        margin-bottom: 10px;
+    margin-bottom: 10px;
+    float: right;
+    clear: both;
 }
 
 .panorama__legenda__item__cor{
     height: 5px;
     width: 100%;
     background-color: red;
+    max-width: 120px;
 }
 
 .panorama__legenda__item__legenda{
     font-size: .8em;
+}
+
+.cards{
+    clear: both;
 }
 
 .card{
