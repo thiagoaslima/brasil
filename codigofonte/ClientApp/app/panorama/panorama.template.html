@@ -1,7 +1,7 @@
 <div id='sintese'>
 
     <section id='dados'>
-        <panorama-resumo></panorama-resumo>
+        <panorama-resumo [dados]="panorama$ | async" [localidade]="localidade$ | async"></panorama-resumo>
     </section>
 
     <section id='detalhes'>

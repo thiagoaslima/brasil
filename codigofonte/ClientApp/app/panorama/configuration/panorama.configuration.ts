@@ -1,4 +1,4 @@
-import { PanoramaItem, PanoramaVisualizacao } from './panorama.model';
+import { PanoramaDescriptor, PanoramaItem, PanoramaConfigurationItem, PanoramaVisualizacao } from './panorama.model';
 import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
 
 import { Observable } from 'rxjs/Observable';
@@ -20,9 +20,9 @@ export const TEMAS = {
 }
 
 export const PANORAMA = {
-    [NiveisTerritoriais.pais.label]: {} as {temas : string[], indicadores: PanoramaItem[]},
+    [NiveisTerritoriais.pais.label]: {},
 
-    [NiveisTerritoriais.uf.label]: {} as {temas : string[], indicadores: PanoramaItem[]},
+    [NiveisTerritoriais.uf.label]: {},
 
     [NiveisTerritoriais.municipio.label]: {
         temas: [
@@ -34,10 +34,10 @@ export const PANORAMA = {
             TEMAS.populacao
         ],
 
-        indicadores: [
+        indicadores: <PanoramaConfigurationItem[]>[
             {
-                pesquisa: 33,
-                indicador: 29169,
+                pesquisaId: 33,
+                indicadorId: 29169,
                 titulo: "Código do Município",
                 tema: TEMAS.nenhum,
                 largura: 'half',
@@ -45,8 +45,8 @@ export const PANORAMA = {
             },
 
             {
-                pesquisa: 33,
-                indicador: 29170,
+                pesquisaId: 33,
+                indicadorId: 29170,
                 titulo: "Prefeito",
                 tema: TEMAS.nenhum,
                 largura: 'half',
@@ -55,8 +55,8 @@ export const PANORAMA = {
 
             // --- Educação
             {
-                pesquisa: 40,
-                indicador: 30277,
+                pesquisaId: 40,
+                indicadorId: 30277,
                 titulo: "IDEB",
                 subtitulo: "Índice de Desenvolvimento da Educação Básica (IDEB)",
                 tema: TEMAS.educacao,
@@ -64,32 +64,32 @@ export const PANORAMA = {
             },
 
             {
-                pesquisa: 13,
-                indicador: 5903,
+                pesquisaId: 13,
+                indicadorId: 5903,
                 titulo: "Matrículas no ensino pré-escolar",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
             {
-                pesquisa: 13,
-                indicador: 5908,
+                pesquisaId: 13,
+                indicadorId: 5908,
                 titulo: "Matrículas no ensino fundamental",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.graficoBarra
             },
 
             {
-                pesquisa: 13,
-                indicador: 5913,
+                pesquisaId: 13,
+                indicadorId: 5913,
                 titulo: "Matrículas no ensino médio",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.graficoBarra
             },
 
             {
-                pesquisa: 13,
-                indicador: 5918,
+                pesquisaId: 13,
+                indicadorId: 5918,
                 titulo: "Matrículas no ensino superior",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.graficoBarra
@@ -97,22 +97,22 @@ export const PANORAMA = {
 
             // --- Trabalho
             {
-                pesquisa: 19,
-                indicador: 29765,
+                pesquisaId: 19,
+                indicadorId: 29765,
                 titulo: "Emprego formal",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
             {
-                pesquisa: 19,
-                indicador: 29764,
+                pesquisaId: 19,
+                indicadorId: 29764,
                 titulo: "Rendimento médio",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             }
 
-        ] as PanoramaItem[]
+        ] 
     }
 }
 
