@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
     templateUrl: './panorama-resumo.template.html',
     styleUrls: ['./panorama-resumo.style.css']
 })
-export class PamoramaResumoComponent implements OnInit {
+export class PanoramaResumoComponent implements OnInit {
     @Input('config') configuracao$: Observable<PanoramaTema[]>;
     @Input() localidade: Localidade
     

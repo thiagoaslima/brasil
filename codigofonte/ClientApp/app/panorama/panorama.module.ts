@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { PanoramaComponent } from './panorama.component';
-import { PamoramaResumoComponent } from './panorama-resumo/panorama-resumo.component'
+import { PanoramaResumoComponent } from './panorama-resumo/panorama-resumo.component'
 import { PanoramaTemasComponent } from './panorama-temas/panorama-temas.component';
 import { PanoramaCardComponent } from './panorama-temas/panorama-card/panorama-card.component';
 
@@ -10,7 +10,7 @@ import { PanoramaCardComponent } from './panorama-temas/panorama-card/panorama-c
     exports: [],
     declarations: [
         PanoramaComponent,
-        PamoramaResumoComponent,
+        PanoramaResumoComponent,
         PanoramaTemasComponent,
         PanoramaCardComponent
     ],

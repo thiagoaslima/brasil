@@ -57,7 +57,8 @@ export const PANORAMA = {
             {
                 pesquisa: 40,
                 indicador: 30277,
-                titulo: "Índice de Desenvolvimento da Educação Básica (IDEB)",
+                titulo: "IDEB",
+                subtitulo: "Índice de Desenvolvimento da Educação Básica (IDEB)",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
             },

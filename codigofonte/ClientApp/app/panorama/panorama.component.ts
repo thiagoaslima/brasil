@@ -47,11 +47,12 @@ export class PanoramaComponent implements OnInit {
             if (!acc[item.tema]) { acc[item.tema] = new PanoramaTema({ nome: item.tema }) }
 
             const indicador$ = observables[item.pesquisa].map(indicadores => indicadores.find(indicador => indicador.id === item.indicador))
+            item = Object.assign({}, item, {indicador$});
 
             if (item.visualizacao === PanoramaVisualizacao.painel) {
-                acc[item.tema].painel.push(indicador$);
+                acc[item.tema].painel.push(item);
             } else {
-                acc[item.tema].complementos.push({ indicador: indicador$, visualizacao: item.visualizacao })
+                acc[item.tema].complementos.push(item)
             }
 
             return acc;
