@@ -29,7 +29,7 @@ export class GraficoComponent implements OnInit, OnChanges{
     public datasets = [];
     public labels = [];
     public options = {};
-    public tipo = 'bar'; // bar / line / radar / polarArea / pie / doughnut / bubble
+    public tipo = 'bar'; // bar / horizontalBar / line / radar / polarArea / pie / doughnut / bubble
     public colors = ["#00A99D", "#177437", "#22B573", "#8CC63F"]; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
 
     private showLegend = false;
@@ -71,17 +71,22 @@ export class GraficoComponent implements OnInit, OnChanges{
         let dataset = {};
         let i = 0;
 
+        //construindo os datasets
         for(var indicador in dados) {
 
+            //limpa valores para gerar o dataset de cada indicador e joga-los no array datasets
             dataset = {};
             dadosGrafico = [];
+
             for(var periodo in dados[indicador]) {
 
                 dadosGrafico.push(dados[indicador][periodo]);
-                i === 0 ? this.labels.push(periodo) : '';
+                //puxa os períodos do primeiro indicador
+                i === 0 ? this.labels.push(periodo) : ''; 
 
             }
 
+            //converte os valores finais para números antes de jogar no dataset
             let valores = dadosGrafico.map(valor => {
                 return this.converterParaNumero(valor);
             });
