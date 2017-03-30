@@ -141,14 +141,11 @@ export class LocalidadeService2 {
         return this._municipios.buscarPorCodigo(munCodigo);
     }
 
-    public buscar(termo: string): {ufs: Localidade[], municipios: Localidade[]} {
+    public buscar(termo: string): Localidade[] {
         const municipios = this._municipios.todos.filter(mun => searchTest(termo, mun))
-        const ufs = this._ufs.todos.filter(mun => searchTest(termo, mun));
-
-        return {
-            ufs,
-            municipios
-        }
+        const ufs = this._ufs.todos.filter(uf => searchTest(termo, uf));
+        const pais = [this._brasil].filter(pais => searchTest(termo, pais))
+        return pais.concat(ufs, municipios);
     }
 
     private _buildLocalidadesTree() {
