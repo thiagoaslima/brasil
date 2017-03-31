@@ -40,10 +40,19 @@
                 <li routerLinkActive='menu--selecionado'>
                     <a style="display:block" [routerLink]="getLink('pesquisas')">Pesquisas</a>
                 </li>
+
+                <li routerLinkActive='menu--selecionado'>
+                    <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas2</a>
+                </li>
             </ul>
         </nav>
 
     </aside>
 
+    <div class="conteudo__dados--com-scroll submenu">
+        <submenu *ngIf="abrirMenuPesquisa === true"></submenu>
+    </div>
+
     <router-outlet></router-outlet>
+
 </div>

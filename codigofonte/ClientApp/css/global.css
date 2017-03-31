@@ -263,6 +263,11 @@ sintese>dados
     overflow-y: auto;
 }
 
+.conteudo__dados--com-scroll.submenu {
+    width: 10px;
+    background: #333;
+}
+
 
 .conteudo__detalhes{
     float: left;
@@ -447,7 +452,7 @@ sintese>dados
     }
     
     .conteudo{
-        width: calc(100% - 250px);
+        width: calc(100% - 260px);
     }
 
     

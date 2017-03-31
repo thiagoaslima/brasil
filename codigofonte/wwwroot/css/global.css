@@ -29,6 +29,14 @@ body.estado{
     background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
+body.estado--apenas-aside{
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: -o-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: -moz-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+}
+
 body.municipio{
     background: #fff; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
@@ -172,6 +180,12 @@ aside #localidade button#menu-principal{
     display: none;
 }
 
+
+
+
+
+
+
 aside #menu ul{
     margin-top: 28px;
 }
@@ -220,12 +234,11 @@ sintese>dados
 }
 
 #sintese #detalhes{
-    background-color: white;
+    background-color: yellow;
     float: left;
     width: 62%;
     min-height: 100%;
 }
-
 
 /*******************/
 
@@ -248,6 +261,11 @@ sintese>dados
     width: 38%;
     height: 100%;
     overflow-y: auto;
+}
+
+.conteudo__dados--com-scroll.submenu {
+    width: 10px;
+    background: #333;
 }
 
 
@@ -408,8 +426,21 @@ sintese>dados
 
 @media screen and (min-width: 1200px) {
     /*aside fica fixo em 250px;*/
-    body.estado{
-       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff )
+    body.estado{  
+       background: #fff; /* For browsers that do not support gradients */
+       background: -webkit-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
+       background: -o-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
+       background: -moz-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
+       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
+
+    }
+
+    body.estado--apenas-aside{
+        background: #fff; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: -o-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: -moz-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
     }
 
     header .logo {
@@ -421,7 +452,7 @@ sintese>dados
     }
     
     .conteudo{
-        width: calc(100% - 250px);
+        width: calc(100% - 260px);
     }
 
     

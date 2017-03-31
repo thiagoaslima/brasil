@@ -1,0 +1,86 @@
+.submenu{
+    background-color: #333333;
+    width: 100%;
+    color: white;
+    list-style: none;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 30%;
+    top: 56px;
+}
+
+.submenu__item{
+    background-color: #333333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submenu__item--selecionado{
+    background-color: #333333 !important;
+}
+
+.submenu__texto{
+    padding: 15px 40px 15px 20px;
+    position: relative;
+}
+
+.submenu__subtexto{
+    padding: 15px 40px 15px 60px;
+    position: relative;
+}
+
+.submenu__subseta{
+    position: absolute;
+    right: 20px;
+    top: 35%;
+    color: #9B9B9B;
+}
+
+.submenu__subseta--selecionada{
+    color: white;
+}
+
+.submenu__subitem--selecionado{
+    background-color: #1B779B !important;
+}
+
+.submenu__item:hover{
+    background-color: #1B779B;
+}
+
+.submenu__seta{
+    position: absolute;
+    right: 20px;
+    top: 35%;
+}
+
+.submenu__seta--selecionado{
+    color: #1B779B;
+}
+
+.submenu__separador{
+    margin: 0px 20px;
+    border-top: 1px solid #999999;
+    display: block;
+}
+
+li:last-child > .submenu__separador, .submenu__item--selecionado > .submenu__separador{
+    display: none;
+}
+
+.submenu__submenu{
+    background-color: #4D4D4D;
+    list-style: none;
+    width: 100%;
+}
+
+.submenu__subitem{
+    background-color: #4D4D4D;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submenu__subitem:hover{
+    background-color: #1B779B;
+}

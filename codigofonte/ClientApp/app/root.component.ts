@@ -24,6 +24,7 @@ export class RootComponent implements OnInit, OnDestroy {
     public isHeaderStatic;
     public menuGlobalAberto = false;
     public menuAberto = false;
+    public abrirMenuPesquisa = false;
 
     private _localSelecionada$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
