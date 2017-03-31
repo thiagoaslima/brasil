@@ -1,3 +1,4 @@
+<template ngFor let-tema [ngForOf]="dados">
 <div class="cabecalho">
     <div class="cabecalho__celula-esquerda">
         <h2 class="cabecalho__titulo">Educação</h2>
@@ -39,5 +40,7 @@
     </grafico>
 </div>
 
-<panorama-card>
-</panorama-card>
+<template ngFor let-painel [ngForOf]="tema.painel">
+    <panorama-card [dados]="painel" [localidade]="localidade">
+    </panorama-card>
+</template>

@@ -12,8 +12,7 @@ export interface PanoramaConfigurationItem {
     indicadorId: number
     unidade?: string
     visualizacao: string,
-    indicador: Indicador,
-    pesquisa: Pesquisa
+    indicador: Indicador
 }
 
 export const PanoramaVisualizacao = {

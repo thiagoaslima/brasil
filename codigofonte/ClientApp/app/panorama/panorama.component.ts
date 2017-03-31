@@ -21,10 +21,7 @@ import 'rxjs/add/operator/share';
 })
 export class PanoramaComponent implements OnInit {
     localidade$: Observable<Localidade>
-    hashIndicadores$: Observable<{ [indicadorId: number]: Observable<Indicador> }>
     panorama$;
-    private _initialConfig;
-    private _initialHash;
 
     constructor(
         private _appState: AppState,
