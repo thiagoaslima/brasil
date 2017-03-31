@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'panorama-temas',
     templateUrl: './panorama-temas.template.html',
-    styleUrls: ['./panorama-temas.style.css']
+    styleUrls: ['./panorama-temas.style.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanoramaTemasComponent implements OnInit {
     @Input() dados;

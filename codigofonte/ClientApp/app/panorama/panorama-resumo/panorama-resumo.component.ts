@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { PanoramaDescriptor, PanoramaConfigurationItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
@@ -9,7 +9,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
     selector: 'panorama-resumo',
     templateUrl: './panorama-resumo.template.html',
-    styleUrls: ['./panorama-resumo.style.css']
+    styleUrls: ['./panorama-resumo.style.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanoramaResumoComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaDescriptor;

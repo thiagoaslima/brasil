@@ -100,19 +100,45 @@ export const PANORAMA = {
             {
                 pesquisaId: 19,
                 indicadorId: 29765,
-                titulo: "Emprego formal",
+                titulo: "Salário médio mensal",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
             {
                 pesquisaId: 19,
-                indicadorId: 29764,
-                titulo: "Rendimento médio",
+                indicadorId: 29763,
+                titulo: "Pessoal ocupado",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
-            }
+            },
 
+            {
+                pesquisaId: 19,
+                indicadorId: 29763,
+                titulo: "Pessoal ocupado",
+                tema: TEMAS.trabalho,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            // --- Saúde
+            {
+                pesquisaId: 39,
+                indicadorId: 30279,
+                titulo: "Mortalidade Infantil",
+                tema: TEMAS.saude,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            // --- Economia
+            {
+                pesquisaId: 38,
+                indicadorId: 47001,
+                titulo: "PIB per capita",
+                tema: TEMAS.economia,
+                visualizacao: PanoramaVisualizacao.painel
+            }
+            
         ] 
     }
 }
