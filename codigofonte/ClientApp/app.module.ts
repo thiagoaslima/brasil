@@ -4,7 +4,7 @@ import { CommonModule }  from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app/app/app.component';
-import { rootRouting } from './app/root.routes';
+import { RootRoutingModule } from './app/root-routing.module';
 import { RootModule } from './app/root.module';
 
 import { ValidParametersGuard } from './app/valid-parameters.guard';
@@ -18,7 +18,7 @@ import { ValidParametersGuard } from './app/valid-parameters.guard';
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         CommonModule,
         RouterModule,
-        rootRouting,
+        RootRoutingModule,
         RootModule
     ],
     providers: [

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
-import { PanoramaTema, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
+import { PanoramaDescriptor, PanoramaConfigurationItem, PanoramaVisualizacao } from '../configuration/panorama.model';
+import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 
 import { Observable } from 'rxjs/Observable';
@@ -10,11 +11,16 @@ import { Observable } from 'rxjs/Observable';
     templateUrl: './panorama-resumo.template.html',
     styleUrls: ['./panorama-resumo.style.css']
 })
-export class PanoramaResumoComponent implements OnInit {
-    @Input('config') configuracao$: Observable<PanoramaTema[]>;
-    @Input() localidade: Localidade
+export class PanoramaResumoComponent implements OnInit, OnChanges {
+    @Input() dados: PanoramaDescriptor;
+    @Input() localidade: Localidade;
     
     constructor() { }
 
     ngOnInit() { }
+
+    ngOnChanges(changes) {
+        debugger;
+        console.log(changes)
+    }
 }

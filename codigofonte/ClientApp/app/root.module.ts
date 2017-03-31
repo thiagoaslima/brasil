@@ -28,7 +28,7 @@ import { BASES, PESQUISAS } from './global-config';
         SinteseModule,
         PanoramaModule,
         SandboxModule,  
-        RootRoutingModule,
+        // RootRoutingModule,
         TesteModule
     ],
     declarations: [
