@@ -28,6 +28,7 @@ export const PANORAMA = {
         temas: [
             TEMAS.nenhum,
             TEMAS.trabalho,
+            TEMAS.educacao,
             TEMAS.meioAmbiente,
             TEMAS.economia,
             TEMAS.saude,
