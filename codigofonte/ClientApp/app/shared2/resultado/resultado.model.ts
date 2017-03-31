@@ -48,6 +48,10 @@ export class Resultado {
         return flat(arr);
     }
 
+    static converterFromIndicadorBody(indicadorId: number, res: { localidade: string, res: Object }[]) {
+        return Resultado.converterGroupedByIndicador([{ id: indicadorId, res }]);
+    }
+
     static resultadoStrategy = null;
     static get(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: number): Observable<Resultado> {
         return Resultado.resultadoStrategy.retrieve(pesquisaId, posicaoIndicador, codigoLocalidade, EscopoIndicadores.proprio)

@@ -11,7 +11,7 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
-  { path: '', redirectTo: 'sintese/historico', pathMatch: 'full' },
+  { path: '', redirectTo: 'panorama', pathMatch: 'full' },
 
   { path: 'panorama',
     component: PanoramaComponent
@@ -39,10 +39,10 @@ const children = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild([
+    RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'brasil/rj/rio-de-janeiro/sintese/historico',
+        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
         pathMatch: 'full'
       },
       {

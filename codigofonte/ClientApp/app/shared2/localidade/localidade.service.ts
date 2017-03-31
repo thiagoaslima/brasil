@@ -5,6 +5,7 @@ import { Localidade } from './localidade.model';
 import { municipios } from '../../../api/municipios';
 import { ufs } from '../../../api/ufs';
 import { brasil } from '../../../api/brasil';
+import { slugify } from '../../utils/slug';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -140,6 +141,13 @@ export class LocalidadeService2 {
         return this._municipios.buscarPorCodigo(munCodigo);
     }
 
+    public buscar(termo: string): Localidade[] {
+        const municipios = this._municipios.todos.filter(mun => searchTest(termo, mun))
+        const ufs = this._ufs.todos.filter(uf => searchTest(termo, uf));
+        const pais = [this._brasil].filter(pais => searchTest(termo, pais))
+        return pais.concat(ufs, municipios);
+    }
+
     private _buildLocalidadesTree() {
         this._brasil = Localidade.criar(Localidade.convertFromFile(brasil));
 
@@ -153,4 +161,12 @@ export class LocalidadeService2 {
             this._municipios.registerElement(_mun, _mun.codigoParent);
         });
     }
+}
+
+function searchTest(termo: string, local: Localidade) {
+    termo = slugify(termo);
+
+    return local.codigo.toString().indexOf(termo) >= 0 
+        || local.sigla.indexOf(termo) >= 0
+        || local.slug.indexOf(termo) >= 0;
 }

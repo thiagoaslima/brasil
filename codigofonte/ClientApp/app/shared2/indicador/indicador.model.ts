@@ -113,7 +113,7 @@ export class Indicador {
     get indicadores() {
         if (!this._indicadores) {
             this._indicadores = Indicador.getFilhos(this.pesquisaId, this.posicao)
-                .do(indicadores => this._indicadores = Observable.of(indicadores))
+                .do(indicadores => this.registerFilhos(indicadores))
                 .share();
         }
         return this._indicadores;
@@ -123,7 +123,7 @@ export class Indicador {
     get pesquisa() {
         if (this._pesquisa === undefined) {
             this._pesquisa = Pesquisa.get(this.pesquisaId)
-                .do(pesquisa => this._pesquisa = Observable.of(pesquisa))
+                .do(pesquisa => this.registerPesquisa(pesquisa))
                 .share();
         }
 
@@ -135,9 +135,15 @@ export class Indicador {
         Object.keys(_defaults).forEach(property => {
             this[property] = data[property];
         });
+
+        if (data.res) {
+            const array = Resultado.converterFromIndicadorBody(this.id, data.res);
+            const resultados = array.map(obj => Resultado.criar(obj))
+            this.registerResultados(resultados);
+        }
     }
 
-    private _resultados: {[idx: number]: Observable<Resultado>} = Object.create(null);
+    private _resultados: {[codigoLocalidade: number]: Observable<Resultado>} = Object.create(null);
     getResultadoByLocal(codigoLocalidade: number): Observable<Resultado> {
         if (!this._resultados[codigoLocalidade]) {
             this._resultados[codigoLocalidade] = Resultado.get(this.pesquisaId, this.posicao.toString(), codigoLocalidade)
@@ -145,6 +151,26 @@ export class Indicador {
                 .share();
         }
         return this._resultados[codigoLocalidade];
+    }
+
+    registerPesquisa(pesquisa: Pesquisa) {
+        this._pesquisa = Observable.of(pesquisa);
+    }
+
+    registerResultado(resultado: Resultado) {
+        this._resultados[resultado.localidadeCodigo] = Observable.of(resultado);       
+    }
+
+    registerResultados(resultados: Resultado[]) {
+        resultados.forEach(resultado => this.registerResultado(resultado));
+    }
+
+    registerIndicadorPai(indicador: Indicador) {
+        this._indicadorPai = Observable.of(indicador);
+    }
+
+    registerFilhos(indicadores: Indicador[]) {
+        this._indicadores = Observable.of(indicadores);
     }
 }
 

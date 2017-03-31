@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'panorama-temas',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./panorama-temas.style.css']
 })
 export class PanoramaTemasComponent implements OnInit {
+    @Input() dados;
+    @Input() localidade;
 
     tipoGrafico = "bar";
     // dadosIndicador = {"1991": "0.639", "2000": "0.716", "2010": "0.799"};

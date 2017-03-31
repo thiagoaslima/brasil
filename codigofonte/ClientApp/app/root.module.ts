@@ -30,7 +30,7 @@ import { SubmenuComponent } from './submenu/submenu.component';
         SinteseModule,
         PanoramaModule,
         SandboxModule,  
-        RootRoutingModule,
+        // RootRoutingModule,
         TesteModule
     ],
     declarations: [
