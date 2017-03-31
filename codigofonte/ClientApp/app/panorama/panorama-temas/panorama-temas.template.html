@@ -1,46 +1,42 @@
 <template ngFor let-tema [ngForOf]="dados">
-<div class="cabecalho">
-    <div class="cabecalho__celula-esquerda">
-        <h2 class="cabecalho__titulo">Educação</h2>
-    </div>
-    <div class="cabecalho__celula-direita">
-        <p class="cabecalho__descricao">
-            Saquarema possui uma taxa de escolarização para crianças entre 4 e 6 anos de idade de
-            90,7%, sendo considerado um valor muito elevado. Porém, ao compararmos com todos os
-            municípios do Brasil, Saquarema encontra-se entre as 60% menos taxas.
-        </p>
-        <p class="cabecalho__descricao">
-            Em relação aos municípios do Estado do Rio de Janeiro, essa taxa posiciona Saquarema entre
-            os 40% menores.
-        </p>
-        <p class="cabecalho__descricao">
-            Ao confrontarmos com os municípios brasileiros de mesmo porte populacional (maior que 50
-            até 100 mil habitantes), a cidade situa-se entre os 60% menores.
-        </p>
-    </div>
-</div>
-
-<div class="grafico">
-    <h2 class="grafico__titulo">Matrículas <i class="fa fa-info-circle grafico__info" aria-hidden="true"></i></h2>
-    <div class="grafico__detalhes">
-        <h3 class="grafico__subtitulo">Por nível de escolaridade</h3>
-        <div class="grafico__legenda">
-            <div class="grafico__legenda-item" *ngFor="let indicador of nomeIndicador; let i = index">
-                <div class="grafico__legenda-cor grafico__legenda-cor--{{i+1}}"></div>
-                <p class="grafico__legenda-texto">{{indicador}}</p>
-            </div>
+    <div class="cabecalho">
+        <div class="cabecalho__celula-esquerda">
+            <h2 class="cabecalho__titulo">Educação</h2>
+        </div>
+        <div class="cabecalho__celula-direita">
+            <p class="cabecalho__descricao">
+                Saquarema possui uma taxa de escolarização para crianças entre 4 e 6 anos de idade de 90,7%, sendo considerado um valor muito
+                elevado. Porém, ao compararmos com todos os municípios do Brasil, Saquarema encontra-se entre as 60% menos
+                taxas.
+            </p>
+            <p class="cabecalho__descricao">
+                Em relação aos municípios do Estado do Rio de Janeiro, essa taxa posiciona Saquarema entre os 40% menores.
+            </p>
+            <p class="cabecalho__descricao">
+                Ao confrontarmos com os municípios brasileiros de mesmo porte populacional (maior que 50 até 100 mil habitantes), a cidade
+                situa-se entre os 60% menores.
+            </p>
         </div>
     </div>
-    <grafico 
-        [tipoGrafico]="tipoGrafico" 
-        [dadosIndicador]="dadosIndicador" 
-        [nomeSerie]="nomeIndicador" 
-        [carregando]="isGraficoCarregando" 
-        (dataURL)="setDataURL($event)">
-    </grafico>
-</div>
 
-<template ngFor let-painel [ngForOf]="tema.painel">
-    <panorama-card [dados]="painel" [localidade]="localidade">
-    </panorama-card>
+    <div class="grafico">
+        <h2 class="grafico__titulo">Matrículas <i class="fa fa-info-circle grafico__info" aria-hidden="true"></i></h2>
+        <div class="grafico__detalhes">
+            <h3 class="grafico__subtitulo">Por nível de escolaridade</h3>
+            <div class="grafico__legenda">
+                <div class="grafico__legenda-item" *ngFor="let indicador of nomeIndicador; let i = index">
+                    <div class="grafico__legenda-cor grafico__legenda-cor--{{i+1}}"></div>
+                    <p class="grafico__legenda-texto">{{indicador}}</p>
+                </div>
+            </div>
+        </div>
+        <grafico [tipoGrafico]="tipoGrafico" [dadosIndicador]="dadosIndicador" [nomeSerie]="nomeIndicador" [carregando]="isGraficoCarregando"
+            (dataURL)="setDataURL($event)">
+        </grafico>
+    </div>
+
+    <template ngFor let-painel [ngForOf]="tema.painel">
+        <panorama-card [dados]="painel" [localidade]="localidade">
+        </panorama-card>
+    </template>
 </template>
