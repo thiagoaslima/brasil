@@ -54,7 +54,7 @@
     </aside>
 
     <div class="conteudo__dados--com-scroll submenu">
-        <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)"></submenu>
+        <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
     </div>
 
     <router-outlet></router-outlet>

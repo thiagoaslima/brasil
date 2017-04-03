@@ -10,7 +10,7 @@ import { LocalidadeService } from '../shared/localidade/localidade.service';
     templateUrl: 'submenu.template.html',
     styleUrls: ['submenu.style.css']
 })
-export class SubmenuComponent {
+export class SubmenuComponent implements OnInit {
 
     public pesquisas = [];
     public idPesquisaSelecionada;
@@ -20,6 +20,7 @@ export class SubmenuComponent {
     public baseURL;
 
     @Output() closeMenu = new EventEmitter();
+    @Input() localidade;
 
     constructor(
         private _routerParams:RouterParamsService,
