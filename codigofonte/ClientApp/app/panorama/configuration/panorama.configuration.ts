@@ -1,5 +1,6 @@
 import { PanoramaDescriptor, PanoramaItem, PanoramaConfigurationItem, PanoramaVisualizacao } from './panorama.model';
 import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
+import { TiposGrafico } from '../../infografia/grafico-base/grafico.component';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';
@@ -59,61 +60,82 @@ export const PANORAMA = {
                 pesquisaId: 40,
                 indicadorId: 30277,
                 titulo: "IDEB",
-                subtitulo: "Índice de Desenvolvimento da Educação Básica (IDEB)",
+                subtitulo: "Índice de Desenvolvimento da Educação Básica",
                 tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.painel
-            },
-
-            {
-                pesquisaId: 13,
-                indicadorId: 5903,
-                titulo: "Matrículas no ensino pré-escolar",
-                tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.painel
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "IDEB",
+                    tipo: TiposGrafico.linha,
+                    dados: [{
+                        pesquisaId: 40,
+                        indicadorId: 30277
+                    }]
+                }
             },
 
             {
                 pesquisaId: 13,
                 indicadorId: 5908,
-                titulo: "Matrículas no ensino fundamental",
+                titulo: "Matrículas",
+                subtitulo: "no ensino fundamental",
                 tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.graficoBarra
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Matrículas",
+                    tipo: TiposGrafico.coluna,
+                    dados: [{
+                        pesquisaId: 13,
+                        indicadorId: 5903,
+                    }, {
+                        pesquisaId: 13,
+                        indicadorId: 5908,
+                    }, {
+                        pesquisaId: 13,
+                        indicadorId: 5913,
+                    }, {
+                        pesquisaId: 13,
+                        indicadorId: 5918,
+                    }]
+                }
             },
 
-            {
-                pesquisaId: 13,
-                indicadorId: 5913,
-                titulo: "Matrículas no ensino médio",
-                tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.graficoBarra
-            },
-
-            {
-                pesquisaId: 13,
-                indicadorId: 5918,
-                titulo: "Matrículas no ensino superior",
-                tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.graficoBarra
-            },
 
             // --- Trabalho
             {
                 pesquisaId: 19,
                 indicadorId: 29765,
-                titulo: "Emprego formal",
+                titulo: "Salário médio mensal",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
             {
                 pesquisaId: 19,
-                indicadorId: 29764,
-                titulo: "Rendimento médio",
+                indicadorId: 29763,
+                titulo: "Pessoal ocupado",
                 tema: TEMAS.trabalho,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            // --- Saúde
+            {
+                pesquisaId: 39,
+                indicadorId: 30279,
+                titulo: "Mortalidade Infantil",
+                tema: TEMAS.saude,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            // --- Economia
+            {
+                pesquisaId: 38,
+                indicadorId: 47001,
+                titulo: "PIB per capita",
+                tema: TEMAS.economia,
                 visualizacao: PanoramaVisualizacao.painel
             }
 
-        ] 
+        ]
     }
 }
 

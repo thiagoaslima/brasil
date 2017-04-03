@@ -6,7 +6,7 @@ import { PesquisaDadosComponent } from './pesquisa-dados/pesquisa-dados.componen
 
 
 import { SharedModule } from '../shared/shared.module';
-import { ChartsModule } from '../shared/ng2-charts.module';
+import { ChartsModule } from '../infografia/ng2-charts.module';
 
 @NgModule({
     imports: [

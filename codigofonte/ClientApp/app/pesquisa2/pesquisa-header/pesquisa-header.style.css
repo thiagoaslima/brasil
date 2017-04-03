@@ -30,6 +30,9 @@
     float: right;
     margin-top: 30px;
     background: #ccc;
+}
+
+.notas__botao {
     cursor: pointer;
 }
 
@@ -42,13 +45,13 @@
 }
 
 .notas__lista-container {
-    display: none;
     position: absolute;
     background: #fff;
     padding: 20px 15px 15px 30px;
     width: 450px;
     border: 1px solid #ccc;
     margin-left: -5px;
+    z-index: 2;
 }
 
 .notas__lista-container li {
@@ -124,6 +127,10 @@
 */
 
 .cabecalho .select__sub-menu {
+    position: relative;
+}
+
+.select__sub-menu__botao{
     width: 45px;
     height: 25px;
     border: 1px solid #999;
@@ -136,14 +143,6 @@
     cursor: pointer;
 }
 
-.select__sub-menu .select__submenu-aberto {
-    display: none;
-}
-
-.select__sub-menu.submenu-aberto > div {
-    display: block;
-}
-
 .select__sub-menu.submenu-aberto {
     background-color: #CCC;
     color: initial;
@@ -152,19 +151,17 @@
 
 .select__submenu-aberto{
     background-color: #ccc;
-    position: relative; 
+    position: absolute;
+    right: 0px;
     text-align: left;
-    margin-left: -95px;
-    width: 140px;
+    z-index: 2;
 }
 
 .select__submenu-aberto > div {
-    padding: 10px 0;
+    padding: 10px;
     letter-spacing: initial;
     color: initial;
     cursor: pointer;
-    padding-left: 10px;
-
 }
 
 .select__submenu-aberto > div:hover {
@@ -186,17 +183,8 @@
 */
 
 .add-municipio {
-    /*width: 45px;
-    height: 25px;
-    border: 1px solid #999;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    display: inline-block;
-    line-height: 25px;
-    letter-spacing: 5px;
-    color: #999;
-    margin-top: 17px;*/
     cursor: pointer;
+    position: relative;
 }
 
 .add-municipio button {
@@ -229,9 +217,10 @@
     background: #333;
     color: #fff;
     line-height: normal;
-    position: relative;
-    margin-left: -75px;
-    padding: 0 10px;
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    padding: 10px;
     min-width: 260px;
 }
 
@@ -253,12 +242,14 @@
 .por-estado__selecionar-municipio input {
     width: 100%;
     color: #4D4D4D;
-    height: 31px;
-    margin-bottom: 15px;
+    height: 32px;
 }
 
 .por-estado__selecionar-municipio ul {
     list-style-type: none;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .por-estado__selecionar-municipio ul li {
@@ -266,6 +257,10 @@
     font-size: .9em;
     padding: 10px 0px;
     transition: padding-left 0.3s, background-color 0.3s;
+}
+
+.por-estado__selecionar-municipio ul li:last-child {
+    border-bottom: none;
 }
 
 .por-estado__selecionar-municipio ul li:hover {
@@ -295,4 +290,18 @@
     font-weight: bold;
     margin: 0px 0px 5px;
     font-size: .9em;
+}
+
+.area-click{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    display: none;
+}
+
+.area-click--visivel{
+    display: block;
 }

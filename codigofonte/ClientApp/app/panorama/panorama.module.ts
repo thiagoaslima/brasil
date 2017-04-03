@@ -3,24 +3,26 @@ import { NgModule } from '@angular/core';
 import { PanoramaComponent } from './panorama.component';
 import { PanoramaResumoComponent } from './panorama-resumo/panorama-resumo.component'
 import { PanoramaTemasComponent } from './panorama-temas/panorama-temas.component';
-import { PanoramaCardComponent } from './panorama-temas/panorama-card/panorama-card.component';
+import { PanoramaPainelComponent } from './panorama-painel/panorama-painel.component';
+import { PanoramaCardComponent } from './panorama-painel/panorama-card/panorama-card.component';
 
-import { GraficoComponent } from './panorama-temas/grafico/grafico.component';
+import { InfografiaModule } from '../infografia/infografia.module';
 import { SharedModule } from '../shared/shared.module';
-import { ChartsModule } from '../shared/ng2-charts.module';
+import { SharedModule2 } from '../shared2/shared.module';
 
 @NgModule({
     imports: [
+        InfografiaModule,
         SharedModule,
-        ChartsModule
+        SharedModule2
     ],
     exports: [],
     declarations: [
         PanoramaComponent,
         PanoramaResumoComponent,
         PanoramaTemasComponent,
-        PanoramaCardComponent,
-        GraficoComponent
+        PanoramaPainelComponent,
+        PanoramaCardComponent
     ],
     providers: [],
 })
