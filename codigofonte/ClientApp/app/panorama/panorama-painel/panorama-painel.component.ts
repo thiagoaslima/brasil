@@ -15,7 +15,6 @@ import { Localidade } from '../../shared2/localidade/localidade.model';
                 <div class="legenda">
                     
                 </div>
-                </div>
             </div>
             
             <div class="cards">
