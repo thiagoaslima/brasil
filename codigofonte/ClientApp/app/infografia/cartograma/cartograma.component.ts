@@ -2,7 +2,6 @@ import { Inject, Component, Input, OnInit, OnChanges, SimpleChange } from '@angu
 
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { MapaService } from './mapa.service';
 
 import { Observable } from 'rxjs/Observable';
@@ -24,37 +23,42 @@ import 'rxjs/add/operator/scan';
     styleUrls: ['mapa.style.css']
 })
 export class CartogramaComponent implements OnInit, OnChanges {
-    @Input('localidade') codigoLocalidade: number;
+    @Input() localidade: Localidade;
     @Input() indicador: Indicador;
     @Input() periodo;
     
-    public malha$
-    private _codigoLocalidade$ = new BehaviorSubject<number>(null);
+    public malha$;
+    private _localidade$ = new BehaviorSubject<Localidade>(null);
+    private _indicador$ = new BehaviorSubject<Indicador>(null);
 
     constructor(
-        private _mapaService: MapaService,
-        private _localidadeService: LocalidadeService2
+        private _mapaService: MapaService
     ){}
 
     ngOnInit() {
-       this.malha$ = this._codigoLocalidade$
+       this.malha$ = this._localidade$
             .filter(Boolean)
-            .distinctUntilChanged()
-            .flatMap(codigo => {
-                return this._mapaService.getMalhaSubdivisao(codigo);
+            .distinctUntilKeyChanged('codigo')
+            .flatMap(localidade => {
+                return this._mapaService.getMalhaSubdivisao(localidade.codigo);
             }); 
     }
 
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-        if (changes.hasOwnProperty('codigoLocalidade')) {
-            this._codigoLocalidade$.next(changes.codigoLocalidade.currentValue);
+        if (changes.hasOwnProperty('codigoLocalidade') && Boolean(changes.localidade.currentValue)) {
+            this._localidade$.next(changes.localidade.currentValue);
+        }
+
+        if (changes.hasOwnProperty('indicador') && Boolean(changes.indicador.currentValue)) {
+            this._indicador$.next(changes.indicador.currentValue);
         }
     }
 }
 
 @Component({
     selector: '[regiao-mapa]',
-    template: `<svg:g #item [attr.class]="classeCss" 
+    template: `<svg:g #item 
+                    [attr.class]="classeCss" 
                     [attr.codigo]="codigo" 
                     [attr.nome]="nome" 
                     [attr.link]="link" 

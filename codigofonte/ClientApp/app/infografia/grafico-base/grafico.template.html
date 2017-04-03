@@ -15,9 +15,8 @@
                 [labels]="labels$ | async"
                 [options]="options$ | async"
                 [chartType]="tipo"
-                [colors]="colors"
-            >
-            </canvas>
+                [colors]="colors[tipo]"
+            ></canvas>
 
         <!--</div>-->
     </div>

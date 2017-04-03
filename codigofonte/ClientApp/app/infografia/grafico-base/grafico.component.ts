@@ -75,7 +75,11 @@ export class GraficoComponent implements OnInit, OnChanges {
     // public labels = [];
     // public options = {};
     public tipo = 'bar';
-    public colors = [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }];
+    public colors = {
+        bar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
+        horizontalBar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
+        line: [{ borderColor: '#00A99D' }, { borderColor: '#177437' }, { borderColor: '#22B573' }, { borderColor: '#8CC63F' }],
+    };
     // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
     // public carregando: boolean = true;
 
@@ -142,7 +146,7 @@ export class GraficoComponent implements OnInit, OnChanges {
             })
             .distinctUntilChanged((newValue, oldValue) => {
                 return newValue['data']
-                    .map( (val, idx) => [val, oldValue['data'][idx]])
+                    .map((val, idx) => [val, oldValue['data'][idx]])
                     .every(item => item[0] === item[1]);
             });
 
