@@ -1,4 +1,6 @@
 <!--<div class="conteudo__dados--com-scroll">-->
+<div class="submenu-container">
+    <div class="submenu-close" (click)="closeMenu.emit()"></div>
     <ul class="submenu">
         <li class="submenu__item" *ngFor="let pesquisa of pesquisas; let i = index;"
             [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada || pesquisa.visivel">
@@ -16,12 +18,12 @@
             <!--submenu-->
             <ul class="submenu__submenu" *ngIf="pesquisa.indicadores && pesquisa.visivel">
                 <li class="submenu__subitem" *ngFor="let indicador of pesquisa.indicadores;" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
-                    <p class="submenu__subtexto" routerLink="{{ baseURL + pesquisa.id + '/' + indicador.id }}" [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
+                    <p class="submenu__subtexto"><a routerLink="{{ baseURL + pesquisa.id + '/' + indicador.id }}" [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
                         <!--<span class="submenu__texto">-->
                             {{ indicador.indicador }}
                             <!--</span>-->
                         <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
-                    </p>
+                    </a></p>
                     <span class="submenu__separador"></span>
                 </li>
                 <!--<li class="submenu__separador"></li>-->
@@ -30,4 +32,5 @@
         </li>
         <!--<li class="submenu__separador"></li>-->
     </ul>
+</div>
 <!--</div>-->
