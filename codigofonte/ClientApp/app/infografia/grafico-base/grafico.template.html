@@ -4,20 +4,21 @@
     </div>
 
     <div *ngIf="!carregando">
-        <div *ngIf="!!datasets && datasets.length > 0">
+        <!--<div *ngIf="datasets | async">-->
             
-            <canvas baseChart
+            <canvas #grafico
+                baseChart
                 class="chart"
                 width="510" 
                 height="220"
-                [datasets]="datasets"
-                [labels]="labels"
-                [options]="options"
+                [datasets]="datasets$ | async"
+                [labels]="labels$ | async"
+                [options]="options$ | async"
                 [chartType]="tipo"
                 [colors]="colors"
-                #grafico1>
+            >
             </canvas>
 
-        </div>
+        <!--</div>-->
     </div>
 </div>

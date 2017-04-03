@@ -226,7 +226,7 @@ export class UnidadeIndicador {
     }
 
     toString() {
-        return this.multiplicador === 1
+        return this.multiplicador === 1 || !this.multiplicador 
             ? `${this.nome}`
             : `${this.nome} (${this.multiplicador})`;
     }

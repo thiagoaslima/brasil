@@ -4,6 +4,17 @@ import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+export type GraficoConfiguration = {
+    tipo: string,
+    titulo: string,
+    subtitulo?: string,
+    dados: Array<{
+        indicadorId: number,
+        pesquisaId: number,
+        indicador: Indicador
+    }>
+}
+
 export class PanoramaConfigurationItem {
     public titulo: string
     public subtitulo: string
@@ -15,9 +26,10 @@ export class PanoramaConfigurationItem {
     public unidade: string
     public visualizacao: string
     public indicador: Indicador
+    public grafico: GraficoConfiguration;
 
     constructor(data) {
-        this.titulo = data.titulo || ""; 
+        this.titulo = data.titulo || "";
         this.subtitulo = data.subtitulo || "";
         this.tema = data.tema;
         this.largura = data.largura || "full";
@@ -32,21 +44,41 @@ export class PanoramaConfigurationItem {
         } else {
             this.indicador = null;
         }
+
+        if (data.grafico && data.grafico.dados && data.grafico.dados.length) {
+            this.grafico = Object.assign(
+                {},
+                data.grafico,
+                {
+                    dados: data.grafico.dados.map(obj => {
+                        if (obj.indicador === undefined) {
+                            obj.indicador = null;
+                        }
+                        return obj;
+                    })
+                });
+            if (this.grafico.titulo === undefined) {
+                this.grafico.titulo = this.titulo;
+            }
+        } else {
+            this.grafico = null;
+        }
     }
 }
 
 export const PanoramaVisualizacao = {
-    graficoLinha: "linha",
-    graficoBarra: "barra",
+    grafico: "grafico",
     mapa: "cartograma",
     numerico: "numero",
     painel: "painel"
 }
 
 export type PanoramaItem = {
-    tema: string, 
+    tema: string,
     painel: PanoramaConfigurationItem[]
-    graficos: PanoramaConfigurationItem[]
+    grafico: PanoramaConfigurationItem[]
+    cartograma: PanoramaConfigurationItem[]
+    numero: PanoramaConfigurationItem[]
 }
 
 export type PanoramaDescriptor = PanoramaItem[]

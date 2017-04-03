@@ -21,6 +21,6 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     ngOnInit() { }
 
     ngOnChanges(changes) {
-        console.log(changes)
+        console.log('resumo', changes)
     }
 }
