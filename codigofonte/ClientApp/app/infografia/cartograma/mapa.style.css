@@ -45,6 +45,7 @@
 .ico-faixa.faixa3{ background: #C7E9B4; }
 .ico-faixa.selecionado{ background: #0D4768; }
 
+g.semValor polygon { fill: #A6A6A6}
 g.faixa1 polygon{ fill: #1B779B; }
 g.faixa2 polygon{ fill: #308BC9; }
 g.faixa3 polygon{ fill: #41B6C4; }

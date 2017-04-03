@@ -7,7 +7,7 @@
                 {{ item.titulo || item.indicador?.nome }}
             </h3>
             <p class="topo__valor">
-                {{ localidade.codigo }}
+                {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente }}
             </p>
         </div>
 

@@ -231,7 +231,6 @@ export class MapaComponent implements OnInit, OnChanges {
                 const qtdeFaixas = Math.ceil(resultados.length / 5) > 5 ? 5 : Math.ceil(resultados.length / 5);
                 const itensPorFaixa = resultados.length / qtdeFaixas;
                 const divisorias = Array(qtdeFaixas).fill(1).map((_, idx) => {
-                    debugger;
 
                     let len = resultados.length;
                     let indexQuartil = (len + 1) * (idx / len);
@@ -254,7 +253,6 @@ export class MapaComponent implements OnInit, OnChanges {
             resultadosOrdenados$,
             faixas$
         ).map(([{ periodo, resultados }, divisorias]) => {
-            debugger;
             return resultados.reduce((agg, resultado) => Object.assign(agg, {
                 [resultado.localidade]: {
                     faixa: this._defineFaixa(resultado.res, divisorias),

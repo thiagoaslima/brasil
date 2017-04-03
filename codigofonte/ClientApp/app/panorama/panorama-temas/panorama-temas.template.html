@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <panorama-painel [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
+    <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
     <!--
         <div class="cards">
             <panorama-card  *ngFor="let painel of tema.painel" [dados]="painel" [localidade]="localidade"></panorama-card>

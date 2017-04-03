@@ -218,7 +218,7 @@ export class SinteseService {
      */
     public getNomesPesquisa(pesquisa: string, indicadores: string[] = []) {
         if (!pesquisa) {
-            debugger;
+            
         }
 
         const nomesPesquisa$ = this._http.get(
