@@ -78,7 +78,23 @@ export class GraficoComponent implements OnInit, OnChanges {
     public colors = {
         bar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
         horizontalBar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
-        line: [{ borderColor: '#00A99D' }, { borderColor: '#177437' }, { borderColor: '#22B573' }, { borderColor: '#8CC63F' }],
+        line: [{
+            borderColor: '#00A99D', 
+            pointBackgroundColor: '#00A99D',
+            pointBorderColor: '#fff',
+        }, {
+            borderColor: '#177437', 
+            pointBackgroundColor: '#177437',
+            pointBorderColor: '#fff',
+        }, {
+            borderColor: '#22B573', 
+            pointBackgroundColor: '#22B573',
+            pointBorderColor: '#fff',
+        }, {
+            borderColor: '#8CC63F', 
+            pointBackgroundColor: '#8CC63F',
+            pointBorderColor: '#fff',
+        }],
     };
     // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
     // public carregando: boolean = true;
