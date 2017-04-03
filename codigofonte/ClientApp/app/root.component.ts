@@ -24,6 +24,7 @@ export class RootComponent implements OnInit, OnDestroy {
     public isHeaderStatic;
     public menuGlobalAberto = false;
     public menuAberto = false;
+    public abrirMenuPesquisa = false;
 
     private _localSelecionada$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
@@ -79,6 +80,10 @@ export class RootComponent implements OnInit, OnDestroy {
 
     handleSeletorAberto(seletorAberto){
         this.menuAberto = seletorAberto;
+    }
+
+    handleCloseMenu($event) {
+        this.abrirMenuPesquisa = false;
     }
 
 }

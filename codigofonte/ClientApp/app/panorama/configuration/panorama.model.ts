@@ -1,36 +1,32 @@
+import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Observable } from 'rxjs/Observable';
 
-export interface PanoramaItem {
+export interface PanoramaConfigurationItem {
     titulo: string,
     subtitulo?: string,
     tema: string
     largura?: string
     link?: string
-    pesquisa?: number
-    indicador?: number
+    pesquisaId: number
+    indicadorId: number
     unidade?: string
-    visualizacao: PanoramaVisualizacao,
-    indicador$: Observable<Indicador>
+    visualizacao: string,
+    indicador: Indicador
 }
 
-export enum PanoramaVisualizacao {
-    graficoLinha,
-    graficoBarra,
-    mapa,
-    numerico,
-    painel
+export const PanoramaVisualizacao = {
+    graficoLinha: "linha",
+    graficoBarra: "barra",
+    mapa: "cartograma",
+    numerico: "numero",
+    painel: "painel"
 }
 
-
-export class PanoramaTema {
-    public readonly nome: string
-    public readonly painel: Array<PanoramaItem>
-    public readonly complementos: Array<PanoramaItem>
-
-    constructor({nome, painel = [], complementos = []}) {
-        this.nome = nome,
-        this.painel = painel;
-        this.complementos = complementos;
-    }
+export type PanoramaItem = {
+    tema: string, 
+    painel: PanoramaConfigurationItem[]
+    graficos: PanoramaConfigurationItem[]
 }
+
+export type PanoramaDescriptor = PanoramaItem[]

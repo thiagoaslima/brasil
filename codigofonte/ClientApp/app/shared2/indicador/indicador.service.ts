@@ -52,9 +52,10 @@ export class IndicadorService2 {
             .share();
     }
 
-    getIndicadorById(pesquisaId: number, indicadorId: number | number[], escopo: string): Observable<Indicador> {
+    getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?): Observable<Indicador[]> {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
-        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}`;
+        const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`; 
+        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;
         if (this._prefetchMode.active) {
             url += `&localidades=${this._prefetchMode.localidades.join(',')}`
         }
@@ -62,7 +63,9 @@ export class IndicadorService2 {
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
             .map(res => res.json())
-            .map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId }))))
+            .map(json => flatTree(json))
+            .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId })))))
+            .map(array => this._rebuildTree(array))
             .do(indicador => console.log(`getIndicadorById`, indicador))
             .share();
     }

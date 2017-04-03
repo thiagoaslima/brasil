@@ -234,7 +234,7 @@ sintese>dados
 }
 
 #sintese #detalhes{
-    background-color: yellow;
+    background-color: #FFFFFF;
     float: left;
     width: 62%;
     min-height: 100%;
@@ -261,6 +261,11 @@ sintese>dados
     width: 38%;
     height: 100%;
     overflow-y: auto;
+}
+
+.conteudo__dados--com-scroll.submenu {
+    width: 10px;
+    background: #333;
 }
 
 
@@ -447,7 +452,7 @@ sintese>dados
     }
     
     .conteudo{
-        width: calc(100% - 250px);
+        width: calc(100% - 260px);
     }
 
     

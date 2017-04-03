@@ -9,7 +9,7 @@ if (module['hot']) {
     module['hot'].accept();
     module['hot'].dispose(() => { platform.destroy(); });
 } else {
-    enableProdMode();
+    // enableProdMode();
 }
 
 // Boot the application, either now or when the DOM content is loaded

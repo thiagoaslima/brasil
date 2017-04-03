@@ -18,6 +18,8 @@ import { TesteModule } from './testes/testes.module';
 import { ValidParametersGuard } from './valid-parameters.guard';
 import { BASES, PESQUISAS } from './global-config';
 
+import { SubmenuComponent } from './submenu/submenu.component';
+
 @NgModule({
     imports: [
         CoreModule,
@@ -28,11 +30,12 @@ import { BASES, PESQUISAS } from './global-config';
         SinteseModule,
         PanoramaModule,
         SandboxModule,  
-        RootRoutingModule,
+        // RootRoutingModule,
         TesteModule
     ],
     declarations: [
-        RootComponent
+        RootComponent,
+        SubmenuComponent
     ],
     exports: [
         RootComponent
