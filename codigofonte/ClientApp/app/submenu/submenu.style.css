@@ -19,7 +19,20 @@
     position: absolute;
     height: 100%;
     width: 37%;
-    /*top: 56px;*/
+    -webkit-animation: submenuanime 500ms; /* Safari 4.0 - 8.0 */
+    animation: submenuanime 500ms;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes submenuanime {
+    0%   {width: 12px;}
+    100% {width: 37%;}
+}
+
+/* Standard syntax */
+@keyframes submenuanime {
+    0%   {width: 12px;}
+    100% {width: 37%;}
 }
 
 .submenu__item{
