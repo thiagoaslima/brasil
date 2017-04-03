@@ -16,7 +16,7 @@
             <th class="lista__titulo" colspan="3">{{tema.nome}}</th>
         </tr>
 
-        <template ngFor let-item let-last="last" [ngForOf]="tema.painel"></template>
+        <template ngFor let-item let-last="last" [ngForOf]="tema.painel">
         <tr class="lista__indicador lista__indicador--selecionado">
             <td></td>
             <td class="lista__nome">{{item.titulo || (item.indicador$ | async)?.nome}}</td>
