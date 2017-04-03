@@ -29,7 +29,7 @@ export class SubmenuComponent {
     ){}
 
     ngOnInit(){
-        
+
         //busca pesquisas disponíveis e as organiza em ordem alfabética
         this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
             pesquisas.sort((a, b) => {
@@ -42,7 +42,7 @@ export class SubmenuComponent {
             });
             this.pesquisas = pesquisas;
         });
-
+        
         //pega a rota atual
         this._routerParams.params$.subscribe(({params}) => {
             //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
@@ -79,7 +79,7 @@ export class SubmenuComponent {
                 this.baseURL = '/brasil/pesquisas/';
             }
         });
-        
+    
     }
 
     onClick(index){

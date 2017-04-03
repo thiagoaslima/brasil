@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AppState } from '../shared/app-state';
 import { PANORAMA } from './configuration/panorama.configuration';
-import { PanoramaDescriptor, PanoramaItem, PanoramaConfigurationItem, PanoramaVisualizacao } from './configuration/panorama.model';
+import { PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from './configuration/panorama.model';
 import { Localidade } from '../shared2/localidade/localidade.model';
 import { Indicador, EscopoIndicadores } from '../shared2/indicador/indicador.model';
 import { IndicadorService2 } from '../shared2/indicador/indicador.service';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/distinctUntilKeyChanged';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
 
@@ -21,7 +22,8 @@ import 'rxjs/add/operator/share';
 })
 export class PanoramaComponent implements OnInit {
     localidade$: Observable<Localidade>
-    panorama$;
+    resumo$: Observable<{ tema: string, indicadores: Array<{ titulo: string, unidade: string, indicador: Indicador }> }[]>;
+    temas$;
 
     constructor(
         private _appState: AppState,
@@ -32,47 +34,108 @@ export class PanoramaComponent implements OnInit {
         this.localidade$ = this._appState.observable$.map(state => state.localidade).filter(Boolean).distinctUntilKeyChanged('codigo');
 
         const configuracao$: Observable<{ temas: string[], indicadores: PanoramaConfigurationItem[] }> = this._appState.observable$
-            // .distinctUntilKeyChanged('tipo')
+            .distinctUntilKeyChanged('tipo', (a, b) => a !== b)
             .scan((acc, state) => {
                 return Object.assign(acc, PANORAMA[state.tipo])
             }, { temas: [] as string[], indicadores: [] as PanoramaConfigurationItem[] })
             .map(config => {
-                config.indicadores = config.indicadores.map(obj => {
-                    obj.indicador = null;
-                    return obj;
-                });
+                config.indicadores = config.indicadores.map(obj => new PanoramaConfigurationItem(obj));
                 return config;
             });
-            
 
-        // const hashConfig$ = configuracao$.map(config => config.indicadores.reduce((acc, item) => Object.assign(acc, {[item.indicadorId]: item}), Object.create(null)));
+
         const groupByPesquisa$ = configuracao$.map(config => this._groupIndicadoresByPesquisa(config));
-
         const indicadores$ = groupByPesquisa$.combineLatest(this.localidade$)
-            .flatMap(([obj, localidade]) => Observable.from(obj.map(({ pesquisaId, indicadoresId }) => ({ pesquisaId, indicadoresId, codigoLocalidade: localidade.codigo }))))
-            .do(console.log.bind(console, 'indicadores1'))
-            .flatMap(obj => this._indicadorService.getIndicadoresById(obj.pesquisaId, obj.indicadoresId, EscopoIndicadores.proprio, obj.codigoLocalidade))
-            .do(console.log.bind(console, 'indicadores2'))
+            .mergeMap(([obj, localidade]) => Observable.from(obj.map(({ pesquisaId, indicadoresId }) => ({ pesquisaId, indicadoresId, codigoLocalidade: localidade.codigo }))))
+            .mergeMap((obj, idx) => this._indicadorService.getIndicadoresById(obj.pesquisaId, obj.indicadoresId, EscopoIndicadores.proprio, obj.codigoLocalidade).delay(1000 * idx))
 
-        this.panorama$ = Observable.zip(
-            configuracao$,
-            indicadores$
-        ).map(([configuracao, indicadores]) => {
-            indicadores.forEach(indicador => {
-               const item = configuracao.indicadores.find(ind => ind.indicadorId === indicador.id);
-               item.indicador = indicador;
+
+        const setConfiguracaoBasica$ = configuracao$.map(config => configState => Object.assign({}, configState, config));
+        const updateIndicadoresOnConfiguracao$ = indicadores$.map(indicadores => configState => {
+            const _indicadores = configState.indicadores.map(item => {
+                item = Object.assign({}, item);
+                const indicador = indicadores.find(indicador => indicador.id === item.indicadorId);
+
+                if (indicador) {
+                    item.indicador = indicador;
+                    if (!item.titulo && indicador) { item.titulo = indicador.nome }
+                    if (!item.unidade && indicador) { item.unidade = indicador.unidade.toString() }
+                }
+                
+
+                if (item.grafico) {
+                    item.grafico.dados = item.grafico.dados.map(grafico => {
+                        grafico = Object.assign({}, grafico);
+                        const indicador = indicadores.find(indicador => indicador.id === grafico.indicadorId);
+                        if (indicador) { grafico.indicador = indicador; }
+                        return grafico;
+                    })
+                }
+
+                return item;
+            });
+
+            return {
+                temas: configState.temas.slice(0),
+                indicadores: _indicadores
+            }
+        })
+
+
+        const panorama$ = Observable.merge(setConfiguracaoBasica$, updateIndicadoresOnConfiguracao$)
+            .scan((configState, fn) => fn(configState), { temas: [], indicadores: [] })
+            .map(configState => {
+                const temas = this._buildHashTemas(configState);
+                return configState.temas.map(tema => temas[tema]).filter(Boolean);;
+            });
+
+        this.resumo$ = panorama$.map(configState => {
+            return configState.map(item => {
+                const indicadores = Object.keys(PanoramaVisualizacao)
+                    .map(key => PanoramaVisualizacao[key])
+                    .reduce((acc, visualizacao) => {
+                        const items = item[visualizacao].map(item => ({
+                            titulo: item.titulo,
+                            unidade: item.unidade,
+                            indicador: item.indicador
+                        }));
+                        return acc.concat(items);
+                    }, []);
+
+                return {
+                    tema: item.tema,
+                    indicadores: indicadores.sort((a, b) => a.titulo < b.titulo ? -1 : 1)
+                }
+            });
+        }).do(console.log.bind(console, 'sent to resumo'));
+
+        this.temas$ = panorama$
+            .map(configState => {
+                return configState
+                    .filter(item => Boolean(item.tema))
+                    .map(item => {
+                        return {
+                            tema: item.tema,
+                            painel: item.painel,
+                            grafico: item.grafico.map(item => item.grafico)
+                        }
+                    })
             })
-
-            const temas = this._buildHashTemas(configuracao);
-            return configuracao.temas.map(tema => temas[tema]).filter(Boolean);
-        });
-
+            .do(console.log.bind(console, 'sent to temas'));;
     }
 
     private _groupIndicadoresByPesquisa({ indicadores = [] as PanoramaConfigurationItem[] }): Array<{ pesquisaId: number, indicadoresId: number[] }> {
         const hash = indicadores.reduce((acc, item) => {
             if (!acc[item.pesquisaId]) { acc[item.pesquisaId] = []; }
             acc[item.pesquisaId].push(item.indicadorId);
+
+            if (item.grafico && item.grafico.dados && item.grafico.dados.length) {
+                item.grafico.dados.forEach(item => {
+                    if (!acc[item.pesquisaId]) { acc[item.pesquisaId] = []; }
+                    acc[item.pesquisaId].push(item.indicadorId);
+                })
+            }
+
             return acc;
         }, Object.create(null) as { [idx: number]: number[] });
 
@@ -84,13 +147,16 @@ export class PanoramaComponent implements OnInit {
 
     private _buildHashTemas({ indicadores = [] as PanoramaConfigurationItem[] }): { [tema: string]: PanoramaItem } {
         return indicadores.reduce((acc, item) => {
-            if (!acc[item.tema]) { acc[item.tema] = { tema: item.tema, painel: [], graficos: [] } }
 
-            if (item.visualizacao === PanoramaVisualizacao.painel) {
-                acc[item.tema].painel.push(item);
-            } else {
-                acc[item.tema].graficos.push(item);
+            if (!acc[item.tema]) {
+                acc[item.tema] = Object.assign(
+                    { tema: item.tema },
+                    Object.keys(PanoramaVisualizacao)
+                        .map(key => PanoramaVisualizacao[key])
+                        .reduce((acc, key) => Object.assign(acc, { [key]: [] }), Object.create(null))
+                )
             }
+            acc[item.tema][item.visualizacao].push(item);
 
             return acc;
         }, Object.create(null))

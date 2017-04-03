@@ -12,7 +12,7 @@ import { HistoricoComponent } from './historico/historico.component';
 import { FotosComponent } from './fotos/fotos.component';
 
 import { SharedModule } from '../shared/shared.module';
-import { ChartsModule } from '../shared/ng2-charts.module';
+import { ChartsModule } from '../infografia/ng2-charts.module';
 import { MapaComponent, RegiaoMapaComponent } from './mapa/mapa.component';
 import { MapaService } from './mapa/mapa.service';
 import { RootRoutingModule } from '../root-routing.module';

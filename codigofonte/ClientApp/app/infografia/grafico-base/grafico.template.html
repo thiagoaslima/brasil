@@ -1,0 +1,23 @@
+<div class="grafico">
+    <div class="loading" *ngIf="!(datasets$ | async)">
+        <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+    </div>
+
+    <div >
+        <!--<div *ngIf="datasets | async">-->
+            
+            <canvas *ngIf="datasets$ | async" #grafico
+                baseChart
+                class="chart"
+                width="510" 
+                height="220"
+                [datasets]="datasets$ | async"
+                [labels]="labels$ | async"
+                [options]="options$ | async"
+                [chartType]="tipo"
+                [colors]="colors[tipo]"
+            ></canvas>
+
+        <!--</div>-->
+    </div>
+</div>

@@ -23,8 +23,8 @@ resultadoValidador.resgitrarTestes([
 const _resultadoDefaults = {
     indicadorId: null,
     localidadeCodigo: null,
-    periodos: [],
-    valores: []
+    periodos: [] as string[],
+    valores: [] as string[]
 }
 
 export class Resultado {
@@ -97,7 +97,7 @@ export class Resultado {
                 arr.push(this.periodos[idx]);
             }
             return arr;
-        }, []);
+        }, [] as string[]);
     }
 
     get periodoMaisRecente() {

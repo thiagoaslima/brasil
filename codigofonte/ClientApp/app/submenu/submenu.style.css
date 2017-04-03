@@ -1,13 +1,15 @@
 .submenu-container {
     position: absolute;
     height: 100%;
-    width: 79%;
+    /*width: 79%;*/
+    width: calc(100% - 250px);
 }
 
 .submenu-close {
     position: absolute;
     height: 100%;
     width: 100%;
+    background: rgba(0,0,0,.5);
 }
 
 .submenu{

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ChartsModule } from './ng2-charts.module';
 import { WindowEventsModule } from './window-events/window-events.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 

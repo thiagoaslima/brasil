@@ -2,15 +2,15 @@
 
     <div *ngIf="!tema.tema" class="topo">
 
-        <div *ngFor="let item of tema.graficos; let first = first; let last=last" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': last}">
+        <div *ngFor="let item of tema.indicadores; let first = first; let last=last" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': last}">
             <h3 class="topo__titulo">
                 {{ item.titulo || item.indicador?.nome }}
             </h3>
             <p class="topo__valor">
-                {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente}}
+                {{ localidade.codigo }}
             </p>
         </div>
-        
+
     </div>
 
     <table *ngIf="tema.tema" class="lista">
@@ -19,38 +19,26 @@
             <th class="lista__titulo" colspan="3">{{tema.tema}}</th>
         </tr>
 
-        <template ngFor let-item let-last="last" [ngForOf]="tema.painel">
-        <tr class="lista__indicador lista__indicador--selecionado">
-            <td></td>
-            <td class="lista__nome">{{item.titulo || item.indicador?.nome}}</td>
-            <td class="lista__valor">
-                {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente }} 
-                <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
-            </td>
-            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-        </tr>
-        <tr *ngIf="!last" class="lista__separador">
-            <td colspan="4">
-                <div class="lista__linha"></div>
-            </td>
-        </tr>
-        </template>
-
-        <template ngFor let-item let-last="last" [ngForOf]="tema.graficos">
-        <tr class="lista__indicador lista__indicador--selecionado">
-            <td></td>
-            <td class="lista__nome">{{item.titulo || item.indicador?.nome}}</td>
-            <td class="lista__valor">
-                {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente }} 
-                <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
-            </td>
-            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-        </tr>
-        <tr *ngIf="!last" class="lista__separador">
-            <td colspan="4">
-                <div class="lista__linha"></div>
-            </td>
-        </tr>
+        <template ngFor let-item let-last="last" [ngForOf]="tema.indicadores">
+            <tr class="lista__indicador lista__indicador--selecionado">
+                <td></td>
+                <td class="lista__nome">
+                    {{item.titulo || item.indicador?.nome}}
+                    <small *ngIf="(item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente">
+                    {{ '[' + (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente + ']' }}
+                    </small>
+                </td>
+                <td class="lista__valor">
+                    {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado}}
+                    <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
+                </td>
+                <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+            </tr>
+            <tr *ngIf="!last" class="lista__separador">
+                <td colspan="4">
+                    <div class="lista__linha"></div>
+                </td>
+            </tr>
         </template>
 
     </table>
