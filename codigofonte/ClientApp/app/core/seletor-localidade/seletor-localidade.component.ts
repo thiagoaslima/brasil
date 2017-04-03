@@ -63,7 +63,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 }
             });
 
-            this.totalAtual = this.atual.reduce( (sum, obj) => sum + obj.municipios.length, 0);
+            this.totalAtual = this.atual.reduce( (sum, obj) => sum + obj.municipios ? obj.municipios.length : 0, 0);
         }
     };
 

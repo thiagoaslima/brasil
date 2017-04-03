@@ -1,0 +1,12 @@
+<div id="cartograma" style="display: block; width: 100%; padding: 1em; border-top: 1px solid">
+
+    <div class="mapa" *ngIf="(malha$ | async)?.viewBox">
+        <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
+            <svg:g class="uf" transform="scale(1 -1)">
+                <svg:g regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" 
+                    [codigo]="item.codigo" [nome]="item.nome" [link]="item.link" [polygons]="item.polys">
+                </svg:g>
+            </svg:g>
+        </svg>
+    </div>
+</div>

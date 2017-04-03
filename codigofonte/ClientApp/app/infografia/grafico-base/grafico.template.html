@@ -1,12 +1,12 @@
 <div class="grafico">
-    <div class="loading" *ngIf="carregando">
+    <div class="loading" *ngIf="!(datasets$ | async)">
         <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
     </div>
 
-    <div *ngIf="!carregando">
+    <div >
         <!--<div *ngIf="datasets | async">-->
             
-            <canvas #grafico
+            <canvas *ngIf="datasets$ | async" #grafico
                 baseChart
                 class="chart"
                 width="510" 

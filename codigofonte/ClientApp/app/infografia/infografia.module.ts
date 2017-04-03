@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ChartsModule } from './ng2-charts.module';
 import { SharedModule } from '../shared/shared.module';
 import { GraficoComponent } from './grafico-base/grafico.component';
+import { CartogramaComponent, LocalCartogramaComponent } from './cartograma/cartograma.component';
+import { MapaService } from './cartograma/mapa.service';
 
 @NgModule({
 	imports: [
@@ -10,10 +12,17 @@ import { GraficoComponent } from './grafico-base/grafico.component';
 		SharedModule
 	],
 	declarations: [ 
-		GraficoComponent
+		GraficoComponent,
+		CartogramaComponent,
+		LocalCartogramaComponent
 	],
 	exports: [
-		GraficoComponent
+		GraficoComponent,
+		CartogramaComponent,
+		LocalCartogramaComponent
+	],
+	providers: [
+		MapaService
 	]
 })
 export class InfografiaModule {

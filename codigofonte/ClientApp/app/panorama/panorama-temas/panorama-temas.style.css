@@ -98,10 +98,3 @@
     font-size: 0.8em;
     color: #B3B3B3;
 }
-
-.cards{
-    content: "";
-    display: table;
-    clear: both;
-    margin: 2% 5%;
-}

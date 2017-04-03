@@ -59,7 +59,6 @@ const Actions = {
     styleUrls: ['grafico.style.css']
 })
 export class GraficoComponent implements OnInit, OnChanges {
-
     @Input() tipoGrafico: 'bar' | 'horizontalBar' | 'line' | 'radar' | 'polarArea' | 'pie' | 'doughnut' | 'bubble' = 'bar';
     @Input() indicadores: Indicador[] = [];
     @Input() localidade: Localidade;
@@ -76,14 +75,14 @@ export class GraficoComponent implements OnInit, OnChanges {
     // public labels = [];
     // public options = {};
     public tipo = 'bar';
-    public colors = ["#00A99D", "#177437", "#22B573", "#8CC63F"];
+    public colors = [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }];
     // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
-    public carregando: boolean = false;
+    // public carregando: boolean = true;
 
     public labels$: Observable<string[]>;
     public datasets$: Observable<{ data: number[], label: string }[]>;
 
-    private _indicadores$ = new BehaviorSubject<{indicador: Indicador, indicadorId: number, pesquisaId: number}[]>([]);
+    private _indicadores$ = new BehaviorSubject<{ indicador: Indicador, indicadorId: number, pesquisaId: number }[]>([]);
     private _localidade$ = new BehaviorSubject<Localidade>(null);
 
     // private _showLegend = false;
@@ -122,22 +121,30 @@ export class GraficoComponent implements OnInit, OnChanges {
                 const _indicadores = indicadores.map(item => item.indicador).filter(Boolean)
                 return Observable.zip(..._indicadores.map(indicador => indicador.getResultadoByLocal(localidade.codigo)))
             })
+            // .do(_ => this.carregando = false)
             .do(console.log.bind(console, 'resultados'))
-            .do(_ => this.carregando = false);
+
 
         this.labels$ = resultados$
             .map(resultados => this.mostrarApenasPeriodosValidos ? resultados[0].periodosValidos : resultados[0].periodos)
             .do(console.log.bind(console, 'label'));
 
-        this.datasets$ = this._indicadores$.zip(resultados$).map(([indicadores, resultados]) => {
-            return resultados.map((resultado, idx) => {
-                const valores = this.mostrarApenasPeriodosValidos ? resultado.valoresValidos : resultado.valores;
-                return {
-                    data: valores.map(valor => this.converterParaNumero(valor)),
-                    label: indicadores[idx].indicador.nome
-                }
+        this.datasets$ = this._indicadores$
+            .zip(resultados$)
+            .map(([indicadores, resultados]) => {
+                return resultados.map((resultado, idx) => {
+                    const valores = this.mostrarApenasPeriodosValidos ? resultado.valoresValidos : resultado.valores;
+                    return {
+                        data: valores.map(valor => this.converterParaNumero(valor)),
+                        label: indicadores[idx].indicador.nome
+                    }
+                })
             })
-        }).do(console.log.bind(console, 'datasets'));;
+            .distinctUntilChanged((newValue, oldValue) => {
+                return newValue['data']
+                    .map( (val, idx) => [val, oldValue['data'][idx]])
+                    .every(item => item[0] === item[1]);
+            });
 
         this.options$ = this.actions$
             .do(console.log.bind(console, 'options'))
@@ -196,7 +203,7 @@ export class GraficoComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        
+
         if (changes.indicadores && Boolean(changes.indicadores.currentValue)) {
             this._indicadores$.next(changes.indicadores.currentValue);
         }

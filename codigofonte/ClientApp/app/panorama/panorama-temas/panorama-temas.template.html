@@ -19,9 +19,12 @@
         </div>
     </div>
 
-    <div class="cards">
-        <panorama-card  *ngFor="let painel of tema.painel" [dados]="painel" [localidade]="localidade"></panorama-card>
-    </div>
+    <panorama-painel [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
+    <!--
+        <div class="cards">
+            <panorama-card  *ngFor="let painel of tema.painel" [dados]="painel" [localidade]="localidade"></panorama-card>
+        </div>
+    -->
     
     <div class="grafico" *ngFor="let grafico of tema.grafico">
         <h2 class="grafico__titulo">{{grafico.titulo}}<i class="fa fa-info-circle grafico__info" aria-hidden="true"></i></h2>
