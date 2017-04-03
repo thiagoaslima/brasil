@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import { SinteseService } from '../sintese/sintese.service';
 import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { RouterParamsService } from '../shared/router-params.service';
@@ -19,6 +19,8 @@ export class SubmenuComponent {
     public codigoMunicipio;
     public baseURL;
 
+    @Output() closeMenu = new EventEmitter();
+
     constructor(
         private _routerParams:RouterParamsService,
         private _sintese:SinteseService,
@@ -27,9 +29,7 @@ export class SubmenuComponent {
     ){}
 
     ngOnInit(){
-        // this.pesquisas.forEach(pesquisa => {
-        //     pesquisa["visivel"] = false;
-        // });
+        
         //busca pesquisas disponíveis e as organiza em ordem alfabética
         this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
             pesquisas.sort((a, b) => {
@@ -79,13 +79,10 @@ export class SubmenuComponent {
                 this.baseURL = '/brasil/pesquisas/';
             }
         });
-        // debugger;
-        // console.dir(this.pesquisas);
+        
     }
 
     onClick(index){
-        // this.idPesquisaSelecionada = index;
-        // this.pesquisas[index]["visivel"] = !this.pesquisas[index]["visivel"]; 
         this.pesquisas[index].visivel = !this.pesquisas[index].visivel;
         //carrega indicadores que aparecem no submenu
         if(this.pesquisas[index].indicadores == undefined){

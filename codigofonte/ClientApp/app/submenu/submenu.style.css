@@ -1,13 +1,23 @@
+.submenu-container {
+    position: absolute;
+    height: 100%;
+    width: 79%;
+}
+
+.submenu-close {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 .submenu{
     background-color: #333333;
-    width: 100%;
     color: white;
     list-style: none;
     position: absolute;
-    top: 0px;
     height: 100%;
-    width: 30%;
-    top: 56px;
+    width: 37%;
+    /*top: 56px;*/
 }
 
 .submenu__item{

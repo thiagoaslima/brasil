@@ -50,7 +50,7 @@
     </aside>
 
     <div class="conteudo__dados--com-scroll submenu">
-        <submenu *ngIf="abrirMenuPesquisa === true"></submenu>
+        <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)"></submenu>
     </div>
 
     <router-outlet></router-outlet>
