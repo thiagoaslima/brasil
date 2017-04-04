@@ -2,7 +2,8 @@
     position: absolute;
     height: 100%;
     /*width: 79%;*/
-    width: calc(100% - 250px);
+    width: 79%;
+    margin-left: 21%;
 }
 
 .submenu-close {
@@ -25,14 +26,14 @@
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes submenuanime {
-    0%   {width: 12px;}
-    100% {width: 37%;}
+    0%   {left: -423px;}
+    100% {left: 0;}
 }
 
 /* Standard syntax */
 @keyframes submenuanime {
-    0%   {width: 12px;}
-    100% {width: 37%;}
+    0%   {left: -423px;}
+    100% {left: 0;}
 }
 
 .submenu__item{
@@ -108,4 +109,13 @@ li:last-child > .submenu__separador, .submenu__item--selecionado > .submenu__sep
 
 .submenu__subitem:hover{
     background-color: #1B779B;
+}
+
+@media screen and (min-width: 1200px) {
+
+    .submenu-container {
+        width: calc(100% - 250px);
+        margin-left: 250px;
+    }
+
 }
