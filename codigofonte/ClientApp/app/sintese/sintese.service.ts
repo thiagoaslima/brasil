@@ -259,6 +259,18 @@ export class SinteseService {
             });
     }
 
+    public getPesquisaLocalidades(pesquisa: number, localA: number, localB: number, localC: number, indicadores: string[] = []) {
+
+        return Observable.zip(this.getNomesPesquisa(pesquisa.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localA.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localB.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localC.toString(), indicadores))
+            .map(([nomes, dadosA, dadosB, dadosC]) => {
+
+
+                this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
+
+                return nomes;
+            });
+    }
+
     /**
      * Obtém o histórico de um munucípio, dado seu código.
      * 
@@ -314,6 +326,21 @@ export class SinteseService {
             if (obj[attr]) {
 
                 this.atribuirValorIndicadoresPesquisa(attr, obj[attr], valueList);
+            }
+        });
+    }
+
+    private atribuirValorIndicadoresLocalidades(attr, elements, valueListA, valueListB, valueListC) {
+
+        elements.forEach((obj) => {
+
+            obj["localidadeA"] = valueListA[obj.id];
+            obj["localidadeB"] = valueListB[obj.id];
+            obj["localidadeC"] = valueListC[obj.id];
+
+            if (obj[attr]) {
+
+                this.atribuirValorIndicadoresLocalidades(attr, obj[attr], valueListA, valueListB, valueListC);
             }
         });
     }

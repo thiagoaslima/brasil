@@ -1,0 +1,27 @@
+<table cellspacing="0" border='0'>
+    <tr>
+        <td class="p"></td>
+        <td class='s'></td>
+        <td class='s'></td>
+        <td class='s'></td>
+        <td class='s'></td>
+    </tr>
+
+    <template ngFor let-indicador [ngForOf]="indicadores">
+        <tr class='{{getStyleClass(indicador.posicao)}}'>
+            <td class='label'>
+                <div class='label--com-acao'>{{ indicador.indicador }}</div> 
+                <div class='acoes'>
+                </div>
+            </td>  
+
+            <td class='valor'>{{ !!indicador.localidadeA ? indicador.localidadeA["2010"] : "" }}</td>
+            <td class='valor'>{{ !!indicador.localidadeB ? indicador.localidadeB["2010"] : "" }}</td>
+            <td class='valor'>{{ !!indicador.localidadeC ? indicador.localidadeC["2010"] : "" }}</td>
+
+            <td class='valor'>{{ indicador.unidade?.id }}</td>  
+        </tr>
+    </template>
+    
+
+</table>
