@@ -217,7 +217,7 @@ aside #menu ul li:hover, aside #menu .menu--selecionado{
 
 #sintese{
     float: left;
-    width: 79%;
+    width: calc(100% - 250px);
     min-height: 100%;
     border-left: 10px solid #333;
 }
@@ -429,10 +429,10 @@ sintese>dados
     /*aside fica fixo em 250px;*/
     body.estado{  
        background: #fff; /* For browsers that do not support gradients */
-       background: -webkit-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
-       background: -o-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
-       background: -moz-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
-       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 155px), #fff calc(38% + 95px), #fff );
+       background: -webkit-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: -o-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: -moz-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
 
     }
 

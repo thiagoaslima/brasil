@@ -1,4 +1,5 @@
-<template ngFor let-tema [ngForOf]="dados">
+<template ngFor let-tema [ngForOf]="dados" let-i="index">
+    <div [class.borda]="i!=0" ></div>
     <div class="cabecalho">
         <div class="cabecalho__celula-esquerda">
             <h2 class="cabecalho__titulo">{{tema?.tema}}</h2>
