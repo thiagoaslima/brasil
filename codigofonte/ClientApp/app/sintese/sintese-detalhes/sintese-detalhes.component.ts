@@ -128,8 +128,6 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
         });
 
         infoPesquisa$.subscribe(info => {
-            // console.log(info);
-            //debugger;
             this.fontesIndicador = !!info.periodos ? info.periodos : [];
             info.periodos.forEach(periodo => {
                 this.temFonte = periodo.fonte.length > 0 ? true : false;
