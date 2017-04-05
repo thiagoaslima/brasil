@@ -33,12 +33,40 @@ export class PesquisaTabelaComponent implements OnChanges {
 
             this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC).subscribe((indicadores) => {
 
-                this.indicadores = this.flat(indicadores);
+                this.indicadores = this.flat(indicadores).map(indicador => {
+
+                    indicador.nivel = this.getNivelIndicador(indicador.posicao);
+                    indicador.visivel = indicador.nivel <= 3 ? true : false;
+
+                    return indicador;
+                });
             });
 
         }
     }
 
+    private isFolha(indicador){
+
+        return !indicador.children || indicador.children.length == 0;
+    }
+
+    //chamada quando abre os nós nível 2 da tabela de dados
+    private controlarExibicao(item){
+
+        debugger;
+
+        if(item.nivel < 3) {
+
+            return;
+        }
+        
+        this.flat(item.children).map(child => child.visivel = !child.visivel);
+    }
+
+    private isListaAberta(indicador){
+
+        return !!indicador.children && indicador.children.length > 0 && indicador.children[0].visivel;
+    }
 
     /** 
      * Função que transforma a árvore num array linear.

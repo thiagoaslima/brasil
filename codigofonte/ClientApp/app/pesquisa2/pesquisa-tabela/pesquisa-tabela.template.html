@@ -8,16 +8,16 @@
     </tr>
 
     <template ngFor let-indicador [ngForOf]="indicadores">
-        <tr class='{{getStyleClass(indicador.posicao)}}'>
+        <tr class='{{getStyleClass(indicador.posicao)}}' [class.aberto]="isListaAberta(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel">
             <td class='label'>
                 <div class='label--com-acao'>{{ indicador.indicador }}</div> 
                 <div class='acoes'>
                 </div>
             </td>  
 
-            <td class='valor'>{{ !!indicador.localidadeA ? indicador.localidadeA["2010"] : "" }}</td>
-            <td class='valor'>{{ !!indicador.localidadeB ? indicador.localidadeB["2010"] : "" }}</td>
-            <td class='valor'>{{ !!indicador.localidadeC ? indicador.localidadeC["2010"] : "" }}</td>
+            <td class='valor'>{{ !!indicador.localidadeA ? indicador.localidadeA[periodo] : "" }}</td>
+            <td class='valor' [class.compara-blank]="!localidades[1]">{{ !!indicador.localidadeB ? indicador.localidadeB[periodo] : "" }}</td>
+            <td class='valor' [class.compara-blank]="!localidades[2]">{{ !!indicador.localidadeC ? indicador.localidadeC[periodo] : "" }}</td>
 
             <td class='valor'>{{ indicador.unidade?.id }}</td>  
         </tr>
