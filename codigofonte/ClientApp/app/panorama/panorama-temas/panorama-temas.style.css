@@ -1,6 +1,14 @@
+.borda{
+    border-top: 4px solid #F7931E;
+    margin-top: 44px;
+    margin-bottom: 30px;
+}
+
 .cabecalho{
     margin: 2% 5%;
     overflow: hidden;
+    border-bottom: 1px solid #F7931E;
+    padding-bottom: 2%;
 }
 
 .cabecalho__celula-esquerda{

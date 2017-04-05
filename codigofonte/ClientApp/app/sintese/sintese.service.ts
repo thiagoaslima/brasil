@@ -218,7 +218,7 @@ export class SinteseService {
      */
     public getNomesPesquisa(pesquisa: string, indicadores: string[] = []) {
         if (!pesquisa) {
-            debugger;
+            
         }
 
         const nomesPesquisa$ = this._http.get(
@@ -254,6 +254,19 @@ export class SinteseService {
 
 
                 this.atribuirValorIndicadoresPesquisa('children', nomes, dados);
+
+                return nomes;
+            });
+    }
+
+    public getPesquisaLocalidades(pesquisa: number, localA: number = 0, localB: number = 0, localC: number = 0, indicadores: string[] = []) {
+
+        return Observable.zip(this.getNomesPesquisa(pesquisa.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localA.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localB.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localC.toString(), indicadores))
+            .map(([nomes, dadosA, dadosB, dadosC]) => {
+
+                debugger;
+
+                this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
 
                 return nomes;
             });
@@ -314,6 +327,21 @@ export class SinteseService {
             if (obj[attr]) {
 
                 this.atribuirValorIndicadoresPesquisa(attr, obj[attr], valueList);
+            }
+        });
+    }
+
+    private atribuirValorIndicadoresLocalidades(attr, elements, valueListA, valueListB, valueListC) {
+
+        elements.forEach((obj) => {
+
+            obj["localidadeA"] = valueListA[obj.id];
+            obj["localidadeB"] = valueListB[obj.id];
+            obj["localidadeC"] = valueListC[obj.id];
+
+            if (obj[attr]) {
+
+                this.atribuirValorIndicadoresLocalidades(attr, obj[attr], valueListA, valueListB, valueListC);
             }
         });
     }

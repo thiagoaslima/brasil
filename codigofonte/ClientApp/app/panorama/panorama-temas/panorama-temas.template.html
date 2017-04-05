@@ -1,4 +1,5 @@
-<template ngFor let-tema [ngForOf]="dados">
+<template ngFor let-tema [ngForOf]="dados" let-i="index">
+    <div [class.borda]="i!=0" ></div>
     <div class="cabecalho">
         <div class="cabecalho__celula-esquerda">
             <h2 class="cabecalho__titulo">{{tema?.tema}}</h2>
@@ -19,7 +20,7 @@
         </div>
     </div>
 
-    <panorama-painel [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
+    <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
     <!--
         <div class="cards">
             <panorama-card  *ngFor="let painel of tema.painel" [dados]="painel" [localidade]="localidade"></panorama-card>
