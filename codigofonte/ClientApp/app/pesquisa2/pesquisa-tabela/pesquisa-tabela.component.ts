@@ -33,10 +33,40 @@ export class PesquisaTabelaComponent implements OnChanges {
 
             this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC).subscribe((indicadores) => {
 
-                this.indicadores = this.flat(indicadores);
+                this.indicadores = this.flat(indicadores).map(indicador => {
+
+                    indicador.nivel = this.getNivelIndicador(indicador.posicao);
+                    indicador.visivel = indicador.nivel <= 3 ? true : false;
+
+                    return indicador;
+                });
             });
 
         }
+    }
+
+
+    private isFilho(posicaoPai: string, posicaoFilho: string){
+
+        return posicaoFilho.startsWith(posicaoPai);
+    }
+
+    private isFolha(indicador){
+
+        return !indicador.children || indicador.children.length == 0;
+    }
+
+    //chamada quando abre os nós nível 2 da tabela de dados
+    private controlarExibicao(item){
+
+        debugger;
+
+        if(item.nivel < 3) {
+
+            return;
+        }
+        
+        this.flat(item.children).map(child => child.visivel = !child.visivel);
     }
 
 
