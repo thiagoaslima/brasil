@@ -1,236 +1,238 @@
-<template ngFor let-tema [ngForOf]="dados">
+<div id='container__panorama-resumo'>
+    <template ngFor let-tema [ngForOf]="dados">
 
-    <div *ngIf="!tema.tema" class="topo">
+        <div *ngIf="!tema.tema" class="topo">
 
-        <div *ngFor="let item of tema.indicadores; let first = first; let last=last" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': last}">
-            <h3 class="topo__titulo">
-                {{ item.titulo || item.indicador?.nome }}
-            </h3>
-            <p class="topo__valor">
-                {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente }}
-            </p>
+            <div *ngFor="let item of tema.indicadores; let first = first; let last=last" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': last}">
+                <h3 class="topo__titulo">
+                    {{ item.titulo || item.indicador?.nome }}
+                </h3>
+                <p class="topo__valor">
+                    {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente }}
+                </p>
+            </div>
+
         </div>
 
+        <table *ngIf="tema.tema" class="lista">
+            <tr class="lista__cabecalho">
+                
+                <th [ngSwitch]="tema.tema" class="lista__icone">
+                    <div *ngSwitchCase="'Agricultura'" class="ico ico--agri"></div>
+                    <div *ngSwitchCase="'Educação'" class="ico ico--edu"></div>
+                    <div *ngSwitchCase="'Economia'" class="ico ico--eco"></div>
+                    <div *ngSwitchCase="'Meio Ambiente'" class="ico ico--ambi"></div>
+                    <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
+                    <div *ngSwitchCase="'Saúde'" class="ico ico--sau"></div>
+                    <div *ngSwitchCase="'Trabalho'" class="ico ico--trab"></div>
+                </th>
+
+                <th class="lista__titulo" colspan="3">{{tema.tema}}</th>
+            </tr>
+
+            <template ngFor let-item let-last="last" [ngForOf]="tema.indicadores">
+                <tr class="lista__indicador lista__indicador--selecionado">
+                    <td></td>
+                    <td class="lista__nome">
+                        {{item.titulo || item.indicador?.nome}}
+                        <small *ngIf="(item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente">
+                        {{ '[' + (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente + ']' }}
+                        </small>
+                    </td>
+                    <td class="lista__valor">
+                        {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado}}
+                        <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
+                    </td>
+                    <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+                </tr>
+                <tr *ngIf="!last" class="lista__separador">
+                    <td colspan="4">
+                        <div class="lista__linha"></div>
+                    </td>
+                </tr>
+            </template>
+
+        </table>
+    </template>
+
+    <!--
+    <div class="topo">
+        <div class="topo__celula-esquerda">
+            <h3 class="topo__titulo">Código</h3>
+            <p class="topo__valor">33045</p>
+        </div>
+        <div class="topo__celula-direita">
+            <h3 class="topo__titulo">Prefeito</h3>
+            <p class="topo__valor">Marcelo Bezerra Crivella <span class="topo__unidade">PMDB</span></p>
+        </div>
     </div>
 
-    <table *ngIf="tema.tema" class="lista">
-        <tr class="lista__cabecalho">
-            
-            <th [ngSwitch]="tema.tema" class="lista__icone">
-                <div *ngSwitchCase="'Agricultura'" class="ico ico--agri"></div>
-                <div *ngSwitchCase="'Educação'" class="ico ico--edu"></div>
-                <div *ngSwitchCase="'Economia'" class="ico ico--eco"></div>
-                <div *ngSwitchCase="'Meio Ambiente'" class="ico ico--ambi"></div>
-                <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
-                <div *ngSwitchCase="'Saúde'" class="ico ico--sau"></div>
-                <div *ngSwitchCase="'Trabalho'" class="ico ico--trab"></div>
-            </th>
-
-            <th class="lista__titulo" colspan="3">{{tema.tema}}</th>
+    <table class="lista">
+        <tr class="lista__cabecalho lista__cabecalho--selecionado">
+            <th class="lista__icone"><i class="fa fa-graduation-cap" aria-hidden="true"></i></th>
+            <th class="lista__titulo" colspan="3">Educação</th>
         </tr>
-
-        <template ngFor let-item let-last="last" [ngForOf]="tema.indicadores">
-            <tr class="lista__indicador lista__indicador--selecionado">
-                <td></td>
-                <td class="lista__nome">
-                    {{item.titulo || item.indicador?.nome}}
-                    <small *ngIf="(item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente">
-                    {{ '[' + (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente + ']' }}
-                    </small>
-                </td>
-                <td class="lista__valor">
-                    {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado}}
-                    <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
-                </td>
-                <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-            </tr>
-            <tr *ngIf="!last" class="lista__separador">
-                <td colspan="4">
-                    <div class="lista__linha"></div>
-                </td>
-            </tr>
-        </template>
-
+        <tr class="lista__indicador lista__indicador--selecionado">
+            <td></td>
+            <td class="lista__nome">IDEB</td>
+            <td class="lista__valor">4,4 <span class="lista__unidade">%</span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Escolarização</td>
+            <td class="lista__valor">XX <span class="lista__unidade">%</span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
     </table>
-</template>
 
-<!--
-<div class="topo">
-    <div class="topo__celula-esquerda">
-        <h3 class="topo__titulo">Código</h3>
-        <p class="topo__valor">33045</p>
-    </div>
-    <div class="topo__celula-direita">
-        <h3 class="topo__titulo">Prefeito</h3>
-        <p class="topo__valor">Marcelo Bezerra Crivella <span class="topo__unidade">PMDB</span></p>
-    </div>
+    <table class="lista">
+        <tr class="lista__cabecalho">
+            <th class="lista__icone"><img src="img/trabalho.svg" /></th>
+            <th class="lista__titulo" colspan="3">Trabalho</th>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Emprego Formal</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Rendimento Médio</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+
+    <table class="lista">
+        <tr class="lista__cabecalho">
+            <th class="lista__icone"><i class="fa fa-leaf" aria-hidden="true"></i></th>
+            <th class="lista__titulo" colspan="3">Meio Ambiente</th>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Emprego Formal</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Rendimento Médio</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+
+    <table class="lista">
+        <tr class="lista__cabecalho">
+            <th class="lista__icone"><i class="fa fa-money" aria-hidden="true"></i></th>
+            <th class="lista__titulo" colspan="3">Economia</th>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Emprego Formal</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Rendimento Médio</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+
+    <table class="lista">
+        <tr class="lista__cabecalho">
+            <th class="lista__icone"><i class="fa fa-medkit" aria-hidden="true"></i></th>
+            <th class="lista__titulo" colspan="3">Saúde</th>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Emprego Formal</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Rendimento Médio</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+
+    <table class="lista">
+        <tr class="lista__cabecalho">
+            <th class="lista__icone"><img src="img/populacao.svg" /></th>
+            <th class="lista__titulo" colspan="3">População</th>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Emprego Formal</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Rendimento Médio</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+
+    <table class="lista">
+        <tr class="lista__cabecalho">
+            <th class="lista__icone"><img src="img/agricultura.svg" /></th>
+            <th class="lista__titulo" colspan="3">Agricultura</th>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Emprego Formal</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+        <tr class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">Rendimento Médio</td>
+            <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
+            <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+    -->
 </div>
-
-<table class="lista">
-    <tr class="lista__cabecalho lista__cabecalho--selecionado">
-        <th class="lista__icone"><i class="fa fa-graduation-cap" aria-hidden="true"></i></th>
-        <th class="lista__titulo" colspan="3">Educação</th>
-    </tr>
-    <tr class="lista__indicador lista__indicador--selecionado">
-        <td></td>
-        <td class="lista__nome">IDEB</td>
-        <td class="lista__valor">4,4 <span class="lista__unidade">%</span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Escolarização</td>
-        <td class="lista__valor">XX <span class="lista__unidade">%</span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
-
-<table class="lista">
-    <tr class="lista__cabecalho">
-        <th class="lista__icone"><img src="img/trabalho.svg" /></th>
-        <th class="lista__titulo" colspan="3">Trabalho</th>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Emprego Formal</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Rendimento Médio</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
-
-<table class="lista">
-    <tr class="lista__cabecalho">
-        <th class="lista__icone"><i class="fa fa-leaf" aria-hidden="true"></i></th>
-        <th class="lista__titulo" colspan="3">Meio Ambiente</th>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Emprego Formal</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Rendimento Médio</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
-
-<table class="lista">
-    <tr class="lista__cabecalho">
-        <th class="lista__icone"><i class="fa fa-money" aria-hidden="true"></i></th>
-        <th class="lista__titulo" colspan="3">Economia</th>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Emprego Formal</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Rendimento Médio</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
-
-<table class="lista">
-    <tr class="lista__cabecalho">
-        <th class="lista__icone"><i class="fa fa-medkit" aria-hidden="true"></i></th>
-        <th class="lista__titulo" colspan="3">Saúde</th>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Emprego Formal</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Rendimento Médio</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
-
-<table class="lista">
-    <tr class="lista__cabecalho">
-        <th class="lista__icone"><img src="img/populacao.svg" /></th>
-        <th class="lista__titulo" colspan="3">População</th>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Emprego Formal</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Rendimento Médio</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
-
-<table class="lista">
-    <tr class="lista__cabecalho">
-        <th class="lista__icone"><img src="img/agricultura.svg" /></th>
-        <th class="lista__titulo" colspan="3">Agricultura</th>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Emprego Formal</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-    <tr class="lista__separador">
-        <td colspan="4">
-            <div class="lista__linha"></div>
-        </td>
-    </tr>
-    <tr class="lista__indicador">
-        <td></td>
-        <td class="lista__nome">Rendimento Médio</td>
-        <td class="lista__valor">XXXX <span class="lista__unidade"></span></td>
-        <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
-    </tr>
-</table>
--->
