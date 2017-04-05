@@ -1,31 +1,36 @@
 <div class="cabecalho">
     <div class="cabecalho__nome-pesquisa">
+        <!--pesquisa atual e select do indicador-->
         <div class="nome-pesquisa">
             {{ pesquisa?.nome }}/
             <br/> 
             <span>
-                <select>
-                    <option *ngFor="let indicador of (pesquisa?.indicadores | async)">{{ indicador?.nome }}</option>
+                <select (change)="mudaIndicador($event);">
+                    <option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.id" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>
                 </select>
             </span>
         </div>
+        <!--select do ano-->
         <div class="select-ano-container">
             Ano:
-            <select class="select-ano" #ano>
-                <option *ngFor="let periodo of pesquisa?.periodos"> {{ periodo.nome }} </option>
+            <select class="select-ano" (change)="mudaAno($event)">
+                <option *ngFor="let periodo of pesquisa?.periodos" [selected]="periodo.nome == ano"> {{ periodo.nome }} </option>
             </select>
         </div>
-        <div class="notas" *ngIf="pesquisa?.periodos[ano.selectedIndex]?.notas.length">
-            <div class="area-click" [class.area-click--visivel]="mostrarNotas" (click)="mostrarNotas=false"></div>
-            <div class="notas__botao" (click)="mostrarNotas=true">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas
+        <!--notas-->
+        <template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
+            <div class="notas" *ngIf="periodo.nome == ano && periodo.notas.length > 0">
+                <div class="area-click" [class.area-click--visivel]="mostrarNotas" (click)="mostrarNotas=false"></div>
+                <div class="notas__botao" (click)="mostrarNotas=true">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas
+                </div>
+                <div class="notas__lista-container" *ngIf="mostrarNotas">
+                    <ol>
+                        <li *ngFor="let nota of periodo.notas"> {{ nota }} </li>
+                    </ol>
+                </div>
             </div>
-            <div class="notas__lista-container" *ngIf="mostrarNotas">
-                <ol>
-                    <li *ngFor="let nota of pesquisa?.periodos[ano.selectedIndex]?.notas"> {{ nota }} </li>
-                </ol>
-            </div>
-        </div>
+        </template>
     </div>
     <div class="cabecalho__seletor-visualizacao-dados">
         <div class="cabecalho__seletor-visualizacao-dados__item selecionado"><i class="fa fa-table" aria-hidden="true"></i> TABELA</div>
@@ -38,8 +43,8 @@
             {{ localidade?.nome }}
         </div>
 
-        <busca-header (onLocalidade)="setaLocalidade1($event);"></busca-header>
-        <busca-header (onLocalidade)="setaLocalidade2($event);"></busca-header>
+        <busca-header [localidadeAtual]="localidade1" (onLocalidade)="setaLocalidade1($event);"></busca-header>
+        <busca-header [localidadeAtual]="localidade2" (onLocalidade)="setaLocalidade2($event);"></busca-header>
 
         <div class="cabecalho__visualizacao-dados__item">
             <div class="area-click" [class.area-click--visivel]="mostrarOpcoes" (click)="mostrarOpcoes=false"></div>
