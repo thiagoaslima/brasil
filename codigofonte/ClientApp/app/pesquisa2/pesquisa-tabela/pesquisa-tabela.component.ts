@@ -45,12 +45,6 @@ export class PesquisaTabelaComponent implements OnChanges {
         }
     }
 
-
-    private isFilho(posicaoPai: string, posicaoFilho: string){
-
-        return posicaoFilho.startsWith(posicaoPai);
-    }
-
     private isFolha(indicador){
 
         return !indicador.children || indicador.children.length == 0;
@@ -69,6 +63,10 @@ export class PesquisaTabelaComponent implements OnChanges {
         this.flat(item.children).map(child => child.visivel = !child.visivel);
     }
 
+    private isListaAberta(indicador){
+
+        return !!indicador.children && indicador.children.length > 0 && indicador.children[0].visivel;
+    }
 
     /** 
      * Função que transforma a árvore num array linear.
