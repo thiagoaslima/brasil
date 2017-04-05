@@ -61,6 +61,69 @@
     padding: 10px 5px;
 }
 
+.lista__icone .ico{   
+    width: 30px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.ico--agri{
+    background-image: url('./../../../img/ico/ico-agricultura.png');
+}
+
+.lista__cabecalho--selecionado .ico--agri{
+    background-image: url('./../../../img/ico/ico-agricultura_on.png');
+}
+
+.ico--edu{
+    background-image: url('./../../../img/ico/ico-educacao.png');
+}
+
+.lista__cabecalho--selecionado .ico--edu{
+    background-image: url('./../../../img/ico/ico-educacao_on.png');
+}
+
+.ico--eco{
+    background-image: url('./../../../img/ico/ico-economia.png');
+}
+
+.lista__cabecalho--selecionado .ico--eco{
+    background-image: url('./../../../img/ico/ico-economia_on.png');
+}
+
+.ico--ambi{
+    background-image: url('./../../../img/ico/ico-ambiente.png');
+}
+
+.lista__cabecalho--selecionado .ico--ambi{
+    background-image: url('./../../../img/ico/ico-ambiente_on.png');
+}
+
+.ico--pop{
+    background-image: url('./../../../img/ico/ico-populacao.png');
+}
+
+.lista__cabecalho--selecionado .ico--pop{
+    background-image: url('./../../../img/ico/ico-populacao_on.png');
+}
+
+.ico--sau{
+    background-image: url('./../../../img/ico/ico-saude.png');
+}
+
+.lista__cabecalho--selecionado .ico--sau{
+    background-image: url('./../../../img/ico/ico-saude_on.png');
+}
+
+.ico--trab{
+    background-image: url('./../../../img/ico/ico-trabalho.png');
+}
+
+.lista__cabecalho--selecionado .ico--trab{
+    background-image: url('./../../../img/ico/ico-trabalho_on.png');
+}
+
 .lista__titulo{
     font-weight: bold;
     padding: 10px 5px;
