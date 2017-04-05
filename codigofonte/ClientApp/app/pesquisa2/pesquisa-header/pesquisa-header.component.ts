@@ -20,7 +20,7 @@ export class PesquisaHeaderComponent implements OnInit {
     localidade: Localidade;
     localidade1: Localidade = null;
     localidade2: Localidade = null;
-    ano = -1;
+    ano = 0;
     indicador = 0;
     mostrarNotas = false;
     mostrarOpcoes = false;
@@ -41,9 +41,10 @@ export class PesquisaHeaderComponent implements OnInit {
                 this.pesquisa = pesquisa;
             });
 
-            this.ano = (params.queryParams && params.queryParams.ano) ? params.queryParams.ano : -1;
             this.indicador = params.params.indicador;
             this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
+            if(params.queryParams.ano)
+                this.ano = params.queryParams.ano;
             if(params.queryParams.localidade1)
                 this.localidade1 = this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1);
             if(params.queryParams.localidade2)
@@ -53,7 +54,7 @@ export class PesquisaHeaderComponent implements OnInit {
             this.objetoURL.municipio = params.params.municipio;
             this.objetoURL.pesquisa = params.params.pesquisa;
             this.objetoURL.indicador = params.params.indicador ? params.params.indicador : 0;
-            this.objetoURL.ano = params.queryParams.ano ? params.queryParams.ano : -1;
+            this.objetoURL.ano = params.queryParams.ano ? params.queryParams.ano : 0;
             this.objetoURL.localidade1 = params.queryParams.localidade1 ? params.queryParams.localidade1 : 0;
             this.objetoURL.localidade2 = params.queryParams.localidade2 ? params.queryParams.localidade2 : 0;
         });
@@ -65,21 +66,18 @@ export class PesquisaHeaderComponent implements OnInit {
         this.objetoURL.localidade1 = localidade1 ? localidade1 : this.objetoURL.localidade1;
         this.objetoURL.localidade2 = localidade2 ? localidade2 : this.objetoURL.localidade2;
         let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa2', this.objetoURL.pesquisa, this.objetoURL.indicador];
-        let queryParams = {
-            'ano' : this.objetoURL.ano,
-            'localidade1' : this.objetoURL.localidade1,
-            'localidade2' : this.objetoURL.localidade2
-        };
+        let queryParams:any = {};
+        if(this.objetoURL.ano) queryParams.ano = this.objetoURL.ano;
+        if(this.objetoURL.localidade1) queryParams.localidade1 = this.objetoURL.localidade1;
+        if(this.objetoURL.localidade2) queryParams.localidade2 = this.objetoURL.localidade2;
         this._router.navigate(url, {'queryParams' : queryParams});
     }
 
     setaLocalidade1(localidade){
-        //setar rota
         this.navegarPara(null, null, localidade.codigo);
     }
 
     setaLocalidade2(localidade){
-        //setar rota
         this.navegarPara(null, null, null, localidade.codigo);
     }
 
