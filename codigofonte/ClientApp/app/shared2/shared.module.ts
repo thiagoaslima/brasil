@@ -9,6 +9,8 @@ import { IndicadorService2 } from './indicador/indicador.service';
 import { ResultadoService2 } from './resultado/resultado.service';
 import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';
 
+import { ResultadoPipe } from './resultado.pipe';
+
 
 export function getLRU() {
     return new Map();
@@ -23,7 +25,7 @@ const MODULES = [
 ];
 
 const PIPES = [
-    // put pipes here
+    ResultadoPipe
 ];
 
 const COMPONENTS = [

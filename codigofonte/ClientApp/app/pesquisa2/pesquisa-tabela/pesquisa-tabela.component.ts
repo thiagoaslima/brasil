@@ -25,7 +25,15 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     ngOnChanges() {
 
-        if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0 && !!this.periodo){
+        if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
+
+            debugger;
+
+            // Quando não houver um período selecionado, é exibido o período mais recente
+            if(!this.periodo){
+
+                this.periodo = this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome;
+            }
 
             let localidadeA = this.localidades[0];
             let localidadeB =  this.localidades.length > 1 ? this.localidades[1] : null;
@@ -106,6 +114,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
 
     private getStyleClass(posicaoIndicador){
+        
 
         return "nivel-" + this.getNivelIndicador(posicaoIndicador);
     }
