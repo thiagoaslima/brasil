@@ -17,7 +17,7 @@ const children = [
     component: PanoramaComponent
   },
 
-  { path: 'pesquisa2',
+  { path: 'pesquisa2/:pesquisa',
     component: PesquisaComponent2
   },
 

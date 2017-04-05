@@ -259,11 +259,12 @@ export class SinteseService {
             });
     }
 
-    public getPesquisaLocalidades(pesquisa: number, localA: number, localB: number, localC: number, indicadores: string[] = []) {
+    public getPesquisaLocalidades(pesquisa: number, localA: number = 0, localB: number = 0, localC: number = 0, indicadores: string[] = []) {
 
         return Observable.zip(this.getNomesPesquisa(pesquisa.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localA.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localB.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localC.toString(), indicadores))
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 
+                debugger;
 
                 this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
 

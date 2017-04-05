@@ -12,7 +12,7 @@ import { SinteseService } from '../../sintese/sintese.service';
 
 export class PesquisaTabelaComponent implements OnChanges {
    
-    @Input() localidades: Localidade[];
+    @Input() localidades: number[];
     @Input() pesquisa: Pesquisa;
     @Input() periodo: string;
    
@@ -27,9 +27,9 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0 && !!this.periodo){
 
-            let localidadeA = this.localidades[0].codigo;
-            let localidadeB =  this.localidades.length > 1 ? this.localidades[1].codigo : null;
-            let localidadeC = this.localidades.length > 2 ? this.localidades[2].codigo : null;
+            let localidadeA = this.localidades[0];
+            let localidadeB =  this.localidades.length > 1 ? this.localidades[1] : null;
+            let localidadeC = this.localidades.length > 2 ? this.localidades[2] : null;
 
             this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC).subscribe((indicadores) => {
 
