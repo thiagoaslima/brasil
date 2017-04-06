@@ -76,7 +76,7 @@ export class PesquisaHeaderComponent implements OnInit {
         this.objetoURL.ano = ano ? ano : this.objetoURL.ano;
         this.objetoURL.localidade1 = localidade1 ? localidade1 : this.objetoURL.localidade1;
         this.objetoURL.localidade2 = localidade2 ? localidade2 : this.objetoURL.localidade2;
-        let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa2', this.objetoURL.pesquisa, this.objetoURL.indicador];
+        let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa', this.objetoURL.pesquisa, this.objetoURL.indicador];
         let queryParams:any = {};
         if(this.objetoURL.ano) queryParams.ano = this.objetoURL.ano;
         if(this.objetoURL.localidade1) queryParams.localidade1 = this.objetoURL.localidade1;

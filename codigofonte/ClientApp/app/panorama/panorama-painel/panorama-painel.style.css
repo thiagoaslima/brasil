@@ -1,0 +1,41 @@
+ .cards{
+            content: "";
+            display: table;
+            clear: both;
+            margin: 2% 5%;
+        }
+
+        .cartograma {
+            padding-top: 1em;
+            display: inline-block;
+            width: 70%;
+            margin-left: 40px;
+            float: left;
+            margin-bottom: 20px;
+}
+
+.legenda {
+    display: inline-block;
+    width: 20%;
+    float: left;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.legenda__item{
+    width: 100%;
+    max-width: 128px;
+    margin-bottom: 15px;
+    float: right;
+}
+
+.legenda__item__cor{
+    width: 100%;
+    background-color: red;
+    height: 4px;
+    margin-bottom: 3px;
+}
+
+.legenda__item__label{
+    font-size: .8em;
+}

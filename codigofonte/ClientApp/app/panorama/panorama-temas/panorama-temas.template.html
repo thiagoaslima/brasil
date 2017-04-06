@@ -32,7 +32,7 @@
         <div class="grafico__detalhes">
             <h3 *ngIf="grafico.subtitulo" class="grafico__subtitulo">{{grafico.subtitulo}}</h3>
             <div class="grafico__legenda" *ngIf="grafico.dados">
-                <div class="grafico__legenda-item" *ngFor="let dado of grafico.dados; let i = index">
+                <div class="grafico__legenda-item" *ngFor="let dado of grafico.dados.reverse(); let i = index">
                     <div class="grafico__legenda-cor grafico__legenda-cor--{{i+1}}"></div>
                     <p class="grafico__legenda-texto">{{dado.indicador?.nome}}</p>
                 </div>
