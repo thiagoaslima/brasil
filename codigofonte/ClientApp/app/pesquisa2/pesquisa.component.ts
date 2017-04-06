@@ -28,7 +28,7 @@ export class PesquisaComponent2 implements OnInit {
     pesquisa$;
     localidade: Localidade;
 
-    posicaoIndicador: string;
+    posicaoIndicador: string = "1";
     localidades: number[] = [null, null, null];
     periodo: string;
     
@@ -37,25 +37,32 @@ export class PesquisaComponent2 implements OnInit {
         private _routerParams:RouterParamsService,
         private _localidadeService2: LocalidadeService2,
         private _pesquisaService: PesquisaService2,
-        private _sintese:SinteseService
+        private _sintese:SinteseService,
+        private _indicadorService: IndicadorService2
     ) { }
 
     ngOnInit() {
 
-        debugger;
-
-        // TODO: Obter dados da rota em app-state, tanto da pesquisa quanto da localidade
-        this.localidade = this._localidadeService2.getMunicipioBySlug('rj', 'rio-de-janeiro');
-        
-
-
         this._routerParams.params$.subscribe(urlParams => {
 
-            debugger;
+            if(!!urlParams.params['indicador']){
+                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.proprio)
+                    .subscribe((indicadores) => {
+                        
+                        debugger;
+
+                        if(!!indicadores && indicadores.length > 0){ 
+
+                            this.posicaoIndicador = indicadores[0].posicao;
+                        } 
+                        else { 
+
+                            this.posicaoIndicador = "1";
+                        }
+                });
+            }
 
             this.pesquisa$ = this._pesquisaService.getPesquisa(urlParams.params['pesquisa']);
-
-            this.posicaoIndicador = urlParams.params['indicador'];
 
             // Obter localidade principal
             this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;

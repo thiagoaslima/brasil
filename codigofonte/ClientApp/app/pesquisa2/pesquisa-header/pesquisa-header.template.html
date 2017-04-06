@@ -6,7 +6,7 @@
             <br/> 
             <span>
                 <select (change)="mudaIndicador($event);">
-                    <option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.posicao" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>
+                    <option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.id" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>
                 </select>
             </span>
         </div>
