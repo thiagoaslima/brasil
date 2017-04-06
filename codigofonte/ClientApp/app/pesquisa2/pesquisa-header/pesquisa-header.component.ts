@@ -39,12 +39,22 @@ export class PesquisaHeaderComponent implements OnInit {
         this._routerParamsService.params$.subscribe((params) => {
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
+
+                if(params.queryParams.ano){
+                    this.ano = params.queryParams.ano;
+                }
+                else {
+
+                    debugger;
+                    // Quando não houver um período selecionado, é exibido o período mais recente
+                    this.ano = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
+                }
+
             });
 
             this.indicador = params.params.indicador;
             this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
-            if(params.queryParams.ano)
-                this.ano = params.queryParams.ano;
+
             if(params.queryParams.localidade1)
                 this.localidade1 = this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1);
             if(params.queryParams.localidade2)

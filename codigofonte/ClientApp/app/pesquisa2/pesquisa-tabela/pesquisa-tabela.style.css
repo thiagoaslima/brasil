@@ -171,8 +171,13 @@ tr.nivel-4 td:first-child {
     font-style: italic;
 }
 
+.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+    cursor: pointer;
+}
+
 .sem-filho .label{
     background-image: none;
+    cursor: default;
 }
 
 .label--com-acao{
