@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class PesquisaHeaderComponent implements OnInit {
+    @Output() onDownload = new EventEmitter();
     pesquisa$: Observable<Pesquisa>;
     pesquisa: Pesquisa;
     localidade: Localidade;
@@ -97,6 +98,15 @@ export class PesquisaHeaderComponent implements OnInit {
 
     mudaAno(event){
         this.navegarPara(null, event.srcElement.value);
+    }
+
+    fazerDownload(){
+        this.mostrarOpcoes = false;
+        this.onDownload.emit();
+    }
+
+    compartilhar(){
+        this.mostrarOpcoes = false; //esconde o menu
     }
 }
 

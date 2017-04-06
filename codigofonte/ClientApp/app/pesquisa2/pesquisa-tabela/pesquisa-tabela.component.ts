@@ -3,6 +3,11 @@ import { Component, OnChanges, Input } from '@angular/core';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { SinteseService } from '../../sintese/sintese.service';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+
+// Biblioteca usada no download de arquivos.
+// Possui um arquivo de definição de tipos file-saver.d.ts do typings.
+var FileSaver = require('file-saver');
 
 @Component({
     selector: 'pesquisa-tabela',
@@ -20,7 +25,10 @@ export class PesquisaTabelaComponent implements OnChanges {
 
 
 
-    constructor( private _sintese:SinteseService ) {  }
+    constructor(
+        private _sintese:SinteseService,
+        private _localidade:LocalidadeService2
+    ) {  }
 
 
     ngOnChanges() {
@@ -117,5 +125,22 @@ export class PesquisaTabelaComponent implements OnChanges {
         
 
         return "nivel-" + this.getNivelIndicador(posicaoIndicador);
+    }
+
+    public downloadCSV(){
+        let ind = this.indicadores;
+        let localidadeA = this._localidade.getMunicipioByCodigo(this.localidades[0]).nome;
+        let localidadeB = this.localidades[1] ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';
+        let localidadeC = this.localidades[2] ? this._localidade.getMunicipioByCodigo(this.localidades[2]).nome : '';
+        let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
+        for(let i = 0; i < ind.length; i++){
+            csv += ind[i].posicao + ';' + ind[i].indicador + ';';
+            csv += (ind[i].localidadeA && ind[i].localidadeA[this.periodo] ? ind[i].localidadeA[this.periodo] : "") + ';';
+            csv += (ind[i].localidadeB && ind[i].localidadeB[this.periodo] ? ind[i].localidadeB[this.periodo] : "") + ';';
+            csv += (ind[i].localidadeC && ind[i].localidadeC[this.periodo] ? ind[i].localidadeC[this.periodo] : "") + ';';
+            csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
+        }
+        let blob = new Blob([csv], { type: 'text/csv' });
+        FileSaver.saveAs(blob, this.pesquisa.nome + '(' + this.periodo + ').csv');
     }
 }
