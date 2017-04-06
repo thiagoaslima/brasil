@@ -14,7 +14,7 @@
         <div class="select-ano-container">
             Ano:
             <select class="select-ano" (change)="mudaAno($event)">
-                <option *ngFor="let periodo of pesquisa?.periodos" [selected]="periodo.nome == ano"> {{ periodo.nome }} </option>
+                <option *ngFor="let periodo of pesquisa?.periodos.reverse()" [selected]="periodo.nome == ano"> {{ periodo.nome }} </option>
             </select>
         </div>
         <!--notas-->

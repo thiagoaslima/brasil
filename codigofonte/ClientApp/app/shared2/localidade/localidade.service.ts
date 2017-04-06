@@ -148,6 +148,17 @@ export class LocalidadeService2 {
         return pais.concat(ufs, municipios);
     }
 
+    public getAllCapitais(){
+        let arr = [];
+        for(let i = 0; i < this._ufs.todos.length; i++){
+            arr.push(this._ufs.todos[i].capital);
+        }
+        arr.sort((a, b) => {
+            return a.nome.localeCompare(b.nome);
+        });
+        return arr;
+    }
+
     private _buildLocalidadesTree() {
         this._brasil = Localidade.criar(Localidade.convertFromFile(brasil));
 
