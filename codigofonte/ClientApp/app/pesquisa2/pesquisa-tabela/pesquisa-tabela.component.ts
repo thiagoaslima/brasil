@@ -44,7 +44,7 @@ export class PesquisaTabelaComponent implements OnChanges {
                 this.indicadores = this.flat(indicadores).map(indicador => {
 
                     indicador.nivel = this.getNivelIndicador(indicador.posicao);
-                    indicador.visivel = indicador.nivel <= 3 ? true : false;
+                    indicador.visivel = indicador.nivel <= 4 ? true : false;
 
                     return indicador;
                 });

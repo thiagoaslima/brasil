@@ -11,45 +11,8 @@ import 'rxjs/add/operator/filter';
 
 @Component({
     selector: 'panorama-painel',
-    template: `
-        <div>
-            <h2>{{dados.tema}}</h2>
-            
-            <div>
-                <div class="cartograma">
-                    <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
-                </div>
-                <div class="legenda">
-                    
-                </div>
-            </div>
-            
-            <div class="cards">
-                <panorama-card  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade"></panorama-card>
-            </div>
-
-        </div>
-    `,
-    styles: [`
-        .cards{
-            content: "";
-            display: table;
-            clear: both;
-            margin: 2% 5%;
-        }
-
-        .cartograma {
-            padding-top: 1em;
-            display: inline-block;
-            width: 70%;
-            margin-left: 40px;
-        }
-        .legenda {
-            display: inline-block;
-            width: 29%;
-        }
-        
-    `],
+    templateUrl: './panorama-painel.template.html',
+    styleUrls: ['./panorama-painel.style.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanoramaPainelComponent implements OnInit, OnChanges {
