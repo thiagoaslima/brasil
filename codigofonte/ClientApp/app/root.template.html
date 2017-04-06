@@ -38,7 +38,7 @@
                 </li>
 
                 <li routerLinkActive='menu--selecionado'>
-                    <a style="display:block" [routerLink]="getLink('pesquisa/23')">Pesquisas</a>
+                    <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
                 </li>
             </ul>
         </nav>
