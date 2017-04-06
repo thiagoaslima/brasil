@@ -17,24 +17,9 @@ const children = [
     component: PanoramaComponent
   },
 
-  { path: 'pesquisa2', component: PesquisaComponent2},
-  { path: 'pesquisa2/:pesquisa', component: PesquisaComponent2},
-  { path: 'pesquisa2/:pesquisa/:indicador', component: PesquisaComponent2},
-
-  {
-    path: 'sintese',
-    component: SinteseComponent,
-    children: [
-      { path: '', redirectTo: 'historico', pathMatch: 'full' },
-      { path: ':indicador', component: SinteseDetalhesComponent }
-    ]
-  },
-
-  { path: 'pesquisas/:pesquisa/:indicador', component: PesquisaComponent },
-  { path: 'pesquisas/:pesquisa', component: PesquisaComponent },
-  { path: 'pesquisas/mapa', component: PesquisaComponent },
-  { path: 'pesquisas', redirectTo: 'pesquisas/23/27652' },
-
+  { path: 'pesquisa', component: PesquisaComponent2},
+  { path: 'pesquisa/:pesquisa', component: PesquisaComponent2},
+  { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent2},
 ];
 
 @NgModule({
