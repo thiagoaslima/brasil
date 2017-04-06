@@ -28,6 +28,7 @@ export class PesquisaComponent2 implements OnInit {
     pesquisa$;
     localidade: Localidade;
 
+    posicaoIndicador: string;
     localidades: number[] = [null, null, null];
     periodo: string;
     
@@ -53,6 +54,8 @@ export class PesquisaComponent2 implements OnInit {
             debugger;
 
             this.pesquisa$ = this._pesquisaService.getPesquisa(urlParams.params['pesquisa']);
+
+            this.posicaoIndicador = urlParams.params['indicador'];
 
             // Obter localidade principal
             this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;

@@ -31,9 +31,24 @@
 
 .legenda__item__cor{
     width: 100%;
-    background-color: red;
     height: 4px;
     margin-bottom: 3px;
+}
+
+.legenda__cor-1{
+    background-color: #308BC9;
+}
+
+.legenda__cor-2{
+    background-color: #1B779B;
+}
+
+.legenda__cor-3{
+    background-color: #41B6C4;
+}
+
+.legenda__cor-4{
+    background-color: #C7E9B4;
 }
 
 .legenda__item__label{
