@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface.2';
 import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
+import { EscopoIndicadores } from '../shared2/indicador/indicador.model';
 import { SINTESE, SinteseConfigItem } from './sintese-config';
 import { flatTree } from '../utils/flatFunctions';
 
@@ -174,6 +175,40 @@ export class SinteseService {
     }
 
 
+    public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
+
+        const serviceEndpoint = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=${escopo}`;
+
+        return this._http.get(serviceEndpoint).map((res => res.json()));
+    }
+
+    public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
+
+        const serviceEndpoint = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}`;
+
+        const dadosPesquisa$ = this._http.get(serviceEndpoint)
+            .map((res => res.json()))
+            .map(this._excludeNullYearsFromResultados);
+
+        return dadosPesquisa$.map((dados) => {
+
+            let indicadores = {};
+            dados.map((dado: any) => {
+
+                return dado.res.filter((res: any) => {
+
+                    return !!res.localidade && res.localidade === codigoLocalidade;
+                })
+                    .forEach((res: any) => {
+                        indicadores[dado.id.toString()] = res.res;
+                    });
+            });
+
+            return indicadores;
+        });
+    }
+
+
     /**
      * Recupera apenas os dados da pesquisa, ignorando os rótulos dos indicadores.
      * 
@@ -259,9 +294,9 @@ export class SinteseService {
             });
     }
 
-    public getPesquisaLocalidades(pesquisa: number, localA: number = 0, localB: number = 0, localC: number = 0, indicadores: string[] = []) {
+    public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA: number = 0, codigoLocalidadeB: number = 0, codigoLocalidadeC: number = 0, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
 
-        return Observable.zip(this.getNomesPesquisa(pesquisa.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localA.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localB.toString(), indicadores), this.getDadosPesquisa(pesquisa.toString(), localC.toString(), indicadores))
+        return Observable.zip(this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo))
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 
                 debugger;

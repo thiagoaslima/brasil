@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input } from '@angular/core';
 
+import { EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { SinteseService } from '../../sintese/sintese.service';
@@ -14,6 +15,7 @@ export class PesquisaTabelaComponent implements OnChanges {
    
     @Input() localidades: number[];
     @Input() pesquisa: Pesquisa;
+    @Input() posicaoIndicador: string;
     @Input() periodo: string;
    
     private indicadores;
@@ -35,11 +37,16 @@ export class PesquisaTabelaComponent implements OnChanges {
                 this.periodo = this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome;
             }
 
+            if(!this.posicaoIndicador){
+
+                this.posicaoIndicador = "1";
+            }
+
             let localidadeA = this.localidades[0];
             let localidadeB =  this.localidades.length > 1 ? this.localidades[1] : null;
             let localidadeC = this.localidades.length > 2 ? this.localidades[2] : null;
 
-            this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC).subscribe((indicadores) => {
+            this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
 
                 this.indicadores = this.flat(indicadores).map(indicador => {
 
