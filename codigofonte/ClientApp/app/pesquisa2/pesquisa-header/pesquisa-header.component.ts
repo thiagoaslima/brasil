@@ -56,11 +56,9 @@ export class PesquisaHeaderComponent implements OnInit {
             this.indicador = params.params.indicador;
             this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
 
-            if(params.queryParams.localidade1)
-                this.localidade1 = this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1);
-            if(params.queryParams.localidade2)
-                this.localidade2 = this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2)
-
+            this.localidade1 = params.queryParams.localidade1 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1) : null;
+            this.localidade2 = params.queryParams.localidade2 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2) : null;
+            
             this.objetoURL.uf = params.params.uf;
             this.objetoURL.municipio = params.params.municipio;
             this.objetoURL.pesquisa = params.params.pesquisa;
