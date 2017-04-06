@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class PesquisaHeaderComponent implements OnInit {
+    @Output() onDownload = new EventEmitter();
     pesquisa$: Observable<Pesquisa>;
     pesquisa: Pesquisa;
     localidade: Localidade;
@@ -98,6 +99,15 @@ export class PesquisaHeaderComponent implements OnInit {
     mudaAno(event){
         this.navegarPara(null, event.srcElement.value);
     }
+
+    fazerDownload(){
+        this.mostrarOpcoes = false;
+        this.onDownload.emit();
+    }
+
+    compartilhar(){
+        this.mostrarOpcoes = false; //esconde o menu
+    }
 }
 
 /***********************
@@ -126,6 +136,14 @@ export class PesquisaHeaderComponent implements OnInit {
                                 <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
                             </li>
                         </ul>
+                        <div *ngIf="localidades == null">
+                            <p class="todos-municipios__titulo">Mais acessados:</p>
+                            <ul>
+                                <li *ngFor="let localidade of capitais" (click)="onClickItem(localidade)">
+                                    <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,12 +155,17 @@ export class PesquisaHeaderComponent implements OnInit {
 export class BuscaHeaderComponent{
     mostrarMenu = false;
     localidades: Localidade[];
+    capitais: Localidade[];
     @Output() onLocalidade = new EventEmitter();
     @Input() localidadeAtual: Localidade;
 
     constructor(
         private _localidadeService: LocalidadeService2
     ) { }
+
+     ngOnInit(){
+         this.capitais = this._localidadeService.getAllCapitais();
+    }
 
     onChangeInput(event){
         let texto = event.srcElement.value;

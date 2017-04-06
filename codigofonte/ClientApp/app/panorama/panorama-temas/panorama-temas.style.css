@@ -78,19 +78,19 @@
 }
 
 .grafico__legenda-cor--1{
-    background-color: #8CC63F;
+    background-color: #00A99D;
 }
 
 .grafico__legenda-cor--2{
-    background-color: #22B573;
-}
-
-.grafico__legenda-cor--3{
     background-color: #177437;
 }
 
+.grafico__legenda-cor--3{
+    background-color: #22B573;
+}
+
 .grafico__legenda-cor--4{
-    background-color: #00A99D;
+    background-color: #8CC63F;
 }
 
 .grafico__legenda-texto{

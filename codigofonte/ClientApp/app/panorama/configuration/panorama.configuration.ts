@@ -55,6 +55,59 @@ export const PANORAMA = {
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
+            // --- Ambiente
+            {
+                pesquisaId: 10058,
+                indicadorId: 60029,
+                titulo: "Arborização de vias públicas",
+                subtitulo: "Arborização de vias públicas",
+                tema: TEMAS.meioAmbiente,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Arborização de vias públicas",
+                    tipo: TiposGrafico.barra,
+                    dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60029
+                    }]
+                }
+            },
+
+            {
+                pesquisaId: 10058,
+                indicadorId: 60030,
+                titulo: "Esgotamento sanitário adequado",
+                subtitulo: "Esgotamento sanitário adequado",
+                tema: TEMAS.meioAmbiente,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Esgotamento sanitário adequado",
+                    tipo: TiposGrafico.barra,
+                    dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60030
+                    }]
+                }
+            },
+
+            {
+                pesquisaId: 10058,
+                indicadorId: 60031,
+                titulo: "Urbanização de vias públicas",
+                subtitulo: "Urbanização de vias públicas",
+                tema: TEMAS.meioAmbiente,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Urbanização de vias públicas",
+                    tipo: TiposGrafico.barra,
+                    dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60031
+                    }]
+                }
+            },
+
+
             // --- Educação
             {
                 pesquisaId: 40,
@@ -69,6 +122,40 @@ export const PANORAMA = {
                     dados: [{
                         pesquisaId: 40,
                         indicadorId: 30277
+                    }]
+                }
+            },
+
+            {
+                pesquisaId: 10058,
+                indicadorId: 60041,
+                titulo: "IDEB - Anos iniciais do ensino fundamental",
+                subtitulo: "Anos iniciais do ensino fundamental",
+                tema: TEMAS.educacao,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "IDEB - Anos iniciais do ensino fundamental",
+                    tipo: TiposGrafico.barra,
+                    dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60041
+                    }]
+                }
+            },
+
+             {
+                pesquisaId: 10058,
+                indicadorId: 60042,
+                titulo: "IDEB - Anos finais do ensino fundamental",
+                subtitulo: "Anos finais do ensino fundamental",
+                tema: TEMAS.educacao,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "IDEB - Anos finais do ensino fundamental",
+                    tipo: TiposGrafico.barra,
+                    dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60042
                     }]
                 }
             },
@@ -99,6 +186,23 @@ export const PANORAMA = {
                 }
             },
 
+            {
+                pesquisaId: 10058,
+                indicadorId: 60045,
+                titulo: "Taxa de escolarização de 6 a 14 anos de idade",
+                subtitulo: "6 a 14 anos de idade",
+                tema: TEMAS.educacao,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Taxa de escolarização de 6 a 14 anos de idade",
+                    tipo: TiposGrafico.barra,
+                    dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60045
+                    }]
+                }
+            },
+
 
             // --- Trabalho
             {
@@ -117,6 +221,22 @@ export const PANORAMA = {
                 visualizacao: PanoramaVisualizacao.painel
             },
 
+            {
+                pesquisaId: 10058,
+                indicadorId: 60036,
+                titulo: "População ocupada",
+                tema: TEMAS.trabalho,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            {
+                pesquisaId: 10058,
+                indicadorId: 60037,
+                titulo: "Rendimento nominal mensal domiciliar per capita até ½ salário mínimo",
+                tema: TEMAS.trabalho,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
             // --- Saúde
             {
                 pesquisaId: 39,
@@ -126,11 +246,43 @@ export const PANORAMA = {
                 visualizacao: PanoramaVisualizacao.painel
             },
 
-            // --- Economia
             {
-                pesquisaId: 38,
-                indicadorId: 47001,
+                pesquisaId: 10058,
+                indicadorId: 60032,
+                titulo: "Internações por diarreia",
+                tema: TEMAS.saude,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            // {
+            //     pesquisaId: 10058,
+            //     indicadorId: 60033,
+            //     titulo: "Mortalidade Infantil - óbitos por mil nascidos vivos",
+            //     tema: TEMAS.saude,
+            //     visualizacao: PanoramaVisualizacao.painel
+            // },
+
+            // --- Economia
+            // {
+            //     pesquisaId: 38,
+            //     indicadorId: 47001,
+            //     titulo: "PIB per capita",
+            //     tema: TEMAS.economia,
+            //     visualizacao: PanoramaVisualizacao.painel
+            // },
+
+            {
+                pesquisaId: 10058,
+                indicadorId: 60047,
                 titulo: "PIB per capita",
+                tema: TEMAS.economia,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+
+            {
+                pesquisaId: 10058,
+                indicadorId: 60048,
+                titulo: "Percentual das receitas oriundas de fontes externas",
                 tema: TEMAS.economia,
                 visualizacao: PanoramaVisualizacao.painel
             }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -22,6 +22,8 @@ import { flatTree } from '../utils/flatFunctions';
 })
 
 export class PesquisaComponent2 implements OnInit {
+
+    @ViewChild('dados') dados: ElementRef;
 
     pesquisa$;
     localidade: Localidade;

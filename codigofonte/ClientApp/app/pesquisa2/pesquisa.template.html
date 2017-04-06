@@ -1,6 +1,6 @@
 <div class='conteudo'>
     
-    <pesquisa-header></pesquisa-header>
+    <pesquisa-header (onDownload)="dados.downloadCSV();"></pesquisa-header>
 
-    <pesquisa-tabela [pesquisa]="pesquisa$ | async" [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo"></pesquisa-tabela>
+    <pesquisa-tabela #dados [pesquisa]="pesquisa$ | async"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo"></pesquisa-tabela>
 </div>
