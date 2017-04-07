@@ -148,3 +148,33 @@ button .fa{
     height: 14px;
     background-size: 100% auto;
 }
+
+.notas__lista-container, .fontes__lista-container{
+    display: none;
+}
+
+.card.selecionado .notas__lista-container {
+    margin-left: 128px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    margin-top: 56px;
+    font-size: .9em;
+    display: block;
+}
+
+.card.selecionado .fontes__lista-container {
+    margin-left: 57px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    margin-top: 56px;
+    font-size: .9em;
+    display: block;
+}
