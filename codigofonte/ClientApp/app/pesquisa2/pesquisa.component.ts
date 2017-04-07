@@ -28,7 +28,7 @@ export class PesquisaComponent2 implements OnInit {
     pesquisa$;
     localidade: Localidade;
 
-    posicaoIndicador: string = "1";
+    posicaoIndicador: string = "2";
     localidades: number[] = [null, null, null];
     periodo: string;
     
@@ -57,7 +57,7 @@ export class PesquisaComponent2 implements OnInit {
                         } 
                         else { 
 
-                            this.posicaoIndicador = "1";
+                            this.posicaoIndicador = "2";
                         }
                 });
             }
