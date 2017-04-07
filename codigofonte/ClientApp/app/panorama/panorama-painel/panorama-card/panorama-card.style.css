@@ -1,3 +1,8 @@
+.content-card{
+    float: left;
+    height: 312px;
+    margin-bottom: 30px;
+}
 
 .card{
     border: 1px solid #B3B3B3;
@@ -7,6 +12,7 @@
     padding: 10px;
     float: left;
     margin-left: 30px;
+    margin-bottom: 30px;
 }
 
 .cards .card:nth-child(1) {

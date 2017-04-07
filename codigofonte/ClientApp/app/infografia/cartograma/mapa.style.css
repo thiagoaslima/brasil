@@ -1,14 +1,15 @@
+.container{
+    overflow: hidden;
+}
+
+.mapa{
+    width: 80%;
+    float: left;
+}
 .mapa svg {
-    width: 90%;
-    margin: 0 5%;
-    max-height: 700px;
-    /*margin-top: -20px;*/
-    /*height: 250px;   */
+    
 }
 #faixas{
-    /*position:absolute; 
-    bottom:50px; 
-    border:1px solid #ccc; */
     padding:0 0 7px 5%;
 }
 #faixas h4{ 
@@ -161,23 +162,22 @@ g, .periodo-link {
 /*legenda*/
 
 .legenda{
-    width: 90%;
-    margin: 3% 5%;
+    width: 15%;
+    float: right;
 }
 
 .legenda__item{
-    display: inline-block;
-    width: 19%;
-    padding-right: 5px;
+    margin-top: 18px;
 }
 
 .legenda__cor{
     width: 100%;
     height: 6px;
-    margin-bottom: 5px;
 }
 
 .legenda__texto{
+    padding-top: 5px;
+    font-size: 0.75em;
     font-style: italic;
 }
 

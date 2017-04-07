@@ -38,6 +38,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     public quartis$ = new BehaviorSubject<any[]>([]);
     // public _quartis$ = this._quartis$.asObservable().share();
     private _resultados: { [idx: string]: Observable<Resultado[]> } = Object.create(null);
+    public valores = null;
 
     constructor(
         private _mapaService: MapaService,
@@ -80,6 +81,10 @@ export class CartogramaComponent implements OnInit, OnChanges {
             })
             // .distinct( (a, b) => a.length === b.length && a.every( (v, idx) => v === b[idx]))
             .subscribe(arr => { debugger; this.quartis$.next(arr)});
+
+            this.quartis$.subscribe((valores) => {
+                this.valores = valores;
+            });
 
     }
 

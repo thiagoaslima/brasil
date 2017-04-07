@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <div class="mapa" *ngIf="(malha$ | async)?.viewBox">
         <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
             <svg:g class="uf" transform="scale(1 -1)">
@@ -10,14 +10,16 @@
         </svg>
     </div>
 
-    <div class="legenda">
-        <div class="legenda-item">
-            <div class="legenda-cor legenda-cor--0"></div>
-            <p class="legenda-texto">0 {{indicador?.unidade.nome}}</p>
+    <div class="legenda" *ngIf="valores.length > 0">
+        <!--<div class="legenda__item" *ngFor="let valor of quartis$ | async; let i = index">-->
+        <div class="legenda__item" *ngFor="let valor of valores; let i = index">
+            <div class="legenda__cor faixa{{i+1}}"></div>
+            <p class="legenda__texto" *ngIf="i == 0">0 - {{valor}} {{indicador?.unidade.nome}}</p>
+            <p class="legenda__texto" *ngIf="i > 0">{{valores[i - 1]}} - {{valor}} {{indicador?.unidade.nome}}</p>
         </div>
-        <div class="legenda-item" *ngFor="let valor of quartis$ | async; let i = index">
-            <div class="legenda-cor legenda-cor--{{i+1}}"></div>
-            <p class="legenda-texto">{{valor | resultado}} {{indicador?.unidade.nome}}</p>
+        <div class="legenda__item">
+            <div class="legenda__cor faixa{{valores.length + 1}}"></div>
+            <p class="legenda__texto">{{valores[valores.length - 1]}} {{indicador?.unidade.nome}} ou mais</p>
         </div>
     </div>
 </div>
