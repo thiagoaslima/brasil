@@ -24,6 +24,10 @@ td.label {
     color: #E2871A;
 }
 
+.nivel-2 td {
+	padding: 13px 2%;
+	}
+
 .nivel-2:hover {
 	background-color: #E6E6E6;
 	-webkit-transition: all 100ms ease;
