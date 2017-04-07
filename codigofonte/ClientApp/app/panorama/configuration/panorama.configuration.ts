@@ -13,7 +13,7 @@ export const TEMAS = {
     economia: "Economia",
     frota: "Frota de veículos",
     historico: 'Histórico',
-    meioAmbiente: "Meio Ambiente",
+    meioAmbiente: "Território e Ambiente",
     populacao: "População",
     saude: "Saúde",
     territorio: "Território",
@@ -56,22 +56,6 @@ export const PANORAMA = {
             },
 
             // --- Ambiente
-            {
-                pesquisaId: 10058,
-                indicadorId: 60029,
-                titulo: "Arborização de vias públicas",
-                subtitulo: "Arborização de vias públicas",
-                tema: TEMAS.meioAmbiente,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "Arborização de vias públicas",
-                    tipo: TiposGrafico.barra,
-                    dados: [{
-                        pesquisaId: 10058,
-                        indicadorId: 60029
-                    }]
-                }
-            },
 
             {
                 pesquisaId: 10058,
@@ -79,32 +63,23 @@ export const PANORAMA = {
                 titulo: "Esgotamento sanitário adequado",
                 subtitulo: "Esgotamento sanitário adequado",
                 tema: TEMAS.meioAmbiente,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "Esgotamento sanitário adequado",
-                    tipo: TiposGrafico.barra,
-                    dados: [{
-                        pesquisaId: 10058,
-                        indicadorId: 60030
-                    }]
-                }
+                visualizacao: PanoramaVisualizacao.painel
             },
-
+            {
+                pesquisaId: 10058,
+                indicadorId: 60029,
+                titulo: "Arborização de vias públicas",
+                subtitulo: "Arborização de vias públicas",
+                tema: TEMAS.meioAmbiente,
+                visualizacao: PanoramaVisualizacao.painel
+            },
             {
                 pesquisaId: 10058,
                 indicadorId: 60031,
                 titulo: "Urbanização de vias públicas",
                 subtitulo: "Urbanização de vias públicas",
                 tema: TEMAS.meioAmbiente,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "Urbanização de vias públicas",
-                    tipo: TiposGrafico.barra,
-                    dados: [{
-                        pesquisaId: 10058,
-                        indicadorId: 60031
-                    }]
-                }
+                visualizacao: PanoramaVisualizacao.painel
             },
 
 
