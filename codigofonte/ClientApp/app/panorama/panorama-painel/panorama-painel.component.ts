@@ -37,10 +37,9 @@ import 'rxjs/add/operator/filter';
         }
 
         .cartograma {
-            padding-top: 1em;
-            display: inline-block;
-            width: 70%;
+            margin: 3% 5%;
         }
+
         .legenda {
             display: inline-block;
             width: 29%;
