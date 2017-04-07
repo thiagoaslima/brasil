@@ -5,6 +5,7 @@ import { PesquisaService2 } from './shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from './shared2/indicador/indicador.service';
 import { ResultadoService2 } from './shared2/resultado/resultado.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { RouterParamsService } from './shared/router-params.service';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
@@ -25,6 +26,7 @@ export class RootComponent implements OnInit, OnDestroy {
     public menuGlobalAberto = false;
     public menuAberto = false;
     public abrirMenuPesquisa = false;
+    public itemSelecionado;
 
     private _localSelecionada$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
@@ -49,7 +51,8 @@ export class RootComponent implements OnInit, OnDestroy {
 
     constructor(
         private _route: ActivatedRoute,
-        private _localidadeService: LocalidadeService
+        private _localidadeService: LocalidadeService,
+        private _routerParams:RouterParamsService
     ) {
         this.locais = this._localidadeService.tree$;
     }
@@ -65,6 +68,13 @@ export class RootComponent implements OnInit, OnDestroy {
             } else {
                 this.menuAberto = false;
             }
+        });
+        //marca a opção no menu, baseado na rota
+        this._routerParams.params$.subscribe(({params}) => {
+            if(params.pesquisa)
+                this.itemSelecionado = 'pesquisa';
+            else
+                this.itemSelecionado = 'panorama';
         });
     }
 

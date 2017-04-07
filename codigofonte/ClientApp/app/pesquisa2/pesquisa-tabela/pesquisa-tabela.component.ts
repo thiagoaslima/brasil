@@ -37,7 +37,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
 
-            debugger;
+            // debugger;
 
             // Quando não houver um período selecionado, é exibido o período mais recente
             if(!this.periodo){
@@ -76,7 +76,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     //chamada quando abre os nós nível 2 da tabela de dados
     private controlarExibicao(item){
 
-        debugger;
+        // debugger;
 
         if(item.nivel < 3) {
 

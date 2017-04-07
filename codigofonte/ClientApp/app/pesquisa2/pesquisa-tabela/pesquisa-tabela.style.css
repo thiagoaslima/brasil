@@ -224,6 +224,7 @@ tr.nivel-4 td:first-child {
 
 .valor{
     text-align: center;
+    cursor: default;
 }
 
 /*
