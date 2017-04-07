@@ -141,6 +141,11 @@ export class LocalidadeService2 {
         return this._municipios.buscarPorCodigo(munCodigo);
     }
 
+    public getMunicipiosByRegiao(codigoRegiao: string) {
+        const codigo = codigoRegiao.replace(/x/g, '');
+        return this._municipios.todos.filter(municipio => municipio.codigo.toString().indexOf(codigo) === 0);
+    }
+
     public buscar(termo: string): Localidade[] {
         const municipios = this._municipios.todos.filter(mun => searchTest(termo, mun))
         const ufs = this._ufs.todos.filter(uf => searchTest(termo, uf));
@@ -158,7 +163,7 @@ export class LocalidadeService2 {
         });
         return arr;
     }
-
+    
     private _buildLocalidadesTree() {
         this._brasil = Localidade.criar(Localidade.convertFromFile(brasil));
 
