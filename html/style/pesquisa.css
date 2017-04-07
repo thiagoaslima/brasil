@@ -250,6 +250,10 @@ td.label {
     border-bottom: 5px solid #fff;
 }
 
+.nivel-4 td:hover {
+    background-color: #CECECE;
+}
+
 .nivel-4 .label{
     background-image: url('../img/seta_quarta_e_quinto_e_sexto_nivel.png');
     background-repeat: no-repeat;

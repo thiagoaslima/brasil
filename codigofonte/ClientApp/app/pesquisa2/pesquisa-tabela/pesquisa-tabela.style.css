@@ -59,21 +59,46 @@ td.label {
     background-position: 10px 20px;
 }
 
+.nivel-4:hover {
+	background-color: #E6E6E6;
+	-webkit-transition: all 100ms ease;
+	-moz-transition: all 100ms ease;
+	-ms-transition: all 100ms ease;
+	-o-transition: all 100ms ease;
+	transition: all 100ms ease;
+}
+
 .nivel-4 td{
     padding: 12px 0px;
     color: #333333;
-    background-color: #cccccc;
-    border-bottom: 5px solid #fff;
+    /*background-color: #cccccc;*/
+	border-bottom: 1px solid #DFDFDF;
+    /*border-bottom: 5px solid #fff;*/
 }
 
 .nivel-4 .label{
     background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');
     background-repeat: no-repeat;
     background-position: 10px -25px;
+	background-color: #cccccc;
     padding-left: 29px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
     
 }
 
+.nivel-4 .label:hover {
+	/*background-color: #B0B0B0;*/
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	}
+	
 tr.nivel-4 td:first-child {
     border-bottom-color: #E6E6E6;
 }
@@ -205,15 +230,17 @@ tr.nivel-4 td:first-child {
 * cor destaque na coluna adicionar comparação
 */
 .compara-blank {
-    background-color: #CADFEA;
+    background-color: #D9F8FF;
 }
 
 td.compara-blank {
-    background-color: #EEFCFF;
+    /*background-color: #EEFCFF;*/
+	background-color:#D9F8FF;
 }
 
 .nivel-4 td.compara-blank {
-    background-color: #C2D6E1;
+   /* background-color: #C2D6E1;*/
+   background-color: #D9F8FF;
 }
 
 /**
