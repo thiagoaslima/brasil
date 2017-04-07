@@ -1,28 +1,28 @@
-<div class='card selecionado'>
+<div class='card' [ngClass]="{selecionado: isSelecionado}">
     <div class="card__titulo">{{ dados.titulo }}</div>
     <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }}</div>
     <div class="card__sub-titulo">{{dados.subtitulo}}</div>
 
     <p class="card__comparando">Comparando a outros municípios</p>
 
-    <div class="card__regua-comparacao">
+    <!--<div class="card__regua-comparacao">
         <p>Na Microrregião</p>
         <div class="card__regua-comparacao__regua">
-            <div style='left: 60%' class="card__regua-comparacao__regua__marcador"></div>
+            <div [ngStyle]='{left: (ranking$ | async)?.pais | async }' class="card__regua-comparacao__regua__marcador"></div>
         </div>
-    </div>
+    </div>-->
 
     <div class="card__regua-comparacao">
         <p>No Estado</p>
         <div class="card__regua-comparacao__regua">
-            <div style='left: 80%' class="card__regua-comparacao__regua__marcador"></div>
+            <div [ngStyle]='{left: rankingPais }' class="card__regua-comparacao__regua__marcador"></div>
         </div>
     </div>
 
     <div class="card__regua-comparacao">
-        <p>De mesmo porte populacional no Brasil</p>
+        <p>No Brasil</p>
         <div class="card__regua-comparacao__regua">
-            <div style='left: 20%' class="card__regua-comparacao__regua__marcador"></div>
+            <div [ngStyle]='{left: rankingUf }' class="card__regua-comparacao__regua__marcador"></div>
         </div>
     </div>
 
