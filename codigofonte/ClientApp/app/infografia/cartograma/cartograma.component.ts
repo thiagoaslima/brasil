@@ -1,7 +1,8 @@
 import { Inject, Component, Input, OnInit, OnChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
-import { Localidade } from '../../shared2/localidade/localidade.model';
+import { Localidade, NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { Resultado } from '../../shared2/resultado/resultado.model';
 import { ResultadoService2 } from '../../shared2/resultado/resultado.service';
 import { MapaService } from './mapa.service';
@@ -34,12 +35,13 @@ export class CartogramaComponent implements OnInit, OnChanges {
     public hashResultado$;
     public localidade$ = new BehaviorSubject<Localidade>(null);
     public indicador$ = new BehaviorSubject<Indicador>(null);
-    public quartis$: Observable<number[]>;
+    public quartis$ = new BehaviorSubject<any[]>([]);
+    // public _quartis$ = this._quartis$.asObservable().share();
     private _resultados: { [idx: string]: Observable<Resultado[]> } = Object.create(null);
 
     constructor(
         private _mapaService: MapaService,
-        private _resultadoService: ResultadoService2
+        private _localidadeService: LocalidadeService2
     ) { }
 
     ngOnInit() {
@@ -50,35 +52,23 @@ export class CartogramaComponent implements OnInit, OnChanges {
             })
             .do(console.log.bind(console, 'geometries'));
 
-        const codigoRegiao$ = this.localidade$
-            .filter(Boolean)
-            .map(localidade => `${localidade.codigo}xxxx`);
-
-
         const resultados$ = this.indicador$
-            .combineLatest(codigoRegiao$)
-            .filter(([indicador, codigo]) => Boolean(indicador) && Boolean(codigo))
-            .flatMap(([indicador, codigo]) => {
-                const key = `${indicador.id}-${codigo}`
-                if (!this._resultados[key]) {
-                    this._resultados[key] = this._resultadoService.getResultados(indicador.pesquisaId, indicador.posicao, codigo, EscopoIndicadores.proprio)
-                        .do(resultados => this._resultados[key] = Observable.of(resultados));
-                }
-                return this._resultados[key];
-            });
-        
-        this.hashResultado$ = resultados$
-            .map(resultados => resultados.reduce( (acc, resultado) => {
-                acc[resultado.localidadeCodigo] = resultado;
-                return acc;
-            }, Object.create(null)));
+            // .distinctUntilKeyChanged('id')
+            .combineLatest(this.localidade$)
+            .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
+            .flatMap(([indicador, localidade]) => {
 
-        this.quartis$ = resultados$
+                const municipios = this._localidadeService.getMunicipiosByRegiao(localidade.codigo.toString());
+
+                return Observable.zip(
+                    ...municipios.map(localidade => indicador.getResultadoByLocal(localidade.codigo))
+                );
+            })
             .map(resultados => {
                 return resultados
                     .map(resultado => Number.parseFloat(resultado.valorValidoMaisRecente))
                     .filter(val => !Number.isNaN(val))
-                    .sort();
+                    .sort( (a, b) => a < b ? -1 : 1);
             })
             .map(valores => {
                 const len = valores.length;
@@ -87,11 +77,14 @@ export class CartogramaComponent implements OnInit, OnChanges {
                 const q3 = valores[Math.round(0.75 * (len + 1))];
 
                 return [q1, q2, q3];
-            });
+            })
+            // .distinct( (a, b) => a.length === b.length && a.every( (v, idx) => v === b[idx]))
+            .subscribe(arr => { debugger; this.quartis$.next(arr)});
 
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+        debugger;
         if (changes.hasOwnProperty('localidade')
             && Boolean(changes.localidade.currentValue)
             && (!changes.localidade.previousValue || changes.localidade.currentValue.codigo !== changes.localidade.previousValue.codigo)) {
@@ -103,10 +96,6 @@ export class CartogramaComponent implements OnInit, OnChanges {
             && (!changes.indicador.previousValue || changes.indicador.currentValue.id !== changes.indicador.previousValue.id)) {
             this.indicador$.next(changes.indicador.currentValue);
         }
-    }
-
-    getValor(codigo) {
-        return this.hashResultado$.map(hash => hash[codigo].valorValidoMaisRecente);
     }
 }
 
@@ -144,6 +133,7 @@ export class LocalCartogramaComponent implements OnInit, OnChanges {
             .combineLatest(this._quartis$)
             .filter(([valor, quartis]) => valor !== undefined && Boolean(quartis.length))
             .map(([valor, quartis]) => {
+
                 let faixa;
                 const valorNumerico = Number.parseFloat(valor);
                 if (Number.isNaN(valorNumerico)) {

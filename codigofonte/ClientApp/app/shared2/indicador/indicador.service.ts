@@ -32,15 +32,15 @@ export class IndicadorService2 {
         localidades: []
     }
     prefetchResultados(active = true, localidades: number | string | Array<number>) {
-        this._prefetchMode.active = active;
-        this._prefetchMode.localidades = Array.isArray(localidades) ? localidades : [localidades];
+        console.log('deprecated: do not use prefetchResultados. This function caused side-effects');
+        return;
+        // this._prefetchMode.active = active;
+        // this._prefetchMode.localidades = Array.isArray(localidades) ? localidades : [localidades];
     }
 
     getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string): Observable<Indicador[]> {
         let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}`;
-        if (this._prefetchMode.active) {
-            url += `&localidade=${this._prefetchMode.localidades.join(',')}`
-        }
+        
         return this._http.get(url, options)
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
@@ -56,9 +56,7 @@ export class IndicadorService2 {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
         const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`; 
         let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;
-        if (this._prefetchMode.active) {
-            url += `&localidades=${this._prefetchMode.localidades.join(',')}`
-        }
+        
         return this._http.get(url, options)
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
@@ -67,6 +65,21 @@ export class IndicadorService2 {
             .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId })))))
             .map(array => this._rebuildTree(array))
             .do(indicador => console.log(`getIndicadorById`, indicador))
+            .share();
+    }
+
+    getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number,  contexto = 'BR') {
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?orderBy=&contexto=${contexto}`;
+        
+        return this._http.get(url, options)
+            .retry(3)
+            .catch(err => Observable.of({ json: () => [{res: []}] }))
+            .map(res => res.json())
+            .map( ([{res}]) => {
+                const obj = res.find(obj => obj.localidade === codigoLocalidade);
+                return Object.assign({}, obj, {totalItens: res.length});
+            })
+            .do(indicador => console.log(`getRanking`, indicador))
             .share();
     }
 

@@ -130,6 +130,8 @@ export class Indicador {
         return this._pesquisa;
     }
 
+    private _ranking
+
     constructor(data) {
         data = Object.assign({}, _defaults, data);
         Object.keys(_defaults).forEach(property => {
