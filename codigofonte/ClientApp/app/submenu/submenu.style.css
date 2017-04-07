@@ -54,6 +54,7 @@
 .submenu__subtexto{
     padding: 15px 40px 15px 60px;
     position: relative;
+    display: block;
 }
 
 .submenu__subseta{
