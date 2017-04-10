@@ -49,7 +49,7 @@ export class PesquisaComponent2 implements OnInit {
                 this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.proprio)
                     .subscribe((indicadores) => {
                         
-                        debugger;
+                       
 
                         if(!!indicadores && indicadores.length > 0){ 
 

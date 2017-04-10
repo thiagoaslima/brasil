@@ -299,7 +299,7 @@ export class SinteseService {
         return Observable.zip(this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo))
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 
-                debugger;
+               
 
                 this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
 

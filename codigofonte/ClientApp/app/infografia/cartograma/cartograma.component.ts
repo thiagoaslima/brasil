@@ -80,7 +80,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
                 return [q1, q2, q3];
             })
             // .distinct( (a, b) => a.length === b.length && a.every( (v, idx) => v === b[idx]))
-            .subscribe(arr => { debugger; this.quartis$.next(arr)});
+            .subscribe(arr => {this.quartis$.next(arr)});
 
             this.quartis$.subscribe((valores) => {
                 this.valores = valores;
@@ -89,7 +89,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-        debugger;
+        
         if (changes.hasOwnProperty('localidade')
             && Boolean(changes.localidade.currentValue)
             && (!changes.localidade.previousValue || changes.localidade.currentValue.codigo !== changes.localidade.previousValue.codigo)) {
