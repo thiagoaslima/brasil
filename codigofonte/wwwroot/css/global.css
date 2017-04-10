@@ -88,7 +88,7 @@ header #busca{
     margin: auto;
     height: 100%;
 
-    padding-top: 54px;
+    margin-top: 54px;
 }
 
 .brasil .cor-fundo{
@@ -128,7 +128,6 @@ aside{
     /*padding: 2% 0%;*/
     z-index: 5;
     position: absolute;
-    margin-top: 2px;
 }
 
 aside.aside--municipio{
