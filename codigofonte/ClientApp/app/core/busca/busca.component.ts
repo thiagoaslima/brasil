@@ -81,7 +81,7 @@ export class BuscaComponent implements OnInit {
                 tipo: pesquisa.descricao,
                 categoria: 1,
                 destaque: '',
-                link: this._localidadeAtual.link + '/pesquisas/' + pesquisa.id
+                link: this._localidadeAtual.link + '/pesquisa/' + pesquisa.id
             };
 
             this.resultadoPesquisas.push(itemResultado);
