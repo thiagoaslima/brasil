@@ -73,11 +73,11 @@ export class SubmenuComponent implements OnInit {
 
             //seta a variável de rota base
             if(params.uf && params.municipio){
-                this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/';
+                this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisa/';
             }else if(params.uf){
-                this.baseURL = '/brasil/' + params.uf + '/pesquisas/';
+                this.baseURL = '/brasil/' + params.uf + '/pesquisa/';
             }else{
-                this.baseURL = '/brasil/pesquisas/';
+                this.baseURL = '/brasil/pesquisa/';
             }
         });
     

@@ -89,7 +89,7 @@ export class SinteseHeaderComponent implements OnInit {
                             this.titulo = dados[0].indicador;
 
                             //constrói link para pesquisa de origem
-                            this.linkPesquisa = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisas/' + this.codPesquisa + '/' + params.indicador;
+                            this.linkPesquisa = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisa/' + this.codPesquisa + '/' + params.indicador;
 
                             // Valores utilizados na exportação de arquivo
                             this.valoresIndicador = this.substituirVirgulasPorPontosNosValoresDoObjeto(dados[0].res);

@@ -123,6 +123,14 @@
     background-image: url('./../../../img/ico/ico-trabalho_on.png');
 }
 
+.ico--frota{
+    background-image: url('./../../../img/ico/ico-frota.png');
+}
+
+.lista__cabecalho--selecionado .ico--frota{
+    background-image: url('./../../../img/ico/ico-frota_on.png');
+}
+
 .lista__titulo{
     font-weight: bold;
     padding: 10px 5px;

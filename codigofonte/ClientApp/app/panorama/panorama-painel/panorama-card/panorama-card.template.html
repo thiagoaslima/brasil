@@ -13,19 +13,24 @@
             </div>
         </div>-->
 
-        <div class="card__regua-comparacao">
+        
+        <panorama-card-regua title='No Estado' [posicao]="(rankingUf$ | async)?.posicaoAbsoluta" [itens]="lengthUf$ | async"></panorama-card-regua>
+        <panorama-card-regua title='No País' [posicao]="(rankingPais$ | async)?.posicaoAbsoluta" [itens]="lengthPais"></panorama-card-regua>
+        
+        <!--<div class="card__regua-comparacao">
             <p>No Estado</p>
             <div class="card__regua-comparacao__regua">
                 <div [ngStyle]='{left: rankingPais }' class="card__regua-comparacao__regua__marcador"></div>
             </div>
-        </div>
+        </div>-->
 
-        <div class="card__regua-comparacao">
-            <p>No Brasil</p>
+        
+        <!--<div class="card__regua-comparacao">
+            <p>No Brasil | {{rankingPais}}</p>
             <div class="card__regua-comparacao__regua">
                 <div [ngStyle]='{left: rankingUf }' class="card__regua-comparacao__regua__marcador"></div>
             </div>
-        </div>
+        </div>-->
 
 
         <button><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
@@ -33,6 +38,20 @@
         <button><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas</button>
 
         <button><i class="fa fa-info-circle" aria-hidden="true"></i> Fontes</button>
+
+        <div class="notas__lista-container">
+            <ol>
+                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
+                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
+            </ol>
+        </div>
+
+        <div class="fontes__lista-container">
+            <ol>
+                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
+                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
+            </ol>
+        </div>
 
     </div>
 

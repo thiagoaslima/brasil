@@ -4,7 +4,7 @@ import { PanoramaComponent } from './panorama.component';
 import { PanoramaResumoComponent } from './panorama-resumo/panorama-resumo.component'
 import { PanoramaTemasComponent } from './panorama-temas/panorama-temas.component';
 import { PanoramaPainelComponent } from './panorama-painel/panorama-painel.component';
-import { PanoramaCardComponent } from './panorama-painel/panorama-card/panorama-card.component';
+import { PanoramaCardComponent, PanoramaCardReguaComponent } from './panorama-painel/panorama-card/panorama-card.component';
 
 import { InfografiaModule } from '../infografia/infografia.module';
 import { SharedModule } from '../shared/shared.module';
@@ -22,7 +22,8 @@ import { SharedModule2 } from '../shared2/shared.module';
         PanoramaResumoComponent,
         PanoramaTemasComponent,
         PanoramaPainelComponent,
-        PanoramaCardComponent
+        PanoramaCardComponent,
+        PanoramaCardReguaComponent
     ],
     providers: [],
 })

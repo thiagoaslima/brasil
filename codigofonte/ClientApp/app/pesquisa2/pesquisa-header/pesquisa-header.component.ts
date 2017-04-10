@@ -46,7 +46,7 @@ export class PesquisaHeaderComponent implements OnInit {
                 }
                 else {
 
-                    debugger;
+                   
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     this.ano = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
                 }

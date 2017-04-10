@@ -89,6 +89,7 @@
 }
 
 .card__regua-comparacao__regua{
+    position: relative;
     background-image: url(./../../../../img/barra-compacarao.png);
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -97,10 +98,10 @@
 }
 
 .card__regua-comparacao__regua__marcador{
+    position: absolute;
     background-image: url(./../../../../img/seta-marca-comparacao.png);
     width: 11px;
     height: 11px;
-    position: relative;
 }
 
 button{
@@ -147,4 +148,34 @@ button .fa{
     width: 14px;
     height: 14px;
     background-size: 100% auto;
+}
+
+.notas__lista-container, .fontes__lista-container{
+    display: none;
+}
+
+.card.selecionado .notas__lista-container {
+    margin-left: 128px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    margin-top: 56px;
+    font-size: .9em;
+    display: none;
+}
+
+.card.selecionado .fontes__lista-container {
+    margin-left: 57px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    margin-top: 56px;
+    font-size: .9em;
+    display: none;
 }

@@ -69,18 +69,24 @@ export class IndicadorService2 {
     }
 
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number,  contexto = 'BR') {
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?orderBy=&contexto=${contexto}`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?orderBy=&contexto=${contexto}&localidade=${codigoLocalidade}&lower=0&upper=0`;
         
         return this._http.get(url, options)
             .retry(3)
             .catch(err => Observable.of({ json: () => [{res: []}] }))
             .map(res => res.json())
-            .map( ([{res}]) => {
-                const obj = res.find(obj => obj.localidade === codigoLocalidade);
-                return Object.assign({}, obj, {totalItens: res.length});
+            .map(arr => {
+                const res = arr[0].res[0]
+                res.posicaoAbsoluta = res['#'];
+                delete(res['#']);
+                return res;
             })
+            // .map( ([{res}]) => {
+            //     const obj = res.find(obj => obj.localidade === codigoLocalidade.toString());
+            //     return Object.assign({}, obj, {totalItens: res.length});
+            // })
             .do(indicador => console.log(`getRanking`, indicador))
-            .share();
+            // .share();
     }
 
     private _rebuildTree(indicadores: Indicador[]): Indicador[] {

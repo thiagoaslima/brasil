@@ -24,6 +24,7 @@ export class PanoramaConfigurationItem {
     public pesquisaId: number
     public indicadorId: number
     public unidade: string
+    public periodo: string
     public visualizacao: string
     public indicador: Indicador
     public grafico: GraficoConfiguration;
@@ -38,6 +39,7 @@ export class PanoramaConfigurationItem {
         this.indicadorId = data.indicadorId || 0;
         this.unidade = data.unidade || "";
         this.visualizacao = data.visualizacao;
+        this.periodo = data.periodo || "";
 
         if (data.indicador && data.indicador instanceof Indicador) {
             this.indicador = data.indicador;
