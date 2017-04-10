@@ -11,44 +11,61 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 const children = [
-  { path: '', redirectTo: 'panorama', pathMatch: 'full' },
+    { path: '', redirectTo: 'panorama', pathMatch: 'full' },
 
-  { path: 'panorama',
-    component: PanoramaComponent
-  },
+    {
+        path: 'panorama',
+        component: PanoramaComponent
+    },
 
-  { path: 'pesquisa', component: PesquisaComponent2},
-  { path: 'pesquisa/:pesquisa', component: PesquisaComponent2},
-  { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent2},
+    { path: 'pesquisa', component: PesquisaComponent2 },
+    { path: 'pesquisa/:pesquisa', component: PesquisaComponent2 },
+    { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent2 },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
-        pathMatch: 'full'
-      },
-      {
-        path: 'brasil/sandbox',
-        component: SandboxComponent
-      },
-      {
-        path: 'brasil',
-        children
-      },
-      {
-        path: 'brasil/:uf',
-        canActivate: [ValidParametersGuard],
-        children
-      },
-      {
-        path: 'brasil/:uf/:municipio',
-        canActivate: [ValidParametersGuard],
-        children
-      }
-    ])
-  ]
+    imports: [
+        RouterModule.forRoot([
+            {
+                path: '',
+                redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
+                pathMatch: 'full'
+            },
+            {
+                path: 'brasil/sandbox',
+                redirectTo: 'v4/brasil/sandbox'
+            },
+            {
+                path: 'brasil',
+                redirectTo: 'v4/brasil'
+            },
+            {
+                path: 'brasil/:uf',
+                redirectTo: 'v4/brasil/:uf'
+            },
+            {
+                path: 'brasil/:uf/:municipio',
+                redirectTo: 'v4/brasil/:uf/:municipio'
+            },
+            {
+                path: 'v4/brasil/sandbox',
+                component: SandboxComponent
+            },
+            {
+                path: 'v4/brasil',
+                children
+            },
+            {
+                path: 'v4/brasil/:uf',
+                canActivate: [ValidParametersGuard],
+                children
+            },
+            {
+                path: 'v4/brasil/:uf/:municipio',
+                canActivate: [ValidParametersGuard],
+                children
+            }
+        ])
+    ]
 })
 export class RootRoutingModule { }
