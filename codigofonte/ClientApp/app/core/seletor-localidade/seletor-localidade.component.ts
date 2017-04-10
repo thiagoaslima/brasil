@@ -63,7 +63,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 }
             });
 
-            this.totalAtual = this.atual.reduce( (sum, obj) => sum + obj.municipios ? obj.municipios.length : 0, 0);
+            this.totalAtual = this.atual.reduce( (sum, obj) => !!obj.municipios && (sum + obj.municipios) ? obj.municipios.length : 0, 0);
         }
     };
 
@@ -137,7 +137,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
-            .filter( (termo: string) => termo.length >= 3)
+            .filter( (termo: string) => !!termo && termo.length >= 3)
             .subscribe(termo => this.search(termo));
     }
 
@@ -185,6 +185,12 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     search(termo = '') {
+
+        if(!termo){
+            
+            return;
+        }
+
         if(this.ufSelecionada) {
             if(termo.length >= 3) //mostra o resultado da busca
                 return this.listaMunicipios.build(this.ufSelecionada.children, termo);
