@@ -60,6 +60,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60030,
+                periodo: "2010",
                 titulo: "Esgotamento sanitário adequado",
                 subtitulo: "Esgotamento sanitário adequado",
                 tema: TEMAS.meioAmbiente,
@@ -68,6 +69,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60029,
+                periodo: "2010",
                 titulo: "Arborização de vias públicas",
                 subtitulo: "Arborização de vias públicas",
                 tema: TEMAS.meioAmbiente,
@@ -76,6 +78,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60031,
+                periodo: "2010",
                 titulo: "Urbanização de vias públicas",
                 subtitulo: "Urbanização de vias públicas",
                 tema: TEMAS.meioAmbiente,
@@ -87,6 +90,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 40,
                 indicadorId: 30277,
+                periodo: "2013",
                 titulo: "IDEB",
                 subtitulo: "Índice de Desenvolvimento da Educação Básica",
                 tema: TEMAS.educacao,
@@ -183,6 +187,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 19,
                 indicadorId: 29765,
+                periodo: "2014",
                 titulo: "Salário médio mensal",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
@@ -191,6 +196,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 19,
                 indicadorId: 29763,
+                periodo: "2014",
                 titulo: "Pessoal ocupado",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
@@ -199,6 +205,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60036,
+                periodo: "2014",
                 titulo: "População ocupada",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
@@ -207,6 +214,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60037,
+                periodo: "2010",
                 titulo: "Rendimento nominal mensal domiciliar per capita até ½ salário mínimo",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
@@ -216,6 +224,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 39,
                 indicadorId: 30279,
+                periodo: "2014",
                 titulo: "Mortalidade Infantil",
                 tema: TEMAS.saude,
                 visualizacao: PanoramaVisualizacao.painel
@@ -224,6 +233,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60032,
+                periodo: "2016",
                 titulo: "Internações por diarreia",
                 tema: TEMAS.saude,
                 visualizacao: PanoramaVisualizacao.painel
@@ -249,6 +259,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60047,
+                periodo: "2014",
                 titulo: "PIB per capita",
                 tema: TEMAS.economia,
                 visualizacao: PanoramaVisualizacao.painel
@@ -257,6 +268,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60048,
+                periodo: "2015",
                 titulo: "Percentual das receitas oriundas de fontes externas",
                 tema: TEMAS.economia,
                 visualizacao: PanoramaVisualizacao.painel

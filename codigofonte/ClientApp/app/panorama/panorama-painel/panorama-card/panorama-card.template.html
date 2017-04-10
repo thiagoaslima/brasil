@@ -13,19 +13,24 @@
             </div>
         </div>-->
 
-        <div class="card__regua-comparacao">
+        
+        <panorama-card-regua title='No Estado' [posicao]="(rankingUf$ | async)?.posicaoAbsoluta" [itens]="lengthUf$ | async"></panorama-card-regua>
+        <panorama-card-regua title='No País' [posicao]="(rankingPais$ | async)?.posicaoAbsoluta" [itens]="lengthPais"></panorama-card-regua>
+        
+        <!--<div class="card__regua-comparacao">
             <p>No Estado</p>
             <div class="card__regua-comparacao__regua">
                 <div [ngStyle]='{left: rankingPais }' class="card__regua-comparacao__regua__marcador"></div>
             </div>
-        </div>
+        </div>-->
 
-        <div class="card__regua-comparacao">
-            <p>No Brasil</p>
+        
+        <!--<div class="card__regua-comparacao">
+            <p>No Brasil | {{rankingPais}}</p>
             <div class="card__regua-comparacao__regua">
                 <div [ngStyle]='{left: rankingUf }' class="card__regua-comparacao__regua__marcador"></div>
             </div>
-        </div>
+        </div>-->
 
 
         <button><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
