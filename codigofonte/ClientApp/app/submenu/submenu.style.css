@@ -4,13 +4,15 @@
     /*width: 79%;*/
     width: 79%;
     margin-left: 21%;
+    z-index: 4;
 }
 
 .submenu-close {
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     background: rgba(0,0,0,.5);
+    top: 0;
 }
 
 .submenu{
@@ -26,13 +28,13 @@
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes submenuanime {
-    0%   {left: -423px;}
+    0%   {left: -35%;}
     100% {left: 0;}
 }
 
 /* Standard syntax */
 @keyframes submenuanime {
-    0%   {left: -423px;}
+    0%   {left: -35%;}
     100% {left: 0;}
 }
 
