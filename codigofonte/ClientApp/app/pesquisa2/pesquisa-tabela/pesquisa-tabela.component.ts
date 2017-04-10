@@ -83,7 +83,10 @@ export class PesquisaTabelaComponent implements OnChanges {
             return;
         }
         
-        this.flat(item.children).map(child => child.visivel = !child.visivel);
+        if(this.isListaAberta(item)) //se estiver aberta
+            this.flat(item.children).map(child => child.visivel = false); //fecha os filhos e todos os subfilhos
+        else //senão, se estiver fechado
+            item.children.map(child => child.visivel = true); //abre apenas os filhos imediatos
     }
 
     private isListaAberta(indicador){
