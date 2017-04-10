@@ -77,7 +77,7 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
             <p>{{title}}</p>
             <div class="card__regua-comparacao__regua" [attr.pos]="posicao" [attr.len]="itens" [attr.ranking]="ranking">
                 <p *ngIf="!ranking">Nenhum dado sobre o item</p>
-                <div *ngIf="ranking"[ngStyle]='{right: ranking }' class="card__regua-comparacao__regua__marcador"></div>
+                <div *ngIf="ranking" [ngStyle]='{right: cssRanking }' class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
     `,
@@ -89,10 +89,12 @@ export class PanoramaCardReguaComponent implements OnChanges {
     @Input() title;
 
     public ranking ;
+    public cssRanking;
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.posicao && this.itens) {
             this.ranking = `${(this.posicao/this.itens * 100).toFixed(2)}%`;
+            this.cssRanking = `${((this.posicao/this.itens * 100) * 96 / 100 ).toFixed(2)}%`;
         }
     }
 }
