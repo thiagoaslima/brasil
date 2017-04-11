@@ -72,8 +72,8 @@ export class PesquisaHeaderComponent implements OnInit {
     navegarPara(indicador = null, ano = null, localidade1 = null, localidade2 = null){
         this.objetoURL.indicador = indicador ? indicador : this.objetoURL.indicador;
         this.objetoURL.ano = ano ? ano : this.objetoURL.ano;
-        this.objetoURL.localidade1 = localidade1 ? localidade1 : this.objetoURL.localidade1;
-        this.objetoURL.localidade2 = localidade2 ? localidade2 : this.objetoURL.localidade2;
+        this.objetoURL.localidade1 = localidade1 != null ? localidade1 : this.objetoURL.localidade1;
+        this.objetoURL.localidade2 = localidade2 != null ? localidade2 : this.objetoURL.localidade2;
         let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa', this.objetoURL.pesquisa, this.objetoURL.indicador];
         let queryParams:any = {};
         if(this.objetoURL.ano) queryParams.ano = this.objetoURL.ano;
@@ -83,11 +83,11 @@ export class PesquisaHeaderComponent implements OnInit {
     }
 
     setaLocalidade1(localidade){
-        this.navegarPara(null, null, localidade.codigo);
+        this.navegarPara(null, null, localidade ? localidade.codigo : 0);
     }
 
     setaLocalidade2(localidade){
-        this.navegarPara(null, null, null, localidade.codigo);
+        this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
     }
 
     mudaIndicador(event){
@@ -126,9 +126,11 @@ export class PesquisaHeaderComponent implements OnInit {
                     <!--div class="estado-selecionado">
                         <span class="selecionado">Município</span><span>Estado</span><span>Brasil</span>
                     </div-->
+                    <div class="botao_remove" *ngIf="localidadeAtual" (click)="onClickItem(null)">
+                        <i class="fa fa-times" aria-hidden="true"></i> {{ localidadeAtual.nome }}
+                    </div>
                     <input placeholder="Qual município você procura?" type="text" (input)="onChangeInput($event)">
                     <div id="todos-municipios">
-                        <!--p class="todos-municipios__titulo">Mais acessados:</p-->
                         <ul>
                             <li *ngFor="let localidade of localidades" (click)="onClickItem(localidade)">
                                 <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>

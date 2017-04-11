@@ -165,7 +165,7 @@
     padding: 10px;
     letter-spacing: initial;
     color: initial;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .select__submenu-aberto > div:hover {
@@ -187,7 +187,7 @@
 */
 
 .add-municipio {
-    cursor: pointer;
+    /*cursor: pointer;*/
     position: relative;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
@@ -275,6 +275,7 @@
     font-size: .9em;
     padding: 10px 0px;
     transition: padding-left 0.3s, background-color 0.3s;
+    cursor: pointer;
 }
 
 .por-estado__selecionar-municipio ul li:last-child {
@@ -308,6 +309,16 @@
     font-weight: bold;
     margin: 5px 0px;
     font-size: .9em;
+}
+
+.botao_remove {
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: .9em;
+    margin-bottom: 8px;
 }
 
 .area-click{
