@@ -63,6 +63,7 @@ export class MapaService {
             .map(({ Tarsus }) => this._convertTarsus2TopoJson(Tarsus));
     }
 
+    // TODO: Está consumindo cerca de 0,8 segundos
     private _convertTarsus2TopoJson = (tarsus) => {
         return this._simpler2TopoJson(this._tarsus2Simpler(tarsus));
     }
@@ -119,6 +120,7 @@ export class MapaService {
         return this._topojson.feature(malha, malha.objects[localidadeCodigo])
     }
 
+    // TODO: Refatorar, _prepareGeometries está consumindo cerca de 0,5 segundos
     private _prepareGeometries(model) {
         // definição inicial do viewbox
         let n = -90; let s = 90; let l = -90; let o = 90;
