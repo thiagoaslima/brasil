@@ -4,6 +4,18 @@
         <div class="cabecalho__celula-esquerda">
             <h2 class="cabecalho__titulo">{{tema?.tema}}</h2>
         </div>
+            <div class="cabecalho__celula-direita">
+            <p class="cabecalho__descricao" *ngIf="tema?.tema=='Educação'">
+               
+                </p>
+            </div>
+            
+            <div class="cabecalho__celula-direita">
+            <p class="cabecalho__descricao">
+                {{getTextoAnalitico(tema?.tema)}}
+            </p>
+            </div>
+        
         <!--<div class="cabecalho__celula-direita">
             <p class="cabecalho__descricao">
                 Saquarema possui uma taxa de escolarização para crianças entre 4 e 6 anos de idade de 90,7%, sendo considerado um valor muito

@@ -61,9 +61,9 @@ export class IndicadorService2 {
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
             .map(res => res.json())
-            .map(json => flatTree(json))
+            //.map(json => flatTree(json))
             .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId })))))
-            .map(array => this._rebuildTree(array))
+            //.map(array => this._rebuildTree(array))
             .do(indicador => console.log(`getIndicadorById`, indicador))
             .share();
     }
