@@ -40,6 +40,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     // public _quartis$ = this._quartis$.asObservable().share();
     private _resultados: { [idx: string]: Observable<Resultado[]> } = Object.create(null);
     public valores = null;
+    public municSelected = "";
 
     constructor(
         private _mapaService: MapaService,

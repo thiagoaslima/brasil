@@ -1,10 +1,13 @@
 <div class="container">
+
+    <span class="local-atual">{{indicador?.nome}}</span>
+
     <div class="mapa" *ngIf="(malha$ | async)?.viewBox">
         <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
             <svg:g class="uf" transform="scale(1 -1)">
-                <svg:g regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome"
+                <svg:g #mun regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome"
                     [link]="item.link" [polygons]="item.polys" [valor]="((indicador$ | async)?.getResultadoByLocal(item.codigo) | async)?.valorValidoMaisRecente"
-                    [quartis]="quartis$ | async">
+                    [quartis]="quartis$ | async" (mouseover)="municSelected = [item.nome, mun.valor]" (mouseleave)="municSelected = ''">
                 </svg:g>
             </svg:g>
         </svg>
@@ -21,5 +24,15 @@
             <div class="legenda__cor faixa{{valores.length + 1}}"></div>
             <p class="legenda__texto">{{ valores[valores.length - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade.nome}} ou mais</p>
         </div>
+
+        <div class="legenda__item">
+            <p class="legenda__texto"><i class="fa fa-map-marker fa-2x" aria-hidden="true" style="color:#d10046; float:left; width:22px;"></i> Município selecionado</p>
+        </div>
+
+        <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
+            <p class="legenda__texto">{{municSelected[0]}}: ({{municSelected[1]}} {{indicador?.unidade.nome}})</p>
+        </div>
+
     </div>
+
 </div>

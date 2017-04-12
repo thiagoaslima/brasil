@@ -58,7 +58,8 @@ export class MapaService {
     }
 
     private _getMalha(localidadeCodigo: number, nivel: number) {
-        return this._http.get(`http://servicomapas.ibge.gov.br/api/mapas/${localidadeCodigo}/${nivel}`)
+         return this._http.get(`http://servicomapas.ibge.gov.br/api/mapas/${localidadeCodigo}/${nivel}`)
+        //return this._http.get(`/malhas/${localidadeCodigo}xxxxx.topojson`)
             .map(res => res.json())
             .map(({ Tarsus }) => this._convertTarsus2TopoJson(Tarsus));
     }
