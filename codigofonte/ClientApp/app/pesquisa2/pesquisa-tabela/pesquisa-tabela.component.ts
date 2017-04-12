@@ -148,6 +148,7 @@ export class PesquisaTabelaComponent implements OnChanges {
         let localidadeB = this.localidades[1] ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';
         let localidadeC = this.localidades[2] ? this._localidade.getMunicipioByCodigo(this.localidades[2]).nome : '';
         let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
+        //valores dos indicadores
         for(let i = 0; i < ind.length; i++){
             csv += ind[i].posicao + ';' + ind[i].indicador + ';';
             csv += (ind[i].localidadeA && ind[i].localidadeA[this.periodo] ? ind[i].localidadeA[this.periodo] : "") + ';';
@@ -155,6 +156,24 @@ export class PesquisaTabelaComponent implements OnChanges {
             csv += (ind[i].localidadeC && ind[i].localidadeC[this.periodo] ? ind[i].localidadeC[this.periodo] : "") + ';';
             csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
         }
+        //fontes e notas
+        for(let i = 0; i < this.pesquisa.periodos.length; i++){
+            if(this.pesquisa.periodos[i].nome == this.periodo){
+                csv += '\n';
+                let notas = this.pesquisa.periodos[i].notas;
+                for(let j = 0; j < notas.length; j++){
+                    csv += 'Nota: ' + notas[j];
+                    csv += '\n';
+                }
+                csv += '\n';
+                let fontes = this.pesquisa.periodos[i].fontes;
+                for(let j = 0; j < fontes.length; j++){
+                    csv += 'Fonte: ' + fontes[j];
+                    csv += '\n';
+                }
+            }
+        }
+        //baixa o arquivo
         let blob = new Blob([csv], { type: 'text/csv' });
         FileSaver.saveAs(blob, this.pesquisa.nome + '(' + this.periodo + ').csv');
     }
