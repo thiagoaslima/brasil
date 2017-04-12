@@ -147,6 +147,16 @@
     cursor: pointer;
 }
 
+.select__sub-menu__botao--olho{
+    margin-right: 14px;
+}
+
+.select__sub-menu__botao--olho i{
+    font-size: 19px; 
+    text-align: center; 
+    width: 112%;
+}
+
 .select__sub-menu.submenu-aberto {
     background-color: #CCC;
     color: initial;

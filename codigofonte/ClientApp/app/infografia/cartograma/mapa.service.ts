@@ -47,7 +47,7 @@ export class MapaService {
         if (!this._cache[`${localidadeCodigo}-${Nivel.sub}`]) {
             this._cache[`${localidadeCodigo}-${Nivel.sub}`] =
                 this._getMalha(localidadeCodigo, Nivel.sub)
-                    .map(malha => this._topojsonFeatures(malha, localidadeCodigo))
+                    .map(malha => this._topojsonFeatures(malha, "foo"))
                     .map(model => this._prepareGeometries(model))
                     .do(model => {
                         this._cache[`${localidadeCodigo}-${Nivel.sub}`] = Observable.of(model)
@@ -58,10 +58,8 @@ export class MapaService {
     }
 
     private _getMalha(localidadeCodigo: number, nivel: number) {
-         return this._http.get(`http://servicomapas.ibge.gov.br/api/mapas/${localidadeCodigo}/${nivel}`)
-        //return this._http.get(`/malhas/${localidadeCodigo}xxxxx.topojson`)
+        return this._http.get(`/malhas/${localidadeCodigo}xxxxx.topojson`)
             .map(res => res.json())
-            .map(({ Tarsus }) => this._convertTarsus2TopoJson(Tarsus));
     }
 
     // TODO: Está consumindo cerca de 0,8 segundos
@@ -129,7 +127,7 @@ export class MapaService {
         model.geometries = [];
 
         model.features.forEach(feature => {
-            const codigoFeature = feature['properties'].cod.toString().substr(0, 6);
+            const codigoFeature = feature['properties']['codarea'].toString().substr(0, 6);
             const localidade = codigoFeature.length > 2
                 ? this._localidadeService.getMunicipioByCodigo(codigoFeature)
                 : this._localidadeService.getUfByCodigo(codigoFeature);
