@@ -20,6 +20,7 @@ import 'rxjs/add/operator/scan';
  * TODO: Generalizar para qualquer mapa com diferentes subdivisões
  */
 
+// TODO: Refatorar, o detectContentChildrenChanges está consumindo cerca de 1,8 segundos
 @Component({
     selector: 'cartograma',
     templateUrl: 'cartograma.template.html',

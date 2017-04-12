@@ -47,11 +47,11 @@
 .ico-faixa.selecionado{ background: #0D4768; }
 
 g.semValor polygon { fill: #A6A6A6}
-g.faixa1 polygon{ fill: #1B779B; }
-g.faixa2 polygon{ fill: #308BC9; }
-g.faixa3 polygon{ fill: #41B6C4; }
-g.faixa4 polygon{ fill: #7FCDBB; }
-g.faixa5 polygon{ fill: #C7E9B4; }
+g.faixa4 polygon{ fill: #1B779B; }
+g.faixa3 polygon{ fill: #308BC9; }
+g.faixa2 polygon{ fill: #41B6C4; }
+g.faixa1 polygon{ fill: #7FCDBB; }
+/*g.faixa5 polygon{ fill: #C7E9B4; }*/
 polygon {
     stroke: #fff;
     stroke-width: 0.01px;
@@ -233,27 +233,27 @@ g, .periodo-link {
 
 /*faixas de cores*/
 
-.faixa1{
+.faixa4{
     background-color: #1B779B;
     fill: #1B779B;
 }
 
-.faixa2{
+.faixa3{
     background-color: #308BC9;
     fill: #308BC9;
 }
 
-.faixa3{
+.faixa2{
     background-color: #41B6C4;
     fill: #41B6C4;
 }
 
-.faixa4{
+.faixa1{
     background-color: #7FCDBB;
     fill: #7FCDBB;
 }
 
-.faixa5{
+/*.faixa5{
     background-color: #C7E9B4;
     fill: #C7E9B4;
-}
+}*/
