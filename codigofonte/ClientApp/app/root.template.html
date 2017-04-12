@@ -49,7 +49,7 @@
         <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
     </div>
 
-    <div [style.position]="menuAberto || abrirMenuPesquisa ? 'fixed' : 'initial'">
+    <div [style.position]="abrirMenuPesquisa || seletor.aberto ? 'fixed' : 'initial'">
         <router-outlet></router-outlet>
     </div>
     
