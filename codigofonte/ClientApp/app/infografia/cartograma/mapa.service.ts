@@ -123,6 +123,7 @@ export class MapaService {
     private _prepareGeometries(model) {
         // definição inicial do viewbox
         let n = -90; let s = 90; let l = -90; let o = 90;
+        let n2, s2, l2, o2;
 
         model.geometries = [];
 
@@ -133,10 +134,20 @@ export class MapaService {
                 : this._localidadeService.getUfByCodigo(codigoFeature);
 
             let polygons;
+            
+            n2 = -90;
+            s2 = 90;
+            l2 = -90;
+            o2 = 90;
 
             if (feature['geometry'].type == "Polygon") {
                 polygons = feature['geometry'].coordinates.map((poly) => {
                     return [poly.map((point) => {
+                        if (n2 < point[1]) n2 = point[1];
+                        if (s2 > point[1]) s2 = point[1];
+                        if (l2 < point[0]) l2 = point[0];
+                        if (o2 > point[0]) o2 = point[0];
+
                         if (n < point[1]) n = point[1];
                         if (s > point[1]) s = point[1];
                         if (l < point[0]) l = point[0];
@@ -148,6 +159,11 @@ export class MapaService {
                 polygons = feature['geometry'].coordinates.map((MultiPoly) => {
                     return MultiPoly.map((poly) => {
                         return poly.map((point) => {
+                            if (n2 < point[1]) n2 = point[1];
+                            if (s2 > point[1]) s2 = point[1];
+                            if (l2 < point[0]) l2 = point[0];
+                            if (o2 > point[0]) o2 = point[0];
+
                             if (n < point[1]) n = point[1];
                             if (s > point[1]) s = point[1];
                             if (l < point[0]) l = point[0];
@@ -162,7 +178,8 @@ export class MapaService {
                 codigo: localidade.codigo,
                 nome: localidade.nome,
                 link: localidade.link,
-                polys: polygons
+                polys: polygons,
+                center: [(o2+l2)/2, (s2+n2)/2]
             });
         });
 

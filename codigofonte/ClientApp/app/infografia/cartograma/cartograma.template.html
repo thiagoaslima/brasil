@@ -7,8 +7,9 @@
             <svg:g class="uf" transform="scale(1 -1)">
                 <svg:g #mun regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome"
                     [link]="item.link" [polygons]="item.polys" [valor]="((indicador$ | async)?.getResultadoByLocal(item.codigo) | async)?.valorValidoMaisRecente"
-                    [quartis]="quartis$ | async" (mouseover)="municSelected = [item.nome, mun.valor]" (mouseleave)="municSelected = ''">
+                    [quartis]="quartis$ | async" (mouseover)="municSelected = [item.nome, mun.valor, item.center]" (mouseleave)="municSelected = ''">
                 </svg:g>
+                <svg:circle *ngIf="!!municSelected && municSelected != ''" [attr.cx.px]="municSelected[2][0]" [attr.cy.px]="municSelected[2][1]" r="1" style="fill:#ffcc00;"></svg:circle>
             </svg:g>
         </svg>
     </div>
