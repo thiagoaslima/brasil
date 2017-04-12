@@ -33,11 +33,11 @@
 
         <nav id="menu" [class.aberto]="menuGlobalAberto">
             <ul>
-                <li [class.menu--selecionado]="itemSelecionado == 'panorama'">
+                <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false">
                     <a style="display:block" [routerLink]="getLink('panorama')">Panorama</a>
                 </li>
 
-                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa'">
+                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa'" [class.menu--selecionado]="abrirMenuPesquisa">
                     <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
                 </li>
             </ul>
@@ -49,6 +49,9 @@
         <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
     </div>
 
-    <router-outlet></router-outlet>
+    <div [style.position]="menuAberto || abrirMenuPesquisa ? 'fixed' : 'initial'">
+        <router-outlet></router-outlet>
+    </div>
+    
 
 </div>
