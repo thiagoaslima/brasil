@@ -37,12 +37,17 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
 
-            // debugger;
+            //organiza os períodos da pesquisa em orderm crescente
+            this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
 
-            // Quando não houver um período selecionado, é exibido o período mais recente
-            if(!this.periodo){
-
-                this.periodo = this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome;
+            //valida o período
+            for(let i = 0; i < this.pesquisa.periodos.length; i++){
+                //verifica se o período é válido
+                if(this.pesquisa.periodos[i].nome == this.periodo)
+                    break;
+                //senão seta o mais recente
+                else
+                    this.periodo = this.pesquisa.periodos[i].nome;
             }
 
             if(!this.posicaoIndicador){
