@@ -291,6 +291,7 @@ sintese>dados
 }
 
 @media screen and (max-width: 768px) {
+    /*Mobile*/
     body, body.municipio, body.brasil, body.estado{
         background: none;
     }
@@ -330,6 +331,7 @@ sintese>dados
 
     #container{
         padding-top: 42px;
+        margin-top: 0;
     }
 
     aside{
@@ -352,6 +354,10 @@ sintese>dados
     .localidade--static #menu {
         z-index: 13;
         transform: translateY(18px);
+    }
+
+    aside.aside--municipio.localidade--static{
+        margin-top: 58px;
     }
 
     aside #localidade button{
