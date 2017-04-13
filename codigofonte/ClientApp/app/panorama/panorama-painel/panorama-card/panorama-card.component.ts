@@ -7,6 +7,7 @@ import { IndicadorService2 } from '../../../shared2/indicador/indicador.service'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+// TODO: Refatorar, o AsyncPipe do PanoramaCardComponent está consumindo cerca de 0,6 segundos
 @Component({
     selector: 'panorama-card',
     templateUrl: './panorama-card.template.html',

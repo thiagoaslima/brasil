@@ -8,7 +8,7 @@
     </tr>
 
     <template ngFor let-indicador [ngForOf]="indicadores">
-        <tr class='{{getStyleClass(indicador.posicao)}}' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel">
+        <tr class='{{getStyleClass(indicador.posicao)}}' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
             <td class='label'>
                 <div class='label--com-acao'>{{ indicador.indicador }}</div> 
                 <div class='acoes'>

@@ -18,7 +18,7 @@
                 <ul>
                     <template ngFor let-local [ngForOf]="locais | async" let-last="last">
                         <li *ngIf="!last">
-                            <a [routerLink]="local.link">{{local.nome}}</a>
+                            <!--<a [routerLink]="local.link">-->{{local.nome}}<!--</a>-->
                         </li>
                         <li *ngIf="last">
                             <h1>{{local.nome}}</h1>
@@ -33,11 +33,11 @@
 
         <nav id="menu" [class.aberto]="menuGlobalAberto">
             <ul>
-                <li [class.menu--selecionado]="itemSelecionado == 'panorama'">
+                <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false">
                     <a style="display:block" [routerLink]="getLink('panorama')">Panorama</a>
                 </li>
 
-                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa'">
+                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa'" [class.menu--selecionado]="abrirMenuPesquisa">
                     <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
                 </li>
             </ul>
@@ -49,6 +49,9 @@
         <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
     </div>
 
-    <router-outlet></router-outlet>
+    <div style="width:100%;" [style.position]="abrirMenuPesquisa || seletor.aberto ? 'fixed' : 'initial'">
+        <router-outlet></router-outlet>
+    </div>
+    
 
 </div>

@@ -20,6 +20,7 @@ import 'rxjs/add/operator/scan';
  * TODO: Generalizar para qualquer mapa com diferentes subdivisões
  */
 
+// TODO: Refatorar, o detectContentChildrenChanges está consumindo cerca de 1,8 segundos
 @Component({
     selector: 'cartograma',
     templateUrl: 'cartograma.template.html',
@@ -39,6 +40,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     // public _quartis$ = this._quartis$.asObservable().share();
     private _resultados: { [idx: string]: Observable<Resultado[]> } = Object.create(null);
     public valores = null;
+    public municSelected = "";
 
     constructor(
         private _mapaService: MapaService,

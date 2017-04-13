@@ -22,10 +22,9 @@ export class PesquisaTabelaComponent implements OnChanges {
     @Input() pesquisa: Pesquisa;
     @Input() posicaoIndicador: string;
     @Input() periodo: string;
+    @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     private indicadores;
-
-
 
     constructor(
         private _sintese:SinteseService,
@@ -37,12 +36,17 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
 
-            // debugger;
+            //organiza os períodos da pesquisa em orderm crescente
+            this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
 
-            // Quando não houver um período selecionado, é exibido o período mais recente
-            if(!this.periodo){
-
-                this.periodo = this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome;
+            //valida o período
+            for(let i = 0; i < this.pesquisa.periodos.length; i++){
+                //verifica se o período é válido
+                if(this.pesquisa.periodos[i].nome == this.periodo)
+                    break;
+                //senão seta o mais recente
+                else
+                    this.periodo = this.pesquisa.periodos[i].nome;
             }
 
             if(!this.posicaoIndicador){
@@ -61,6 +65,8 @@ export class PesquisaTabelaComponent implements OnChanges {
                     indicador.nivel = this.getNivelIndicador(indicador.posicao);
                     indicador.visivel = indicador.nivel <= 4 ? true : false;
 
+                    indicador.isVazio = !this.hasValue(indicador, this.periodo) && !this.hasChildrenWithValue(indicador.children, this.periodo);
+
                     return indicador;
                 });
             });
@@ -68,9 +74,68 @@ export class PesquisaTabelaComponent implements OnChanges {
         }
     }
 
+
     private isFolha(indicador){
 
         return !indicador.children || indicador.children.length == 0;
+    }
+
+    private hasValue(indicador, periodo){
+
+        if(!indicador || !periodo || !indicador.localidadeA){
+
+            return false;
+        }
+
+        return !this.isEmpty(indicador.localidadeA[periodo]);
+    }
+
+    private hasChildrenWithValue(children: any[], periodo){
+
+        if(!children || !periodo){
+
+            return false;
+        }
+
+        let hasChildrenWithValue = false;
+
+        for(let i = 0; i < children.length; i++){
+
+            hasChildrenWithValue = this.hasValue(children[i], periodo) || this.hasChildrenWithValue(children[i].children, periodo)
+
+            if(hasChildrenWithValue){
+                break;
+            }
+        }
+
+        return hasChildrenWithValue;
+    }
+
+    isEmpty(valor){
+
+        return (!valor || 
+                valor.trim() == '99999999999999' ||
+                valor.trim() == '99999999999998' ||
+                valor.trim() == '99999999999997' ||
+                valor.trim() == '99999999999996' ||
+                valor.trim() == '99999999999995' ||
+                valor.trim() == '99999999999992' ||
+                valor.trim() == '99999999999991' ||
+                valor.trim() == '-' ||
+                valor.trim().toLowerCase() == 'x' ||
+                valor.trim() == 'Não existente');
+    }
+
+    private ocultarValoresVazios(listaIndicadores){
+
+        // TODO: Ocultar valores vazios
+        // Se a opção oultar valores vazios estiver habilitada
+        if(this.isOcultarValoresVazios){
+
+            // Se for um nó folha, oculta o nó
+
+            // Se for um nó galho, o oculta caso todos os filhos já sejam ocultos
+        }
     }
 
     //chamada quando abre os nós nível 2 da tabela de dados
@@ -82,7 +147,8 @@ export class PesquisaTabelaComponent implements OnChanges {
 
             return;
         }
-        
+
+       
         if(this.isListaAberta(item)) //se estiver aberta
             this.flat(item.children).map(child => child.visivel = false); //fecha os filhos e todos os subfilhos
         else //senão, se estiver fechado
@@ -143,6 +209,7 @@ export class PesquisaTabelaComponent implements OnChanges {
         let localidadeB = this.localidades[1] ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';
         let localidadeC = this.localidades[2] ? this._localidade.getMunicipioByCodigo(this.localidades[2]).nome : '';
         let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
+        //valores dos indicadores
         for(let i = 0; i < ind.length; i++){
             csv += ind[i].posicao + ';' + ind[i].indicador + ';';
             csv += (ind[i].localidadeA && ind[i].localidadeA[this.periodo] ? ind[i].localidadeA[this.periodo] : "") + ';';
@@ -150,6 +217,24 @@ export class PesquisaTabelaComponent implements OnChanges {
             csv += (ind[i].localidadeC && ind[i].localidadeC[this.periodo] ? ind[i].localidadeC[this.periodo] : "") + ';';
             csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
         }
+        //fontes e notas
+        for(let i = 0; i < this.pesquisa.periodos.length; i++){
+            if(this.pesquisa.periodos[i].nome == this.periodo){
+                csv += '\n';
+                let notas = this.pesquisa.periodos[i].notas;
+                for(let j = 0; j < notas.length; j++){
+                    csv += 'Nota: ' + notas[j];
+                    csv += '\n';
+                }
+                csv += '\n';
+                let fontes = this.pesquisa.periodos[i].fontes;
+                for(let j = 0; j < fontes.length; j++){
+                    csv += 'Fonte: ' + fontes[j];
+                    csv += '\n';
+                }
+            }
+        }
+        //baixa o arquivo
         let blob = new Blob([csv], { type: 'text/csv' });
         FileSaver.saveAs(blob, this.pesquisa.nome + '(' + this.periodo + ').csv');
     }

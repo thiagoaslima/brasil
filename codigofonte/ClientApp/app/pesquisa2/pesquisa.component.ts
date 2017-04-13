@@ -31,6 +31,8 @@ export class PesquisaComponent2 implements OnInit {
     posicaoIndicador: string = "2";
     localidades: number[] = [null, null, null];
     periodo: string;
+
+    isOcultarValoresVazios = true;
     
     
     constructor(
@@ -77,5 +79,12 @@ export class PesquisaComponent2 implements OnInit {
         });
 
 
+    }
+
+    ocultarValoresVazios(event){
+
+        debugger;
+
+        this.isOcultarValoresVazios = event['OcultarValoresVazios'];
     }
 }

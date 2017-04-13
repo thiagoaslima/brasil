@@ -47,7 +47,7 @@ export class MapaService {
         if (!this._cache[`${localidadeCodigo}-${Nivel.sub}`]) {
             this._cache[`${localidadeCodigo}-${Nivel.sub}`] =
                 this._getMalha(localidadeCodigo, Nivel.sub)
-                    .map(malha => this._topojsonFeatures(malha, localidadeCodigo))
+                    .map(malha => this._topojsonFeatures(malha, "foo"))
                     .map(model => this._prepareGeometries(model))
                     .do(model => {
                         this._cache[`${localidadeCodigo}-${Nivel.sub}`] = Observable.of(model)
@@ -58,11 +58,11 @@ export class MapaService {
     }
 
     private _getMalha(localidadeCodigo: number, nivel: number) {
-        return this._http.get(`http://servicomapas.ibge.gov.br/api/mapas/${localidadeCodigo}/${nivel}`)
+        return this._http.get(`/malhas/${localidadeCodigo}xxxxx.topojson`)
             .map(res => res.json())
-            .map(({ Tarsus }) => this._convertTarsus2TopoJson(Tarsus));
     }
 
+    // TODO: Está consumindo cerca de 0,8 segundos
     private _convertTarsus2TopoJson = (tarsus) => {
         return this._simpler2TopoJson(this._tarsus2Simpler(tarsus));
     }
@@ -119,23 +119,35 @@ export class MapaService {
         return this._topojson.feature(malha, malha.objects[localidadeCodigo])
     }
 
+    // TODO: Refatorar, _prepareGeometries está consumindo cerca de 0,5 segundos
     private _prepareGeometries(model) {
         // definição inicial do viewbox
         let n = -90; let s = 90; let l = -90; let o = 90;
+        let n2, s2, l2, o2;
 
         model.geometries = [];
 
         model.features.forEach(feature => {
-            const codigoFeature = feature['properties'].cod.toString().substr(0, 6);
+            const codigoFeature = feature['properties']['codarea'].toString().substr(0, 6);
             const localidade = codigoFeature.length > 2
                 ? this._localidadeService.getMunicipioByCodigo(codigoFeature)
                 : this._localidadeService.getUfByCodigo(codigoFeature);
 
             let polygons;
+            
+            n2 = -90;
+            s2 = 90;
+            l2 = -90;
+            o2 = 90;
 
             if (feature['geometry'].type == "Polygon") {
                 polygons = feature['geometry'].coordinates.map((poly) => {
                     return [poly.map((point) => {
+                        if (n2 < point[1]) n2 = point[1];
+                        if (s2 > point[1]) s2 = point[1];
+                        if (l2 < point[0]) l2 = point[0];
+                        if (o2 > point[0]) o2 = point[0];
+
                         if (n < point[1]) n = point[1];
                         if (s > point[1]) s = point[1];
                         if (l < point[0]) l = point[0];
@@ -147,6 +159,11 @@ export class MapaService {
                 polygons = feature['geometry'].coordinates.map((MultiPoly) => {
                     return MultiPoly.map((poly) => {
                         return poly.map((point) => {
+                            if (n2 < point[1]) n2 = point[1];
+                            if (s2 > point[1]) s2 = point[1];
+                            if (l2 < point[0]) l2 = point[0];
+                            if (o2 > point[0]) o2 = point[0];
+
                             if (n < point[1]) n = point[1];
                             if (s > point[1]) s = point[1];
                             if (l < point[0]) l = point[0];
@@ -161,7 +178,8 @@ export class MapaService {
                 codigo: localidade.codigo,
                 nome: localidade.nome,
                 link: localidade.link,
-                polys: polygons
+                polys: polygons,
+                center: [(o2+l2)/2, (s2+n2)/2]
             });
         });
 

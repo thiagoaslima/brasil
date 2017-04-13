@@ -24,16 +24,20 @@
     font-size: .8em;
     font-weight: bold;
     margin-top: 3px;
+	margin-right: 10px;
 }
 
 .card__nota{
     float: left;
     color: #29ABE2;
-    margin-left: 10px;
     font-weight: bold;
     font-size: 1.3em;
     margin-top: -2px;
 }
+
+.card_unidade {
+	font-size: 0.6em;
+	}
 
 .card__sub-titulo{
     font-size: .7em;
