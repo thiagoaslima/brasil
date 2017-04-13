@@ -40,14 +40,17 @@ export class PesquisaTabelaComponent implements OnChanges {
             this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
 
             //valida o período
+            let valido = false;
             for(let i = 0; i < this.pesquisa.periodos.length; i++){
                 //verifica se o período é válido
-                if(this.pesquisa.periodos[i].nome == this.periodo)
+                if(this.pesquisa.periodos[i].nome == this.periodo){
+                    valido = true;
                     break;
-                //senão seta o mais recente
-                else
-                    this.periodo = this.pesquisa.periodos[i].nome;
+                }
             }
+            //se nao for válido, usa o período mais recente
+            if(!valido)
+                this.periodo = this.pesquisa.periodos[this.pesquisa.periodos.length - 1].nome;
 
             if(!this.posicaoIndicador){
 
