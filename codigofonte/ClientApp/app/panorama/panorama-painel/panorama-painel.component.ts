@@ -12,40 +12,40 @@ import 'rxjs/add/operator/filter';
 
 @Component({
     selector: 'panorama-painel',
-    template: `
-        <div>
-            <h2>{{dados.tema}}</h2>
+    templateUrl: './panorama-painel.template.html',
+    styleUrls: ['./panorama-painel.style.css']
+    // template:`
+    //     <div>
+    //         <h2>{{dados.tema}}</h2>
             
-            <div>
-                <div class="cartograma">
-                    <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
-                </div>
-            </div>
+    //         <div>
+    //             <div class="cartograma">
+    //                 <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
+    //             </div>
+    //         </div>
             
-            <div class="cards">
-                <panorama-card (click)="selectPainel(painel)"  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
-            </div>
+    //         <div class="cards">
+    //             <panorama-card (click)="selectPainel(painel)"  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
+    //         </div>
+    //    </div>`,
+    // styles: [`
+    //     .cards{
+    //         content: "";
+    //         display: table;
+    //         clear: both;
+    //         margin: 2% 5%;
+    //     }
 
-        </div>
-    `,
-    styles: [`
-        .cards{
-            content: "";
-            display: table;
-            clear: both;
-            margin: 2% 5%;
-        }
+    //     .cartograma {
+    //         margin: 3% 5%;
+    //     }
 
-        .cartograma {
-            margin: 3% 5%;
-        }
-
-        .legenda {
-            display: inline-block;
-            width: 29%;
-        }
+    //     .legenda {
+    //         display: inline-block;
+    //         width: 29%;
+    //     }
         
-    `],
+    // `],
     // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanoramaPainelComponent implements OnInit, OnChanges {

@@ -47,7 +47,7 @@ export class PanoramaComponent implements OnInit {
         const groupByPesquisa$ = configuracao$.map(config => this._groupIndicadoresByPesquisa(config));
         const indicadores$ = groupByPesquisa$.combineLatest(this.localidade$)
             .mergeMap(([obj, localidade]) => Observable.from(obj.map(({ pesquisaId, indicadoresId }) => ({ pesquisaId, indicadoresId, codigoLocalidade: localidade.parent.codigo }))))
-            .mergeMap((obj, idx) => this._indicadorService.getIndicadoresById(obj.pesquisaId, obj.indicadoresId, EscopoIndicadores.proprio, Localidade.alterarContexto(obj.codigoLocalidade, NiveisTerritoriais.municipio)));
+            .mergeMap((obj, idx) => this._indicadorService.getIndicadoresById(obj.pesquisaId, obj.indicadoresId, EscopoIndicadores.proprio, Localidade.alterarContexto(obj.codigoLocalidade, NiveisTerritoriais.municipio), true));
 
 
         const setConfiguracaoBasica$ = configuracao$.map(config => configState => Object.assign({}, configState, config));
