@@ -188,7 +188,7 @@
 	position: absolute;
 	z-index: 2;
 	padding: 10px;
-	min-width: 160px;
+	min-width: 192px;
 	margin-top: -19px;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
@@ -212,9 +212,6 @@
     padding: 10px;
     letter-spacing: initial;
     cursor: pointer;
-    color: initial;
-
-
 }
 
 .select__submenu-aberto > div:hover {
