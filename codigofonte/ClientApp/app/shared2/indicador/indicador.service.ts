@@ -104,7 +104,7 @@ export class IndicadorService2 {
 
                     indicador.res = valor.res;
 
-                    return indicador;
+                    return indicador; 
                 })
             })
             .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId: indicadorMapPesquisa[obj.id.toString()] })))))
