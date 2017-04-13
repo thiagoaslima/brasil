@@ -24,6 +24,7 @@ export class PanoramaComponent implements OnInit {
     localidade$: Observable<Localidade>
     resumo$: Observable<{ tema: string, indicadores: Array<{ titulo: string, unidade: string, indicador: Indicador }> }[]>;
     temas$;
+    temaSelecionado;
 
     constructor(
         private _appState: AppState,
@@ -161,4 +162,9 @@ export class PanoramaComponent implements OnInit {
             return acc;
         }, Object.create(null))
     }
+
+    handleTemaSelecionado(tema){
+        this.temaSelecionado = tema;
+    }
+
 }
