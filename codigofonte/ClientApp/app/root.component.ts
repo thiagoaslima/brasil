@@ -90,6 +90,7 @@ export class RootComponent implements OnInit, OnDestroy {
 
     handleSeletorAberto(seletorAberto){
         this.menuAberto = seletorAberto;
+        this.abrirMenuPesquisa = false;
     }
 
     handleCloseMenu($event) {

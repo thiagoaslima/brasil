@@ -152,9 +152,21 @@
 	transition: all 400ms ease;
 }
 
+
 .select__sub-menu__botao:hover {
 	background-color: rgb(208, 208, 208);
 	}
+
+.select__sub-menu__botao--olho{
+    margin-right: 14px;
+}
+
+.select__sub-menu__botao--olho i{
+    font-size: 19px; 
+    text-align: center; 
+    width: 112%;
+}
+
 
 .select__sub-menu.submenu-aberto {
     background-color: #CCC;
@@ -199,7 +211,12 @@
 .select__submenu-aberto > div {
     padding: 10px;
     letter-spacing: initial;
+<<<<<<< HEAD
     cursor: pointer;
+=======
+    color: initial;
+    /*cursor: pointer;*/
+>>>>>>> e362b5ac3361775eb3f86119322b0c615195b3fa
 }
 
 .select__submenu-aberto > div:hover {
@@ -221,7 +238,7 @@
 */
 
 .add-municipio {
-    cursor: pointer;
+    /*cursor: pointer;*/
     position: relative;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
@@ -309,6 +326,7 @@
     font-size: .9em;
     padding: 10px 0px;
     transition: padding-left 0.3s, background-color 0.3s;
+    cursor: pointer;
 }
 
 .por-estado__selecionar-municipio ul li:last-child {
@@ -342,6 +360,16 @@
     font-weight: bold;
     margin: 5px 0px;
     font-size: .9em;
+}
+
+.botao_remove {
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: .9em;
+    margin-bottom: 8px;
 }
 
 .area-click{

@@ -116,6 +116,7 @@ export class LocalidadeService {
         return this._municipios.buscarPorCodigo(munCodigo);
     }
 
+    // TODO: Refatorar esse método, está consumindo cerca de 0,6 segundos no processamento + 0,3 segundos
     private _buildLocalidadesTree() {
         this._brasil = LocalidadeService.criarPais(brasil);
 

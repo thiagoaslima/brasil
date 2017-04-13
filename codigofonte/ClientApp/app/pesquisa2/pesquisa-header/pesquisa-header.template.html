@@ -49,14 +49,20 @@
         <div class="cabecalho__visualizacao-dados__item">
             <div class="area-click" [class.area-click--visivel]="mostrarOpcoes" (click)="mostrarOpcoes=false"></div>
             <div class="select__sub-menu">
-            <!--Inicio Menu Hamburguer Button-->
-                <div class="select__sub-menu__botao" [class.select__sub-menu__botao--aberto]="mostrarOpcoes" (click)="mostrarOpcoes=true"><i class="fa fa-bars" aria-hidden="true"></i><i class="fa fa-caret-down" aria-hidden="true"></i></div> 
-			<!--Fim Menu Hamburguer Button-->
+
+                <div title='Ocultar linhas sem dados' class="select__sub-menu__botao select__sub-menu__botao--olho" style=''><i class="fa" [ngClass]="{'fa-eye': !isOcultarValoresVazios, 'fa-eye-slash': isOcultarValoresVazios}" (click)="ocultarValoresVazios()" aria-hidden="true" style=''></i></div>
+				<!--Inicio Menu Hamburguer Button-->
+                <div class="select__sub-menu__botao" [class.select__sub-menu__botao--aberto]="mostrarOpcoes" (click)="mostrarOpcoes=true"><i class="fa fa-bars" aria-hidden="true"></i><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+                <!--Fim Menu Hamburguer Button-->
+                
+
                 <div class="select__submenu-aberto" *ngIf="mostrarOpcoes">
                     <div (click)="fazerDownload();"><span><i class="fa fa-download fa-lg" aria-hidden="true"></i></span> Download</div>
                     <!--<div (click)="compartilhar();"><span><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i></span> Compartilhar</div>-->
                 </div>
             </div>
+
+            
         </div>
 
     </div>

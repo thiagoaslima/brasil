@@ -1,6 +1,11 @@
+import { Localidade } from '../../shared/localidade/localidade.interface';
 import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
 
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
+
+import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model'
+import { IndicadorService2 } from '../../shared2/indicador/indicador.service'
+
 
 @Component({
     selector: 'panorama-temas',
@@ -14,12 +19,24 @@ export class PanoramaTemasComponent implements OnInit {
         painel: PanoramaConfigurationItem[],
         grafico: GraficoConfiguration[]
     };
-    @Input() localidade;
+    @Input() localidade: Localidade;
 
-    constructor() { }
+    constructor(
+        private _indicadorService:IndicadorService2
+    ) {  }
     
+
     getTextoAnalitico(nomeTema){
+
+        //debugger;
         
+        // this._indicadorService.getIndicadoresById(10058, 60041, EscopoIndicadores.proprio, this.localidade.codigo).subscribe(res => {
+
+        //     debugger;
+
+        //     console.log(res[0].getResultadoByLocal(this.localidade.codigo));
+        // });
+
         let valoresEducacao = {
             idebInicial:"IDEBINIUCIAL",
             idebFinal:"IDEBFINAL",
@@ -47,4 +64,6 @@ export class PanoramaTemasComponent implements OnInit {
     ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges) { }
+
+
 }
