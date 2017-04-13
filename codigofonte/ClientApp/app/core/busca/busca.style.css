@@ -53,6 +53,8 @@
 	margin-left: -40px;
 	margin-top: 16px;
 	color: #1B779B;
+	
+        
 }
 
 .busca__auto-completar{
@@ -163,6 +165,8 @@
         font-size: 20px;
         padding: 12px 6%;
         z-index: 3;
+		position:relative;
+		margin:0;
     }
 
     .busca.digitacao{

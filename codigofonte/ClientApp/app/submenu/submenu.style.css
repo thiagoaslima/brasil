@@ -122,3 +122,14 @@ li:last-child > .submenu__separador, .submenu__item--selecionado > .submenu__sep
     }
 
 }
+
+@media screen and (max-width: 768px) {
+    .submenu{
+        width: 100%;
+        padding-top: 106px;
+    }
+    .submenu-container{
+        margin-left: 0;
+        width: 100%;
+    }
+}

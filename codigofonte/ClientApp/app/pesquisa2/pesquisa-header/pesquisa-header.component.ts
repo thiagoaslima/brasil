@@ -15,7 +15,10 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class PesquisaHeaderComponent implements OnInit {
+
     @Output() onDownload = new EventEmitter();
+    @Output() onOcultarValoresVazios = new EventEmitter();
+
     pesquisa$: Observable<Pesquisa>;
     pesquisa: Pesquisa;
     localidade: Localidade;
@@ -27,6 +30,9 @@ export class PesquisaHeaderComponent implements OnInit {
     mostrarOpcoes = false;
     objetoURL:any = {};
     baseURL = '';
+
+
+    private isOcultarValoresVazios = false;
 
     constructor(
         private _pesquisaService: PesquisaService2,
@@ -101,6 +107,12 @@ export class PesquisaHeaderComponent implements OnInit {
     fazerDownload(){
         this.mostrarOpcoes = false;
         this.onDownload.emit();
+    }
+
+    ocultarValoresVazios(){
+
+        this.isOcultarValoresVazios = !this.isOcultarValoresVazios;
+        this.onOcultarValoresVazios.emit({"OcultarValoresVazios": this.isOcultarValoresVazios});
     }
 
     compartilhar(){

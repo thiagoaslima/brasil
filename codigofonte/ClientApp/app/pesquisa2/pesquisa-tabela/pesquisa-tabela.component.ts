@@ -22,10 +22,9 @@ export class PesquisaTabelaComponent implements OnChanges {
     @Input() pesquisa: Pesquisa;
     @Input() posicaoIndicador: string;
     @Input() periodo: string;
+    @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     private indicadores;
-
-
 
     constructor(
         private _sintese:SinteseService,
@@ -66,6 +65,8 @@ export class PesquisaTabelaComponent implements OnChanges {
                     indicador.nivel = this.getNivelIndicador(indicador.posicao);
                     indicador.visivel = indicador.nivel <= 4 ? true : false;
 
+                    indicador.isVazio = !this.hasValue(indicador, this.periodo) && !this.hasChildrenWithValue(indicador.children, this.periodo);
+
                     return indicador;
                 });
             });
@@ -73,9 +74,68 @@ export class PesquisaTabelaComponent implements OnChanges {
         }
     }
 
+
     private isFolha(indicador){
 
         return !indicador.children || indicador.children.length == 0;
+    }
+
+    private hasValue(indicador, periodo){
+
+        if(!indicador || !periodo || !indicador.localidadeA){
+
+            return false;
+        }
+
+        return !this.isEmpty(indicador.localidadeA[periodo]);
+    }
+
+    private hasChildrenWithValue(children: any[], periodo){
+
+        if(!children || !periodo){
+
+            return false;
+        }
+
+        let hasChildrenWithValue = false;
+
+        for(let i = 0; i < children.length; i++){
+
+            hasChildrenWithValue = this.hasValue(children[i], periodo) || this.hasChildrenWithValue(children[i].children, periodo)
+
+            if(hasChildrenWithValue){
+                break;
+            }
+        }
+
+        return hasChildrenWithValue;
+    }
+
+    isEmpty(valor){
+
+        return (!valor || 
+                valor.trim() == '99999999999999' ||
+                valor.trim() == '99999999999998' ||
+                valor.trim() == '99999999999997' ||
+                valor.trim() == '99999999999996' ||
+                valor.trim() == '99999999999995' ||
+                valor.trim() == '99999999999992' ||
+                valor.trim() == '99999999999991' ||
+                valor.trim() == '-' ||
+                valor.trim().toLowerCase() == 'x' ||
+                valor.trim() == 'Não existente');
+    }
+
+    private ocultarValoresVazios(listaIndicadores){
+
+        // TODO: Ocultar valores vazios
+        // Se a opção oultar valores vazios estiver habilitada
+        if(this.isOcultarValoresVazios){
+
+            // Se for um nó folha, oculta o nó
+
+            // Se for um nó galho, o oculta caso todos os filhos já sejam ocultos
+        }
     }
 
     //chamada quando abre os nós nível 2 da tabela de dados
@@ -87,7 +147,8 @@ export class PesquisaTabelaComponent implements OnChanges {
 
             return;
         }
-        
+
+       
         if(this.isListaAberta(item)) //se estiver aberta
             this.flat(item.children).map(child => child.visivel = false); //fecha os filhos e todos os subfilhos
         else //senão, se estiver fechado
