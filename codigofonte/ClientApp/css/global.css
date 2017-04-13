@@ -353,7 +353,7 @@ sintese>dados
 
     .localidade--static #menu {
         z-index: 13;
-        transform: translateY(18px);
+        transform: translateY(17px);
     }
 
     aside.aside--municipio.localidade--static{
@@ -396,6 +396,10 @@ sintese>dados
 
     aside #menu.aberto{
         left: 0%;
+        margin-top: 52px;
+    }
+    aside.localidade--static #menu.aberto{
+        margin-top: 0;
     }
 
     .conteudo{
