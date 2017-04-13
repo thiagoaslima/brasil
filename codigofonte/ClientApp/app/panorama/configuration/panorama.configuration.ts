@@ -94,35 +94,39 @@ export const PANORAMA = {
                 titulo: "IDEB",
                 subtitulo: "Índice de Desenvolvimento da Educação Básica",
                 tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "IDEB",
-                    tipo: TiposGrafico.linha,
-                    dados: [{
-                        pesquisaId: 40,
-                        indicadorId: 30277
-                    }]
-                }
+                visualizacao: PanoramaVisualizacao.painel,
+               
             },
-
+			{
+				pesquisaId: 10058,
+                indicadorId: 60045,
+				periodo: "2010",
+                titulo: "Taxa de escolarização de 6 a 14 anos de idade",
+                subtitulo: "6 a 14 anos de idade",
+                tema: TEMAS.educacao,
+                visualizacao: PanoramaVisualizacao.painel
+				},
             {
                 pesquisaId: 10058,
                 indicadorId: 60041,
                 titulo: "IDEB - Anos iniciais do ensino fundamental",
-                subtitulo: "Anos iniciais do ensino fundamental",
+                subtitulo: "Anos iniciais e finais do ensino fundamental",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.grafico,
                 grafico: {
                     titulo: "IDEB - Anos iniciais do ensino fundamental",
-                    tipo: TiposGrafico.barra,
+                    tipo: TiposGrafico.linha,
                     dados: [{
                         pesquisaId: 10058,
                         indicadorId: 60041
+                    },
+					{
+                        pesquisaId: 10058,
+                        indicadorId: 60042
                     }]
                 }
             },
-
-             {
+            {
                 pesquisaId: 10058,
                 indicadorId: 60042,
                 titulo: "IDEB - Anos finais do ensino fundamental",
@@ -130,14 +134,21 @@ export const PANORAMA = {
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.grafico,
                 grafico: {
-                    titulo: "IDEB - Anos finais do ensino fundamental",
-                    tipo: TiposGrafico.barra,
+                    titulo: "IDEB - finais do ensino fundamental",
+                    tipo: TiposGrafico.linha,
                     dados: [{
+                        pesquisaId: 10058,
+                        indicadorId: 60041
+                    },
+					{
                         pesquisaId: 10058,
                         indicadorId: 60042
                     }]
                 }
             },
+            
+
+             
 
             {
                 pesquisaId: 13,
@@ -161,23 +172,6 @@ export const PANORAMA = {
                     }, {
                         pesquisaId: 13,
                         indicadorId: 5918,
-                    }]
-                }
-            },
-
-            {
-                pesquisaId: 10058,
-                indicadorId: 60045,
-                titulo: "Taxa de escolarização de 6 a 14 anos de idade",
-                subtitulo: "6 a 14 anos de idade",
-                tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "Taxa de escolarização de 6 a 14 anos de idade",
-                    tipo: TiposGrafico.barra,
-                    dados: [{
-                        pesquisaId: 10058,
-                        indicadorId: 60045
                     }]
                 }
             },

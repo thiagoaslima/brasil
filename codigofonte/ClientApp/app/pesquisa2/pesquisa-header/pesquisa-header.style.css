@@ -145,26 +145,60 @@
     color: #999;
     margin-top: 17px;
     cursor: pointer;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
 }
+
+.select__sub-menu__botao:hover {
+	background-color: rgb(208, 208, 208);
+	}
 
 .select__sub-menu.submenu-aberto {
     background-color: #CCC;
     color: initial;
     border: none;
+
 }
 
 .select__submenu-aberto{
-    background-color: #ccc;
+   /* background-color: #ccc;
     position: absolute;
     right: 0px;
     text-align: left;
-    z-index: 2;
+    z-index: 2;*/
+	text-align: left;
+	background: #333;
+	color: #fff;
+	line-height: normal;
+	position: absolute;
+	z-index: 2;
+	padding: 10px;
+	min-width: 160px;
+	margin-top: -19px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
 }
+
+.select__sub-menu__botao--aberto {
+    background-color: #333;
+    color: #fff;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
 
 .select__submenu-aberto > div {
     padding: 10px;
     letter-spacing: initial;
-    color: initial;
     cursor: pointer;
 }
 
