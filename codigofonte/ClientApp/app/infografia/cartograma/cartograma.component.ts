@@ -21,6 +21,7 @@ import 'rxjs/add/operator/scan';
  */
 
 // TODO: Refatorar, o detectContentChildrenChanges está consumindo cerca de 1,8 segundos
+// Remover a maioria dos ASYNCs possível, eles aumentam o número de chamadas do detectContentChildrenChanges
 @Component({
     selector: 'cartograma',
     templateUrl: 'cartograma.template.html',

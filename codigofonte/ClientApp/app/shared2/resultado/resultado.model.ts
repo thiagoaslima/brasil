@@ -71,6 +71,7 @@ export class Resultado {
     public readonly periodos: string[]
     public readonly valores: string[]
 
+    // TODO: Refatorar, está consumindo 0.22 ms
     constructor(data) {
         data = Object.assign({}, _resultadoDefaults, data);
         Object.keys(_resultadoDefaults).forEach(property => {
