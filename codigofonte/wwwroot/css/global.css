@@ -294,6 +294,7 @@ sintese>dados
 }
 
 @media screen and (max-width: 768px) {
+    /*Mobile*/
     body, body.municipio, body.brasil, body.estado{
         background: none;
     }
@@ -333,6 +334,7 @@ sintese>dados
 
     #container{
         padding-top: 42px;
+        margin-top: 0;
     }
 
     aside{
@@ -354,7 +356,11 @@ sintese>dados
 
     .localidade--static #menu {
         z-index: 13;
-        transform: translateY(18px);
+        transform: translateY(17px);
+    }
+    
+    aside.aside--municipio.localidade--static{
+        margin-top: 58px;
     }
 
     aside #localidade button{
@@ -393,6 +399,10 @@ sintese>dados
 
     aside #menu.aberto{
         left: 0%;
+        margin-top: 52px;
+    }
+    aside.localidade--static #menu.aberto{
+        margin-top: 0;
     }
 
     .conteudo{
