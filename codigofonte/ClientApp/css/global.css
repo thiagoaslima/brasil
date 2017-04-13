@@ -451,6 +451,12 @@ sintese>dados
     #sintese #dados{
         display: none;
     }
+    section#detalhes{
+        margin-top: 150px;
+    }
+    #sintese #detalhes{
+        width: 100vw;
+    }
 }
 
 

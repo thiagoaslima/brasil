@@ -198,3 +198,46 @@ button .fa{
     text-align: right;
     margin-top: 25px;
 }
+
+@media screen and (max-width: 768px) {
+    /*Mobile*/
+    .content-card{
+        float: none;
+        height: auto;
+        margin-bottom: 30px;
+    }
+    .card, .card.selecionado{
+        float: none;
+        margin: 0;
+        width: 100%;
+    }
+    .card__titulo{
+    font-size: 1em;
+    margin-top: 5px;
+    }
+    
+   .card__nota{
+        font-size: 1.5em;
+    }
+    
+    .card__comparando{
+        font-size: .8em;
+        padding-top: 40px;
+    }
+    
+    .card__regua-comparacao{
+        font-size: .7em;
+    }
+    
+   .card__regua-comparacao__regua__marcador{
+        width: 14px;
+        height: 14px;
+        background-size: 100% auto;
+    }
+    .card.selecionado{
+        height: auto;
+        border-top-color: #B3B3B3;
+    }
+        
+  
+}
