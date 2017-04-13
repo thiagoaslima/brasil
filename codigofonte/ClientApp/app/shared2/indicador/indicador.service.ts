@@ -52,7 +52,7 @@ export class IndicadorService2 {
             .share();
     }
 
-    getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?): Observable<Indicador[]> {
+    getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false): Observable<Indicador[]> {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
         const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`; 
         let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;
@@ -64,7 +64,23 @@ export class IndicadorService2 {
             //.map(json => flatTree(json))
             .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId })))))
             //.map(array => this._rebuildTree(array))
-            .do(indicador => console.log(`getIndicadorById`, indicador))
+            .do(indicadores => {
+                //adiciona fonte e notas, da pesquisa nos indicadores
+                if(fontesNotas && indicadores.length > 0){
+                    indicadores[0].pesquisa.subscribe((pesquisa) =>{
+                        //organiza os períodos da pesquisa em ordem crescente
+                        pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
+                        //pega fontes e notas do período mais recente
+                        let fontes = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
+                        let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
+                        for(let i = 0; i < indicadores.length; i++){
+                            indicadores[i].fontes = fontes;
+                            indicadores[i].notas = notas;
+                        }
+                    });
+                }
+                console.log(`getIndicadorById`, indicadores);
+            })
             .share();
     }
 

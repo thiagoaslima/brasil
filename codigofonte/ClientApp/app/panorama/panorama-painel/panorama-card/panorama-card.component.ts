@@ -4,6 +4,7 @@ import { Localidade, NiveisTerritoriais } from '../../../shared2/localidade/loca
 import { LocalidadeService2 } from '../../../shared2/localidade/localidade.service';
 import { Indicador, EscopoIndicadores } from '../../../shared2/indicador/indicador.model';
 import { IndicadorService2 } from '../../../shared2/indicador/indicador.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -26,9 +27,13 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     private _dados$ = new BehaviorSubject(null);
     private _localidade$ = new BehaviorSubject(null);
 
+    mostrarNotas = false;
+    mostrarFontes = false;
+
     constructor(
         private _localidadeService: LocalidadeService2,
-        private _indicadorService: IndicadorService2
+        private _indicadorService: IndicadorService2,
+        private _router: Router
     ) { }
 
     ngOnInit() { 
@@ -67,6 +72,12 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
        if (changes.hasOwnProperty('localidade') && changes.localidade.currentValue) {
             this._localidade$.next(changes.localidade.currentValue);
        }
+    }
+
+    navegarTabela(){
+        let url = this.localidade.link + '/pesquisa/' + this.dados.pesquisaId + '/' + this.dados.indicadorId;
+        console.log('$$$$$$$$$$$$$$$$$$$$$', this.dados, url);
+        this._router.navigate(url.split('/'));
     }
 }
 
