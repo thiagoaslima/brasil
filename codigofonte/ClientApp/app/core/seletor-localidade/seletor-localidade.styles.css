@@ -453,6 +453,7 @@ ANIMAÇÃO
 
 
 @media screen and (max-width: 768px) {
+    /*Mobile*/
     #selecionar-localidade{
         top: 42px;
         left: -100%;
@@ -527,6 +528,9 @@ ANIMAÇÃO
     }
 
 
+    #selecionar-localidade #primeira-coluna.aberto{
+        position: fixed;
+    }
 
     #selecionar-localidade #segunda-coluna{
         left: 100%;
