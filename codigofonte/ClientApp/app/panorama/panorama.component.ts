@@ -45,10 +45,14 @@ export class PanoramaComponent implements OnInit {
             });
 
 
-        const groupByPesquisa$ = configuracao$.map(config => this._groupIndicadoresByPesquisa(config));
-        const indicadores$ = groupByPesquisa$.combineLatest(this.localidade$)
-            .mergeMap(([obj, localidade]) => Observable.from(obj.map(({ pesquisaId, indicadoresId }) => ({ pesquisaId, indicadoresId, codigoLocalidade: localidade.parent.codigo }))))
-            .mergeMap((obj, idx) => this._indicadorService.getIndicadoresById(obj.pesquisaId, obj.indicadoresId, EscopoIndicadores.proprio, Localidade.alterarContexto(obj.codigoLocalidade, NiveisTerritoriais.municipio), true));
+        // const groupByPesquisa$ = configuracao$.map(config => this._groupIndicadoresByPesquisa(config));
+        // const indicadores$ = groupByPesquisa$.combineLatest(this.localidade$)
+        //     .mergeMap(([obj, localidade]) => Observable.from(obj.map(({ pesquisaId, indicadoresId }) => ({ pesquisaId, indicadoresId, codigoLocalidade: localidade.parent.codigo }))))
+        //     .mergeMap((obj, idx) => this._indicadorService.getIndicadoresById(obj.pesquisaId, obj.indicadoresId, EscopoIndicadores.proprio, Localidade.alterarContexto(obj.codigoLocalidade, NiveisTerritoriais.municipio, true)));
+
+        const groupBy$ = configuracao$.map(config => this._groupIndicadores(config));
+        const indicadores$ = groupBy$.combineLatest(this.localidade$)
+            .mergeMap(([obj, localidade]) => this._indicadorService.getVariosIndicadoresById(obj.indicadorMapPesquisa, obj.indicadores, Localidade.alterarContexto(localidade.parent.codigo, NiveisTerritoriais.municipio), true));
 
 
         const setConfiguracaoBasica$ = configuracao$.map(config => configState => Object.assign({}, configState, config));
@@ -144,6 +148,27 @@ export class PanoramaComponent implements OnInit {
             pesquisaId: parseInt(key, 10),
             indicadoresId: hash[key]
         }));
+    }
+
+    private _groupIndicadores({ indicadores = [] as PanoramaConfigurationItem[] }): { indicadores:Array<number>, indicadorMapPesquisa: any } {
+        let indicadoresArr = [];
+        let indicadorMapPesquisa = {};
+        const hash = indicadores.forEach((item) => {
+            indicadoresArr.push(item.indicadorId);
+            indicadorMapPesquisa[item.indicadorId.toString()] = item.pesquisaId;
+
+            if (item.grafico && item.grafico.dados && item.grafico.dados.length) {
+                item.grafico.dados.forEach(item => {
+                    indicadoresArr.push(item.indicadorId);
+                    indicadorMapPesquisa[item.indicadorId.toString()] = item.pesquisaId;
+                })
+            }
+        });
+
+        return {
+            indicadores: indicadoresArr,
+            indicadorMapPesquisa: indicadorMapPesquisa
+        };
     }
 
     private _buildHashTemas({ indicadores = [] as PanoramaConfigurationItem[] }): { [tema: string]: PanoramaItem } {
