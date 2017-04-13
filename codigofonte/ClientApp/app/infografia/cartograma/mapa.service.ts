@@ -126,6 +126,7 @@ export class MapaService {
         let n2, s2, l2, o2;
 
         model.geometries = [];
+        model.centers = [];
 
         model.features.forEach(feature => {
             const codigoFeature = feature['properties']['codarea'].toString().substr(0, 6);
@@ -181,6 +182,7 @@ export class MapaService {
                 polys: polygons,
                 center: [(o2+l2)/2, (s2+n2)/2]
             });
+
         });
 
         // inverte o mapa na vertical...
@@ -190,4 +192,5 @@ export class MapaService {
 
         return model;
     }
+
 }

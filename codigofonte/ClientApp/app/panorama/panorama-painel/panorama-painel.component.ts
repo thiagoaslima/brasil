@@ -54,6 +54,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     @Input() localidade: Localidade;
 
     public uf: Localidade;
+    public mun: Localidade;
     public indicador$: Observable<Indicador>
     public localSelecionado;
     private _selecionarIndicador$ = new BehaviorSubject<Indicador>(null);
@@ -79,6 +80,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     ngOnChanges(changes: { [label: string]: SimpleChange }) {
         if (changes.hasOwnProperty('localidade') && Boolean(changes.localidade.currentValue)) {
             this.uf = changes.localidade.currentValue.parent;
+            this.mun = changes.localidade.currentValue;
+            
         }
 
         if (changes.hasOwnProperty('dados') && Boolean(changes.dados.currentValue) && Boolean(changes.dados.currentValue.length)) {

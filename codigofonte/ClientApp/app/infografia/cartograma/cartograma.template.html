@@ -7,9 +7,10 @@
             <svg:g class="uf" transform="scale(1 -1)">
                 <svg:g #mun regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome"
                     [link]="item.link" [polygons]="item.polys" [valor]="((indicador$ | async)?.getResultadoByLocal(item.codigo) | async)?.valorValidoMaisRecente"
-                    [quartis]="quartis$ | async" (mouseover)="municSelected = [item.nome, mun.valor, item.center]" (mouseleave)="municSelected = ''">
+                    [quartis]="quartis$ | async" (mouseover)="municSelected = [item.nome, mun.valor, item.center]" (mouseleave)="municSelected = ''" vector-effect="non-scaling-stroke">
                 </svg:g>
-                <svg:circle *ngIf="!!municSelected && municSelected != ''" [attr.cx.px]="municSelected[2][0]" [attr.cy.px]="municSelected[2][1]" r="1" style="fill:#ffcc00;"></svg:circle>
+                <svg:circle [attr.cx]="getCenter((malha$ | async)?.geometries, localidade.codigo)[0]" [attr.cy]="getCenter((malha$ | async)?.geometries, localidade.codigo)[1]" r="0.03" style="stroke:none;fill:#000;"></svg:circle>
+                <svg:path [attr.d]="'M'+getCenter((malha$ | async)?.geometries, localidade.codigo)[0]+' '+getCenter((malha$ | async)?.geometries, localidade.codigo)[1]+'v180'" style="stroke:#000;stroke-width:1px;" vector-effect="non-scaling-stroke"></svg:path>
             </svg:g>
         </svg>
     </div>

@@ -6,6 +6,7 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
 import { Resultado } from '../../shared2/resultado/resultado.model';
 import { ResultadoService2 } from '../../shared2/resultado/resultado.service';
 import { MapaService } from './mapa.service';
+import { RouterParamsService } from '../../shared/router-params.service';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -43,16 +44,24 @@ export class CartogramaComponent implements OnInit, OnChanges {
     public valores = null;
     public municSelected = "";
 
+    public pin;
+
     constructor(
         private _mapaService: MapaService,
-        private _localidadeService: LocalidadeService2
+        private _localidadeService: LocalidadeService2,
+        private _routerParams:RouterParamsService
     ) { }
 
     ngOnInit() {
+
+        this.pin = {
+            x:-43, y:-22, width:1, height: 1
+        };
+
         this.malha$ = this.localidade$
             .filter(Boolean)
-            .flatMap(localidade => {
-                return this._mapaService.getMalhaSubdivisao(localidade.codigo);
+            .flatMap((localidade) => {
+                return this._mapaService.getMalhaSubdivisao(localidade.parent.codigo);
             })
             // .do(console.log.bind(console, 'geometries'));
 
@@ -62,7 +71,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
             .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
             .flatMap(([indicador, localidade]) => {
 
-                const municipios = this._localidadeService.getMunicipiosByRegiao(localidade.codigo.toString());
+                const municipios = this._localidadeService.getMunicipiosByRegiao(localidade.parent.codigo.toString());
 
                 return Observable.zip(
                     ...municipios.map(localidade => indicador.getResultadoByLocal(localidade.codigo))
@@ -104,7 +113,21 @@ export class CartogramaComponent implements OnInit, OnChanges {
             && (!changes.indicador.previousValue || changes.indicador.currentValue.id !== changes.indicador.previousValue.id)) {
             this.indicador$.next(changes.indicador.currentValue);
         }
+
     }
+
+    public getCenter(geometries, codigo) {
+        if (codigo) {
+            let el = geometries.find(item => item.codigo.toString().substring(0,6) == codigo.toString().substring(0,6));
+            if (el.center)
+                return el.center;
+            else
+                return [0, 0];
+        } else {
+            return [0, 0];
+        }
+    }
+
 }
 
 @Component({

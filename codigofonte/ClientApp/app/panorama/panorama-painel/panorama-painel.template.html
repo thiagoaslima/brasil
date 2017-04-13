@@ -4,6 +4,7 @@
             <div>
                 <div class="cartograma" *ngIf="!isMobile()">
                     <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
+                    <cartograma [localidade]="mun" [indicador]="indicador$ | async"></cartograma>
                 </div>
             </div>
             
