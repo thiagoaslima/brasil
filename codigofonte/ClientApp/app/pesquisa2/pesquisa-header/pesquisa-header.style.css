@@ -188,8 +188,9 @@
 	position: absolute;
 	z-index: 2;
 	padding: 10px;
-	min-width: 192px;
+	min-width: 219px;
 	margin-top: -19px;
+	margin-left:-35px;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
 	-ms-transition: all 400ms ease;
