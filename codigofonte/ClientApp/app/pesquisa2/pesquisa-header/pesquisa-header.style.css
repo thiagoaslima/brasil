@@ -211,12 +211,10 @@
 .select__submenu-aberto > div {
     padding: 10px;
     letter-spacing: initial;
-<<<<<<< HEAD
     cursor: pointer;
-=======
     color: initial;
-    /*cursor: pointer;*/
->>>>>>> e362b5ac3361775eb3f86119322b0c615195b3fa
+
+
 }
 
 .select__submenu-aberto > div:hover {
