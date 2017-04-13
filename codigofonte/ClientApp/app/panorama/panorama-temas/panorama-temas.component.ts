@@ -81,4 +81,22 @@ export class PanoramaTemasComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges) { }
 
 
+    /**
+     * Obtém o valor de um indicador, dado seu identificador, pesquisa, localidade e período desejados.
+     * 
+     * @private
+     * @param {number} idPesquisa
+     * @param {number} idIndicador
+     * @param {number} codigoLocalidade
+     * @param {string} periodo
+     * @returns {Observable<string>}
+     * 
+     * @memberOf PanoramaTemasComponent
+     */
+    private getValorIndicador(idPesquisa: number, idIndicador: number, codigoLocalidade: number, periodo: string): Observable<string>{
+
+        return this._indicadorService.getIndicadoresById(idPesquisa, idIndicador, EscopoIndicadores.proprio, codigoLocalidade)
+                    .switchMap(indicadores => indicadores[0].getResultadoByLocal(this.localidade.codigo))
+                    .map(resulatado => resulatado.getValor(periodo));
+    }
 }
