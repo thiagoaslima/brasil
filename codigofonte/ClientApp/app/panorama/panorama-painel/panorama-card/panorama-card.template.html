@@ -33,24 +33,52 @@
         </div>-->
 
 
-        <button><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
+        <!--<button><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
 
-        <button><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas</button>
+        <button *ngIf="dados && dados.indicador && dados.indicador.notas && dados.indicador.notas.length" (click)="mostrarNotas = !mostrarNotas;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas</button>
 
-        <button><i class="fa fa-info-circle" aria-hidden="true"></i> Fontes</button>
+        <button *ngIf="dados && dados.indicador && dados.indicador.fontes && dados.indicador.fontes.length" (click)="mostrarFontes = !mostrarFontes;"><i class="fa fa-info-circle" aria-hidden="true"></i> Fontes</button>
 
-        <div class="notas__lista-container">
+        <div *ngIf="mostarNotas" class="notas__lista-container">
             <ol>
-                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
-                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
+                <li *ngFor="let nota of dados?.indicador?.notas;">{{ nota }}</li>
             </ol>
         </div>
 
-        <div class="fontes__lista-container">
+        <div *ngIf="mostrarFontes" class="fontes__lista-container">
             <ol>
-                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
-                <li>Atribui-se zeros aos valores dos municípios onde não há ocorrência da variável </li>
+                <li *ngFor="let fonte of dados?.indicador?.fontes;">{{ fonte }}</li>
             </ol>
+        </div>-->
+
+        <div class="botao-container">
+            <div class="botao" *ngIf="dados && dados.indicador && dados.indicador.fontes && dados.indicador.fontes.length">
+                <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
+                <button (click)="mostrarFontes=true">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fontes
+                </button>
+                <div *ngIf="mostrarFontes" class="fontes__lista-container">
+                    <ol>
+                        <li *ngFor="let fonte of dados?.indicador?.fontes;">{{ fonte }}</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="botao" *ngIf="dados && dados.indicador && dados.indicador.notas && dados.indicador.notas.length">
+                <div class="area-click" [class.area-click--visivel]="mostrarNotas" (click)="mostrarNotas=false"></div>
+                <button (click)="mostrarNotas=true">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas
+                </button>
+                <div *ngIf="mostrarNotas" class="notas__lista-container">
+                    <ol>
+                        <li *ngFor="let nota of dados?.indicador?.notas;">{{ nota }}</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="botao">
+                <button (click)="navegarTabela();"><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
+            </div>
         </div>
 
     </div>

@@ -113,16 +113,11 @@ button{
     background-color: #E6E6E6;
     padding: 2px 3px;
     font-size: .8em;
-    float: right;
-    margin-left: 10px;
-    margin-top: 33px;
 }
 
 button .fa{
     color: #1B779B;
 }
-
-
 
 .card.selecionado{
     border-top-color: #F7931E;
@@ -154,11 +149,7 @@ button .fa{
     background-size: 100% auto;
 }
 
-.notas__lista-container, .fontes__lista-container{
-    display: none;
-}
-
-.card.selecionado .notas__lista-container {
+.notas__lista-container {
     margin-left: 128px;
     position: absolute;
     background: #fff;
@@ -168,18 +159,42 @@ button .fa{
     z-index: 2;
     margin-top: 56px;
     font-size: .9em;
-    display: none;
 }
 
-.card.selecionado .fontes__lista-container {
-    margin-left: 57px;
+.fontes__lista-container {
     position: absolute;
     background: #fff;
     padding: 10px 15px 15px 26px;
     width: 200px;
     border: 1px solid #ccc;
     z-index: 2;
-    margin-top: 56px;
     font-size: .9em;
+    margin-left: -138px;
+}
+
+.area-click{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
     display: none;
+}
+
+.area-click--visivel{
+    display: block;
+}
+
+.botao{
+    display: inline-block;
+}
+
+.botao button{
+    cursor: pointer;
+}
+
+.botao-container{
+    text-align: right;
+    margin-top: 25px;
 }
