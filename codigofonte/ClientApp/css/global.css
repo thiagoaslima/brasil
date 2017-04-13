@@ -442,6 +442,15 @@ sintese>dados
     .no__scroll--mobile{
         overflow: hidden;
     }
+    
+     #sintese{
+        float: none;
+        border-left: none;
+        margin-left: 0;
+    }
+    #sintese #dados{
+        display: none;
+    }
 }
 
 

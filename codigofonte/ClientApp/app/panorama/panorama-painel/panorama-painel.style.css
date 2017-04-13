@@ -1,4 +1,27 @@
- .cards{
+.cards{
+    content: "";
+    display: table;
+    clear: both;
+    margin: 2% 5%;
+}
+
+.cartograma {
+    margin: 3% 5%;
+}
+
+.legenda {
+    display: inline-block;
+    width: 29%;
+}
+         
+@media screen and (max-width: 768px) {
+    .cartograma{
+        display: none;
+    }
+   
+}         
+ 
+ /*.cards{
             content: "";
             display: table;
             clear: both;
@@ -54,3 +77,9 @@
 .legenda__item__label{
     font-size: .8em;
 }
+
+@media screen and (max-width: 768px) {
+    .cartograma{
+        display: none;
+    }
+}*/
