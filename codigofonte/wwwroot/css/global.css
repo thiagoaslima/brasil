@@ -163,7 +163,7 @@ aside #localidade button{
     background-color: transparent;
     border: 1px solid #fff;
     border-radius: 21px;
-    font-size: .8em;
+    font-size: 1em;
     margin: 4% 0%;
     padding: 5px 10px;
     cursor: pointer;
@@ -442,10 +442,10 @@ sintese>dados
     /*aside fica fixo em 250px;*/
     body.estado{  
        background: #fff; /* For browsers that do not support gradients */
-       background: -webkit-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
-       background: -o-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
-       background: -moz-linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
-       background: linear-gradient( to right, #1B779B 250px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: -webkit-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: -o-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: -moz-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
 
     }
 
@@ -475,11 +475,4 @@ sintese>dados
     }
 
     
-}
-
-/** UTILS **/
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
 }
