@@ -12,6 +12,7 @@ img {
 	padding-right: 20px;
 	width: 100%;
 	max-width:900px;
+	
 }
 
 .comp__titulo{
@@ -310,5 +311,7 @@ img {
 }
 
 @media screen and (min-width: 768px) {
-	padding-left: 48px;
+	.component {
+		padding-left: 48px;
+	}
 }

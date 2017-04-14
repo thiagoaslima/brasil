@@ -135,6 +135,7 @@
     font-weight: bold;
     padding: 10px 5px;
     text-transform: uppercase;
+	text-align:left;
     font-size: 0.9em;
 }
 
