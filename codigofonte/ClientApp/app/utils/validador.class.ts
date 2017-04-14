@@ -29,7 +29,7 @@ export class Validador {
     validar(data, cb) {
         this._testes.forEach(teste => {
             if (!teste.funcaoTeste(data)) {
-                console.log(teste.mensagemErro, data);
+                // console.log(teste.mensagemErro, data);
                 this._erros.push(teste.mensagemErro);
             }
         });

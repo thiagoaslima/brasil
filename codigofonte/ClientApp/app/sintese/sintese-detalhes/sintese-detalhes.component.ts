@@ -64,7 +64,7 @@ export class SinteseDetalhesComponent implements OnInit, OnDestroy {
                 let indicador = params && params['indicador'];
                 let view = queryParams && queryParams['v'];
 
-                console.log(params, queryParams);
+                // console.log(params, queryParams);
 
                 if (indicador == 'historico') {
                     this.componenteAtivo = 'historico';

@@ -54,7 +54,7 @@ export class PesquisaDadosComponent {
                 //adiciona novas propriedades aos indicadores: nível e visível
                 //nível é usado para aplicar o css para criar a impressão de hierarquia na tabela de dados
                 //visível é usado para definir se o indicador está visível ou não (dentro de um elemento pai fechado)
-                console.log('>>>>>>>>>>', params.indicador, indicadores);
+                // console.log('>>>>>>>>>>', params.indicador, indicadores);
 
                 let ind = this.flat(indicadores);
                 this.anos = [];

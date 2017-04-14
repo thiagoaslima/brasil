@@ -67,7 +67,7 @@ export class FotosComponent implements OnInit {
             .get('http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
             .map(res => {
                 // If request fails, return false
-                console.log(res.status);
+                // console.log(res.status);
                return (res.status < 200 || res.status >= 300) ? false : true;
             })
             .subscribe( (retornaServico) => {

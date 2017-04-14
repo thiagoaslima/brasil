@@ -3,6 +3,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChange, ChangeDetectionStrat
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
+import { IsMobileService } from '../../shared/is-mobile.service';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -58,6 +59,16 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     private _selecionarIndicador$ = new BehaviorSubject<Indicador>(null);
     private _resultados = Object.create(null);
     private _rankings = Object.create(null);
+    
+    constructor (
+        private _isMobileServ:IsMobileService
+        ){
+        
+    }
+
+    isMobile(){
+        return this._isMobileServ.any(); 
+    }
 
     ngOnInit() {
         this.indicador$ = this._selecionarIndicador$

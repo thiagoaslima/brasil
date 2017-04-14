@@ -453,12 +453,16 @@ sintese>dados
         float: none;
         border-left: none;
         margin-left: 0;
+        width: auto;
     }
     #sintese #dados{
-        display: none;
+        float: none;
+        width: 100%;
+        min-height: auto;
+        
     }
     section#detalhes{
-        margin-top: 150px;
+        margin-top: 15px;
     }
     #sintese #detalhes{
         width: 100vw;
