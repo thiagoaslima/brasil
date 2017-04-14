@@ -23,7 +23,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     ngOnInit() { }
 
     ngOnChanges(changes) {
-        console.log('resumo', changes)
+        // console.log('resumo', changes)
     }
 
     fireTemaSelecionado(tema){

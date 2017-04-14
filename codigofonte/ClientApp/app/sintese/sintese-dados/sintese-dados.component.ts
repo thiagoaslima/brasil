@@ -51,7 +51,7 @@ export class SinteseDadosComponent implements OnInit, OnDestroy {
     }
 
     resetConteudo() {
-        console.log('reset');
+        // console.log('reset');
         return this._sinteseConfig.temas.map(tema => ( { tema, indicadores: [] } ))
     }
 
