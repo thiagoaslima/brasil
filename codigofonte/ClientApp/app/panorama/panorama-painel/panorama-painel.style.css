@@ -18,6 +18,9 @@
     .cartograma{
         display: none;
     }
+    .cards{
+        display: block;
+    }
    
 }         
  
