@@ -1,0 +1,26 @@
+.agregador {
+	float: left;
+	background-color: #fff;
+	margin-left: 21%;
+	border-left: 10px solid #333;
+	
+	}
+	
+	
+@media screen and (min-width: 1200px) {
+	.agregador {
+	margin-left: 250px;
+	}
+	
+}
+
+
+@media screen and (max-width: 768px) {
+	
+	.agregador {
+		border: none;
+		margin-left: 20px;
+		
+		}	
+	
+}
