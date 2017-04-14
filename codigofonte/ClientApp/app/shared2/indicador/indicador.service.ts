@@ -84,6 +84,59 @@ export class IndicadorService2 {
             .share();
     }
 
+    getVariosIndicadoresById(indicadorMapPesquisa, indicadorId: number | number[], localidade?, fontesNotas = false): Observable<Indicador[]> {
+        const queryIndicadores = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
+        const queryLocalidades = localidade === undefined ? '' : `&localidades=${Array.isArray(localidade) ? localidade.join(',') : localidade}`; 
+        
+        let urlValores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/valores?indicadores=${queryIndicadores}${queryLocalidades}`;
+        let urlIndicadores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores?indicadores=${queryIndicadores}`;
+        
+        let fallBackError = err => Observable.of({ json: () => ({}) });
+        return Observable.zip(
+                this._http.get(urlValores, options).retry(3),
+                this._http.get(urlIndicadores, options).retry(3)
+            )
+            .catch(err => Observable.of([{ json: () => ({})}, { json: () => ({})}]))
+            .map(([valores, indicadores]) => [valores.json(), indicadores.json()])
+            .map(([valores, indicadores]:any[][]) => {
+                return indicadores.map((indicador) => {
+                    let valor = valores.find((valor) => valor.id === indicador.id);
+
+                    indicador.res = valor.res;
+
+                    return indicador; 
+                })
+            })
+            .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId: indicadorMapPesquisa[obj.id.toString()] })))))
+            .do(indicadores => {
+                //adiciona fonte e notas, da pesquisa nos indicadores
+                if(fontesNotas && indicadores.length > 0){
+                    for(let i = 0; i < indicadores.length; i++){
+                        indicadores[i].pesquisa.subscribe((pesquisa) =>{
+                            //organiza os períodos da pesquisa em ordem crescente
+                            pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
+                            //pega fontes e notas do período mais recente
+                            let fontes = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
+                            let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
+                            indicadores[i].fontes = fontes;
+                            indicadores[i].notas = notas;
+                        });
+                    }
+                }
+            })
+            .do(indicadores => console.log(`getIndicadorById`, indicadores))
+            .share();
+        // this._http.get(url, options)
+        //     .retry(3)
+        //     .catch(err => Observable.of({ json: () => ({}) }))
+        //     .map(res => res.json())
+        //     //.map(json => flatTree(json))
+        //     .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId })))))
+        //     //.map(array => this._rebuildTree(array))
+        //     .do(indicador => console.log(`getIndicadorById`, indicador))
+        //     .share();
+    }
+
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number,  contexto = 'BR') {
         let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?orderBy=&contexto=${contexto}&localidade=${codigoLocalidade}&lower=0&upper=0`;
         
