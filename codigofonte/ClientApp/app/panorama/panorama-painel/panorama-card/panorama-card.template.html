@@ -1,9 +1,10 @@
 <div class="content-card">
     <div class='card' [ngClass]="{selecionado: isSelecionado}">
+    <div class="selecionar">
         <div class="card__titulo">{{ dados.titulo }}</div>
         <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
         <!--<div class="card__sub-titulo">{{dados.subtitulo}}</div> O SUBTITULO QUE APARECE É APENAS UMA REPETIÇÃO DO TÍTULO-->
-
+	</div>
         <p class="card__comparando">Comparando a outros municípios</p>
 
         <!--<div class="card__regua-comparacao">

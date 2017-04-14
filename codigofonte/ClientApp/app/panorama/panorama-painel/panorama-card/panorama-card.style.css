@@ -13,8 +13,29 @@
     float: left;
     margin-left: 30px;
     margin-bottom: 30px;
+	-webkit-transition: all 230ms ease-in;
+	-moz-transition: all 230ms ease-in;
+	-ms-transition: all 230ms ease-in;
+	-o-transition: all 230ms ease-in;
+	transition: all 230ms ease-in;
 }
 
+.card:hover{
+	margin-top: -5px;
+	box-shadow: 3px 5px 20px #ccc;
+	-webkit-transition: all 230ms ease-in;
+	-moz-transition: all 230ms ease-in;
+	-ms-transition: all 230ms ease-in;
+	-o-transition: all 230ms ease-in;
+	transition: all 230ms ease-in;
+}
+
+.selecionar {
+	cursor:pointer;
+	height:90px;
+	width:100%;
+	}
+	
 .cards .card:nth-child(1) {
     margin-left: 0px;
 }
@@ -25,6 +46,10 @@
     font-weight: bold;
     margin-top: 3px;
 	margin-right: 10px;
+	-moz-transition: all 230ms ease-in;
+	-ms-transition: all 230ms ease-in;
+	-o-transition: all 230ms ease-in;
+	transition: all 230ms ease-in;
 }
 
 .card__nota{
@@ -33,6 +58,10 @@
     font-weight: bold;
     font-size: 1.3em;
     margin-top: -2px;
+	-moz-transition: all 230ms ease-in;
+	-ms-transition: all 230ms ease-in;
+	-o-transition: all 230ms ease-in;
+	transition: all 230ms ease-in;
 }
 
 .card_unidade {
@@ -86,6 +115,10 @@
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 10px;
+	-moz-transition: all 230ms ease-in;
+	-ms-transition: all 230ms ease-in;
+	-o-transition: all 230ms ease-in;
+	transition: all 230ms ease-in;
 }
 
 .card__regua-comparacao{
@@ -123,6 +156,7 @@ button .fa{
     border-top-color: #F7931E;
     height: 312px;    
     width: 277px;
+	box-shadow: 3px 5px 20px #ccc;
 }
 
 .selecionado .card__titulo{
@@ -136,7 +170,11 @@ button .fa{
 
 .selecionado .card__comparando{
     font-size: .8em;
-    padding-top: 40px;
+    padding-top: 20px;
+	-moz-transition: all 230ms ease-in;
+	-ms-transition: all 230ms ease-in;
+	-o-transition: all 230ms ease-in;
+	transition: all 230ms ease-in;
 }
 
 .selecionado .card__regua-comparacao{
@@ -210,7 +248,12 @@ button .fa{
         float: none;
         margin: 0;
         width: 100%;
+		height:auto;
     }
+	.card:hover{
+	margin-top: 0px;
+	box-shadow: none;
+	}
     .card__titulo{
     font-size: 1em;
     margin-top: 5px;
@@ -222,7 +265,7 @@ button .fa{
     
     .card__comparando{
         font-size: .8em;
-        padding-top: 40px;
+        padding-top: 20px;
     }
     
     .card__regua-comparacao{
@@ -237,6 +280,7 @@ button .fa{
     .card.selecionado{
         height: auto;
         border-top-color: #B3B3B3;
+		box-shadow:none;
     }
         
   
