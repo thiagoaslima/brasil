@@ -8,7 +8,8 @@ img {
     /*border-top: 1px solid #ddd;*/
     border-radius: none;
     position: relative;
-	padding-top: 25px;
+	/*padding-top: 25px;*/
+    padding-top: 44px;
 	padding-right: 20px;
 	width: 100%;
 	max-width:900px;
