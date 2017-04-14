@@ -6,7 +6,7 @@
 
 .cabecalho select {
     border: none;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .cabecalho select:first-child {
