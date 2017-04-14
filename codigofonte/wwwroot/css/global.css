@@ -345,6 +345,13 @@ sintese>dados
     aside #localidade {
         padding: 7px 5%;
     }
+    
+    aside #localidade h1{
+        min-height: 55px;
+    }
+    aside.localidade--static #localidade h1{
+        min-height: auto;
+    }
 
     .localidade--static #localidade{
         position: fixed;
@@ -456,6 +463,7 @@ sintese>dados
         float: none;
         width: 100%;
         min-height: auto;
+        padding: 0;
         
     }
     section#detalhes{
