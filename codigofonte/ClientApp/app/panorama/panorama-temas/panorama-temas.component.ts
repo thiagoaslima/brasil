@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges, ViewChild, ElementRef, Inject } from '@angular/core';
+
+import { DOCUMENT } from '@angular/platform-browser';
 
 import { Localidade } from '../../shared/localidade/localidade.interface';
 
@@ -6,6 +8,8 @@ import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, Pa
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
+
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
 
 @Component({
@@ -16,6 +20,9 @@ import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.
 })
 export class PanoramaTemasComponent implements OnInit {
 
+    @ViewChild('cont')
+     private container: ElementRef;
+
     @Input('dados') temas: {
         tema: string,
         painel: PanoramaConfigurationItem[],
@@ -23,8 +30,10 @@ export class PanoramaTemasComponent implements OnInit {
     };
     @Input() localidade: Localidade;
 
+    @Input() temaSelecionado: String = '';
 
-    constructor(private _indicadorService:IndicadorService2) { }
+
+    constructor(private _indicadorService:IndicadorService2, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) { }
 
     public getTextoAnalitico(nomeTema){
 
@@ -61,9 +70,9 @@ export class PanoramaTemasComponent implements OnInit {
         
     }
 
-    ngOnInit() { }
+    ngOnInit() { this.goToTema(); }
 
-    ngOnChanges(changes: SimpleChanges) { }
+    ngOnChanges(changes: SimpleChanges) { this.goToTema();}
 
     private getValorIndicador(idPesquisa: number, idIndicador: number, codigoLocalidade: number, periodo: string){
 
@@ -71,4 +80,15 @@ export class PanoramaTemasComponent implements OnInit {
                     .switchMap(indicadores => indicadores[0].getResultadoByLocal(this.localidade.codigo))
                     .map(resulatado => resulatado.getValor(periodo));
     }
+
+    public goToTema(): void {
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, this.temaSelecionado && this.temaSelecionado.toString());
+         this.pageScrollService.start(pageScrollInstance);
+     };    
+ 
+    //  public goToHeadingInContainer(): void {
+    //      let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#cont', scrollingViews: [this.container.nativeElement]});
+    //      this.pageScrollService.start(pageScrollInstance);
+    //  };
+
 }

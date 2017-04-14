@@ -32,7 +32,7 @@ export class PesquisaHeaderComponent implements OnInit {
     baseURL = '';
 
 
-    private isOcultarValoresVazios = false;
+    private isOcultarValoresVazios = true;
 
     constructor(
         private _pesquisaService: PesquisaService2,

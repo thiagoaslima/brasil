@@ -132,6 +132,7 @@ export class Indicador {
 
     private _ranking
 
+    // TODO: Refatorar, Está consumindo cerca de 0,6ms
     constructor(data) {
         data = Object.assign({}, _defaults, data);
         Object.keys(_defaults).forEach(property => {
@@ -139,8 +140,11 @@ export class Indicador {
         });
 
         if (data.res) {
+            // 0.25ms
             const array = Resultado.converterFromIndicadorBody(this.id, data.res);
+            // 0.29ms
             const resultados = array.map(obj => Resultado.criar(obj))
+            // 0.06ms
             this.registerResultados(resultados);
         }
     }

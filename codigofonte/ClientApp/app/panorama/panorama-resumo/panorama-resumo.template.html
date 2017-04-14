@@ -32,7 +32,7 @@
             </tr>
 
             <template ngFor let-item let-last="last" [ngForOf]="tema.indicadores">
-                <tr class="lista__indicador lista__indicador">
+                <tr class="lista__indicador lista__indicador" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
                     <td></td>
                     <td class="lista__nome">
                         {{item.titulo || item.indicador?.nome}}
@@ -46,7 +46,7 @@
                     </td>
                     <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
                 </tr>
-                <tr *ngIf="!last" class="lista__separador">
+                <tr *ngIf="!last" class="lista__separador" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
                     <td colspan="4">
                         <div class="lista__linha"></div>
                     </td>

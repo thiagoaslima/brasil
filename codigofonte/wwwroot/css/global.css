@@ -407,6 +407,9 @@ sintese>dados
 
     .conteudo{
         width: 100%;
+        border-left: none;
+        margin-left: 0px;
+        margin-top: 113px;
     }
 
     .conteudo__dados, .conteudo__dados--com-scroll{
