@@ -393,6 +393,13 @@
         border-right: 0px;
     }
 
+    .notas__lista-container{
+        position: absolute;
+        right: 14px;
+        max-width: 70vw;
+        margin-top: 4px;
+    }
+
     .cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
         width: 100%;
     }
