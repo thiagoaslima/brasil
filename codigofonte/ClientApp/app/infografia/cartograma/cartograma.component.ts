@@ -54,7 +54,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
             .flatMap(localidade => {
                 return this._mapaService.getMalhaSubdivisao(localidade.codigo);
             })
-            .do(console.log.bind(console, 'geometries'));
+            // .do(console.log.bind(console, 'geometries'));
 
         const resultados$ = this.indicador$
             // .distinctUntilKeyChanged('id')

@@ -135,6 +135,7 @@
     font-weight: bold;
     padding: 10px 5px;
     text-transform: uppercase;
+	text-align:left;
     font-size: 0.9em;
 }
 
@@ -198,4 +199,36 @@
 .lista__linha{
     border-bottom: 1px solid #D9D8D7;
     margin: 0px 15px;
+}
+
+.mobile__exclusive{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    /*Mobile*/
+    
+    .mobile__exclusive{
+        display: block;
+    }
+    
+    .topo{
+        margin: 0;
+        margin-top: 137px;
+        width: 100%;
+    }
+
+    .topo__celula-esquerda, .topo__celula-direita{
+        padding: 10px;
+    }
+
+    .lista{
+        display: none;
+    }
+    
+    .temas__horizontais div{
+        display: inline-block;
+    }
+    
+    
 }

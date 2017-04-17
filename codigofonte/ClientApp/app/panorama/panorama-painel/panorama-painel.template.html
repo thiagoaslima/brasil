@@ -2,7 +2,7 @@
             <h2>{{dados.tema}}</h2>
             
             <div>
-                <div class="cartograma">
+                <div class="cartograma" *ngIf="!isMobile()">
                     <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
                 </div>
             </div>

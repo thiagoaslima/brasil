@@ -261,7 +261,7 @@ export class MapaComponent implements OnInit, OnChanges {
             }));
         }).subscribe(faixas => this.faixaLocalidades$.next(faixas));
 
-        this.faixasObservable.subscribe(console.log.bind(console));
+        // this.faixasObservable.subscribe(console.log.bind(console));
 
 
     }
@@ -308,7 +308,7 @@ export class MapaComponent implements OnInit, OnChanges {
 
     plotMap(codLocal, dados) {
 
-        console.log('dadosMapa', dados);
+        // console.log('dadosMapa', dados);
 
         if (dados.length > 0) {
             /**
@@ -663,7 +663,7 @@ export class MapaComponent implements OnInit, OnChanges {
     }
 
     selectAno(ano) {
-        console.log(ano);
+        // console.log(ano);
         this.periodoSelecionado.next(ano);
         this.anoWasSelected = true;
         this.ano = ano;

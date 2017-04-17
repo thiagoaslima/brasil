@@ -112,7 +112,8 @@ export class PanoramaComponent implements OnInit {
                     indicadores: indicadores.sort((a, b) => a.titulo < b.titulo ? -1 : 1)
                 }
             });
-        }).do(console.log.bind(console, 'sent to resumo'));
+        })
+        // .do(console.log.bind(console, 'sent to resumo'));
 
         this.temas$ = panorama$
             .map(configState => {
@@ -126,7 +127,7 @@ export class PanoramaComponent implements OnInit {
                         }
                     })
             })
-            .do(console.log.bind(console, 'sent to temas'));;
+            // .do(console.log.bind(console, 'sent to temas'));
     }
 
     private _groupIndicadoresByPesquisa({ indicadores = [] as PanoramaConfigurationItem[] }): Array<{ pesquisaId: number, indicadoresId: number[] }> {

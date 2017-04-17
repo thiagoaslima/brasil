@@ -264,6 +264,15 @@ tr.nivel-4 td:first-child {
     cursor: pointer;
 }
 
+.ie10 .nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+	background-color:#fff;
+}
+
+@media all and (-ms-high-contrast:none) {
+	.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+	background-color: #fff;
+}
+}
 
 .sem-filho .label{
     background-image: none;

@@ -15,6 +15,7 @@ import { PesquisaService } from './pesquisa/pesquisa.service.2';
 import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
+import { IsMobileService } from './is-mobile.service';
 
 export function getLRU() {
   return new Map();
@@ -47,6 +48,7 @@ const PROVIDERS = [
     CommonService,
     BuscaService,
     PesquisaService,
+    IsMobileService,
     { provide: TOPOJSON, useValue: TopoJson },
     { provide: 'LRU', useFactory: getLRU, deps: [] }
 ]
