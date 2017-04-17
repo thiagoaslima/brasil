@@ -65,7 +65,6 @@
 .nome-pesquisa {
 	border-bottom: 1px solid black;
 	}
-
 .cabecalho__nome-pesquisa{
     float: left;
     background-color: #E6E6E6;
@@ -380,4 +379,42 @@
 
 .area-click--visivel{
     display: block;
+}
+
+
+@media screen and (max-width: 768px) {
+    /*Mobile*/
+    .cabecalho{
+        padding-top: 37px;
+    }
+
+    .cabecalho__nome-pesquisa{
+        width: 100%;
+        border-right: 0px;
+    }
+
+    .notas__lista-container{
+        position: absolute;
+        right: 14px;
+        max-width: 70vw;
+        margin-top: 4px;
+    }
+
+    .cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
+        width: 100%;
+    }
+
+    .cabecalho__visualizacao-dados__item--compartilhar{
+        display: none;
+    }
+
+    .cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
+        width: 33%;
+    }
+
+    .por-estado__selecionar-municipio{
+        min-width: 207px;
+        max-width: 207px;
+        width: 207px;
+    }
 }
