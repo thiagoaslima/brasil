@@ -14,9 +14,9 @@
             
             <div class="cabecalho__celula-direita cabecalho__celula-direita--fader" [class.cabecalho__descricao__aberto]="textoAberto" (click)="textoAberto=!textoAberto">
                 <!--Inserir CLICK na div toda, adicionando/removendo a classe "cabecalho__descricao__aberto"-->
-                <p class="cabecalho__descricao">
-                    {{getTextoAnalitico(tema?.tema)}}
-                </p>
+                <!--<p class="cabecalho__descricao">
+                    {{ (getTextoAnalitico(tema?.tema) | async) }}
+                </p>-->
                 
                 <div class="mobile-exclusive cabecalho__descricao__showhide">
                     <i class="fa fa-chevron-down cabecalho__descricao__bt--show" aria-hidden="true"></i>

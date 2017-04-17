@@ -1,25 +1,17 @@
-<table cellspacing="0" border='0'>
-    <tr>
-        <td class="p"></td>
-        <td class='s'></td>
-        <td class='s'></td>
-        <td class='s'></td>
-        <td class='s'></td>
-    </tr>
-
+<table cellspacing="0" border='0' class='mobile-table'>
     <template ngFor let-indicador [ngForOf]="indicadores">
-        <tr class='{{getStyleClass(indicador.posicao)}}' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
-            <td class='label'>
-                <div class='label--com-acao'>{{ indicador.indicador }}</div> 
+        <tr class='{{getStyleClass(indicador.posicao)}} mobile-tr' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
+            
+            <td class='label p '>
+                <div class='label--com-acao'>{{ indicador.indicador }} <span class='mobile-unidade' *ngIf='indicador.unidade?.id'>({{ indicador.unidade?.id }})</span></div> 
                 <div class='acoes'>
                 </div>
             </td>  
 
-            <td class='valor'>{{ !!indicador.localidadeA ? (indicador.localidadeA[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
-            <td class='valor' [class.compara-blank]="!localidades[1]">{{ !!indicador.localidadeB ? (indicador.localidadeB[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
-            <td class='valor' [class.compara-blank]="!localidades[2]">{{ !!indicador.localidadeC ? (indicador.localidadeC[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
-
-            <td class='valor'>{{ indicador.unidade?.id }}</td>  
+            <td class='valor s'>{{ !!indicador.localidadeA ? (indicador.localidadeA[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
+            <td class='valor s' [class.compara-blank]="!localidades[1]">{{ !!indicador.localidadeB ? (indicador.localidadeB[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
+            <td class='valor s' [class.compara-blank]="!localidades[2]">{{ !!indicador.localidadeC ? (indicador.localidadeC[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
+            <td class='valor s desk-unidade'>{{ indicador.unidade?.id }}</td>  
         </tr>
     </template>
     
