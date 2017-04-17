@@ -147,6 +147,7 @@ export class IndicadorService2 {
             .map(arr => {
                 const res = arr[0].res[0]
                 res.posicaoAbsoluta = res['#'];
+                res.periodo = periodo;
                 delete(res['#']);
                 return res;
             })
