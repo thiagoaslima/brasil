@@ -44,8 +44,6 @@ export class CartogramaComponent implements OnInit, OnChanges {
     public valores = null;
     public municSelected = "";
 
-    public pin;
-
     constructor(
         private _mapaService: MapaService,
         private _localidadeService: LocalidadeService2,
@@ -53,10 +51,6 @@ export class CartogramaComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-
-        this.pin = {
-            x:-43, y:-22, width:1, height: 1
-        };
 
         this.malha$ = this.localidade$
             .filter(Boolean)
@@ -126,6 +120,9 @@ export class CartogramaComponent implements OnInit, OnChanges {
         } else {
             return [0, 0];
         }
+    }
+    public getIconHeight(bbox, pos) {
+        return bbox[3]-pos[1];
     }
 
 }

@@ -417,4 +417,12 @@
         max-width: 207px;
         width: 207px;
     }
+
+    .cabecalho .select-ano-container{
+        margin-top: 17px;
+    }
+
+    .cabecalho select:first-child {
+        width: 100%;
+    }
 }
