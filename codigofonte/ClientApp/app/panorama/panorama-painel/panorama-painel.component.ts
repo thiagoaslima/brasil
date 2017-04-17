@@ -1,4 +1,14 @@
-import { Component, Input, OnInit, OnChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Inject,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChange
+} from '@angular/core';
 
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -10,11 +20,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/distinctUntilKeyChanged';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/sample';
 
 @Component({
     selector: 'panorama-painel',
     templateUrl: './panorama-painel.template.html',
-    styleUrls: ['./panorama-painel.style.css']
+    styleUrls: ['./panorama-painel.style.css'],
+    host: {
+        '(window:scroll)': 'onScroll($event)'
+    }
 })
 export class PanoramaPainelComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaConfigurationItem;
@@ -27,8 +41,13 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     private _selecionarIndicador$ = new BehaviorSubject<Indicador>(null);
     private _resultados = Object.create(null);
     private _rankings = Object.create(null);
+
+    private _isOnScreen = false;
+    private _isOnScreen$ = new BehaviorSubject<Boolean>(this._isOnScreen);
     
     constructor (
+        private element: ElementRef,
+        @Inject(DOCUMENT) private document,
         private _isMobileServ:IsMobileService
         ){
         
@@ -39,9 +58,50 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        this.evaluateIsOnScreen(this.document);
+
         this.indicador$ = this._selecionarIndicador$
             .filter(Boolean)
+            // .sample(this._isOnScreen$.filter(isOnScreen => isOnScreen.valueOf()))
             .do(indicador => this.localSelecionado = indicador.id);
+    }
+
+    onScroll(evt) {
+        this.evaluateIsOnScreen(evt.target);
+    }
+
+    evaluateIsOnScreen(viewWindow) {
+        if (
+            !this.element.nativeElement || 
+            typeof this.element.nativeElement.getBoundingClientRect !== "function"
+        ) {
+            return false;
+        }
+
+        let element = this.element.nativeElement.getBoundingClientRect();
+
+        if (viewWindow && viewWindow.nodeType === 9) {
+            // viewWindow === document
+            viewWindow = viewWindow['body'];
+        }
+
+        if (
+            !viewWindow ||
+            viewWindow.nodeType !== 1 ||
+            !element
+        ) { return false; }
+
+        let isOnScreen = (!!element
+            && element.bottom >= 0
+            && element.right >= 0
+            && element.top <= viewWindow.clientHeight
+            && element.left <= viewWindow.clientWidth
+        );
+
+        if (isOnScreen !== this._isOnScreen) {
+            this._isOnScreen = isOnScreen;
+            this._isOnScreen$.next(this._isOnScreen);
+        }
     }
 
     ngOnChanges(changes: { [label: string]: SimpleChange }) {
