@@ -4,6 +4,7 @@ import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
 import { RouterParamsService } from '../shared/router-params.service';
 import { slugify } from '../utils/slug';
 import { LocalidadeService } from '../shared/localidade/localidade.service';
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'submenu',
@@ -24,6 +25,7 @@ export class SubmenuComponent implements OnInit {
 
     constructor(
         private _routerParams:RouterParamsService,
+        private router: Router,
         private _sintese:SinteseService,
         private _localidade:LocalidadeService,
         private _pesquisa:PesquisaService
@@ -94,8 +96,15 @@ export class SubmenuComponent implements OnInit {
                     ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});
                 }
                 this.pesquisas[index].indicadores = ind;
+
+                if(ind.length < 2){
+                    this.router.navigate( [ this.localidade.link + '/pesquisa/' +  this.pesquisas[index].id + '/' + ind[0].id ], { queryParams: { detalhes: true } } );
+                    this.closeMenu.emit();
+                }
+
             });
         }
+       
     }
 
 }
