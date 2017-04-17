@@ -8,6 +8,12 @@ img {
     /*border-top: 1px solid #ddd;*/
     border-radius: none;
     position: relative;
+	/*padding-top: 25px;*/
+    padding-top: 44px;
+	padding-right: 20px;
+	width: 100%;
+	max-width:900px;
+	
 }
 
 .comp__titulo{
@@ -46,6 +52,7 @@ img {
     .component{
         /*border: 1px solid #ddd;
         border-radius: 5px;*/
+		
     }
 
     /*.comp__conteudo{
@@ -302,4 +309,10 @@ img {
     .foto__seta-direita{
         right: 75px;
     }
+}
+
+@media screen and (min-width: 768px) {
+	.component {
+		padding-left: 48px;
+	}
 }

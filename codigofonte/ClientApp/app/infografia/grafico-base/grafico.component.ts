@@ -147,12 +147,12 @@ export class GraficoComponent implements OnInit, OnChanges {
                 return Observable.zip(..._indicadores.map(indicador => indicador.getResultadoByLocal(localidade.codigo)))
             })
             // .do(_ => this.carregando = false)
-            .do(console.log.bind(console, 'resultados'))
+            // .do(console.log.bind(console, 'resultados'))
 
 
         this.labels$ = resultados$
             .map(resultados => this.mostrarApenasPeriodosValidos ? resultados[0].periodosValidos : resultados[0].periodos)
-            .do(console.log.bind(console, 'label'));
+            // .do(console.log.bind(console, 'label'));
 
         this.datasets$ = this._indicadores$
             .zip(resultados$)
@@ -172,7 +172,7 @@ export class GraficoComponent implements OnInit, OnChanges {
             });
 
         this.options$ = this.actions$
-            .do(console.log.bind(console, 'options'))
+            // .do(console.log.bind(console, 'options'))
             .scan((state, action) => {
                 let legend, position, scales, yAxes, xAxes;
 

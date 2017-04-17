@@ -11,8 +11,11 @@ td.p{
     width: 38%; 
 }
 
+.mobile-unidade{
+    display: none;
+}
+
 td.s{
-    background-color: red;
     width: 15.5%;
 }
 
@@ -261,6 +264,15 @@ tr.nivel-4 td:first-child {
     cursor: pointer;
 }
 
+.ie10 .nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+	background-color:#fff;
+}
+
+@media all and (-ms-high-contrast:none) {
+	.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+	background-color: #fff;
+}
+}
 
 .sem-filho .label{
     background-image: none;
@@ -389,4 +401,62 @@ td.compara-blank {
 
 .grafico-legenda__total {
     float: right;
+}
+
+
+@media screen and (max-width: 768px) {
+    /*Mobile*/
+    .mobile-table{
+        display: block;
+    }
+
+    .mobile-tr{
+        display: block;
+    }
+
+    .mobile-tr .p{
+        display: block;
+        width: 100%;
+    }
+    
+    .label--com-acao{
+        float: none;
+        width: 100%;
+    }
+
+    .mobile-unidade{
+        display: inline;
+    }
+
+    .mobile-tr .s{
+        display: inline-block;
+        width: 32%;
+    }
+
+    .mobile-tr .s.desk-unidade{
+        display: none;   
+    }
+
+    .nivel-2 .valor{
+        border-bottom: none;
+    }
+
+    .nivel-4 td{
+        border-bottom: none;
+    }
+
+    td.compara-blank, .nivel-4 td.compara-blank{
+        background-color: transparent;   
+    }
+
+    td.label{
+        border: none;
+    }
+
+    .nivel-6 td{
+        border-bottom: none;
+    }
+    .nivel-1:hover, .nivel-2:hover, .nivel-3:hover, .nivel-4:hover, .nivel-5:hover, .nivel-6:hover, .nivel-7:hover, .nivel-8:hover, .nivel-9:hover{
+        background-color: transparent;
+    }
 }

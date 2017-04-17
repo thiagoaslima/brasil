@@ -38,7 +38,7 @@ export class PesquisaService2 {
             .map(res => res.json())
             .map(json => json.filter(obj => this._pesquisasConfig.isValida(obj.id)))
             .map(json => json.map(obj => Pesquisa.criar(obj)))
-            .do(pesquisas => console.log(`getAllPesquisas`, pesquisas))
+            // .do(pesquisas => console.log(`getAllPesquisas`, pesquisas))
             .share();
     }
 
@@ -51,7 +51,7 @@ export class PesquisaService2 {
             .map(res => res.json())
             .filter(obj => this._pesquisasConfig.isValida(obj.id))
             .map(obj => Pesquisa.criar(obj))
-            .do(pesquisa => console.log(`get(${pesquisaId})`, pesquisa))
+            // .do(pesquisa => console.log(`get(${pesquisaId})`, pesquisa))
             .share();
     }
 }

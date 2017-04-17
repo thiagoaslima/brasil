@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { PanoramaDescriptor, PanoramaConfigurationItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
@@ -15,12 +15,18 @@ import { Observable } from 'rxjs/Observable';
 export class PanoramaResumoComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaDescriptor;
     @Input() localidade: Localidade;
+
+    @Output() temaSelecionado = new EventEmitter();
     
     constructor() { }
 
     ngOnInit() { }
 
     ngOnChanges(changes) {
-        console.log('resumo', changes)
+        // console.log('resumo', changes)
+    }
+
+    fireTemaSelecionado(tema){
+        this.temaSelecionado.emit(tema);
     }
 }

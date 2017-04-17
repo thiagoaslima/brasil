@@ -25,6 +25,10 @@ import { RootRoutingModule } from '../root-routing.module';
         ChartsModule,
         RootRoutingModule
     ],
+    exports: [
+        HistoricoComponent,
+        FotosComponent
+    ],
     declarations: [
         SinteseComponent,
         SinteseHeaderComponent,

@@ -39,7 +39,7 @@ export class ResultadoService2 {
                 array = Resultado.converterGroupedByIndicador(array);
                 return array.map(obj => Resultado.criar(obj))
             })
-            .do(resultados => console.log(`getResultado`, resultados))
+            // .do(resultados => console.log(`getResultado`, resultados))
             .share();
     }
 }

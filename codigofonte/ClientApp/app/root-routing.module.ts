@@ -6,8 +6,8 @@ import { SinteseDetalhesComponent } from './sintese/sintese-detalhes/sintese-det
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { PanoramaComponent } from './panorama/panorama.component';
 import { PesquisaComponent2 } from './pesquisa2/pesquisa.component';
-import { HistoricoComponent } from './sintese/historico/historico.component';
-import { FotosComponent } from './sintese/fotos/fotos.component';
+import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
+
 
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
@@ -20,11 +20,7 @@ const children = [
   },
 
   { path: 'historico',
-    component: HistoricoComponent
-  },
-
-  { path: 'fotos',
-    component: FotosComponent
+    component: VisaoHistoricaComponent
   },
 
   { path: 'pesquisa', component: PesquisaComponent2},

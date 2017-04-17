@@ -83,8 +83,6 @@ export class PesquisaComponent2 implements OnInit {
 
     ocultarValoresVazios(event){
 
-        debugger;
-
         this.isOcultarValoresVazios = event['OcultarValoresVazios'];
     }
 }

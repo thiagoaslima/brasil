@@ -27,5 +27,13 @@
 .caixa__conteudo{
     line-height: 2em;
     font-size: .95em;
-    padding: 16px 52px;
+    padding: 16px 52px 52px 52px;
+	width: 100%;
+	max-width:900px;
+}
+
+@media screen and (max-width: 768px) {
+	.caixa__conteudo{
+	padding-left:0;
+	}
 }

@@ -76,7 +76,7 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
 
     navegarTabela(){
         let url = this.localidade.link + '/pesquisa/' + this.dados.pesquisaId + '/' + this.dados.indicadorId;
-        //console.log('$$$$$$$$$$$$$$$$$$$$$', this.dados, url);
+        // console.log('$$$$$$$$$$$$$$$$$$$$$', this.dados, url);
         this._router.navigate(url.split('/'), {'queryParams' : {ano : this.dados.periodo}});
     }
 }

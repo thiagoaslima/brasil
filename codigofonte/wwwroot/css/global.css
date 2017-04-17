@@ -18,6 +18,7 @@ body, body.brasil{
     background: -webkit-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -o-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -moz-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+	background: -ms-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
@@ -26,6 +27,7 @@ body.estado{
     background: -webkit-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -o-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -moz-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+	background: -ms-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
@@ -34,6 +36,7 @@ body.estado--apenas-aside{
     background: -webkit-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
     background: -o-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
     background: -moz-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+	background: -ms-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
     background: linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
 }
 
@@ -42,9 +45,9 @@ body.municipio{
     background: -webkit-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -o-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -moz-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+	background: -ms-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: linear-gradient( to right, #1b779b 21%,#E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
-
 header{
     background-color: #E6E6E6;
     /*max-width: 1900px;*/
@@ -345,6 +348,13 @@ sintese>dados
     aside #localidade {
         padding: 7px 5%;
     }
+    
+    aside #localidade h1{
+        min-height: 55px;
+    }
+    aside.localidade--static #localidade h1{
+        min-height: auto;
+    }
 
     .localidade--static #localidade{
         position: fixed;
@@ -407,6 +417,9 @@ sintese>dados
 
     .conteudo{
         width: 100%;
+        border-left: none;
+        margin-left: 0px;
+        margin-top: 113px;
     }
 
     .conteudo__dados, .conteudo__dados--com-scroll{
@@ -442,6 +455,28 @@ sintese>dados
     .no__scroll--mobile{
         overflow: hidden;
     }
+    
+     #sintese{
+        float: none;
+        border-left: none;
+        margin-left: 0;
+        width: auto;
+    }
+    #sintese #dados{
+        float: none;
+        width: 100%;
+        min-height: auto;
+        padding: 0;
+        
+    }
+    section#detalhes{
+        margin-top: 15px;
+    }
+    #sintese #detalhes{
+        width: 100vw;
+    }
+    
+    
 }
 
 
