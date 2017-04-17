@@ -122,6 +122,8 @@ export class CartogramaComponent implements OnInit, OnChanges {
         }
     }
     public getIconHeight(bbox, pos) {
+        console.log(bbox)
+        console.log(pos)
         return bbox[3]-pos[1];
     }
 
