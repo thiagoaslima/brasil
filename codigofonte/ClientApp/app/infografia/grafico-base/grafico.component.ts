@@ -317,12 +317,18 @@ export class GraficoComponent implements OnInit, OnChanges {
     */
 
     private converterParaNumero(valor: string): number {
-
+        if(valor == '99999999999999' || valor == '99999999999998' || valor == '99999999999997' ||
+            valor == '99999999999996' || valor == '99999999999995' || valor == '99999999999992' ||
+            valor == '99999999999991'){
+            
+            valor = '0';
+        }
+        
         return !!valor ? Number(valor.replace(',', '.')) : Number(valor)
     }
 
     navegarTabela(){
-        console.log(">>>>>>>>>>>>>>", this.indicadores);
+        //console.log(">>>>>>>>>>>>>>", this.indicadores);
         if(this.indicadores.length > 0){
             let url = this.localidade.link + '/pesquisa/' + this.indicadores[0].pesquisaId/* + '/' + this.indicadores[0].indicadorId*/;
             this._router.navigate(url.split('/'));
