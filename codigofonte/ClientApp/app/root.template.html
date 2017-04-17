@@ -37,7 +37,7 @@
                     <a style="display:block" [routerLink]="getLink('panorama')">Panorama</a>
                 </li>
 
-                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa'" [class.menu--selecionado]="abrirMenuPesquisa">
+                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa' || abrirMenuPesquisa == true">
                     <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
                 </li>
 
