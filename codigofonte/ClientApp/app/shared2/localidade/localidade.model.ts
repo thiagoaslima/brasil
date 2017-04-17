@@ -90,7 +90,9 @@ export class Localidade {
                 break;
         }
     }
+    
     // 340ms 700ms
+    //  63ms 388ms
     static convertBrasil(data) {
         debugger;
         return {
