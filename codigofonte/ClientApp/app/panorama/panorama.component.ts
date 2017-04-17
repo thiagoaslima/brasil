@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 
-import { AppState } from '../shared/app-state';
+import { AppState } from '../shared2/app-state';
 import { PANORAMA } from './configuration/panorama.configuration';
 import { PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from './configuration/panorama.model';
 import { Localidade, NiveisTerritoriais } from '../shared2/localidade/localidade.model';

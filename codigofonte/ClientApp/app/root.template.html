@@ -16,7 +16,7 @@
         <div id="localidade">
             <nav id='local'>
                 <ul>
-                    <template ngFor let-local [ngForOf]="locais | async" let-last="last">
+                    <template ngFor let-local [ngForOf]="locais" let-last="last">
                         <li *ngIf="!last">
                             <!--<a [routerLink]="local.link">-->{{local.nome}}<!--</a>-->
                         </li>

@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { LocalidadeService } from './shared/localidade/localidade.service';
-import { LocalidadeService2 } from './shared2/localidade/localidade.service';
-import { PesquisaService2 } from './shared2/pesquisa/pesquisa.service';
-import { IndicadorService2 } from './shared2/indicador/indicador.service';
-import { ResultadoService2 } from './shared2/resultado/resultado.service';
 import { ActivatedRoute, Params } from '@angular/router';
+
+import { AppState } from './shared2/app-state';
 import { RouterParamsService } from './shared/router-params.service';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -20,26 +17,28 @@ import 'rxjs/add/operator/debounceTime';
 export class RootComponent implements OnInit, OnDestroy {
     @ViewChild('abreMenuGlobal') button: ElementRef;
 
-    public locais;
-    public localidadeSelecionada;
+    public locais = [];
+    public localidadeSelecionada = null;
     public isHeaderStatic;
     public menuGlobalAberto = false;
     public menuAberto = false;
     public abrirMenuPesquisa = false;
     public itemSelecionado;
 
-    private _localSelecionada$$: Subscription;
+    private _localidade$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
 
 
-    @HostListener('window:scroll', ['$event']) onScroll({target}) {
+    @HostListener('window:scroll', ['$event'])
+    onScroll({ target }) {
         if (target) {
             let scrollTop = target.body.scrollTop;
             this._scrollTop$.next(scrollTop);
         }
     }
 
-    @HostListener('click', ['$event']) onHostClick({target}) {
+    @HostListener('click', ['$event'])
+    onHostClick({ target }) {
         if (this.menuGlobalAberto && target && !this.button.nativeElement.contains(target)) {
             this.menuGlobalAberto = false;
         }
@@ -51,35 +50,38 @@ export class RootComponent implements OnInit, OnDestroy {
 
     constructor(
         private _route: ActivatedRoute,
-        private _localidadeService: LocalidadeService,
-        private _routerParams:RouterParamsService
-    ) {
-        this.locais = this._localidadeService.tree$;
-    }
+        private _appState: AppState,
+        private _routerParams: RouterParamsService
+    ) { }
 
     ngOnInit() {
-        this._localSelecionada$$ = this._localidadeService.selecionada$.subscribe(localidade => this.localidadeSelecionada = localidade);
+        this._localidade$$ = this._appState.observable$
+            .subscribe(({ localidade }) => {
+                this.localidadeSelecionada = localidade;
+                this.locais = localidade
+                    ? [localidade, localidade.parent, localidade.parent.parent].filter(Boolean).reverse()
+                    : [];
+            });
+
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
 
         //verifica se o componente de detalhes está aberto (mobile)
-        this._route.queryParams.subscribe(params => {
-            if(params['detalhes'] == 'true'){
-                this.menuAberto = true;
-            } else {
-                this.menuAberto = false;
-            }
-        });
+        /* this._route.queryParams.subscribe(params => {
+             if (params['detalhes'] == 'true') {
+                 this.menuAberto = true;
+             } else {
+                 this.menuAberto = false;
+             }
+         });*/
         //marca a opção no menu, baseado na rota
-        this._routerParams.params$.subscribe(({params}) => {
-            if(params.pesquisa)
-                this.itemSelecionado = 'pesquisa';
-            else
-                this.itemSelecionado = 'panorama';
+        this._routerParams.params$.subscribe(({ params, queryParams }) => {
+            this.itemSelecionado = params.pesquisa ? 'pesquisa' : 'panorama';
+            this.menuAberto = queryParams['detalhes'] == 'true'
         });
     }
 
     ngOnDestroy() {
-        this._localSelecionada$$.unsubscribe();
+        this._localidade$$.unsubscribe();
     }
 
     getLink(str) {
@@ -88,7 +90,7 @@ export class RootComponent implements OnInit, OnDestroy {
             : '/brasil/' + str;
     }
 
-    handleSeletorAberto(seletorAberto){
+    handleSeletorAberto(seletorAberto) {
         this.menuAberto = seletorAberto;
         this.abrirMenuPesquisa = false;
     }

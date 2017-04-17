@@ -19,7 +19,7 @@ import { Indicador } from '../shared2/indicador/indicador.model';
 
 import { LocalidadeService2 } from '../shared2/localidade/localidade.service';
 import { PesquisaService2 } from '../shared2/pesquisa/pesquisa.service';
-import { RouterParamsService } from './router-params.service';
+import { RouterParamsService } from '../shared/router-params.service';
 
 
 const _initialState = {
@@ -55,8 +55,8 @@ export class AppState {
      * @memberOf AppState
      */
     public constructor(
-        private _localidadeService: LocalidadeService2,
         private _routerParamsService: RouterParamsService,
+        private _localidadeService: LocalidadeService2,
         private _pesquisaService: PesquisaService2
     ) {
         const localidade$ = this._routerParamsService.params$

@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer } from '@angular/core';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 
+import { AppState } from '../../shared2/app-state';
 import { SinteseService } from '../sintese.service';
 import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { ScrollDirective } from '../../shared/window-events/scroll.directive';
@@ -42,7 +43,7 @@ export class FotosComponent implements OnInit {
     constructor(
         private renderer: Renderer,
         private _sinteseService: SinteseService,
-        private _localidadeService: LocalidadeService,
+        private _appState: AppState,
         http:Http
     ) {
         //destroi o timer anterior
@@ -75,7 +76,9 @@ export class FotosComponent implements OnInit {
                 this.servicoThumbs = retornaServico ? "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
              }); // Reach true if res.status >= 200 && <= 299 // Reach false if fails
 
-        this._localidadeService.selecionada$
+        this._appState.observable$
+            .filter( ({localidade}) => Boolean(localidade))
+            .map(state => state.localidade)
             .flatMap(localidade => this._sinteseService.getFotografias(localidade.codigo))
             .subscribe((fotos) => {
 

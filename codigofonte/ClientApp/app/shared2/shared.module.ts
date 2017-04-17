@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppState } from './app-state';
 import { LocalidadeService2 } from './localidade/localidade.service';
 import { PesquisaService2 } from './pesquisa/pesquisa.service';
 import { IndicadorService2 } from './indicador/indicador.service';
@@ -33,6 +34,7 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
+    AppState,
     LocalidadeService2,
     PesquisaService2,
     IndicadorService2,

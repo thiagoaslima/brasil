@@ -21,7 +21,6 @@ export class PesquisaService2 {
     
     constructor(
         private _http: Http,
-        // private _servidor: ServidorPesquisas,
         private _pesquisasConfig: PesquisaConfiguration
     ) {
         Pesquisa.setPesquisaStrategy({
