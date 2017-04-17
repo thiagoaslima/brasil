@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, OnChanges, ViewChild, ElementRef, Renderer, SimpleChange, SimpleChanges } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { Indicador } from '../../shared2/indicador/indicador.model';
@@ -60,7 +61,7 @@ const Actions = {
 })
 export class GraficoComponent implements OnInit, OnChanges {
     @Input() tipoGrafico: 'bar' | 'horizontalBar' | 'line' | 'radar' | 'polarArea' | 'pie' | 'doughnut' | 'bubble' = 'bar';
-    @Input() indicadores: Indicador[] = [];
+    @Input() indicadores = [];
     @Input() localidade: Localidade;
     @ViewChild("grafico") graficoRef: ElementRef;
 
@@ -130,9 +131,13 @@ export class GraficoComponent implements OnInit, OnChanges {
     actions$ = new BehaviorSubject<{ action: string, value?: any }>({ action: 'START' });
     options$;
 
+    mostrarFontes = false;
+    mostrarNotas = false;
+
     constructor(
         private _render: Renderer,
-        private _commonService: CommonService
+        private _commonService: CommonService,
+        private _router: Router
     ) {
         const resultados$ = this._indicadores$
             .combineLatest(this._localidade$)
@@ -316,4 +321,11 @@ export class GraficoComponent implements OnInit, OnChanges {
         return !!valor ? Number(valor.replace(',', '.')) : Number(valor)
     }
 
+    navegarTabela(){
+        console.log(">>>>>>>>>>>>>>", this.indicadores);
+        if(this.indicadores.length > 0){
+            let url = this.localidade.link + '/pesquisa/' + this.indicadores[0].pesquisaId/* + '/' + this.indicadores[0].indicadorId*/;
+            this._router.navigate(url.split('/'));
+        }
+    }
 }
