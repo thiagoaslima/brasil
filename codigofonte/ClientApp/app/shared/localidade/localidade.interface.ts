@@ -155,6 +155,7 @@ export class Localidade {
     constructor({
         codigo,
         nome,
+        slug,
         tipo,
         sigla = '',
         capital = null,
@@ -168,7 +169,7 @@ export class Localidade {
         this.sigla = sigla;
         this.capital = capital;
         this.parent = parent;
-        this.slug = slugify(nome);
+        this.slug = slug || slugify(nome);
     }
 
     registerChildren(children: Localidade|Localidade[]) {

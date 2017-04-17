@@ -16,19 +16,19 @@
         
         <!-- Posteriormente pode entrar este menu. Por enquanto fica desativado -->
             
-            <!--
-            <div class="mobile__exclusive temas__horizontais">
-                 <div [ngSwitch]="tema.tema" class="lista__icone--mobile">
-                    <div *ngSwitchCase="'Agricultura'" class="ico ico--agri"></div>
-                    <div *ngSwitchCase="'Educação'" class="ico ico--edu"></div>
-                    <div *ngSwitchCase="'Economia'" class="ico ico--eco"></div>
-                    <div *ngSwitchCase="'Território e Ambiente'" class="ico ico--ambi"></div>
-                    <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
-                    <div *ngSwitchCase="'Saúde'" class="ico ico--sau"></div>
-                    <div *ngSwitchCase="'Trabalho'" class="ico ico--trab"></div>
-                    <div *ngSwitchCase="'Frota'" class="ico ico--frota"></div>
-                </div>
-        </div>-->
+            
+        <div *ngIf="tema.tema" class="mobile__exclusive temas__horizontais">
+            <div [ngSwitch]="tema.tema" class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
+                <div *ngSwitchCase="'Agricultura'" class="ico ico--agri"></div>
+                <div *ngSwitchCase="'Educação'"class="ico ico--edu"></div>
+                <div *ngSwitchCase="'Economia'" class="ico ico--eco"></div>
+                <div *ngSwitchCase="'Território e Ambiente'" class="ico ico--ambi"></div>
+                <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
+                <div *ngSwitchCase="'Saúde'" class="ico ico--sau"></div>
+                <div *ngSwitchCase="'Trabalho'" class="ico ico--trab"></div>
+                <div *ngSwitchCase="'Frota'" class="ico ico--frota"></div>
+            </div>
+        </div>
 
         <table *ngIf="tema.tema" class="lista">
             <tr class="lista__cabecalho">

@@ -90,15 +90,16 @@ export class Localidade {
                 break;
         }
     }
-
+    // 340ms 700ms
     static convertBrasil(data) {
+        debugger;
         return {
             codigo: data.codigo,
             codigoCompleto: data.codigo,
             digitoVerificador: null,
             nome: data.nome,
             tipo: tiposPossiveisLocalidade[1],
-            slug: slugify(data.nome),
+            slug: data.slug || slugify(data.nome),
             sigla: "",
             codigoCapital: parseInt(data.codigoCapital.toString().slice(0, 6), 10),
             codigoParent: null
@@ -112,7 +113,7 @@ export class Localidade {
             digitoVerificador: null,
             nome: data.nome,
             tipo: tiposPossiveisLocalidade[2],
-            slug: slugify(data.nome),
+            slug: data.slug || slugify(data.nome),
             sigla: data.sigla.toUpperCase(),
             codigoCapital: parseInt(data.codigoCapital.toString().slice(0, 6), 10),
             codigoParent: 0
@@ -127,7 +128,7 @@ export class Localidade {
             nome: data.nome,
             tipo: tiposPossiveisLocalidade[6],
             sigla: "",
-            slug: slugify(data.nome),
+            slug: data.slug || slugify(data.nome),
             codigoCapital: null,
             codigoParent: parseInt(data.codigoUf, 10)
         }

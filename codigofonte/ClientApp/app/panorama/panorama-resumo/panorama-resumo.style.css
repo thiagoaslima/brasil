@@ -71,7 +71,7 @@
     background-image: url('./../../../img/ico/ico-agricultura.png');
 }
 
-.lista__cabecalho--selecionado .ico--agri{
+.lista__cabecalho--selecionado.ico--agri{
     background-image: url('./../../../img/ico/ico-agricultura_on.png');
 }
 
@@ -79,7 +79,7 @@
     background-image: url('./../../../img/ico/ico-educacao.png');
 }
 
-.lista__cabecalho--selecionado .ico--edu{
+.lista__cabecalho--selecionado.ico--edu{
     background-image: url('./../../../img/ico/ico-educacao_on.png');
 }
 
@@ -87,7 +87,7 @@
     background-image: url('./../../../img/ico/ico-economia.png');
 }
 
-.lista__cabecalho--selecionado .ico--eco{
+.lista__cabecalho--selecionado.ico--eco{
     background-image: url('./../../../img/ico/ico-economia_on.png');
 }
 
@@ -95,7 +95,7 @@
     background-image: url('./../../../img/ico/ico-ambiente.png');
 }
 
-.lista__cabecalho--selecionado .ico--ambi{
+.lista__cabecalho--selecionado.ico--ambi{
     background-image: url('./../../../img/ico/ico-ambiente_on.png');
 }
 
@@ -103,7 +103,7 @@
     background-image: url('./../../../img/ico/ico-populacao.png');
 }
 
-.lista__cabecalho--selecionado .ico--pop{
+.lista__cabecalho--selecionado.ico--pop{
     background-image: url('./../../../img/ico/ico-populacao_on.png');
 }
 
@@ -111,7 +111,7 @@
     background-image: url('./../../../img/ico/ico-saude.png');
 }
 
-.lista__cabecalho--selecionado .ico--sau{
+.lista__cabecalho--selecionado.ico--sau{
     background-image: url('./../../../img/ico/ico-saude_on.png');
 }
 
@@ -119,7 +119,7 @@
     background-image: url('./../../../img/ico/ico-trabalho.png');
 }
 
-.lista__cabecalho--selecionado .ico--trab{
+.lista__cabecalho--selecionado.ico--trab{
     background-image: url('./../../../img/ico/ico-trabalho_on.png');
 }
 
@@ -127,7 +127,7 @@
     background-image: url('./../../../img/ico/ico-frota.png');
 }
 
-.lista__cabecalho--selecionado .ico--frota{
+.lista__cabecalho--selecionado.ico--frota{
     background-image: url('./../../../img/ico/ico-frota_on.png');
 }
 
@@ -226,8 +226,27 @@
         display: none;
     }
     
-    .temas__horizontais div{
-        display: inline-block;
+    .temas__horizontais{
+        display: block;
+        float: left;
+        width: 20%;
+        margin: 0;
+        padding: 0;
+    }
+    .lista__icone--mobile{
+        display: block;
+        padding: 12px;
+        margin: 0;
+        border-bottom: 3px solid #1b779b;
+        width: 100%;
+        text-align: center;
+        background-color: #E6E6E6;
+    }
+    .lista__icone--mobile div{
+        width: 16px;
+        height: 16px;
+        display: block;
+        margin: 0 auto;
     }
     
     
