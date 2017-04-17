@@ -439,6 +439,11 @@ td.compara-blank {
     td.compara-blank, .nivel-4 td.compara-blank{
         background-color: transparent;   
     }
+
+    td.label{
+        border: none;
+    }
+
     .nivel-6 td{
         border-bottom: none;
     }
