@@ -15,45 +15,13 @@ import 'rxjs/add/operator/filter';
     selector: 'panorama-painel',
     templateUrl: './panorama-painel.template.html',
     styleUrls: ['./panorama-painel.style.css']
-    // template:`
-    //     <div>
-    //         <h2>{{dados.tema}}</h2>
-            
-    //         <div>
-    //             <div class="cartograma">
-    //                 <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
-    //             </div>
-    //         </div>
-            
-    //         <div class="cards">
-    //             <panorama-card (click)="selectPainel(painel)"  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
-    //         </div>
-    //    </div>`,
-    // styles: [`
-    //     .cards{
-    //         content: "";
-    //         display: table;
-    //         clear: both;
-    //         margin: 2% 5%;
-    //     }
-
-    //     .cartograma {
-    //         margin: 3% 5%;
-    //     }
-
-    //     .legenda {
-    //         display: inline-block;
-    //         width: 29%;
-    //     }
-        
-    // `],
-    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanoramaPainelComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaConfigurationItem;
     @Input() localidade: Localidade;
 
     public uf: Localidade;
+    public mun: Localidade;
     public indicador$: Observable<Indicador>
     public localSelecionado;
     private _selecionarIndicador$ = new BehaviorSubject<Indicador>(null);
@@ -79,6 +47,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     ngOnChanges(changes: { [label: string]: SimpleChange }) {
         if (changes.hasOwnProperty('localidade') && Boolean(changes.localidade.currentValue)) {
             this.uf = changes.localidade.currentValue.parent;
+            this.mun = changes.localidade.currentValue;
+            
         }
 
         if (changes.hasOwnProperty('dados') && Boolean(changes.dados.currentValue) && Boolean(changes.dados.currentValue.length)) {

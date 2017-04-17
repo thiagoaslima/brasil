@@ -1,0 +1,56 @@
+<div>
+            <h2>{{dados.tema}}</h2>
+            
+            <div>
+                <div class="cartograma" *ngIf="!isMobile()">
+                    <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
+                    <cartograma [localidade]="mun" [indicador]="indicador$ | async"></cartograma>
+                </div>
+            </div>
+            
+            <div class="cards">
+                <panorama-card (click)="selectPainel(painel)"  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
+            </div>
+
+        </div>
+        
+        
+        
+        <!--Deprec-->
+<!--<div>
+            <h2>{{dados.tema}}</h2>
+            
+            <div>
+                <div class="cartograma">
+                    <cartograma [localidade]="uf" [indicador]="indicador$ | async"></cartograma>
+                </div>
+                <div class="legenda">
+                   
+                    <div class="legenda__item">
+                        <div class="legenda__item__cor legenda__cor-1"></div>
+                        <div class="legenda__item__label">6.001 ou mais</div>
+                    </div>
+
+                    <div class="legenda__item">
+                        <div class="legenda__item__cor legenda__cor-2"></div>
+                        <div class="legenda__item__label">6.001 ou mais</div>
+                    </div>
+
+                    <div class="legenda__item">
+                        <div class="legenda__item__cor legenda__cor-3"></div>
+                        <div class="legenda__item__label">6.001 ou mais</div>
+                    </div>
+
+                    <div class="legenda__item">
+                        <div class="legenda__item__cor legenda__cor-4"></div>
+                        <div class="legenda__item__label">6.001 ou mais</div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="cards">
+                <panorama-card  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade"></panorama-card>
+            </div>
+
+        </div>-->
