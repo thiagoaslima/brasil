@@ -1,109 +1,69 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
-import { SinteseService } from '../sintese/sintese.service';
-import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
-import { RouterParamsService } from '../shared/router-params.service';
-import { slugify } from '../utils/slug';
-import { LocalidadeService } from '../shared/localidade/localidade.service';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router'
 
+import { Pesquisa } from '../shared2/pesquisa/pesquisa.model';
+import { PesquisaService2 } from '../shared2/pesquisa/pesquisa.service';
+import { RouterParamsService } from '../shared/router-params.service';
+import { slugify } from '../utils/slug';
+
+import { Subscription } from 'rxjs/Subscription';
 @Component({
     selector: 'submenu',
     templateUrl: 'submenu.template.html',
     styleUrls: ['submenu.style.css']
 })
-export class SubmenuComponent implements OnInit {
+export class SubmenuComponent implements OnInit, OnDestroy {
 
-    public pesquisas = [];
+    public pesquisas = <Pesquisa[]>[];
     public idPesquisaSelecionada;
+    public idPesquisaSubmenu;
     public indicadores = [];
     public idIndicadorSelecionado;
     public codigoMunicipio;
     public baseURL;
 
+    private allPesquisas$$: Subscription
+
     @Output() closeMenu = new EventEmitter();
     @Input() localidade;
 
     constructor(
-        private _routerParams:RouterParamsService,
+        private _routerParams: RouterParamsService,
         private router: Router,
-        private _sintese:SinteseService,
-        private _localidade:LocalidadeService,
-        private _pesquisa:PesquisaService
-    ){}
+        private _pesquisaService: PesquisaService2
+    ) { }
 
-    ngOnInit(){
+    ngOnInit() {
 
         //busca pesquisas disponíveis e as organiza em ordem alfabética
-        this._sintese.getPesquisasDisponiveis().subscribe((pesquisas) => {
-            pesquisas.sort((a, b) => {
-                //usando slugify para remover acentuação, pois letras acentuadas ficam por último, prejudicando o sorting
-                let _a = slugify(a.descricao);
-                let _b = slugify(b.descricao);
-                if (_a < _b) {return -1;}
-                if (_a > _b) {return 1;}
-                return 0;
-            });
-            this.pesquisas = pesquisas;
-        });
-        
-        //pega a rota atual
-        this._routerParams.params$.subscribe(({params}) => {
-            //Pega o código do município apontado pela rota. O código deve possuir somente 6 dígitos, sendo o último desprezado
-            let dadosMunicipio = this._localidade.getMunicipioBySlug(params.uf, params.municipio);
-            this.codigoMunicipio = dadosMunicipio.codigo.toString().substr(0, 6);
+        this.allPesquisas$$ = this._pesquisaService.getAllPesquisas()
+            .map(pesquisas => pesquisas.sort((a, b) => slugify(a.nome) < slugify(b.nome) ? -1 : 1))
+            .subscribe(pesquisas => this.pesquisas = pesquisas);
 
+
+        //pega a rota atual
+        this._routerParams.params$.subscribe(({ params }) => {
             //pega o indicador e a pesquisa a partir da rota
             this.idPesquisaSelecionada = params.pesquisa;
             this.idIndicadorSelecionado = params.indicador;
-
-            //this._sintese.getPesquisa(params.pesquisa, this.codigoMunicipio).subscribe((indicadores) => {
-            this._pesquisa.getFilhosIndicador(params.pesquisa, 0).subscribe((indicadores) => {
-                let ind = []
-                for(let i = 0; i < indicadores.length; i++){
-                    ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});
-                }
-                for(let i = 0; i < this.pesquisas.length; i++){                   
-                    if(this.pesquisas[i].id == this.idPesquisaSelecionada){
-                        this.pesquisas[i].indicadores = ind;
-                        this.pesquisas[i].visivel = true;
-                    }else{
-                        this.pesquisas[i].indicadores = undefined;
-                        this.pesquisas[i].visivel = false;
-                    }
-                }
-            });
-
-            //seta a variável de rota base
-            if(params.uf && params.municipio){
-                this.baseURL = '/brasil/' + params.uf + '/' + params.municipio + '/pesquisa/';
-            }else if(params.uf){
-                this.baseURL = '/brasil/' + params.uf + '/pesquisa/';
-            }else{
-                this.baseURL = '/brasil/pesquisa/';
-            }
         });
-    
+
     }
 
-    onClick(index){
-        this.pesquisas[index].visivel = !this.pesquisas[index].visivel;
-        //carrega indicadores que aparecem no submenu
-        if(this.pesquisas[index].indicadores == undefined){
-            //this._sintese.getPesquisa(this.pesquisas[index].id, this.codigoMunicipio).subscribe((indicadores) => {
-            this._pesquisa.getFilhosIndicador(this.pesquisas[index].id, 0).subscribe((indicadores) => {
-                let ind = [];
-                for(let i = 0; i < indicadores.length; i++){
-                    ind.push({indicador : indicadores[i].indicador, id : indicadores[i].id});
-                }
-                this.pesquisas[index].indicadores = ind;
+    ngOnDestroy() {
+        this.allPesquisas$$.unsubscribe();
+    }
 
-                if(ind.length < 2){
-                    this.router.navigate( [ this.localidade.link + '/pesquisa/' +  this.pesquisas[index].id + '/' + ind[0].id ], { queryParams: { detalhes: true } } );
-                    this.closeMenu.emit();
-                }
+    onClick(index) {
+        const pesquisa = this.pesquisas[index];
+        this.idPesquisaSubmenu = pesquisa.id;
 
-            });
-        }
+        pesquisa.indicadores.take(1).subscribe(indicadores => {
+            if (indicadores.length === 1) {
+                this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id], { queryParams: { detalhes: true } });
+                this.closeMenu.emit();
+            }
+        });
        
     }
 

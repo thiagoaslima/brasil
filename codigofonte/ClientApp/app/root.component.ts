@@ -58,9 +58,11 @@ export class RootComponent implements OnInit, OnDestroy {
         this._localidade$$ = this._appState.observable$
             .subscribe(({ localidade }) => {
                 this.localidadeSelecionada = localidade;
-                this.locais = localidade
-                    ? [localidade, localidade.parent, localidade.parent.parent].filter(Boolean).reverse()
-                    : [];
+                const locais = [localidade];
+                if (localidade) { locais.push(localidade.parent) }
+                if (localidade && localidade.parent) { locais.push(localidade.parent.parent) }
+
+                this.locais = locais.filter(Boolean).reverse();    
             });
 
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();

@@ -10,9 +10,6 @@ import { TopoJson, TOPOJSON } from './topojson.v2';
 import { RouterParamsService } from './router-params.service';
 import { CacheService } from './cache.service';
 import { SystemCacheService } from './system-cache.service';
-import { LocalidadeService } from './localidade/localidade.service';
-import { PesquisaService } from './pesquisa/pesquisa.service.2';
-import { BuscaService } from '../core/busca/busca.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
 import { IsMobileService } from './is-mobile.service';
@@ -44,10 +41,7 @@ const PROVIDERS = [
     SystemCacheService,
     CacheService,
     RouterParamsService,
-    LocalidadeService,
     CommonService,
-    BuscaService,
-    PesquisaService,
     IsMobileService,
     { provide: TOPOJSON, useValue: TopoJson },
     { provide: 'LRU', useFactory: getLRU, deps: [] }

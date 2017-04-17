@@ -2,9 +2,8 @@ import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitte
 
 import { AppState } from '../../shared2/app-state';
 import { BuscaService } from './busca.service';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface.2';
-import { Localidade } from '../../shared/localidade/localidade.interface';
+import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
+import { Localidade } from '../../shared2/localidade/localidade.model';
 
 import { Observable } from 'rxjs/Observable';
 @Component({

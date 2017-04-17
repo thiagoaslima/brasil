@@ -124,7 +124,13 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _localidadeService: LocalidadeService2
     ) {
         this.selecaoLocalidadesAtual = this._appState.observable$
-            .map(({ localidade }) => localidade ? [localidade, localidade.parent, localidade.parent.parent].filter(Boolean).reverse() : []);
+            .map(({ localidade }) => {
+                const locais = [localidade];
+                if (localidade) { locais.push(localidade.parent); }
+                if (localidade && localidade.parent) { locais.push(localidade.parent.parent); }
+                
+                return locais.filter(Boolean).reverse();
+            });
 
         this.ufs = this._localidadeService.getUfs();
         this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);

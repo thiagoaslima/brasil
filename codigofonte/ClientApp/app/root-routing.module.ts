@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SinteseComponent } from './sintese/sintese.component';
-import { SinteseDetalhesComponent } from './sintese/sintese-detalhes/sintese-detalhes.component';
 import { PanoramaComponent } from './panorama/panorama.component';
 import { PesquisaComponent2 } from './pesquisa2/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
@@ -41,12 +39,16 @@ const children = [
       },
       {
         path: 'brasil',
-        children
+        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
+        pathMatch: 'full'
+        // children
       },
       {
         path: 'brasil/:uf',
-        canActivate: [ValidParametersGuard],
-        children
+        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
+        pathMatch: 'full'
+        // canActivate: [ValidParametersGuard],
+        // children
       },
       {
         path: 'brasil/:uf/:municipio',

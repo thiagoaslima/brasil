@@ -27,6 +27,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     private indicadores;
 
     constructor(
+        // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese:SinteseService,
         private _localidade:LocalidadeService2
     ) {  }

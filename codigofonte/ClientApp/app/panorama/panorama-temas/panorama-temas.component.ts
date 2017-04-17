@@ -1,19 +1,16 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges, ViewChild, ElementRef, Inject } from '@angular/core';
-import { Observer, Observable } from 'rxjs';
-
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { Localidade } from '../../shared/localidade/localidade.interface';
-
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { TEMAS } from '../configuration/panorama.configuration';
+import { Localidade } from '../../shared2/localidade/localidade.model';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
-
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Resultado } from '../../shared2/resultado/resultado.model';
 
-import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
-
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'panorama-temas',
@@ -24,7 +21,7 @@ import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 export class PanoramaTemasComponent implements OnInit {
 
     @ViewChild('cont')
-     private container: ElementRef;
+    private container: ElementRef;
 
     @Input('dados') temas: {
         tema: string,
@@ -41,86 +38,83 @@ export class PanoramaTemasComponent implements OnInit {
     textoSaude = "";
     textoEducacao = "";
 
+    constructor(
+        private _indicadorService: IndicadorService2,
+        private pageScrollService: PageScrollService,
+        @Inject(DOCUMENT) private document: any
+    ) { }
 
+    public getTextoAnalitico(nomeTema) {
 
-    constructor(private _indicadorService:IndicadorService2, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) { }
-
-    public getTextoAnalitico(nomeTema){
-
-        if(nomeTema === TEMAS.trabalho){
+        if (nomeTema === TEMAS.trabalho) {
             return Observable.of(this.textoTrabalho);
-        }        
+        }
 
-        if(nomeTema === TEMAS.meioAmbiente){
+        if (nomeTema === TEMAS.meioAmbiente) {
             return Observable.of(this.textoMeioAmbiente);
         }
 
 
-        if(nomeTema === TEMAS.economia){
+        if (nomeTema === TEMAS.economia) {
             return Observable.of(this.textoEconomia);
         }
 
 
-        if(nomeTema === TEMAS.saude){
+        if (nomeTema === TEMAS.saude) {
             return Observable.of(this.textoSaude);
         }
 
-        
-        if(nomeTema === TEMAS.educacao){
-            return Observable.of(this.textoEducacao) ;
+
+        if (nomeTema === TEMAS.educacao) {
+            return Observable.of(this.textoEducacao);
         }
-      
+
     }
 
 
 
-    ngOnInit() { 
+    ngOnInit() {
 
         this.goToTema();
     }
 
 
-    ngOnChanges(changes: SimpleChanges) { 
-
+    ngOnChanges(changes: SimpleChanges) {
         this.goToTema();
         this.configurarTextosTemas();
     }
 
-    private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any>{
-
+    private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any> {
         return this._indicadorService.getPosicaoRelativa(idPesquisa, indicador, periodo, codigoLocalidade, contexto)
     }
-    
 
-    private getValorIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number): Observable<any>{
+
+    private getValorIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number): Observable<any> {
 
         return this._indicadorService.getIndicadoresById(idPesquisa, indicador, EscopoIndicadores.proprio, codigoLocalidade)
-                    .switchMap(indicadores => indicadores[0].getResultadoByLocal(this.localidade.codigo))
-                    .map(resultado => {
-                        
-                        return {
-                            "valor": resultado.valorValidoMaisRecente,
-                            "ano": resultado.periodoValidoMaisRecente
-                        }  
-                    });
+            .switchMap(indicadores => indicadores[0].getResultadoByLocal(this.localidade.codigo))
+            .map(resultado => {
+
+                return {
+                    "valor": resultado.valorValidoMaisRecente,
+                    "ano": resultado.periodoValidoMaisRecente
+                }
+            });
     }
 
     public goToTema(): void {
-         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, this.temaSelecionado && this.temaSelecionado.toString());
-         this.pageScrollService.start(pageScrollInstance);
-     };    
- 
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, this.temaSelecionado && this.temaSelecionado.toString());
+        this.pageScrollService.start(pageScrollInstance);
+    };
+
     //  public goToHeadingInContainer(): void {
     //      let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#cont', scrollingViews: [this.container.nativeElement]});
     //      this.pageScrollService.start(pageScrollInstance);
     //  };
 
-    private configurarTextosTemas(){
+    private configurarTextosTemas() {
 
-        debugger;
-
-        if(!this.localidade || !this.localidade.codigo){
-
+        if (!this.localidade || !this.localidade.codigo) {
             return;
         }
 
@@ -174,7 +168,7 @@ export class PanoramaTemasComponent implements OnInit {
 
                 this.textoMeioAmbiente = `${this.localidade.nome} tem ${esgotamentoSanitarioUF.res}% de domicilios com esgotamento sanitário adequado, ${arborizacaoUF.res}% dos domicilios urbanos em vias publicas com arborização e ${urbanizacaoUF.res}% dos domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). Quando comparado com os outros municípios de ${this.localidade.parent.sigla}, fica posicionado em ${esgotamentoSanitarioUF.ranking} de ${esgotamentoSanitarioUF.posicaoAbsoluta}, ${arborizacaoUF.ranking} de ${arborizacaoUF.posicaoAbsoluta} e ${urbanizacaoUF.ranking} de ${urbanizacaoUF.posicaoAbsoluta} respectiviamente. Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamentoSanitarioBrasil.ranking} de ${esgotamentoSanitarioBrasil.posicaoAbsoluta}, ${arborizacaoBrasil.ranking} de ${arborizacaoBrasil.posicaoAbsoluta} e ${urbanizacaoBrasil.ranking} de ${urbanizacaoBrasil.posicaoAbsoluta} respectivamente.`;
             });
-        
+
 
         // Texto ECONOMIA
         let pipPerCaptaUF$ = this.getValorIndicador(10058, 60047, this.localidade.codigo)
@@ -214,33 +208,33 @@ export class PanoramaTemasComponent implements OnInit {
 
                 this.textoSaude = `A taxa de mortalidade infantil média no município é de ${mortaldadeInfantilUF.res} para 1.000 nascidos vivos. As internações devido a diarréias são de ${intermacoesDiarreiaUF.res} para cada 1.000 habitantes. Comparado com todos os municípios do estado, posiciona-se em ${mortaldadeInfantilUF.ranking} de ${mortaldadeInfantilUF.posicaoAbsoluta} e ${intermacoesDiarreiaUF.ranking} de ${intermacoesDiarreiaUF.posicaoAbsoluta} respectivamente. Quando comparado a municípios no Brasil essas posições são de ${mortaldadeInfantilBrasil.ranking} de ${mortaldadeInfantilBrasil.posicaoAbsoluta} e ${internacoesDiarreiaBrasil.ranking} de ${mortaldadeInfantilBrasil.posicaoAbsoluta}.`;
             });
-    
+
 
         // Texto EDUCAÇÃO
         let idebAnosIniciaisUF$ = this.getValorIndicador(10058, 60041, this.localidade.codigo)
-                .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
         let idebAnosIniciaisBrasil$ = this.getValorIndicador(10058, 60041, this.localidade.codigo)
-                .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano));
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano));
 
         let idebAnosFinaisUF$ = this.getValorIndicador(10058, 60042, this.localidade.codigo)
-                .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
         let idebAnosFinaisBrasil$ = this.getValorIndicador(10058, 60042, this.localidade.codigo)
-                .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano));
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano));
 
         let taxaEscolarizacao6A14AnosUF$ = this.getValorIndicador(10058, 60045, this.localidade.codigo)
-                .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
         let taxaEscolarizacao6A14AnosBrasil$ = this.getValorIndicador(10058, 60045, this.localidade.codigo)
-                .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano));
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano));
 
         idebAnosIniciaisUF$.zip(idebAnosIniciaisBrasil$, idebAnosFinaisUF$, idebAnosFinaisBrasil$, taxaEscolarizacao6A14AnosUF$, taxaEscolarizacao6A14AnosBrasil$)
             .subscribe(([idebAnosIniciaisUF, idebAnosIniciaisBrasil, idebAnosFinaisUF, idebAnosFinaisBrasil, taxaEscolarizacao6A14AnosUF, taxaEscolarizacao6A14AnosBrasil]) => {
 
-            this.textoEducacao = `Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município, tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. Para os alunos dos anos finais essa nota foi de ${idebAnosFinaisBrasil.res}. Comparados aos municíos do mesmo estado, a nota dos alunos dos anos inciais coloca o município dentre em ${idebAnosIniciaisUF.ranking} de ${idebAnosIniciaisUF.posicaoAbsoluta}. Para a nota dos alunos dos anos finais, a posição é de ${idebAnosFinaisUF.ranking} de ${idebAnosFinaisUF.posicaoAbsoluta}. Quanto a taxa de escolarização (para pessoas de 6 a 14 anos), esta foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. Isso posiciona o município em ${taxaEscolarizacao6A14AnosUF.ranking} de ${taxaEscolarizacao6A14AnosUF.posicaoAbsoluta} do ${this.localidade.parent.sigla} e em ${taxaEscolarizacao6A14AnosBrasil.ranking} de ${taxaEscolarizacao6A14AnosBrasil.posicaoAbsoluta} no Brasil.`;
-        });
+                this.textoEducacao = `Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município, tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. Para os alunos dos anos finais essa nota foi de ${idebAnosFinaisBrasil.res}. Comparados aos municíos do mesmo estado, a nota dos alunos dos anos inciais coloca o município dentre em ${idebAnosIniciaisUF.ranking} de ${idebAnosIniciaisUF.posicaoAbsoluta}. Para a nota dos alunos dos anos finais, a posição é de ${idebAnosFinaisUF.ranking} de ${idebAnosFinaisUF.posicaoAbsoluta}. Quanto a taxa de escolarização (para pessoas de 6 a 14 anos), esta foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. Isso posiciona o município em ${taxaEscolarizacao6A14AnosUF.ranking} de ${taxaEscolarizacao6A14AnosUF.posicaoAbsoluta} do ${this.localidade.parent.sigla} e em ${taxaEscolarizacao6A14AnosBrasil.ranking} de ${taxaEscolarizacao6A14AnosBrasil.posicaoAbsoluta} no Brasil.`;
+            });
 
-        
+
     }
 }

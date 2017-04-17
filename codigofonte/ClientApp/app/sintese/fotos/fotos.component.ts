@@ -3,7 +3,6 @@ import { Http } from '@angular/http';
 
 import { AppState } from '../../shared2/app-state';
 import { SinteseService } from '../sintese.service';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { ScrollDirective } from '../../shared/window-events/scroll.directive';
 
 

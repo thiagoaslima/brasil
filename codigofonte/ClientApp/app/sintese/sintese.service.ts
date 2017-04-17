@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Pesquisa, Indicador } from '../shared/pesquisa/pesquisa.interface.2';
-import { PesquisaService } from '../shared/pesquisa/pesquisa.service.2';
-import { LocalidadeService } from '../shared/localidade/localidade.service';
-import { EscopoIndicadores } from '../shared2/indicador/indicador.model';
+import { EscopoIndicadores } from '../shared2/indicador/indicador.model'
 import { SINTESE, SinteseConfigItem } from './sintese-config';
 import { flatTree } from '../utils/flatFunctions';
 
@@ -26,134 +23,16 @@ export class SinteseService {
 
     constructor(
         private _http: Http,
-        private _pesquisaService: PesquisaService,
-        private _localidadeService: LocalidadeService,
         private _sinteseConfig: SINTESE
     ) { }
 
 
-    /**
-     * Monta o array de dados a ser consumido pela view
-     */
-    getConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
-        return lista.map(item => {
-            if (item.pesquisa && item.indicador) {
+    
 
-                let valor$ = Observable.zip(
-                    this._pesquisaService.getPesquisa(item.pesquisa),
-                    this._pesquisaService.getIndicadores(item.pesquisa, item.indicador),
-                    this._pesquisaService.getResultados(item.pesquisa, item.indicador, codigoLocalidade)
-                ).flatMap(([pesquisa, indicadores, resultados]) => {
-                    let indicador = indicadores[0];
-                    return indicador.resultadosValidosMaisRecentes(codigoLocalidade).map(res => {
-                        return {
-                            periodo: res.periodos[0],
-                            valor: res.resultados[res.periodos[0]]
-                        }
-                    });
-                }).share();
-
-                return {
-                    nome: item.nome,
-                    link: item.indicador,
-                    query: item.query || {},
-                    valor: valor$,
-                    unidade: this._pesquisaService.getIndicadores(item.pesquisa, item.indicador).map((indicador: Indicador[]) => indicador[0].unidade.id),
-                    tema: item.tema,
-                    largura: item.largura || 'full'
-                };
-            }
-
-            if (item.composicao) {
-                let pesquisaId = item.composicao.indicadores[0].pesquisa;
-                let indicadoresId = item.composicao.indicadores.map(indicador => indicador.indicador);
-
-                let indicadores$ = Observable.zip(
-                    this._pesquisaService.getPesquisa(pesquisaId),
-                    this._pesquisaService.getIndicadores(pesquisaId, indicadoresId),
-                    this._pesquisaService.getResultados(pesquisaId, indicadoresId, codigoLocalidade)
-                )
-
-                let periodo$ = indicadores$.flatMap(([pesquisa, indicadores, resultados]) => {
-                    return indicadores[0].resultadosValidosMaisRecentes(codigoLocalidade).map(res => res.periodos[0]);
-                });
-
-                let composicao$ = indicadores$.flatMap(([pesquisa, indicadores, resultados]) => {
-                    return item.composicao.make(indicadores, codigoLocalidade);
-                });
-
-                let valor$ = Observable.zip(
-                    periodo$,
-                    composicao$
-                ).map(([periodo, dados]) => {
-                    return {
-                        periodo: periodo,
-                        valor: dados
-                    }
-                }).share();
-
-                return {
-                    nome: item.nome,
-                    link: item.link,
-                    query: item.query || {},
-                    valor: valor$,
-                    unidade: Observable.of(item.unidade || ''),
-                    tema: item.tema,
-                    largura: item.largura || 'full'
-                }
-
-            }
-
-            if (item.link) {
-                return {
-                    nome: item.nome,
-                    link: item.link,
-                    query: item.query || {},
-                    valor: Observable.of(null),
-                    unidade: Observable.of(''),
-                    tema: item.tema,
-                    largura: item.largura || 'full'
-                };
-            }
-        })
+    
 
 
-        //return Observable.of(observables).flatMap(val => val);
-    }
-
-    getDadosConteudo(lista: SinteseConfigItem[], codigoLocalidade: number) {
-        lista
-    }
-
-
-    /**
-     * Obtém a lista de pesquisas disponíveis para a aplicação.
-     */
-    public getPesquisasDisponiveis() {
-
-        return this._pesquisaService.getAllPesquisas()
-            .map(pesquisas => pesquisas.map(pesquisa => ({
-                id: pesquisa.id,
-                descricao: pesquisa.descricao || pesquisa.nome
-            })));
-
-        // return this._http.get('http://servicodados.ibge.gov.br/api/v1/pesquisas/')
-        //     .map((res) => res.json())
-        //     .map((pesquisas) => {
-        //         let _pesquisas = pesquisas
-        //             .filter((pesquisa) => {
-        //                 return this.idPesquisasValidas.indexOf(pesquisa.id) >= 0;
-        //             })
-        //             .map((pesquisa) => {
-        //                 return {
-        //                     id: pesquisa.id,
-        //                     descricao: pesquisa.descricao || pesquisa.nome
-        //                 }
-        //             });
-
-        //         return _pesquisas;
-        //     });
-    }
+   
 
     /**
      * Obtém notas e fontes da pesquisa solicitada.
@@ -299,8 +178,6 @@ export class SinteseService {
         return Observable.zip(this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo))
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 
-               
-
                 this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
 
                 return nomes;
@@ -380,60 +257,6 @@ export class SinteseService {
             }
         });
     }
-
-    /**
-     * Recupera a síntese de uma dada localidade.
-     * 
-     * @local: string - código da localidade.
-     */
-    public getSinteseLocal(local: string) {
-
-        /*
-            codigo      33    29169
-            prefeito    33    29170
-    
-            area        33    29167
-            altitude    ?
-    
-            pop estimada    33    29171
-            dens demograf    33    29168
-    
-            orçamento        ?
-            FPM            21    28160
-    
-            PIB per capita   38    47001 
-            Salário médio    ?
-    
-            IDHM     37    30255
-            IDEB    40    30277
-    
-            Leitos hospitalares    32    28311
-    
-            agricultura     necessário vir do servidor
-    
-            Desocupação (não há no servidor ainda)
-        */
-
-
-        return Observable.zip(
-            this.getPesquisa('33', local, ["29169", "29170", "29167", "29171", "29168"]),
-            this.getPesquisa('21', local, ['28160']),
-            this.getPesquisa('38', local, ['47001']),
-            this.getPesquisa('37', local, ['30255']),
-            this.getPesquisa('40', local, ['30277']),
-            this.getPesquisa('32', local, ['28311'])
-        ).map((resp) => {
-            return resp.reduce((agg, pesq) => agg.concat(pesq), []);
-        }).map(dados => dados.map(this.filterLastValidValue))
-            .map(dados => dados.reduce((agg, dado) => {
-                agg[dado.id] = dado;
-                return agg;
-            }, {}));
-    }
-
-    // public getDadosIndicadoresSintese() {
-    //     return this._pesquisaService.getIndicadores()
-    // }
 
     /**
      * Obtém os valores históricos de um dado indicador da síntese.
@@ -571,57 +394,7 @@ export class SinteseService {
 
     }
 
-    /**
-     * Recupera apenas os dados da pesquisa, ignorando os rótulos dos indicadores.
-     * 
-     * @pesquisa: string - código da pesquisa.
-     * @local: string[] - lista de códigos de localidade.
-     * @indicador: string - indicador a ser recuperado.
-     */
-    public getDadosPesquisaMapa(pesquisa: string, local: string[] = [], indicador: string): Observable<any> {
-
-        let locaisCorrigidos = local.map(local => local.substr(0, 6));
-
-        const codigoLocal = locaisCorrigidos.length > 0 ? locaisCorrigidos.join(',') : "";
-
-        const codigoIndicador = indicador;
-
-        const dadosPesquisa$ = this._http.get(
-            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&indicadores=${codigoIndicador}`
-        )
-            .map((res => res.json()))
-            .map(this._excludeNullYearsFromResultados);
-
-        return dadosPesquisa$;
-    }
-
-    getPesquisaByIndicador(idIdentificador: number) {
-
-        // Obter o código de todas as pesquisas
-        return Observable.from(this.idPesquisasValidas)
-            .flatMap(idPesquisa => {
-
-                let pesquisa$ = this.getInfoPesquisa(idPesquisa.toString());
-                let indicadores$ = this.getNomesPesquisa(idPesquisa.toString(), [idIdentificador.toString()]);
-
-                return Observable.zip(pesquisa$, indicadores$)
-                    .map(([pesquisa, indicadores]) => {
-
-                        pesquisa['indicadores'] = indicadores;
-
-                        return pesquisa;
-                    })
-            })
-            .filter(pesquisa => { 
-                
-                return pesquisa['indicadores'].length > 0;
-        
-            }).map(resultado => {
-
-                return resultado;
-            });
-    }
-
+ 
 
     _excludeNullYearsFromResultados(json) {
         /* elimina os anos que todas as localidades tenham valor null */

@@ -52,7 +52,9 @@ export class PanoramaComponent implements OnInit {
 
         const groupBy$ = configuracao$.map(config => this._groupIndicadores(config));
         const indicadores$ = groupBy$.combineLatest(this.localidade$)
-            .mergeMap(([obj, localidade]) => this._indicadorService.getVariosIndicadoresById(obj.indicadorMapPesquisa, obj.indicadores, Localidade.alterarContexto(localidade.parent.codigo, NiveisTerritoriais.municipio), true));
+            .mergeMap(([obj, localidade]) => {
+                return this._indicadorService.getVariosIndicadoresById(obj.indicadorMapPesquisa, obj.indicadores, Localidade.alterarContexto(localidade.parent.codigo, NiveisTerritoriais.municipio), true)
+            });
 
 
         const setConfiguracaoBasica$ = configuracao$.map(config => configState => Object.assign({}, configState, config));

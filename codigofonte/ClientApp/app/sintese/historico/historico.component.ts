@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AppState } from '../../shared2/app-state';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
 import { SinteseService } from '../sintese.service';
 
 @Component({
