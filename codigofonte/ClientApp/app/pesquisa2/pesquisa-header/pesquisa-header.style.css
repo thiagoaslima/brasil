@@ -382,6 +382,22 @@
 }
 
 
+
+
+
+    .cabecalho__visualizacao-dados__item--local__atual{
+        display: table;
+        height: 52px;
+    }
+
+    .cabecalho__visualizacao-dados__item__label{
+        display: table-cell;
+        vertical-align: middle;
+        line-height: 16px;
+        height: 56px;
+        width: 1%;
+    }
+
 @media screen and (max-width: 768px) {
     /*Mobile*/
     .cabecalho{

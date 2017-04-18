@@ -243,4 +243,9 @@ export class PanoramaTemasComponent implements OnInit {
 
         
     }
+	
+public goToTop(tema): void {
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, tema);
+         this.pageScrollService.start(pageScrollInstance);
+     }; 
 }
