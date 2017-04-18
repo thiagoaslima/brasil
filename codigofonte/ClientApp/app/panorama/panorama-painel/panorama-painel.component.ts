@@ -44,6 +44,9 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     private _isOnScreen = false;
     private _isOnScreen$ = new BehaviorSubject<Boolean>(this._isOnScreen);
+
+    public shouldAppear$: Observable<Boolean>;
+    private _novosDados = true;
     
     constructor (
         private element: ElementRef,
@@ -64,6 +67,17 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             .filter(Boolean)
             // .sample(this._isOnScreen$.filter(isOnScreen => isOnScreen.valueOf()))
             .do(indicador => this.localSelecionado = indicador.id);
+        
+        this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
+            debugger;
+            let novosDados = this._novosDados;
+            if (isOnScreen) {
+                this._novosDados = false;
+            }
+            let shouldAppear = isOnScreen || !novosDados
+            debugger;
+            return shouldAppear;
+        })
     }
 
     onScroll(evt) {
@@ -106,12 +120,14 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: { [label: string]: SimpleChange }) {
         if (changes.hasOwnProperty('localidade') && Boolean(changes.localidade.currentValue)) {
+            this._novosDados = true;
             this.uf = changes.localidade.currentValue.parent;
             this.mun = changes.localidade.currentValue;
             
         }
 
         if (changes.hasOwnProperty('dados') && Boolean(changes.dados.currentValue) && Boolean(changes.dados.currentValue.length)) {
+            this._novosDados = true;
             this._selecionarIndicador$.next(changes.dados.currentValue[0].indicador)
         }
     }
