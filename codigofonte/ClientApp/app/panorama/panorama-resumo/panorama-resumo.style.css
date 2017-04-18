@@ -249,5 +249,29 @@
         margin: 0 auto;
     }
     
+    /*Menu resumo fixo na rolagem*/
+    .resumo-fixo{
+        position: fixed;
+        top:144px;
+        z-index: 1;
+        width: 100%;
+    }
+    /*.resumo-fixo div{ position: relative; }
+    .resumo-fixo div div{ position: relative; }
+    .resumo-fixo div div div{ position: relative; }*/
+    .resumo-fixo.resumo__icons__1{ margin-left: 0;}
+    .resumo-fixo.resumo__icons__2{ margin-left: 20%;}
+    .resumo-fixo.resumo__icons__3{ margin-left: 40%;}
+    .resumo-fixo.resumo__icons__4{ margin-left: 60%;}
+    .resumo-fixo.resumo__icons__5{ margin-left: 80%;}
+   
+    .resumo-fixo .temas__horizontais{
+        width: 20%;
+        box-sizing: border-box;
+        
+    }
+   
+    
+    
     
 }

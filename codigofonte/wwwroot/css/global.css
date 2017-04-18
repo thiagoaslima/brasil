@@ -353,7 +353,7 @@ sintese>dados
         min-height: 55px;
     }
     aside.localidade--static #localidade h1{
-        min-height: auto;
+        /*min-height: auto;*/
     }
 
     .localidade--static #localidade{
