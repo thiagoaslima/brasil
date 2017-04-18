@@ -109,22 +109,10 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60041,
-                titulo: "IDEB - Anos iniciais do ensino fundamental",
+                titulo: "IDEB - Anos  iniciais do ensino fundamental",
                 subtitulo: "Anos iniciais e finais do ensino fundamental",
                 tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "IDEB - Anos iniciais do ensino fundamental",
-                    tipo: TiposGrafico.linha,
-                    dados: [{
-                        pesquisaId: 10058,
-                        indicadorId: 60041
-                    },
-					{
-                        pesquisaId: 10058,
-                        indicadorId: 60042
-                    }]
-                }
+                visualizacao: PanoramaVisualizacao.painel
             },
             {
                 pesquisaId: 10058,
@@ -132,19 +120,7 @@ export const PANORAMA = {
                 titulo: "IDEB - Anos finais do ensino fundamental",
                 subtitulo: "Anos finais do ensino fundamental",
                 tema: TEMAS.educacao,
-                visualizacao: PanoramaVisualizacao.grafico,
-                grafico: {
-                    titulo: "IDEB - finais do ensino fundamental",
-                    tipo: TiposGrafico.linha,
-                    dados: [{
-                        pesquisaId: 10058,
-                        indicadorId: 60041
-                    },
-					{
-                        pesquisaId: 10058,
-                        indicadorId: 60042
-                    }]
-                }
+                visualizacao: PanoramaVisualizacao.painel
             },
             
 
