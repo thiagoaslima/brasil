@@ -1,3 +1,5 @@
+<span id="topo"></span>
+<div class="button_voltarTopo" (click)="goToTop('#topo')"><i aria-hidden="true" class="fa fa-chevron-up"></i> Voltar ao topo</div>
 <template ngFor let-tema [ngForOf]="temas" let-i="index">
     <p [id]="tema.tema.substr(0,2).toLowerCase()"></p>
     <div [class.borda]="i!=0" ></div>
