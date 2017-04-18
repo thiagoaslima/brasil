@@ -73,8 +73,8 @@ export class RootComponent implements OnInit, OnDestroy {
         this._routerParams.params$.subscribe(({params}) => {
             if(params.pesquisa)
                 this.itemSelecionado = 'pesquisa';
-            else
-                this.itemSelecionado = 'panorama';
+            // else
+            //     this.itemSelecionado = 'panorama';
         });
     }
 

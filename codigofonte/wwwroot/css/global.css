@@ -48,6 +48,7 @@ body.municipio{
 	background: -ms-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: linear-gradient( to right, #1b779b 21%,#E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
+
 header{
     background-color: #E6E6E6;
     /*max-width: 1900px;*/
@@ -241,6 +242,19 @@ sintese>dados
     min-height: 100%;
 }
 
+.button_voltarTopo {
+	top: 35px;
+	margin-left: -20%;
+	position: fixed;
+	border-bottom: 1px solid #ccc;
+	color: #333;
+	font-weight: bold;
+	cursor: pointer;
+	display:none;
+	
+	
+	}
+
 #sintese #detalhes{
     background-color: #FFFFFF;
     float: left;
@@ -348,7 +362,7 @@ sintese>dados
     aside #localidade {
         padding: 7px 5%;
     }
-    
+
     aside #localidade h1{
         min-height: 55px;
     }
@@ -368,7 +382,7 @@ sintese>dados
         z-index: 13;
         transform: translateY(17px);
     }
-    
+
     aside.aside--municipio.localidade--static{
         margin-top: 58px;
     }
@@ -475,8 +489,6 @@ sintese>dados
     #sintese #detalhes{
         width: 100vw;
     }
-    
-    
 }
 
 

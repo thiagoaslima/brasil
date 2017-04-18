@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { LocalidadeService } from '../shared/localidade/localidade.service';
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/pluck';
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import { DOCUMENT } from '@angular/platform-browser';
 
 
 @Component({
@@ -27,7 +29,9 @@ export class SinteseComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _localidadeService: LocalidadeService,
         private _sinteseService: SinteseService,
-        private _routerParams:RouterParamsService
+        private _routerParams:RouterParamsService,
+		private pageScrollService: PageScrollService,
+		@Inject(DOCUMENT) private document: any
     ) { };
 
     ngOnInit() {
@@ -88,4 +92,6 @@ export class SinteseComponent implements OnInit, OnDestroy {
         return nivel;
     }
 
+   
+	 
 }
