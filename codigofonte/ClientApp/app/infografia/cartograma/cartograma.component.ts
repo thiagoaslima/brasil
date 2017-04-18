@@ -1,6 +1,7 @@
 import { Inject, Component, Input, OnInit, OnChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
+import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { Localidade, NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { Resultado } from '../../shared2/resultado/resultado.model';
@@ -47,7 +48,8 @@ export class CartogramaComponent implements OnInit, OnChanges {
     constructor(
         private _mapaService: MapaService,
         private _localidadeService: LocalidadeService2,
-        private _routerParams:RouterParamsService
+        private _indicadorService: IndicadorService2,
+        private _routerParams: RouterParamsService
     ) { }
 
     ngOnInit() {
@@ -64,11 +66,18 @@ export class CartogramaComponent implements OnInit, OnChanges {
             .combineLatest(this.localidade$)
             .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
             .flatMap(([indicador, localidade]) => {
+                return Observable.zip(
+                    this._indicadorService.getIndicadoresById(indicador.pesquisaId, indicador.id, EscopoIndicadores.proprio, Localidade.alterarContexto(localidade.parent.codigo, NiveisTerritoriais.municipio) ),
+                    Observable.of(localidade),
+                    this._localidadeService.getMunicipiosByRegiao(localidade.parent.codigo.toString())
+                )
+            })
+            .flatMap(([indicador, localidade]) => {
 
                 const municipios = this._localidadeService.getMunicipiosByRegiao(localidade.parent.codigo.toString());
 
                 return Observable.zip(
-                    ...municipios.map(localidade => indicador.getResultadoByLocal(localidade.codigo))
+                    ...municipios.map(localidade => indicador[0].getResultadoByLocal(localidade.codigo))
                 );
             })
             .map(resultados => {
@@ -112,7 +121,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
 
     public getCenter(geometries, codigo) {
         if (codigo) {
-            let el = geometries.find(item => item.codigo.toString().substring(0,6) == codigo.toString().substring(0,6));
+            let el = geometries.find(item => item.codigo.toString() == codigo.toString().substring(0,6));
             if (el.center)
                 return el.center;
             else
