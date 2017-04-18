@@ -186,11 +186,18 @@ export class MapaService {
 
         });
 
-        // inverte o mapa na vertical...
-        n *= -1; s *= -1;[n, s] = [s, n];
+        model.bbox = [o, s, l, n]; // salva os extremos naturais do mapa
+        // estende os extremos em 10% da maior dimensão
+        let dx = model.bbox[2] - model.bbox[0];
+        let dy = model.bbox[1] - model.bbox[3];
+        let d = dx > dy ? dx*0.05 : dy*0.05;
+        model.bbox[0] -= d;
+        model.bbox[1] -= d;
+        model.bbox[2] += d;
+        model.bbox[3] += d;
 
-        model.viewBox = [o, s, (l - o), (n - s)].join(" ");
-        model.bbox = [o, s, l, n];
+        // cria o viewBox de modo a inverter norte e sul, pois o mapa será invertido na vertical
+        model.viewBox = [model.bbox[0], -model.bbox[3], model.bbox[2]-model.bbox[0], model.bbox[3]-model.bbox[1]].join(" ");
 
         return model;
     }

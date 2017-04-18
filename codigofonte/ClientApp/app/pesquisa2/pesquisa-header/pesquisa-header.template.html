@@ -40,7 +40,7 @@
     </div>
     <div class="cabecalho__visualizacao-dados">
         <div class="cabecalho__visualizacao-dados__item">
-            {{ localidade?.nome }}
+            <div class="cabecalho__visualizacao-dados__item__label">{{ localidade?.nome }}</div>
         </div>
 
         <busca-header [localidadeAtual]="localidade1" (onLocalidade)="setaLocalidade1($event);"></busca-header>
