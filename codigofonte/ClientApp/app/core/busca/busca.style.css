@@ -31,7 +31,8 @@
 .busca.aberto .busca__auto-completar{
     display: block;
     z-index: 1;
-    
+    max-height: 100vh;
+    overflow: scroll;
 }
 
 
