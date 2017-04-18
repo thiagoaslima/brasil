@@ -27,7 +27,7 @@
        
     </div>
 
-    <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
+    <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="tema.localidade"></panorama-painel>
     
     <div class="grafico" *ngFor="let grafico of tema.grafico">
         
@@ -43,7 +43,7 @@
             </div>
         </div>
         
-        <grafico [localidade]="localidade" [indicadores]="grafico.dados" [tipoGrafico]="grafico.tipo"></grafico>
+        <grafico [localidade]="tema.localidade" [indicadores]="grafico.dados" [tipoGrafico]="grafico.tipo"></grafico>
     </div>
 </template>
 

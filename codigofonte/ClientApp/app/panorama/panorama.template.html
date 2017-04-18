@@ -1,11 +1,11 @@
 <div id='sintese'>
 
     <section id='dados'>
-        <panorama-resumo [dados]="resumo$ | async" [localidade]="localidade$ | async" (temaSelecionado)="handleTemaSelecionado($event)"></panorama-resumo>
+        <panorama-resumo [dados]="resumo$ | async" (temaSelecionado)="handleTemaSelecionado($event)"></panorama-resumo>
     </section>
 
     <section id='detalhes'>
-        <panorama-temas [dados]="temas$ | async" [localidade]="localidade$ | async" [temaSelecionado]="temaSelecionado"></panorama-temas>
+        <panorama-temas [dados]="temas$ | async" [temaSelecionado]="temaSelecionado"></panorama-temas>
     </section>
     
 </div>

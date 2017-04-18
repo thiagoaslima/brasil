@@ -151,6 +151,8 @@ export class Indicador {
 
     private _resultados: {[codigoLocalidade: number]: Observable<Resultado>} = Object.create(null);
     getResultadoByLocal(codigoLocalidade: number): Observable<Resultado> {
+        debugger;
+        
         if (!this._resultados[codigoLocalidade]) {
             this._resultados[codigoLocalidade] = Resultado.get(this.pesquisaId, this.posicao.toString(), codigoLocalidade)
                 .do(resultado => this._resultados[codigoLocalidade] = Observable.of(resultado))

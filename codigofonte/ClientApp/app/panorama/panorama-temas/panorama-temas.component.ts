@@ -28,7 +28,7 @@ export class PanoramaTemasComponent implements OnInit {
         painel: PanoramaConfigurationItem[],
         grafico: GraficoConfiguration[]
     };
-    @Input() localidade: Localidade;
+    localidade: Localidade;
 
     @Input() temaSelecionado: String = '';
 
@@ -80,8 +80,11 @@ export class PanoramaTemasComponent implements OnInit {
 
 
     ngOnChanges(changes: SimpleChanges) {
-        this.goToTema();
-        this.configurarTextosTemas();
+        if (changes.temas && changes.temas.currentValue && changes.temas.currentValue.length > 0) {
+            this.localidade = changes.temas.currentValue[0].localidade;
+            this.goToTema();
+            // this.configurarTextosTemas();
+        }
     }
 
     private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any> {

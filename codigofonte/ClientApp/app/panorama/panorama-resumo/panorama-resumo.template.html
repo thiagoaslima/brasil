@@ -8,7 +8,7 @@
                     {{ item.titulo || item.indicador?.nome }}
                 </h3>
                 <p class="topo__valor">
-                    {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente }}
+                    {{ (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.valorValidoMaisRecente }}
                 </p>
             </div>
 
@@ -52,12 +52,12 @@
                     <td></td>
                     <td class="lista__nome">
                         {{item.titulo || item.indicador?.nome}}
-                        <small *ngIf="(item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente">
-                        {{ '[' + (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.periodoValidoMaisRecente + ']' }}
+                        <small *ngIf="(item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.periodoValidoMaisRecente">
+                        {{ '[' + (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.periodoValidoMaisRecente + ']' }}
                         </small>
                     </td>
                     <td class="lista__valor">
-                        {{ (item.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado}}
+                        {{ (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.valorValidoMaisRecente | resultado}}
                         <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
                     </td>
                     <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
