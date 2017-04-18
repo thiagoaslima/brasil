@@ -382,6 +382,22 @@
 }
 
 
+
+
+
+    .cabecalho__visualizacao-dados__item--local__atual{
+        display: table;
+        height: 52px;
+    }
+
+    .cabecalho__visualizacao-dados__item__label{
+        display: table-cell;
+        vertical-align: middle;
+        line-height: 16px;
+        height: 52px;
+        width: 1%;
+    }
+
 @media screen and (max-width: 768px) {
     /*Mobile*/
     .cabecalho{
@@ -411,7 +427,7 @@
     .cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
         width: 33%;
     }
-
+    
     .por-estado__selecionar-municipio{
         min-width: 207px;
         max-width: 207px;
