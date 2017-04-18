@@ -394,7 +394,7 @@
         display: table-cell;
         vertical-align: middle;
         line-height: 16px;
-        height: 52px;
+        height: 56px;
         width: 1%;
     }
 
@@ -427,7 +427,7 @@
     .cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
         width: 33%;
     }
-    
+
     .por-estado__selecionar-municipio{
         min-width: 207px;
         max-width: 207px;

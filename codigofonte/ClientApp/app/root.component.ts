@@ -76,9 +76,10 @@ export class RootComponent implements OnInit, OnDestroy {
              }
          });*/
         //marca a opção no menu, baseado na rota
+
         this._routerParams.params$.subscribe(({ params, queryParams }) => {
             this.itemSelecionado = params.pesquisa ? 'pesquisa' : 'panorama';
-            this.menuAberto = queryParams['detalhes'] == 'true'
+            this.menuAberto = queryParams['detalhes'] == 'true';
         });
     }
 

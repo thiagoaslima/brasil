@@ -33,7 +33,7 @@
 
         <nav id="menu" [class.aberto]="menuGlobalAberto">
             <ul>
-                <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false">
+                <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'panorama'">
                     <a style="display:block" [routerLink]="getLink('panorama')">Panorama</a>
                 </li>
 
@@ -41,7 +41,7 @@
                     <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
                 </li>
 
-                <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false">
+                <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'historico'">
                     <a style="display:block" [routerLink]="getLink('historico')">Histórico</a>
                 </li>
             </ul>

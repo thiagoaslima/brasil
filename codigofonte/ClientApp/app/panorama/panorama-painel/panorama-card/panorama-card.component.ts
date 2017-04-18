@@ -87,9 +87,8 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     template:`
         <div class="card__regua-comparacao">
             <p>{{title}}</p>
-            <div class="card__regua-comparacao__regua" [attr.pos]="posicao" [attr.len]="itens" [attr.ranking]="ranking">
-                <p *ngIf="!ranking">Nenhum dado sobre o item</p>
-                <div *ngIf="ranking" [ngStyle]='{right: cssRanking }' class="card__regua-comparacao__regua__marcador"></div>
+            <div class="card__regua-comparacao__regua" [class.card__regua-comparacao__regua--desabilitada]="!ranking" [attr.pos]="posicao" [attr.len]="itens" [attr.ranking]="ranking">
+                <div [ngStyle]='{right: cssRanking}' class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
     `,

@@ -14,20 +14,29 @@
 
         </div>
         
-        <!-- Posteriormente pode entrar este menu. Por enquanto fica desativado -->
+        
             
-            
-        <div *ngIf="tema.tema" class="mobile__exclusive temas__horizontais">
+        <!--Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo    -->
+        <div [ngClass]="{'resumo__icons__1':tema.tema==='Trabalho','resumo__icons__2':tema.tema==='Educação','resumo__icons__3':tema.tema==='Território e Ambiente','resumo__icons__4':tema.tema==='Economia','resumo__icons__5':tema.tema==='Saúde', 'resumo-fixo': isHeaderStatic | async}"
+            >
+        <div *ngIf="tema.tema" class="mobile__exclusive temas__horizontais ">
             <div [ngSwitch]="tema.tema" class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
-                <div *ngSwitchCase="'Agricultura'" class="ico ico--agri"></div>
-                <div *ngSwitchCase="'Educação'"class="ico ico--edu"></div>
-                <div *ngSwitchCase="'Economia'" class="ico ico--eco"></div>
-                <div *ngSwitchCase="'Território e Ambiente'" class="ico ico--ambi"></div>
+               
+               <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
+               Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
+               e se recalcular as margens de todas as anteriores-->
+               <div *ngSwitchCase="'Trabalho'" class="ico ico--trab "></div>
+               <div *ngSwitchCase="'Educação'"class="ico ico--edu "></div>
+               <div *ngSwitchCase="'Território e Ambiente'" class="ico ico--ambi "></div>
+               <div *ngSwitchCase="'Economia'" class="ico ico--eco "></div>
+               <div *ngSwitchCase="'Saúde'" class="ico ico--sau "></div>
+               
+                <!--<div *ngSwitchCase="'Agricultura'" class="ico ico--agri "></div>
                 <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
-                <div *ngSwitchCase="'Saúde'" class="ico ico--sau"></div>
-                <div *ngSwitchCase="'Trabalho'" class="ico ico--trab"></div>
-                <div *ngSwitchCase="'Frota'" class="ico ico--frota"></div>
+                <div *ngSwitchCase="'Frota'" class="ico ico--frota"></div>-->
+            
             </div>
+        </div>
         </div>
 
         <table *ngIf="tema.tema" class="lista">
@@ -71,7 +80,7 @@
 
         </table>
     </template>
-
+	
     <!--
     <div class="topo">
         <div class="topo__celula-esquerda">

@@ -6,14 +6,17 @@ import {
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges
+    SimpleChanges, 
+    HostListener
 } from '@angular/core';
+
 
 import { PanoramaDescriptor, PanoramaConfigurationItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
     selector: 'panorama-resumo',
@@ -26,9 +29,25 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
 
     @Output() temaSelecionado = new EventEmitter();
     
+    public isHeaderStatic;
+    private _scrollTop$ = new BehaviorSubject(0);
+
+
+    @HostListener('window:scroll', ['$event']) onScroll({target}) {
+        if (target) {
+            let scrollTop = target.body.scrollTop;
+            this._scrollTop$.next(scrollTop);
+        }
+    }
+
+    
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
+        
+        
+    }
 
     ngOnChanges(changes: SimpleChanges) {}
 

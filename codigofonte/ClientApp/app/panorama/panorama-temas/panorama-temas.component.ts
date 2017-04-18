@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges, ViewChild, ElementRef, Inject } from '@angular/core';
+import { isBrowser, isNode } from 'angular2-universal/browser';
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
@@ -31,6 +32,8 @@ export class PanoramaTemasComponent implements OnInit {
     localidade: Localidade;
 
     @Input() temaSelecionado: String = '';
+
+    isPrerender = isNode;
 
     textoTrabalho = "";
     textoMeioAmbiente = "";
@@ -240,4 +243,9 @@ export class PanoramaTemasComponent implements OnInit {
 
 
     }
+	
+public goToTop(tema): void {
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, tema);
+         this.pageScrollService.start(pageScrollInstance);
+     }; 
 }
