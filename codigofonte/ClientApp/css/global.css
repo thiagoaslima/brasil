@@ -57,7 +57,7 @@ header{
     display: table;
     width: 100%;
     
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     z-index: 20;
@@ -131,7 +131,7 @@ aside{
     color: #fff;
     /*padding: 2% 0%;*/
     z-index: 5;
-    position: absolute;
+    position: fixed;
 }
 
 aside.aside--municipio{
@@ -242,6 +242,19 @@ sintese>dados
     min-height: 100%;
 }
 
+.button_voltarTopo {
+	top: 35px;
+	margin-left: -20%;
+	position: fixed;
+	border-bottom: 1px solid #ccc;
+	color: #333;
+	font-weight: bold;
+	cursor: pointer;
+	display:none;
+	
+	
+	}
+
 #sintese #detalhes{
     background-color: #FFFFFF;
     float: left;
@@ -295,6 +308,15 @@ sintese>dados
     width: 62%;
     height: 100%;
     overflow-y: auto;
+}
+
+#home-compartilhar-container .n2s-share-btn{
+      background: #666;
+      color:white;
+    }
+#home-compartilhar-container .n2s-share-btn:hover{
+    background: white;
+    color:#165D72;
 }
 
 @media screen and (max-width: 768px) {

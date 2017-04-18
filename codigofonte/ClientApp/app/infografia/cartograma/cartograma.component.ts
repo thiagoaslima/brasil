@@ -124,6 +124,17 @@ export class CartogramaComponent implements OnInit, OnChanges {
     public getIconHeight(bbox, pos) {
         return bbox[3]-pos[1];
     }
+    public getPercLeftIconPosition(bbox, pos) {
+        return Math.round(100*(pos[0]-bbox[0])/(bbox[2]-bbox[0]));
+    }
+    public getPercRightIconPosition(bbox, pos) {
+        return 100 - this.getPercLeftIconPosition(bbox, pos);
+    }
+    public getPercIconPosition(bbox, pos) {
+        let left = this.getPercLeftIconPosition(bbox, pos);
+        let right = this.getPercRightIconPosition(bbox, pos);
+        return left < right ? {left: left, right: 0, align: 'left', borderLeft: 3, borderRight: 0} : {left: 0, right: right, align: 'right', borderLeft: 0, borderRight: 3};
+    }
 
 }
 

@@ -27,7 +27,23 @@
 	}
 }
 /*Fim do hack ie11 */
-
+.mapa__label--mun-selecionado {
+    width: 100%;
+    padding-bottom: 3px;
+}
+.mapa__label--mun-selecionado .tip {
+    font-size: 0.7em;
+    padding: 0;
+    /*border-bottom: 2px solid black;*/
+}
+.ic-mun-selecionado--circle-top {
+    fill: #ff1f76;
+    stroke: none;
+}
+.ic-mun-selecionado--path {
+    stroke: #ff1f76;
+    stroke-width: 1px;
+}
 
 #faixas{
     padding:0 0 7px 5%;

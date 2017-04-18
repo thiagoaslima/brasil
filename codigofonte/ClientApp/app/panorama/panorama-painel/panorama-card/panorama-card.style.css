@@ -134,6 +134,14 @@
     height: 17px;
 }
 
+.card__regua-comparacao__regua--desabilitada{
+    background-image: url(./../../../../img/barra-compacarao-cinza.png);
+}
+
+.card__regua-comparacao__regua--desabilitada div{
+    display: none;
+}
+
 .card__regua-comparacao__regua__marcador{
     position: absolute;
     background-image: url(./../../../../img/seta-marca-comparacao.png);
