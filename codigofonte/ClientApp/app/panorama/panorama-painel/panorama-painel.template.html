@@ -2,8 +2,8 @@
             <h2>{{dados.tema}}</h2>
             
             <div>
-                <div class="cartograma" *ngIf="!isMobile() && (_isOnScreen$ | async)">
-                    <cartograma *ngIf="!isPrerender" [localidade]="mun" [indicador]="indicador$ | async"></cartograma>
+                <div class="cartograma" *ngIf="!isMobile() && (shouldAppear$ | async)">
+                    <cartograma [localidade]="mun" *ngIf="!isPrerender" [indicador]="indicador$ | async"></cartograma>
                 </div>
             </div>
             
