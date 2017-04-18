@@ -10,6 +10,8 @@ import {
     SimpleChange
 } from '@angular/core';
 
+import { isBrowser, isNode } from 'angular2-universal/browser';
+
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
@@ -33,6 +35,8 @@ import 'rxjs/add/operator/sample';
 export class PanoramaPainelComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaConfigurationItem;
     @Input() localidade: Localidade;
+
+    isPrerender = isNode;
 
     public uf: Localidade;
     public mun: Localidade;

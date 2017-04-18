@@ -3,7 +3,7 @@
             
             <div>
                 <div class="cartograma" *ngIf="!isMobile() && (_isOnScreen$ | async)">
-                    <cartograma [localidade]="mun" [indicador]="indicador$ | async"></cartograma>
+                    <cartograma *ngIf="!isPrerender" [localidade]="mun" [indicador]="indicador$ | async"></cartograma>
                 </div>
             </div>
             
