@@ -150,11 +150,16 @@ export class IndicadorService2 {
             .catch(err => Observable.of({ json: () => [{res: []}] }))
             .map(res => res.json())
             .map(arr => {
-                const res = arr[0].res[0]
-                res.posicaoAbsoluta = res['#'];
-                res.periodo = periodo;
-                delete(res['#']);
-                return res;
+                if (arr && arr[0] && arr[0].res) {
+                    const res = arr[0].res[0]
+                    res.posicaoAbsoluta = res['#'];
+                    res.periodo = periodo;
+                    delete(res['#']);
+
+                    return res;
+                } else {
+                    return {};
+                }
             })
             // .map( ([{res}]) => {
             //     const obj = res.find(obj => obj.localidade === codigoLocalidade.toString());
