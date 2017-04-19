@@ -319,6 +319,29 @@ sintese>dados
     color:#165D72;
 }
 
+.botao .n2s-share-btn{
+      background: transparent !important;
+      color:#165D72 !important;
+    }
+.botao .n2s-share-btn:hover{
+    color:#333 !important;
+}
+.botao .n2s-share-btn-more{
+    /*display: inline-block !important;*/
+    font: normal normal normal 14px/1 FontAwesome !important;
+    font-size: 0 !important;
+    text-rendering: auto !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    background: #eee !important;
+    height: 20px !important;
+    margin-top: 7px !important;
+}
+.botao .n2s-share-btn-more:before {
+    content: "\f1e0" !important;
+    font-size: 15px !important;
+}
+
 @media screen and (max-width: 768px) {
     /*Mobile*/
     body, body.municipio, body.brasil, body.estado{

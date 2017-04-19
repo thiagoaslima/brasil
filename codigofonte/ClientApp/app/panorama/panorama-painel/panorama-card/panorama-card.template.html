@@ -80,6 +80,16 @@
             <div class="botao">
                 <button (click)="navegarTabela();"><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
             </div>
+
+            <div class="botao">
+                <share-container
+                    [secondaryPlatforms]="['twitter','facebook','googlePlus','linkedin']"
+                    [platforms]="[]"
+                    [properties]="{title:'IBGE', description:'Brasil em Síntese', via:'IBGE', hashtags:'IBGE'}"
+                    [textEnabled]="false"
+                    [expandable]="true">
+                </share-container>
+            </div>
         </div>
 
     </div>
