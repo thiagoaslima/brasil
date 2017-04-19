@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="botao">
+        <div class="botao" *ngIf="indicadores && indicadores.length && _pesquisasConfig.isValida(indicadores[0].pesquisaId)">
             <button (click)="navegarTabela();"><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
         </div>
     </div>
