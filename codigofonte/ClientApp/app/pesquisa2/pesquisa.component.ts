@@ -73,6 +73,8 @@ export class PesquisaComponent2 implements OnInit {
             this.localidades[1] = urlParams.queryParams['localidade1'];
             this.localidades[2] = urlParams.queryParams['localidade2'];
 
+            this.localidades = this.localidades.slice(0);
+
             // Obter período de análise
             this.periodo = urlParams.queryParams['ano'];
 
