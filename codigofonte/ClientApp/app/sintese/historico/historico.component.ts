@@ -39,8 +39,8 @@ export class HistoricoComponent implements OnInit {
 
     isHistoricoVazio(): boolean {
 
-        return  !this.historico.historico && 
+        return  !this.historico || (!this.historico.historico && 
                 !this.historico.fonte &&
-                !this.historico.formacaoAdministrativa;
+                !this.historico.formacaoAdministrativa);
     }
 }

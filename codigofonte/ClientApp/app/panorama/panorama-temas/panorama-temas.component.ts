@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Observer, Observable } from 'rxjs';
 
+import { isBrowser, isNode } from 'angular2-universal/browser';
+
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { Localidade } from '../../shared/localidade/localidade.interface';
@@ -34,6 +36,8 @@ export class PanoramaTemasComponent implements OnInit {
     @Input() localidade: Localidade;
 
     @Input() temaSelecionado: String = '';
+
+    isPrerender = isNode;
 
     textoTrabalho = "";
     textoMeioAmbiente = "";
