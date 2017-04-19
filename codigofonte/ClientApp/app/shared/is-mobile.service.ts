@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { isBrowser } from 'angular2-universal';
 
 @Injectable()
 export class IsMobileService {
@@ -8,11 +9,18 @@ export class IsMobileService {
     private _iOS = undefined;
     private _opera = undefined;
     private _windows = undefined;
+
+
+    private _userAgent = "";
     
-    constructor() {}
+    constructor() {
+        if (isBrowser) {
+            this._userAgent = navigator.userAgent;
+        }
+    }
 
     private match(regexp) {
-        return navigator.userAgent.match(regexp) && navigator.userAgent.match(regexp).length > 0;
+        return this._userAgent.match(regexp) && this._userAgent.match(regexp).length > 0;
     }
 
     Android() {
