@@ -21,6 +21,7 @@ td.s{
 
 td.label {
     border-right: 3px solid #fff;
+    background-color: #e6e6e6;
 }
 
 .nivel-2{
@@ -30,6 +31,7 @@ td.label {
 .nivel-2 td {
 	padding: 13px 2%;
 	}
+    
 
 .nivel-2:hover {
 	background-color: #E6E6E6;
@@ -153,6 +155,7 @@ tr.nivel-4 td:first-child {
     
     font-weight: bold;
     text-transform: uppercase;
+    background-color: #e6e6e6;
 }
 
 .nivel-5.aberto .label{
@@ -181,10 +184,11 @@ tr.nivel-4 td:first-child {
 
     background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');
     background-repeat: no-repeat; 
+    background-color: #e6e6e6;
 }
 
 .nivel-6 td{
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .nivel-6.aberto .label{
@@ -290,11 +294,6 @@ tr.nivel-4 td:first-child {
     width: 28%;
     /*background-color: red;*/
 }
-
-.acoes .acao{
-
-}
-
 
 .valor{
     text-align: right;
@@ -426,17 +425,23 @@ td.compara-blank {
 
     .mobile-unidade{
         display: inline;
+        font-size: .8em;
     }
 
     .mobile-tr .s{
         display: inline-block;
         width: 32%;
+        border-left: 3px solid #E6E6E6;
+        height: 46px;
+        text-align: center
     }
 
     .mobile-tr .s.desk-unidade{
         display: none;   
     }
-
+    .mobile-tr .s.sem-valor{
+        display: none;
+    }
     .nivel-2 .valor{
         border-bottom: none;
     }
@@ -455,7 +460,20 @@ td.compara-blank {
 
     .nivel-6 td{
         border-bottom: none;
+        font-weight: bold;
     }
+    
+    .nivel-6 td.p{
+        border-bottom: solid 1px #ccc;
+    }
+
+    .nivel-5 .label--com-acao {
+       font-weight: normal;
+    }
+    .nivel-7 .label--com-acao{
+        font-weight: normal;
+    }
+
     .nivel-1:hover, .nivel-2:hover, .nivel-3:hover, .nivel-4:hover, .nivel-5:hover, .nivel-6:hover, .nivel-7:hover, .nivel-8:hover, .nivel-9:hover{
         background-color: transparent;
     }

@@ -29,7 +29,6 @@ export class ResultadoService2 {
     }
 
     getResultados(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio): Observable<Resultado[]> {
-        if (codigoLocalidade === '500270') { debugger; }
         const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}`;
 
         return this._http.get(url, options)

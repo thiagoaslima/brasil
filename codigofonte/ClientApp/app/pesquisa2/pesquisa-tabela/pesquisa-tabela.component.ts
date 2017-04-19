@@ -147,8 +147,6 @@ export class PesquisaTabelaComponent implements OnChanges {
     //chamada quando abre os nós nível 2 da tabela de dados
     private controlarExibicao(item){
 
-        // debugger;
-
         if(item.nivel < 3) {
 
             return;

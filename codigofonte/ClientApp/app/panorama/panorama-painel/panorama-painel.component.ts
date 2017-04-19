@@ -73,13 +73,12 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             .do(indicador => this.localSelecionado = indicador.id);
         
         this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
-            debugger;
             let novosDados = this._novosDados;
             if (isOnScreen) {
                 this._novosDados = false;
             }
             let shouldAppear = isOnScreen || !novosDados
-            debugger;
+
             return shouldAppear;
         })
     }

@@ -1,5 +1,5 @@
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
-import { Indicador } from '../../shared2/indicador/indicador.model';
+import { Indicador, Ranking } from '../../shared2/indicador/indicador.model';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -28,6 +28,7 @@ export class PanoramaConfigurationItem {
     public visualizacao: string
     public indicador: Indicador
     public grafico: GraficoConfiguration;
+    public ranking: {[contexto: string]: Ranking}
 
     constructor(data) {
         this.titulo = data.titulo || "";
@@ -40,6 +41,9 @@ export class PanoramaConfigurationItem {
         this.unidade = data.unidade || "";
         this.visualizacao = data.visualizacao;
         this.periodo = data.periodo || "";
+        this.ranking = data.ranking 
+            ? data.ranking.reduce( (acc, rank) => Object.assign(acc, {[rank.contexto]: rank}), {}) 
+            : null;
 
         if (data.indicador && data.indicador instanceof Indicador) {
             this.indicador = data.indicador;

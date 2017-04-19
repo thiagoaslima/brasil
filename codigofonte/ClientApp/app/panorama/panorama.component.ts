@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, group, OnDestroy, OnInit } from '@angular/core';
 
 import { AppState } from '../shared2/app-state';
 import { PANORAMA } from './configuration/panorama.configuration';
@@ -61,24 +61,42 @@ export class PanoramaComponent implements OnInit, OnDestroy {
                 configuracaoBase$.next(config);
             });
 
-        const groupBy$ = configuracaoBase$
+        const groupIndicadores$ = configuracaoBase$
             .filter(({indicadores}) => indicadores.length > 0)
             .map(config => this._groupIndicadores(config))
+
+        const groupIndicadoresPainel$  = configuracaoBase$
+            .filter(({indicadores}) => indicadores.length > 0)
+            .map(config => config.indicadores.filter(item => item.visualizacao === PanoramaVisualizacao.painel))
 
         const indicadores$ = this._appState.observable$
             .map(state => state.localidade)
             .filter(Boolean)
             .distinctUntilKeyChanged('codigo')
-            .withLatestFrom(groupBy$)
+            .withLatestFrom(groupIndicadores$)
             .filter(([localidade, obj]) => obj && obj.indicadores.length > 0)
             .mergeMap(([localidade, obj]) => {
-                debugger;
                 return this._indicadorService.getVariosIndicadoresById(obj.indicadorMapPesquisa, obj.indicadores, Localidade.alterarContexto(localidade.parent.codigo, NiveisTerritoriais.municipio), true)
             });
 
-        const configuracaoFull$ = indicadores$
+        const rankings$ = this._appState.observable$
+            .map(state => state.localidade as Localidade)
+            .filter(Boolean)
+            .distinctUntilKeyChanged('codigo')
+            .withLatestFrom(groupIndicadoresPainel$)
+            .filter(([localidade, indicadores]) => indicadores.length > 0)
+            .mergeMap( ([localidade, indicadores]) => {
+                return this._indicadorService.getRankings(
+                    indicadores.map(item => item.indicadorId), 
+                    indicadores.map(item => item.periodo), 
+                    localidade.codigo, 
+                    ['BR', localidade.parent.codigo.toString()]
+                );
+            });
+
+        const configuracaoFull$ = indicadores$.zip(rankings$)
             .withLatestFrom(configuracaoBase$)
-            .map(([indicadores, configuracaoBase]) => {
+            .map(([[indicadores, rankings], configuracaoBase]) => {
 
                 const _indicadores = configuracaoBase.indicadores.map(item => {
                     item = Object.assign({}, item);
@@ -98,6 +116,11 @@ export class PanoramaComponent implements OnInit, OnDestroy {
                             if (indicador) { grafico.indicador = indicador; }
                             return grafico;
                         })
+                    }
+
+                    const ranks = rankings.filter(ranking => ranking.indicador === item.indicadorId);
+                    if (!item.ranking) {
+                        item.ranking = ranks.reduce( (acc, ranking) => Object.assign(acc, {[ranking.contexto]: ranking}), {});
                     }
 
                     return item;
@@ -222,6 +245,7 @@ export class PanoramaComponent implements OnInit, OnDestroy {
             return acc;
         }, Object.create(null))
     }
+
 
     handleTemaSelecionado(tema) {
         this.temaSelecionado = tema;

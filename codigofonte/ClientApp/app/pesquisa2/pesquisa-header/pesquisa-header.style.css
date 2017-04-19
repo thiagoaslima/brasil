@@ -398,6 +398,16 @@
         width: 1%;
     }
 
+@media screen and (max-width: 1000px) {
+    .select__sub-menu__botao{
+        width: 31px;
+    }
+
+    .select__sub-menu .fa.fa-caret-down{
+        display: none
+    }
+}
+
 @media screen and (max-width: 768px) {
     /*Mobile*/
     .cabecalho{
@@ -427,7 +437,7 @@
     .cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
         width: 33%;
     }
-
+    
     .por-estado__selecionar-municipio{
         min-width: 207px;
         max-width: 207px;

@@ -12,6 +12,8 @@ import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';
 
 import { ResultadoPipe } from './resultado.pipe';
 
+import {ShareModule} from 'ng2share/share.module'; //social share module
+
 
 export function getLRU() {
     return new Map();
@@ -22,6 +24,7 @@ const MODULES = [
     CommonModule,
     RouterModule,
     FormsModule,
+    ShareModule,
     ReactiveFormsModule
 ];
 

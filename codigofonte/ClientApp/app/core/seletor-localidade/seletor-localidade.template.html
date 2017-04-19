@@ -146,11 +146,11 @@
             </div>
 
             <div id="todos-municipios">
-                <div class="todos-municipios__titulo" *ngIf="buscaInput.value.length < 3">
+                <div class="todos-municipios__titulo" *ngIf="!buscaInput.value || buscaInput.value.length < 3">
                     Mais acessados:
                 </div>
 
-                <ul *ngIf="buscaInput.value.length < 3 ">
+                <ul *ngIf="!buscaInput.value || buscaInput.value.length < 3 ">
                     <li *ngFor="let municipio of listaMunicipios.maisVistos">
                         <a style="display:block" [routerLink]="municipio?.link">
                             {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
