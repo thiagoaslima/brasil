@@ -103,8 +103,10 @@ export class PanoramaTemasComponent implements OnInit {
                     .map(resultado => {
                         
                         return {
-                            "valor": resultado.valorValidoMaisRecente,
-                            "ano": resultado.periodoValidoMaisRecente
+                            // "valor": resultado.valorValidoMaisRecente,
+                            // "ano": resultado.periodoValidoMaisRecente
+                            "valor": resultado && resultado.valorValidoMaisRecente,
+                            "ano": resultado && resultado.periodoValidoMaisRecente
                         }  
                     });
     }
