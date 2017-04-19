@@ -36,7 +36,7 @@
         </div>
 
         <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
-            <p class="legenda__texto">{{municSelected[0]}}: ({{municSelected[1]}} {{indicador?.unidade.nome}})</p>
+            <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1]}} {{indicador?.unidade.nome}}</span></p>
         </div>
 
     </div>
