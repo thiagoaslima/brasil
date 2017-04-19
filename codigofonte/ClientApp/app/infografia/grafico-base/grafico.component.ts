@@ -7,6 +7,7 @@ import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Resultado } from '../../shared2/resultado/resultado.model';
 import { CommonService } from '../../shared/common.service';
 import { flat } from '../../utils/flatFunctions';
+import { PesquisaConfiguration } from '../../shared2/pesquisa/pesquisa.configuration';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -137,7 +138,8 @@ export class GraficoComponent implements OnInit, OnChanges {
     constructor(
         private _render: Renderer,
         private _commonService: CommonService,
-        private _router: Router
+        private _router: Router,
+        private _pesquisasConfig: PesquisaConfiguration
     ) {
         const resultados$ = this._indicadores$
             .combineLatest(this._localidade$)
