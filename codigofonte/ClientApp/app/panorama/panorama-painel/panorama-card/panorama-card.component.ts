@@ -5,6 +5,7 @@ import { LocalidadeService2 } from '../../../shared2/localidade/localidade.servi
 import { Indicador, EscopoIndicadores } from '../../../shared2/indicador/indicador.model';
 import { IndicadorService2 } from '../../../shared2/indicador/indicador.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { PesquisaConfiguration } from '../../../shared2/pesquisa/pesquisa.configuration';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -33,7 +34,8 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     constructor(
         private _localidadeService: LocalidadeService2,
         private _indicadorService: IndicadorService2,
-        private _router: Router
+        private _router: Router,
+        private _pesquisasConfig: PesquisaConfiguration
     ) { }
 
     ngOnInit() { 
