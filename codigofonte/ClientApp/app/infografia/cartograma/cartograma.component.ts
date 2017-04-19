@@ -73,7 +73,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
             })
             .map(resultados => {
                 return resultados
-                    .map(resultado => Number.parseFloat(resultado.valorValidoMaisRecente))
+                    .map(resultado => Number.parseFloat(resultado && resultado.valorValidoMaisRecente))
                     .filter(val => !Number.isNaN(val))
                     .sort( (a, b) => a < b ? -1 : 1);
             })
