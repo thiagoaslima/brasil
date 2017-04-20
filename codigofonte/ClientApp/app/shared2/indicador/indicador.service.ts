@@ -27,17 +27,6 @@ export class IndicadorService2 {
         })
     }
 
-    private _prefetchMode = {
-        active: false,
-        localidades: []
-    }
-    prefetchResultados(active = true, localidades: number | string | Array<number>) {
-        // console.log('deprecated: do not use prefetchResultados. This function caused side-effects');
-        return;
-        // this._prefetchMode.active = active;
-        // this._prefetchMode.localidades = Array.isArray(localidades) ? localidades : [localidades];
-    }
-
     getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string): Observable<Indicador[]> {
         let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}`;
 
@@ -169,12 +158,6 @@ export class IndicadorService2 {
                     universo: universo
                 } as Ranking
             })
-        // .map( ([{res}]) => {
-        //     const obj = res.find(obj => obj.localidade === codigoLocalidade.toString());
-        //     return Object.assign({}, obj, {totalItens: res.length});
-        // })
-        // .do(indicador => console.log(`getRanking`, indicador))
-        // .share();
     }
 
     public getRankings(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable<Ranking[]> {
