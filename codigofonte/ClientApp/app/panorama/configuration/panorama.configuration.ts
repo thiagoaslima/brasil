@@ -45,7 +45,6 @@ export const PANORAMA = {
                 largura: 'half',
                 visualizacao: PanoramaVisualizacao.numerico
             },
-
             {
                 pesquisaId: 33,
                 indicadorId: 29170,
@@ -55,8 +54,68 @@ export const PANORAMA = {
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
-            // --- Ambiente
+            // --- População
+            {
+                pesquisaId: 23,
+                indicadorId: 22423,
+                titulo: "População residente, religião católica apostólica romana",
+                subtitulo: "População residente, religião católica apostólica romana",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+            {
+                pesquisaId: 23,
+                indicadorId: 22424,
+                titulo: "População residente, religião espírita",
+                subtitulo: "População residente, religião espírita",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+            {
+                pesquisaId: 23,
+                indicadorId: 22426,
+                titulo: "População residente, religião evangélicas",
+                subtitulo: "População residente, religião evangélicas",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+            {
+                pesquisaId: 33,
+                indicadorId: 29171,
+                titulo: "População estimada",
+                subtitulo: "População estimada",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+            {
+                pesquisaId: 33,
+                indicadorId: 29166,
+                periodo: "2010",
+                titulo: "População no último censo",
+                subtitulo: "População no último censo",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.painel
+            },
+            {
+                pesquisaId: 33,
+                indicadorId: 29168,
+                titulo: "Densidade demográfica",
+                subtitulo: "Densidade demográfica",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.painel
+            },
 
+
+
+            // --- Ambiente
+            {
+                pesquisaId: 33,
+                indicadorId: 29167,
+                titulo: "Área da unidade territorial",
+                subtitulo: "Área da unidade territorial",
+                tema: TEMAS.meioAmbiente,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
             {
                 pesquisaId: 10058,
                 indicadorId: 60030,
@@ -95,20 +154,21 @@ export const PANORAMA = {
                 subtitulo: "Índice de Desenvolvimento da Educação Básica",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel,
-               
+
             },
-			{
-				pesquisaId: 10058,
+            {
+                pesquisaId: 10058,
                 indicadorId: 60045,
-				periodo: "2010",
+                periodo: "2010",
                 titulo: "Taxa de escolarização de 6 a 14 anos de idade",
                 subtitulo: "6 a 14 anos de idade",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
-				},
+            },
             {
                 pesquisaId: 10058,
                 indicadorId: 60041,
+                periodo: "2015",
                 titulo: "IDEB - Anos  iniciais do ensino fundamental",
                 subtitulo: "Anos iniciais e finais do ensino fundamental",
                 tema: TEMAS.educacao,
@@ -117,14 +177,12 @@ export const PANORAMA = {
             {
                 pesquisaId: 10058,
                 indicadorId: 60042,
+                periodo: "2015",
                 titulo: "IDEB - Anos finais do ensino fundamental",
                 subtitulo: "Anos finais do ensino fundamental",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
-            
-
-             
 
             {
                 pesquisaId: 13,
@@ -162,7 +220,6 @@ export const PANORAMA = {
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
-
             {
                 pesquisaId: 19,
                 indicadorId: 29763,
@@ -171,7 +228,6 @@ export const PANORAMA = {
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
-
             {
                 pesquisaId: 10058,
                 indicadorId: 60036,
@@ -180,7 +236,6 @@ export const PANORAMA = {
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
-
             {
                 pesquisaId: 10058,
                 indicadorId: 60037,
@@ -199,7 +254,6 @@ export const PANORAMA = {
                 tema: TEMAS.saude,
                 visualizacao: PanoramaVisualizacao.painel
             },
-
             {
                 pesquisaId: 10058,
                 indicadorId: 60032,
@@ -208,24 +262,15 @@ export const PANORAMA = {
                 tema: TEMAS.saude,
                 visualizacao: PanoramaVisualizacao.painel
             },
-
-            // {
-            //     pesquisaId: 10058,
-            //     indicadorId: 60033,
-            //     titulo: "Mortalidade Infantil - óbitos por mil nascidos vivos",
-            //     tema: TEMAS.saude,
-            //     visualizacao: PanoramaVisualizacao.painel
-            // },
+            {
+                pesquisaId: 32,
+                indicadorId: 28242,
+                titulo: "Estabelecimentos de Saúde SUS",
+                tema: TEMAS.saude,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
 
             // --- Economia
-            // {
-            //     pesquisaId: 38,
-            //     indicadorId: 47001,
-            //     titulo: "PIB per capita",
-            //     tema: TEMAS.economia,
-            //     visualizacao: PanoramaVisualizacao.painel
-            // },
-
             {
                 pesquisaId: 10058,
                 indicadorId: 60047,
@@ -242,6 +287,14 @@ export const PANORAMA = {
                 titulo: "Percentual das receitas oriundas de fontes externas",
                 tema: TEMAS.economia,
                 visualizacao: PanoramaVisualizacao.painel
+            },
+
+            {
+                pesquisaId: 37,
+                indicadorId: 30255,
+                titulo: "Índice de Desenvolvimento Humano Municipal",
+                tema: TEMAS.economia,
+                visualizacao: PanoramaVisualizacao.numerico
             }
 
         ]

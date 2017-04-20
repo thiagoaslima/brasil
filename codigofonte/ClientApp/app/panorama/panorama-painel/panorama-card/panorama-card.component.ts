@@ -39,7 +39,9 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() { 
+       /*
         const sync$ = this._dados$
+            .do(dados => {debugger; console.log(dados)})
             .distinct( (a, b) =>  ['pesquisaId', 'indicadorId', 'periodo'].every(key => a[key] === b[key]))
             .filter(dados => dados.pesquisaId && dados.indicadorId && dados.periodo)
             .map(dados => {
@@ -61,9 +63,11 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
         
             
         this.lengthUf$ = this._localidade$.map((localidade: Localidade) => localidade.parent.children.length);
+        
         this.rankingUf$ = sync$
             .flatMap(obj => this._indicadorService.getPosicaoRelativa(obj.pesquisaId, obj.indicadorId, obj.periodo, obj.localidade.codigo, obj.localidade.parent.codigo))
             .share()
+            */
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -81,6 +85,22 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
         // console.log('$$$$$$$$$$$$$$$$$$$$$', this.dados, url);
         this._router.navigate(url.split('/'), {'queryParams' : {ano : this.dados.periodo}});
     }
+
+    getRankingPosition(contexto) {
+        if (!contexto || !this.dados || !this.dados.ranking) {
+            return ''
+        }
+
+        return this.dados.ranking[contexto].ranking
+    }
+
+    getRankingItems(contexto) {
+        if (!contexto || !this.dados || !this.dados.ranking) {
+            return ''
+        }
+        
+        return this.dados.ranking[contexto].qtdeItensComparados;
+    }
 }
 
 @Component({
@@ -90,7 +110,7 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
         <div class="card__regua-comparacao">
             <p>{{title}}</p>
             <div class="card__regua-comparacao__regua" [class.card__regua-comparacao__regua--desabilitada]="!ranking" [attr.pos]="posicao" [attr.len]="itens" [attr.ranking]="ranking">
-                <div [ngStyle]='{right: cssRanking}' class="card__regua-comparacao__regua__marcador"></div>
+                <div [ngStyle]='{right: cssRanking}' [title]="this.posicao + ' de ' + this.itens " class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
     `,
@@ -108,6 +128,9 @@ export class PanoramaCardReguaComponent implements OnChanges {
         if (this.posicao && this.itens) {
             this.ranking = `${(this.posicao/this.itens * 100).toFixed(2)}%`;
             this.cssRanking = `${((this.posicao/this.itens * 100) * 96 / 100 ).toFixed(2)}%`;
+        } else {
+            this.ranking = null;
+            this.cssRanking = null;
         }
     }
 }

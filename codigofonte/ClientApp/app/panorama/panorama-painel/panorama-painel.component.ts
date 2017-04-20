@@ -51,17 +51,15 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     public shouldAppear$: Observable<Boolean>;
     private _novosDados = true;
-    
-    constructor (
+
+    constructor(
         private element: ElementRef,
         @Inject(DOCUMENT) private document,
-        private _isMobileServ:IsMobileService
-        ){
-        
-    }
+        private _isMobileServ: IsMobileService
+    ) { }
 
-    isMobile(){
-        return this._isMobileServ.any(); 
+    isMobile() {
+        return this._isMobileServ.any();
     }
 
     ngOnInit() {
@@ -71,15 +69,14 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             .filter(Boolean)
             // .sample(this._isOnScreen$.filter(isOnScreen => isOnScreen.valueOf()))
             .do(indicador => this.localSelecionado = indicador.id);
-        
+
         this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
-            debugger;
             let novosDados = this._novosDados;
             if (isOnScreen) {
                 this._novosDados = false;
             }
             let shouldAppear = isOnScreen || !novosDados
-            debugger;
+
             return shouldAppear;
         })
     }
@@ -90,7 +87,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     evaluateIsOnScreen(viewWindow) {
         if (
-            !this.element.nativeElement || 
+            !this.element.nativeElement ||
             typeof this.element.nativeElement.getBoundingClientRect !== "function"
         ) {
             return false;
@@ -127,7 +124,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this._novosDados = true;
             this.uf = changes.localidade.currentValue.parent;
             this.mun = changes.localidade.currentValue;
-            
+
         }
 
         if (changes.hasOwnProperty('dados') && Boolean(changes.dados.currentValue) && Boolean(changes.dados.currentValue.length)) {
@@ -137,6 +134,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     }
 
     selectPainel(obj) {
+        debugger;
         this._selecionarIndicador$.next(obj.indicador)
     }
 

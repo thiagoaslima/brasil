@@ -47,12 +47,13 @@ export class CartogramaComponent implements OnInit, OnChanges {
     constructor(
         private _mapaService: MapaService,
         private _localidadeService: LocalidadeService2,
-        private _routerParams:RouterParamsService
+        private _routerParams: RouterParamsService
     ) { }
 
     ngOnInit() {
 
         this.malha$ = this.localidade$
+            .asObservable()
             .filter(Boolean)
             .flatMap((localidade) => {
                 return this._mapaService.getMalhaSubdivisao(localidade.parent.codigo);
@@ -60,8 +61,9 @@ export class CartogramaComponent implements OnInit, OnChanges {
             // .do(console.log.bind(console, 'geometries'));
 
         const resultados$ = this.indicador$
+            .do(indicador => {debugger; console.log(indicador)})
             // .distinctUntilKeyChanged('id')
-            .combineLatest(this.localidade$)
+            .withLatestFrom(this.localidade$.asObservable().share())
             .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
             .flatMap(([indicador, localidade]) => {
 
@@ -105,6 +107,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
         if (changes.hasOwnProperty('indicador')
             && Boolean(changes.indicador.currentValue)
             && (!changes.indicador.previousValue || changes.indicador.currentValue.id !== changes.indicador.previousValue.id)) {
+                debugger;
             this.indicador$.next(changes.indicador.currentValue);
         }
 
@@ -112,7 +115,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
 
     public getCenter(geometries, codigo) {
         if (codigo) {
-            let el = geometries.find(item => item.codigo.toString().substring(0,6) == codigo.toString().substring(0,6));
+            let el = geometries.find(item => item.codigo.toString() == codigo.toString().substring(0,6));
             if (el.center)
                 return el.center;
             else

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { isBrowser, isNode } from 'angular2-universal/browser';
 
-import { Localidade } from '../../shared/localidade/localidade.interface';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface.2';
-import { PesquisaService } from '../../shared/pesquisa/pesquisa.service.2';
+import { Localidade } from '../../shared2/localidade/localidade.model';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
+import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
+import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
+import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { SystemCacheService } from '../../shared/system-cache.service';
 import { slugify } from '../../utils/slug';
 import { flat, flatTree, flatMap } from '../../utils/flatFunctions';
@@ -19,12 +21,12 @@ export class BuscaService {
     private _cacheKeys = {
         "busca": (termo: string) => `busca/${termo}`
     }
-    private _localidades = flatTree(this._localidadeService.getRoot());
 
     constructor(
         private _cache: SystemCacheService,
-        private _localidadeService: LocalidadeService,
-        private _pesquisaService: PesquisaService
+        private _localidadeService: LocalidadeService2,
+        private _pesquisaService: PesquisaService2,
+        private _indicadoresService: IndicadorService2
     ) { }
 
     search(termo: string): Observable<{ pesquisas: Pesquisa[], indicadores: Indicador[], localidades: Localidade[] }> {
@@ -54,19 +56,14 @@ export class BuscaService {
 
             return Observable.forkJoin(...pesquisas.map(pesquisa => { 
                 
-                let indicadoresPesquisa = this._pesquisaService.getIndicadoresDaPesquisa(pesquisa.id);
+                let indicadoresPesquisa = this._indicadoresService.getIndicadoresByPosicao(pesquisa.id, '0', EscopoIndicadores.arvore);
 
                 return indicadoresPesquisa.map(indicadores => flatTree(indicadores));
 
             }));
         }).map( (indicadores: Indicador[][]) => flat(indicadores));     
     
-        if (isBrowser) {
-            window['indicadores'] = indicadores$;
-            window['_cache'] = this._cache;
-        }
-
-        let localidade$: Observable<Localidade[]> = Observable.of(this._localidades);
+        let localidade$: Observable<Localidade[]> = Observable.of(this._localidadeService.buscar(termo));
 
         return Observable.zip(pesquisas$, indicadores$, localidade$)
             .map(([pesquisas, indicadores, localidades]) => {
@@ -74,7 +71,7 @@ export class BuscaService {
                 pesquisas = pesquisas.filter(filtro.pesquisa);
                 
                 let hash = indicadores.filter(filtro.indicador).reduce( (obj, indicador) => {
-                    obj[indicador.pesquisa.id] = indicador.pesquisa;
+                    obj[indicador.pesquisaId] = indicador.pesquisa;
                     return obj;
                 }, {});
 
@@ -84,8 +81,6 @@ export class BuscaService {
                         pesquisas.push(pesquisa);
                     }
                 })
-
-                localidades = localidades.filter(filtro.localidade);
 
                 return { pesquisas, indicadores, localidades }
             });
@@ -102,7 +97,7 @@ export class BuscaService {
             },
 
             indicador(indicador: Indicador) {
-                return slugify(indicador.indicador).includes(termo) || indicador.id.toString().includes(termo);
+                return slugify(indicador.nome).includes(termo) || indicador.id.toString().includes(termo);
             }
         }
     }

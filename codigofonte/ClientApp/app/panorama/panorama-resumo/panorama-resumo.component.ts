@@ -1,4 +1,15 @@
-import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, HostListener } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges, 
+    HostListener
+} from '@angular/core';
+
 
 import { PanoramaDescriptor, PanoramaConfigurationItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
@@ -15,9 +26,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class PanoramaResumoComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaDescriptor;
-    @Input() localidade: Localidade;
 
     @Output() temaSelecionado = new EventEmitter();
+    temaAtual;
     
     public isHeaderStatic;
     private _scrollTop$ = new BehaviorSubject(0);
@@ -39,11 +50,16 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
         
     }
 
-    ngOnChanges(changes) {
-        // console.log('resumo', changes)
-    }
+    ngOnChanges(changes: SimpleChanges) {}
 
     fireTemaSelecionado(tema){
-        this.temaSelecionado.emit(tema);
+        if(this.temaAtual == tema){
+            this.temaSelecionado.emit(tema+'-alt');
+            this.temaAtual = '';
+        }
+        else{
+            this.temaSelecionado.emit(tema);
+            this.temaAtual = tema;
+        }
     }
 }
