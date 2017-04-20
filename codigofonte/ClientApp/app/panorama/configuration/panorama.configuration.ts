@@ -99,6 +99,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 33,
                 indicadorId: 29168,
+                periodo: "2010",
                 titulo: "Densidade demográfica",
                 subtitulo: "Densidade demográfica",
                 tema: TEMAS.populacao,
@@ -252,7 +253,8 @@ export const PANORAMA = {
                 periodo: "2014",
                 titulo: "Mortalidade Infantil",
                 tema: TEMAS.saude,
-                visualizacao: PanoramaVisualizacao.painel
+                visualizacao: PanoramaVisualizacao.painel,
+                maiorMelhor: false
             },
             {
                 pesquisaId: 10058,
@@ -260,7 +262,8 @@ export const PANORAMA = {
                 periodo: "2016",
                 titulo: "Internações por diarreia",
                 tema: TEMAS.saude,
-                visualizacao: PanoramaVisualizacao.painel
+                visualizacao: PanoramaVisualizacao.painel,
+                maiorMelhor: false
             },
             {
                 pesquisaId: 32,
@@ -286,7 +289,8 @@ export const PANORAMA = {
                 periodo: "2015",
                 titulo: "Percentual das receitas oriundas de fontes externas",
                 tema: TEMAS.economia,
-                visualizacao: PanoramaVisualizacao.painel
+                visualizacao: PanoramaVisualizacao.painel,
+                maiorMelhor: false
             },
 
             {

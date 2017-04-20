@@ -49,6 +49,13 @@ body.municipio{
     background: linear-gradient( to right, #1b779b 21%,#E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
+#barra_governo{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+}
+
 header{
     background-color: #E6E6E6;
     /*max-width: 1900px;*/
@@ -61,6 +68,7 @@ header{
     top: 0px;
     left: 0px;
     z-index: 20;
+    top:25px;
 }
 
 header .logo{
@@ -93,6 +101,7 @@ header #busca{
     height: 100%;
 
     margin-top: 54px;
+    margin-top: 80px;
 }
 
 .brasil .cor-fundo{
@@ -239,11 +248,7 @@ sintese>dados
     float: left;
     width: 38%;
     padding: 2% 0%;
-    /*min-height: 100%;*/
-    position: fixed;
-    overflow-y: auto;
-    height: calc(100% - 56px);
-    width: 31%;
+    min-height: 100%;
 }
 
 .button_voltarTopo {
@@ -264,7 +269,6 @@ sintese>dados
     float: left;
     width: 62%;
     min-height: 100%;
-    margin-left: 38%;
 }
 
 /*******************/
@@ -357,6 +361,7 @@ sintese>dados
         background-color: #333333;
         border-bottom: none;
         z-index: 5;
+        top:0;
     }
 
     header .logo {
@@ -519,15 +524,13 @@ sintese>dados
         width: 100%;
         min-height: auto;
         padding: 0;
-        position: relative;
-        height: initial;
+        
     }
     section#detalhes{
         margin-top: 15px;
     }
     #sintese #detalhes{
         width: 100vw;
-        margin-left: 0;
     }
 }
 

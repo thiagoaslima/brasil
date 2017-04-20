@@ -1,9 +1,7 @@
 <div id='sintese'>
 
     <section id='dados'>
-        <div style="min-height:100%">
-            <panorama-resumo [dados]="resumo$ | async" (temaSelecionado)="handleTemaSelecionado($event)"></panorama-resumo>
-        </div>
+        <panorama-resumo [dados]="resumo$ | async" (temaSelecionado)="handleTemaSelecionado($event)"></panorama-resumo>
     </section>
     <section id='detalhes'>
         <panorama-temas [dados]="temas$ | async" [temaSelecionado]="temaSelecionado"></panorama-temas>
