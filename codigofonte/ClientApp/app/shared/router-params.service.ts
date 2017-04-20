@@ -27,7 +27,6 @@ export class RouterParamsService {
             .filter(e => e instanceof NavigationEnd)
             .distinctUntilChanged()
             .subscribe(e => {
-                debugger;
                 if (isBrowser && (<any>window).ga) {
                     (<any>window).ga('set', 'page', e.url);
                     (<any>window).ga('send', 'pageview');
