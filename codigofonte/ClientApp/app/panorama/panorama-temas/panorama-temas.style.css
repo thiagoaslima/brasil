@@ -81,7 +81,7 @@
 
 .grafico__legenda-item{
     width: 24%;
-    float: right;
+    float: left;
     padding-left: 15px;
     min-width: 100px;
 }
