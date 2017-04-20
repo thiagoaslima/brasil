@@ -4,6 +4,8 @@
         <div class="card__titulo">{{ dados.titulo }}</div>
         <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
         <!--<div class="card__sub-titulo">{{dados.subtitulo}}</div> O SUBTITULO QUE APARECE É APENAS UMA REPETIÇÃO DO TÍTULO-->
+        
+           
 	</div>
         <p class="card__comparando">Comparando a outros municípios</p>
 
@@ -84,16 +86,9 @@
                 <button (click)="navegarTabela();"><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
             </div>
 
-            <div class="botao">
-                <share-container
-                    [secondaryPlatforms]="['twitter','facebook','googlePlus','linkedin']"
-                    [platforms]="[]"
-                    [properties]="{title:'IBGE', description:'Brasil em Síntese', via:'IBGE', hashtags:'IBGE'}"
-                    [textEnabled]="false"
-                    [expandable]="true">
-                </share-container>
-            </div>
+            
         </div>
+        
 
     </div>
 
