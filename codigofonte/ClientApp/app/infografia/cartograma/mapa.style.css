@@ -15,7 +15,7 @@
 }
 
 .alturafixa_legenda {
-	height: 50px;
+	height: 40px;
 	margin-top:20px;
 	}
 	
@@ -51,6 +51,12 @@
 .ic-mun-selecionado--path {
     stroke: #ff1f76;
     stroke-width: 1px;
+}
+
+@media all and (-ms-high-contrast:none) {
+	.ic-mun-selecionado--path {
+    stroke-width: 0.02px;
+}
 }
 
 #faixas{
