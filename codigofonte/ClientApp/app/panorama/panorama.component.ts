@@ -79,24 +79,24 @@ export class PanoramaComponent implements OnInit, OnDestroy {
                 return this._indicadorService.getVariosIndicadoresById(obj.indicadorMapPesquisa, obj.indicadores, Localidade.alterarContexto(localidade.parent.codigo, NiveisTerritoriais.municipio), true)
             });
 
-        const rankings$ = this._appState.observable$
-            .map(state => state.localidade as Localidade)
-            .filter(Boolean)
-            .distinctUntilKeyChanged('codigo')
-            .withLatestFrom(groupIndicadoresPainel$)
-            .filter(([localidade, indicadores]) => indicadores.length > 0)
-            .mergeMap( ([localidade, indicadores]) => {
-                return this._indicadorService.getRankings(
-                    indicadores.map(item => item.indicadorId), 
-                    indicadores.map(item => item.periodo), 
-                    localidade.codigo, 
-                    ['BR', localidade.parent.codigo.toString()]
-                );
-            });
+        // const rankings$ = this._appState.observable$
+        //     .map(state => state.localidade as Localidade)
+        //     .filter(Boolean)
+        //     .distinctUntilKeyChanged('codigo')
+        //     .withLatestFrom(groupIndicadoresPainel$)
+        //     .filter(([localidade, indicadores]) => indicadores.length > 0)
+        //     .mergeMap( ([localidade, indicadores]) => {
+        //         return this._indicadorService.getRankings(
+        //             indicadores.map(item => item.indicadorId), 
+        //             indicadores.map(item => item.periodo), 
+        //             localidade.codigo, 
+        //             ['BR', localidade.parent.codigo.toString()]
+        //         );
+        //     });
 
-        const configuracaoFull$ = indicadores$.zip(rankings$)
+        const configuracaoFull$ = indicadores$
             .withLatestFrom(configuracaoBase$)
-            .map(([[indicadores, rankings], configuracaoBase]) => {
+            .map(([indicadores, configuracaoBase]) => {
 
                 const _indicadores = configuracaoBase.indicadores.map(item => {
                     item = Object.assign({}, item);
@@ -118,10 +118,10 @@ export class PanoramaComponent implements OnInit, OnDestroy {
                         })
                     }
 
-                    const ranks = rankings.filter(ranking => ranking.indicador === item.indicadorId);
-                    if (!item.ranking) {
-                        item.ranking = ranks.reduce( (acc, ranking) => Object.assign(acc, {[ranking.contexto]: ranking}), {});
-                    }
+                    // const ranks = rankings.filter(ranking => ranking.indicador === item.indicadorId);
+                    // if (!item.ranking) {
+                    //     item.ranking = ranks.reduce( (acc, ranking) => Object.assign(acc, {[ranking.contexto]: ranking}), {});
+                    // }
 
                     return item;
                 });

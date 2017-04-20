@@ -2,7 +2,7 @@
     <div class='card' [ngClass]="{selecionado: isSelecionado}">
     <div class="selecionar">
         <div class="card__titulo">{{ dados.titulo }}</div>
-        <div class="card__nota">{{ dados.ranking?.BR.res | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
+        <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
         <!--<div class="card__sub-titulo">{{dados.subtitulo}}</div> O SUBTITULO QUE APARECE É APENAS UMA REPETIÇÃO DO TÍTULO-->
 	</div>
         <p class="card__comparando">Comparando a outros municípios</p>
@@ -14,9 +14,12 @@
             </div>
         </div>-->
 
-        
+        <panorama-card-regua title='No Estado' [ranking]="rankingUf$ | async" [itens]="lengthUf$ | async"></panorama-card-regua>
+        <panorama-card-regua title='No País' [ranking]="rankingPais$ | async" [itens]="lengthPais"></panorama-card-regua>
+        <!--
         <panorama-card-regua title='No Estado' [posicao]="getRankingPosition(this.localidade?.parent.codigo)" [itens]="getRankingItems(this.localidade?.parent.codigo)"></panorama-card-regua>
         <panorama-card-regua title='No País' [posicao]="getRankingPosition('BR')" [itens]="getRankingItems('BR')"></panorama-card-regua>
+        -->
         
         <!--<div class="card__regua-comparacao">
             <p>No Estado</p>
