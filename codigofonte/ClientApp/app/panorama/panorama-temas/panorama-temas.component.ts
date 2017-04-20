@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges, ViewChild, ElementRef, Inject } from '@angular/core';
-import { isBrowser, isNode } from 'angular2-universal/browser';
-import { DOCUMENT } from '@angular/platform-browser';
+import { isBrowser, isNode } from 'angular2-universal';
 
 import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
@@ -12,6 +11,9 @@ import { Resultado } from '../../shared2/resultado/resultado.model';
 
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
+
+declare var document: any;
+
 
 @Component({
     selector: 'panorama-temas',
@@ -41,10 +43,11 @@ export class PanoramaTemasComponent implements OnInit {
     textoSaude = "";
     textoEducacao = "";
 
+    isBrowser = isBrowser;
+
     constructor(
         private _indicadorService: IndicadorService2,
         private pageScrollService: PageScrollService,
-        @Inject(DOCUMENT) private document: any
     ) { }
 
     public getTextoAnalitico(nomeTema) {
@@ -73,7 +76,9 @@ export class PanoramaTemasComponent implements OnInit {
 
 
     ngOnInit() {
-        this.goToTema();
+        if(this.isBrowser){
+            this.goToTema();
+        }
     }
 
 
@@ -82,7 +87,9 @@ export class PanoramaTemasComponent implements OnInit {
             this.localidade = changes.temas.currentValue[0].localidade;
             this.configurarTextosTemas();
         }
-        this.goToTema();
+        if(this.isBrowser){
+            this.goToTema();
+        }
     }
 
     private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any> {
@@ -104,8 +111,11 @@ export class PanoramaTemasComponent implements OnInit {
     }
 
     public goToTema(): void {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, this.temaSelecionado && this.temaSelecionado.toString());
-        this.pageScrollService.start(pageScrollInstance);
+
+        if(this.isBrowser){
+            let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(document, this.temaSelecionado && this.temaSelecionado.toString());
+            this.pageScrollService.start(pageScrollInstance);
+        }
     };
 
     //  public goToHeadingInContainer(): void {
@@ -311,7 +321,9 @@ export class PanoramaTemasComponent implements OnInit {
     }
 
     public goToTop(tema): void {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, tema);
-        this.pageScrollService.start(pageScrollInstance);
+        if(this.isBrowser && !!document){
+            let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(document, tema);
+            this.pageScrollService.start(pageScrollInstance);
+        }
     };
 }

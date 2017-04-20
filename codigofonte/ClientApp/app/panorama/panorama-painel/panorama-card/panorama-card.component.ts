@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges, SimpleChange } from '@angular/core';
 
+import { isBrowser } from 'angular2-universal'
+
 import { Localidade, NiveisTerritoriais } from '../../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../../shared2/localidade/localidade.service';
 import { Indicador, EscopoIndicadores } from '../../../shared2/indicador/indicador.model';
@@ -27,6 +29,8 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     public lengthUf$;
     private _dados$ = new BehaviorSubject(null);
     private _localidade$ = new BehaviorSubject(null);
+
+    public isBrowser = isBrowser;
 
     mostrarNotas = false;
     mostrarFontes = false;

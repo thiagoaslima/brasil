@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/platform-browser';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -10,7 +9,7 @@ import {
     SimpleChange
 } from '@angular/core';
 
-import { isBrowser, isNode } from 'angular2-universal/browser';
+import { isBrowser, isNode } from 'angular2-universal';
 
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -23,6 +22,8 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/distinctUntilKeyChanged';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/sample';
+
+declare var document: any;
 
 @Component({
     selector: 'panorama-painel',
@@ -54,7 +55,6 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     constructor(
         private element: ElementRef,
-        @Inject(DOCUMENT) private document,
         private _isMobileServ: IsMobileService
     ) { }
 
@@ -63,26 +63,36 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        this.evaluateIsOnScreen(this.document);
+
+        if(isBrowser){
+            this.evaluateIsOnScreen(document);
+        }
 
         this.indicador$ = this._selecionarIndicador$
             .filter(Boolean)
             // .sample(this._isOnScreen$.filter(isOnScreen => isOnScreen.valueOf()))
             .do(indicador => this.localSelecionado = indicador.id);
 
-        this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
-            let novosDados = this._novosDados;
-            if (isOnScreen) {
-                this._novosDados = false;
-            }
-            let shouldAppear = isOnScreen || !novosDados
+        if(isBrowser){
 
-            return shouldAppear;
-        })
+            this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
+                let novosDados = this._novosDados;
+                if (isOnScreen) {
+                    this._novosDados = false;
+                }
+                let shouldAppear = isOnScreen || !novosDados
+
+                return shouldAppear;
+            })
+
+        }
     }
 
     onScroll(evt) {
-        this.evaluateIsOnScreen(evt.target);
+
+        if(isBrowser){
+            this.evaluateIsOnScreen(evt.target);
+        }
     }
 
     evaluateIsOnScreen(viewWindow) {
