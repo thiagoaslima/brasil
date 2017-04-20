@@ -28,6 +28,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaDescriptor;
 
     @Output() temaSelecionado = new EventEmitter();
+    temaAtual;
     
     public isHeaderStatic;
     private _scrollTop$ = new BehaviorSubject(0);
@@ -52,6 +53,13 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {}
 
     fireTemaSelecionado(tema){
-        this.temaSelecionado.emit(tema);
+        if(this.temaAtual == tema){
+            this.temaSelecionado.emit(tema+'-alt');
+            this.temaAtual = '';
+        }
+        else{
+            this.temaSelecionado.emit(tema);
+            this.temaAtual = tema;
+        }
     }
 }
