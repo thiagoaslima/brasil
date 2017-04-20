@@ -102,9 +102,15 @@ export class IndicadorService2 {
                 .map(([valores, indicadores]: any[][]) => {
                     return indicadores.map((indicador) => {
                         let valor = valores.find((valor) => valor.id === indicador.id);
-
-                        indicador.res = valor.res;
-
+                        if (valor) {
+                            indicador.res = valor.res;
+                        } else {
+                            indicador.res = [{
+                                localidade: localidade,
+                                res: {}
+                            }]
+                        }
+                        
                         return indicador;
                     })
                 })

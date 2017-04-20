@@ -84,12 +84,12 @@ export class Resultado {
     }
 
     get valorMaisRecente() {
-        return this.valores[this.valores.length - 1];
+        return this.valores[this.valores.length - 1] || '';
     }
 
     get valorValidoMaisRecente() {
         const arr = this.valoresValidos;
-        return arr[arr.length - 1];
+        return arr[arr.length - 1] || '-';
     }
 
     get periodosValidos() {
@@ -102,12 +102,12 @@ export class Resultado {
     }
 
     get periodoMaisRecente() {
-        return this.periodos[this.periodos.length - 1];
+        return this.periodos[this.periodos.length - 1] || '';
     }
 
     get periodoValidoMaisRecente() {
         const arr = this.periodosValidos;
-        return arr[arr.length - 1];
+        return arr[arr.length - 1] || '-';
     }
 
     public getValor(periodo) {

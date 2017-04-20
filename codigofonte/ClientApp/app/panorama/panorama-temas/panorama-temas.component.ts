@@ -102,7 +102,12 @@ export class PanoramaTemasComponent implements OnInit {
         return this._indicadorService.getIndicadoresById(idPesquisa, indicador, EscopoIndicadores.proprio, codigoLocalidade)
             .switchMap(indicadores => indicadores[0].getResultadoByLocal(this.localidade.codigo))
             .map(resultado => {
-
+                if (!resultado) {
+                     return {
+                        "valor": '-',
+                        "ano": ''
+                    }
+                }
                 return {
                     "valor": resultado.valorValidoMaisRecente,
                     "ano": resultado.periodoValidoMaisRecente
