@@ -115,13 +115,13 @@ export class PanoramaTemasComponent implements OnInit {
 
     private configurarTextosTemas() {
 
-        if (!this.localidade || !this.localidade.codigo || !this.temas[0].painel[0].ranking) {
+        if (!this.localidade || !this.localidade.codigo) {
             return;
         }
 
-        const hash = this.temas.reduce((arr, tema) => arr.concat(tema.painel), []).reduce((acc, painel) => {
-            return Object.assign(acc, { [painel.indicadorId]: painel.ranking })
-        }, {});
+        // const hash = this.temas.reduce((arr, tema) => arr.concat(tema.painel), []).reduce((acc, painel) => {
+        //     return Object.assign(acc, { [painel.indicadorId]: painel.ranking })
+        // }, {});
         const contextoLocal = this.localidade.parent.codigo.toString();
         const universoLocal = this.localidade.parent.children.length;
         const contextoGeral = 'BR';
@@ -129,32 +129,32 @@ export class PanoramaTemasComponent implements OnInit {
 
 
         // TODO: Texto TRABALHO
-        const salarioMedioMensalUF = hash[29765][contextoLocal];
-        // let salarioMedioMensalUF$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const salarioMedioMensalUF = hash[29765][contextoLocal];
+        let salarioMedioMensalUF$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
+             .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const salarioMedioMensalBrasil = hash[29765][contextoGeral];
-        // let salarioMedioMensalBrasil$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano));
+        // const salarioMedioMensalBrasil = hash[29765][contextoGeral];
+        let salarioMedioMensalBrasil$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano));
 
-        const pessoasOcupadasUF = hash[60036][contextoLocal];
-        // let pessoasOcupadasUF$ = this.getValorIndicador(10058, 60036, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60036, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const pessoasOcupadasUF = hash[60036][contextoLocal];
+        let pessoasOcupadasUF$ = this.getValorIndicador(10058, 60036, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60036, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const pessoasOcupadasBrasil = hash[60036][contextoGeral];
-        // let pessoasOcupadasBrasil$ = this.getValorIndicador(10058, 60036, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60036, this.localidade.codigo, resultado.ano));
+        // const pessoasOcupadasBrasil = hash[60036][contextoGeral];
+        let pessoasOcupadasBrasil$ = this.getValorIndicador(10058, 60036, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60036, this.localidade.codigo, resultado.ano));
 
-        const rendimentoMensalUF = hash[60036][contextoLocal];
-        // let rendimentoMensalUF$ = this.getValorIndicador(10058, 60037, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60037, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const rendimentoMensalUF = hash[60036][contextoLocal];
+        let rendimentoMensalUF$ = this.getValorIndicador(10058, 60037, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60037, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const rendimentoMensalBrasil = hash[60036][contextoGeral];
-        // let rendimentoMensalBrasil$ = this.getValorIndicador(10058, 60037, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60037, this.localidade.codigo, resultado.ano));
+        // const rendimentoMensalBrasil = hash[60036][contextoGeral];
+        let rendimentoMensalBrasil$ = this.getValorIndicador(10058, 60037, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60037, this.localidade.codigo, resultado.ano));
 
-        // salarioMedioMensalUF$.zip(salarioMedioMensalBrasil$, pessoasOcupadasUF$, pessoasOcupadasBrasil$, rendimentoMensalUF$, rendimentoMensalBrasil$)
-        //     .subscribe(([salarioMedioMensalUF, salarioMedioMensalBrasil, pessoasOcupadasUF, pessoasOcupadasBrasil, rendimentoMensalUF, rendimentoMensalBrasil]) => {
+       salarioMedioMensalUF$.zip(salarioMedioMensalBrasil$, pessoasOcupadasUF$, pessoasOcupadasBrasil$, rendimentoMensalUF$, rendimentoMensalBrasil$)
+           .subscribe(([salarioMedioMensalUF, salarioMedioMensalBrasil, pessoasOcupadasUF, pessoasOcupadasBrasil, rendimentoMensalUF, rendimentoMensalBrasil]) => {
 
         this.textoTrabalho = `Em ${this.localidade.nome}, o salário médio mensal, em ${salarioMedioMensalUF.periodo}, 
             era de ${salarioMedioMensalUF.res} salários mínimos. 
@@ -168,36 +168,36 @@ export class PanoramaTemasComponent implements OnInit {
             ${this.localidade.nome} tinha ${rendimentoMensalUF.res}% da população nestas condições, 
             colocando-o em ${rendimentoMensalUF.ranking} de ${universoLocal} dentre os municipios de ${this.localidade.parent.sigla} e 
             ${rendimentoMensalBrasil.ranking} de ${universoGeral} dentre os municipios do Brasil.`;
-        // });
+        });
 
 
         // TODO: Texto MEIO-AMBIENTE
-        const esgotamentoSanitarioUF = hash[60030][contextoLocal];
-        // let esgotamentoSanitarioUF$ = this.getValorIndicador(10058, 60030, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60030, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const esgotamentoSanitarioUF = hash[60030][contextoLocal];
+        let esgotamentoSanitarioUF$ = this.getValorIndicador(10058, 60030, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60030, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const esgotamentoSanitarioBrasil = hash[60030][contextoGeral];
-        // let esgotamentoSanitarioBrasil$ = this.getValorIndicador(10058, 60030, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60030, this.localidade.codigo, resultado.ano));
+        // const esgotamentoSanitarioBrasil = hash[60030][contextoGeral];
+        let esgotamentoSanitarioBrasil$ = this.getValorIndicador(10058, 60030, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60030, this.localidade.codigo, resultado.ano));
 
-        const arborizacaoUF = hash[60029][contextoLocal];
-        // let arborizacaoUF$ = this.getValorIndicador(10058, 60029, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60029, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const arborizacaoUF = hash[60029][contextoLocal];
+        let arborizacaoUF$ = this.getValorIndicador(10058, 60029, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60029, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const arborizacaoBrasil = hash[60029][contextoGeral];
-        // let arborizacaoBrasil$ = this.getValorIndicador(10058, 60029, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60029, this.localidade.codigo, resultado.ano));
+        // const arborizacaoBrasil = hash[60029][contextoGeral];
+        let arborizacaoBrasil$ = this.getValorIndicador(10058, 60029, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60029, this.localidade.codigo, resultado.ano));
 
-        const urbanizacaoUF = hash[60031][contextoLocal];
-        // let urbanizacaoUF$ = this.getValorIndicador(10058, 60031, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60031, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const urbanizacaoUF = hash[60031][contextoLocal];
+        let urbanizacaoUF$ = this.getValorIndicador(10058, 60031, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60031, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const urbanizacaoBrasil = hash[60031][contextoGeral];
-        // let urbanizacaoBrasil$ = this.getValorIndicador(10058, 60031, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60031, this.localidade.codigo, resultado.ano));
+        // const urbanizacaoBrasil = hash[60031][contextoGeral];
+        let urbanizacaoBrasil$ = this.getValorIndicador(10058, 60031, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60031, this.localidade.codigo, resultado.ano));
 
-        // esgotamentoSanitarioUF$.zip(esgotamentoSanitarioBrasil$, arborizacaoUF$, arborizacaoBrasil$, urbanizacaoUF$, urbanizacaoBrasil$)
-        //     .subscribe(([esgotamentoSanitarioUF, esgotamentoSanitarioBrasil, arborizacaoUF, arborizacaoBrasil, urbanizacaoUF, urbanizacaoBrasil]) => {
+        esgotamentoSanitarioUF$.zip(esgotamentoSanitarioBrasil$, arborizacaoUF$, arborizacaoBrasil$, urbanizacaoUF$, urbanizacaoBrasil$)
+            .subscribe(([esgotamentoSanitarioUF, esgotamentoSanitarioBrasil, arborizacaoUF, arborizacaoBrasil, urbanizacaoUF, urbanizacaoBrasil]) => {
 
         this.textoMeioAmbiente = `${this.localidade.nome} tem ${esgotamentoSanitarioUF.res}% de domicilios com esgotamento sanitário adequado, 
                 ${arborizacaoUF.res}% dos domicilios urbanos em vias publicas com arborização e 
@@ -207,29 +207,29 @@ export class PanoramaTemasComponent implements OnInit {
                 Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamentoSanitarioBrasil.ranking} de ${universoGeral}, 
                 ${arborizacaoBrasil.ranking} de ${universoGeral} e 
                 ${urbanizacaoBrasil.ranking} de ${universoGeral} respectivamente.`;
-        // });
+        });
 
 
         // Texto ECONOMIA
 
-        const pipPerCaptaUF = hash[60047][contextoLocal];
-        // let pipPerCaptaUF$ = this.getValorIndicador(10058, 60047, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60047, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const pipPerCaptaUF = hash[60047][contextoLocal];
+        let pipPerCaptaUF$ = this.getValorIndicador(10058, 60047, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60047, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const pipPerCaptaBrasil = hash[60047][contextoGeral];
-        // let pipPerCaptaBrasil$ = this.getValorIndicador(10058, 60047, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60047, this.localidade.codigo, resultado.ano));
+        // const pipPerCaptaBrasil = hash[60047][contextoGeral];
+        let pipPerCaptaBrasil$ = this.getValorIndicador(10058, 60047, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60047, this.localidade.codigo, resultado.ano));
 
-        const receitasFontesExternasUF = hash[60048][contextoLocal];
-        // let receitasFontesExternasUF$ = this.getValorIndicador(10058, 60048, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60048, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const receitasFontesExternasUF = hash[60048][contextoLocal];
+        let receitasFontesExternasUF$ = this.getValorIndicador(10058, 60048, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60048, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const receitasFontesExternasBrasil = hash[60048][contextoGeral];
-        // let receitasFontesExternasBrasil$ = this.getValorIndicador(10058, 60048, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60048, this.localidade.codigo, resultado.ano));
+        // const receitasFontesExternasBrasil = hash[60048][contextoGeral];
+        let receitasFontesExternasBrasil$ = this.getValorIndicador(10058, 60048, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60048, this.localidade.codigo, resultado.ano));
 
-        // pipPerCaptaUF$.zip(pipPerCaptaBrasil$, receitasFontesExternasUF$, receitasFontesExternasBrasil$)
-        //     .subscribe(([pipPerCaptaUF, pipPerCaptaBrasil, receitasFontesExternasUF, receitasFontesExternasBrasil]) => {
+        pipPerCaptaUF$.zip(pipPerCaptaBrasil$, receitasFontesExternasUF$, receitasFontesExternasBrasil$)
+            .subscribe(([pipPerCaptaUF, pipPerCaptaBrasil, receitasFontesExternasUF, receitasFontesExternasBrasil]) => {
 
         this.textoEconomia = `Em ${pipPerCaptaUF.periodo}, ${this.localidade.nome} tinha PIB per capita de R$ ${pipPerCaptaUF.res}. 
             Comparado aos demais municípios do estado, se posicionava entre em ${pipPerCaptaUF.ranking} de ${universoLocal}. 
@@ -237,28 +237,28 @@ export class PanoramaTemasComponent implements OnInit {
             ${this.localidade.nome} tinha em ${receitasFontesExternasUF.periodo}, ${receitasFontesExternasUF.res}% do seu orçamento proveniente de fontes externas. 
             Em compração aos outros municípios de ${this.localidade.parent.sigla}, está dentre em ${receitasFontesExternasUF.ranking} de ${universoLocal} 
             e quando comparado a municípios no Brasil todo, fica em ${receitasFontesExternasBrasil.ranking} de ${universoGeral}.`;
-        // });
+        });
 
 
         // Texto SAUDE
-        const mortaldadeInfantilUF = hash[30279][contextoLocal];
-        // let mortaldadeInfantilUF$ = this.getValorIndicador(39, 30279, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(39, 30279, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const mortaldadeInfantilUF = hash[30279][contextoLocal];
+        let mortaldadeInfantilUF$ = this.getValorIndicador(39, 30279, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(39, 30279, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const mortaldadeInfantilBrasil = hash[30279][contextoGeral];
-        // let mortaldadeInfantilBrasil$ = this.getValorIndicador(39, 30279, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(39, 30279, this.localidade.codigo, resultado.ano));
+        // const mortaldadeInfantilBrasil = hash[30279][contextoGeral];
+        let mortaldadeInfantilBrasil$ = this.getValorIndicador(39, 30279, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(39, 30279, this.localidade.codigo, resultado.ano));
 
-        const intermacoesDiarreiaUF = hash[60032][contextoLocal];
-        // let intermacoesDiarreiaUF$ = this.getValorIndicador(10058, 60032, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60032, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const intermacoesDiarreiaUF = hash[60032][contextoLocal];
+        let intermacoesDiarreiaUF$ = this.getValorIndicador(10058, 60032, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60032, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const internacoesDiarreiaBrasil = hash[60032][contextoGeral];
-        // let internacoesDiarreiaBrasil$ = this.getValorIndicador(10058, 60032, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60032, this.localidade.codigo, resultado.ano));
+        // const internacoesDiarreiaBrasil = hash[60032][contextoGeral];
+        let internacoesDiarreiaBrasil$ = this.getValorIndicador(10058, 60032, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60032, this.localidade.codigo, resultado.ano));
 
-        // mortaldadeInfantilUF$.zip(mortaldadeInfantilBrasil$, intermacoesDiarreiaUF$, internacoesDiarreiaBrasil$)
-        //     .subscribe(([mortaldadeInfantilUF, mortaldadeInfantilBrasil, intermacoesDiarreiaUF, internacoesDiarreiaBrasil]) => {
+        mortaldadeInfantilUF$.zip(mortaldadeInfantilBrasil$, intermacoesDiarreiaUF$, internacoesDiarreiaBrasil$)
+            .subscribe(([mortaldadeInfantilUF, mortaldadeInfantilBrasil, intermacoesDiarreiaUF, internacoesDiarreiaBrasil]) => {
 
         this.textoSaude = `A taxa de mortalidade infantil média no município é de ${mortaldadeInfantilUF.res} para 1.000 nascidos vivos. 
             As internações devido a diarréias são de ${intermacoesDiarreiaUF.res} para cada 1.000 habitantes. 
@@ -266,36 +266,36 @@ export class PanoramaTemasComponent implements OnInit {
             ${intermacoesDiarreiaUF.ranking} de ${universoLocal} respectivamente. 
             Quando comparado a municípios no Brasil essas posições são de ${mortaldadeInfantilBrasil.ranking} de ${universoGeral} e 
             ${internacoesDiarreiaBrasil.ranking} de ${universoGeral}.`;
-        // });
+        });
 
 
         // Texto EDUCAÇÃO
-        const idebAnosIniciaisUF = hash[60041][contextoLocal];
-        // let idebAnosIniciaisUF$ = this.getValorIndicador(10058, 60041, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const idebAnosIniciaisUF = hash[60041][contextoLocal];
+        let idebAnosIniciaisUF$ = this.getValorIndicador(10058, 60041, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const idebAnosIniciaisBrasil = hash[60041][contextoGeral];
-        // let idebAnosIniciaisBrasil$ = this.getValorIndicador(10058, 60041, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano));
+        // const idebAnosIniciaisBrasil = hash[60041][contextoGeral];
+        let idebAnosIniciaisBrasil$ = this.getValorIndicador(10058, 60041, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60041, this.localidade.codigo, resultado.ano));
 
-        const idebAnosFinaisUF = hash[60042][contextoLocal];
-        // let idebAnosFinaisUF$ = this.getValorIndicador(10058, 60042, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const idebAnosFinaisUF = hash[60042][contextoLocal];
+        let idebAnosFinaisUF$ = this.getValorIndicador(10058, 60042, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const idebAnosFinaisBrasil = hash[60042][contextoGeral];
-        // let idebAnosFinaisBrasil$ = this.getValorIndicador(10058, 60042, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano));
+        // const idebAnosFinaisBrasil = hash[60042][contextoGeral];
+        let idebAnosFinaisBrasil$ = this.getValorIndicador(10058, 60042, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60042, this.localidade.codigo, resultado.ano));
 
-        const taxaEscolarizacao6A14AnosUF = hash[60045][contextoLocal];
-        // let taxaEscolarizacao6A14AnosUF$ = this.getValorIndicador(10058, 60045, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+        // const taxaEscolarizacao6A14AnosUF = hash[60045][contextoLocal];
+        let taxaEscolarizacao6A14AnosUF$ = this.getValorIndicador(10058, 60045, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
-        const taxaEscolarizacao6A14AnosBrasil = hash[60045][contextoGeral];
-        // let taxaEscolarizacao6A14AnosBrasil$ = this.getValorIndicador(10058, 60045, this.localidade.codigo)
-        //     .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano));
+        // const taxaEscolarizacao6A14AnosBrasil = hash[60045][contextoGeral];
+        let taxaEscolarizacao6A14AnosBrasil$ = this.getValorIndicador(10058, 60045, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(10058, 60045, this.localidade.codigo, resultado.ano));
 
-        // idebAnosIniciaisUF$.zip(idebAnosIniciaisBrasil$, idebAnosFinaisUF$, idebAnosFinaisBrasil$, taxaEscolarizacao6A14AnosUF$, taxaEscolarizacao6A14AnosBrasil$)
-        //     .subscribe(([idebAnosIniciaisUF, idebAnosIniciaisBrasil, idebAnosFinaisUF, idebAnosFinaisBrasil, taxaEscolarizacao6A14AnosUF, taxaEscolarizacao6A14AnosBrasil]) => {
+        idebAnosIniciaisUF$.zip(idebAnosIniciaisBrasil$, idebAnosFinaisUF$, idebAnosFinaisBrasil$, taxaEscolarizacao6A14AnosUF$, taxaEscolarizacao6A14AnosBrasil$)
+            .subscribe(([idebAnosIniciaisUF, idebAnosIniciaisBrasil, idebAnosFinaisUF, idebAnosFinaisBrasil, taxaEscolarizacao6A14AnosUF, taxaEscolarizacao6A14AnosBrasil]) => {
 
         this.textoEducacao = `Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município, 
         tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. 
@@ -305,7 +305,7 @@ export class PanoramaTemasComponent implements OnInit {
         Quanto a taxa de escolarização (para pessoas de 6 a 14 anos), esta foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. 
         Isso posiciona o município em ${taxaEscolarizacao6A14AnosUF.ranking} de ${universoLocal} do ${this.localidade.parent.sigla} e 
         em ${taxaEscolarizacao6A14AnosBrasil.ranking} de ${universoGeral} no Brasil.`;
-        // });
+         });
 
 
     }

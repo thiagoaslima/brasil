@@ -14,9 +14,12 @@
             </div>
         </div>-->
 
-        
+        <panorama-card-regua title='No Estado' [posicao]="(rankingUf$ | async)?.posicaoAbsoluta" [itens]="lengthUf$ | async"></panorama-card-regua>
+        <panorama-card-regua title='No País' [posicao]="(rankingPais$ | async)?.posicaoAbsoluta" [itens]="lengthPais"></panorama-card-regua>
+        <!--
         <panorama-card-regua title='No Estado' [posicao]="getRankingPosition(this.localidade?.parent.codigo)" [itens]="getRankingItems(this.localidade?.parent.codigo)"></panorama-card-regua>
         <panorama-card-regua title='No País' [posicao]="getRankingPosition('BR')" [itens]="getRankingItems('BR')"></panorama-card-regua>
+        -->
         
         <!--<div class="card__regua-comparacao">
             <p>No Estado</p>
