@@ -8,7 +8,6 @@
             <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1]}} {{indicador?.unidade.nome}}</span></p>
         </div>
     </div>
-        <div class="mapa__label--mun-selecionado" [style.text-align]="getPercIconPosition((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)).align" [style.padding-left.%]="getPercIconPosition((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)).left-5" [style.padding-right.%]="getPercIconPosition((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)).right-5"><span class="tip">{{localidade?.nome}}</span></div>
         <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
             <svg:g class="uf" transform="scale(1 -1)">
                 <svg:g #mun regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome"
@@ -18,7 +17,7 @@
                 <svg:g class="ic-mun-selecionado" [attr.transform]="'translate('+getCenter((malha$ | async)?.geometries, localidade.codigo).join(' ')+')'">
                     <svg:path class="ic-mun-selecionado--path" [attr.d]="'M0 0v'+getIconHeight((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo))" vector-effect="non-scaling-stroke"></svg:path>
                     <!--<svg:circle class="ic-mun-selecionado--circle-bottom" cx="0" cy="0" r="0.03"></svg:circle>-->
-                    <svg:circle class="ic-mun-selecionado--circle-top" cx="0" [attr.cy]="getIconHeight((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)) - 0.025" r="0.025"></svg:circle>
+                    <svg:circle class="ic-mun-selecionado--circle-top" cx="0" [attr.cy]="getIconHeight((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)) - 0.025" r="0.025"><svg:title>{{municSelected[0]}}</svg:title></svg:circle>
                 </svg:g>
             </svg:g>
         </svg>
