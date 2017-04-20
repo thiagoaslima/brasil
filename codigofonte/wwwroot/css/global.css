@@ -239,7 +239,11 @@ sintese>dados
     float: left;
     width: 38%;
     padding: 2% 0%;
-    min-height: 100%;
+    /*min-height: 100%;*/
+    position: fixed;
+    overflow-y: auto;
+    height: calc(100% - 56px);
+    width: 31%;
 }
 
 .button_voltarTopo {
@@ -260,6 +264,7 @@ sintese>dados
     float: left;
     width: 62%;
     min-height: 100%;
+    margin-left: 38%;
 }
 
 /*******************/
@@ -514,13 +519,15 @@ sintese>dados
         width: 100%;
         min-height: auto;
         padding: 0;
-        
+        position: relative;
+        height: initial;
     }
     section#detalhes{
         margin-top: 15px;
     }
     #sintese #detalhes{
         width: 100vw;
+        margin-left: 0;
     }
 }
 
