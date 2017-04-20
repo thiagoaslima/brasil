@@ -147,7 +147,6 @@ export class IndicadorService2 {
                     universo = ranking.res[ranking.res.length - 1]['#'];
                 }
 
-                debugger;
                 return {
                     localidade: parseInt(valores['localidade'] || codigoLocalidade, 10),
                     indicador: parseInt(ranking.indicador, 10),

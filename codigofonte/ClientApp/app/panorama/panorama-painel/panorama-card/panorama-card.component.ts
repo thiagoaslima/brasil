@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges, SimpleChange } from '@angular/core';
 
+import { isBrowser } from 'angular2-universal'
+
 import { Localidade, NiveisTerritoriais } from '../../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../../shared2/localidade/localidade.service';
 import { Indicador, EscopoIndicadores } from '../../../shared2/indicador/indicador.model';
@@ -28,6 +30,8 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     private _dados$ = new BehaviorSubject(null);
     private _localidade$ = new BehaviorSubject(null);
 
+    public isBrowser = isBrowser;
+
     mostrarNotas = false;
     mostrarFontes = false;
 
@@ -41,7 +45,6 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     ngOnInit() { 
        
         const sync$ = this._dados$
-            .do(dados => {debugger; console.log(dados)})
             .distinct( (a, b) =>  ['pesquisaId', 'indicadorId', 'periodo'].every(key => a[key] === b[key]))
             .filter(dados => dados.pesquisaId && dados.indicadorId && dados.periodo)
             .map(dados => {
@@ -126,7 +129,6 @@ export class PanoramaCardReguaComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.rankingObj && this.itens) {
-            debugger;
             this.ranking = `${(this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100).toFixed(2)}%`;
             this.cssRanking = `${((this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100) * 96 / 100 ).toFixed(2)}%`;
         } else {
