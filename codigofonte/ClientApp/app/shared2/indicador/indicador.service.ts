@@ -155,7 +155,7 @@ export class IndicadorService2 {
                     posicaoAbsoluta: valores['#'],
                     ranking: valores['ranking'],
                     res: valores['res'],
-                    universo: universo
+                    qtdeItensComparados: universo
                 } as Ranking
             })
     }
@@ -187,7 +187,7 @@ export class IndicadorService2 {
                         posicaoAbsoluta: valores['#'],
                         ranking: valores['ranking'],
                         res: valores['res'],
-                        universo: universo
+                        qtdeItensComparados: universo
                     } as Ranking
                 })
 

@@ -25,7 +25,7 @@ export interface Ranking {
     posicaoAbsoluta: number,
     ranking: number,
     res: string,
-    universo: number
+    qtdeItensComparados: number
 }
 
 export const EscopoIndicadores = {
