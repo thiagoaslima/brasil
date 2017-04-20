@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { isBrowser } from 'angular2-universal';
+
 @Component({
     selector: 'barra-gov',
     templateUrl: 'barra-gov.html'
@@ -14,7 +16,9 @@ export class BarraGov implements OnInit {
 
     private isMobile = {
         match: (regexp) => {
-            return navigator.userAgent.match(regexp) && navigator.userAgent.match(regexp).length > 0;
+            if (isBrowser) {
+                return navigator.userAgent.match(regexp) && navigator.userAgent.match(regexp).length > 0;
+            }
         },
         Android: () => {
             return this.isMobile.match(/Android/i);
