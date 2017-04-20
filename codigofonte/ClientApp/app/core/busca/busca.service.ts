@@ -56,7 +56,7 @@ export class BuscaService {
 
             return Observable.forkJoin(...pesquisas.map(pesquisa => { 
                 
-                let indicadoresPesquisa = this._indicadoresService.getIndicadoresByPosicao(pesquisa.id, '0', EscopoIndicadores.arvore);
+                let indicadoresPesquisa = this._indicadoresService.getIndicadoresByPosicao(pesquisa.id, '0', EscopoIndicadores.filhos);
    
                 return indicadoresPesquisa.map(indicadores => { debugger; return flatTree(indicadores, 'indicadores')});
 
