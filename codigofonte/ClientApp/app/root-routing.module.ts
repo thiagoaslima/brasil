@@ -30,31 +30,39 @@ const children = [
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
+        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/sandbox',
+        path: 'v4/brasil/sandbox',
         component: SandboxComponent
       },
       {
-        path: 'brasil',
-        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
+        path: 'brasil/sandbox',
+        redirectTo: 'v4/brasil/sandbox',
+      },
+      {
+        path: 'v4/brasil',
+        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
         pathMatch: 'full'
         // children
       },
       {
-        path: 'brasil/:uf',
-        redirectTo: 'brasil/rj/rio-de-janeiro/panorama',
+        path: 'v4/brasil/:uf',
+        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
         pathMatch: 'full'
         // canActivate: [ValidParametersGuard],
         // children
       },
       {
-        path: 'brasil/:uf/:municipio',
+        path: 'v4/brasil/:uf/:municipio',
         canActivate: [ValidParametersGuard],
         children
-      }
+      },
+      {
+        path: 'brasil/:uf/:municipio',
+        redirectTo: 'v4/brasil/:uf/:municipio',
+      },
     ])
   ]
 })
