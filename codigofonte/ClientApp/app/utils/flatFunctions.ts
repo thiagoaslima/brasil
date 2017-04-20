@@ -6,7 +6,7 @@ export function flatTree(root) {
         return [].concat(...root.map(flatTree));
     }
     let arr = [root];
-    if (root.children.length) {
+    if (root.children && root.children.length) {
         arr = arr.concat(...root.children.map(flatTree));
     }
     return arr;
