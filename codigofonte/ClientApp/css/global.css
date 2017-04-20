@@ -351,6 +351,7 @@ sintese>dados
     header{
         background-color: #333333;
         border-bottom: none;
+        z-index: 5;
     }
 
     header .logo {

@@ -1,5 +1,5 @@
 <template ngFor let-tema [ngForOf]="temas" let-i="index">
-    <p [id]="tema.tema.substr(0,2).toLowerCase()"></p>
+    <div  [id]="tema.tema.substr(0,2).toLowerCase()" style="position:absolute;margin-top: -40px;"></div>
     <div [class.borda]="i!=0" ></div>
     <div class="cabecalho" id="cont">
         <div class="cabecalho__celula-esquerda">
@@ -26,8 +26,8 @@
     </div>
 
 
+    <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="tema.localidade"></panorama-painel>
 
-    <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="localidade"></panorama-painel>
     
     <div class="grafico" *ngFor="let grafico of tema.grafico">
         
@@ -43,7 +43,8 @@
             </div>
         </div>
         
-        <grafico *ngIf="!isPrerender" [localidade]="localidade" [indicadores]="grafico.dados" [tipoGrafico]="grafico.tipo"></grafico>
+        <grafico *ngIf="!isPrerender" [localidade]="tema.localidade" [indicadores]="grafico.dados" [tipoGrafico]="grafico.tipo"></grafico>
+
     </div>
 </template>
 

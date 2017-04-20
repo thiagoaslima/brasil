@@ -27,6 +27,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     private indicadores;
 
     constructor(
+        // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese:SinteseService,
         private _localidade:LocalidadeService2
     ) {  }
@@ -61,7 +62,7 @@ export class PesquisaTabelaComponent implements OnChanges {
             let localidadeB =  this.localidades.length > 1 ? this.localidades[1] : null;
             let localidadeC = this.localidades.length > 2 ? this.localidades[2] : null;
 
-            this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
 
                 this.indicadores = this.flat(indicadores).map(indicador => {
 
@@ -72,6 +73,8 @@ export class PesquisaTabelaComponent implements OnChanges {
 
                     return indicador;
                 });
+
+                subscription$$.unsubscribe();
             });
 
         }
@@ -143,8 +146,6 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     //chamada quando abre os nós nível 2 da tabela de dados
     private controlarExibicao(item){
-
-        // debugger;
 
         if(item.nivel < 3) {
 

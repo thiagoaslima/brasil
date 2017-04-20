@@ -21,7 +21,6 @@ export class PesquisaService2 {
 
     constructor(
         private _http: Http,
-        // private _servidor: ServidorPesquisas,
         private _pesquisasConfig: PesquisaConfiguration
     ) {
         Pesquisa.setPesquisaStrategy({
@@ -55,7 +54,7 @@ export class PesquisaService2 {
                 .retry(3)
                 .catch(err => Observable.of({ json: () => ({}) }))
                 .map(res => res.json())
-                .filter(obj => this._pesquisasConfig.isValida(obj.id))
+                // .filter(obj => this._pesquisasConfig.isValida(obj.id))
                 .map(obj => Pesquisa.criar(obj))
                 // .do(pesquisa => console.log(`get(${pesquisaId})`, pesquisa))
                 .share();

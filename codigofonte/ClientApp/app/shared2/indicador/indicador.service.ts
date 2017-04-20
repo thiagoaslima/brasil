@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador } from './indicador.model';
+import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador, Ranking } from './indicador.model';
 import { flatTree } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
@@ -27,20 +27,9 @@ export class IndicadorService2 {
         })
     }
 
-    private _prefetchMode = {
-        active: false,
-        localidades: []
-    }
-    prefetchResultados(active = true, localidades: number | string | Array<number>) {
-        // console.log('deprecated: do not use prefetchResultados. This function caused side-effects');
-        return;
-        // this._prefetchMode.active = active;
-        // this._prefetchMode.localidades = Array.isArray(localidades) ? localidades : [localidades];
-    }
-
     getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string): Observable<Indicador[]> {
         let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}`;
-        
+
         return this._http.get(url, options)
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
@@ -54,9 +43,9 @@ export class IndicadorService2 {
 
     getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false): Observable<Indicador[]> {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
-        const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`; 
+        const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
         let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;
-        
+
         return this._http.get(url, options)
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
@@ -66,14 +55,14 @@ export class IndicadorService2 {
             //.map(array => this._rebuildTree(array))
             .do(indicadores => {
                 //adiciona fonte e notas, da pesquisa nos indicadores
-                if(fontesNotas && indicadores.length > 0){
-                    indicadores[0].pesquisa.subscribe((pesquisa) =>{
+                if (fontesNotas && indicadores.length > 0) {
+                    indicadores[0].pesquisa.subscribe((pesquisa) => {
                         //organiza os períodos da pesquisa em ordem crescente
-                        pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
+                        pesquisa.periodos.sort((a, b) => a.nome > b.nome ? 1 : -1);
                         //pega fontes e notas do período mais recente
                         let fontes = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
                         let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
-                        for(let i = 0; i < indicadores.length; i++){
+                        for (let i = 0; i < indicadores.length; i++) {
                             indicadores[i].fontes = fontes;
                             indicadores[i].notas = notas;
                         }
@@ -97,36 +86,36 @@ export class IndicadorService2 {
 
         if (!this._getVariosIndicadoresByIdCache[keyCache]) {
             const queryIndicadores = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
-            const queryLocalidades = localidade === undefined ? '' : `&localidades=${Array.isArray(localidade) ? localidade.join(',') : localidade}`; 
-            
+            const queryLocalidades = localidade === undefined ? '' : `&localidades=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
+
             let urlValores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/valores?indicadores=${queryIndicadores}${queryLocalidades}`;
             let urlIndicadores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores?indicadores=${queryIndicadores}`;
-            
+
             let fallBackError = err => Observable.of({ json: () => ({}) });
 
             this._getVariosIndicadoresByIdCache[keyCache] = Observable.zip(
-                    this._http.get(urlValores, options).retry(3),
-                    this._http.get(urlIndicadores, options).retry(3)
-                )
-                .catch(err => Observable.of([{ json: () => ({})}, { json: () => ({})}]))
+                this._http.get(urlValores, options).retry(3),
+                this._http.get(urlIndicadores, options).retry(3)
+            )
+                .catch(err => Observable.of([{ json: () => ({}) }, { json: () => ({}) }]))
                 .map(([valores, indicadores]) => [valores.json(), indicadores.json()])
-                .map(([valores, indicadores]:any[][]) => {
+                .map(([valores, indicadores]: any[][]) => {
                     return indicadores.map((indicador) => {
                         let valor = valores.find((valor) => valor.id === indicador.id);
 
                         indicador.res = valor.res;
 
-                        return indicador; 
+                        return indicador;
                     })
                 })
                 .map(array => array.map(obj => Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId: indicadorMapPesquisa[obj.id.toString()] })))))
                 .do(indicadores => {
                     //adiciona fonte e notas, da pesquisa nos indicadores
-                    if(fontesNotas && indicadores.length > 0){
-                        for(let i = 0; i < indicadores.length; i++){
-                            indicadores[i].pesquisa.subscribe((pesquisa) =>{
+                    if (fontesNotas && indicadores.length > 0) {
+                        for (let i = 0; i < indicadores.length; i++) {
+                            indicadores[i].pesquisa.subscribe((pesquisa) => {
                                 //organiza os períodos da pesquisa em ordem crescente
-                                pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
+                                pesquisa.periodos.sort((a, b) => a.nome > b.nome ? 1 : -1);
                                 //pega fontes e notas do período mais recente
                                 let fontes = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
                                 let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
@@ -142,31 +131,69 @@ export class IndicadorService2 {
         return this._getVariosIndicadoresByIdCache[keyCache];
     }
 
-    getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number,  contexto = 'BR') {
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?orderBy=&contexto=${contexto}&localidade=${codigoLocalidade}&lower=0&upper=0`;
-        
+    getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable<Ranking> {
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?orderBy=&contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;
+
         return this._http.get(url, options)
             .retry(3)
-            .catch(err => Observable.of({ json: () => [{res: []}] }))
+            .catch(err => Observable.of({ json: () => [{ res: [] }] }))
             .map(res => res.json())
             .map(arr => {
-                if (arr && arr[0] && arr[0].res) {
-                    const res = arr[0].res[0]
-                    res.posicaoAbsoluta = res['#'];
-                    res.periodo = periodo;
-                    delete(res['#']);
+                const ranking = arr[0];
+                let valores = {}, universo = 1;
 
-                    return res;
-                } else {
-                    return {};
+                if (ranking.res.length > 0) {
+                    valores = ranking.res[0];
+                    universo = ranking.res[ranking.res.length - 1]['#'];
                 }
+
+                return {
+                    localidade: parseInt(valores['localidade'] || codigoLocalidade, 10),
+                    indicador: parseInt(ranking.indicador, 10),
+                    periodo: periodo,
+                    contexto: contexto,
+                    posicaoAbsoluta: valores['#'],
+                    ranking: valores['ranking'],
+                    res: valores['res'],
+                    qtdeItensComparados: universo
+                } as Ranking
             })
-            // .map( ([{res}]) => {
-            //     const obj = res.find(obj => obj.localidade === codigoLocalidade.toString());
-            //     return Object.assign({}, obj, {totalItens: res.length});
-            // })
-            // .do(indicador => console.log(`getRanking`, indicador))
-            // .share();
+    }
+
+    public getRankings(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable<Ranking[]> {
+        const query = indicadoresId.map((id, index) => `${id}(${periodos[index]})`).join('|');
+        const _contexto = contexto.join(',')
+        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${query}?lower=0&contexto=${_contexto}&localidade=${codigoLocalidade}`;
+
+        return this._http.get(url, options)
+            .retry(3)
+            .catch(err => Observable.of({ json: () => [{ res: [] }] }))
+            .map(res => res.json())
+            .map(rankings => {
+
+                return rankings.map(ranking => {
+                    let valores = {}, universo = 1;
+
+                    if (ranking.res.length > 0) {
+                        valores = ranking.res[0];
+                        universo = ranking.res[ranking.res.length - 1]['#'];
+                    }
+
+                    return {
+                        localidade: parseInt(valores['localidade'] || codigoLocalidade, 10),
+                        indicador: parseInt(ranking.indicador, 10),
+                        periodo: ranking.periodo,
+                        contexto: ranking.contexto,
+                        posicaoAbsoluta: valores['#'],
+                        ranking: valores['ranking'],
+                        res: valores['res'],
+                        qtdeItensComparados: universo
+                    } as Ranking
+                })
+
+            })
+
+
     }
 
     private _rebuildTree(indicadores: Indicador[]): Indicador[] {
@@ -187,7 +214,7 @@ export class IndicadorService2 {
             if (!agg[parentKey]) { agg[parentKey] = []; }
             agg[parentKey].push(hash[key]);
             return agg;
-            
+
         }, Object.create(null));
 
         return arr;

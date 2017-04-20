@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
-import { Localidade } from '../../shared/localidade/localidade.interface';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
+
+import { AppState } from '../../shared2/app-state';
+import { Localidade } from '../../shared2/localidade/localidade.model';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { slugify } from '../../utils/slug';
 
 import { Observable } from 'rxjs/Observable';
@@ -63,7 +65,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 }
             });
 
-            this.totalAtual = this.atual.reduce( (sum, obj) => !!obj.municipios && (sum + obj.municipios) ? obj.municipios.length : 0, 0);
+            this.totalAtual = this.atual.reduce((sum, obj) => !!obj.municipios && (sum + obj.municipios) ? obj.municipios.length : 0, 0);
         }
     };
 
@@ -118,16 +120,25 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
 
     constructor(
-        private _localidadeService: LocalidadeService
+        private _appState: AppState,
+        private _localidadeService: LocalidadeService2
     ) {
-        this.selecaoLocalidadesAtual = this._localidadeService.tree$;
+        this.selecaoLocalidadesAtual = this._appState.observable$
+            .map(({ localidade }) => {
+                const locais = [localidade];
+                if (localidade) { locais.push(localidade.parent); }
+                if (localidade && localidade.parent) { locais.push(localidade.parent.parent); }
+                
+                return locais.filter(Boolean).reverse();
+            });
+
         this.ufs = this._localidadeService.getUfs();
         this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);
     }
 
 
     ngOnInit() {
-        this._selecionada$$ = this._localidadeService.selecionada$
+        this._selecionada$$ = this._appState.observable$.pluck('localidade')
             .distinctUntilChanged()
             .subscribe(_ => {
                 this.fecharSeletor();
@@ -137,7 +148,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
-            .filter( (termo: string) => !!termo && termo.length >= 3)
+            .filter((termo: string) => !!termo && termo.length >= 3)
             .subscribe(termo => this.search(termo));
     }
 
@@ -154,15 +165,15 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     @HostListener('window:mousedown', ['$event'])
-    onMouseDown(event){
+    onMouseDown(event) {
         //guarda a referência da Window do browser (melhorar a forma de pegar essa referência???)
         this.hist = event.view && event.view.history ? event.view.history : null;
     }
 
     abrirSeletor() {
         //insere um state fake(apenas uma vez) para fazer com que o voltar do browser feche o seletor de locais (não volte para a página anterior do histórico)
-        if(this.hist && !(this.hist.state && this.hist.state.seletor_localidade))
-            this.hist.pushState({seletor_localidade : true}, '', '');
+        if (this.hist && !(this.hist.state && this.hist.state.seletor_localidade))
+            this.hist.pushState({ seletor_localidade: true }, '', '');
 
         this.aberto = true;
         this.setState('municipiosTodos');
@@ -186,20 +197,19 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     search(termo = '') {
 
-        if(!termo){
-            
+        if (!termo) {
             return;
         }
 
-        if(this.ufSelecionada) {
-            if(termo.length >= 3) //mostra o resultado da busca
+        if (this.ufSelecionada) {
+            if (termo.length >= 3) //mostra o resultado da busca
                 return this.listaMunicipios.build(this.ufSelecionada.children, termo);
-            if(termo.length == 0) //mostra a lista inicial
+            if (termo.length == 0) //mostra a lista inicial
                 return this.listaMunicipios.build(this.ufSelecionada.children);
         } else {
-            if(termo.length >= 3) //mostra o resultado da busca
+            if (termo.length >= 3) //mostra o resultado da busca
                 return this.listaMunicipios.build(this.listaMunicipios.base, termo);
-            if(termo.length == 0) //mostra a lista inicial
+            if (termo.length == 0) //mostra a lista inicial
                 return this.listaMunicipios.build(this.listaMunicipios.base);
         }
     }
@@ -216,7 +226,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         }
     }
 
-    focusBuscaInputMobile(){
+    focusBuscaInputMobile() {
         this.selecionarLocalidade.nativeElement.scrollTop = '246';
     }
 }

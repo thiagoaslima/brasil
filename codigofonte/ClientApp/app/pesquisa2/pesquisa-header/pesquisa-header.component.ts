@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Pesquisa} from '../../shared2/pesquisa/pesquisa.model';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { Localidade} from '../../shared2/localidade/localidade.model';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./pesquisa-header.style.css']
 })
 
-export class PesquisaHeaderComponent implements OnInit {
+export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     @Output() onDownload = new EventEmitter();
     @Output() onOcultarValoresVazios = new EventEmitter();
@@ -31,7 +31,7 @@ export class PesquisaHeaderComponent implements OnInit {
     objetoURL:any = {};
     baseURL = '';
 
-
+    private subs$$
     private isOcultarValoresVazios = true;
 
     constructor(
@@ -43,7 +43,7 @@ export class PesquisaHeaderComponent implements OnInit {
     ) { }
 
     ngOnInit(){
-        this._routerParamsService.params$.subscribe((params) => {
+        this.subs$$ = this._routerParamsService.params$.subscribe((params) => {
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
 
@@ -73,6 +73,10 @@ export class PesquisaHeaderComponent implements OnInit {
             this.objetoURL.localidade1 = params.queryParams.localidade1 ? params.queryParams.localidade1 : 0;
             this.objetoURL.localidade2 = params.queryParams.localidade2 ? params.queryParams.localidade2 : 0;
         });
+    }
+
+    ngOnDestroy() {
+        this.subs$$.unsubscribe();
     }
 
     navegarPara(indicador = null, ano = null, localidade1 = null, localidade2 = null){
