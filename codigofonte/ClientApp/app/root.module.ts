@@ -1,6 +1,6 @@
 import { NgModule, OpaqueToken } from '@angular/core';
 
-import {Ng2PageScrollModule} from 'ng2-page-scroll';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 import { CoreModule } from './core/core.module';
 
@@ -10,12 +10,9 @@ import { SharedModule2 } from './shared2/shared.module';
 import { SinteseModule } from './sintese/sintese.module';
 import { PanoramaModule } from './panorama/panorama.module'
 import { PesquisaModule2 } from './pesquisa2/pesquisa.module';
-import { PesquisaModule } from './pesquisa/pesquisa.module';
-import { PesquisaService } from './shared/pesquisa/pesquisa.service.2';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
-import { TesteModule } from './testes/testes.module';
 import { VisaoHistoricaModule } from './visao-historica/visao-historica.module';
 
 import { ValidParametersGuard } from './valid-parameters.guard';
@@ -28,15 +25,12 @@ import { SubmenuComponent } from './submenu/submenu.component';
         CoreModule,
         SharedModule.forRoot(),
         SharedModule2.forRoot(),
-        PesquisaModule,
         PesquisaModule2,
         SinteseModule,
         PanoramaModule,
         VisaoHistoricaModule,
         SandboxModule,
-        Ng2PageScrollModule.forRoot(),
-        // RootRoutingModule,
-        TesteModule,
+        Ng2PageScrollModule.forRoot()
     ],
     declarations: [
         RootComponent,

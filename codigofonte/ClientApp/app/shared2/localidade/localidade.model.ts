@@ -94,7 +94,6 @@ export class Localidade {
     // 340ms 700ms
     //  63ms 388ms
     static convertBrasil(data) {
-        debugger;
         return {
             codigo: data.codigo,
             codigoCompleto: data.codigo,

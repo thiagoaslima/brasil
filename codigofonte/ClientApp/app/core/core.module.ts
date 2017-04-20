@@ -6,7 +6,7 @@ import { throwIfAlreadyLoaded } from './core.guard';
 import { SharedModule } from '../shared/shared.module';
 import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
 import { BuscaComponent } from './busca/busca.component';
-
+import { BuscaService } from './busca/busca.service';
 
 
 @NgModule({
@@ -22,7 +22,9 @@ import { BuscaComponent } from './busca/busca.component';
     SeletorLocalidadeComponent,
     BuscaComponent
   ],
-  providers: []
+  providers: [
+    BuscaService
+  ]
 })
 export class CoreModule {
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {

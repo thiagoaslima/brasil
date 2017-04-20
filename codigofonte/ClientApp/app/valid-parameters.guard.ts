@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 
-import { LocalidadeService } from './shared/localidade/localidade.service';
+import { LocalidadeService2 } from './shared2/localidade/localidade.service';
 
 @Injectable()
 export class ValidParametersGuard implements CanActivate {
     constructor(
-        private _localidadeService: LocalidadeService
+        private _localidadeService: LocalidadeService2
     ) { }
 
     canActivate(

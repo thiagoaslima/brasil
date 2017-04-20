@@ -1,11 +1,11 @@
 import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
 
+import { AppState } from '../../shared2/app-state';
 import { BuscaService } from './busca.service';
-import { LocalidadeService } from '../../shared/localidade/localidade.service';
-import { Indicador, Pesquisa } from '../../shared/pesquisa/pesquisa.interface.2';
-import { Localidade } from '../../shared/localidade/localidade.interface';
+import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
+import { Localidade } from '../../shared2/localidade/localidade.model';
 
+import { Observable } from 'rxjs/Observable';
 @Component({
     selector: 'busca',
     templateUrl: 'busca.template.html',
@@ -38,12 +38,12 @@ export class BuscaComponent implements OnInit {
     constructor(
         private _renderer: Renderer,
         private _buscaService: BuscaService,
-        private _localidadeService: LocalidadeService
+        private _appState: AppState
     ) { }
 
     ngOnInit() {
 
-        this._localidadeService.selecionada$.subscribe(localidade => this._localidadeAtual = localidade);
+        this._appState.observable$.subscribe(localidade => this._localidadeAtual = localidade);
 
         Observable.fromEvent<KeyboardEvent>(this.campoBusca.nativeElement, "keyup")
             .debounceTime(400)

@@ -47,7 +47,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     constructor(
         private _mapaService: MapaService,
         private _localidadeService: LocalidadeService2,
-        private _routerParams:RouterParamsService
+        private _routerParams: RouterParamsService
     ) { }
 
     ngOnInit() {
@@ -61,7 +61,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
 
         const resultados$ = this.indicador$
             // .distinctUntilKeyChanged('id')
-            .combineLatest(this.localidade$)
+            .zip(Observable.of(this.localidade))
             .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
             .flatMap(([indicador, localidade]) => {
 
@@ -112,7 +112,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
 
     public getCenter(geometries, codigo) {
         if (codigo) {
-            let el = geometries.find(item => item.codigo.toString().substring(0,6) == codigo.toString().substring(0,6));
+            let el = geometries.find(item => item.codigo.toString() == codigo.toString().substring(0,6));
             if (el.center)
                 return el.center;
             else

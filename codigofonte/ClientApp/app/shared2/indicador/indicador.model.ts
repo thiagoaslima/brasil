@@ -17,6 +17,17 @@ const _defaults = {
     pesquisaId: 0
 };
 
+export interface Ranking {
+    localidade: number,
+    indicador: number
+    periodo: string
+    contexto: string
+    posicaoAbsoluta: number,
+    ranking: number,
+    res: string,
+    universo: number
+}
+
 export const EscopoIndicadores = {
     proprio: 'base',
     filhos: 'one',
@@ -149,7 +160,7 @@ export class Indicador {
         }
     }
 
-    private _resultados: {[codigoLocalidade: number]: Observable<Resultado>} = Object.create(null);
+    private _resultados: { [codigoLocalidade: number]: Observable<Resultado> } = Object.create(null);
     getResultadoByLocal(codigoLocalidade: number): Observable<Resultado> {
         if (!this._resultados[codigoLocalidade]) {
             this._resultados[codigoLocalidade] = Resultado.get(this.pesquisaId, this.posicao.toString(), codigoLocalidade)
@@ -164,7 +175,7 @@ export class Indicador {
     }
 
     registerResultado(resultado: Resultado) {
-        this._resultados[resultado.localidadeCodigo] = Observable.of(resultado);       
+        this._resultados[resultado.localidadeCodigo] = Observable.of(resultado);
     }
 
     registerResultados(resultados: Resultado[]) {
@@ -232,7 +243,7 @@ export class UnidadeIndicador {
     }
 
     toString() {
-        return this.multiplicador === 1 || !this.multiplicador 
+        return this.multiplicador === 1 || !this.multiplicador
             ? `${this.nome}`
             : `${this.nome} (${this.multiplicador})`;
     }
