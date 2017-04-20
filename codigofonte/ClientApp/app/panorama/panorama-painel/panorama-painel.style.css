@@ -51,9 +51,15 @@
     .cards{
         display: block;
     }
-   
-}         
- 
+
+    .nav__cards__anterior{
+        display: none;
+    }
+
+    .nav__cards__proximo{
+        display: none;
+    }         
+}
  /*.cards{
             content: "";
             display: table;

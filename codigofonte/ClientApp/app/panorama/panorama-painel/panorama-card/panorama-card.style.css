@@ -257,6 +257,7 @@ button .fa{
         float: none;
         height: auto;
         margin-bottom: 30px;
+        display: block;
     }
     .card, .card.selecionado{
         float: none;
