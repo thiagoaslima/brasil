@@ -7,11 +7,19 @@
     float: left;
 	margin-top: 26px;
 }
+
 .mapa svg {
-    width: 80%;
+    width: 100%;
 	max-height: 600px;
 	
 }
+
+.alturafixa_legenda {
+	height: 50px;
+	margin-top:20px;
+	}
+	
+
 
 /* Hack para correto dimensionamento do mapa no IE 10 */
 .ie10 .mapa svg {
@@ -93,6 +101,7 @@ polygon {
     stroke: #fff;
     stroke-width: 0.01px;
     fill: #E8E267;
+
 }
 g.checked polygon {
     stroke: #fff;
@@ -100,7 +109,8 @@ g.checked polygon {
     fill: #0D4768;
 }
 polygon:hover {
-    fill: #e0db6b;
+	fill-opacity: 0.75;
+
 }
 
 g, .periodo-link {
@@ -316,16 +326,17 @@ g, .periodo-link {
 	width:100%;
 	}
 	
-.mapa svg {
-	width:100%;
-	}
+
 .legenda {
 	width:100%;
+	
 	}
 
 .legenda-item {
 	float: left;
 	margin-left: 20px;
 }
+
+
 
 }
