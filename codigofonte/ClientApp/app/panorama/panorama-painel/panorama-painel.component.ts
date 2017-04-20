@@ -174,7 +174,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
 
 
-        this.posicao =  (index*274) * -1;
+        this.posicao =  (index*180) * -1;
 
        // console.log(total);
     }
