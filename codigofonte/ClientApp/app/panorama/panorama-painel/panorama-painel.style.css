@@ -1,8 +1,38 @@
 .cards{
     content: "";
-    display: table;
+    /* display: table; */
     clear: both;
     margin: 2% 5%;
+    /*background-color: yellow;*/
+    overflow: hidden;
+    width: 87%;
+    white-space: nowrap;
+    padding-top: 10px;
+}
+
+.scroll{
+    -webkit-transition: all 330ms ease-in;
+    -moz-transition: all 330ms ease-in;
+    -ms-transition: all 330ms ease-in;
+    -o-transition: all 330ms ease-in;
+    transition: all 330ms ease-in;
+}
+
+.nav__cards__anterior{
+    font-size: 1.8em;
+    float: left;
+    margin-top: 146px;
+    position: absolute;
+    margin-left: 14px;
+    cursor: pointer;
+}
+
+.nav__cards__proximo{
+    font-size: 1.8em;
+    float: right; 
+    margin-top: -233px;
+    margin-right: 14px;
+    cursor: pointer;
 }
 
 .cartograma {
@@ -21,9 +51,15 @@
     .cards{
         display: block;
     }
-   
-}         
- 
+
+    .nav__cards__anterior{
+        display: none;
+    }
+
+    .nav__cards__proximo{
+        display: none;
+    }         
+}
  /*.cards{
             content: "";
             display: table;

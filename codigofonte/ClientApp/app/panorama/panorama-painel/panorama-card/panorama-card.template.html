@@ -1,5 +1,5 @@
 <div class="content-card">
-    <div class='card' [ngClass]="{selecionado: isSelecionado}">
+    <div class='card' [ngClass]="{selecionado: isSelecionado}" id='card-{{dados?.indicador?.id}}'>
     <div class="selecionar">
         <div class="card__titulo">{{ dados.titulo }}</div>
         <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
