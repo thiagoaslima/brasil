@@ -38,6 +38,11 @@
     font-size: 0.8em;
 }
 
+.ancora-click-resumo{
+    position:absolute;
+    margin-top: -40px;
+}
+
 
 /*---------------------------------*/
 
@@ -175,11 +180,18 @@
         overflow: visible;
     }
     
-    
-    
-    
     .cabecalho__celula-direita--maybe-empty{
         height: auto;
         padding-bottom: 10px;
     }
+    
+    .ancora-click-resumo{
+        position: relative;
+        margin-top: 0;
+        height: 0;
+    }
+    .ancora-click-resumo ~ .ancora-click-resumo{
+        height: 125px;
+    }
+    
 }

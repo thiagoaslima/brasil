@@ -17,7 +17,7 @@
         
             
         <!--Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo    -->
-        <div [ngClass]="{'resumo__icons__1':tema.tema==='Trabalho','resumo__icons__2':tema.tema==='Educação','resumo__icons__3':tema.tema==='Território e Ambiente','resumo__icons__4':tema.tema==='Economia','resumo__icons__5':tema.tema==='Saúde', 'resumo-fixo': isHeaderStatic | async}"
+        <div [ngClass]="{'resumo__icons__1':tema.tema==='Trabalho','resumo__icons__2':tema.tema==='Educação','resumo__icons__3':tema.tema==='Território e Ambiente','resumo__icons__4':tema.tema==='Economia','resumo__icons__5':tema.tema==='Saúde', 'resumo__icons__6':tema.tema==='População','resumo-fixo': isHeaderStatic | async}"
             >
         <div *ngIf="tema.tema" class="mobile__exclusive temas__horizontais ">
             <div [ngSwitch]="tema.tema" class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
@@ -30,9 +30,9 @@
                <div *ngSwitchCase="'Território e Ambiente'" class="ico ico--ambi "></div>
                <div *ngSwitchCase="'Economia'" class="ico ico--eco "></div>
                <div *ngSwitchCase="'Saúde'" class="ico ico--sau "></div>
+               <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
                
                 <!--<div *ngSwitchCase="'Agricultura'" class="ico ico--agri "></div>
-                <div *ngSwitchCase="'População'" class="ico ico--pop"></div>
                 <div *ngSwitchCase="'Frota'" class="ico ico--frota"></div>-->
             
             </div>
