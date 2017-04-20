@@ -54,7 +54,8 @@
 }
 
 @media all and (-ms-high-contrast:none) {
-	.ic-mun-selecionado--path {
+
+.ic-mun-selecionado--path {
     stroke-width: 0.02px;
 }
 }
