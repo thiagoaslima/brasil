@@ -1,6 +1,9 @@
-<template ngFor let-tema [ngForOf]="temas" let-i="index" class="ancora-click-regulator">
-    <div  [id]="tema.tema.substr(0,2).toLowerCase()" class="ancora-click-resumo"></div>
-    <div [class.borda]="i!=0" ></div>
+<template ngFor let-tema [ngForOf]="temas" let-i="index">
+    <div  [id]="tema.tema.substr(0,2).toLowerCase()" class="ancora-click-resumo">
+        <div  [id]="tema.tema.substr(0,2).toLowerCase()+'-alt'"></div>
+    </div>
+    <div [class.borda]="i!=0"></div>
+
     <div class="cabecalho" id="cont">
         <div class="cabecalho__celula-esquerda">
             <h2 class="cabecalho__titulo">{{tema?.tema}}</h2>

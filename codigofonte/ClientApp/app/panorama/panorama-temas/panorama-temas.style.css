@@ -188,10 +188,10 @@
     .ancora-click-resumo{
         position: relative;
         margin-top: 0;
-        height: 125px;
-    }
-    .ancora-click-regulator:first-child.ancora-click-resumo{
         height: 0;
+    }
+    .ancora-click-resumo ~ .ancora-click-resumo{
+        height: 125px;
     }
     
 }
