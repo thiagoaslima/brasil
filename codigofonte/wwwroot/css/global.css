@@ -68,7 +68,7 @@ header{
     top: 0px;
     left: 0px;
     z-index: 20;
-    top:25px;
+    /*top:25px;*/
 }
 .share_Button {
 	right: 0; 
@@ -106,7 +106,7 @@ header #busca{
     height: 100%;
 
     margin-top: 54px;
-    margin-top: 80px;
+    /*margin-top: 80px;*/
 }
 
 .brasil .cor-fundo{
