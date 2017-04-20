@@ -63,12 +63,17 @@ header{
     border-bottom: 4px solid #F7931E;
     display: table;
     width: 100%;
-    
+    border-top: 4px solid #ccc;
     position: fixed;
     top: 0px;
     left: 0px;
     z-index: 20;
     top:25px;
+}
+.share_Button {
+	right: 0; 
+	bottom: 50px;
+	position: fixed;
 }
 
 header .logo{
@@ -391,6 +396,11 @@ sintese>dados
         padding: 10px 15px;
         font-size: 20px;
     }
+
+	.share_Button {
+	bottom: 0px;
+	position: fixed;
+	}
 
     #container{
         padding-top: 42px;
