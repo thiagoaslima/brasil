@@ -53,6 +53,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     ngOnInit() {
 
         this.malha$ = this.localidade$
+            .asObservable()
             .filter(Boolean)
             .flatMap((localidade) => {
                 return this._mapaService.getMalhaSubdivisao(localidade.parent.codigo);

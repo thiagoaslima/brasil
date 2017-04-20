@@ -125,7 +125,7 @@ export class PanoramaTemasComponent implements OnInit {
         const contextoLocal = this.localidade.parent.codigo.toString();
         const universoLocal = this.localidade.parent.children.length;
         const contextoGeral = 'BR';
-        const universoGeral = this.localidade.parent.children.length;
+        const universoGeral = this.localidade.parent.parent.children.length;
 
 
         // TODO: Texto TRABALHO
