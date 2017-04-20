@@ -20,7 +20,7 @@
         <div [ngClass]="{'resumo__icons__1':tema.tema==='Trabalho','resumo__icons__2':tema.tema==='Educação','resumo__icons__3':tema.tema==='Território e Ambiente','resumo__icons__4':tema.tema==='Economia','resumo__icons__5':tema.tema==='Saúde', 'resumo-fixo': isHeaderStatic | async}"
             >
         <div *ngIf="tema.tema" class="mobile__exclusive temas__horizontais ">
-            <div [ngSwitch]="tema.tema" class="lista__icone--mobile">
+            <div [ngSwitch]="tema.tema" class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
                
                <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
                Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
