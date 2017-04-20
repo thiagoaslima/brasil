@@ -53,6 +53,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     ngOnInit() {
 
         this.malha$ = this.localidade$
+            .asObservable()
             .filter(Boolean)
             .flatMap((localidade) => {
                 return this._mapaService.getMalhaSubdivisao(localidade.parent.codigo);
@@ -61,7 +62,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
 
         const resultados$ = this.indicador$
             // .distinctUntilKeyChanged('id')
-            .zip(Observable.of(this.localidade))
+            .withLatestFrom(this.localidade$.asObservable().share())
             .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
             .flatMap(([indicador, localidade]) => {
 

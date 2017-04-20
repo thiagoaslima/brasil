@@ -236,7 +236,7 @@
     .temas__horizontais{
         display: block;
         float: left;
-        width: 20%;
+        width: 16.66%;
         margin: 0;
         padding: 0;
     }
@@ -267,13 +267,14 @@
     .resumo-fixo div div{ position: relative; }
     .resumo-fixo div div div{ position: relative; }*/
     .resumo-fixo.resumo__icons__1{ margin-left: 0;}
-    .resumo-fixo.resumo__icons__2{ margin-left: 20%;}
-    .resumo-fixo.resumo__icons__3{ margin-left: 40%;}
-    .resumo-fixo.resumo__icons__4{ margin-left: 60%;}
-    .resumo-fixo.resumo__icons__5{ margin-left: 80%;}
+    .resumo-fixo.resumo__icons__2{ margin-left: 16.66%;}
+    .resumo-fixo.resumo__icons__3{ margin-left: 33.32%;}
+    .resumo-fixo.resumo__icons__4{ margin-left: 49.98%;}
+    .resumo-fixo.resumo__icons__5{ margin-left: 66.64%;}
+    .resumo-fixo.resumo__icons__6{ margin-left: 83.3%;}
    
     .resumo-fixo .temas__horizontais{
-        width: 20%;
+        width: 16.66%;
         box-sizing: border-box;
         
     }

@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/platform-browser';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -10,7 +9,7 @@ import {
     SimpleChanges
 } from '@angular/core';
 
-import { isBrowser, isNode } from 'angular2-universal/browser';
+import { isBrowser, isNode } from 'angular2-universal';
 
 import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -23,6 +22,8 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/distinctUntilKeyChanged';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/sample';
+
+declare var document: any;
 
 @Component({
     selector: 'panorama-painel',
@@ -56,44 +57,51 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public posicao = 0;
     public card = 0;
     
-    constructor (
+    constructor(
         private element: ElementRef,
-        @Inject(DOCUMENT) private document,
-        private _isMobileServ:IsMobileService
-        ){
-        
-    }
+        private _isMobileServ: IsMobileService
+    ) { }
 
-    isMobile(){
-        return this._isMobileServ.any(); 
+    isMobile() {
+        return this._isMobileServ.any();
     }
 
     ngOnInit() {
-        this.evaluateIsOnScreen(this.document);
+
+        if(isBrowser){
+            this.evaluateIsOnScreen(document);
+        }
 
         this.indicador$ = this._selecionarIndicador$
             .filter(Boolean)
             // .sample(this._isOnScreen$.filter(isOnScreen => isOnScreen.valueOf()))
             .do(indicador => this.localSelecionado = indicador.id);
-        
-        this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
-            let novosDados = this._novosDados;
-            if (isOnScreen) {
-                this._novosDados = false;
-            }
-            let shouldAppear = isOnScreen || !novosDados
 
-            return shouldAppear;
-        })
+        if(isBrowser){
+
+            this.shouldAppear$ = this._isOnScreen$.map((isOnScreen) => {
+                let novosDados = this._novosDados;
+                if (isOnScreen) {
+                    this._novosDados = false;
+                }
+                let shouldAppear = isOnScreen || !novosDados
+
+                return shouldAppear;
+            })
+
+        }
     }
 
     onScroll(evt) {
-        this.evaluateIsOnScreen(evt.target);
+
+        if(isBrowser){
+            this.evaluateIsOnScreen(evt.target);
+        }
     }
 
     evaluateIsOnScreen(viewWindow) {
         if (
-            !this.element.nativeElement || 
+            !this.element.nativeElement ||
             typeof this.element.nativeElement.getBoundingClientRect !== "function"
         ) {
             return false;
@@ -130,7 +138,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this._novosDados = true;
             this.uf = changes.localidade.currentValue.parent;
             this.mun = changes.localidade.currentValue;
-            
+
         }
 
         if (changes.hasOwnProperty('dados') && Boolean(changes.dados.currentValue) && Boolean(changes.dados.currentValue.length)) {

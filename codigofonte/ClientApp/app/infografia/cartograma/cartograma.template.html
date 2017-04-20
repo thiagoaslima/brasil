@@ -3,6 +3,11 @@
     <span class="local-atual">{{indicador?.nome}}</span>
 
     <div class="mapa" *ngIf="(malha$ | async)?.viewBox">
+    <div class="alturafixa_legenda">
+    <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
+            <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1]}} {{indicador?.unidade.nome}}</span></p>
+        </div>
+    </div>
         <div class="mapa__label--mun-selecionado" [style.text-align]="getPercIconPosition((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)).align" [style.padding-left.%]="getPercIconPosition((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)).left-5" [style.padding-right.%]="getPercIconPosition((malha$ | async)?.bbox, getCenter((malha$ | async)?.geometries, localidade.codigo)).right-5"><span class="tip">{{localidade?.nome}}</span></div>
         <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
             <svg:g class="uf" transform="scale(1 -1)">
@@ -17,6 +22,9 @@
                 </svg:g>
             </svg:g>
         </svg>
+        
+        
+        
     </div>
 
     <div class="legenda" *ngIf="valores.length > 0">
@@ -32,12 +40,10 @@
         </div>
 
         <div class="legenda__item">
-            <p class="legenda__texto"><i class="fa fa-map-marker fa-2x" aria-hidden="true" style="color:#d10046; float:left; width:22px;"></i> Município selecionado</p>
+            <p class="legenda__texto"><i class="fa fa-map-pin" aria-hidden="true" style="color:#ff1f76; float:left; width:22px;height:25px;"></i> Município selecionado</p>
         </div>
 
-        <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
-            <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1]}} {{indicador?.unidade.nome}}</span></p>
-        </div>
+        
 
     </div>
 

@@ -236,7 +236,11 @@ button .fa{
 
 .botao{
     display: inline-block;
+
 }
+.n2s-shareContainer{
+		float:right;
+		}
 
 .botao button{
     cursor: pointer;
