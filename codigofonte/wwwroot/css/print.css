@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	color: #000;
+}
+body {
+	background-color: #FFF;
+	background-image: none;
+}
+
+div#geral {
+	width: auto;
+	margin: auto;
+	padding: auto;
+	background-image: none;
+	border: 0;
+}
+
+div#geral div#topo {
+	width: auto;
+	height: auto;
+	background-image: none;
+}
+
+div#geral div#topo h1#logo_ibge, div#geral div#topo h1#logo_ibge a {
+	width: auto;
+	height: auto;
+	background-image: none;
+	font-size: 2em;
+	color: #000;
+}
+
+div#geral div#topo ul#idioma {
+	display: none;
+}
+div#geral div#topo div#busca_ibge {
+	display: none;
+}
+
+div#geral div#topo div#barra_canal {
+	width: auto;
+	height: auto;
+	background-image: none;
+}
+
+div#geral div#topo div#barra_canal h2#logo_cidadesat, div#geral div#topo div#barra_canal h2#logo_cidadesat a {
+	display: auto;
+	width: auto;
+	height: auto;
+	background-image: none;
+	font-size: 1.5em;
+	color: #000;
+}
+
+div#geral div#topo div#barra_canal p#desc_cidadesat {
+	display: none;
+}
+
+div#geral div#topo div#menu_topo {
+	display: none;
+}
+
+div#geral div#conteudo h2#breadcrumb {
+	float: left;
+	width: 100%;
+	clear: both;
+}
+
+div#geral div#conteudo div#menu_lateral {
+	display: none;
+}
+
+div#geral div#conteudo div#conteudo_meio {
+	float: left;
+	width: 100%;
+	clear: both;
+}
+
+div#geral div#conteudo div#conteudo_meio ul#links-redes-sociais {
+	display: none !important;
+}
+
+div#geral div#conteudo div#conteudo_meio div#bot_imprimir {
+	display: none !important;
+}
+
+div#geral div#conteudo div#conteudo_meio div#previsao_do_tempo {
+	display: none !important;
+}
+
+
+div#geral div#conteudo div#conteudo_meio div#outros_links {
+	display: none !important;
+}

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges, SimpleChange } from '@angular/core';
 
+import { isBrowser } from 'angular2-universal'
+
 import { Localidade, NiveisTerritoriais } from '../../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../../shared2/localidade/localidade.service';
 import { Indicador, EscopoIndicadores } from '../../../shared2/indicador/indicador.model';
@@ -28,6 +30,8 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     private _dados$ = new BehaviorSubject(null);
     private _localidade$ = new BehaviorSubject(null);
 
+    public isBrowser = isBrowser;
+
     mostrarNotas = false;
     mostrarFontes = false;
 
@@ -41,7 +45,6 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     ngOnInit() { 
        
         const sync$ = this._dados$
-            .do(dados => {debugger; console.log(dados)})
             .distinct( (a, b) =>  ['pesquisaId', 'indicadorId', 'periodo'].every(key => a[key] === b[key]))
             .filter(dados => dados.pesquisaId && dados.indicadorId && dados.periodo)
             .map(dados => {
@@ -110,7 +113,7 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
         <div class="card__regua-comparacao">
             <p>{{title}}</p>
             <div class="card__regua-comparacao__regua" [class.card__regua-comparacao__regua--desabilitada]="!ranking" [attr.pos]="this.rankingObj?.ranking" [attr.len]="itens" [attr.ranking]="ranking">
-                <div [ngStyle]='{right: cssRanking}' [title]="this.rankingObj?.ranking + ' de ' + this.itens " class="card__regua-comparacao__regua__marcador"></div>
+                <div [ngStyle]='{right: cssRanking}' [title]="getTitle()" class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
     `,
@@ -127,19 +130,28 @@ export class PanoramaCardReguaComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.rankingObj && this.itens) {
-            this.ranking = (this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100).toFixed(2);
+            this.ranking = this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100;
             if(!this.maiorMelhor)
                 this.ranking = 100 - this.ranking;
-            this.ranking += '%';
+            this.ranking = this.ranking.toFixed(2) + '%';
 
             //ajusta o ranking do css que deve ir de 0 a 96 para não quebrar o posicionamento do marcador na régua
-            this.cssRanking = (this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 96).toFixed(2);
+            this.cssRanking = this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 96;
             if(!this.maiorMelhor)
                 this.cssRanking = 96 - this.cssRanking;
-            this.cssRanking += '%';
+            this.cssRanking = this.cssRanking.toFixed(2) + '%';
         } else {
             this.ranking = null;
             this.cssRanking = null;
         }
+    }
+
+    getTitle() {
+        if (!this.rankingObj) {
+            return null
+        }
+
+        const valor = this.maiorMelhor ? this.rankingObj.ranking : (this.rankingObj.qtdeItensComparados - this.rankingObj.ranking);
+        return valor + ' de ' + this.itens 
     }
 }
