@@ -80,9 +80,9 @@ export class PanoramaTemasComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges) {
         if (changes.temas && changes.temas.currentValue && changes.temas.currentValue.length > 0) {
             this.localidade = changes.temas.currentValue[0].localidade;
-            this.goToTema();
             this.configurarTextosTemas();
         }
+        this.goToTema();
     }
 
     private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any> {

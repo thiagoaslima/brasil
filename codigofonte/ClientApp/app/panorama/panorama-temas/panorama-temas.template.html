@@ -1,5 +1,5 @@
 <template ngFor let-tema [ngForOf]="temas" let-i="index">
-    <p [id]="tema.tema.substr(0,2).toLowerCase()"></p>
+    <div  [id]="tema.tema.substr(0,2).toLowerCase()" style="position:absolute;margin-top: -40px;"></div>
     <div [class.borda]="i!=0" ></div>
     <div class="cabecalho" id="cont">
         <div class="cabecalho__celula-esquerda">

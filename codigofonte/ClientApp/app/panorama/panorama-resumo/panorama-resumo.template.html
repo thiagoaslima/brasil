@@ -57,21 +57,21 @@
             </tr>
 
             <template ngFor let-item let-last="last" [ngForOf]="tema.indicadores">
-                <tr class="lista__indicador lista__indicador" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
+                <tr class="lista__indicador lista__indicador">
                     <td></td>
-                    <td class="lista__nome">
+                    <td class="lista__nome" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
                         {{item.titulo || item.indicador?.nome}}
                         <small *ngIf="(item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.periodoValidoMaisRecente">
                         {{ '[' + (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.periodoValidoMaisRecente + ']' }}
                         </small>
                     </td>
-                    <td class="lista__valor">
+                    <td class="lista__valor" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
                         {{ (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.valorValidoMaisRecente | resultado}}
                         <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
                     </td>
-                    <td class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+                    <td class="lista__seta" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
                 </tr>
-                <tr *ngIf="!last" class="lista__separador" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
+                <tr *ngIf="!last" class="lista__separador">
                     <td colspan="4">
                         <div class="lista__linha"></div>
                     </td>
