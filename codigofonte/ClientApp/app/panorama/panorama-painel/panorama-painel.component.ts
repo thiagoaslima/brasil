@@ -7,7 +7,7 @@ import {
     Input,
     OnChanges,
     OnInit,
-    SimpleChange
+    SimpleChanges
 } from '@angular/core';
 
 import { isBrowser, isNode } from 'angular2-universal/browser';
@@ -42,6 +42,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public mun: Localidade;
     public indicador$: Observable<Indicador>
     public localSelecionado;
+    public indexSelecionado = 0;
     private _selecionarIndicador$ = new BehaviorSubject<Indicador>(null);
     private _resultados = Object.create(null);
     private _rankings = Object.create(null);
@@ -51,6 +52,9 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     public shouldAppear$: Observable<Boolean>;
     private _novosDados = true;
+
+    public posicao = 0;
+    public card = 0;
     
     constructor (
         private element: ElementRef,
@@ -121,7 +125,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         }
     }
 
-    ngOnChanges(changes: { [label: string]: SimpleChange }) {
+    ngOnChanges(changes: SimpleChanges) {
         if (changes.hasOwnProperty('localidade') && Boolean(changes.localidade.currentValue)) {
             this._novosDados = true;
             this.uf = changes.localidade.currentValue.parent;
@@ -135,11 +139,36 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         }
     }
 
-    selectPainel(obj) {
-        this._selecionarIndicador$.next(obj.indicador)
+    selectPainel(idx) {
+        console.log(idx);
+        let total = Object.keys(this.dados).length;
+
+        if(idx>=0 && idx < total){
+            this._selecionarIndicador$.next(this.dados[idx].indicador);
+            this.scrollCard(idx);
+            this.indexSelecionado = idx;
+        }
     }
 
     trackByIndicadorId(index, card) {
         return card.indicador ? card.indicador.id : undefined;
     }
+
+
+    scrollCard(index){
+        // let total = Object.keys(this.dados).length;
+
+        // if(dir == 'proximo' && this.card < total-1){
+        //     this.card ++
+        // }else if(dir == 'anterior' && this.card > 0){
+        //     this.card --
+        // }
+
+
+
+        this.posicao =  (index*274) * -1;
+
+       // console.log(total);
+    }
+
 }
