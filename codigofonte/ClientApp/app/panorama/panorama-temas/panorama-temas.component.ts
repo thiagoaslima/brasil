@@ -135,7 +135,7 @@ export class PanoramaTemasComponent implements OnInit {
         const contextoLocal = this.localidade.parent.codigo.toString();
         const universoLocal = this.localidade.parent.children.length;
         const contextoGeral = 'BR';
-        const universoGeral = this.localidade.parent.parent.children.length;
+        const universoGeral = '5570';
 
 
         // TODO: Texto TRABALHO
@@ -213,7 +213,7 @@ export class PanoramaTemasComponent implements OnInit {
                 ${arborizacaoUF.res}% dos domicilios urbanos em vias publicas com arborização e 
                 ${urbanizacaoUF.res}% dos domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). 
                 Quando comparado com os outros municípios de ${this.localidade.parent.sigla}, fica posicionado em ${esgotamentoSanitarioUF.ranking} de ${universoLocal}, 
-                ${arborizacaoUF.ranking} de ${arborizacaoUF.universo} e ${urbanizacaoUF.ranking} de ${universoLocal} respectiviamente. 
+                ${arborizacaoUF.ranking} de ${universoLocal} e ${urbanizacaoUF.ranking} de ${universoLocal} respectiviamente. 
                 Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamentoSanitarioBrasil.ranking} de ${universoGeral}, 
                 ${arborizacaoBrasil.ranking} de ${universoGeral} e 
                 ${urbanizacaoBrasil.ranking} de ${universoGeral} respectivamente.`;
@@ -245,7 +245,7 @@ export class PanoramaTemasComponent implements OnInit {
             Comparado aos demais municípios do estado, se posicionava entre em ${pipPerCaptaUF.ranking} de ${universoLocal}. 
             E quando comparado a outros municípios do Brasil, essa colocação é ${pipPerCaptaBrasil.ranking} de ${universoGeral}. 
             ${this.localidade.nome} tinha em ${receitasFontesExternasUF.periodo}, ${receitasFontesExternasUF.res}% do seu orçamento proveniente de fontes externas. 
-            Em compração aos outros municípios de ${this.localidade.parent.sigla}, está dentre em ${receitasFontesExternasUF.ranking} de ${universoLocal} 
+            Em compração aos outros municípios de ${this.localidade.parent.sigla}, está em ${receitasFontesExternasUF.ranking} de ${universoLocal} 
             e quando comparado a municípios no Brasil todo, fica em ${receitasFontesExternasBrasil.ranking} de ${universoGeral}.`;
         });
 
@@ -310,7 +310,7 @@ export class PanoramaTemasComponent implements OnInit {
         this.textoEducacao = `Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município, 
         tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. 
         Para os alunos dos anos finais essa nota foi de ${idebAnosFinaisBrasil.res}. 
-        Comparados aos municíos do mesmo estado, a nota dos alunos dos anos inciais coloca o município dentre em ${idebAnosIniciaisUF.ranking} de ${universoLocal}. 
+        Comparados aos municíos do mesmo estado, a nota dos alunos dos anos inciais coloca o município em ${idebAnosIniciaisUF.ranking} de ${universoLocal}. 
         Para a nota dos alunos dos anos finais, a posição é de ${idebAnosFinaisUF.ranking} de ${universoLocal}. 
         Quanto a taxa de escolarização (para pessoas de 6 a 14 anos), esta foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. 
         Isso posiciona o município em ${taxaEscolarizacao6A14AnosUF.ranking} de ${universoLocal} do ${this.localidade.parent.sigla} e 

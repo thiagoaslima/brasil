@@ -45,7 +45,6 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     ngOnInit() { 
        
         const sync$ = this._dados$
-            .do(dados => {debugger; console.log(dados)})
             .distinct( (a, b) =>  ['pesquisaId', 'indicadorId', 'periodo'].every(key => a[key] === b[key]))
             .filter(dados => dados.pesquisaId && dados.indicadorId && dados.periodo)
             .map(dados => {
@@ -130,7 +129,6 @@ export class PanoramaCardReguaComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.rankingObj && this.itens) {
-            debugger;
             this.ranking = `${(this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100).toFixed(2)}%`;
             this.cssRanking = `${((this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100) * 96 / 100 ).toFixed(2)}%`;
         } else {

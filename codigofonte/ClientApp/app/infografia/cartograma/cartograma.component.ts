@@ -61,7 +61,6 @@ export class CartogramaComponent implements OnInit, OnChanges {
             // .do(console.log.bind(console, 'geometries'));
 
         const resultados$ = this.indicador$
-            .do(indicador => {debugger; console.log(indicador)})
             // .distinctUntilKeyChanged('id')
             .withLatestFrom(this.localidade$.asObservable().share())
             .filter(([indicador, localidade]) => Boolean(indicador) && Boolean(localidade))
@@ -107,7 +106,6 @@ export class CartogramaComponent implements OnInit, OnChanges {
         if (changes.hasOwnProperty('indicador')
             && Boolean(changes.indicador.currentValue)
             && (!changes.indicador.previousValue || changes.indicador.currentValue.id !== changes.indicador.previousValue.id)) {
-                debugger;
             this.indicador$.next(changes.indicador.currentValue);
         }
 

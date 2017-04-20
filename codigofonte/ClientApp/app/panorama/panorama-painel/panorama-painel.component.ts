@@ -144,7 +144,6 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     }
 
     selectPainel(obj) {
-        debugger;
         this._selecionarIndicador$.next(obj.indicador)
     }
 
