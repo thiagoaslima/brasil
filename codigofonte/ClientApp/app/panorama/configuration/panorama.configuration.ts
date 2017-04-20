@@ -28,12 +28,12 @@ export const PANORAMA = {
     [NiveisTerritoriais.municipio.label]: {
         temas: [
             TEMAS.nenhum,
+            TEMAS.populacao,
             TEMAS.trabalho,
-            TEMAS.educacao,
-            TEMAS.meioAmbiente,
+            TEMAS.educacao,            
             TEMAS.economia,
             TEMAS.saude,
-            TEMAS.populacao
+            TEMAS.meioAmbiente
         ],
 
         indicadores: <PanoramaConfigurationItem[]>[
@@ -54,7 +54,15 @@ export const PANORAMA = {
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
+
             // --- População
+            // {
+            //     pesquisaId: 33,
+            //     indicadorId: 60409,
+            //     titulo: " Gentílico",
+            //     tema: TEMAS.populacao,
+            //     visualizacao: PanoramaVisualizacao.numerico
+            // },
             {
                 pesquisaId: 23,
                 indicadorId: 22423,

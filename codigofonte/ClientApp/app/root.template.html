@@ -44,9 +44,13 @@
                 <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'historico'">
                     <a style="display:block" [routerLink]="getLink('historico')">Histórico</a>
                 </li>
+
             </ul>
         </nav>
 
+        <a href='http://cidades.ibge.gov.br/xtras/home.php '>
+            <button id='versaoAnterior'>Acesse a versão anterior do @Cidades</button>
+        </a>
     </aside>
 
     <div class="conteudo__dados--com-scroll submenu">
@@ -56,7 +60,7 @@
     <div style="width:100%;" [style.position]="abrirMenuPesquisa || seletor.aberto ? 'fixed' : 'initial'">
         <router-outlet></router-outlet>
     </div>
-    <div class="share_Button" >
+    <div class="share_Button" *ngIf="isBrowser">
     <share-container
                         direction="vertical"
                         [expandable]="false"
