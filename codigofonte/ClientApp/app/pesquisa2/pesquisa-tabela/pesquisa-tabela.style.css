@@ -402,6 +402,13 @@ td.compara-blank {
     float: right;
 }
 
+.mensagem-vazio{
+    margin-left: 38%;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    padding: 20px;
+}
 
 @media screen and (max-width: 768px) {
     /*Mobile*/
@@ -476,5 +483,9 @@ td.compara-blank {
 
     .nivel-1:hover, .nivel-2:hover, .nivel-3:hover, .nivel-4:hover, .nivel-5:hover, .nivel-6:hover, .nivel-7:hover, .nivel-8:hover, .nivel-9:hover{
         background-color: transparent;
+    }
+
+    .mensagem-vazio{
+        margin-left: 0px;
     }
 }

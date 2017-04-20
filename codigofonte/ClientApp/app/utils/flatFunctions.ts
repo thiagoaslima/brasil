@@ -6,9 +6,11 @@ export function flatTree(root, childrenProp = 'children') {
         return [].concat(...root.map(item  => flatTree(item, childrenProp)));
     }
     let arr = [root];
+
     if (root[childrenProp] && root[childrenProp].length > 0) {
         arr = arr.concat(...root[childrenProp].map(item => flatTree(item, childrenProp)));
     }
+
     return arr;
 }
 export function flatMap(array: Array<any|any[]>, callbackfn): any[] {
