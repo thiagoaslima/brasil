@@ -347,6 +347,18 @@ sintese>dados
     font-size: 15px !important;
 }
 
+#versaoAnterior{
+    position: absolute;
+    bottom: 77px;
+    margin-left: 0;
+    background-color: #165d72;
+    border: none;
+    padding: 11px 0px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.8em;
+}
+
 @media screen and (max-width: 768px) {
     /*Mobile*/
     body, body.municipio, body.brasil, body.estado{
@@ -528,6 +540,10 @@ sintese>dados
     #sintese #detalhes{
         width: 100vw;
         margin-left: 0;
+    }
+
+    #versaoAnterior{
+        display: none;
     }
 }
 
