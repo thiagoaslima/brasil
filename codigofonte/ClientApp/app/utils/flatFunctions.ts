@@ -1,13 +1,13 @@
 interface Tree<T> {
     children: any[]
 }
-export function flatTree(root) {
+export function flatTree(root, childrenProp = 'children') {
     if (Array.isArray(root)) {
-        return [].concat(...root.map(flatTree));
+        return [].concat(...root.map(item  => flatTree(item, childrenProp)));
     }
     let arr = [root];
-    if (root.children.length) {
-        arr = arr.concat(...root.children.map(flatTree));
+    if (root[childrenProp] && root[childrenProp].length > 0) {
+        arr = arr.concat(...root[childrenProp].map(item => flatTree(item, childrenProp)));
     }
     return arr;
 }
