@@ -359,6 +359,14 @@ sintese>dados
     font-size: 0.8em;
 }
 
+.mobile{
+    display: none;
+}
+
+.desktop{
+    display: block
+}
+
 @media screen and (max-width: 768px) {
     /*Mobile*/
     body, body.municipio, body.brasil, body.estado{
@@ -541,10 +549,19 @@ sintese>dados
         width: 100vw;
         margin-left: 0;
     }
-    
+
     #versaoAnterior{
         display: none;
     }
+
+    .mobile{
+        display: block;
+    }
+
+    .desktop{
+        display: none;
+    }
+
 }
 
 
