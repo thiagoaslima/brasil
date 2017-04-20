@@ -6,9 +6,18 @@
                     <cartograma [localidade]="mun" *ngIf="!isPrerender" [indicador]="indicador$ | async"></cartograma>
                 </div>
             </div>
-            
+
+            <div class="nav__cards__anterior" (click)="selectPainel(indexSelecionado - 1)">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </div>
             <div class="cards">
-                <panorama-card (click)="selectPainel(painel)"  *ngFor="let painel of dados" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
+                <div class="scroll" [style.transform]="'translateX(' + posicao + 'px)'">
+                    <panorama-card (click)="selectPainel(i)"  *ngFor="let painel of dados; let i = index" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
+                </div>
+            </div>
+
+            <div class="nav__cards__proximo" (click)="selectPainel(indexSelecionado + 1)">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </div>
 
         </div>
