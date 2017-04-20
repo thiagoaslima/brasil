@@ -1,5 +1,5 @@
 import { NgModule, OpaqueToken } from '@angular/core';
-
+import { BarraGov } from './barra-gov/barra-gov';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 import { CoreModule } from './core/core.module';
@@ -34,7 +34,8 @@ import { SubmenuComponent } from './submenu/submenu.component';
     ],
     declarations: [
         RootComponent,
-        SubmenuComponent
+        SubmenuComponent,
+        BarraGov
     ],
     exports: [
         RootComponent
