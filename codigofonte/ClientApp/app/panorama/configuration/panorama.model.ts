@@ -29,6 +29,7 @@ export class PanoramaConfigurationItem {
     public indicador: Indicador
     public grafico: GraficoConfiguration;
     public ranking: {[contexto: string]: Ranking}
+    public maiorMelhor = true;
 
     constructor(data) {
         this.titulo = data.titulo || "";
@@ -44,6 +45,7 @@ export class PanoramaConfigurationItem {
         this.ranking = data.ranking 
             ? data.ranking.reduce( (acc, rank) => Object.assign(acc, {[rank.contexto]: rank}), {}) 
             : null;
+        this.maiorMelhor = data.maiorMelhor === undefined ? true : data.maiorMelhor;
 
         if (data.indicador && data.indicador instanceof Indicador) {
             this.indicador = data.indicador;

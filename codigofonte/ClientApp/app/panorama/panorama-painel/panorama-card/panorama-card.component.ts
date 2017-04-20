@@ -120,15 +120,23 @@ export class PanoramaCardReguaComponent implements OnChanges {
     @Input('ranking') rankingObj;
     @Input() itens;
     @Input() title;
+    @Input() maiorMelhor = true;
 
     public ranking ;
     public cssRanking;
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.rankingObj && this.itens) {
-            debugger;
-            this.ranking = `${(this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100).toFixed(2)}%`;
-            this.cssRanking = `${((this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100) * 96 / 100 ).toFixed(2)}%`;
+            this.ranking = (this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100).toFixed(2);
+            if(!this.maiorMelhor)
+                this.ranking = 100 - this.ranking;
+            this.ranking += '%';
+
+            //ajusta o ranking do css que deve ir de 0 a 96 para não quebrar o posicionamento do marcador na régua
+            this.cssRanking = (this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 96).toFixed(2);
+            if(!this.maiorMelhor)
+                this.cssRanking = 96 - this.cssRanking;
+            this.cssRanking += '%';
         } else {
             this.ranking = null;
             this.cssRanking = null;
