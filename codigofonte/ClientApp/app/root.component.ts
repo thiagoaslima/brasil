@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { isBrowser } from 'angular2-universal'
+
 import { AppState } from './shared2/app-state';
 import { RouterParamsService } from './shared/router-params.service';
 
@@ -24,6 +26,8 @@ export class RootComponent implements OnInit, OnDestroy {
     public menuAberto = false;
     public abrirMenuPesquisa = false;
     public itemSelecionado;
+
+    public isBrowser = isBrowser;
 
     private _localidade$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
