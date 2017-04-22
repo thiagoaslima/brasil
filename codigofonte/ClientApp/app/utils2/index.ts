@@ -1,0 +1,1 @@
+export { converterEmNumero } from './converterEmNumero'

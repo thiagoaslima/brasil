@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { Pesquisa } from '../models/pesquisa.model';
+import { PeriodoPesquisa, Pesquisa, PesquisaDTO } from '../models';
 
 import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/toPromise';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -21,12 +22,18 @@ export class PesquisaService3 {
         return this._http.get(url, options)
             .retry(3)
             .toPromise()
-            .then(res => res.json().map(obj => Object.assign(new Pesquisa(), obj)) as Pesquisa[])
+            .then(res => res.json().map((obj: PesquisaDTO)  => {
+                const periodos = obj.periodos.map(periodo => PeriodoPesquisa.criar(periodo));
+                 return Pesquisa.criar(Object.assign(obj, {periodos}))
+            }))
             .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
         return Promise.reject(error.message || error);
+    }
+
+    private _get(url) {
+        return ;
     }
 }
