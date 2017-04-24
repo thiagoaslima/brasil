@@ -54,8 +54,11 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public shouldAppear$: Observable<Boolean>;
     private _novosDados = true;
 
+    // card
     public posicao = 0;
     public card = 0;
+    public navProximo = true;
+    public navAnterior = false;
     
     constructor(
         private element: ElementRef,
@@ -148,7 +151,6 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     }
 
     selectPainel(idx) {
-        console.log(idx);
         let total = Object.keys(this.dados).length;
 
         if(idx>=0 && idx < total){
@@ -156,6 +158,9 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this.scrollCard(idx);
             this.indexSelecionado = idx;
         }
+
+        this.navAnterior = (idx==0) ? false : true;   
+        this.navProximo = (idx>=total-1) ? false : true;
     }
 
     trackByIndicadorId(index, card) {

@@ -7,7 +7,7 @@
                 </div>
             </div>
 
-            <div class="nav__cards__anterior" (click)="selectPainel(indexSelecionado - 1)">
+            <div class="nav__cards__anterior" [class.nav__cards__anterior--desabilitado]="!navAnterior" (click)="selectPainel(indexSelecionado - 1)">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </div>
             <div class="cards">
@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="nav__cards__proximo" (click)="selectPainel(indexSelecionado + 1)">
+            <div class="nav__cards__proximo" [class.nav__cards__proximo--desabilitado]="!navProximo" (click)="selectPainel(indexSelecionado + 1)">
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </div>
 
