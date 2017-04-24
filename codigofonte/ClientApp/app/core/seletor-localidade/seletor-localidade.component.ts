@@ -134,7 +134,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 return locais.filter(Boolean).reverse();
             });
 
-        this.ufs = this._localidadeService.getUfs();
+        this.ufs = this._localidadeService.getUfs().sort((a, b) => a.nome < b.nome ? -1 : 1);
         this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);
     }
 
