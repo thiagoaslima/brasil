@@ -1,27 +1,32 @@
-import { PeriodoPesquisa, PeriodoPesquisaDTO } from './index';
-import { NiveisTerritoriais } from './index'
+import { converterEmNumero } from '../../utils2';
+import { NiveisTerritoriais } from './index';
 
 export interface PesquisaDTO {
     id: number
     nome: string
     descricao: string
-    contexto: number
+    contexto: string
     observacao: string
     periodos: Array<PeriodoPesquisaDTO>
 }
 
-interface PesquisaParameters {
-     id: number
-    nome: string
-    descricao: string
-    contexto: number
-    observacao: string
-    periodos: Array<PeriodoPesquisa>
+interface PeriodoPesquisaDTO {
+    periodo: string,
+    publicacao: string,
+    fonte: string[],
+    nota: string[]
+}
+
+interface PeriodoPesquisa {
+    nome: string,
+    dataPublicacao: Date,
+    fontes: string[],
+    notas: string[]
 }
 
 export class Pesquisa {
-    static criar(data: PesquisaParameters) {
-        return data;
+    static criar(data: PesquisaDTO) {
+        return new Pesquisa(data);
     }
 
     public readonly id: number
@@ -29,24 +34,47 @@ export class Pesquisa {
     public readonly descricao: string
     public readonly observacao: string
     public readonly periodos: PeriodoPesquisa[]
-    public readonly contextos: {[nivelTerritorial: string]: boolean}
+    public readonly contextos: { [nivelTerritorial: string]: boolean }
 
-    constructor(dados: PesquisaParameters) {
+    private _notas;
+
+    constructor(dados: PesquisaDTO) {
         this.id = dados.id;
         this.nome = dados.nome;
-        this.descricao = dados.descricao;
-        this.observacao = dados.observacao;
-        this.periodos = dados.periodos;
-        this.contextos = this._setContextos(dados.contexto);
+        this.descricao = dados.descricao || "";
+        this.observacao = dados.observacao || "";
+        this.periodos = this._setPeriodos(dados.periodos);
+        this.contextos = this._setContextos(Number.parseInt(dados.contexto, 10));
     }
 
     abrangeNivelTerritorial(contexto: string) {
         return this.contextos[contexto];
     }
 
-    getListaContextosValidos(): string[] {
+    getContextosValidos(): string[] {
         return this._contextos.filter(contexto => Boolean(this.contextos[contexto]));
     }
+
+    getAllFontes() {
+        const fontes = this.periodos.reduce( (fontes, periodo) => fontes.concat(periodo.fontes), [] as string[]);
+        return Array.from(new Set(fontes));
+    }
+
+    getFontesDoPeriodo(periodo: string) {
+        const obj = this.periodos.find(_periodo => _periodo.nome === periodo);
+        return obj ? obj.fontes : [];
+    }
+    
+    getAllNotas() {
+        const notas = this.periodos.reduce( (notas, periodo) => notas.concat(periodo.notas), [] as string[]);
+        return Array.from(new Set(notas))
+    }
+
+    getNotasDoPeriodo(periodo: string) {
+        const obj = this.periodos.find(_periodo => _periodo.nome === periodo);
+        return obj ? obj.notas : [];
+    }
+
 
     private _contextos = [
         NiveisTerritoriais.pais.label,
@@ -58,7 +86,6 @@ export class Pesquisa {
     ];
 
     private _setContextos(binario: number) {
-
         const contextos = Boolean(binario)
             ? binario.toString()
                 .split('')
@@ -69,10 +96,34 @@ export class Pesquisa {
         const len = contextos.length;
         contextos.length = 6;
         contextos.fill(0, len);
+        contextos.reverse();
 
         return this._contextos.reduce((acc, propertyName, index) => {
             acc[propertyName] = Boolean(contextos[index]);
             return acc;
         }, {});
+    }
+
+    private _setPeriodos(periodos: PeriodoPesquisaDTO[]) {
+        return periodos.map(periodo => {
+            const nome = periodo.periodo;
+            const fontes = periodo.fonte;
+            const notas = periodo.nota;
+            let dataPublicacao = null;
+
+            if (periodo.publicacao) {
+                const [data, horario] = periodo.publicacao.split(' ');
+                const [dia, mes, ano] = data.split('/').map(converterEmNumero);
+                const [hora, minuto, segundo] = horario.split(':').map(converterEmNumero);
+                dataPublicacao = new Date(Date.UTC(ano, mes - 1, dia, hora, minuto, segundo));
+            }
+
+            return {
+                nome,
+                dataPublicacao,
+                fontes,
+                notas
+            } as PeriodoPesquisa;
+        })
     }
 }

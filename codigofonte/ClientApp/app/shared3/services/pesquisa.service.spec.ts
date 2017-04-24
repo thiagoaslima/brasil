@@ -3,6 +3,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/ht
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
+import { NiveisTerritoriais, Pesquisa } from '../models';
 import { PesquisaService3 } from './pesquisa.service';
 
 describe('PesquisaService', () => {
@@ -161,7 +162,7 @@ describe('PesquisaService', () => {
 
     describe('getAllPesquisas()', () => {
 
-        it('should return an Promise<Array<Pesquisa[]>>', fakeAsync(
+        it('retorna 2 pesquisas', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
                 mockBackend.connections.subscribe(c => connection = c);
@@ -170,10 +171,24 @@ describe('PesquisaService', () => {
                 tick();
 
                 expect(serviceResponse.length).toBe(2)
+                expect(serviceResponse[0] instanceof Pesquisa).toBeTruthy()
+                expect(serviceResponse[1] instanceof Pesquisa).toBeTruthy()
+            })
+        ));
+       
+        it('retorna as pesquisas de id 13 e 14, respectivamente', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getAllPesquisas().then(pesquisas => serviceResponse = pesquisas)
+                connection.mockRespond(mockResponse);
+                tick();
+
                 expect(serviceResponse[0].id).toBe(13)
                 expect(serviceResponse[1].id).toBe(14)
             })
-        ))
+        ));
+
     })
 
 })

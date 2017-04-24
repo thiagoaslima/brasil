@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { PeriodoPesquisa, Pesquisa, PesquisaDTO } from '../models';
+import { Pesquisa, PesquisaDTO } from '../models';
 
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/toPromise';
@@ -22,10 +22,7 @@ export class PesquisaService3 {
         return this._http.get(url, options)
             .retry(3)
             .toPromise()
-            .then(res => res.json().map((obj: PesquisaDTO)  => {
-                const periodos = obj.periodos.map(periodo => PeriodoPesquisa.criar(periodo));
-                 return Pesquisa.criar(Object.assign(obj, {periodos}))
-            }))
+            .then(res => res.json().map(Pesquisa.criar))
             .catch(this.handleError);
     }
 
