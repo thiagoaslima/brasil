@@ -48,6 +48,10 @@
     .cartograma{
         display: none;
     }
+    .scroll{
+        transform: translateX(0px) !important
+    }
+
     .cards{
         display: block;
     }
