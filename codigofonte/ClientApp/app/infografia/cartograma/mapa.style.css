@@ -140,7 +140,6 @@ g, .periodo-link {
 .local-atual{
     font-weight: bold;
     color: #0d4768;
-	position:absolute;
 }
 .local-selecionado{
     font-size: small;
