@@ -44,7 +44,6 @@ ANIMAÇÃO
 #selecionar-localidade{
     position: absolute;
     top: 54px;
-    top: 88px; /* compensr barra gov federal */
     height: 100%;
     color:#fff;
     width: 100%;
