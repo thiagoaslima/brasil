@@ -1,13 +1,7 @@
 import { converterEmNumero } from '../../utils2';
 import { PeriodoPesquisaDTO, PesquisaDTO } from '../dto';
+import { PeriodoPesquisa } from './index';
 import { NiveisTerritoriais } from '../values';
-
-interface PeriodoPesquisa {
-    nome: string,
-    dataPublicacao: Date,
-    fontes: string[],
-    notas: string[]
-}
 
 export class Pesquisa {
     static criar(data: PesquisaDTO) {

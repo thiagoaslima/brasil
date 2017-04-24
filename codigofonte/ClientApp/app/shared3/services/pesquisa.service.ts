@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
+function setUrl(path) { return `http://servicodados.ibge.gov.br/api/v1${path}`; }
 @Injectable()
 export class PesquisaService3 {
 
@@ -18,7 +19,7 @@ export class PesquisaService3 {
     ) { }
 
     getAllPesquisas(): Promise<Pesquisa[]> {
-        const url = 'http://servicodados.ibge.gov.br/api/v1/pesquisas';
+        const url = setUrl('/pesquisas');
 
         return this._http.get(url, options)
             .retry(3)
@@ -28,7 +29,7 @@ export class PesquisaService3 {
     }
 
     getPesquisa(pesquisaId: number): Promise<Pesquisa> {
-        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}`;
+        const url = setUrl(`/pesquisas/${pesquisaId}`);
 
         return this._http.get(url, options)
             .retry(3)
@@ -45,6 +46,10 @@ export class PesquisaService3 {
                 return Pesquisa.criar(obj);
             })
             .catch(this.handleError);
+    }
+
+    getIndicadoresDaPesquisa(pesquisaId: number) {
+        
     }
 
     private handleError(error: any): Promise<any> {
