@@ -26,11 +26,27 @@ export class PesquisaService3 {
             .catch(this.handleError);
     }
 
+    getPesquisa(pesquisaId: number): Promise<Pesquisa> {
+        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}`;
+
+        return this._http.get(url, options)
+            .retry(3)
+            .toPromise()
+            .then(res => res.json())
+            .then(obj => {
+                if (obj.message) {
+                    throw new Error(`
+                        Não foi possível recuperar a pesquisa solicitada. 
+                        Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]
+                    `)
+                }
+                return Pesquisa.criar(obj);
+            })
+            .catch(this.handleError);
+    }
+
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);
     }
 
-    private _get(url) {
-        return ;
-    }
 }
