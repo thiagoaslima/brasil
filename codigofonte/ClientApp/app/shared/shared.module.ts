@@ -13,6 +13,7 @@ import { SystemCacheService } from './system-cache.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
 import { IsMobileService } from './is-mobile.service';
+import { QRCodeComponent } from './qrcode/qrcode.component';
 
 export function getLRU() {
   return new Map();
@@ -34,6 +35,7 @@ const PIPES = [
 
 const COMPONENTS = [
     // put shared components here
+    QRCodeComponent
 ];
 
 const PROVIDERS = [
