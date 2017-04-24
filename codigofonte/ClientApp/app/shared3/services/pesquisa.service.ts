@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { Pesquisa, PesquisaDTO } from '../models';
+import { PesquisaDTO } from '../dto';
+import { Pesquisa } from '../models';
 
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/toPromise';
@@ -31,9 +32,10 @@ export class PesquisaService3 {
 
         return this._http.get(url, options)
             .retry(3)
-            .toPromise()
-            .then(res => res.json())
-            .then(obj => {
+            .toPromise()          
+            .then(res => {
+                const obj = res.json(); 
+
                 if (obj.message) {
                     throw new Error(`
                         Não foi possível recuperar a pesquisa solicitada. 

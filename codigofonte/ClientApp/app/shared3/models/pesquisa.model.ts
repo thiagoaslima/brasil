@@ -1,21 +1,6 @@
 import { converterEmNumero } from '../../utils2';
-import { NiveisTerritoriais } from './index';
-
-export interface PesquisaDTO {
-    id: number
-    nome: string
-    descricao: string
-    contexto: string
-    observacao: string
-    periodos: Array<PeriodoPesquisaDTO>
-}
-
-interface PeriodoPesquisaDTO {
-    periodo: string,
-    publicacao: string,
-    fonte: string[],
-    nota: string[]
-}
+import { PeriodoPesquisaDTO, PesquisaDTO } from '../dto';
+import { NiveisTerritoriais } from '../values';
 
 interface PeriodoPesquisa {
     nome: string,

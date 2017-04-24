@@ -1,2 +1,2 @@
-export { NiveisTerritoriais } from './niveis-territoriais.model'
-export { Pesquisa, PesquisaDTO } from './pesquisa.model'
+export { Indicador } from './indicador.model'
+export { Pesquisa } from './pesquisa.model'

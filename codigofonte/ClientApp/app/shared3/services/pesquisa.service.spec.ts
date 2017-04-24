@@ -3,7 +3,9 @@ import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/ht
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
-import { NiveisTerritoriais, Pesquisa } from '../models';
+import { Pesquisa } from '../models';
+import { NiveisTerritoriais } from '../values';
+
 import { PesquisaService3 } from './pesquisa.service';
 
 describe('PesquisaService', () => {
