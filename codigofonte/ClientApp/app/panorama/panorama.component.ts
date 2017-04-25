@@ -39,6 +39,7 @@ export class PanoramaComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        
         const _blankConfig = { temas: [] as string[], indicadores: [] as PanoramaConfigurationItem[] };
 
         const configuracaoBase$ = new BehaviorSubject(_blankConfig);
@@ -143,6 +144,9 @@ export class PanoramaComponent implements OnInit, OnDestroy {
 
         this.resumo$ = panorama$
             .withLatestFrom(_localidade$)
+            .do(() => {
+                this.temaSelecionado = undefined; //limpando scroll
+            })
             .map(([configState, localidade]) => {
             return configState.map(item => {
                 const indicadores = Object.keys(PanoramaVisualizacao)

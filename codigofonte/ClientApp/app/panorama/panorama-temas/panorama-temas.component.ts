@@ -42,6 +42,7 @@ export class PanoramaTemasComponent implements OnInit {
     textoEconomia = "";
     textoSaude = "";
     textoEducacao = "";
+    textoPopulacao = "";
 
     isBrowser = isBrowser;
 
@@ -51,6 +52,10 @@ export class PanoramaTemasComponent implements OnInit {
     ) { }
 
     public getTextoAnalitico(nomeTema) {
+        
+        if (nomeTema === TEMAS.populacao) {
+            return Observable.of(this.textoPopulacao);
+        }
 
         if (nomeTema === TEMAS.trabalho) {
             return Observable.of(this.textoTrabalho);
@@ -76,9 +81,9 @@ export class PanoramaTemasComponent implements OnInit {
 
 
     ngOnInit() {
-        if(this.isBrowser){
-            this.goToTema();
-        }
+        // if(this.isBrowser){
+        //     this.goToTema();
+        // }
     }
 
 
@@ -143,7 +148,32 @@ export class PanoramaTemasComponent implements OnInit {
         const universoGeral = '5570';
 
 
-        // TODO: Texto TRABALHO
+        // Texto POPULAÇÂO
+        // 
+        let populacaoUF$ = this.getValorIndicador(33, 29166, this.localidade.codigo)
+             .flatMap(resultado => this.getPosicaoIndicador(33, 29166, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+
+        // 
+        let populacaoBrasil$ = this.getValorIndicador(33, 29166, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(33, 29166, this.localidade.codigo, resultado.ano));
+            
+        // 
+        let densidadeUF$ = this.getValorIndicador(33, 29168, this.localidade.codigo)
+             .flatMap(resultado => this.getPosicaoIndicador(33, 29168, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+
+        // 
+        let densidadeBrasil$ = this.getValorIndicador(33, 29168, this.localidade.codigo)
+            .flatMap(resultado => this.getPosicaoIndicador(33, 29168, this.localidade.codigo, resultado.ano));   
+            
+        populacaoUF$.zip(populacaoBrasil$, densidadeUF$, densidadeBrasil$)
+           .subscribe(([populacaoUF, populacaoBrasil, densidadeUF, densidadeBrasil]) => {
+
+        this.textoPopulacao = `
+        
+        O município tinha ${populacaoUF.res} habitantes no último Censo. Isso coloca o município na posição ${populacaoUF.ranking} dentre ${universoLocal} do mesmo estado. Em comparação com outros municípios do Brasil, fica na posição ${populacaoBrasil.ranking} dentre ${universoGeral}. Sua densidade demográfica é de ${densidadeUF.res} habitantes por kilometro quadrado, colocando-o na posição ${densidadeUF.ranking} de ${universoLocal} do mesmo estado. Quando comparado com outros municípios no Brasil, fica na posição ${densidadeBrasil.ranking} de ${universoGeral}.`;
+        });
+
+        //Texto TRABALHO
         // const salarioMedioMensalUF = hash[29765][contextoLocal];
         let salarioMedioMensalUF$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
              .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
@@ -171,18 +201,14 @@ export class PanoramaTemasComponent implements OnInit {
        salarioMedioMensalUF$.zip(salarioMedioMensalBrasil$, pessoasOcupadasUF$, pessoasOcupadasBrasil$, rendimentoMensalUF$, rendimentoMensalBrasil$)
            .subscribe(([salarioMedioMensalUF, salarioMedioMensalBrasil, pessoasOcupadasUF, pessoasOcupadasBrasil, rendimentoMensalUF, rendimentoMensalBrasil]) => {
 
-        this.textoTrabalho = `Em ${this.localidade.nome}, o salário médio mensal, em ${salarioMedioMensalUF.periodo}, 
-            era de ${salarioMedioMensalUF.res} salários mínimos. 
-            A proporção de pessoas ocupadas em relação à população total, era de ${pessoasOcupadasUF.res}%. 
-            Quando analisado em comparação com os outros municípios de ${this.localidade.parent.sigla}, 
-            encontra-se nas posições ${salarioMedioMensalUF.ranking} de ${universoLocal} e 
-            ${pessoasOcupadasUF.ranking} de ${universoLocal} respectivamente. 
-            E quando comparado com municípios do Brasil todo, fica em ${salarioMedioMensalBrasil.ranking} de ${universoGeral} e 
-            ${pessoasOcupadasBrasil.ranking} de ${universoGeral} respectivamente. 
-            Sobre os domicílios com rendimentos mensais de até meio salário mínimo por pessoa, 
-            ${this.localidade.nome} tinha ${rendimentoMensalUF.res}% da população nestas condições, 
-            colocando-o em ${rendimentoMensalUF.ranking} de ${universoLocal} dentre os municipios de ${this.localidade.parent.sigla} e 
-            ${rendimentoMensalBrasil.ranking} de ${universoGeral} dentre os municipios do Brasil.`;
+        this.textoTrabalho = `
+        Em ${salarioMedioMensalUF.periodo}, o salário médio mensal era de ${salarioMedioMensalUF.res} salários mínimos. A proporção de pessoas ocupadas em relação à população total era de ${pessoasOcupadasUF.res}%. 
+        
+        Na comparação com os outros municípios do estado, ocupava as posições ${salarioMedioMensalUF.ranking} de ${universoLocal} e ${pessoasOcupadasUF.ranking} de ${universoLocal}, respectivamente. 
+        
+        Já na comparação com municípios do Brasil todo, ficava na posição ${salarioMedioMensalBrasil.ranking} de ${universoGeral} e ${pessoasOcupadasBrasil.ranking} de ${universoGeral}, respectivamente.
+        
+        Considerando domicílios com rendimentos mensais de até meio salário mínimo por pessoa, tinha ${rendimentoMensalUF.res}% da população nessas condições, o que o colocava na posição ${rendimentoMensalUF.ranking} de ${universoLocal} dentre os municípios do estado e na posição ${rendimentoMensalBrasil.ranking} de ${universoGeral} dentre os municípios do Brasil.`;
         });
 
 
@@ -214,14 +240,13 @@ export class PanoramaTemasComponent implements OnInit {
         esgotamentoSanitarioUF$.zip(esgotamentoSanitarioBrasil$, arborizacaoUF$, arborizacaoBrasil$, urbanizacaoUF$, urbanizacaoBrasil$)
             .subscribe(([esgotamentoSanitarioUF, esgotamentoSanitarioBrasil, arborizacaoUF, arborizacaoBrasil, urbanizacaoUF, urbanizacaoBrasil]) => {
 
-        this.textoMeioAmbiente = `${this.localidade.nome} tem ${esgotamentoSanitarioUF.res}% de domicilios com esgotamento sanitário adequado, 
-                ${arborizacaoUF.res}% dos domicilios urbanos em vias publicas com arborização e 
-                ${urbanizacaoUF.res}% dos domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). 
-                Quando comparado com os outros municípios de ${this.localidade.parent.sigla}, fica posicionado em ${esgotamentoSanitarioUF.ranking} de ${universoLocal}, 
-                ${arborizacaoUF.ranking} de ${universoLocal} e ${urbanizacaoUF.ranking} de ${universoLocal} respectiviamente. 
-                Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamentoSanitarioBrasil.ranking} de ${universoGeral}, 
+        this.textoMeioAmbiente = `
+        
+        Apresenta ${esgotamentoSanitarioUF.res}% de domicílios com esgotamento sanitário adequado, ${arborizacaoUF.res}% de domicílios urbanos em vias públicas com arborização e  ${urbanizacaoUF.res}% de domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). Quando comparado com os outros municípios do estado, fica na posição ${esgotamentoSanitarioUF.ranking} de ${universoLocal}, ${arborizacaoUF.ranking} de ${universoLocal} e ${urbanizacaoUF.ranking} de ${universoLocal}, respectivamente. 
+                
+        Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamentoSanitarioBrasil.ranking} de ${universoGeral}, 
                 ${arborizacaoBrasil.ranking} de ${universoGeral} e 
-                ${urbanizacaoBrasil.ranking} de ${universoGeral} respectivamente.`;
+                ${urbanizacaoBrasil.ranking} de ${universoGeral}, respectivamente.`;
         });
 
 
@@ -246,12 +271,12 @@ export class PanoramaTemasComponent implements OnInit {
         pipPerCaptaUF$.zip(pipPerCaptaBrasil$, receitasFontesExternasUF$, receitasFontesExternasBrasil$)
             .subscribe(([pipPerCaptaUF, pipPerCaptaBrasil, receitasFontesExternasUF, receitasFontesExternasBrasil]) => {
 
-        this.textoEconomia = `Em ${pipPerCaptaUF.periodo}, ${this.localidade.nome} tinha PIB per capita de R$ ${pipPerCaptaUF.res}. 
-            Comparado aos demais municípios do estado, se posicionava entre em ${pipPerCaptaUF.ranking} de ${universoLocal}. 
-            E quando comparado a outros municípios do Brasil, essa colocação é ${pipPerCaptaBrasil.ranking} de ${universoGeral}. 
-            ${this.localidade.nome} tinha em ${receitasFontesExternasUF.periodo}, ${receitasFontesExternasUF.res}% do seu orçamento proveniente de fontes externas. 
-            Em compração aos outros municípios de ${this.localidade.parent.sigla}, está em ${receitasFontesExternasUF.ranking} de ${universoLocal} 
-            e quando comparado a municípios no Brasil todo, fica em ${receitasFontesExternasBrasil.ranking} de ${universoGeral}.`;
+        this.textoEconomia = `
+        
+        
+        Em ${pipPerCaptaUF.periodo}, tinha um PIB per capita de R$ ${pipPerCaptaUF.res}. Na comparação com os demais municípios do estado, sua posição era de ${pipPerCaptaUF.ranking} de ${universoLocal}. Já na comparação com municípios do Brasil todo, sua colocação era de ${pipPerCaptaBrasil.ranking} de ${universoGeral}. 
+        
+        Em ${receitasFontesExternasUF.periodo}, tinha ${receitasFontesExternasUF.res}% do seu orçamento proveniente de fontes externas. Em comparação aos outros municípios do estado, estava na posição ${receitasFontesExternasUF.ranking} de ${universoLocal} e, quando comparado a municípios do Brasil todo, ficava em ${receitasFontesExternasBrasil.ranking} de ${universoGeral}.`;
         });
 
 
@@ -275,12 +300,13 @@ export class PanoramaTemasComponent implements OnInit {
         mortaldadeInfantilUF$.zip(mortaldadeInfantilBrasil$, intermacoesDiarreiaUF$, internacoesDiarreiaBrasil$)
             .subscribe(([mortaldadeInfantilUF, mortaldadeInfantilBrasil, intermacoesDiarreiaUF, internacoesDiarreiaBrasil]) => {
 
-        this.textoSaude = `A taxa de mortalidade infantil média no município é de ${mortaldadeInfantilUF.res} para 1.000 nascidos vivos. 
-            As internações devido a diarréias são de ${intermacoesDiarreiaUF.res} para cada 1.000 habitantes. 
-            Comparado com todos os municípios do estado, posiciona-se em ${mortaldadeInfantilUF.ranking} de ${universoLocal} e 
-            ${intermacoesDiarreiaUF.ranking} de ${universoLocal} respectivamente. 
-            Quando comparado a municípios no Brasil essas posições são de ${mortaldadeInfantilBrasil.ranking} de ${universoGeral} e 
-            ${internacoesDiarreiaBrasil.ranking} de ${universoGeral}.`;
+        this.textoSaude = `
+        
+        A taxa de mortalidade infantil média no município é de ${mortaldadeInfantilUF.res} para 1.000 nascidos vivos. As internações devido a diarreias são de ${intermacoesDiarreiaUF.res} para cada 1.000 habitantes. Comparado com todos os municípios do estado, fica nas posições ${mortaldadeInfantilUF.ranking} de ${universoLocal} e 
+            ${intermacoesDiarreiaUF.ranking} de ${universoLocal}, respectivamente. 
+            
+            Quando comparado a municípios do Brasil todo, essas posições são de ${mortaldadeInfantilBrasil.ranking} de ${universoGeral} e 
+            ${internacoesDiarreiaBrasil.ranking} de ${universoGeral}, respectivamente.`;
         });
 
 
@@ -312,14 +338,17 @@ export class PanoramaTemasComponent implements OnInit {
         idebAnosIniciaisUF$.zip(idebAnosIniciaisBrasil$, idebAnosFinaisUF$, idebAnosFinaisBrasil$, taxaEscolarizacao6A14AnosUF$, taxaEscolarizacao6A14AnosBrasil$)
             .subscribe(([idebAnosIniciaisUF, idebAnosIniciaisBrasil, idebAnosFinaisUF, idebAnosFinaisBrasil, taxaEscolarizacao6A14AnosUF, taxaEscolarizacao6A14AnosBrasil]) => {
 
-        this.textoEducacao = `Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município, 
-        tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. 
-        Para os alunos dos anos finais essa nota foi de ${idebAnosFinaisBrasil.res}. 
-        Comparados aos municíos do mesmo estado, a nota dos alunos dos anos inciais coloca o município em ${idebAnosIniciaisUF.ranking} de ${universoLocal}. 
-        Para a nota dos alunos dos anos finais, a posição é de ${idebAnosFinaisUF.ranking} de ${universoLocal}. 
-        Quanto a taxa de escolarização (para pessoas de 6 a 14 anos), esta foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. 
-        Isso posiciona o município em ${taxaEscolarizacao6A14AnosUF.ranking} de ${universoLocal} do ${this.localidade.parent.sigla} e 
-        em ${taxaEscolarizacao6A14AnosBrasil.ranking} de ${universoGeral} no Brasil.`;
+        this.textoEducacao = `
+        
+        Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. Para os alunos dos anos finais, essa nota foi de ${idebAnosFinaisBrasil.res}. 
+        
+        Na comparação com municípios do mesmo estado, a nota dos alunos dos anos iniciais colocava este município na posição ${idebAnosIniciaisUF.ranking} de ${universoLocal}. 
+        
+        Considerando a nota dos alunos dos anos finais, a posição passava a ${idebAnosFinaisUF.ranking} de ${universoLocal}. 
+        
+        A taxa de escolarização (para pessoas de 6 a 14 anos) foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. 
+        
+        Isso posicionava o município na posição ${taxaEscolarizacao6A14AnosUF.ranking} de ${universoLocal} dentre os municípios do estado e na posição ${taxaEscolarizacao6A14AnosBrasil.ranking} de ${universoGeral} dentre os municípios do Brasil.`;
          });
 
 

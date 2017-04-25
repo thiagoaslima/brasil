@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
 @Component({
     selector: 'seletor-localidade',
@@ -121,7 +122,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     constructor(
         private _appState: AppState,
-        private _localidadeService: LocalidadeService2
+        private _localidadeService: LocalidadeService2,
+        private pageScrollService: PageScrollService
     ) {
         this.selecaoLocalidadesAtual = this._appState.observable$
             .map(({ localidade }) => {
@@ -132,7 +134,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 return locais.filter(Boolean).reverse();
             });
 
-        this.ufs = this._localidadeService.getUfs();
+        this.ufs = this._localidadeService.getUfs().sort((a, b) => a.nome < b.nome ? -1 : 1);
         this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);
     }
 
@@ -193,6 +195,13 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.ufSelecionada = uf;
         this.search(this.buscaInput.nativeElement.value);
         //this.clearSearch();
+
+        //scroll to top ao selecionar uf
+        this.pageScrollService.stopAll();
+        var pos = window.pageYOffset;
+        if (pos > 0) {
+            window.scrollTo(0, -pos);
+        } 
     }
 
     search(termo = '') {

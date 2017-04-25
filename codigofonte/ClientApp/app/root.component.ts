@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 
 import { isBrowser } from 'angular2-universal'
 
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { AppState } from './shared2/app-state';
 import { RouterParamsService } from './shared/router-params.service';
 
@@ -58,7 +59,9 @@ export class RootComponent implements OnInit, OnDestroy {
     constructor(
         private _route: ActivatedRoute,
         private _appState: AppState,
-        private _routerParams: RouterParamsService
+        private _routerParams: RouterParamsService,
+        private router: Router,
+        private pageScrollService: PageScrollService
     ) { }
 
     ngOnInit() {
@@ -87,6 +90,24 @@ export class RootComponent implements OnInit, OnDestroy {
         this._routerParams.params$.subscribe(({ params, queryParams }) => {
             this.itemSelecionado = params.pesquisa ? 'pesquisa' : 'panorama';
             this.menuAberto = queryParams['detalhes'] == 'true';
+        });
+
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            //scroll to top ao carregar página
+            if(isBrowser){
+                this.pageScrollService.stopAll();
+                // var scrollToTop = window.setInterval(function () {
+                    var pos = window.pageYOffset;
+                    if (pos > 0) {
+                        window.scrollTo(0, -pos); // how far to scroll on each step
+                    } else {
+                        // window.clearInterval(scrollToTop);
+                    }
+                // }, 16); // how fast to scroll (this equals roughly 60 fps)
+            }
         });
     }
 

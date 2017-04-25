@@ -43,7 +43,9 @@ ANIMAÇÃO
 
 #selecionar-localidade{
     position: absolute;
-    top: 0px;
+    top: 54px;
+	overflow:hidden;
+   /*top: 88px; compensr barra gov federal */
     height: 100%;
     color:#fff;
     width: 100%;
@@ -60,7 +62,8 @@ ANIMAÇÃO
     z-index: 23;
     display: inline-block;
     left: -22%;
-
+	margin-bottom:-1000em;
+	padding-bottom: 1000em;
     -webkit-transition: left 0.5s ease;
     -moz-transition: left 0.5s ease;
     -ms-transition: left 0.5s ease;
@@ -76,7 +79,8 @@ ANIMAÇÃO
     position: relative;
     left: -50%;
     vertical-align: top;
-
+	margin-bottom:-1000em;
+	padding-bottom: 1000em;
     -webkit-transition: left 0.8s ease;
     -moz-transition: left 0.8s ease;
     -ms-transition: left 0.8s ease;
@@ -222,7 +226,8 @@ ANIMAÇÃO
     padding: 0px 2%;
     left: -100%;
     vertical-align: top;
-
+	margin-bottom:-100em;
+	padding-bottom: 100em;
     -webkit-transition: left .8s ease;
     -moz-transition: left .8s ease;
     -ms-transition: left .8s ease;
