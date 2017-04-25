@@ -1,4 +1,5 @@
 import { IndicadorDTO } from '../dto';
+import { Pesquisa } from './'
 import { EscopoIndicadores } from '../values'
 
 export class Indicador {
@@ -10,7 +11,8 @@ export class Indicador {
     public readonly nome: string;
     public readonly posicao: string;
     public readonly classe: string;
-    public readonly pesquisaId: number
+    public readonly pesquisaId?: number
+    public readonly pesquisa?: Pesquisa
     public readonly notas: string[]
     public readonly metadados: {
         descricao: string
@@ -22,17 +24,18 @@ export class Indicador {
         multiplicador: number
     }
 
-    constructor(dados: IndicadorDTO) {
+    constructor(dados: any) {
         this.id = dados.id;
         this.nome = dados.indicador;
         this.posicao = dados.posicao;
         this.classe = dados.classe;
-        this.pesquisaId = dados.pesquisa_id;
         this.notas = dados.nota;
+
         this.metadados = Object.assign({
             descricao: '',
             calculo: ''
         }, dados.metadado);
+
         this.unidade = Object.assign({
             nome: '',
             classe: '',
@@ -42,5 +45,8 @@ export class Indicador {
             classe: dados.unidade.classe,
             multiplicador: dados.unidade.multiplicador
         })
+
+        if (dados.pesquisa_id) { this.pesquisaId = dados.pesquisa_id; }
+        if (dados.pesquisa) { this.pesquisa = dados.pesquisa; }
     }
 }
