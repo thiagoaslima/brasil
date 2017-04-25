@@ -1,11 +1,11 @@
 <div class="container">
 
-    <span class="local-atual">{{indicador?.nome}}</span>
+    <div class="local-atual">{{indicador?.nome}}</div>
 
     <div class="mapa" *ngIf="(malha$ | async)?.viewBox">
     <div class="alturafixa_legenda">
     <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
-            <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1]}} {{indicador?.unidade.nome}}</span></p>
+            <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1] | resultado:dado?.unidade?.id }} {{indicador?.unidade.nome}}</span></p>
         </div>
     </div>
         <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
