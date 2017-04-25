@@ -81,9 +81,9 @@ export class PanoramaTemasComponent implements OnInit {
 
 
     ngOnInit() {
-        if(this.isBrowser){
-            this.goToTema();
-        }
+        // if(this.isBrowser){
+        //     this.goToTema();
+        // }
     }
 
 

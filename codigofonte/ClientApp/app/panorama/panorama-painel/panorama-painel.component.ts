@@ -159,7 +159,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this.indexSelecionado = idx;
         }
 
-        this.navAnterior = (idx==0) ? false : true;   
+        this.navAnterior = (idx<=0) ? false : true;   
         this.navProximo = (idx>=total-1) ? false : true;
     }
 
@@ -169,19 +169,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
 
     scrollCard(index){
-        // let total = Object.keys(this.dados).length;
-
-        // if(dir == 'proximo' && this.card < total-1){
-        //     this.card ++
-        // }else if(dir == 'anterior' && this.card > 0){
-        //     this.card --
-        // }
-
-
-
         this.posicao =  (index*180) * -1;
-
-       // console.log(total);
     }
 
 }
