@@ -10,6 +10,9 @@ import { RouterParamsService } from './shared/router-params.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+
+import {TituloBrowserComponent} from './core/titulo-browser/titulo-browser.component'
+
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 
