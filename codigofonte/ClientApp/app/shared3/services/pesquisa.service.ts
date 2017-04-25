@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { PesquisaDTO } from '../dto';
-import { Pesquisa } from '../models';
+import { Indicador, Pesquisa } from '../models';
+import { EscopoIndicadores } from '../values';
 
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/toPromise';
@@ -33,9 +34,9 @@ export class PesquisaService3 {
 
         return this._http.get(url, options)
             .retry(3)
-            .toPromise()          
+            .toPromise()
             .then(res => {
-                const obj = res.json(); 
+                const obj = res.json();
 
                 if (obj.message) {
                     throw new Error(`
@@ -48,8 +49,15 @@ export class PesquisaService3 {
             .catch(this.handleError);
     }
 
-    getIndicadoresDaPesquisa(pesquisaId: number) {
-        
+    getIndicadoresDaPesquisa(pesquisaId: number, arvoreCompleta = false): Promise<Indicador[]> {
+        const escopo = arvoreCompleta ? EscopoIndicadores.filhos : EscopoIndicadores.arvoreCompleta
+        const url = setUrl(`/pesquisas/${pesquisaId}/periodos/all/indicadores?scope=${escopo}`);
+
+        return this._http.get(url, options)
+            .retry(3)
+            .toPromise()
+            .then(res => res.json().map(Indicador.criar))
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

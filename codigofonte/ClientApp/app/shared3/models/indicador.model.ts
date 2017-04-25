@@ -2,6 +2,10 @@ import { IndicadorDTO } from '../dto';
 import { EscopoIndicadores } from '../values'
 
 export class Indicador {
+    static criar(dados: IndicadorDTO) {
+        return new Indicador(dados);
+    }
+
     public readonly id: number;
     public readonly nome: string;
     public readonly posicao: string;
