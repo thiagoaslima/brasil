@@ -30,6 +30,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     mostrarOpcoes = false;
     objetoURL:any = {};
     baseURL = '';
+    listaPeriodos = [];
 
     private subs$$
     private isOcultarValoresVazios = true;
@@ -46,6 +47,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         this.subs$$ = this._routerParamsService.params$.subscribe((params) => {
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
+                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
 
                 if(params.queryParams.ano){
                     this.ano = params.queryParams.ano;
@@ -105,7 +107,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     mudaAno(event){
-        this.navegarPara(null, event.srcElement.value);
+        this.navegarPara(null, event.srcElement.value.trim());
     }
 
     fazerDownload(){
