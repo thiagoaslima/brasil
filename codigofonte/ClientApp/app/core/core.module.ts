@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
 import { BuscaComponent } from './busca/busca.component';
 import { BuscaService } from './busca/busca.service';
+import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
 
 
 @NgModule({
@@ -16,11 +17,13 @@ import { BuscaService } from './busca/busca.service';
   ],
   declarations: [
     SeletorLocalidadeComponent,
-    BuscaComponent
+    BuscaComponent,
+    TituloBrowserComponent
   ],
   exports: [
     SeletorLocalidadeComponent,
-    BuscaComponent
+    BuscaComponent,
+    TituloBrowserComponent
   ],
   providers: [
     BuscaService

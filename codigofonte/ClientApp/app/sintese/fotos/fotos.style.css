@@ -39,7 +39,6 @@ img {
 
 .comp__conteudo{
     margin: 0px;
-    height: 320px;
 }
 
 .loading{
@@ -47,6 +46,12 @@ img {
     color: #999;
     text-align: center;
 }
+
+.sem_fotos {
+	background-color: #E6E6E6;
+	padding: 10px; 
+	text-align:center;
+	}
 
 @media screen and (min-width: 48em) {
     .component{

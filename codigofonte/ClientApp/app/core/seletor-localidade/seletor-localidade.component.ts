@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
+import { isBrowser } from 'angular2-universal';
+
 import { AppState } from '../../shared2/app-state';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
@@ -10,6 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
 @Component({
     selector: 'seletor-localidade',
@@ -32,6 +35,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     private _ufSelecionada = null;
 
     private hist = null; //guarda a referência para o objeto 'history' do browser
+
+    public isBrowser = isBrowser;
 
     public listaMunicipios = {
         maisVistos: <Localidade[]>[],
@@ -121,7 +126,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     constructor(
         private _appState: AppState,
-        private _localidadeService: LocalidadeService2
+        private _localidadeService: LocalidadeService2,
+        private pageScrollService: PageScrollService
     ) {
         this.selecaoLocalidadesAtual = this._appState.observable$
             .map(({ localidade }) => {
@@ -132,7 +138,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 return locais.filter(Boolean).reverse();
             });
 
-        this.ufs = this._localidadeService.getUfs();
+        this.ufs = this._localidadeService.getUfs().sort((a, b) => a.nome < b.nome ? -1 : 1);
         this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);
     }
 
@@ -193,6 +199,16 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.ufSelecionada = uf;
         this.search(this.buscaInput.nativeElement.value);
         //this.clearSearch();
+
+
+        if (this.isBrowser) {
+            //scroll to top ao selecionar uf
+            this.pageScrollService.stopAll();
+            var pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, -pos);
+            }
+        }
     }
 
     search(termo = '') {

@@ -88,12 +88,20 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     private hasValue(indicador, periodo){
 
-        if(!indicador || !periodo || !indicador.localidadeA){
+        if(!indicador || !periodo || !(indicador.localidadeA || indicador.localidadeB || indicador.localidadeC)){
 
             return false;
         }
 
-        return !this.isEmpty(indicador.localidadeA[periodo]);
+        let _isNotEmpty = !this.isEmpty(indicador.localidadeA[periodo]);
+        if(indicador.localidadeB) {
+            _isNotEmpty = _isNotEmpty || !this.isEmpty(indicador.localidadeB[periodo]);
+        }
+        if(indicador.localidadeC) {
+            _isNotEmpty = _isNotEmpty || !this.isEmpty(indicador.localidadeC[periodo]);
+        }
+
+        return _isNotEmpty;
     }
 
     private hasChildrenWithValue(children: any[], periodo){

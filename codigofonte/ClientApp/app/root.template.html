@@ -1,7 +1,11 @@
+<titulo-browser></titulo-browser>
+
 <header>
     <div class="logo">
-        <img src="img/logo.png" class='logo--desk'>
-        <img src="img/logo_mobile.png" class='logo--mobile'>
+        <a href="http://www.ibge.gov.br" target="_blank">
+            <img src="img/logo.png" class='logo--desk'>
+            <img src="img/logo_mobile.png" class='logo--mobile'>
+        </a>
     </div>
     
     <busca (buscaAberta)="seletor.fecharSeletor()"></busca>
@@ -57,7 +61,7 @@
         <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
     </div>
 
-    <div style="width:100%;" [style.position]="abrirMenuPesquisa || seletor.aberto ? 'fixed' : 'initial'">
+    <div style="width:100%;" [style.position]="abrirMenuPesquisa || seletor.aberto ? 'fixed' : 'relative'">
         <router-outlet></router-outlet>
     </div>
     <div class="share_Button" *ngIf="isBrowser">
@@ -69,6 +73,8 @@
                         >
     </share-container>
     </div>
+
+    <qrcode></qrcode>
     
 
 </div>
