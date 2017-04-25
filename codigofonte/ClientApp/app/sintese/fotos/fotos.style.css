@@ -47,6 +47,12 @@ img {
     text-align: center;
 }
 
+.sem_fotos {
+	background-color: #E6E6E6;
+	padding: 10px; 
+	text-align:center;
+	}
+
 @media screen and (min-width: 48em) {
     .component{
         /*border: 1px solid #ddd;
