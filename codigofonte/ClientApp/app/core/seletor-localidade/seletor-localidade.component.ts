@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
+import { isBrowser } from 'angular2-universal';
+
 import { AppState } from '../../shared2/app-state';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
@@ -33,6 +35,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     private _ufSelecionada = null;
 
     private hist = null; //guarda a referência para o objeto 'history' do browser
+
+    public isBrowser = isBrowser;
 
     public listaMunicipios = {
         maisVistos: <Localidade[]>[],
@@ -196,12 +200,15 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.search(this.buscaInput.nativeElement.value);
         //this.clearSearch();
 
-        //scroll to top ao selecionar uf
-        this.pageScrollService.stopAll();
-        var pos = window.pageYOffset;
-        if (pos > 0) {
-            window.scrollTo(0, -pos);
-        } 
+
+        if (this.isBrowser) {
+            //scroll to top ao selecionar uf
+            this.pageScrollService.stopAll();
+            var pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, -pos);
+            }
+        }
     }
 
     search(termo = '') {
