@@ -1,6 +1,9 @@
 <div class="component">
-    <div class="comp__conteudo"  *ngIf="preview1 != '' && preview2 != '' && preview3 != ''">
-
+    <div class="comp__conteudo">
+		<div   *ngIf="preview1 == '' && preview2 == '' && preview3 == ''" style="background-color: #E6E6E6;padding: 10px;">
+        Não há fotos para este município
+		</div>
+        
         <div class="preview" (click)="mostrar()"  *ngIf="preview1 != '' && preview2 == '' && preview3 == ''">
             <!--apenas uma foto-->
             <img class="foto__preview" [style.background-image]="'url(' + preview1 +')'"/>
