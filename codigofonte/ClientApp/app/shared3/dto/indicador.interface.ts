@@ -4,6 +4,8 @@ export interface IndicadorDTO {
     posicao: string
     classe: string
     children: IndicadorDTO[]
+    pesquisa_id?: number,
+    nota: string[]
     unidade?: {
         id: string
         classe: string
@@ -13,7 +15,5 @@ export interface IndicadorDTO {
         descricao: string
         calculo: string
     }
-    nota: string[]
-    pesquisa_id?: number,
     res?: string[]
 }

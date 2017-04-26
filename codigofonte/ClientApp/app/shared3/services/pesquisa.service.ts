@@ -3,15 +3,19 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { PesquisaDTO } from '../dto';
 import { Indicador, Pesquisa } from '../models';
-import { EscopoIndicadores } from '../values';
+import { escopoIndicadores, listaNiveisTerritoriais } from '../values';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
-import 'rxjs/add/operator/toPromise';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 function setUrl(path) { return `http://servicodados.ibge.gov.br/api/v1${path}`; }
+
 @Injectable()
 export class PesquisaService3 {
 
@@ -19,29 +23,40 @@ export class PesquisaService3 {
         private _http: Http
     ) { }
 
-    getAllPesquisas(): Promise<Pesquisa[]> {
+    getAllPesquisas(): Observable<Pesquisa[]> {
         const url = setUrl('/pesquisas');
         const errorMessage = `Não foi possível recuperar as pesquisas`;
 
         return this._request(url)
-            .then(arr => arr.map(Pesquisa.criar))
-            .catch(this._handleError.bind(this, errorMessage));
+            .map(arr => arr.map(Pesquisa.criar))
+            .catch(err => this._handleError(new Error(errorMessage)));
     }
 
-    getPesquisa(pesquisaId: number): Promise<Pesquisa> {
+    getPesquisasPorAbrangenciaTerritorial(nivelTerritorial: string): Observable<Pesquisa[]> {
+        const errorMessage = `Não existe o nível territorial pesquisado. Favor verifique sua solicitação. [nivelterritorial: ${nivelTerritorial}]`;
+
+        if (listaNiveisTerritoriais.indexOf(nivelTerritorial) === -1) {
+             return this._handleError(new Error(errorMessage));
+        }
+
+        return this.getAllPesquisas()
+            .map(pesquisas => pesquisas.filter(pesquisa => pesquisa.abrangeNivelTerritorial(nivelTerritorial)))
+            .catch(err => this._handleError(err));
+    }
+
+    getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         const url = setUrl(`/pesquisas/${pesquisaId}`);
         const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 
         return this._request(url)
-            .then(Pesquisa.criar)
-            .catch(this._handleError.bind(this, errorMessage));
+            .map(Pesquisa.criar)
+            .catch(err => this._handleError(new Error(errorMessage)));
     }
 
     private _request(url: string) {
         return this._http.get(url, options)
             .retry(3)
-            .toPromise()
-            .then(res => {
+            .map(res => {
                 const obj = res.json();
 
                 if (this._isServerError(obj)) {
@@ -52,8 +67,8 @@ export class PesquisaService3 {
             });
     }
 
-    private _handleError(message, error): Promise<any> {
-        return Promise.reject(message || error.message || error);
+    private _handleError(error): Observable<any> {
+        return Observable.throw(error);
     }
 
     private _isServerError(res) {

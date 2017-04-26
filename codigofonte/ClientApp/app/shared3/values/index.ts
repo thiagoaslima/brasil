@@ -1,2 +1,2 @@
-export { EscopoIndicadores } from './escopo-indicadores.values'
-export { NiveisTerritoriais } from './niveis-territoriais.values'
+export { escopoIndicadores } from './escopo-indicadores.values'
+export { listaNiveisTerritoriais, niveisTerritoriais } from './niveis-territoriais.values'

@@ -1,7 +1,8 @@
+import { IndicadorDTO } from '../dto';
 import { Pesquisa } from './'
-import { EscopoIndicadores } from '../values'
+import { escopoIndicadores } from '../values'
 
-export interface IndicadorParameters {
+export interface IndicadorParameters extends IndicadorDTO {
     id: number;
     indicador: string;
     posicao: string;

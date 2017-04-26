@@ -3,10 +3,13 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { PesquisaService3 } from './';
 import { Indicador, Pesquisa } from '../models';
-import { EscopoIndicadores } from '../values';
+import { escopoIndicadores } from '../values';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
-import 'rxjs/add/operator/toPromise';
 
 
 const headers = new Headers({ 'accept': '*/*' });
@@ -18,32 +21,24 @@ function setUrl(path) { return `http://servicodados.ibge.gov.br/api/v1${path}`; 
 export class IndicadorService3 {
 
     constructor(
-        private _http: Http,
-        private _pesquisaService: PesquisaService3
+        private _http: Http
     ) {}
 
-    getIndicadoresDaPesquisa(pesquisaId: number, arvoreCompleta = false, comPesquisa = false): Promise<Indicador[]> {
-        const escopo = arvoreCompleta ? EscopoIndicadores.filhos : EscopoIndicadores.arvoreCompleta
+    getIndicadoresDaPesquisa(pesquisaId: number, arvoreCompleta = false, comPesquisa = false) {
+        const escopo = arvoreCompleta ? escopoIndicadores.filhos : escopoIndicadores.arvoreCompleta
         const url = setUrl(`/pesquisas/${pesquisaId}/periodos/all/indicadores?scope=${escopo}`);
+        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}]`;
 
-        return Promise.all([
-            this._request(url),
-            comPesquisa ? this._pesquisaService.getPesquisa(pesquisaId) : Promise.resolve({} as Pesquisa)
-        ]).then( ([res, pesquisa]) => {
-            let indicadores;
-
-            if (comPesquisa) {
-                indicadores = res.map()
-            }
-        })
+        return this._request(url)
+            .map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, {pesquisa_id: pesquisaId}))))
+            .catch(err => this._handleError(new Error(errorMessage)));
             
     }
 
     private _request(url: string) {
         return this._http.get(url, options)
             .retry(3)
-            .toPromise()
-            .then(res => {
+            .map(res => {
                 const obj = res.json();
 
                 if (this._isServerError(obj)) {
@@ -54,8 +49,8 @@ export class IndicadorService3 {
             });
     }
 
-    private _handleError(message, error): Promise<any> {
-        return Promise.reject(message || error.message || error);
+    private _handleError(error): Observable<any> {
+        return Observable.throw(error);
     }
 
     private _isServerError(res) {

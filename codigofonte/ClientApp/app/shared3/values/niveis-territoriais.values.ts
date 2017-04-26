@@ -1,4 +1,20 @@
-export const NiveisTerritoriais = {
+import { municipios } from '../../../api/_municipios';
+
+interface NivelTerritorial {
+        label: string,
+        codeLength: number
+}
+
+interface NiveisTerritoriais {
+    pais: NivelTerritorial,
+    macrorregiao: NivelTerritorial,
+    uf: NivelTerritorial,
+    ufSub: NivelTerritorial,
+    municipio: NivelTerritorial,
+    municipioSub: NivelTerritorial
+}
+
+export const niveisTerritoriais: NiveisTerritoriais = {
     pais: {
         label: "pais",
         codeLength: 0
@@ -26,7 +42,6 @@ export const NiveisTerritoriais = {
         label: "municipioSub",
         codeLength: 8
     },
-} as {[label: string]: {
-        label: string,
-        codeLength: number
-    }}
+}
+
+export const listaNiveisTerritoriais = Object.keys(niveisTerritoriais).map(key => niveisTerritoriais[key].label);

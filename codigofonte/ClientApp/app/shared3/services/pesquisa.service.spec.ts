@@ -4,7 +4,7 @@ import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
 import { Pesquisa } from '../models';
-import { NiveisTerritoriais } from '../values';
+import { niveisTerritoriais } from '../values';
 
 import { PesquisaService3 } from './pesquisa.service';
 
@@ -49,6 +49,26 @@ describe('PesquisaService', () => {
                     "nota": [],
                     "periodo": "2007",
                     "publicacao": "05/01/2016 14:46:24"
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "nome": "Síntese de Indicadores Sociais",
+            "descricao": null,
+            "contexto": "1000",
+            "observacao": null,
+            "periodos": [
+                {
+                    "fonte": [
+                        "IBGE, Pesquisa Nacional por Amostra de Domicílios 2015",
+                        "IBGE, Diretoria de Pesquisas, Coordenação de População e Indicadores Sociais, Projeção da população do Brasil por sexo e idade para o período 2000/2060",
+                        "IBGE, Diretoria de Pesquisas, Coordenação de População e Indicadores Sociais, Projeção da população das Unidades da Federação por sexo e idade para o período 2000/2030",
+                        "IBGE, Pesquisa Nacional de Saúde 2013"
+                    ],
+                    "nota": [],
+                    "periodo": "2016",
+                    "publicacao": "01/01/2017 00:00:00"
                 }
             ]
         },
@@ -156,8 +176,7 @@ describe('PesquisaService', () => {
                     "publicacao": "22/11/2016 14:56:56"
                 }
             ]
-        },
-
+        }
     ]
 
     describe('getAllPesquisas()', () => {
@@ -168,33 +187,81 @@ describe('PesquisaService', () => {
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
                 mockBackend.connections.subscribe(c => connection = c);
-                pesquisaService.getAllPesquisas().then(pesquisas => serviceResponse = pesquisas)
+                pesquisaService.getAllPesquisas().subscribe(pesquisas => serviceResponse = pesquisas)
                 connection.mockRespond(mockResponse);
                 tick();
 
-                expect(serviceResponse.length).toBe(2)
+                expect(serviceResponse.length).toBe(3)
                 expect(serviceResponse[0] instanceof Pesquisa).toBeTruthy()
                 expect(serviceResponse[1] instanceof Pesquisa).toBeTruthy()
+                expect(serviceResponse[2] instanceof Pesquisa).toBeTruthy()
             })
         ));
 
-        it('retorna as pesquisas de id 13 e 14, respectivamente', fakeAsync(
+        it('retorna as pesquisas de id 13, 45 e 14, respectivamente', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
                 mockBackend.connections.subscribe(c => connection = c);
-                pesquisaService.getAllPesquisas().then(pesquisas => serviceResponse = pesquisas)
+                pesquisaService.getAllPesquisas().subscribe(pesquisas => serviceResponse = pesquisas)
                 connection.mockRespond(mockResponse);
                 tick();
 
                 expect(serviceResponse[0].id).toBe(13)
-                expect(serviceResponse[1].id).toBe(14)
+                expect(serviceResponse[1].id).toBe(45)
+                expect(serviceResponse[2].id).toBe(14)
             })
         ));
 
     })
 
-    describe('getPesquisa', () => {
+    describe('getPesquisasPorAbrangenciaTerritorial', () => {
+        const mockResponse = new Response(new ResponseOptions({ body: pesquisas, status: 200 }));
+        let serviceResponse, connection;
 
+        it('deve responder apenas as pesquisas com determinada abrangência territorial', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getPesquisasPorAbrangenciaTerritorial(niveisTerritoriais.municipio.label).subscribe(pesquisas => serviceResponse = pesquisas)
+                connection.mockRespond(mockResponse);
+                tick();
+
+                expect(serviceResponse.length).toBe(2)
+                expect(serviceResponse[0].id).toBe(13)
+                expect(serviceResponse[1].id).toBe(14)
+            })
+        ))
+
+        it('deve responder um array vazio caso não haja pesquisas com aquela abrangência', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getPesquisasPorAbrangenciaTerritorial(niveisTerritoriais.macrorregiao.label).subscribe(pesquisas => serviceResponse = pesquisas)
+                connection.mockRespond(mockResponse);
+                tick();
+
+                expect(serviceResponse.length).toBe(0)
+                expect(serviceResponse).toEqual([])
+            })
+        ))
+
+        it('deve retornar Erro caso não exista o nivel territorial consultado', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {              
+                const nivelInexistente = 'nivelInexistente';
+                const errorMessage = `Não existe o nível territorial pesquisado. Favor verifique sua solicitação. [nivelterritorial: ${nivelInexistente}]`;
+
+                //mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getPesquisasPorAbrangenciaTerritorial(nivelInexistente).subscribe(() => {}, response => serviceResponse = response)
+                //connection.mockRespond(mockResponse);
+                tick();
+
+                expect(serviceResponse.message).toBe(errorMessage)
+            })
+        ))
+
+    })
+
+    describe('getPesquisa', () => {
 
         it('retorna a pesquisa com o valor de id passado para a função', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
@@ -203,7 +270,7 @@ describe('PesquisaService', () => {
                 let serviceResponse, connection;
 
                 mockBackend.connections.subscribe(c => connection = c);
-                pesquisaService.getPesquisa(13).then(pesquisas => serviceResponse = pesquisas)
+                pesquisaService.getPesquisa(13).subscribe(pesquisas => serviceResponse = pesquisas)
                 connection.mockRespond(mockResponse);
                 tick();
 
@@ -221,11 +288,11 @@ describe('PesquisaService', () => {
                 const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 
                 mockBackend.connections.subscribe(c => connection = c);
-                pesquisaService.getPesquisa(pesquisaId).catch(err => serviceResponse = err);
+                pesquisaService.getPesquisa(pesquisaId).subscribe(() => { }, err => serviceResponse = err);
                 connection.mockRespond(mockResponse);
                 tick();
 
-                expect(serviceResponse).toBe(errorMessage)
+                expect(serviceResponse.message).toBe(errorMessage)
             })
         ));
     })

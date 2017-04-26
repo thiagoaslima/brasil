@@ -1,6 +1,6 @@
 import { converterEmNumero } from '../../utils2';
 import { PesquisaDTO } from '../dto';
-import { NiveisTerritoriais } from '../values';
+import { niveisTerritoriais } from '../values';
 
 export class Pesquisa {
     static criar(data: PesquisaDTO) {
@@ -58,12 +58,12 @@ export class Pesquisa {
 
 
     private _contextos = [
-        NiveisTerritoriais.pais.label,
-        NiveisTerritoriais.macrorregiao.label,
-        NiveisTerritoriais.uf.label,
-        NiveisTerritoriais.ufSub.label,
-        NiveisTerritoriais.municipio.label,
-        NiveisTerritoriais.municipioSub.label
+        niveisTerritoriais.pais.label,
+        niveisTerritoriais.macrorregiao.label,
+        niveisTerritoriais.uf.label,
+        niveisTerritoriais.ufSub.label,
+        niveisTerritoriais.municipio.label,
+        niveisTerritoriais.municipioSub.label
     ];
 
     private _setContextos(binario: number) {
