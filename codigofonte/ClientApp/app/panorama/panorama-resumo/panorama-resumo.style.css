@@ -43,6 +43,8 @@
 .lista{
     width: 100%;
     border-collapse: collapse;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .lista__cabecalho{
@@ -140,14 +142,18 @@
 }
 
 .lista__indicador{
-    cursor: pointer;
     background-color: #E6E6E6;
     transition: background-color 0.3s;
 }
 
-.lista__indicador:hover{
+.lista:hover{
     background-color: #CCCCCC;
 }
+
+.lista:hover .lista__indicador{
+    background-color: #CCCCCC;
+}
+
 
 .lista__indicador--selecionado{
     background-color: #CCCCCC;
@@ -188,7 +194,7 @@
     transition: margin-right 0.3s;
 }
 
-.lista__indicador:hover .lista__seta i{
+.lista:hover .lista__seta i{
     margin-right: -5px
 }
 
@@ -259,7 +265,7 @@
     /*Menu resumo fixo na rolagem*/
     .resumo-fixo{
         position: fixed;
-        top:144px;
+        top:180px;
         z-index: 1;
         width: 100%;
     }
