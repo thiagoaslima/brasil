@@ -17,7 +17,7 @@ export const TEMAS = {
     populacao: "População",
     saude: "Saúde",
     territorio: "Território",
-    trabalho: "Trabalho"
+    trabalho: "Trabalho e Rendimento"
 }
 
 export const PANORAMA = {
@@ -225,7 +225,7 @@ export const PANORAMA = {
                 pesquisaId: 19,
                 indicadorId: 29765,
                 periodo: "2014",
-                titulo: "Salário médio mensal",
+                titulo: "Salário médio mensal dos trabalhadores formais",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -249,7 +249,7 @@ export const PANORAMA = {
                 pesquisaId: 10058,
                 indicadorId: 60037,
                 periodo: "2010",
-                titulo: "Rendimento nominal mensal domiciliar per capita até ½ salário mínimo",
+                titulo: "Percentual da população com rendimento nominal mensal per capita de até 1/2 salário mínimo",
                 tema: TEMAS.trabalho,
                 visualizacao: PanoramaVisualizacao.painel
             },
