@@ -1,40 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { PesquisaDTO } from '../dto';
+import { PesquisaService3 } from './';
 import { Indicador, Pesquisa } from '../models';
 import { EscopoIndicadores } from '../values';
 
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/toPromise';
 
+
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 function setUrl(path) { return `http://servicodados.ibge.gov.br/api/v1${path}`; }
+
 @Injectable()
-export class PesquisaService3 {
+export class IndicadorService3 {
 
     constructor(
-        private _http: Http
-    ) { }
+        private _http: Http,
+        private _pesquisaService: PesquisaService3
+    ) {}
 
-    getAllPesquisas(): Promise<Pesquisa[]> {
-        const url = setUrl('/pesquisas');
-        const errorMessage = `Não foi possível recuperar as pesquisas`;
+    getIndicadoresDaPesquisa(pesquisaId: number, arvoreCompleta = false, comPesquisa = false): Promise<Indicador[]> {
+        const escopo = arvoreCompleta ? EscopoIndicadores.filhos : EscopoIndicadores.arvoreCompleta
+        const url = setUrl(`/pesquisas/${pesquisaId}/periodos/all/indicadores?scope=${escopo}`);
 
-        return this._request(url)
-            .then(arr => arr.map(Pesquisa.criar))
-            .catch(this._handleError.bind(this, errorMessage));
-    }
+        return Promise.all([
+            this._request(url),
+            comPesquisa ? this._pesquisaService.getPesquisa(pesquisaId) : Promise.resolve({} as Pesquisa)
+        ]).then( ([res, pesquisa]) => {
+            let indicadores;
 
-    getPesquisa(pesquisaId: number): Promise<Pesquisa> {
-        const url = setUrl(`/pesquisas/${pesquisaId}`);
-        const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
-
-        return this._request(url)
-            .then(Pesquisa.criar)
-            .catch(this._handleError.bind(this, errorMessage));
+            if (comPesquisa) {
+                indicadores = res.map()
+            }
+        })
+            
     }
 
     private _request(url: string) {
@@ -59,5 +61,4 @@ export class PesquisaService3 {
     private _isServerError(res) {
         return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
     }
-
 }
