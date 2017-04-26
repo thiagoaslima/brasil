@@ -21,47 +21,43 @@ export class PesquisaService3 {
 
     getAllPesquisas(): Promise<Pesquisa[]> {
         const url = setUrl('/pesquisas');
+        const errorMessage = `Não foi possível recuperar as pesquisas`;
 
-        return this._http.get(url, options)
-            .retry(3)
-            .toPromise()
-            .then(res => res.json().map(Pesquisa.criar))
-            .catch(this.handleError);
+        return this._request(url)
+            .then(arr => arr.map(Pesquisa.criar))
+            .catch(this.handleError.bind(this, errorMessage));
     }
 
     getPesquisa(pesquisaId: number): Promise<Pesquisa> {
         const url = setUrl(`/pesquisas/${pesquisaId}`);
+        const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 
+        return this._request(url)
+            .then(Pesquisa.criar)
+            .catch(this.handleError.bind(this, errorMessage));
+    }
+
+    private _request(url: string) {
         return this._http.get(url, options)
             .retry(3)
             .toPromise()
             .then(res => {
                 const obj = res.json();
 
-                if (obj.message) {
-                    throw new Error(`
-                        Não foi possível recuperar a pesquisa solicitada. 
-                        Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]
-                    `)
+                if (this._isServerError(obj)) {
+                    throw new Error(obj.message);
                 }
-                return Pesquisa.criar(obj);
-            })
-            .catch(this.handleError);
+
+                return obj;
+            });
     }
 
-    getIndicadoresDaPesquisa(pesquisaId: number, arvoreCompleta = false): Promise<Indicador[]> {
-        const escopo = arvoreCompleta ? EscopoIndicadores.filhos : EscopoIndicadores.arvoreCompleta
-        const url = setUrl(`/pesquisas/${pesquisaId}/periodos/all/indicadores?scope=${escopo}`);
-
-        return this._http.get(url, options)
-            .retry(3)
-            .toPromise()
-            .then(res => res.json().map(Indicador.criar))
-            .catch(this.handleError);
+    private handleError(message, error): Promise<any> {
+        return Promise.reject(message || error.message || error);
     }
 
-    private handleError(error: any): Promise<any> {
-        return Promise.reject(error.message || error);
+    private _isServerError(res) {
+        return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
     }
 
 }

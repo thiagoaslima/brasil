@@ -1,3 +1,2 @@
-export { Indicador } from './indicador.model'
-export { PeriodoPesquisa } from './periodo-pesquisa.interface';
+export { Indicador, IndicadorParameters } from './indicador.model'
 export { Pesquisa } from './pesquisa.model'

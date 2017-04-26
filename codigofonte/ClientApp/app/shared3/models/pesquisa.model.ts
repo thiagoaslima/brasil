@@ -1,6 +1,5 @@
 import { converterEmNumero } from '../../utils2';
-import { PeriodoPesquisaDTO, PesquisaDTO } from '../dto';
-import { PeriodoPesquisa } from './index';
+import { PesquisaDTO } from '../dto';
 import { NiveisTerritoriais } from '../values';
 
 export class Pesquisa {
@@ -12,10 +11,13 @@ export class Pesquisa {
     public readonly nome: string
     public readonly descricao: string
     public readonly observacao: string
-    public readonly periodos: PeriodoPesquisa[]
+    public readonly periodos: Array<{
+        nome: string,
+        dataPublicacao: Date,
+        fontes: string[],
+        notas: string[]
+    }>
     public readonly contextos: { [nivelTerritorial: string]: boolean }
-
-    private _notas;
 
     constructor(dados: PesquisaDTO) {
         this.id = dados.id;
@@ -35,7 +37,7 @@ export class Pesquisa {
     }
 
     getAllFontes() {
-        const fontes = this.periodos.reduce( (fontes, periodo) => fontes.concat(periodo.fontes), [] as string[]);
+        const fontes = this.periodos.reduce((fontes, periodo) => fontes.concat(periodo.fontes), [] as string[]);
         return Array.from(new Set(fontes));
     }
 
@@ -43,9 +45,9 @@ export class Pesquisa {
         const obj = this.periodos.find(_periodo => _periodo.nome === periodo);
         return obj ? obj.fontes : [];
     }
-    
+
     getAllNotas() {
-        const notas = this.periodos.reduce( (notas, periodo) => notas.concat(periodo.notas), [] as string[]);
+        const notas = this.periodos.reduce((notas, periodo) => notas.concat(periodo.notas), [] as string[]);
         return Array.from(new Set(notas))
     }
 
@@ -83,7 +85,7 @@ export class Pesquisa {
         }, {});
     }
 
-    private _setPeriodos(periodos: PeriodoPesquisaDTO[]) {
+    private _setPeriodos(periodos) {
         return periodos.map(periodo => {
             const nome = periodo.periodo;
             const fontes = periodo.fonte;
@@ -102,7 +104,7 @@ export class Pesquisa {
                 dataPublicacao,
                 fontes,
                 notas
-            } as PeriodoPesquisa;
+            };
         })
     }
 }

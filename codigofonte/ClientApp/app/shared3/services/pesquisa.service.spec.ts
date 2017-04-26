@@ -218,16 +218,14 @@ describe('PesquisaService', () => {
                 const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
                 let serviceResponse, connection;
                 const pesquisaId = 130;
+                const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 
                 mockBackend.connections.subscribe(c => connection = c);
                 pesquisaService.getPesquisa(pesquisaId).catch(err => serviceResponse = err);
                 connection.mockRespond(mockResponse);
                 tick();
 
-                expect(serviceResponse).toBe(`
-                        Não foi possível recuperar a pesquisa solicitada. 
-                        Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]
-                    `)
+                expect(serviceResponse).toBe(errorMessage)
             })
         ));
     })
