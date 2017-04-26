@@ -49,11 +49,14 @@ body.municipio{
     background: linear-gradient( to right, #1b779b 21%,#E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 }
 
-#barra_governo{
+#barraGoverno{
     position: fixed;
     width: 100%;
     z-index: 1000;
     top: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #f1f1f1;
 }
 
 header{
@@ -65,9 +68,9 @@ header{
     width: 100%;
     border-top: 4px solid #ccc;
     position: fixed;
-    top: 0px;
+    top: 25px;
     left: 0px;
-    z-index: 20;
+    z-index: 22;
     /*top:25px;*/
 }
 .share_Button {
@@ -150,6 +153,7 @@ aside{
 
 aside.aside--municipio{
     background-color: #1B779B;
+    margin-top: 32px;
 }
 
 aside ul li{
@@ -387,6 +391,7 @@ sintese>dados
         border-bottom: none;
         z-index: 5;
         top:0;
+        margin-top: 29px;
     }
 
     header .logo {
@@ -457,7 +462,7 @@ sintese>dados
     }
 
     aside.aside--municipio.localidade--static{
-        margin-top: 58px;
+        margin-top: 92px;
     }
 
     aside #localidade button{
@@ -506,7 +511,7 @@ sintese>dados
         width: 100%;
         border-left: none;
         margin-left: 0px;
-        margin-top: 113px;
+        margin-top: 140px;
     }
 
     .conteudo__dados, .conteudo__dados--com-scroll{
@@ -548,6 +553,7 @@ sintese>dados
         border-left: none;
         margin-left: 0;
         width: auto;
+        margin-top: 171px;
     }
     #sintese #dados{
         float: none;
@@ -602,15 +608,18 @@ sintese>dados
 
     aside{
         width: 250px;    
+        margin-top: 28px;
     }
     
     .conteudo{
         width: calc(100% - 250px);
         margin-left: 250px;
+        margin-top: 28px;
     }
 
     #sintese{
         margin-left: 250px;
+        margin-top: 31px;
     }
 
     
