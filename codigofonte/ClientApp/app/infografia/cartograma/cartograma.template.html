@@ -10,7 +10,7 @@
     </div>
         <svg [attr.viewBox]="(malha$ | async)?.viewBox" preserveAspectRatio="xMidYMid meet">
             <svg:g class="uf" transform="scale(1 -1)">
-                <svg:g #mun regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome"
+                <svg:g #mun regiao-mapa *ngFor="let item of (malha$ | async)?.geometries; trackBy: trackByFn" [codigo]="item.codigo" [nome]="item.nome" (existeVazio)="handleVazio($event)"
                     [link]="item.link" [polygons]="item.polys" [valor]="((indicador$ | async)?.getResultadoByLocal(item.codigo) | async)?.valorValidoMaisRecente"
                     [quartis]="quartis$ | async" (mouseover)="municSelected = [item.nome, mun.valor, item.center]" (mouseleave)="municSelected = ''" vector-effect="non-scaling-stroke">
                 </svg:g>
@@ -37,7 +37,10 @@
             <div class="legenda__cor faixa{{valores.length + 1}}"></div>
             <p class="legenda__texto">{{ valores[valores.length - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade.nome}} ou mais</p>
         </div>
-
+        <div class="legenda__item" *ngIf="existeVazio == true">
+            <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
+            <p class="legenda__texto">sem informação</p>
+        </div>
         <div class="legenda__item">
             <p class="legenda__texto"><i class="fa fa-map-pin" aria-hidden="true" style="color:#ff1f76; float:left; width:22px;height:25px;"></i> Município selecionado</p>
         </div>
