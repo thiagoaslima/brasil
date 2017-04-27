@@ -207,6 +207,7 @@ button .fa{
     z-index: 2;
     margin-top: 56px;
     font-size: .9em;
+    word-wrap: break-word;
 }
 
 .fontes__lista-container {
