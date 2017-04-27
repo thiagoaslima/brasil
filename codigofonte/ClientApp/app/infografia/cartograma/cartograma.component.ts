@@ -83,7 +83,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
             .map(valores => {
                 const len = valores.length;
                 const q1 = valores[Math.round(0.25 * (len + 1))];
-                const q2 = len % 2 ? valores[(len + 1) / 2] : (valores[len / 2] + valores[(len / 2) + 1]) / 2
+                const q2 = len % 2 ? valores[(len + 1) / 2] : ((valores[len / 2] + valores[(len / 2) + 1]) / 2).toFixed(2);
                 const q3 = valores[Math.round(0.75 * (len + 1))];
 
                 return [q1, q2, q3];
