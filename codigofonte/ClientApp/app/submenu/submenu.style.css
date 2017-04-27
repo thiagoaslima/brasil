@@ -119,6 +119,7 @@ li:last-child > .submenu__separador, .submenu__item--selecionado > .submenu__sep
     .submenu-container {
         width: calc(100% - 250px);
         margin-left: 250px;
+        margin-top: 30px;
     }
 
 }

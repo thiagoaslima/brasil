@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { isBrowser } from 'angular2-universal';
 
@@ -22,7 +21,6 @@ export class TituloBrowserComponent implements OnInit {
         private _pesquisaService: PesquisaService2,
         private _routerParamsService: RouterParamsService,
         private _localidadeService: LocalidadeService2,
-        private _titleService: Title,
         private _route: ActivatedRoute
     ) { }
 
@@ -41,10 +39,10 @@ export class TituloBrowserComponent implements OnInit {
                 let url = window.location.href;
                 if(url.indexOf('panorama') >= 0){
                     titulo += ' | Panorama';
-                    this._titleService.setTitle(titulo); // titulo panorama
+                    document.title = titulo; // titulo panorama
                 }else if(url.indexOf('historico') >= 0){
                     titulo += ' | Histórico';
-                    this._titleService.setTitle(titulo); // titulo histórico
+                    document.title = titulo; // titulo histórico
                 }else if(url.indexOf('pesquisa') >= 0){
                     titulo += ' | Pesquisa';
                     if(params.params.pesquisa){
@@ -60,7 +58,7 @@ export class TituloBrowserComponent implements OnInit {
                                 if(params.queryParams.ano){
                                     titulo += ' | ' + params.queryParams.ano;
                                 }
-                                this._titleService.setTitle(titulo); // titulo pesquisa
+                                document.title = titulo; // titulo pesquisa
                             });
                         });
                     }
