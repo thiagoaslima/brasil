@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { PesquisaDTO } from '../dto';
 import { Indicador, Pesquisa } from '../models';
-import { escopoIndicadores, listaNiveisTerritoriais } from '../values';
+import { escopoIndicadores, listaNiveisTerritoriais, ServicoDados as servidor } from '../values';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -14,8 +14,6 @@ import 'rxjs/add/operator/retry';
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
-function setUrl(path) { return `http://servicodados.ibge.gov.br/api/v1${path}`; }
-
 @Injectable()
 export class PesquisaService3 {
 
@@ -24,7 +22,7 @@ export class PesquisaService3 {
     ) { }
 
     getAllPesquisas(): Observable<Pesquisa[]> {
-        const url = setUrl('/pesquisas');
+        const url = servidor.setUrl('pesquisas');
         const errorMessage = `Não foi possível recuperar as pesquisas`;
 
         return this._request(url)
@@ -45,7 +43,7 @@ export class PesquisaService3 {
     }
 
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
-        const url = setUrl(`/pesquisas/${pesquisaId}`);
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}`);
         const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 
         return this._request(url)

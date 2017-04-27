@@ -1,4 +1,4 @@
-import { Indicador } from './';
+import { Indicador, Pesquisa } from './';
 
 describe('Indicador Model', () => {
 
@@ -169,6 +169,95 @@ describe('Indicador Model', () => {
             expect(indicador.indicadores.length).toBe(4);
             expect(indicador.indicadores.every(indicador => indicador instanceof Indicador)).toBeTruthy();
             expect(indicador.indicadores[0].pesquisaId).toBe(pesquisaId);
+        })
+    })
+
+    describe('uma instância com Pesquisa', () => {
+        let indicador: Indicador;
+        const pesquisaId = 13;
+        const indicadorParameters = {
+            "id": 5903,
+            "posicao": "1.1",
+            "indicador": "Ensino pré-escolar",
+            "classe": "I",
+            "unidade": {
+                "id": "Matrículas",
+                "classe": "G",
+                "multiplicador": 0
+            },
+            "children": [
+                {
+                    "id": 5904,
+                    "posicao": "1.1.1",
+                    "indicador": "Escola pública municipal",
+                    "classe": "I",
+                    "unidade": {
+                        "id": "Matrículas",
+                        "classe": "N",
+                        "multiplicador": 1
+                    },
+                    "children": [],
+                    "nota": []
+                },
+                {
+                    "id": 5905,
+                    "posicao": "1.1.2",
+                    "indicador": "Escola pública estadual",
+                    "classe": "I",
+                    "unidade": {
+                        "id": "Matrículas",
+                        "classe": "G",
+                        "multiplicador": 0
+                    },
+                    "children": [],
+                    "nota": []
+                },
+                {
+                    "id": 5906,
+                    "posicao": "1.1.3",
+                    "indicador": "Escola pública federal",
+                    "classe": "I",
+                    "unidade": {
+                        "id": "Matrículas",
+                        "classe": "G",
+                        "multiplicador": 0
+                    },
+                    "children": [],
+                    "nota": []
+                },
+                {
+                    "id": 5907,
+                    "posicao": "1.1.4",
+                    "indicador": "Escola privada",
+                    "classe": "I",
+                    "unidade": {
+                        "id": "Matrículas",
+                        "classe": "G",
+                        "multiplicador": 0
+                    },
+                    "children": [],
+                    "nota": []
+                }
+            ],
+            "nota": []
+        }
+        const pesquisa = Pesquisa.criar({
+            "id": 13, "nome": "Ensino - matrículas, docentes e rede escolar", "descricao": null, "contexto": "1010", "observacao": null, "periodos": [{ "fonte": ["Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais - INEP - Censo Educacional 2005"], "nota": [], "periodo": "2005", "publicacao": "05/01/2016 14:46:24" }, { "fonte": ["Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais - INEP - Censo Educacional 2007"], "nota": [], "periodo": "2007", "publicacao": "05/01/2016 14:46:24" }, { "fonte": ["Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais - INEP - Censo Educacional 2009"], "nota": [], "periodo": "2009", "publicacao": "05/01/2016 14:46:24" }, { "fonte": ["Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais - INEP - Censo Educacional 2012"], "nota": [], "periodo": "2012", "publicacao": "05/01/2016 14:46:24" }, { "fonte": ["Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais - INEP - Censo Educacional 2015"], "nota": [], "periodo": "2015", "publicacao": "24/11/2016 16:25:43" }]
+        })
+
+        beforeEach(() => {
+            indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa: pesquisa }));
+        });
+
+        it('deve conter o objeto Pesquisa na propriedade pesquisa', () => {
+            expect(indicador.pesquisa).toBeDefined();
+            expect(indicador.pesquisa instanceof Pesquisa).toBeTruthy();
+            expect(indicador.pesquisa).toBe(pesquisa);
+        })
+
+        it('não deve ter a propriedade pesquisaId', () => {
+            expect(indicador.pesquisaId).toBeUndefined();
+            expect(indicador.hasOwnProperty('pesquisaId')).toBeFalsy();
         })
     })
 })
