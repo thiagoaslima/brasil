@@ -46,13 +46,21 @@ export class Indicador {
     }
 
     constructor(dados: IndicadorParameters) {
+        if (!dados.pesquisa && !dados.pesquisa_id) {
+            throw new Error('Obrigatório informar a id da pesquisa ou passar o objeto Pesquisa completo para o construtor do Indicador');
+        }
+
         this.id = dados.id;
         this.nome = dados.indicador;
         this.posicao = dados.posicao;
         this.classe = dados.classe;
         this.notas = dados.nota.slice(0);
 
-        this.indicadores = dados.children.map(Indicador.criar);
+        this.indicadores = dados.children.map(child => {
+            return dados.pesquisa 
+                ? Indicador.criar(Object.assign(child, {pesquisa: dados.pesquisa}))
+                : Indicador.criar(Object.assign(child, {pesquisa_id: dados.pesquisa_id}))
+        });
 
         this.metadados = Object.assign({
             descricao: '',
