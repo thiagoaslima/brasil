@@ -33,6 +33,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
     @Input() localidade: Localidade;
     @Input() indicador: Indicador;
     @Input() periodo;
+    @Input() titulo;
     existeVazio;
 
     public malha$;
