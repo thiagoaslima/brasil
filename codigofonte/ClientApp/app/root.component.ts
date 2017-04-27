@@ -18,7 +18,13 @@ import 'rxjs/add/operator/debounceTime';
 
 @Component({
     selector: 'root',
-    templateUrl: './root.template.html'
+    templateUrl: './root.template.html',
+    styles: [`
+    .position_fixed {
+      position: fixed;
+    }
+  `]
+    
 })
 export class RootComponent implements OnInit, OnDestroy {
     @ViewChild('abreMenuGlobal') button: ElementRef;

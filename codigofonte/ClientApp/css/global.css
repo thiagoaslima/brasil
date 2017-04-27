@@ -72,7 +72,6 @@ header{
     left: 0px;
     z-index: 22;
     /*top:25px;*/
-
 }
 .share_Button {
 	right: 0; 
@@ -363,7 +362,7 @@ sintese>dados
 
 #versaoAnterior{
     position: absolute;
-    bottom: 77px;
+    bottom: 95px;
     margin-left: 0;
     background-color: #165d72;
     border: none;
@@ -382,6 +381,10 @@ sintese>dados
 }
 
 @media screen and (max-width: 768px) {
+    .invisivel *{
+        display: none;
+    }
+
     /*Mobile*/
     body, body.municipio, body.brasil, body.estado{
         background: none;
@@ -390,9 +393,9 @@ sintese>dados
     header{
         background-color: #333333;
         border-bottom: none;
-        z-index: 5;
+        z-index: 6;
         top:0;
-        margin-top: 29px;
+        margin-top: 30px;
     }
 
     header .logo {
@@ -463,7 +466,7 @@ sintese>dados
     }
 
     aside.aside--municipio.localidade--static{
-        margin-top: 58px;
+        margin-top: 92px;
     }
 
     aside #localidade button{
@@ -583,7 +586,6 @@ sintese>dados
     }
 }
 
-
 @media screen and (min-width: 1200px) {
     /*aside fica fixo em 250px;*/
     body.estado{  
@@ -622,6 +624,5 @@ sintese>dados
         margin-left: 250px;
         margin-top: 31px;
     }
-
     
 }
