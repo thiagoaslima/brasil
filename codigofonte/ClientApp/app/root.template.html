@@ -4,7 +4,7 @@
     <iframe frameborder="0" height="30" marginheight="0" marginwidth="0" name="barragov" noresize="" src="http://www.ibge.gov.br/barragov/barragov.htm?BGCOLOR=3&amp;WIDTH=940" style="margin-bottom:-4px;" width="100%"></iframe>
 </div>
 
-<header>
+<header [class.invisivel]="isHeaderStatic | async">
     <div class="logo">
         <a href="http://www.ibge.gov.br" target="_blank">
             <img src="img/logo.png" class='logo--desk'>
