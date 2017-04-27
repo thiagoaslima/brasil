@@ -11,6 +11,7 @@ import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/share';
 
 
 const headers = new Headers({ 'accept': '*/*' });
@@ -43,6 +44,16 @@ export class IndicadorService3 {
 
     }
 
+    // getIndicadoresById(indicadoresId: number[], comPesquisa = false) {
+    //     const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}`);
+
+    //     if (comPesquisa) {
+    //         const pesquisas$ = this._request(url).map(arr => {
+    //             const pesquisasId = 
+    //         })
+    //     }
+    // }
+
     private _request(url: string) {
         return this._http.get(url, options)
             .retry(3)
@@ -54,7 +65,8 @@ export class IndicadorService3 {
                 }
 
                 return obj;
-            });
+            })
+            .share();
     }
 
     private _handleError(error): Observable<any> {

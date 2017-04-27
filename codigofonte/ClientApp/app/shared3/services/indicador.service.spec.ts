@@ -15,6 +15,8 @@ describe('IndicadorService', () => {
     let connection, mockResponse, pesquisa, serviceResponse, serverResponse;
 
     beforeEach(() => {
+        TestBed.resetTestingModule();
+
         const indicadores = [
             { "id": 5902, "posicao": "1", "indicador": "Matrícula", "classe": "T", "children": [], "nota": [] }, { "id": 5923, "posicao": "2", "indicador": "Docentes", "classe": "T", "children": [], "nota": [] }, { "id": 5944, "posicao": "3", "indicador": "Escolas", "classe": "T", "children": [], "nota": [] }
         ]
@@ -40,8 +42,6 @@ describe('IndicadorService', () => {
             }
         }
 
-
-        TestBed.resetTestingModule();
 
         TestBed.configureTestingModule({
             providers: [

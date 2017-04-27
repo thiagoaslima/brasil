@@ -42,6 +42,27 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err));
     }
 
+    getPesquisas(pesquisasId: number[]) {
+        return this.getAllPesquisas()
+            .map(pesquisas => {
+                const hash = pesquisas.reduce( (acc, pesquisa) => Object.assign(acc, {[pesquisa.id]: pesquisa}), {});
+                const resp = [];
+                const errors = [];
+                pesquisasId.forEach(id => {
+                    if (hash[id]) {
+                        resp.push(hash[id])
+                    } else {
+                        errors.push(id);
+                    }
+                })
+
+                if (errors.length === 0){
+                    return resp
+                }
+            )
+            .catch(err => this._handleError(err));
+    }
+
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         const url = servidor.setUrl(`pesquisas/${pesquisaId}`);
         const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
