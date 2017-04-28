@@ -1,3 +1,5 @@
+import { EmptyComponent } from './empty.component';
+import { EmptyLocationGuard } from './empty-location.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -30,7 +32,8 @@ const children = [
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
+        canActivate: [EmptyLocationGuard],
+        component: EmptyComponent,
         pathMatch: 'full'
       },
       {
