@@ -101,7 +101,7 @@ describe('Pesquisa model', () => {
     })
 
     it('deve listar a abrangência territorial da pesquisa', () => {
-        expect(pesquisa.getContextosValidos()).toEqual(['uf', 'municipio']);
+        expect(pesquisa.getAbrangenciaTerritorialDaPesquisa()).toEqual(['uf', 'municipio']);
     })
 
     it('deve retornar as notas de determinado período', () => {

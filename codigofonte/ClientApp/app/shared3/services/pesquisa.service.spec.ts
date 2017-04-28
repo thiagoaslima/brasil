@@ -9,22 +9,7 @@ import { niveisTerritoriais } from '../values';
 import { PesquisaService3 } from './pesquisa.service';
 
 describe('PesquisaService', () => {
-
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                PesquisaService3,
-                MockBackend,
-                BaseRequestOptions,
-                {
-                    provide: Http,
-                    deps: [MockBackend, BaseRequestOptions],
-                    useFactory: (backend, defaultOptions) => new Http(backend, defaultOptions)
-                }
-            ]
-        })
-    });
+    let connection, mockResponse, serviceResponse;
 
     const pesquisas = [
         {
@@ -179,11 +164,31 @@ describe('PesquisaService', () => {
         }
     ]
 
-    describe('getAllPesquisas()', () => {
-        const mockResponse = new Response(new ResponseOptions({ body: pesquisas, status: 200 }));
-        let serviceResponse, connection;
+    beforeEach(() => {
+        connection = null;
+        serviceResponse = null;
 
-        it('retorna 2 pesquisas', fakeAsync(
+        mockResponse = new Response(new ResponseOptions({ body: pesquisas, status: 200 }));
+
+        TestBed.configureTestingModule({
+            providers: [
+                PesquisaService3,
+                MockBackend,
+                BaseRequestOptions,
+                {
+                    provide: Http,
+                    deps: [MockBackend, BaseRequestOptions],
+                    useFactory: (backend, defaultOptions) => new Http(backend, defaultOptions)
+                }
+            ]
+        })
+    });
+
+    
+
+    describe('getAllPesquisas', () => {
+
+        it('retorna 3 pesquisas', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
                 mockBackend.connections.subscribe(c => connection = c);
@@ -212,11 +217,23 @@ describe('PesquisaService', () => {
             })
         ));
 
+         it('deve retornar Erro caso haja algum problema no servidor', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {              
+                const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 }));
+                const errorMessage = `Não foi possível recuperar as pesquisas`;
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getAllPesquisas().subscribe(() => {}, response => serviceResponse = response)
+                connection.mockRespond(mockResponse);
+                tick();
+
+                expect(serviceResponse.message).toBe(errorMessage)
+            })
+        ))
+
     })
 
     describe('getPesquisasPorAbrangenciaTerritorial', () => {
-        const mockResponse = new Response(new ResponseOptions({ body: pesquisas, status: 200 }));
-        let serviceResponse, connection;
 
         it('deve responder apenas as pesquisas com determinada abrangência territorial', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
@@ -245,14 +262,56 @@ describe('PesquisaService', () => {
             })
         ))
 
-        it('deve retornar Erro caso não exista o nivel territorial consultado', fakeAsync(
+        it('deve retornar Erro caso não exista o nivel territorial consultado', 
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {              
                 const nivelInexistente = 'nivelInexistente';
                 const errorMessage = `Não existe o nível territorial pesquisado. Favor verifique sua solicitação. [nivelterritorial: ${nivelInexistente}]`;
 
-                //mockBackend.connections.subscribe(c => connection = c);
                 pesquisaService.getPesquisasPorAbrangenciaTerritorial(nivelInexistente).subscribe(() => {}, response => serviceResponse = response)
-                //connection.mockRespond(mockResponse);
+
+                expect(serviceResponse.message).toBe(errorMessage)
+            })
+        )
+
+    })
+
+    describe('getPesquisas', () => {
+
+        it('retorna 2 pesquisas', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getPesquisas([13,14]).subscribe(pesquisas => serviceResponse = pesquisas)
+                connection.mockRespond(mockResponse);
+                tick();
+
+                expect(serviceResponse.length).toBe(2)
+                expect(serviceResponse[0] instanceof Pesquisa).toBeTruthy()
+                expect(serviceResponse[1] instanceof Pesquisa).toBeTruthy()
+            })
+        ));
+
+        it('retorna as pesquisas de id 13 e 14, respectivamente', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getPesquisas([13,14]).subscribe(pesquisas => serviceResponse = pesquisas)
+                connection.mockRespond(mockResponse);
+                tick();
+
+                expect(serviceResponse[0].id).toBe(13)
+                expect(serviceResponse[1].id).toBe(14)
+            })
+        ));
+
+         it('deve retornar Erro caso haja algum problema no servidor', fakeAsync(
+            inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {              
+                const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 }));
+                const errorMessage = `Não foi possível recuperar as pesquisas`;
+
+                mockBackend.connections.subscribe(c => connection = c);
+                pesquisaService.getPesquisas([13,14]).subscribe(() => {}, response => serviceResponse = response)
+                connection.mockRespond(mockResponse);
                 tick();
 
                 expect(serviceResponse.message).toBe(errorMessage)
@@ -267,7 +326,6 @@ describe('PesquisaService', () => {
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
                 const mockResponse = new Response(new ResponseOptions({ body: pesquisas[0], status: 200 }));
-                let serviceResponse, connection;
 
                 mockBackend.connections.subscribe(c => connection = c);
                 pesquisaService.getPesquisa(13).subscribe(pesquisas => serviceResponse = pesquisas)
@@ -283,7 +341,6 @@ describe('PesquisaService', () => {
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
                 const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
-                let serviceResponse, connection;
                 const pesquisaId = 130;
                 const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 

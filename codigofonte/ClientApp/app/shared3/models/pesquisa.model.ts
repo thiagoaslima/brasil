@@ -1,10 +1,15 @@
+import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
 import { converterEmNumero } from '../../utils2';
 import { PesquisaDTO } from '../dto';
-import { niveisTerritoriais } from '../values';
+import { niveisTerritoriais, listaNiveisTerritoriais } from '../values';
 
 export class Pesquisa {
     static criar(data: PesquisaDTO) {
         return new Pesquisa(data);
+    }
+
+    static niveisTerritoriaisPossiveis() {
+        return listaNiveisTerritoriais.slice(0);
     }
 
     public readonly id: number
@@ -32,8 +37,8 @@ export class Pesquisa {
         return this.contextos[contexto];
     }
 
-    getContextosValidos(): string[] {
-        return this._contextos.filter(contexto => Boolean(this.contextos[contexto]));
+    getAbrangenciaTerritorialDaPesquisa(): string[] {
+        return Pesquisa.niveisTerritoriaisPossiveis().filter(contexto => Boolean(this.contextos[contexto]));
     }
 
     getAllFontes() {
@@ -57,15 +62,6 @@ export class Pesquisa {
     }
 
 
-    private _contextos = [
-        niveisTerritoriais.pais.label,
-        niveisTerritoriais.macrorregiao.label,
-        niveisTerritoriais.uf.label,
-        niveisTerritoriais.ufSub.label,
-        niveisTerritoriais.municipio.label,
-        niveisTerritoriais.municipioSub.label
-    ];
-
     private _setContextos(binario: number) {
         const contextos = Boolean(binario)
             ? binario.toString()
@@ -79,7 +75,7 @@ export class Pesquisa {
         contextos.fill(0, len);
         contextos.reverse();
 
-        return this._contextos.reduce((acc, propertyName, index) => {
+        return Pesquisa.niveisTerritoriaisPossiveis().reduce((acc, propertyName, index) => {
             acc[propertyName] = Boolean(contextos[index]);
             return acc;
         }, {});
