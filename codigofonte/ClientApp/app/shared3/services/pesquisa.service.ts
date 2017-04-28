@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
+import { converterObjArrayEmHash } from '../../utils2';
 import { PesquisaDTO } from '../dto';
 import { Indicador, Pesquisa } from '../models';
 import { escopoIndicadores, listaNiveisTerritoriais, ServicoDados as servidor } from '../values';
@@ -34,7 +35,7 @@ export class PesquisaService3 {
         const errorMessage = `Não existe o nível territorial pesquisado. Favor verifique sua solicitação. [nivelterritorial: ${nivelTerritorial}]`;
 
         if (listaNiveisTerritoriais.indexOf(nivelTerritorial) === -1) {
-             return this._handleError(new Error(errorMessage));
+            return this._handleError(new Error(errorMessage));
         }
 
         return this.getAllPesquisas()
@@ -45,21 +46,9 @@ export class PesquisaService3 {
     getPesquisas(pesquisasId: number[]) {
         return this.getAllPesquisas()
             .map(pesquisas => {
-                const hash = pesquisas.reduce( (acc, pesquisa) => Object.assign(acc, {[pesquisa.id]: pesquisa}), {});
-                const resp = [];
-                const errors = [];
-                pesquisasId.forEach(id => {
-                    if (hash[id]) {
-                        resp.push(hash[id])
-                    } else {
-                        errors.push(id);
-                    }
-                })
-
-                if (errors.length === 0){
-                    return resp
-                }
-            )
+                const hashPesquisasById = converterObjArrayEmHash(pesquisas, 'id');
+                return this._filterPesquisas(hashPesquisasById, pesquisasId);
+            })
             .catch(err => this._handleError(err));
     }
 
@@ -94,4 +83,20 @@ export class PesquisaService3 {
         return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
     }
 
+    private _filterPesquisas(hash, pesquisasId) {
+        const obj = pesquisasId.reduce((acc, id) => {
+            if (hash[id]) {
+                acc.pesquisas.push(hash[id])
+            } else {
+                acc.errors.push(id);
+            }
+            return acc;
+        }, { pesquisas: [] as Pesquisa[], errors: [] as number[] })
+
+        if (obj.errors.length > 0) {
+            throw new Error(`Não foram encontradas todas as pesquisas solicitadas. [ids: ${obj.errors.join(', ')}]`)
+        }
+
+        return obj.pesquisas;
+    }
 }
