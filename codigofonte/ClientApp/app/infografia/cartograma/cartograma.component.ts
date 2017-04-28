@@ -1,4 +1,4 @@
-import { Inject, Component, Input, OnInit, OnChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
+import { Inject, Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Localidade, NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
@@ -33,6 +33,8 @@ export class CartogramaComponent implements OnInit, OnChanges {
     @Input() localidade: Localidade;
     @Input() indicador: Indicador;
     @Input() periodo;
+    @Input() titulo;
+    existeVazio;
 
     public malha$;
     public hashResultado$;
@@ -81,7 +83,7 @@ export class CartogramaComponent implements OnInit, OnChanges {
             .map(valores => {
                 const len = valores.length;
                 const q1 = valores[Math.round(0.25 * (len + 1))];
-                const q2 = len % 2 ? valores[(len + 1) / 2] : (valores[len / 2] + valores[(len / 2) + 1]) / 2
+                const q2 = len % 2 ? valores[(len + 1) / 2] : ((valores[len / 2] + valores[(len / 2) + 1]) / 2).toFixed(2);
                 const q3 = valores[Math.round(0.75 * (len + 1))];
 
                 return [q1, q2, q3];
@@ -137,6 +139,10 @@ export class CartogramaComponent implements OnInit, OnChanges {
         return left < right ? {left: left, right: 0, align: 'left', borderLeft: 3, borderRight: 0} : {left: 0, right: right, align: 'right', borderLeft: 0, borderRight: 3};
     }
 
+    handleVazio(vazio){
+        this.existeVazio = vazio;
+    }
+
 }
 
 @Component({
@@ -164,6 +170,8 @@ export class LocalCartogramaComponent implements OnInit, OnChanges {
     @Input() quartis;
     @Input() polygons;
 
+    @Output() existeVazio = new EventEmitter();
+
     public faixa$: Observable<string>;
     public valor$ = new BehaviorSubject<string>('');
     private _quartis$ = new BehaviorSubject<number[]>([]);
@@ -177,6 +185,7 @@ export class LocalCartogramaComponent implements OnInit, OnChanges {
                 let faixa;
                 const valorNumerico = Number.parseFloat(valor);
                 if (Number.isNaN(valorNumerico)) {
+                    this.existeVazio.emit(true);
                     return 'semValor';
                 }
 

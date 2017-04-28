@@ -21,6 +21,7 @@ export class SubmenuComponent implements OnInit, OnDestroy {
     public idIndicadorSelecionado;
     public codigoMunicipio;
     public baseURL;
+    public codigoCapital = 0;
 
     private allPesquisas$$: Subscription
 
@@ -40,7 +41,6 @@ export class SubmenuComponent implements OnInit, OnDestroy {
             .map(pesquisas => pesquisas.sort((a, b) => slugify(a.nome) < slugify(b.nome) ? -1 : 1))
             .subscribe(pesquisas => this.pesquisas = pesquisas);
 
-
         //pega a rota atual
         this._routerParams.params$.subscribe(({ params }) => {
             //pega o indicador e a pesquisa a partir da rota
@@ -48,6 +48,10 @@ export class SubmenuComponent implements OnInit, OnDestroy {
             this.idIndicadorSelecionado = params.indicador;
         });
 
+        if(this.localidade.tipo == 'municipio' && this.localidade.codigo != this.localidade.parent.codigoCapital)
+            this.codigoCapital = this.localidade.parent.codigoCapital;
+        else
+            this.codigoCapital = 0;
     }
 
     ngOnDestroy() {
@@ -60,7 +64,7 @@ export class SubmenuComponent implements OnInit, OnDestroy {
 
         pesquisa.indicadores.take(1).subscribe(indicadores => {
             if (indicadores.length === 1) {
-                this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id], { queryParams: { detalhes: true } });
+                this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id], { queryParams: {detalhes: true,  localidade1: this.codigoCapital} });
                 this.closeMenu.emit();
             }
         });

@@ -4,7 +4,7 @@
     <iframe frameborder="0" height="30" marginheight="0" marginwidth="0" name="barragov" noresize="" src="http://www.ibge.gov.br/barragov/barragov.htm?BGCOLOR=3&amp;WIDTH=940" style="margin-bottom:-4px;" width="100%"></iframe>
 </div>
 
-<header>
+<header [class.invisivel]="isHeaderStatic | async">
     <div class="logo">
         <a href="http://www.ibge.gov.br" target="_blank">
             <img src="img/logo.png" class='logo--desk'>
@@ -65,7 +65,7 @@
         <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
     </div>
 
-    <div style="width:100%;" [style.position]="abrirMenuPesquisa || seletor.aberto ? 'fixed' : 'relative'">
+    <div style="width:100%;" [class.position_fixed]="abrirMenuPesquisa || seletor.aberto">
         <router-outlet></router-outlet>
     </div>
     <div class="share_Button" *ngIf="isBrowser">

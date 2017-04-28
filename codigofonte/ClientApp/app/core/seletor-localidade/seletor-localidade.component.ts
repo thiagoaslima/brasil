@@ -14,6 +14,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
+import { IsMobileService } from '../../shared/is-mobile.service';
+
 @Component({
     selector: 'seletor-localidade',
     templateUrl: 'seletor-localidade.template.html',
@@ -127,7 +129,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     constructor(
         private _appState: AppState,
         private _localidadeService: LocalidadeService2,
-        private pageScrollService: PageScrollService
+        private pageScrollService: PageScrollService,
+        private _isMobileService: IsMobileService
     ) {
         this.selecaoLocalidadesAtual = this._appState.observable$
             .map(({ localidade }) => {
@@ -243,6 +246,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     focusBuscaInputMobile() {
-        this.selecionarLocalidade.nativeElement.scrollTop = '246';
+        if(this._isMobileService.any()){
+            this.selecionarLocalidade.nativeElement.scrollTop = '246';
+        }
     }
 }
