@@ -373,6 +373,15 @@ sintese>dados
     font-size: 0.8em;
 }
 
+.rodape-copyright{
+  float: right;
+    font-size: 0.7em;
+    color: #333;
+    margin-top: -15px;
+    position: relative;
+
+}
+
 .mobile{
     display: none;
 }
@@ -573,6 +582,14 @@ sintese>dados
     #versaoAnterior{
         display: none;
     }
+
+.rodape-copyright{
+       text-align: center;
+       width: 95%; 
+       float: left;
+        }.rodape-copyright span{
+            display: none;
+        }
 
      .mobile{
         display: block;
