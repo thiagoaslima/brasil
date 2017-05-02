@@ -5,8 +5,8 @@
 	border-left: 10px solid #333;
 	min-height: 100%;
 	height:100%;
-	width:100%;
-	padding-right: 379px;
+	/*width:100%;*/
+	/*padding-right: 379px;*/
 	}
 	
 	
@@ -23,7 +23,7 @@
 	.agregador {
 		border: none;
 		margin-left: 20px;
-		margin-top: 105px;
-		}	
+		margin-top: 149px;
+	}	
 	
 }

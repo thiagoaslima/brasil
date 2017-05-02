@@ -44,6 +44,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public indicador$: Observable<Indicador>
     public localSelecionado;
     public indexSelecionado = 0;
+    public tituloCartograma = '';
     private _selecionarIndicador$ = new BehaviorSubject<Indicador>(null);
     private _resultados = Object.create(null);
     private _rankings = Object.create(null);
@@ -146,7 +147,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
         if (changes.hasOwnProperty('dados') && Boolean(changes.dados.currentValue) && Boolean(changes.dados.currentValue.length)) {
             this._novosDados = true;
-            this._selecionarIndicador$.next(changes.dados.currentValue[0].indicador)
+            this.selectPainel(0);
+            // this._selecionarIndicador$.next(changes.dados.currentValue[0].indicador)
         }
     }
 
@@ -155,6 +157,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
         if(idx>=0 && idx < total){
             this._selecionarIndicador$.next(this.dados[idx].indicador);
+            this.tituloCartograma = this.dados[idx].titulo || this.dados[idx].indicador.nome;
             this.scrollCard(idx);
             this.indexSelecionado = idx;
         }

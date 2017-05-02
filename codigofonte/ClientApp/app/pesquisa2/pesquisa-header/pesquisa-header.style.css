@@ -53,6 +53,7 @@
     border: 1px solid #ccc;
     margin-left: -5px;
     z-index: 2;
+    word-wrap: break-word;
 }
 
 .notas__lista-container li {
@@ -77,6 +78,7 @@
 
 .cabecalho__nome-pesquisa span, .cabecalho__nome-pesquisa span select:first-child{
     font-weight: bold;
+    width: 100%;
 }
 
 .cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
@@ -368,7 +370,7 @@
 }
 
 .area-click{
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
     right: 0px;

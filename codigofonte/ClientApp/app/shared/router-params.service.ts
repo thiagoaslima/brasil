@@ -21,6 +21,9 @@ export class RouterParamsService {
             .filter(e => e instanceof NavigationEnd)
             .distinctUntilChanged()
             .map(e => this.extractParamsFromTree(this._route.snapshot, {}))
+            .do((params) => {
+                localStorage.setItem('lastParams', JSON.stringify(params));
+            })
         //.share();
 
         this._router.events

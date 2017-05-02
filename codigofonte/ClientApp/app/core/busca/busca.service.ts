@@ -70,17 +70,17 @@ export class BuscaService {
 
                 pesquisas = pesquisas.filter(filtro.pesquisa);
                 
-                let hash = indicadores.filter(filtro.indicador).reduce( (obj, indicador) => {
-                    obj[indicador.pesquisaId] = indicador.pesquisa;
-                    return obj;
-                }, {});
+                // let hash = indicadores.filter(filtro.indicador).reduce( (obj, indicador) => {
+                //     obj[indicador.pesquisaId] = indicador.pesquisa;
+                //     return obj;
+                // }, {});
 
-                Object.keys(hash).forEach(key => {
-                    let pesquisa = hash[key];
-                    if (pesquisas.indexOf(pesquisa) === -1) {
-                        pesquisas.push(pesquisa);
-                    }
-                })
+                // Object.keys(hash).forEach(key => {
+                //     let pesquisa = hash[key];
+                //     if (pesquisas.indexOf(pesquisa) === -1) {
+                //         pesquisas.push(pesquisa);
+                //     }
+                // })
 
                 return { pesquisas, indicadores, localidades }
             });
