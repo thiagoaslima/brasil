@@ -22,7 +22,11 @@ export class RouterParamsService {
             .distinctUntilChanged()
             .map(e => this.extractParamsFromTree(this._route.snapshot, {}))
             .do((params) => {
-                localStorage.setItem('lastParams', JSON.stringify(params));
+
+                if(isBrowser){
+                    localStorage.setItem('lastParams', JSON.stringify(params));
+                }
+                
             })
         //.share();
 
