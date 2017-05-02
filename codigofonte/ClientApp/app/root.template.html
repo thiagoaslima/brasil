@@ -59,6 +59,8 @@
         <a href='http://cidades.ibge.gov.br/xtras/home.php '>
             <button id='versaoAnterior'>Acesse a versão anterior do Cidades</button>
         </a>
+        
+        
     </aside>
 
     <div class="conteudo__dados--com-scroll submenu">
@@ -68,6 +70,9 @@
     <div style="width:100%;" [class.position_fixed]="abrirMenuPesquisa || seletor.aberto">
         <router-outlet></router-outlet>
     </div>
+    
+    <div class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| v4.01.01</div>
+    
     <div class="share_Button" *ngIf="isBrowser">
     <share-container
                         direction="vertical"

@@ -362,7 +362,7 @@ sintese>dados
 
 #versaoAnterior{
     position: absolute;
-    bottom: 77px;
+    bottom: 95px;
     margin-left: 0;
     background-color: #165d72;
     border: none;
@@ -370,6 +370,16 @@ sintese>dados
     cursor: pointer;
     width: 100%;
     font-size: 0.8em;
+}
+
+
+.rodape-copyright{
+    float: right;
+    font-size: 0.7em;
+    color: #333;
+    margin-top: -15px;
+    position: relative;
+
 }
 
 .mobile{
@@ -576,6 +586,14 @@ sintese>dados
     #versaoAnterior{
         display: none;
     }
+    
+    .rodape-copyright{
+       text-align: center;
+       width: 95%; 
+       float: left;
+        }.rodape-copyright span{
+            display: none;
+        }
 
      .mobile{
         display: block;

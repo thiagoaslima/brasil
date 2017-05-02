@@ -13,9 +13,13 @@ import { PesquisaModule2 } from './pesquisa2/pesquisa.module';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
+import { EmptyComponent } from './empty.component';
 import { VisaoHistoricaModule } from './visao-historica/visao-historica.module';
 
 import { ValidParametersGuard } from './valid-parameters.guard';
+import { EmptyLocationGuard } from './empty-location.guard';
+import { V3RouterGuard } from './v3-router.guard';
+
 import { BASES, PESQUISAS } from './global-config';
 
 import { SubmenuComponent } from './submenu/submenu.component';
@@ -35,6 +39,7 @@ import { SubmenuComponent } from './submenu/submenu.component';
     declarations: [
         RootComponent,
         SubmenuComponent,
+        EmptyComponent,
         BarraGov
     ],
     exports: [
@@ -42,6 +47,8 @@ import { SubmenuComponent } from './submenu/submenu.component';
     ],
     providers: [
         ValidParametersGuard,
+        EmptyLocationGuard,
+        V3RouterGuard,
         PESQUISAS,
         BASES
     ]
