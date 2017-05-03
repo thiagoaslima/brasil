@@ -28,47 +28,40 @@ export class IndicadorService3 {
         private _pesquisaService: PesquisaService3
     ) { }
 
-    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, comPesquisa = false, localidades = [] as Array<number|string> } = {}): Observable<Indicador[]> {
+    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, comPesquisa = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        return this.getIndicadoresByPosicao(pesquisaId, '0', {escopo, comPesquisa, localidades});
+        return this.getIndicadoresByPosicao(pesquisaId, '0', { escopo, comPesquisa, localidades })
+            .catch(err => );
     }
 
-    getIndicadoresByPosicao(pesquisaId: number, posicao: string, { escopo = escopoIndicadores.filhos, comPesquisa = false, localidades = [] as Array<number|string> }): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);
-
+    getIndicadoresByPosicao(pesquisaId: number, posicao: string, { escopo = escopoIndicadores.filhos, comPesquisa = false, localidades = [] as Array<number | string> }): Observable<Indicador[]> {
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
+        const request = comPesquisa
+            ? this._getIndicadoresComPesquisaByPosicao(pesquisaId, posicao, { escopo, localidades })
+            : this._getIndicadoresByPosicao(pesquisaId, posicao, { escopo, localidades });
 
-        if (comPesquisa) {
-            return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
-                .map(([arr, pesquisa]) => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: pesquisa }))))
-                .catch(err => this._handleError(new Error(errorMessage)));
-        }
-
-        return this._request(url)
-            .map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
-            .catch(err => this._handleError(new Error(errorMessage)));
+        return request.catch(err => this._handleError(err, new Error(errorMessage)));
     }
-    private _getIndicadores
 
-    getIndicadoresById(indicadoresId: number[], { comPesquisa = false, localidades = [] as Array<number|string> } = {}): Observable<Indicador[]> {
+    getIndicadoresById(indicadoresId: number[], { comPesquisa = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
 
         if (comPesquisa) {
             const request$ = this._request(url);
             const pesquisas$ = request$
-             .mergeMap(array => {
-                 const pesquisasId = arrayUniqueValues(array.map(obj => obj.pesquisa_id));
-                 return this._pesquisaService.getPesquisas(pesquisasId);
-            })
-             .map((array) => {
-                 return converterObjArrayEmHash(array, 'id');
-            })
+                .mergeMap(array => {
+                    const pesquisasId = arrayUniqueValues(array.map(obj => obj.pesquisa_id));
+                    return this._pesquisaService.getPesquisas(pesquisasId);
+                })
+                .map((array) => {
+                    return converterObjArrayEmHash(array, 'id');
+                })
 
-             return Observable.zip(request$, pesquisas$)
-                 .map( ([array, hashPesquisas]) => {
-                     return array.map(obj => Indicador.criar(Object.assign(obj, {pesquisa: hashPesquisas[obj.pesquisa_id]})))
-                 })
-                 .catch(err => this._handleError(err));
+            return Observable.zip(request$, pesquisas$)
+                .map(([array, hashPesquisas]) => {
+                    return array.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))
+                })
+                .catch(err => this._handleError(err));
         }
 
         return this._request(url).map(array => array.map(Indicador.criar))
@@ -79,22 +72,60 @@ export class IndicadorService3 {
         return this._http.get(url, options)
             .retry(3)
             .map(res => {
-                const obj = res.json();
+                if (res.status === 404) {
+                    throw new Error(`Não foi encontrado o endereço solicitado. [url: ${url}]`);
+                }
 
+                if (res.status === 400 || res.status === 500) {
+                    throw new Error();
+                }
+
+                const obj = res.json();
                 if (this._isServerError(obj)) {
-                    throw new Error(obj.message);
+                    throw new Error();
                 }
 
                 return obj;
-            })
-            .share();
+            });
     }
 
-    private _handleError(error): Observable<any> {
-        return Observable.throw(error);
+    private _handleError(error: Error, customError?: Error): Observable<any> {
+        return Observable.throw(error.message ? error : customError);
     }
 
     private _isServerError(res) {
         return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
+    }
+
+    private _getIndicadoresByPosicao(pesquisaId: number, posicao: string, { escopo, localidades }): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
+        return this._request(url).map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
+    }
+    private _getIndicadoresComPesquisaByPosicao(pesquisaId: number, posicao: string, { escopo = escopoIndicadores.filhos, localidades = [] as Array<number | string> }): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
+
+        return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
+            .map(([arr, pesquisa]) => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: pesquisa }))))
+    }
+
+    private _getIndicadoresById(indicadoresId: number[], { localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+        return this._request(url).map(array => array.map(Indicador.criar))
+    }
+
+    private _getIndicadoresComPesquisaById(indicadoresId: number[], { localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+
+        return this._request(url)
+            .mergeMap(responseIndicadores => {
+                const pesquisasId = arrayUniqueValues(responseIndicadores.map(obj => obj.pesquisa_id));
+                return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas => [responseIndicadores, pesquisas]);
+            })
+            .map(([array, pesquisas]) => {
+                const hashPesquisas = converterObjArrayEmHash(pesquisas, 'id');
+                return array.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))
+            })
+            .catch(err => this._handleError(err));
+
     }
 }
