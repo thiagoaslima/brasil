@@ -3,7 +3,8 @@
             
             <div>
                 <div class="cartograma" *ngIf="!isMobile() && (shouldAppear$ | async)">
-                    <cartograma [localidade]="mun" *ngIf="!isPrerender" [indicador]="indicador$ | async" [titulo]="tituloCartograma"></cartograma>
+                    <!--Não mostra o cartograma de Brasília (código 530010)-->
+                    <cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [indicador]="indicador$ | async" [titulo]="tituloCartograma"></cartograma>
                 </div>
             </div>
 
