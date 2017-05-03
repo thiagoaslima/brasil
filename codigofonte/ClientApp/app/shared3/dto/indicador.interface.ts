@@ -15,5 +15,8 @@ export interface IndicadorDTO {
         descricao: string
         calculo: string
     }
-    res?: string[]
+    res?: Array<{
+        "localidade": string,
+        "res": {[periodo: string]: string}
+    }>
 }

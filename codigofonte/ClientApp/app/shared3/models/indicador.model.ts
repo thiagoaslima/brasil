@@ -1,5 +1,6 @@
+import { ResultadoDTO } from '../dto/resultado.interface';
 import { IndicadorDTO } from '../dto';
-import { Pesquisa } from './'
+import { Pesquisa, Resultado } from './'
 import { escopoIndicadores } from '../values'
 
 export interface IndicadorParameters extends IndicadorDTO {
@@ -19,7 +20,8 @@ export interface IndicadorParameters extends IndicadorDTO {
         id: string
         classe: string
         multiplicador: number
-    }
+    },
+    resultados?: Resultado[]
 }
 
 export class Indicador {
@@ -44,6 +46,7 @@ export class Indicador {
         classe: string
         multiplicador: number
     }
+    public readonly resultados?: Resultado[]
 
     constructor(dados: IndicadorParameters) {
         if (!dados.pesquisa && !dados.pesquisa_id) {
@@ -57,9 +60,9 @@ export class Indicador {
         this.notas = dados.nota.slice(0);
 
         this.indicadores = dados.children.map(child => {
-            return dados.pesquisa 
-                ? Indicador.criar(Object.assign(child, {pesquisa: dados.pesquisa}))
-                : Indicador.criar(Object.assign(child, {pesquisa_id: dados.pesquisa_id}))
+            return dados.pesquisa
+                ? Indicador.criar(Object.assign(child, { pesquisa: dados.pesquisa }))
+                : Indicador.criar(Object.assign(child, { pesquisa_id: dados.pesquisa_id }))
         });
 
         this.metadados = Object.assign({
@@ -74,15 +77,16 @@ export class Indicador {
                 multiplicador: dados.unidade.multiplicador || 1
             }
         } else {
-            this.unidade = {
-                nome: '',
-                classe: '',
-                multiplicador: 1
-            };
+            this.unidade = { nome: '', classe: '', multiplicador: 1 };
         }
 
         if (dados.pesquisa_id && !dados.pesquisa) { this.pesquisaId = dados.pesquisa_id; }
         if (dados.pesquisa) { this.pesquisa = dados.pesquisa; }
 
+        if (dados.res) { this.resultados = Resultado.convertDTOintoParameters({ id: this.id, res: dados.res }).map(Resultado.criar); }
+    }
+
+    getResultadoByLocal(localidadeCodigo: number): Resultado {
+        return this.resultados.find(resultado => resultado.localidadeCodigo === localidadeCodigo) || null;
     }
 }

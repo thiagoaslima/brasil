@@ -28,43 +28,53 @@ export class IndicadorService3 {
         private _pesquisaService: PesquisaService3
     ) { }
 
-    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, comPesquisa = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+        return this.getIndicadoresByPosicao(pesquisaId, '0', { arvoreCompleta, localidades })
+            .catch(err => this._handleError(err));
+    }
+
+    getIndicadoresByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        return this.getIndicadoresByPosicao(pesquisaId, '0', { escopo, comPesquisa, localidades })
-            .catch(err => );
-    }
-
-    getIndicadoresByPosicao(pesquisaId: number, posicao: string, { escopo = escopoIndicadores.filhos, comPesquisa = false, localidades = [] as Array<number | string> }): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
-        const request = comPesquisa
-            ? this._getIndicadoresComPesquisaByPosicao(pesquisaId, posicao, { escopo, localidades })
-            : this._getIndicadoresByPosicao(pesquisaId, posicao, { escopo, localidades });
 
-        return request.catch(err => this._handleError(err, new Error(errorMessage)));
+        return this._request(url)
+            .map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
+            .catch(err => this._handleError(err, new Error(errorMessage)))
+    }
+    getIndicadoresComPesquisaByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+        const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
+        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
+
+        return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
+            .map(([arr, pesquisa]) => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: pesquisa }))))
+            .catch(err => this._handleError(err, new Error(errorMessage)))
     }
 
-    getIndicadoresById(indicadoresId: number[], { comPesquisa = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresById(indicadoresId: number[], localidades = [] as Array<number | string>): Observable<Indicador[]> {
         const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+        const errorMessage = `Não foi possível retornar indicadores para os parâmetros informados. [id: ${indicadoresId.join(', ') || 'nenhum valor informado'}]`
 
-        if (comPesquisa) {
-            const request$ = this._request(url);
-            const pesquisas$ = request$
-                .mergeMap(array => {
-                    const pesquisasId = arrayUniqueValues(array.map(obj => obj.pesquisa_id));
-                    return this._pesquisaService.getPesquisas(pesquisasId);
-                })
-                .map((array) => {
-                    return converterObjArrayEmHash(array, 'id');
-                })
+        return this._request(url)
+            .map(array => array.map(Indicador.criar))
+            .catch(err => this._handleError(err, new Error(errorMessage)));
+    }
 
-            return Observable.zip(request$, pesquisas$)
-                .map(([array, hashPesquisas]) => {
-                    return array.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))
-                })
-                .catch(err => this._handleError(err));
-        }
+    getIndicadoresComPesquisaById(indicadoresId: number[], localidades = [] as Array<number | string>): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+        const errorMessage = `Não foi possível retornar indicadores para os parâmetros informados. [id: ${indicadoresId.join(', ') || 'nenhum valor informado'}}]`
 
-        return this._request(url).map(array => array.map(Indicador.criar))
+        return this._request(url)
+            .mergeMap(responseIndicadores => {
+                const pesquisasId = arrayUniqueValues(responseIndicadores.map(obj => obj.pesquisa_id));
+                return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas => [responseIndicadores, pesquisas]);
+            })
+            .map(([responseIndicadores, pesquisas]) => {
+                const hashPesquisas = converterObjArrayEmHash(pesquisas, 'id');
+                return responseIndicadores.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))
+            })
+            .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
 
@@ -97,35 +107,4 @@ export class IndicadorService3 {
         return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
     }
 
-    private _getIndicadoresByPosicao(pesquisaId: number, posicao: string, { escopo, localidades }): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
-        return this._request(url).map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
-    }
-    private _getIndicadoresComPesquisaByPosicao(pesquisaId: number, posicao: string, { escopo = escopoIndicadores.filhos, localidades = [] as Array<number | string> }): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
-
-        return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
-            .map(([arr, pesquisa]) => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: pesquisa }))))
-    }
-
-    private _getIndicadoresById(indicadoresId: number[], { localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
-        return this._request(url).map(array => array.map(Indicador.criar))
-    }
-
-    private _getIndicadoresComPesquisaById(indicadoresId: number[], { localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
-
-        return this._request(url)
-            .mergeMap(responseIndicadores => {
-                const pesquisasId = arrayUniqueValues(responseIndicadores.map(obj => obj.pesquisa_id));
-                return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas => [responseIndicadores, pesquisas]);
-            })
-            .map(([array, pesquisas]) => {
-                const hashPesquisas = converterObjArrayEmHash(pesquisas, 'id');
-                return array.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))
-            })
-            .catch(err => this._handleError(err));
-
-    }
 }
