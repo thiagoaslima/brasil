@@ -304,7 +304,7 @@ describe('PesquisaService', () => {
             })
         ));
 
-         it('deve retornar Erro caso haja algum problema no servidor', fakeAsync(
+         it('deve retornar erro caso haja algum problema no servidor', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {              
                 const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 }));
                 const errorMessage = `Não foi possível recuperar as pesquisas`;
@@ -340,7 +340,7 @@ describe('PesquisaService', () => {
         it('retorna erro caso não haja pesquisa com a id solicitada', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
 
-                const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
+                const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 }));
                 const pesquisaId = 130;
                 const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
 

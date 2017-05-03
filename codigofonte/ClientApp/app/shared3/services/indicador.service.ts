@@ -28,12 +28,15 @@ export class IndicadorService3 {
         private _pesquisaService: PesquisaService3
     ) { }
 
-    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, comPesquisa = false } = {}) {
-        const url = arvoreCompleta
-            ? servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores`)
-            : servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopoIndicadores.filhos}`);
+    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, comPesquisa = false, localidades = [] as Array<number|string> } = {}): Observable<Indicador[]> {
+        const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
+        return this.getIndicadoresByPosicao(pesquisaId, '0', {escopo, comPesquisa, localidades});
+    }
 
-        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}]`;
+    getIndicadoresByPosicao(pesquisaId: number, posicao: string, { escopo = escopoIndicadores.filhos, comPesquisa = false, localidades = [] as Array<number|string> }): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);
+
+        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         if (comPesquisa) {
             return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
@@ -44,11 +47,11 @@ export class IndicadorService3 {
         return this._request(url)
             .map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
             .catch(err => this._handleError(new Error(errorMessage)));
-
     }
+    private _getIndicadores
 
-    getIndicadoresById(indicadoresId: number[], { comPesquisa = false } = {}) {
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}`);
+    getIndicadoresById(indicadoresId: number[], { comPesquisa = false, localidades = [] as Array<number|string> } = {}): Observable<Indicador[]> {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
 
         if (comPesquisa) {
             const request$ = this._request(url);

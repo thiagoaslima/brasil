@@ -30,8 +30,8 @@ describe('IndicadorService', () => {
             })
 
             mockResponse = {
-                [servidor.setUrl('pesquisas/13/periodos/all/indicadores')]: new Response(new ResponseOptions({ body: indicadores_arvoreCompleta, status: 200 })),
-                [servidor.setUrl('pesquisas/13/periodos/all/indicadores/0?scope=one')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
+                [servidor.setUrl('pesquisas/13/periodos/all/indicadores/0?scope=sub&localidade=')]: new Response(new ResponseOptions({ body: indicadores_arvoreCompleta, status: 200 })),
+                [servidor.setUrl('pesquisas/13/periodos/all/indicadores/0?scope=one&localidade=')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
             };
 
             serverResponse = null;
@@ -159,7 +159,7 @@ describe('IndicadorService', () => {
                     (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
                         const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
                         const pesquisaId = 130;
-                        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}]`;
+                        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: one]`;
 
                         mockBackend.connections.subscribe(c => connection = c);
                         indicadorService.getIndicadoresDaPesquisa(pesquisaId).subscribe(() => { }, err => serviceResponse = err);
@@ -267,7 +267,7 @@ describe('IndicadorService', () => {
                 inject([IndicadorService3, MockBackend], (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
                     const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
                     const pesquisaId = 130;
-                    const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}]`;
+                    const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: sub]`;
 
                     mockBackend.connections.subscribe(c => connection = c);
                     indicadorService.getIndicadoresDaPesquisa(pesquisaId, { arvoreCompleta: true }).subscribe(() => { }, err => serviceResponse = err);
@@ -371,7 +371,7 @@ describe('IndicadorService', () => {
 
                         const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
                         const pesquisaId = 130;
-                        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}]`;
+                        const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: one]`;
 
                         mockBackend.connections.subscribe(c => connection = c);
                         indicadorService.getIndicadoresDaPesquisa(pesquisaId, { comPesquisa: true }).subscribe(() => { }, err => serviceResponse = err);
@@ -482,7 +482,7 @@ describe('IndicadorService', () => {
                 inject([IndicadorService3, MockBackend], (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
                     const mockResponse = new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 200 }));
                     const pesquisaId = 130;
-                    const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}]`;
+                    const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: sub]`;
 
                     mockBackend.connections.subscribe(c => connection = c);
                     indicadorService.getIndicadoresDaPesquisa(pesquisaId, { arvoreCompleta: true, comPesquisa: true }).subscribe(() => { }, err => serviceResponse = err);
@@ -516,7 +516,7 @@ describe('IndicadorService', () => {
             }
 
             mockResponse = {
-                [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
+                [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
             };
 
             serverResponse = null;

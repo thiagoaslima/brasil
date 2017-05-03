@@ -8,6 +8,7 @@ import { escopoIndicadores, listaNiveisTerritoriais, ServicoDados as servidor } 
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
@@ -28,13 +29,12 @@ export class PesquisaService3 {
 
         return this._request(url)
             .map(arr => arr.map(Pesquisa.criar))
-            .catch(err => this._handleError(new Error(errorMessage)));
+            .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
     getPesquisasPorAbrangenciaTerritorial(nivelTerritorial: string): Observable<Pesquisa[]> {
-        const errorMessage = `Não existe o nível territorial pesquisado. Favor verifique sua solicitação. [nivelterritorial: ${nivelTerritorial}]`;
-
-        if (listaNiveisTerritoriais.indexOf(nivelTerritorial) === -1) {
+        if (Pesquisa.niveisTerritoriaisPossiveis.indexOf(nivelTerritorial) === -1) {
+            const errorMessage = `Não existe o nível territorial pesquisado. Favor verifique sua solicitação. [nivelterritorial: ${nivelTerritorial}]`;
             return this._handleError(new Error(errorMessage));
         }
 
@@ -43,7 +43,7 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err));
     }
 
-    getPesquisas(pesquisasId: number[]) {
+    getPesquisas(pesquisasId: number[]): Observable<Pesquisa[]> {
         return this.getAllPesquisas()
             .map(pesquisas => {
                 const hashPesquisasById = converterObjArrayEmHash(pesquisas, 'id');
@@ -58,25 +58,32 @@ export class PesquisaService3 {
 
         return this._request(url)
             .map(Pesquisa.criar)
-            .catch(err => this._handleError(new Error(errorMessage)));
+            .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
-    private _request(url: string) {
+    private _request(url: string): Observable<any> {
         return this._http.get(url, options)
             .retry(3)
             .map(res => {
-                const obj = res.json();
+                if (res.status === 404) {
+                    throw new Error(`Não foi encontrado o endereço solicitado. [url: ${url}]`);
+                }
 
+                if (res.status === 400 || res.status === 500) {
+                    throw new Error();
+                }
+
+                const obj = res.json();
                 if (this._isServerError(obj)) {
-                    throw new Error(obj.message);
+                    throw new Error();
                 }
 
                 return obj;
             });
     }
 
-    private _handleError(error): Observable<any> {
-        return Observable.throw(error);
+    private _handleError(error: Error, customError?: Error): Observable<any> {
+        return Observable.throw(error.message ? error : customError);
     }
 
     private _isServerError(res) {

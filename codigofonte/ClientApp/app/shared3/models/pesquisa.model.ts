@@ -8,7 +8,7 @@ export class Pesquisa {
         return new Pesquisa(data);
     }
 
-    static niveisTerritoriaisPossiveis() {
+    static get niveisTerritoriaisPossiveis() {
         return listaNiveisTerritoriais.slice(0);
     }
 
@@ -38,7 +38,7 @@ export class Pesquisa {
     }
 
     getAbrangenciaTerritorialDaPesquisa(): string[] {
-        return Pesquisa.niveisTerritoriaisPossiveis().filter(contexto => Boolean(this.contextos[contexto]));
+        return Pesquisa.niveisTerritoriaisPossiveis.filter(contexto => Boolean(this.contextos[contexto]));
     }
 
     getAllFontes() {
@@ -61,7 +61,6 @@ export class Pesquisa {
         return obj ? obj.notas : [];
     }
 
-
     private _setContextos(binario: number) {
         const contextos = Boolean(binario)
             ? binario.toString()
@@ -75,7 +74,7 @@ export class Pesquisa {
         contextos.fill(0, len);
         contextos.reverse();
 
-        return Pesquisa.niveisTerritoriaisPossiveis().reduce((acc, propertyName, index) => {
+        return Pesquisa.niveisTerritoriaisPossiveis.reduce((acc, propertyName, index) => {
             acc[propertyName] = Boolean(contextos[index]);
             return acc;
         }, {});
