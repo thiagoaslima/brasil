@@ -267,7 +267,7 @@
     /*Menu resumo fixo na rolagem*/
     .resumo-fixo{
         position: fixed;
-        top:180px;
+        top:145px;
         z-index: 1;
         width: 100%;
     }

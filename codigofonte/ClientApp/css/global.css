@@ -399,12 +399,16 @@ sintese>dados
         background: none;
     }
 
+    #barraGoverno{
+        
+    }
+
     header{
         background-color: #333333;
         border-bottom: none;
         z-index: 6;
         top:0;
-        margin-top: 30px;
+        /*margin-top: 30px;*/
     }
 
     header .logo {
@@ -441,15 +445,20 @@ sintese>dados
 	}
 
     #container{
-        padding-top: 42px;
+        padding-top: 11px;
         margin-top: 0;
     }
 
     aside{
         width: 100%;
         min-height: 0px;
+        margin-top: 0px;
     }
-
+    
+    aside.aside--municipio{
+        margin-top: 35px;
+    }
+    
     aside #localidade {
         padding: 7px 5%;
     }
@@ -517,7 +526,7 @@ sintese>dados
         margin-top: 52px;
     }
     aside.localidade--static #menu.aberto{
-        margin-top: 0;
+        margin-top: 30px;
     }
 
     .conteudo{
@@ -566,7 +575,7 @@ sintese>dados
         border-left: none;
         margin-left: 0;
         width: auto;
-        margin-top: 171px;
+        margin-top: 175px;
     }
     #sintese #dados{
         float: none;
