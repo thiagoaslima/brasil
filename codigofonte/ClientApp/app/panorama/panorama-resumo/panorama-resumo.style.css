@@ -65,8 +65,8 @@
 .lista__icone .ico{   
     width: 30px;
     height: 16px;
-    background-repeat: no-repeat;
-    background-position: center;
+    /*background-repeat: no-repeat;
+    background-position: center;*/
 }
 
 .ico--agri{
@@ -131,6 +131,10 @@
 
 .lista__cabecalho--selecionado.ico--frota{
     background-image: url('./../../../img/ico/ico-frota_on.png');
+}
+
+.lista__cabecalho--selecionado.ico{
+    color: #F15A24;
 }
 
 .lista__titulo{

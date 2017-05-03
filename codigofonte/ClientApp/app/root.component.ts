@@ -94,7 +94,18 @@ export class RootComponent implements OnInit, OnDestroy {
         //marca a opção no menu, baseado na rota
 
         this._routerParams.params$.subscribe(({ params, queryParams }) => {
-            this.itemSelecionado = params.pesquisa ? 'pesquisa' : 'panorama';
+            //seta o item do menu selecionado
+            if(isBrowser){
+                let url = window.location.href;
+                if(url.indexOf('panorama') >= 0){
+                    this.itemSelecionado = 'panorama';
+                }else if(url.indexOf('historico') >= 0){
+                    this.itemSelecionado = 'historico';
+                }else if(url.indexOf('pesquisa') >= 0){
+                    this.itemSelecionado = 'pesquisa';
+                }
+            }
+            
             this.menuAberto = queryParams['detalhes'] == 'true';
         });
 
