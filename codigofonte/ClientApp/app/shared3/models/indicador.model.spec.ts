@@ -180,6 +180,7 @@ describe('Indicador Model', () => {
             "posicao": "1.1",
             "indicador": "Ensino pré-escolar",
             "classe": "I",
+            "pesquisa_id": 13,
             "unidade": {
                 "id": "Matrículas",
                 "classe": "G",
@@ -191,6 +192,7 @@ describe('Indicador Model', () => {
                     "posicao": "1.1.1",
                     "indicador": "Escola pública municipal",
                     "classe": "I",
+                    "pesquisa_id": 13,
                     "unidade": {
                         "id": "Matrículas",
                         "classe": "N",
@@ -204,6 +206,7 @@ describe('Indicador Model', () => {
                     "posicao": "1.1.2",
                     "indicador": "Escola pública estadual",
                     "classe": "I",
+                    "pesquisa_id": 13,
                     "unidade": {
                         "id": "Matrículas",
                         "classe": "G",
@@ -217,6 +220,7 @@ describe('Indicador Model', () => {
                     "posicao": "1.1.3",
                     "indicador": "Escola pública federal",
                     "classe": "I",
+                    "pesquisa_id": 13,
                     "unidade": {
                         "id": "Matrículas",
                         "classe": "G",
@@ -230,6 +234,7 @@ describe('Indicador Model', () => {
                     "posicao": "1.1.4",
                     "indicador": "Escola privada",
                     "classe": "I",
+                    "pesquisa_id": 13,
                     "unidade": {
                         "id": "Matrículas",
                         "classe": "G",

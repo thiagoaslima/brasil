@@ -1,5 +1,5 @@
 import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
-import { converterEmNumero } from '../../utils2';
+import { arrayUniqueValues, converterEmNumero } from '../../utils2';
 import { PesquisaDTO } from '../dto';
 import { niveisTerritoriais, listaNiveisTerritoriais } from '../values';
 
@@ -43,7 +43,7 @@ export class Pesquisa {
 
     getAllFontes() {
         const fontes = this.periodos.reduce((fontes, periodo) => fontes.concat(periodo.fontes), [] as string[]);
-        return Array.from(new Set(fontes));
+        return arrayUniqueValues(fontes);
     }
 
     getFontesDoPeriodo(periodo: string) {
@@ -53,7 +53,7 @@ export class Pesquisa {
 
     getAllNotas() {
         const notas = this.periodos.reduce((notas, periodo) => notas.concat(periodo.notas), [] as string[]);
-        return Array.from(new Set(notas))
+        return arrayUniqueValues(notas);
     }
 
     getNotasDoPeriodo(periodo: string) {

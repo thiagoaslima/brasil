@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { PesquisaService3 } from './';
+import { PesquisaService3 } from '.';
 import { Indicador, Pesquisa } from '../models';
 import { escopoIndicadores, ServicoDados as servidor } from '../values';
+import { arrayUniqueValues, converterObjArrayEmHash } from '../../utils2';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
 
@@ -25,7 +28,7 @@ export class IndicadorService3 {
         private _pesquisaService: PesquisaService3
     ) { }
 
-    getIndicadoresDaPesquisa(pesquisaId: number, arvoreCompleta = false, comPesquisa = false) {
+    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, comPesquisa = false } = {}) {
         const url = arvoreCompleta
             ? servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores`)
             : servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopoIndicadores.filhos}`);
@@ -44,15 +47,30 @@ export class IndicadorService3 {
 
     }
 
-    // getIndicadoresById(indicadoresId: number[], comPesquisa = false) {
-    //     const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}`);
+    getIndicadoresById(indicadoresId: number[], { comPesquisa = false } = {}) {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}`);
 
-    //     if (comPesquisa) {
-    //         const pesquisas$ = this._request(url).map(arr => {
-    //             const pesquisasId = 
-    //         })
-    //     }
-    // }
+        if (comPesquisa) {
+            const request$ = this._request(url);
+            const pesquisas$ = request$
+             .mergeMap(array => {
+                 const pesquisasId = arrayUniqueValues(array.map(obj => obj.pesquisa_id));
+                 return this._pesquisaService.getPesquisas(pesquisasId);
+            })
+             .map((array) => {
+                 return converterObjArrayEmHash(array, 'id');
+            })
+
+             return Observable.zip(request$, pesquisas$)
+                 .map( ([array, hashPesquisas]) => {
+                     return array.map(obj => Indicador.criar(Object.assign(obj, {pesquisa: hashPesquisas[obj.pesquisa_id]})))
+                 })
+                 .catch(err => this._handleError(err));
+        }
+
+        return this._request(url).map(array => array.map(Indicador.criar))
+    }
+
 
     private _request(url: string) {
         return this._http.get(url, options)

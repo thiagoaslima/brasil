@@ -81,7 +81,8 @@ export class Indicador {
             };
         }
 
-        if (dados.pesquisa_id) { this.pesquisaId = dados.pesquisa_id; }
+        if (dados.pesquisa_id && !dados.pesquisa) { this.pesquisaId = dados.pesquisa_id; }
         if (dados.pesquisa) { this.pesquisa = dados.pesquisa; }
+
     }
 }

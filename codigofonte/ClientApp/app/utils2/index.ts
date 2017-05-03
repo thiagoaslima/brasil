@@ -1,2 +1,3 @@
+export { arrayUniqueValues } from './arrayUniqueValues';
 export { converterObjArrayEmHash } from './converterObjArrayEmHash';
-export { converterEmNumero } from './converterEmNumero'
+export { converterEmNumero } from './converterEmNumero';
