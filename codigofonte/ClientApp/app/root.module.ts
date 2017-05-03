@@ -18,6 +18,7 @@ import { VisaoHistoricaModule } from './visao-historica/visao-historica.module';
 
 import { ValidParametersGuard } from './valid-parameters.guard';
 import { EmptyLocationGuard } from './empty-location.guard';
+import { V3RouterGuard } from './v3-router.guard';
 
 import { BASES, PESQUISAS } from './global-config';
 
@@ -47,6 +48,7 @@ import { SubmenuComponent } from './submenu/submenu.component';
     providers: [
         ValidParametersGuard,
         EmptyLocationGuard,
+        V3RouterGuard,
         PESQUISAS,
         BASES
     ]

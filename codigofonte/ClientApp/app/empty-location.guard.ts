@@ -1,7 +1,10 @@
-import { Localidade } from './shared2/localidade/localidade.model';
-import { LocalidadeService2 } from './shared2/localidade/localidade.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { isBrowser } from 'angular2-universal'
+
+import { Localidade } from './shared2/localidade/localidade.model';
+import { LocalidadeService2 } from './shared2/localidade/localidade.service';
+
 
 @Injectable()
 export class EmptyLocationGuard implements CanActivate {
@@ -11,7 +14,11 @@ export class EmptyLocationGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        let params = JSON.parse(localStorage.getItem('lastParams'));
+
+        let params;
+        if(isBrowser){
+            params = JSON.parse(localStorage.getItem('lastParams'));
+        }
 
         if(params) {
             this._router.navigateByUrl(`/v4/brasil/${params.params.uf}/${params.params.municipio}/panorama`);

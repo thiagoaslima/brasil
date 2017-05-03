@@ -372,6 +372,16 @@ sintese>dados
     font-size: 0.8em;
 }
 
+
+.rodape-copyright{
+    float: right;
+    font-size: 0.7em;
+    color: #333;
+    margin-top: -15px;
+    position: relative;
+
+}
+
 .mobile{
     display: none;
 }
@@ -381,7 +391,7 @@ sintese>dados
 }
 
 @media screen and (max-width: 768px) {
-    .invisivel *{
+    .invisivel *, .invisivel{
         display: none;
     }
 
@@ -390,12 +400,17 @@ sintese>dados
         background: none;
     }
 
+    #barraGoverno{
+        /*position: absolute;
+        top: 0px;*/
+    }
+
     header{
         background-color: #333333;
         border-bottom: none;
         z-index: 6;
         top:0;
-        margin-top: 30px;
+        margin-top: 26px;
     }
 
     header .logo {
@@ -432,13 +447,18 @@ sintese>dados
 	}
 
     #container{
-        padding-top: 42px;
-        margin-top: 0;
+        padding-top: 11px;
+        margin-top: -4px;
     }
 
     aside{
         width: 100%;
         min-height: 0px;
+        margin-top: 0px;
+    }
+    
+    aside.aside--municipio{
+        margin-top: 65px;
     }
 
     aside #localidade {
@@ -497,6 +517,7 @@ sintese>dados
         -ms-transition: left 500ms ease;
         -o-transition: left 500ms ease;
         transition: left 500ms ease;
+        margin-top: 52px;
     }
 
     aside #menu ul{
@@ -508,14 +529,14 @@ sintese>dados
         margin-top: 52px;
     }
     aside.localidade--static #menu.aberto{
-        margin-top: 0;
+        margin-top: 30px;
     }
 
     .conteudo{
         width: 100%;
         border-left: none;
         margin-left: 0px;
-        margin-top: 140px;
+        margin-top: 180px;
     }
 
     .conteudo__dados, .conteudo__dados--com-scroll{
@@ -557,7 +578,7 @@ sintese>dados
         border-left: none;
         margin-left: 0;
         width: auto;
-        margin-top: 171px;
+        margin-top: 204px;
     }
     #sintese #dados{
         float: none;
@@ -576,6 +597,14 @@ sintese>dados
     #versaoAnterior{
         display: none;
     }
+    
+    .rodape-copyright{
+       text-align: center;
+       width: 95%; 
+       float: left;
+        }.rodape-copyright span{
+            display: none;
+        }
 
      .mobile{
         display: block;
