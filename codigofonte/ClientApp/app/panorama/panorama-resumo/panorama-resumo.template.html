@@ -41,7 +41,7 @@
         </div>
         </div>
 
-        <table *ngIf="tema.tema" class="lista" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
+        <table *ngIf="tema.tema" class="lista" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())" [class.hide-content]="temaAtual != '#'+tema?.tema?.substr(0,2).toLowerCase()">
             <tr class="lista__cabecalho">
                 
                 <th [ngSwitch]="tema.tema" class="lista__icone">
