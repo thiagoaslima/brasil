@@ -28,7 +28,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     @Input() dados: PanoramaDescriptor;
 
     @Output() temaSelecionado = new EventEmitter();
-    temaAtual;
+    temaAtual = '#po';
     
     public isHeaderStatic;
     private _scrollTop$ = new BehaviorSubject(0);
