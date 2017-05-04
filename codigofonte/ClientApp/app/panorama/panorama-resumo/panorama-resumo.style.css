@@ -265,11 +265,13 @@
         display: block;
         margin: 0 auto;
     }
-    
+    .ico--edu{
+        background-size: 17px;
+    }
     /*Menu resumo fixo na rolagem*/
     .resumo-fixo{
         position: fixed;
-        top:180px;
+        top:145px;
         z-index: 1;
         width: 100%;
     }

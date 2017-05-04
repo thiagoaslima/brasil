@@ -472,12 +472,12 @@ ANIMAÇÃO
 @media screen and (max-width: 768px) {
     /*Mobile*/
     #selecionar-localidade{
-        top: 42px;
+        top: 0px;
         left: -100%;
         min-height: 100vh;
         overflow: hidden;
         display: block;
-        z-index: 23;
+        z-index: 1000;
 
         overflow: scroll;
         position: fixed;
