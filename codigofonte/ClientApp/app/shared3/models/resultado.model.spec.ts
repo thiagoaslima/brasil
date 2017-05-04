@@ -92,5 +92,6 @@ describe('Resultado Model', () => {
         it('periodoValidoMaisRecente == "-"', () => {
             expect(resultado.periodoValidoMaisRecente).toBe("-");
         })
+        
     })
 })

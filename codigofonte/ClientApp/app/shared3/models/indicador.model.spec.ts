@@ -1,4 +1,5 @@
-import { Indicador, Pesquisa } from './';
+import { IndicadorDTO } from '../dto';
+import { Indicador, Pesquisa, Resultado } from './';
 
 describe('Indicador Model', () => {
 
@@ -263,6 +264,37 @@ describe('Indicador Model', () => {
         it('não deve ter a propriedade pesquisaId', () => {
             expect(indicador.pesquisaId).toBeUndefined();
             expect(indicador.hasOwnProperty('pesquisaId')).toBeFalsy();
+        })
+    })
+
+    describe('uma instância com Resultado', () => {
+        let indicador: Indicador
+        const indicadorDTO = {"id":5905,"pesquisa_id":13,"posicao":"1.1.2","indicador":"Escola pública estadual","classe":"I","unidade":{"id":"Matrículas","classe":"G","multiplicador":0},"children":[],"nota":[],"res":[{"localidade":"330010","res":{"2005":"44","2007":"68","2009":"8","2012":"7","2015":"0"}},{"localidade":"330455","res":{"2005":"959","2007":"615","2009":"394","2012":"203","2015":"191"}}]}
+
+        beforeEach(() => {
+            indicador = Indicador.criar(indicadorDTO);
+        })
+
+        it('deve ter a propriedade resultados', () => {
+            expect(indicador.resultados).toBeDefined();
+        })
+
+        it('deve conter 2 instâncias de Resultado', () => {
+            expect(indicador.resultados.length).toBe(2);
+            expect(indicador.resultados[0] instanceof Resultado).toBeTruthy()
+            expect(indicador.resultados[1] instanceof Resultado).toBeTruthy()
+        })
+
+        it('deve retornar o resultado pedido pelo codigo da localidade', () => {
+            const resultado = indicador.getResultadoByLocal(330010)
+            expect(resultado).toBeDefined();
+            expect(resultado instanceof Resultado).toBeTruthy()
+        })
+
+        it('deve retornar null caso não possua o resultado pedido pelo codigo da localidade', () => {
+            const resultado = indicador.getResultadoByLocal(1)
+            expect(resultado).toBeNull();
+            expect(resultado instanceof Resultado).toBeFalsy()
         })
     })
 })
