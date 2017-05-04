@@ -15,38 +15,38 @@ html, body{
 
 body, body.brasil{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    /*background: -webkit-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -o-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -moz-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 	background: -ms-linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1f9982 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );*/
 }
 
 body.estado{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    /*background: -webkit-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -o-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -moz-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 	background: -ms-linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );*/
 }
 
 body.estado--apenas-aside{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    /*background: -webkit-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
     background: -o-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
     background: -moz-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
 	background: -ms-linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
-    background: linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );
+    background: linear-gradient( to right, #1B779B 21%, #fff 15%, #fff );*/
 }
 
 body.municipio{
     background: #fff; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    /*background: -webkit-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -o-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
     background: -moz-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
 	background: -ms-linear-gradient( to right, #1b779b 21%, #E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
-    background: linear-gradient( to right, #1b779b 21%,#E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );
+    background: linear-gradient( to right, #1b779b 21%,#E6E6E6 15%, #E6E6E6 51%, #fff 51%, #fff );*/
 }
 
 #barraGoverno{
@@ -108,8 +108,8 @@ header #busca{
     margin: auto;
     height: 100%;
 
-    margin-top: 54px;
-    /*margin-top: 80px;*/
+    /*margin-top: 54px;*/
+    margin-top: 80px;
 }
 
 .brasil .cor-fundo{
@@ -149,11 +149,12 @@ aside{
     /*padding: 2% 0%;*/
     z-index: 5;
     position: fixed;
+    padding-top: 10px;
 }
 
 aside.aside--municipio{
     background-color: #1B779B;
-    margin-top: 32px;
+    /*margin-top: 32px;*/
 }
 
 aside ul li{
@@ -248,6 +249,10 @@ aside #menu ul li:hover, aside #menu .menu--selecionado{
     margin-left: 21%;
 }
 
+#sintese > section{
+    padding-top: 31px;
+}
+
 /*****************
 sintese>dados
 *****************/
@@ -256,8 +261,11 @@ sintese>dados
     background-color: #E6E6E6;
     float: left;
     width: 38%;
-    padding: 2% 0%;
+    /*padding: 2% 0%;*/
     min-height: 100%;
+    position: fixed;
+/* overflow-y: scroll; */
+    width: 31%;
 }
 
 .button_voltarTopo {
@@ -278,6 +286,7 @@ sintese>dados
     float: left;
     width: 62%;
     min-height: 100%;
+    margin-left: 45%;
 }
 
 /*******************/
@@ -372,9 +381,8 @@ sintese>dados
     font-size: 0.8em;
 }
 
-
 .rodape-copyright{
-    float: right;
+  float: right;
     font-size: 0.7em;
     color: #333;
     margin-top: -15px;
@@ -451,6 +459,10 @@ sintese>dados
         min-height: 0px;
     }
 
+    aside.aside--municipio{
+        padding-top: 32px;
+    }
+
     aside #localidade {
         padding: 7px 5%;
     }
@@ -476,7 +488,7 @@ sintese>dados
     }
 
     aside.aside--municipio.localidade--static{
-        margin-top: 92px;
+        padding-top: 92px;
     }
 
     aside #localidade button{
@@ -574,6 +586,7 @@ sintese>dados
         width: 100%;
         min-height: auto;
         padding: 0;
+        position: inherit;
         
     }
     section#detalhes{
@@ -581,13 +594,14 @@ sintese>dados
     }
     #sintese #detalhes{
         width: 100vw;
+        margin-left: 0;
     }
 
     #versaoAnterior{
         display: none;
     }
-    
-    .rodape-copyright{
+
+.rodape-copyright{
        text-align: center;
        width: 95%; 
        float: left;
@@ -608,19 +622,19 @@ sintese>dados
     /*aside fica fixo em 250px;*/
     body.estado{  
        background: #fff; /* For browsers that do not support gradients */
-       background: -webkit-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       /*background: -webkit-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
        background: -o-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
        background: -moz-linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
-       background: linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );
+       background: linear-gradient( to right, #1B779B 255px, #E6E6E6 250px, #E6E6E6 calc(38% + 161px), #fff calc(38% + 95px), #fff );*/
 
     }
 
     body.estado--apenas-aside{
         background: #fff; /* For browsers that do not support gradients */
-        background: -webkit-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        /*background: -webkit-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
         background: -o-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
         background: -moz-linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
-        background: linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );
+        background: linear-gradient( to right, #1B779B 250px, #fff 250px, #fff );*/
     }
 
     header .logo {
@@ -629,18 +643,21 @@ sintese>dados
 
     aside{
         width: 250px;    
-        margin-top: 28px;
     }
     
     .conteudo{
         width: calc(100% - 250px);
         margin-left: 250px;
-        margin-top: 28px;
+        /*margin-top: 28px;*/
     }
 
     #sintese{
         margin-left: 250px;
-        margin-top: 31px;
+        /*margin-top: 31px;*/
+    }
+
+    #sintese #detalhes{
+        margin-left: 38%;
     }
     
 }

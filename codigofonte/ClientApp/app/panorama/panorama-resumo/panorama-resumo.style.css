@@ -45,6 +45,15 @@
     border-collapse: collapse;
     cursor: pointer;
     transition: background-color 0.3s;
+    border-bottom: 2px solid #cccccc;
+}
+
+.lista:not(.hide-content) .lista__cabecalho {
+    background: #d0d0d0;
+}
+
+.lista:not(.hide-content) .lista__cabecalho .lista__seta {
+    color: #1B779B;
 }
 
 .lista__cabecalho{
@@ -57,7 +66,7 @@
 }
 
 .lista__icone{
-    min-width: 40px;
+    width: 40px;
     text-align: right;
     padding: 10px 5px;
 }
@@ -208,6 +217,10 @@
 }
 
 .mobile__exclusive{
+    display: none;
+}
+
+.hide-content .lista__indicador, .hide-content .lista__separador{
     display: none;
 }
 
