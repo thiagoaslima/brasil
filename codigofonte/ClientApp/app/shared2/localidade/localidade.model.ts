@@ -131,7 +131,8 @@ export class Localidade {
             sigla: "",
             slug: data.slug || slugify(data.nome),
             codigoCapital: null,
-            codigoParent: parseInt(data.codigoUf, 10)
+            codigoParent: parseInt(data.codigoUf, 10),
+            microrregiao: data.microrregiao
         }
     }
 
@@ -157,6 +158,7 @@ export class Localidade {
     slug: string;
     codigoCapital: number;
     codigoParent: number;
+    microrregiao?: number;
     private _link: string = '';
 
     constructor(data) {

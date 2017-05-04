@@ -45,6 +45,15 @@
     border-collapse: collapse;
     cursor: pointer;
     transition: background-color 0.3s;
+    border-bottom: 2px solid #cccccc;
+}
+
+.lista:not(.hide-content) .lista__cabecalho {
+    background: #d0d0d0;
+}
+
+.lista:not(.hide-content) .lista__cabecalho .lista__seta {
+    color: #1B779B;
 }
 
 .lista__cabecalho{
@@ -57,7 +66,7 @@
 }
 
 .lista__icone{
-    min-width: 40px;
+    width: 40px;
     text-align: right;
     padding: 10px 5px;
 }
@@ -65,8 +74,8 @@
 .lista__icone .ico{   
     width: 30px;
     height: 16px;
-    background-repeat: no-repeat;
-    background-position: center;
+    /*background-repeat: no-repeat;
+    background-position: center;*/
 }
 
 .ico--agri{
@@ -131,6 +140,10 @@
 
 .lista__cabecalho--selecionado.ico--frota{
     background-image: url('./../../../img/ico/ico-frota_on.png');
+}
+
+.lista__cabecalho--selecionado.ico{
+    color: #F15A24;
 }
 
 .lista__titulo{
@@ -211,6 +224,10 @@
     display: none;
 }
 
+.hide-content .lista__indicador, .hide-content .lista__separador{
+    display: none;
+}
+
 @media screen and (min-width: 768px) and (max-width: 960px) {
 	.lista__icone{
 		display:none;
@@ -261,11 +278,13 @@
         display: block;
         margin: 0 auto;
     }
-    
+    .ico--edu{
+        background-size: 17px;
+    }
     /*Menu resumo fixo na rolagem*/
     .resumo-fixo{
         position: fixed;
-        top:180px;
+        top:145px;
         z-index: 1;
         width: 100%;
     }

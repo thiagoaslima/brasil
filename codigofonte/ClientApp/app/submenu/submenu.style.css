@@ -119,7 +119,7 @@ li:last-child > .submenu__separador, .submenu__item--selecionado > .submenu__sep
     .submenu-container {
         width: calc(100% - 250px);
         margin-left: 250px;
-        margin-top: 30px;
+        /*margin-top: 30px;*/
     }
 
 }
@@ -127,10 +127,11 @@ li:last-child > .submenu__separador, .submenu__item--selecionado > .submenu__sep
 @media screen and (max-width: 768px) {
     .submenu{
         width: 100%;
-        padding-top: 135px;
+        padding-top: 203px;
     }
     .submenu-container{
         margin-left: 0;
         width: 100%;
+        margin-top: 32px;
     }
 }

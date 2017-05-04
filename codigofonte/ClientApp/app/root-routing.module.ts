@@ -1,3 +1,6 @@
+import { V3RouterGuard } from './v3-router.guard';
+import { EmptyComponent } from './empty.component';
+import { EmptyLocationGuard } from './empty-location.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -30,7 +33,8 @@ const children = [
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
+        canActivate: [EmptyLocationGuard],
+        component: EmptyComponent,
         pathMatch: 'full'
       },
       {
@@ -40,6 +44,11 @@ const children = [
       {
         path: 'brasil/sandbox',
         redirectTo: 'v4/brasil/sandbox',
+      },
+      {
+        path: 'v4/municipio/:codmun',
+        canActivate: [V3RouterGuard],
+        component: EmptyComponent
       },
       {
         path: 'v4/brasil',
