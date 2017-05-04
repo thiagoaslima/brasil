@@ -29,22 +29,22 @@ export class IndicadorService3 {
     ) { }
 
     getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
-        return this.getIndicadoresByPosicao(pesquisaId, '0', { arvoreCompleta, localidades })
+        return this.getIndicadoresFilhosByPosicao(pesquisaId, '0', { arvoreCompleta, localidades })
             .catch(err => this._handleError(err));
     }
 
-    getIndicadoresByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresFilhosByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return this._request(url)
             .map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
             .catch(err => this._handleError(err, new Error(errorMessage)))
     }
-    getIndicadoresComPesquisaByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);       
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))

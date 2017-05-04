@@ -159,6 +159,10 @@ describe('IndicadorService', () => {
                     expect(serviceResponse).toBe('Não foi possível retornar indicadores para os parâmetros informados. [id: nenhum valor informado]')
                 })
         ))
+
+        describe('passando código de localidade', () => {
+
+        })
     })
 
     describe('getIndicadoresComPesquisaById', () => {
