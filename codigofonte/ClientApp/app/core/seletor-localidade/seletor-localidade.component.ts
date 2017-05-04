@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { isBrowser } from 'angular2-universal';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'; 
 
 import { AppState } from '../../shared2/app-state';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -39,6 +40,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     private hist = null; //guarda a referência para o objeto 'history' do browser
 
     public isBrowser = isBrowser;
+
+    public URLEnd = '';
 
     public listaMunicipios = {
         maisVistos: <Localidade[]>[],
@@ -130,8 +133,27 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _appState: AppState,
         private _localidadeService: LocalidadeService2,
         private pageScrollService: PageScrollService,
-        private _isMobileService: IsMobileService
+        private _isMobileService: IsMobileService,
+        private _router: Router
     ) {
+
+        //escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
+        //o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
+        this._router.events.filter(event => event instanceof NavigationEnd).subscribe(route => {
+            if(route.url.indexOf('/panorama') >= 0){
+                this.URLEnd = '/panorama';
+            }else if(route.url.indexOf('/historico') >= 0){
+                this.URLEnd = '/historico';
+            }else if(route.url.indexOf('/pesquisa') >= 0){
+                let arr = route.url.split('/');
+                arr = arr.slice(arr.indexOf('pesquisa') + 1)
+                if(arr.length == 1)
+                    this.URLEnd = '/pesquisa/' + arr[0];
+                if(arr.length == 2)
+                    this.URLEnd = '/pesquisa/' + arr[0] + '/' + arr[1].split('?')[0];
+            }
+        });
+
         this.selecaoLocalidadesAtual = this._appState.observable$
             .map(({ localidade }) => {
                 const locais = [localidade];
