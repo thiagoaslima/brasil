@@ -1,4 +1,3 @@
-import { defaultOptions } from 'preboot/__build/src/node/preboot_node';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
@@ -178,7 +177,7 @@ describe('PesquisaService', () => {
                 {
                     provide: Http,
                     deps: [MockBackend, BaseRequestOptions],
-                    useFactory: (backend, defaultOptions) => new Http(backend, defaultOptions)
+                    useFactory: (backend, options) => new Http(backend, options)
                 }
             ]
         })

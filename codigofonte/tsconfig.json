@@ -7,7 +7,7 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es6", "dom" ],
-    "types": [ "node", "jest" ]
+    "types": [ "node", "jasmine" ]
   },
   "exclude": [ "bin", "node_modules", "**/*.spec.ts" ],
   "atom": { "rewriteTsconfig": false }

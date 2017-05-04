@@ -1,5 +1,3 @@
-import { ResponseBodyHandler } from '_debugger';
-import { defaultOptions } from 'preboot/__build/src/node/preboot_node';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
@@ -70,7 +68,7 @@ describe('IndicadorService', () => {
                     {
                         provide: Http,
                         deps: [MockBackend, BaseRequestOptions],
-                        useFactory: (backend, defaultOptions) => new Http(backend, defaultOptions)
+                        useFactory: (backend, options) => new Http(backend, options)
                     }
                 ]
             })
@@ -214,11 +212,34 @@ describe('IndicadorService', () => {
                         {
                             provide: Http,
                             deps: [MockBackend, BaseRequestOptions],
-                            useFactory: (backend, defaultOptions) => new Http(backend, defaultOptions)
+                            useFactory: (backend, options) => new Http(backend, options)
                         }
                     ]
                 })
             })
+
+            it('deve construir instancias de Indicador com Resultado', fakeAsync(
+                inject([IndicadorService3, MockBackend],
+                    (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
+                        let serverResponse;
+
+                        mockBackend.connections.subscribe(c => {
+                            connection = c;
+                            serverResponse = mockResponse[c.request.url];
+                        });
+                        indicadorService.getIndicadoresById([5905, 5906, 28135, 28136]).subscribe(indicadores => serviceResponse = indicadores)
+                        connection.mockRespond(serverResponse);
+                        tick();
+    
+                        expect(serviceResponse.length).toBe(4)
+                        expect(serviceResponse[0].resultados).toBeDefined()
+                        expect(serviceResponse[1].resultados).toBeDefined()
+                        expect(serviceResponse[2].resultados).toBeDefined()
+                        expect(serviceResponse[3].resultados).toBeDefined()
+                    }
+            ))
+
+            )
         })
     })
 
@@ -278,7 +299,7 @@ describe('IndicadorService', () => {
                     {
                         provide: Http,
                         deps: [MockBackend, BaseRequestOptions],
-                        useFactory: (backend, defaultOptions) => new Http(backend, defaultOptions)
+                        useFactory: (backend, options) => new Http(backend, options)
                     }
                 ]
             })
