@@ -136,7 +136,7 @@
                     <div class="municipios">
                         <ul>
                             <li *ngFor="let municipio of item.municipios">
-                                <a style="display:block" [routerLink]="municipio?.link" (click)="fecharSeletor()">
+                                <a style="display:block" [routerLink]="municipio?.link + URLEnd" (click)="fecharSeletor()">
                                     {{municipio.nome}}
                                 </a>
                             </li>
@@ -152,7 +152,7 @@
 
                 <ul *ngIf="!buscaInput.value || buscaInput.value.length < 3 ">
                     <li *ngFor="let municipio of listaMunicipios.maisVistos">
-                        <a style="display:block" [routerLink]="municipio?.link">
+                        <a style="display:block" [routerLink]="municipio?.link + URLEnd">
                             {{municipio.nome}} <span>{{municipio.parent.identificador.toUpperCase()}}</span>
                         </a>
                     </li>
@@ -169,7 +169,7 @@
                         <div class="municipios">
                             <ul>
                                 <li *ngFor="let municipio of item.municipios">
-                                    <a style="display:block" [routerLink]="municipio?.link">
+                                    <a style="display:block" [routerLink]="municipio?.link  + URLEnd">
                                         {{municipio.nome}}  <span>{{municipio.parent.identificador.toUpperCase()}}</span>
                                     </a>
                                 </li>
