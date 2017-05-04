@@ -17,6 +17,20 @@
                 <option *ngFor="let periodo of listaPeriodos" [selected]="periodo.nome == ano">{{ periodo.nome }}</option>
             </select>
         </div>
+        <!--fontes-->
+        <template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
+            <div class="notas" *ngIf="periodo.nome == ano && periodo.fontes.length > 0">
+                <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
+                <div class="notas__botao" (click)="mostrarFontes=true">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fontes
+                </div>
+                <div class="notas__lista-container" *ngIf="mostrarFontes">
+                    <ol>
+                        <li *ngFor="let fonte of periodo.fontes"> {{ fonte }} </li>
+                    </ol>
+                </div>
+            </div>
+        </template>
         <!--notas-->
         <template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
             <div class="notas" *ngIf="periodo.nome == ano && periodo.notas.length > 0">
