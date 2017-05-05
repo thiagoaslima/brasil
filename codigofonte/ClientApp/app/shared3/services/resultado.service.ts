@@ -30,6 +30,10 @@ export class ResultadoService3 {
             .map(json => Resultado.convertDTOintoParameters(json).map(Resultado.criar))
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
+
+    getResultadosCompletos(indicadoresId: number | number[], codigolocalidades: number | number[]) {
+        
+    }
     private _request(url: string) {
         return this._http.get(url, options)
             .retry(3)

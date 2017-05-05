@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PesquisaConfiguration } from '../../../shared2/pesquisa/pesquisa.configuration';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/combineLatest';
 
 // TODO: Refatorar, o AsyncPipe do PanoramaCardComponent está consumindo cerca de 0,6 segundos
 @Component({
@@ -43,7 +44,7 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() { 
-       
+
         const sync$ = this._dados$
             .distinct( (a, b) =>  ['pesquisaId', 'indicadorId', 'periodo'].every(key => a[key] === b[key]))
             .filter(dados => dados.pesquisaId && dados.indicadorId && dados.periodo)
@@ -56,20 +57,25 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
             })
             .combineLatest(this._localidade$)
             .map( ([obj, localidade]) => Object.assign({}, obj, { localidade: localidade }))
-            // .share();
 
-        this.rankingPais$ = sync$
-            .flatMap(obj => this._indicadorService.getPosicaoRelativa(obj.pesquisaId, obj.indicadorId, obj.periodo, obj.localidade.codigo, 'BR'))
+        const ranking$ = sync$
+            .flatMap(obj => {
+                return this._indicadorService.getRankings([obj.indicadorId], [obj.periodo], obj.localidade.codigo, ['BR',  obj.localidade.parent.codigo])
+                .map(array => [array, obj.localidade])
+            })
+            .share();
+
+        this.rankingPais$ = ranking$
+            .map(([array, _]) => array.find(item => item.contexto === 'BR'))
             .share();
             
         this.lengthPais = this._localidadeService.getAllMunicipios().length;
-        
             
         this.lengthUf$ = this._localidade$.map((localidade: Localidade) => localidade.parent.children.length);
         
-        this.rankingUf$ = sync$
-            .flatMap(obj => this._indicadorService.getPosicaoRelativa(obj.pesquisaId, obj.indicadorId, obj.periodo, obj.localidade.codigo, obj.localidade.parent.codigo))
-            .share()
+        this.rankingUf$ = ranking$
+            .map(([array, localidade]) => array.find(item => item.contexto === localidade.parent.codigo.toString()))
+            .share();
             
     }
 
