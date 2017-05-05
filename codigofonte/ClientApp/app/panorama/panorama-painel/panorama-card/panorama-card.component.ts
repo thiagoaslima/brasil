@@ -1,3 +1,4 @@
+import { log } from 'util';
 import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges, SimpleChange } from '@angular/core';
 
 import { isBrowser } from 'angular2-universal'
@@ -27,6 +28,7 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
     public lengthPais;
     public rankingUf$;
     public lengthUf$;
+    public rankingMicrorregiao$;
     private _dados$ = new BehaviorSubject(null);
     private _localidade$ = new BehaviorSubject(null);
 
@@ -64,13 +66,15 @@ export class PanoramaCardComponent implements OnInit, OnChanges {
             
         this.lengthPais = this._localidadeService.getAllMunicipios().length;
         
-            
         this.lengthUf$ = this._localidade$.map((localidade: Localidade) => localidade.parent.children.length);
         
         this.rankingUf$ = sync$
             .flatMap(obj => this._indicadorService.getPosicaoRelativa(obj.pesquisaId, obj.indicadorId, obj.periodo, obj.localidade.codigo, obj.localidade.parent.codigo))
-            .share()
+            .share();
             
+        this.rankingMicrorregiao$ = sync$
+            .flatMap(obj => this._indicadorService.getPosicaoRelativa(obj.pesquisaId, obj.indicadorId, obj.periodo, obj.localidade.codigo, obj.localidade.microrregiao))
+            .share();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -129,6 +133,7 @@ export class PanoramaCardReguaComponent implements OnChanges {
     public cssRanking;
 
     ngOnChanges(changes: SimpleChanges) {
+
         if (this.rankingObj && this.itens) {
             this.ranking = this.rankingObj.ranking/this.rankingObj.qtdeItensComparados * 100;
             if(!this.maiorMelhor)

@@ -41,7 +41,7 @@ export class TituloBrowserComponent implements OnInit {
                     titulo += ' | Panorama';
                     document.title = titulo; // titulo panorama
                 }else if(url.indexOf('historico') >= 0){
-                    titulo += ' | Histórico';
+                    titulo += ' | História & Fotos';
                     document.title = titulo; // titulo histórico
                 }else if(url.indexOf('pesquisa') >= 0){
                     titulo += ' | Pesquisa';
