@@ -18,6 +18,7 @@
 
         <panorama-card-regua title='No Estado' [ranking]="rankingUf$ | async" [itens]="lengthUf$ | async" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
         <panorama-card-regua title='No País' [ranking]="rankingPais$ | async" [itens]="lengthPais" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
+        <panorama-card-regua title='Na Microrregião' [ranking]="rankingMicrorregiao$ | async" [itens]="(rankingMicrorregiao$ | async)?.qtdeItensComparados" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
         <!--
         <panorama-card-regua title='No Estado' [posicao]="getRankingPosition(this.localidade?.parent.codigo)" [itens]="getRankingItems(this.localidade?.parent.codigo)"></panorama-card-regua>
         <panorama-card-regua title='No País' [posicao]="getRankingPosition('BR')" [itens]="getRankingItems('BR')"></panorama-card-regua>
