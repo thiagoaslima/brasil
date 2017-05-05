@@ -166,6 +166,7 @@ export class Localidade {
         Object.keys(_localidadeDefaults).forEach(property => {
             this[property] = data[property];
         });
+        if(data.microrregiao) { this.microrregiao = data.microrregiao}
     }
 
     get identificador() {
