@@ -11,7 +11,7 @@
             <td class='valor s' [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeA ? (indicador.localidadeA[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
             <td class='valor s' [class.compara-blank]="!localidades[1]" [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeB ? (indicador.localidadeB[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
             <td class='valor s' [class.compara-blank]="!localidades[2]" [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeC ? (indicador.localidadeC[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>
-            <td class='valor s desk-unidade'>{{ indicador.unidade?.id }}</td>  
+            <td class='valor s desk-unidade'> <span *ngIf="indicador.unidade?.multiplicador > 1">(x {{indicador.unidade?.multiplicador}})</span> {{ indicador.unidade?.id }}</td>  
         </tr>
     </template>
     
