@@ -51,7 +51,13 @@
 .ic-mun-selecionado--path {
     stroke: #ff1f76;
     stroke-width: 1px;
-}
+    }
+    /* Microsoft Edge Browser 12+ (All) - @supports method */
+    @supports (-ms-ime-align:auto) {
+        .ic-mun-selecionado--path {
+        stroke-width: 0.01px;
+        } 
+    }
 
 @media all and (-ms-high-contrast:none) {
 
