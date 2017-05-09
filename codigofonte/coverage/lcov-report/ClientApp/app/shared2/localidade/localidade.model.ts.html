@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared2/localidade/localidade.model.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">ClientApp/app/shared2/localidade</a> localidade.model.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/70</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/67</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Vali<span class="cstat-no" title="statement not covered" >dador } from '../../utils/val<span class="cstat-no" title="statement not covered" >i</span>dador.class';</span>
+<span class="cstat-no" title="statement not covered" >import { slugify } from '../../utils/slug';</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export type NivelTerritorial = {</span>
+    label: string,
+    codeLength: number
+};
+&nbsp;
+export const NiveisTerritoriais = {
+    pais: {
+        label: "pais",
+        codeLength: 0
+    },
+    macrorregiao: {
+        label: "macrorregiao",
+        codeLength: 1
+    },
+    uf: {
+        label: "uf",
+        codeLength: 2
+    },
+    municipio: {<span class="cstat-no" title="statement not covered" ></span>
+        label: "municipio",
+        codeLength: 6
+    }
+}
+<span class="cstat-no" title="statement not covered" ></span>
+const tiposPossiveisLocalidade = {
+    "1": 'pais',
+    "2": 'uf',
+    "6": 'municipio'
+};
+&nbsp;
+const _localidadeDefaults = {
+    codigo: null,
+    codigoCompleto: null,
+    digitoVerificador: null,
+    nome: "",<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    tipo: "",</span>
+    slug: "",
+    sigla: "",
+    codigoCapital: null,
+    codigoParent: nul<span class="fstat-no" title="function not covered" >l<span class="cstat-no" title="statement not covered" ></span></span>
+};
+&nbsp;
+const localidadeVa<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >li</span>dador = new Validador();</span>
+localidadeVal<span class="fstat-no" title="function not covered" >idador.resg</span>itrarTestes([
+    {<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        propriedade: 'cod</span>igo',
+<span class="cstat-no" title="statement not covered" >        mensagemErro: 'valor de codigo da localidade inválido</span>',
+<span class="cstat-no" title="statement not covered" >        funcaoTeste: (data) =&gt; Number.isInteger(d<span class="fstat-no" title="function not covered" >at</span>a.codigo)</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+])
+<span class="cstat-no" title="statement not covered" ></span>
+export class<span class="cstat-no" title="statement not covered" > Localidade {</span>
+&nbsp;
+    static localidadeStrategy = null;
+<span class="cstat-no" title="statement not covered" >    static get(codigo<span class="fstat-no" title="function not covered" >: </span>number): Localidade {</span>
+<span class="cstat-no" title="statement not covered" >        return Localidade.localidadeStrategy.retrieve(codigo, 'proprio')[0];</span>
+    }
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    stat<span class="cstat-no" title="statement not covered" >ic getFilhos(codigo: number): Localidade[] {</span>
+        return Localidade.localidadeStrategy.retrieve(codigo, 'filhos');
+<span class="cstat-no" title="statement not covered" >    }<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    stat<span class="cstat-no" title="statement not covered" >ic criar(data, validador = localidadeVali<span class="fstat-no" title="function not covered" >da</span>dor) {<span class="cstat-no" title="statement not covered" ></span></span>
+        return localidadeValidador.validar(data, (data) =&gt; new Localidade(data));
+<span class="cstat-no" title="statement not covered" >    }<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    stat<span class="cstat-no" title="statement not covered" >ic getTipo(codigo) {</span>
+        const len = codigo.toString().length;
+<span class="cstat-no" title="statement not covered" >        return tiposPossiveisLoca<span class="fstat-no" title="function not covered" >li</span>dade[len];</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    stat<span class="cstat-no" title="statement not covered" >ic convertFromFile(data) {</span>
+        const codigo = parseInt(data.codigo.toString().slice(0, 6), 10);
+        const ti<span class="cstat-no" title="statement not covered" >po = Localidade.getTipo(codigo)</span>
+        switch (tipo) {
+            case<span class="cstat-no" title="statement not covered" > tiposPossiveisLocalidade[1]:</span>
+                return Localidade.convertBrasil(data);
+<span class="cstat-no" title="statement not covered" ></span>
+            case tiposPossiveisLocalidade[2]:
+<span class="cstat-no" title="statement not covered" >                return </span>Localidade.convertFileUfs(data);
+&nbsp;
+            case tiposPossiveisLocalidade[6]:
+                return Localidade.convertFileMunicipios(data);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            default:<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+        }
+    }
+    
+    // 340ms 700ms
+    //  63ms 388ms
+    static convertBrasil(data) {
+        return {
+            codigo: data.codigo,
+            codigoCompleto: data.codigo,
+            digitoVerificador: null,
+            nome: data.nome,
+<span class="cstat-no" title="statement not covered" >            tipo: tiposPossiveis<span class="fstat-no" title="function not covered" >Lo</span>calidade[1],</span>
+<span class="cstat-no" title="statement not covered" >            slug: data.slug || slugify(data.nome),</span>
+            sigla: "",
+            codigoCapital: parseInt(data.codigoCapital.toString().slice(0, 6), 10),
+            codigoParent: null
+        }
+    }
+&nbsp;
+    static convertFileUfs(data) {
+        return {
+            codigo: parseInt(data.codigo, 10),
+            codigoCompleto: parseInt(data.codigo, 10),
+            digitoVerificador: null,
+<span class="cstat-no" title="statement not covered" >            nome: data.nome,<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >            tipo: tiposPossiveisLocalidade[2],</span>
+            slug: data.slug || slugify(data.nome),
+            sigla: data.sigla.toUpperCase(),
+            codigoCapital: parseInt(data.codigoCapital.toString().slice(0, 6), 10),
+            codigoParent: 0
+        }
+    }
+&nbsp;
+    static convertFileMunicipios(data) {
+        return {
+            codigo: parseInt(data.codigo.toString().slice(0, 6), 10),
+            codigoCompleto: parseInt(data.codigo, 10),
+            digitoVerificador: parseInt(data.codigo.toString().slice(6), 10),
+<span class="cstat-no" title="statement not covered" >            nome: data.nome,<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >            tipo: tiposPossiveisLocalidade[6],</span>
+            sigla: "",
+<span class="cstat-no" title="statement not covered" >            slug: data.slug || sl<span class="fstat-no" title="function not covered" >ug</span>ify(data.nome),</span>
+            codigoCap<span class="cstat-no" title="statement not covered" >ital: null,</span>
+            codigo<span class="cstat-no" title="statement not covered" >Parent: parseI</span>nt(data.codigoUf, 10),
+<span class="cstat-no" title="statement not covered" >            microrregiao: data.microrregiao</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    static setLocalidadeStrategy(strategy) {</span>
+        Local<span class="fstat-no" title="function not covered" >id</span>ade.localidadeStrategy = strategy;
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    static alterarContexto(codigoBase: number, nivelTerritorial: NivelTerritorial ) {
+        let codigo = codigoBase !== 0 ? codigoBase.toString().split('') : [];
+		const len = codigo.length;
+		co<span class="cstat-no" title="statement not covered" >digo.length = nivelTerritorial.codeLength;</span>
+        codig<span class="fstat-no" title="function not covered" >o.</span>fill('x', len);
+        retu<span class="cstat-no" title="statement not covered" >rn codigo.join('');</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    codigo: <span class="cstat-no" title="statement not covered" >number;</span>
+    codigoCompleto: number;
+    digitoVerificador: number;
+&nbsp;
+    nome: string;
+<span class="cstat-no" title="statement not covered" >    tipo: 'pais' | 'uf' | 'municipio';</span>
+    sigla: st<span class="fstat-no" title="function not covered" >ri</span>ng;
+    slug: st<span class="cstat-no" title="statement not covered" >ring;</span>
+    codigoCapital: number;
+    codigoParent: number;
+    microrregiao?: number;
+    private _link: string = '';
+<span class="cstat-no" title="statement not covered" ></span>
+    construct<span class="fstat-no" title="function not covered" >or</span>(data) {
+        data<span class="cstat-no" title="statement not covered" > = Object.assign({}, _localidadeDefaults, </span>data);
+        Object.keys(_localidadeDefaults).forEach(property =&gt; {
+            this[property] = data[property];
+        });
+        if(data.microrregiao) { this.microrregiao = data.microrregiao}
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" ></span>
+    get iden<span class="cstat-no" title="statement not covered" >tificador() {</span>
+        return t<span class="cstat-no" title="statement not covered" >his.sigla ? this.sigla.toLowerCase() : this</span>.slug;
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    get link() {
+        if (!this._link) {
+            this._link = this.parent ? this.parent.link + '/' + this.identificador : '/' + this.identificador;
+        }
+<span class="cstat-no" title="statement not covered" >        return this._li</span>nk;
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    get children() {</span>
+        return Localidade.getFilhos(this.codigo);
+    }
+&nbsp;
+    get parent() {
+        return Localidade.get(this.codigoParent);
+    }
+&nbsp;
+    get capital() {
+        if (this.codigoCapital) {
+            return Localidade.get(this.codigoCapital)
+        }
+        return null;
+    }
+&nbsp;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

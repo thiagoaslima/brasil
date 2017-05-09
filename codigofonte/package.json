@@ -115,12 +115,20 @@
   },
   "jest": {
     "globals": {
-       "__TS_CONFIG__": "<rootDir>/tsconfig.json"
+      "__TS_CONFIG__": "<rootDir>/tsconfig.json"
     },
     "preset": "jest-preset-angular",
     "setupTestFrameworkScriptFile": "<rootDir>/ClientApp/setupJest.ts",
     "moduleNameMapper": {
-       "app/(.*)": "<rootDir>/ClientApp/app/$1"
-    }
+      "app/(.*)": "<rootDir>/ClientApp/app/$1"
+    },
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "ClientApp/**/*.{ts}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/*.{d.ts}"
+    ],
+    "coverageDirectory": "coverage"
   }
 }

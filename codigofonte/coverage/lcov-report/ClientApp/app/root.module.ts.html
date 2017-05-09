@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/root.module.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">ClientApp/app</a> root.module.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NgMo<span class="cstat-no" title="statement not covered" >dule, OpaqueToken } from '@an<span class="cstat-no" title="statement not covered" >g</span>ular/core';</span>
+import { BarraGov<span class="cstat-no" title="statement not covered" > } from './barra-gov/barra-go<span class="fstat-no" title="function not covered" >v'</span>;</span>
+import { Ng2<span class="cstat-no" title="statement not covered" >PageScrollModule </span>} fro<span class="cstat-no" title="statement not covered" >m 'ng2-page-scroll';</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { <span class="cstat-no" title="statement not covered" >CoreModule } from './core/core.module';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+import { SharedModule } from './shared/shared.module';
+<span class="cstat-no" title="statement not covered" >import { SharedModule2 } from './shared2/shared.module';</span>
+<span class="cstat-no" title="statement not covered" ></span>
+import { SinteseMo<span class="cstat-no" title="statement not covered" >dule } from './sintese/sintese.mo</span>dule';
+import { PanoramaModule <span class="cstat-no" title="statement not covered" >} from './panorama/panorama</span>.module'
+import { PesquisaMod<span class="cstat-no" title="statement not covered" >ule2 } from './pesquisa2/pesqu</span>isa.module';
+import { SandboxModule<span class="cstat-no" title="statement not covered" > } from './sandbox/sandbox.module'</span>;
+import { RootComponent<span class="cstat-no" title="statement not covered" > } from './root.component';</span>
+import { RootRoutingMod<span class="cstat-no" title="statement not covered" >ule } from './root-routing.module';</span>
+import { EmptyComponent <span class="cstat-no" title="statement not covered" >} from './empty.component';</span>
+import { VisaoHistoricaM<span class="cstat-no" title="statement not covered" >odule } from './visao-historica/visao-h</span>istorica.module';
+<span class="cstat-no" title="statement not covered" ></span>
+import { ValidParameter<span class="cstat-no" title="statement not covered" >sGuard } from './valid-param</span>eters.guard';
+import { EmptyLocationGu<span class="cstat-no" title="statement not covered" >ard } from './empty-location.</span>guard';
+import { V3RouterGuard } from '<span class="cstat-no" title="statement not covered" >./v3-router.guard';</span>
+<span class="cstat-no" title="statement not covered" ></span>
+import { BASES, PESQUISAS } f<span class="cstat-no" title="statement not covered" >rom './global-config';</span>
+<span class="cstat-no" title="statement not covered" ></span>
+import { SubmenuCompon<span class="cstat-no" title="statement not covered" >ent } from './submenu/subme</span>nu.component';
+<span class="cstat-no" title="statement not covered" ></span>
+@NgModule({<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    imports: <span class="fstat-no" title="function not covered" >[</span>
+        CoreModule,
+<span class="cstat-no" title="statement not covered" >        SharedModule.fo</span>rRoot(),
+        SharedModule2.forRoot(),
+<span class="cstat-no" title="statement not covered" >        PesquisaModule2,</span>
+        SinteseModule,
+        PanoramaModule,
+        VisaoHistoricaModule,
+        SandboxModule,
+        Ng2PageScrollModule.forRoot()
+    ],
+    declarations: [
+        RootComponent,
+        SubmenuComponent,
+        EmptyComponent,
+        BarraGov
+    ],
+    exports: [
+        RootComponent
+    ],
+    providers: [
+        ValidParametersGuard,
+        EmptyLocationGuard,
+        V3RouterGuard,
+        PESQUISAS,
+        BASES
+    ]
+})
+export class RootModule { }</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

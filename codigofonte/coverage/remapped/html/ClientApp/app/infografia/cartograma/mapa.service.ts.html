@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/infografia/cartograma/mapa.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">ClientApp/app/infografia/cartograma/</a> mapa.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/134</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/53</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/110</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Injectable, Inject } from '@angular/core';</span>
+<span class="cstat-no" title="statement not covered" >import { Http } from '@angular/http';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { TopoJson, TOPOJSON } from '../../shared/topojson.v2';</span>
+import { Localidade } from '../../shared2/localidade/localidade.model';
+<span class="cstat-no" title="statement not covered" >import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { Observable } from 'rxjs/Observable';</span>
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subscription } from 'rxjs/Subscription';
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/observable/zip';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/distinctUntilChanged';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/filter';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/scan';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >enum Nivel<span class="fstat-no" title="function not covered" > {</span></span>
+<span class="cstat-no" title="statement not covered" >    mesmo = 0,</span>
+<span class="cstat-no" title="statement not covered" >    sub = 1</span>
+}
+&nbsp;
+@Injectable()
+e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >MapaService<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>{</span>
+    private <span class="cstat-no" title="statement not covered" >_cache = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    constructor(</span>
+        private <span class="cstat-no" title="statement not covered" >_http: Http,</span>
+        private <span class="cstat-no" title="statement not covered" >_localidadeService: LocalidadeService2,</span>
+        @Inject(TOPOJSON) private <span class="cstat-no" title="statement not covered" >_topojson<span class="fstat-no" title="function not covered" ></span></span>
+    ) { }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >    getMalha(localidadeCodigo: number<span class="fstat-no" title="function not covered" >) {</span></span></span>
+<span class="cstat-no" title="statement not covered" >         if (!this._cache[`${localidadeCodigo}-${Nivel.mesmo}`]) {</span>
+<span class="cstat-no" title="statement not covered" >            this._cache[`${localidadeCodigo}-${Nivel.mesmo}`] =</span>
+                this._getMalha(localidadeCodigo, Nivel.mesmo)
+                    .map(malha<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._topojsonFeatures(malha, localidadeCodigo))</span></span>
+                    .map(model<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._prepareGeometries(model))</span></span>
+                    .do(model<span class="fstat-no" title="function not covered" > =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        this._cache[`${localidadeCodigo}-${Nivel.mesmo}`] = Observable.of(model)</span>
+                    })
+                    .share()
+        }
+<span class="cstat-no" title="statement not covered" >        return this._cache[`${localidadeCodigo}-${Nivel.mesmo}`];</span>
+        
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >    getMalhaSubdivisao(localidadeCodigo: number<span class="fstat-no" title="function not covered" >) {</span></span></span>
+<span class="cstat-no" title="statement not covered" >        if (!this._cache[`${localidadeCodigo}-${Nivel.sub}`]) {</span>
+<span class="cstat-no" title="statement not covered" >            this._cache[`${localidadeCodigo}-${Nivel.sub}`] =</span>
+                this._getMalha(localidadeCodigo, Nivel.sub)
+                    .map(malha<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._topojsonFeatures(malha, "foo"))</span></span>
+                    .map(model<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._prepareGeometries(model))</span></span>
+                    .do(model<span class="fstat-no" title="function not covered" > =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        this._cache[`${localidadeCodigo}-${Nivel.sub}`] = Observable.of(model)</span>
+                    })
+                    .share()
+        }
+<span class="cstat-no" title="statement not covered" >        return this._cache[`${localidadeCodigo}-${Nivel.sub}`];</span>
+    }
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_getMalha(localidadeCodigo: number, nivel: number<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return this._http.get(`malhas/${localidadeCodigo}xxxxx.topojson`)</span>
+            .map(res<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >res.json())</span></span>
+    }
+&nbsp;
+    // TODO: Está consumindo cerca de 0,8 segundos
+    private <span class="cstat-no" title="statement not covered" >_convertTarsus2TopoJson = (tarsus<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        return this._simpler2TopoJson(this._tarsus2Simpler(tarsus));</span>
+    }
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_simpler2TopoJson = (simpler<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+        let objects = <span class="cstat-no" title="statement not covered" >{};</span>
+        let estados = <span class="cstat-no" title="statement not covered" >simpler[3];</span>
+<span class="cstat-no" title="statement not covered" >        estados.forEach((estado<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+            let geometries = <span class="cstat-no" title="statement not covered" >[];</span>
+            let cod = <span class="cstat-no" title="statement not covered" >estado[0];</span>
+            let munics = <span class="cstat-no" title="statement not covered" >estado[1];</span>
+<span class="cstat-no" title="statement not covered" >            munics.forEach((munic<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+                let codMunic = <span class="cstat-no" title="statement not covered" >munic[0];</span>
+                let arcs = <span class="cstat-no" title="statement not covered" >munic[1];</span>
+                let type = <span class="cstat-no" title="statement not covered" >typeof (arcs[0][0][0]) === 'undefined' ? 'Polygon' : 'MultiPolygon';</span> // testa se é um array
+                let geometry = <span class="cstat-no" title="statement not covered" >{</span>
+                    arcs: arcs,
+                    type: type,
+                    properties: {
+                        cod: codMunic
+                    }
+                };
+<span class="cstat-no" title="statement not covered" >                geometries.push(geometry);</span>
+            });
+<span class="cstat-no" title="statement not covered" >            objects[cod] = {</span>
+                type: 'GeometryCollection',
+                geometries: geometries
+            };
+        });
+        let topo = <span class="cstat-no" title="statement not covered" >{</span>
+            type: 'Topology',
+            transform: {
+                scale: simpler[0],
+                translate: simpler[1]
+            },
+            arcs: simpler[2],
+            objects: objects,
+            bbox: simpler[4]
+        };
+<span class="cstat-no" title="statement not covered" >        return topo;</span>
+    }
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_tarsus2Simpler = (tarsus<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+        let myStr = <span class="cstat-no" title="statement not covered" >tarsus;</span>
+        let replaces = <span class="cstat-no" title="statement not covered" >[["\\],\\[0", "a"], ["\\],\\[1", "b"], ["\\],\\[-1", "c"], ["\\],\\[2", "d"], ["\\],\\[-2", "e"], ["\\],\\[3", "f"], ["\\],\\[-3", "g"], ["\\],\\[4", "h"], ["\\],\\[-4", "i"], ["\\],\\[5", "j"], ["\\],\\[-5", "k"], ["\\],\\[6", "l"], ["\\],\\[-6", "m"], ["\\],\\[7", "n"], ["\\],\\[-7", "o"], ["\\],\\[8", "p"], ["\\],\\[-8", "q"], ["\\],\\[9", "r"], ["\\],\\[-9", "s"], ["\\]\\],\\[\\[", "t"], ["\\]\\]", "u"], [",\\[\\[", "v"], ["\\[\\[", "x"], [",0", "A"], [",1", "B"], [",-1", "C"], [",2", "D"], [",-2", "E"], [",3", "F"], [",-3", "G"], [",4", "H"], [",-4", "I"], [",5", "J"], [",-5", "K"], [",6", "L"], [",-6", "M"], [",7", "N"], [",-7", "O"], [",8", "P"], [",-8", "Q"], [",9", "R"], [",-9", "S"]];</span>
+<span class="cstat-no" title="statement not covered" >        replaces.reverse().forEach((rep<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            myStr = myStr.replace(new RegExp(rep[1], 'g'), rep[0].replace(/\\/g, ''));</span>
+        });
+        let simpler = <span class="cstat-no" title="statement not covered" >JSON.parse(myStr);</span>
+<span class="cstat-no" title="statement not covered" >        return simpler;</span>
+    }
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_topojsonFeatures(malha, localidadeCodigo<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return this._topojson.feature(malha, malha.objects[localidadeCodigo])</span>
+    }
+&nbsp;
+    // TODO: Refatorar, _prepareGeometries está consumindo cerca de 0,5 segundos
+<span class="cstat-no" title="statement not covered" >    private <span class="cstat-no" title="statement not covered" >_prepareGeometries(model<span class="fstat-no" title="function not covered" >) {</span></span></span>
+        // definição inicial do viewbox
+        let n = <span class="cstat-no" title="statement not covered" >-90;</span> let s = <span class="cstat-no" title="statement not covered" >90;</span> let l = <span class="cstat-no" title="statement not covered" >-90;</span> let o = <span class="cstat-no" title="statement not covered" >90;</span>
+        let n2, s2, l2, o2;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        model.geometries = [];</span>
+<span class="cstat-no" title="statement not covered" >        model.centers = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        model.features.forEach(feature<span class="fstat-no" title="function not covered" > =&gt; {</span></span>
+            const codigoFeature = <span class="cstat-no" title="statement not covered" >feature['properties']['codarea'].toString().substr(0, 6);</span>
+            const localidade = <span class="cstat-no" title="statement not covered" >codigoFeature.length &gt; 2</span>
+                ? this._localidadeService.getMunicipioByCodigo(codigoFeature)
+                : this._localidadeService.getUfByCodigo(codigoFeature);
+&nbsp;
+            let polygons;
+            
+<span class="cstat-no" title="statement not covered" >            n2 = -90;</span>
+<span class="cstat-no" title="statement not covered" >            s2 = 90;</span>
+<span class="cstat-no" title="statement not covered" >            l2 = -90;</span>
+<span class="cstat-no" title="statement not covered" >            o2 = 90;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (feature['geometry'].type == "Polygon") {</span>
+<span class="cstat-no" title="statement not covered" >                polygons = feature['geometry'].coordinates.map((poly<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                    return [poly.map((point<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (n2 &lt; point[1]) <span class="cstat-no" title="statement not covered" >n2 = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (s2 &gt; point[1]) <span class="cstat-no" title="statement not covered" >s2 = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (l2 &lt; point[0]) <span class="cstat-no" title="statement not covered" >l2 = point[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (o2 &gt; point[0]) <span class="cstat-no" title="statement not covered" >o2 = point[0];</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if (n &lt; point[1]) <span class="cstat-no" title="statement not covered" >n = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (s &gt; point[1]) <span class="cstat-no" title="statement not covered" >s = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (l &lt; point[0]) <span class="cstat-no" title="statement not covered" >l = point[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (o &gt; point[0]) <span class="cstat-no" title="statement not covered" >o = point[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                        return point.join(",");</span>
+                    }).join(" ")];
+                });
+            } else <span class="cstat-no" title="statement not covered" >if (feature['geometry'].type == "MultiPolygon") {</span>
+<span class="cstat-no" title="statement not covered" >                polygons = feature['geometry'].coordinates.map((MultiPoly<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                    return MultiPoly.map((poly<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                        return poly.map((point<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (n2 &lt; point[1]) <span class="cstat-no" title="statement not covered" >n2 = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (s2 &gt; point[1]) <span class="cstat-no" title="statement not covered" >s2 = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (l2 &lt; point[0]) <span class="cstat-no" title="statement not covered" >l2 = point[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (o2 &gt; point[0]) <span class="cstat-no" title="statement not covered" >o2 = point[0];</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            if (n &lt; point[1]) <span class="cstat-no" title="statement not covered" >n = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (s &gt; point[1]) <span class="cstat-no" title="statement not covered" >s = point[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (l &lt; point[0]) <span class="cstat-no" title="statement not covered" >l = point[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (o &gt; point[0]) <span class="cstat-no" title="statement not covered" >o = point[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                            return point.join(",");</span>
+                        }).join(" ");
+                    });
+                });
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            model.geometries.push({</span>
+                codigo: localidade.codigo,
+                nome: localidade.nome,
+                link: localidade.link,
+                polys: polygons,
+                center: [(o2+l2)/2, (s2+n2)/2],
+                bbox: [o2, s2,  l2, n2]
+            });
+&nbsp;
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        model.bbox = [o, s, l, n]; </span>// salva os extremos naturais do mapa
+        // estende os extremos em 10% da maior dimensão
+        let dx = <span class="cstat-no" title="statement not covered" >model.bbox[2] - model.bbox[0];</span>
+        let dy = <span class="cstat-no" title="statement not covered" >model.bbox[1] - model.bbox[3];</span>
+        let d = <span class="cstat-no" title="statement not covered" >dx &gt; dy ? dx*0.05 : dy*0.05;</span>
+<span class="cstat-no" title="statement not covered" >        model.bbox[0] -= d;</span>
+<span class="cstat-no" title="statement not covered" >        model.bbox[1] -= d;</span>
+<span class="cstat-no" title="statement not covered" >        model.bbox[2] += d;</span>
+<span class="cstat-no" title="statement not covered" >        model.bbox[3] += d;</span>
+&nbsp;
+        // cria o viewBox de modo a inverter norte e sul, pois o mapa será invertido na vertical
+<span class="cstat-no" title="statement not covered" >        model.viewBox = [model.bbox[0], -model.bbox[3], model.bbox[2]-model.bbox[0], model.bbox[3]-model.bbox[1]].join(" ");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return model;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

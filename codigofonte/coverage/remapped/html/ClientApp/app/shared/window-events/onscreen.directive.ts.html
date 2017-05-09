@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared/window-events/onscreen.directive.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">ClientApp/app/shared/window-events/</a> onscreen.directive.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/43</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Attribute, Directive, Input, Output, EventEmitter, ElementRef, Renderer, OnDestroy } from '@angular/core';</span>
+import { WindowEventsService } from './window-events.service';
+&nbsp;
+import { Observable } from 'rxjs/Observable';
+<span class="cstat-no" title="statement not covered" >import { Subject } from 'rxjs/Subject';</span>
+import { Subscription } from 'rxjs/Subscription';
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/observable/fromEventPattern';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/takeUntil';</span>
+&nbsp;
+@Directive({
+    selector: '[onScreen]',
+    exportAs: 'onScreenDirective'
+})
+e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >OnSreenDirective<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>implements OnDestroy {</span>
+    private <span class="cstat-no" title="statement not covered" >_subscriptions: { [idx: string]: Subscription } = {};</span>
+    private <span class="cstat-no" title="statement not covered" >_state = {</span>
+        onScreen: false
+    }
+    private <span class="cstat-no" title="statement not covered" >_end$ = new Subject();</span>
+&nbsp;
+    @Output() <span class="cstat-no" title="statement not covered" >onScreenChange = new EventEmitter();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    @Input('scroll-event')</span>
+<span class="cstat-no" title="statement not covered" >    set scrollObservable(observable<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!observable) { <span class="cstat-no" title="statement not covered" >return; </span>}</span>
+<span class="cstat-no" title="statement not covered" >        this._unsubscribe();</span>
+<span class="cstat-no" title="statement not covered" >        this._subscriptions['scroll'] = observable.takeUntil(this._end$)</span>
+            .subscribe(evt<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this.evaluate(evt.target))</span></span>;
+    }
+&nbsp;
+    public singleEmit: boolean;
+&nbsp;
+    constructor(
+        private <span class="cstat-no" title="statement not covered" >element: ElementRef,</span>
+        private <span class="cstat-no" title="statement not covered" >renderer: Renderer,</span>
+        @Attribute('multi-emit') multiEmit<span class="fstat-no" title="function not covered" ></span>
+    ) {
+<span class="cstat-no" title="statement not covered" >        if (!element) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error('Must provide a host element')</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.singleEmit = multiEmit === null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    evaluate(viewWindow<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (</span>
+            !this.element.nativeElement || 
+            typeof this.element.nativeElement.getBoundingClientRect !== "function"
+        ) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+&nbsp;
+        let element = <span class="cstat-no" title="statement not covered" >this.element.nativeElement.getBoundingClientRect();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (viewWindow &amp;&amp; viewWindow.nodeType === 9) {</span>
+            // viewWindow === document
+<span class="cstat-no" title="statement not covered" >            viewWindow = viewWindow['body'];</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (</span>
+            !viewWindow ||
+            viewWindow.nodeType !== 1 ||
+            !element
+        ) { <span class="cstat-no" title="statement not covered" >return false; </span>}
+&nbsp;
+        let isOnScreen = (<span class="cstat-no" title="statement not covered" >!!element</span>
+            &amp;&amp; element.bottom &gt;= 0
+            &amp;&amp; element.right &gt;= 0
+            &amp;&amp; element.top &lt;= viewWindow.clientHeight
+            &amp;&amp; element.left &lt;= viewWindow.clientWidth
+        );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (isOnScreen !== this._state.onScreen) {</span>
+<span class="cstat-no" title="statement not covered" >            this._state.onScreen = isOnScreen;</span>
+<span class="cstat-no" title="statement not covered" >            this.onScreenChange.emit({</span>
+                element: this.element.nativeElement,
+                value: isOnScreen
+            });
+<span class="cstat-no" title="statement not covered" >            if (this.singleEmit) {</span>
+<span class="cstat-no" title="statement not covered" >                this._end$.next({});</span>
+            }
+        }
+&nbsp;
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    ngOnDestroy() {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._unsubscribe();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    private <span class="cstat-no" title="statement not covered" >_unsubscribe(type?: string | string[]<span class="fstat-no" title="function not covered" >) {</span></span></span>
+        let typeArr;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (type) {</span>
+<span class="cstat-no" title="statement not covered" >            typeArr = Array.isArray(type) ? type : [type];</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            typeArr = Object.keys(this._subscriptions);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        typeArr.forEach(key<span class="fstat-no" title="function not covered" > =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            this._subscriptions[key].unsubscribe();</span>
+        });
+    }
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

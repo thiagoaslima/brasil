@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/sintese/grafico/grafico.component.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">ClientApp/app/sintese/grafico</a> grafico.component.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/63</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/57</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Comp<span class="cstat-no" title="statement not covered" >onent, Input, Output, OnInit,<span class="cstat-no" title="statement not covered" > </span>OnChanges, Vi</span>ewChild, ElementRef, Renderer, EventEmitter } from '@angular/core';
+import { isBrowse<span class="cstat-no" title="statement not covered" >r } from 'angular2-universal'<span class="fstat-no" title="function not covered" >;</span></span>
+import { Obs<span class="cstat-no" title="statement not covered" >ervable, Observer</span> } fr<span class="cstat-no" title="statement not covered" >om 'rxjs';</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { <span class="cstat-no" title="statement not covered" >CommonService } from '../../shared/common.service<span class="cstat-no" title="statement not covered" >';<span class="cstat-no" title="statement not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+// Biblioteca usada no download de arquivos.
+// Possui um arqu<span class="cstat-no" title="statement not covered" >ivo de definição de tipos fil<span class="fstat-no" title="function not covered" >e-</span>saver.d.ts do typings.</span>
+var <span class="cstat-no" title="statement not covered" >FileSaver = require('file-saver');<span class="cstat-no" title="statement not covered" ></span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >@Component({</span>
+    selector:<span class="cstat-no" title="statement not covered" > 'grafico',</span>
+    templateUrl: 'grafico.t<span class="cstat-no" title="statement not covered" >emplate.html',</span>
+    styleUrls: ['grafic<span class="cstat-no" title="statement not covered" >o.style.css']</span>
+})
+export class GraficoComponent implements OnInit, OnChanges{
+<span class="cstat-no" title="statement not covered" ></span>
+    @Input() tipoGrafico<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >: </span>string;</span>
+    @Input() <span class="fstat-no" title="function not covered" >dadosIndicador: s</span>tring[];
+    @Inp<span class="cstat-no" title="statement not covered" >ut() nomeSerie: string =</span> 'Indicador';
+    @Inp<span class="cstat-no" title="statement not covered" >ut() carregando: boolean = true;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    @Out<span class="cstat-no" title="statement not covered" >put() dataURL = new Even</span>tEmitter();
+<span class="cstat-no" title="statement not covered" ></span>
+    @Vie<span class="cstat-no" title="statement not covered" >wChild("grafico1") graficoRef : ElementRef;</span>
+  <span class="cstat-no" title="statement not covered" ></span>
+    publ<span class="cstat-no" title="statement not covered" >ic isBrowser = isB</span>rowser;
+    <span class="cstat-no" title="statement not covered" ></span>
+    publ<span class="cstat-no" title="statement not covered" >ic datasets = [];</span>
+    publ<span class="cstat-no" title="statement not covered" >ic labels = [];</span>
+    publ<span class="cstat-no" title="statement not covered" >ic options = {};</span>
+    publ<span class="cstat-no" title="statement not covered" >ic tipo = 'bar'; // bar / l</span>ine / radar / polarArea / pie / doughnut / bubble
+    public colors = []; // this.colors = [ {backgroundColor:'rgba(221,0,0,0.8)'}, {backgroundColor:'rgba(242,146,32,0.8)'}, {backgroundColor:'rgba(67,101,176,0.8)'} ];
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    private stacked <span class="cstat-no" title="statement not covered" >= 'fa</span>lse';
+    priv<span class="cstat-no" title="statement not covered" >ate beginAtZero = 'true';<span class="fstat-no" title="function not covered" ></span></span>
+    private <span class="cstat-no" title="statement not covered" >graficoRef$: Observable&lt;ElementRef&gt;;</span>
+    
+    constructor( <span class="cstat-no" title="statement not covered" ></span>
+        private _render: Renderer, 
+        private _commonService: CommonService
+    ){ }
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    ngOn<span class="cstat-no" title="statement not covered" >Init(){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._commonService.notifyObservabl<span class="fstat-no" title="function not covered" >e$</span>.subscribe((mensagem) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            if(mensagem['t</span>ipo'] == 'getDataUrl'){
+<span class="cstat-no" title="statement not covered" ></span>
+                // Envia po<span class="cstat-no" title="statement not covered" >r s</span>erviço a imagem do gráfico em base64
+<span class="cstat-no" title="statement not covered" >                this._commonService.notifyOther({"tipo": "dataURL", "url": this.graficoRef.nativeElement.toDataURL()});</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+        });<span class="cstat-no" title="statement not covered" ></span>
+    }
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    ngOnChan<span class="cstat-no" title="statement not covered" >ges(){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.plotChart(this.dadosIndicador, this.nomeSerie, this.tipoGrafico);</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+&nbsp;
+    private plotChart(dados, nomeSerie, tipoGrafico){
+        
+        this.labels = [];
+&nbsp;
+        this.tipo = tipoGrafico;
+&nbsp;
+        let dadosGrafico:string[] = [];
+        for(var i in dados) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            dadosGrafico.push(dados[i]);<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >            this.labels.push(i);</span>
+        }
+<span class="cstat-no" title="statement not covered" ></span>
+        let valores = dadosGrafico.map(valor =&gt; {
+<span class="cstat-no" title="statement not covered" ></span>
+            return this.converterParaNumero(valor);
+        });
+        
+<span class="cstat-no" title="statement not covered" >        this.datasets = [{data: valores, label: nomeSerie, lineTension: 0}];</span>
+&nbsp;
+        
+        this.options = {
+<span class="cstat-no" title="statement not covered" >            scales: {</span>
+                yAxes: [{
+                    stacked: this.stacked,
+                    ticks: { beginAtZero:this.beginAtZero }
+<span class="cstat-no" title="statement not covered" >                }],</span>
+                xAxes: [{
+                    stacked: this.stacked
+                }]
+<span class="cstat-no" title="statement not covered" >            }</span>
+        };
+&nbsp;
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    private converterParaNumero(valor: string): number{
+&nbsp;
+        return !!valor? Number(valor.replace(',', '.')) : Number(valor)
+<span class="cstat-no" title="statement not covered" >    }</span>
+&nbsp;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/utils/flatFunctions.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">ClientApp/app/utils</a> flatFunctions.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/18</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">interface Tre<span class="cstat-no" title="statement not covered" >e&lt;T&gt; {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >    children: any[]</span>
+}<span class="fstat-no" title="function not covered" ></span>
+expo<span class="cstat-no" title="statement not covered" >rt function flatTree(root, chil<span class="cstat-no" title="statement not covered" >drenProp = 'children') {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (Array.isArray(root)) {</span>
+<span class="cstat-no" title="statement not covered" >        return [].concat(...root.map(item  =<span class="fstat-no" title="function not covered" >&gt; </span>flatTree(item, c<span class="cstat-no" title="statement not covered" >hildrenProp)));</span></span>
+    }
+    let arr = <span class="cstat-no" title="statement not covered" >[root];</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    if (<span class="cstat-no" title="statement not covered" >root[childrenProp] &amp;&amp; root[childrenProp].length &gt; 0<span class="fstat-no" title="function not covered" >) </span>{<span class="cstat-no" title="statement not covered" ></span></span>
+        arr = arr.concat(...root[childrenProp].map(item =&gt; flatTree(item, childrenProp)));
+<span class="cstat-no" title="statement not covered" >    }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return arr;</span>
+}<span class="fstat-no" title="function not covered" ></span>
+expo<span class="cstat-no" title="statement not covered" >rt function flatMap(array: Array&lt;any|any[]&gt;, callba</span>ckfn): any[] {
+    return [].concat(...array.map(callbackfn));
+<span class="cstat-no" title="statement not covered" >}</span>
+export fu<span class="fstat-no" title="function not covered" >nctio</span>n flat&lt;T&gt;(array: T[][]): T[] {
+<span class="cstat-no" title="statement not covered" >    return [].concat(...array);</span>
+}
+<span class="cstat-no" title="statement not covered" >export function reduc</span>eOnTree(array, propKeys: string | string[]) {
+    let _<span class="fstat-no" title="function not covered" >keys = Array.</span>isArray(propKeys) ? propKeys : [propKeys];
+    return array<span class="cstat-no" title="statement not covered" >.map(item =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return Object<span class="fstat-no" title="function not covered" >.a</span>ssign(</span>
+<span class="cstat-no" title="statement not covered" >            _keys.reduce((obj, key) =&gt; { o<span class="fstat-no" title="function not covered" >bj</span>[key] = item[key]; r<span class="cstat-no" title="statement not covered" >eturn obj; }, {}),<span class="cstat-no" title="statement not covered" ></span></span></span>
+            item['prototype'],
+            { children: reduceOnTree(item.children || [], _keys) }
+<span class="cstat-no" title="statement not covered" >        );</span>
+    });
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

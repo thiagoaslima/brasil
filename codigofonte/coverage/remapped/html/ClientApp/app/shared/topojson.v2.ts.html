@@ -1,0 +1,1625 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared/topojson.v2.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">ClientApp/app/shared/</a> topojson.v2.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/349</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/151</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/70</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/276</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// https://github.com/topojson/topojson-client Version 2.1.0. Copyright 2016 Mike Bostock.
+<span class="cstat-no" title="statement not covered" >import { OpaqueToken } from '@angular/core';</span>
+&nbsp;
+interface featureObj {
+    type: any;
+    geometries?: any;
+    coordinates?: any;
+}
+&nbsp;
+var identity = <span class="cstat-no" title="statement not covered" >function (x, _i?<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return x;</span>
+};
+&nbsp;
+var transform = <span class="cstat-no" title="statement not covered" >function (topology<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if ((transform = topology.transform) == null) <span class="cstat-no" title="statement not covered" >return identity;</span></span>
+    var transform,
+        x0,
+        y0,
+        kx = <span class="cstat-no" title="statement not covered" >transform.scale[0],</span>
+        ky = <span class="cstat-no" title="statement not covered" >transform.scale[1],</span>
+        dx = <span class="cstat-no" title="statement not covered" >transform.translate[0],</span>
+        dy = <span class="cstat-no" title="statement not covered" >transform.translate[1];</span>
+<span class="cstat-no" title="statement not covered" >    return function (point, i?<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!i) <span class="cstat-no" title="statement not covered" >x0 = y0 = 0;</span></span>
+<span class="cstat-no" title="statement not covered" >        point[0] = (x0 += point[0]) * kx + dx;</span>
+<span class="cstat-no" title="statement not covered" >        point[1] = (y0 += point[1]) * ky + dy;</span>
+<span class="cstat-no" title="statement not covered" >        return point;</span>
+    };
+};
+&nbsp;
+var bbox = <span class="cstat-no" title="statement not covered" >function (topology<span class="fstat-no" title="function not covered" >) {</span></span>
+    var bbox = <span class="cstat-no" title="statement not covered" >topology.bbox;</span>
+&nbsp;
+    function bboxPoint(p0<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        p1[0] = p0[0], p1[1] = p0[1], t(p1);</span>
+<span class="cstat-no" title="statement not covered" >        if (p1[0] &lt; x0) <span class="cstat-no" title="statement not covered" >x0 = p1[0];</span></span>
+<span class="cstat-no" title="statement not covered" >        if (p1[0] &gt; x1) <span class="cstat-no" title="statement not covered" >x1 = p1[0];</span></span>
+<span class="cstat-no" title="statement not covered" >        if (p1[1] &lt; y0) <span class="cstat-no" title="statement not covered" >y0 = p1[1];</span></span>
+<span class="cstat-no" title="statement not covered" >        if (p1[1] &gt; y1) <span class="cstat-no" title="statement not covered" >y1 = p1[1];</span></span>
+    }
+&nbsp;
+    function bboxGeometry(o<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (o.type) {</span>
+            case "GeometryCollection": <span class="cstat-no" title="statement not covered" >o.geometries.forEach(bboxGeometry); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "Point": <span class="cstat-no" title="statement not covered" >bboxPoint(o.coordinates); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiPoint": <span class="cstat-no" title="statement not covered" >o.coordinates.forEach(bboxPoint); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!bbox) {</span>
+        var t = <span class="cstat-no" title="statement not covered" >transform(topology),</span> p0, p1 = <span class="cstat-no" title="statement not covered" >new Array(2),</span> name,
+            x0 = <span class="cstat-no" title="statement not covered" >Infinity,</span> y0 = <span class="cstat-no" title="statement not covered" >x0,</span> x1 = <span class="cstat-no" title="statement not covered" >-x0,</span> y1 = <span class="cstat-no" title="statement not covered" >-x0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        topology.arcs.forEach(function (arc<span class="fstat-no" title="function not covered" >) {</span></span>
+            var i = <span class="cstat-no" title="statement not covered" >-1,</span> n = <span class="cstat-no" title="statement not covered" >arc.length;</span>
+<span class="cstat-no" title="statement not covered" >            while (++i &lt; n) {</span>
+<span class="cstat-no" title="statement not covered" >                p0 = arc[i], p1[0] = p0[0], p1[1] = p0[1], t(p1, i);</span>
+<span class="cstat-no" title="statement not covered" >                if (p1[0] &lt; x0) <span class="cstat-no" title="statement not covered" >x0 = p1[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                if (p1[0] &gt; x1) <span class="cstat-no" title="statement not covered" >x1 = p1[0];</span></span>
+<span class="cstat-no" title="statement not covered" >                if (p1[1] &lt; y0) <span class="cstat-no" title="statement not covered" >y0 = p1[1];</span></span>
+<span class="cstat-no" title="statement not covered" >                if (p1[1] &gt; y1) <span class="cstat-no" title="statement not covered" >y1 = p1[1];</span></span>
+            }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (name in topology.objects) {</span>
+<span class="cstat-no" title="statement not covered" >            bboxGeometry(topology.objects[name]);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        bbox = topology.bbox = [x0, y0, x1, y1];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return bbox;</span>
+};
+&nbsp;
+var reverse = <span class="cstat-no" title="statement not covered" >function (array, n<span class="fstat-no" title="function not covered" >) {</span></span>
+    var t, j = <span class="cstat-no" title="statement not covered" >array.length,</span> i = <span class="cstat-no" title="statement not covered" >j - n;</span>
+<span class="cstat-no" title="statement not covered" >    while (i &lt; --j) <span class="cstat-no" title="statement not covered" >t = array[i], array[i++] = array[j], array[j] = t;</span></span>
+};
+&nbsp;
+var feature = <span class="cstat-no" title="statement not covered" >function (topology, o<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return o.type === "GeometryCollection"</span>
+        ? { type: "FeatureCollection", features: o.geometries.map(function (o<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >return feature$1(topology, o); </span>})</span> }
+        : feature$1(topology, o);
+};
+&nbsp;
+function feature$1(topology, o<span class="fstat-no" title="function not covered" >) {</span>
+    var id = <span class="cstat-no" title="statement not covered" >o.id,</span>
+        bbox = <span class="cstat-no" title="statement not covered" >o.bbox,</span>
+        properties = <span class="cstat-no" title="statement not covered" >o.properties == null ? {} : o.properties,</span>
+        geometry = <span class="cstat-no" title="statement not covered" >object(topology, o);</span>
+<span class="cstat-no" title="statement not covered" >    return id == null &amp;&amp; bbox == null ? { type: "Feature", properties: properties, geometry: geometry }</span>
+        : bbox == null ? { type: "Feature", id: id, properties: properties, geometry: geometry }
+            : { type: "Feature", id: id, bbox: bbox, properties: properties, geometry: geometry };
+}
+&nbsp;
+function object(topology, o<span class="fstat-no" title="function not covered" >) {</span>
+    var transformPoint = <span class="cstat-no" title="statement not covered" >transform(topology),</span>
+        arcs = <span class="cstat-no" title="statement not covered" >topology.arcs;</span>
+&nbsp;
+    function arc(i, points<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        if (points.length) <span class="cstat-no" title="statement not covered" >points.pop();</span></span>
+<span class="cstat-no" title="statement not covered" >        for (var a = arcs[i &lt; 0 ? ~i : i], k = 0, n = a.length; k &lt; n; ++k) {</span>
+<span class="cstat-no" title="statement not covered" >            points.push(transformPoint(a[k].slice(), k));</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (i &lt; 0) <span class="cstat-no" title="statement not covered" >reverse(points, n);</span></span>
+    }
+&nbsp;
+    function point(p<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        return transformPoint(p.slice());</span>
+    }
+&nbsp;
+    function line(arcs<span class="fstat-no" title="function not covered" >) {</span>
+        var points = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >        for (var i = 0, n = arcs.length; i &lt; n; ++i) <span class="cstat-no" title="statement not covered" >arc(arcs[i], points);</span></span>
+<span class="cstat-no" title="statement not covered" >        if (points.length &lt; 2) <span class="cstat-no" title="statement not covered" >points.push(points[0].slice());</span></span>
+<span class="cstat-no" title="statement not covered" >        return points;</span>
+    }
+&nbsp;
+    function ring(arcs<span class="fstat-no" title="function not covered" >) {</span>
+        var points = <span class="cstat-no" title="statement not covered" >line(arcs);</span>
+<span class="cstat-no" title="statement not covered" >        while (points.length &lt; 4) <span class="cstat-no" title="statement not covered" >points.push(points[0].slice());</span></span>
+<span class="cstat-no" title="statement not covered" >        return points;</span>
+    }
+&nbsp;
+    function polygon(arcs<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        return arcs.map(ring);</span>
+    }
+&nbsp;
+    function geometry(o<span class="fstat-no" title="function not covered" >): featureObj {</span>
+        var type = <span class="cstat-no" title="statement not covered" >o.type,</span> coordinates;
+<span class="cstat-no" title="statement not covered" >        switch (type) {</span>
+            case "GeometryCollection": <span class="cstat-no" title="statement not covered" >return { type: type, geometries: o.geometries.map(geometry) };</span>
+            case "Point": <span class="cstat-no" title="statement not covered" >coordinates = point(o.coordinates); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiPoint": <span class="cstat-no" title="statement not covered" >coordinates = o.coordinates.map(point); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "LineString": <span class="cstat-no" title="statement not covered" >coordinates = line(o.arcs); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiLineString": <span class="cstat-no" title="statement not covered" >coordinates = o.arcs.map(line); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "Polygon": <span class="cstat-no" title="statement not covered" >coordinates = polygon(o.arcs); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiPolygon": <span class="cstat-no" title="statement not covered" >coordinates = o.arcs.map(polygon); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            default: <span class="cstat-no" title="statement not covered" >return null;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return { type: type, coordinates: coordinates };</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return geometry(o);</span>
+}
+&nbsp;
+var stitch = <span class="cstat-no" title="statement not covered" >function (topology, arcs<span class="fstat-no" title="function not covered" >) {</span></span>
+    var stitchedArcs = <span class="cstat-no" title="statement not covered" >{},</span>
+        fragmentByStart = <span class="cstat-no" title="statement not covered" >{},</span>
+        fragmentByEnd = <span class="cstat-no" title="statement not covered" >{},</span>
+        fragments = <span class="cstat-no" title="statement not covered" >[],</span>
+        emptyIndex = <span class="cstat-no" title="statement not covered" >-1;</span>
+&nbsp;
+    // Stitch empty arcs first, since they may be subsumed by other arcs.
+<span class="cstat-no" title="statement not covered" >    arcs.forEach(function (i, j<span class="fstat-no" title="function not covered" >) {</span></span>
+        var arc = <span class="cstat-no" title="statement not covered" >topology.arcs[i &lt; 0 ? ~i : i],</span> t;
+<span class="cstat-no" title="statement not covered" >        if (arc.length &lt; 3 &amp;&amp; !arc[1][0] &amp;&amp; !arc[1][1]) {</span>
+<span class="cstat-no" title="statement not covered" >            t = arcs[++emptyIndex], arcs[emptyIndex] = i, arcs[j] = t;</span>
+        }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    arcs.forEach(function (i<span class="fstat-no" title="function not covered" >) {</span></span>
+        var e = <span class="cstat-no" title="statement not covered" >ends(i),</span>
+            start = <span class="cstat-no" title="statement not covered" >e[0],</span>
+            end = <span class="cstat-no" title="statement not covered" >e[1],</span>
+            f, g;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (f = fragmentByEnd[start]) {</span>
+<span class="cstat-no" title="statement not covered" >            delete fragmentByEnd[f.end];</span>
+<span class="cstat-no" title="statement not covered" >            f.push(i);</span>
+<span class="cstat-no" title="statement not covered" >            f.end = end;</span>
+<span class="cstat-no" title="statement not covered" >            if (g = fragmentByStart[end]) {</span>
+<span class="cstat-no" title="statement not covered" >                delete fragmentByStart[g.start];</span>
+                var fg = <span class="cstat-no" title="statement not covered" >g === f ? f : f.concat(g);</span>
+<span class="cstat-no" title="statement not covered" >                fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.end] = fg;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                fragmentByStart[f.start] = fragmentByEnd[f.end] = f;</span>
+            }
+        } else <span class="cstat-no" title="statement not covered" >if (f = fragmentByStart[end]) {</span>
+<span class="cstat-no" title="statement not covered" >            delete fragmentByStart[f.start];</span>
+<span class="cstat-no" title="statement not covered" >            f.unshift(i);</span>
+<span class="cstat-no" title="statement not covered" >            f.start = start;</span>
+<span class="cstat-no" title="statement not covered" >            if (g = fragmentByEnd[start]) {</span>
+<span class="cstat-no" title="statement not covered" >                delete fragmentByEnd[g.end];</span>
+                var gf = <span class="cstat-no" title="statement not covered" >g === f ? f : g.concat(f);</span>
+<span class="cstat-no" title="statement not covered" >                fragmentByStart[gf.start = g.start] = fragmentByEnd[gf.end = f.end] = gf;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                fragmentByStart[f.start] = fragmentByEnd[f.end] = f;</span>
+            }
+        } else {
+<span class="cstat-no" title="statement not covered" >            f = [i];</span>
+<span class="cstat-no" title="statement not covered" >            fragmentByStart[f.start = start] = fragmentByEnd[f.end = end] = f;</span>
+        }
+    });
+&nbsp;
+    function ends(i<span class="fstat-no" title="function not covered" >) {</span>
+        var arc = <span class="cstat-no" title="statement not covered" >topology.arcs[i &lt; 0 ? ~i : i],</span> p0 = <span class="cstat-no" title="statement not covered" >arc[0],</span> p1;
+<span class="cstat-no" title="statement not covered" >        if (topology.transform) <span class="cstat-no" title="statement not covered" >p1 = [0, 0], arc.forEach(function (dp<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >p1[0] += dp[0], p1[1] += dp[1]; </span>})</span>;</span></span>
+        else <span class="cstat-no" title="statement not covered" >p1 = arc[arc.length - 1];</span>
+<span class="cstat-no" title="statement not covered" >        return i &lt; 0 ? [p1, p0] : [p0, p1];</span>
+    }
+&nbsp;
+    function flush(fragmentByEnd, fragmentByStart<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        for (var k in fragmentByEnd) {</span>
+            var f = <span class="cstat-no" title="statement not covered" >fragmentByEnd[k];</span>
+<span class="cstat-no" title="statement not covered" >            delete fragmentByStart[f.start];</span>
+<span class="cstat-no" title="statement not covered" >            delete f.start;</span>
+<span class="cstat-no" title="statement not covered" >            delete f.end;</span>
+<span class="cstat-no" title="statement not covered" >            f.forEach(function (i<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >stitchedArcs[i &lt; 0 ? ~i : i] = 1; </span>})</span>;</span>
+<span class="cstat-no" title="statement not covered" >            fragments.push(f);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    flush(fragmentByEnd, fragmentByStart);</span>
+<span class="cstat-no" title="statement not covered" >    flush(fragmentByStart, fragmentByEnd);</span>
+<span class="cstat-no" title="statement not covered" >    arcs.forEach(function (i<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >if (!stitchedArcs[i &lt; 0 ? ~i : i]) <span class="cstat-no" title="statement not covered" >fragments.push([i]); </span></span>})</span>;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return fragments;</span>
+};
+&nbsp;
+var mesh = <span class="cstat-no" title="statement not covered" >function (topology<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return object(topology, meshArcs.apply(this, arguments));</span>
+};
+&nbsp;
+function meshArcs(topology, object$$1, filter<span class="fstat-no" title="function not covered" >) {</span>
+    var arcs, i, n;
+<span class="cstat-no" title="statement not covered" >    if (arguments.length &gt; 1) <span class="cstat-no" title="statement not covered" >arcs = extractArcs(topology, object$$1, filter);</span></span>
+    else <span class="cstat-no" title="statement not covered" >for (i = 0, arcs = new Array(n = topology.arcs.length); i &lt; n; ++i) <span class="cstat-no" title="statement not covered" >arcs[i] = i;</span></span>
+<span class="cstat-no" title="statement not covered" >    return { type: "MultiLineString", arcs: stitch(topology, arcs) };</span>
+}
+&nbsp;
+function extractArcs(topology, object$$1, filter<span class="fstat-no" title="function not covered" >) {</span>
+    var arcs = <span class="cstat-no" title="statement not covered" >[],</span>
+        geomsByArc = <span class="cstat-no" title="statement not covered" >[],</span>
+        geom;
+&nbsp;
+    function extract0(i<span class="fstat-no" title="function not covered" >) {</span>
+        var j = <span class="cstat-no" title="statement not covered" >i &lt; 0 ? ~i : i;</span>
+<span class="cstat-no" title="statement not covered" >        (geomsByArc[j] || (geomsByArc[j] = [])).push({ i: i, g: geom });</span>
+    }
+&nbsp;
+    function extract1(arcs<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        arcs.forEach(extract0);</span>
+    }
+&nbsp;
+    function extract2(arcs<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        arcs.forEach(extract1);</span>
+    }
+&nbsp;
+    function extract3(arcs<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        arcs.forEach(extract2);</span>
+    }
+&nbsp;
+    function geometry(o<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (geom = o, o.type) {</span>
+            case "GeometryCollection": <span class="cstat-no" title="statement not covered" >o.geometries.forEach(geometry); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "LineString": <span class="cstat-no" title="statement not covered" >extract1(o.arcs); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiLineString": case "Polygon": <span class="cstat-no" title="statement not covered" >extract2(o.arcs); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiPolygon": <span class="cstat-no" title="statement not covered" >extract3(o.arcs); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    geometry(object$$1);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    geomsByArc.forEach(filter == null</span>
+        ? function (geoms<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >arcs.push(geoms[0].i); </span>}</span>
+        : function (geoms<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >if (filter(geoms[0].g, geoms[geoms.length - 1].g)) <span class="cstat-no" title="statement not covered" >arcs.push(geoms[0].i); </span></span>})</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return arcs;</span>
+}
+&nbsp;
+function planarRingArea(ring<span class="fstat-no" title="function not covered" >) {</span>
+    var i = <span class="cstat-no" title="statement not covered" >-1,</span> n = <span class="cstat-no" title="statement not covered" >ring.length,</span> a, b = <span class="cstat-no" title="statement not covered" >ring[n - 1],</span> area = <span class="cstat-no" title="statement not covered" >0;</span>
+<span class="cstat-no" title="statement not covered" >    while (++i &lt; n) <span class="cstat-no" title="statement not covered" >a = b, b = ring[i], area += a[0] * b[1] - a[1] * b[0];</span></span>
+<span class="cstat-no" title="statement not covered" >    return Math.abs(area); </span>// Note: doubled area!
+}
+&nbsp;
+var merge = <span class="cstat-no" title="statement not covered" >function (topology<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return object(topology, mergeArcs.apply(this, arguments));</span>
+};
+&nbsp;
+function mergeArcs(topology, objects<span class="fstat-no" title="function not covered" >) {</span>
+    var polygonsByArc = <span class="cstat-no" title="statement not covered" >{},</span>
+        polygons = <span class="cstat-no" title="statement not covered" >[],</span>
+        groups = <span class="cstat-no" title="statement not covered" >[];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    objects.forEach(geometry);</span>
+&nbsp;
+    function geometry(o<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (o.type) {</span>
+            case "GeometryCollection": <span class="cstat-no" title="statement not covered" >o.geometries.forEach(geometry); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "Polygon": <span class="cstat-no" title="statement not covered" >extract(o.arcs); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiPolygon": <span class="cstat-no" title="statement not covered" >o.arcs.forEach(extract); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+        }
+    }
+&nbsp;
+    function extract(polygon<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        polygon.forEach(function (ring<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >            ring.forEach(function (arc<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                (polygonsByArc[arc = arc &lt; 0 ? ~arc : arc] || (polygonsByArc[arc] = [])).push(polygon);</span>
+            });
+        });
+<span class="cstat-no" title="statement not covered" >        polygons.push(polygon);</span>
+    }
+&nbsp;
+    function area(ring<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        return planarRingArea(object(topology, { type: "Polygon", arcs: [ring] }).coordinates[0]);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    polygons.forEach(function (polygon<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!polygon._) {</span>
+            var group = <span class="cstat-no" title="statement not covered" >[],</span>
+                neighbors = <span class="cstat-no" title="statement not covered" >[polygon];</span>
+<span class="cstat-no" title="statement not covered" >            polygon._ = 1;</span>
+<span class="cstat-no" title="statement not covered" >            groups.push(group);</span>
+<span class="cstat-no" title="statement not covered" >            while (polygon = neighbors.pop()) {</span>
+<span class="cstat-no" title="statement not covered" >                group.push(polygon);</span>
+<span class="cstat-no" title="statement not covered" >                polygon.forEach(function (ring<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    ring.forEach(function (arc<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        polygonsByArc[arc &lt; 0 ? ~arc : arc].forEach(function (polygon<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (!polygon._) {</span>
+<span class="cstat-no" title="statement not covered" >                                polygon._ = 1;</span>
+<span class="cstat-no" title="statement not covered" >                                neighbors.push(polygon);</span>
+                            }
+                        });
+                    });
+                });
+            }
+        }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    polygons.forEach(function (polygon<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        delete polygon._;</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        type: "MultiPolygon",
+        arcs: groups.map(function (polygons<span class="fstat-no" title="function not covered" >) {</span>
+            var arcs = <span class="cstat-no" title="statement not covered" >[],</span> n;
+&nbsp;
+            // Extract the exterior (unique) arcs.
+<span class="cstat-no" title="statement not covered" >            polygons.forEach(function (polygon<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                polygon.forEach(function (ring<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    ring.forEach(function (arc<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (polygonsByArc[arc &lt; 0 ? ~arc : arc].length &lt; 2) {</span>
+<span class="cstat-no" title="statement not covered" >                            arcs.push(arc);</span>
+                        }
+                    });
+                });
+            });
+&nbsp;
+            // Stitch the arcs into one or more rings.
+<span class="cstat-no" title="statement not covered" >            arcs = stitch(topology, arcs);</span>
+&nbsp;
+            // If more than one ring is returned,
+            // at most one of these rings can be the exterior;
+            // choose the one with the greatest absolute area.
+<span class="cstat-no" title="statement not covered" >            if ((n = arcs.length) &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >                for (var i = 1, k = area(arcs[0]), ki, t; i &lt; n; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >                    if ((ki = area(arcs[i])) &gt; k) {</span>
+<span class="cstat-no" title="statement not covered" >                        t = arcs[0], arcs[0] = arcs[i], arcs[i] = t, k = ki;</span>
+                    }
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return arcs;</span>
+        })
+    };
+}
+&nbsp;
+var bisect = <span class="cstat-no" title="statement not covered" >function (a, x<span class="fstat-no" title="function not covered" >) {</span></span>
+    var lo = <span class="cstat-no" title="statement not covered" >0,</span> hi = <span class="cstat-no" title="statement not covered" >a.length;</span>
+<span class="cstat-no" title="statement not covered" >    while (lo &lt; hi) {</span>
+        var mid = <span class="cstat-no" title="statement not covered" >lo + hi &gt;&gt;&gt; 1;</span>
+<span class="cstat-no" title="statement not covered" >        if (a[mid] &lt; x) <span class="cstat-no" title="statement not covered" >lo = mid + 1;</span></span>
+        else <span class="cstat-no" title="statement not covered" >hi = mid;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return lo;</span>
+};
+&nbsp;
+var neighbors = <span class="cstat-no" title="statement not covered" >function (objects<span class="fstat-no" title="function not covered" >) {</span></span>
+    var indexesByArc = <span class="cstat-no" title="statement not covered" >{},</span> // arc index -&gt; array of object indexes
+        neighbors = <span class="cstat-no" title="statement not covered" >objects.map(<span class="fstat-no" title="function not covered" >function () { <span class="cstat-no" title="statement not covered" >return []; </span>})</span>;</span>
+&nbsp;
+    function line(arcs, i<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        arcs.forEach(function (a<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (a &lt; 0) <span class="cstat-no" title="statement not covered" >a = ~a;</span></span>
+            var o = <span class="cstat-no" title="statement not covered" >indexesByArc[a];</span>
+<span class="cstat-no" title="statement not covered" >            if (o) <span class="cstat-no" title="statement not covered" >o.push(i);</span></span>
+            else <span class="cstat-no" title="statement not covered" >indexesByArc[a] = [i];</span>
+        });
+    }
+&nbsp;
+    function polygon(arcs, i<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        arcs.forEach(function (arc<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >line(arc, i); </span>})</span>;</span>
+    }
+&nbsp;
+    function geometry(o, i<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        if (o.type === "GeometryCollection") <span class="cstat-no" title="statement not covered" >o.geometries.forEach(function (o<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >geometry(o, i); </span>})</span>;</span></span>
+        else <span class="cstat-no" title="statement not covered" >if (o.type in geometryType) <span class="cstat-no" title="statement not covered" >geometryType[o.type](o.arcs, i);</span></span>
+    }
+&nbsp;
+    var geometryType = <span class="cstat-no" title="statement not covered" >{</span>
+        LineString: line,
+        MultiLineString: polygon,
+        Polygon: polygon,
+        MultiPolygon: function (arcs, i<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >arcs.forEach(function (arc<span class="fstat-no" title="function not covered" >) { <span class="cstat-no" title="statement not covered" >polygon(arc, i); </span>})</span>; </span>}</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    objects.forEach(geometry);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (var i in indexesByArc) {</span>
+        let _iNumber = <span class="cstat-no" title="statement not covered" >parseInt(i, 10);</span>
+<span class="cstat-no" title="statement not covered" >        for (var indexes = indexesByArc[i], m = indexes.length, j = 0; j &lt; m; ++j) {</span>
+<span class="cstat-no" title="statement not covered" >            for (var k = j + 1; k &lt; m; ++k) {</span>
+                var ij = <span class="cstat-no" title="statement not covered" >indexes[j],</span> ik = <span class="cstat-no" title="statement not covered" >indexes[k],</span> n;
+<span class="cstat-no" title="statement not covered" >                if ((n = neighbors[ij])[i = bisect(n, ik).toString()] !== ik.toString()) <span class="cstat-no" title="statement not covered" >n.splice(i, 0, ik);</span></span>
+<span class="cstat-no" title="statement not covered" >                if ((n = neighbors[ik])[i = bisect(n, ij).toString()] !== ij.toString()) <span class="cstat-no" title="statement not covered" >n.splice(i, 0, ij);</span></span>
+            }
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return neighbors;</span>
+};
+&nbsp;
+var quantize = <span class="cstat-no" title="statement not covered" >function (topology, n<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!((n = Math.floor(n)) &gt;= 2)) <span class="cstat-no" title="statement not covered" >throw new Error("n must be ≥2");</span></span>
+<span class="cstat-no" title="statement not covered" >    if (topology.transform) <span class="cstat-no" title="statement not covered" >throw new Error("already quantized");</span></span>
+    var bb = <span class="cstat-no" title="statement not covered" >bbox(topology),</span> name,
+        dx = <span class="cstat-no" title="statement not covered" >bb[0],</span> kx = <span class="cstat-no" title="statement not covered" >(bb[2] - dx) / (n - 1) || 1,</span>
+        dy = <span class="cstat-no" title="statement not covered" >bb[1],</span> ky = <span class="cstat-no" title="statement not covered" >(bb[3] - dy) / (n - 1) || 1;</span>
+&nbsp;
+    function quantizePoint(p<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        p[0] = Math.round((p[0] - dx) / kx);</span>
+<span class="cstat-no" title="statement not covered" >        p[1] = Math.round((p[1] - dy) / ky);</span>
+    }
+&nbsp;
+    function quantizeGeometry(o<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (o.type) {</span>
+            case "GeometryCollection": <span class="cstat-no" title="statement not covered" >o.geometries.forEach(quantizeGeometry); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "Point": <span class="cstat-no" title="statement not covered" >quantizePoint(o.coordinates); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            case "MultiPoint": <span class="cstat-no" title="statement not covered" >o.coordinates.forEach(quantizePoint); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    topology.arcs.forEach(function (arc<span class="fstat-no" title="function not covered" >) {</span></span>
+        var i = <span class="cstat-no" title="statement not covered" >1,</span>
+            j = <span class="cstat-no" title="statement not covered" >1,</span>
+            n = <span class="cstat-no" title="statement not covered" >arc.length,</span>
+            pi = <span class="cstat-no" title="statement not covered" >arc[0],</span>
+            x0 = <span class="cstat-no" title="statement not covered" >pi[0] = Math.round((pi[0] - dx) / kx),</span>
+            y0 = <span class="cstat-no" title="statement not covered" >pi[1] = Math.round((pi[1] - dy) / ky),</span>
+            pj,
+            x1,
+            y1;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (; i &lt; n; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >            pi = arc[i];</span>
+<span class="cstat-no" title="statement not covered" >            x1 = Math.round((pi[0] - dx) / kx);</span>
+<span class="cstat-no" title="statement not covered" >            y1 = Math.round((pi[1] - dy) / ky);</span>
+<span class="cstat-no" title="statement not covered" >            if (x1 !== x0 || y1 !== y0) {</span>
+<span class="cstat-no" title="statement not covered" >                pj = arc[j++];</span>
+<span class="cstat-no" title="statement not covered" >                pj[0] = x1 - x0, x0 = x1;</span>
+<span class="cstat-no" title="statement not covered" >                pj[1] = y1 - y0, y0 = y1;</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (j &lt; 2) {</span>
+<span class="cstat-no" title="statement not covered" >            pj = arc[j++];</span>
+<span class="cstat-no" title="statement not covered" >            pj[0] = 0;</span>
+<span class="cstat-no" title="statement not covered" >            pj[1] = 0;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        arc.length = j;</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (name in topology.objects) {</span>
+<span class="cstat-no" title="statement not covered" >        quantizeGeometry(topology.objects[name]);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    topology.transform = {</span>
+        scale: [kx, ky],
+        translate: [dx, dy]
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return topology;</span>
+};
+&nbsp;
+var untransform = <span class="cstat-no" title="statement not covered" >function (topology<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if ((transform = topology.transform) == null) <span class="cstat-no" title="statement not covered" >return identity;</span></span>
+    var transform,
+        x0,
+        y0,
+        kx = <span class="cstat-no" title="statement not covered" >transform.scale[0],</span>
+        ky = <span class="cstat-no" title="statement not covered" >transform.scale[1],</span>
+        dx = <span class="cstat-no" title="statement not covered" >transform.translate[0],</span>
+        dy = <span class="cstat-no" title="statement not covered" >transform.translate[1];</span>
+<span class="cstat-no" title="statement not covered" >    return function (point, i<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!i) <span class="cstat-no" title="statement not covered" >x0 = y0 = 0;</span></span>
+        var x1 = <span class="cstat-no" title="statement not covered" >Math.round((point[0] - dx) / kx),</span>
+            y1 = <span class="cstat-no" title="statement not covered" >Math.round((point[1] - dy) / ky);</span>
+<span class="cstat-no" title="statement not covered" >        point[0] = x1 - x0, x0 = x1;</span>
+<span class="cstat-no" title="statement not covered" >        point[1] = y1 - y0, y0 = y1;</span>
+<span class="cstat-no" title="statement not covered" >        return point;</span>
+    };
+};
+&nbsp;
+export const <span class="cstat-no" title="statement not covered" >TopoJson = {</span>
+    bbox,
+    feature,
+    mesh,
+    meshArcs,
+    merge,
+    mergeArcs,
+    neighbors,
+    quantize,
+    transform,
+    untransform
+};
+&nbsp;
+export let <span class="cstat-no" title="statement not covered" >TOPOJSON = new OpaqueToken('TopoJson');</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/utils/resultado.pipe.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">ClientApp/app/utils/</a> resultado.pipe.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Pipe, PipeTransform } from '@angular/core';</span>
+/*
+ * Recebe uma string, transforma em float e 
+ * insere formatação com pontos e vírgulas
+*/
+@Pipe({
+    name: 'resultado'
+})
+/*
+99999999999999 - Ignorado
+99999999999998 - Não disponível
+99999999999997 - Não informado
+99999999999996 - Não existente
+99999999999995 - *
+99999999999992 - -
+99999999999991 - -
+- - -
+(NULL) - -
+*/    
+<span class="fstat-no" title="function not covered" >e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >ResultadoPipe<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>implements PipeTransform {</span></span>
+<span class="cstat-no" title="statement not covered" >    transform(value: any, unidade?: string<span class="fstat-no" title="function not covered" >): any {</span></span>
+&nbsp;
+        // let unidades = [
+        //     'unidades',
+        //     'frutos',
+        //     'casamentos',
+        //     'divórcios',
+        //     'separações',
+        //     'estabelecimentos',
+        //     'equipamentos',
+        //     'pessoas',
+        //     'domicílios',
+        //     'famílias',
+        //     'docentes',
+        //     'matrículas',
+        //     'escola',
+        //     'automóveis',
+        //     'caminhões',
+        //     'caminhões trator',
+        //     'caminhonetes',
+        //     'caminhonetas',
+        //     'micro-ônibus',
+        //     'motocicletas',
+        //     'motonetes',
+        //     'ônibus',
+        //     'tratores de roda',
+        //     'utilitários',
+        //     'veículos',
+        //     'agências',
+        //     'óbitos',
+        //     'notificações',
+        //     'cabeças',
+        //     'unidades habitacionais',
+        //     'leitos'
+        // ];
+&nbsp;
+        let unidades = <span class="cstat-no" title="statement not covered" >['r$'];</span>
+&nbsp;
+&nbsp;
+&nbsp;
+        let float = <span class="cstat-no" title="statement not covered" >(typeof(unidade) != "undefined" &amp;&amp; unidade != null) ? (unidades.indexOf(unidade.toLocaleLowerCase()) &gt;= 0 ? true : false) : false; </span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        switch (value) {</span>
+            case '99999999999999':
+<span class="cstat-no" title="statement not covered" >                return 'Ignorado';</span>
+            case '99999999999998':
+<span class="cstat-no" title="statement not covered" >                return 'Não disponível';</span>
+            case '99999999999997':
+<span class="cstat-no" title="statement not covered" >                return 'Não informado';</span>
+            case '99999999999996':
+<span class="cstat-no" title="statement not covered" >                return 'Não existente';</span>
+            case '99999999999995':
+<span class="cstat-no" title="statement not covered" >                return '*';</span>
+            case '99999999999992':
+            case '99999999999991':
+            case '-':
+            case null:
+<span class="cstat-no" title="statement not covered" >                return '-';</span>
+            
+            default:
+<span class="cstat-no" title="statement not covered" >                if (!isNaN(Number(value))) {</span>
+<span class="cstat-no" title="statement not covered" >                    value = Number(value);</span>
+                    let isFloat = <span class="cstat-no" title="statement not covered" >(n<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >Number(n) === n &amp;&amp; n%1 !== 0;</span></span></span>
+                    //let valueStr = (float || (float === undefined &amp;&amp; isFloat(value))) ? (&lt;number&gt;value).toFixed(2).toString() : value.toString();
+                    let valueStr = <span class="cstat-no" title="statement not covered" >(float === true) ? (&lt;number&gt;value).toFixed(2).toString() : value.toString();</span>
+                    //return valueStr.replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&amp;.");
+                    let <span class="cstat-no" title="statement not covered" >[<span class="cstat-no" title="statement not covered" >parteInteira,</span> <span class="cstat-no" title="statement not covered" >parteDecimal]</span> = valueStr.split('.');</span>
+<span class="cstat-no" title="statement not covered" >                    parteInteira = this.adicionaSeparadorMilhares(parteInteira, '.');</span>
+<span class="cstat-no" title="statement not covered" >                    return parteDecimal ? [parteInteira, parteDecimal].join(',') : parteInteira;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    return value;</span>
+                }
+        }
+    }
+    private <span class="cstat-no" title="statement not covered" >adicionaSeparadorMilhares(n:string, <span class="cstat-no" title="statement not covered" >separador=' '<span class="fstat-no" title="function not covered" >)</span> {</span></span>
+        let start = <span class="cstat-no" title="statement not covered" >0;</span>
+        let next = <span class="cstat-no" title="statement not covered" >n.length%3;</span>
+        let r = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >        for(var curr = start; curr &lt; n.length; curr=next, next+=3) {</span>
+<span class="cstat-no" title="statement not covered" >            if(next == 0){ <span class="cstat-no" title="statement not covered" >continue; </span>}</span>
+<span class="cstat-no" title="statement not covered" >            r.push(n.substring(curr,next));</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return r.join(separador);</span>
+    }
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
