@@ -28,6 +28,7 @@
 
     <div class="legenda" *ngIf="valores.length > 0">
         <!--<div class="legenda__item" *ngFor="let valor of quartis$ | async; let i = index">-->
+            <p class="legenda__texto">Legenda</p>
         <div class="legenda__item" *ngFor="let valor of valores; let i = index">
             <div class="legenda__cor faixa{{i+1}}"></div>
             <p class="legenda__texto" *ngIf="i == 0">0 |-- {{ valor | resultado: dado?.unidade?.id }} {{ indicador?.unidade.nome }}</p>
