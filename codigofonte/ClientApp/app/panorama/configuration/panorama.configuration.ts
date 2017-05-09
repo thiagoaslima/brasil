@@ -9,19 +9,97 @@ import 'rxjs/add/operator/zip';
 export const TEMAS = {
     nenhum: "",
     agricultura: "Agricultura",
+    agropecuaria: "Agropecuária",
+    comercio: "Comércio",
     educacao: "Educação",
     economia: "Economia",
     frota: "Frota de veículos",
     historico: 'Histórico',
+    industria: "Indústria",
     meioAmbiente: "Território e Ambiente",
     populacao: "População",
     saude: "Saúde",
+    servicos: "Serviços",
     territorio: "Território",
     trabalho: "Trabalho e Rendimento"
 }
 
 export const PANORAMA = {
-    [NiveisTerritoriais.pais.label]: {},
+    [NiveisTerritoriais.pais.label]: {
+        temas: [
+            TEMAS.nenhum,
+            TEMAS.territorio,
+            TEMAS.populacao,
+            TEMAS.educacao,
+            TEMAS.trabalho,
+            TEMAS.agropecuaria,
+            TEMAS.industria,
+            TEMAS.comercio,
+            TEMAS.servicos,
+            TEMAS.economia
+        ],
+
+        indicadores: [
+            {
+                indicadorId: 60272,
+                pesquisaId: 10065,
+                periodo: "2017",
+                titulo: "Área territorial",
+                tema: TEMAS.territorio,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Área por bioma",
+                    tipo: TiposGrafico.coluna,
+                    dados: [{
+                        pesquisaId: 10065,
+                        indicadorId: 60273,
+                    }, {
+                        pesquisaId: 10065,
+                        indicadorId: 60274,
+                    }, {
+                        pesquisaId: 10065,
+                        indicadorId: 60275,
+                    }, {
+                        pesquisaId: 10065,
+                        indicadorId: 60276,
+                    }, {
+                        pesquisaId: 10065,
+                        indicadorId: 60277,
+                    }, {
+                        pesquisaId: 10065,
+                        indicadorId: 60278,
+                    }]
+                }
+            },
+
+            {
+                indicadorId: 60272,
+                pesquisaId: 10065,
+                periodo: "2017",
+                titulo: "Número de municípios",
+                tema: TEMAS.territorio,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+
+
+            {
+                indicadorId: 60410,
+                pesquisaId: 10065,
+                periodo: "2010",
+                titulo: "Total de habitantes",
+                tema: TEMAS.populacao,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "Total de habitantes",
+                    tipo: TiposGrafico.coluna,
+                    dados: [{
+                        pesquisaId: 10065,
+                        indicadorId: 60410,
+                    }]
+                }
+            }
+        ] as PanoramaConfigurationItem[]
+    },
 
     [NiveisTerritoriais.uf.label]: {},
 
@@ -30,7 +108,7 @@ export const PANORAMA = {
             TEMAS.nenhum,
             TEMAS.populacao,
             TEMAS.trabalho,
-            TEMAS.educacao,            
+            TEMAS.educacao,
             TEMAS.economia,
             TEMAS.saude,
             TEMAS.meioAmbiente

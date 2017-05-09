@@ -1,4 +1,4 @@
-import { municipios } from '../../../api/_municipios';
+import { municipios } from '../../../api/municipios';
 
 interface NivelTerritorial {
         label: string,

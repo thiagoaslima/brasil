@@ -57,8 +57,9 @@ td.label {
     text-transform: uppercase;
     padding: 13px 0px;
     padding-left: 15px;
-    background: #1B779B;
-    color: #fff; 
+    /*background: #1B779B;*/
+	background: #ccc;
+    color: #333; 
 }
 
 
@@ -81,15 +82,19 @@ td.label {
 
 .nivel-3 td{
     padding: 13px 2%;
+	border-bottom: 1px solid #95E0FD;	
 }
 
 .nivel-3 .label{
-    background-color: #808080;
-    color: #fff;
-    /*background-image: url('./../../../img/seta_terceiro_nivel.png');*/
+    /*background-color: #808080;*/
+	background-color: #e6e6e6;
+    color: #1b779b;
+    /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat;
     background-position: 10px -24px;
     padding-left: 29px;
+	text-transform: uppercase;
+	border-bottom:2px solid #1b779b;
 }
 
 .nivel-3.aberto .label{
@@ -109,7 +114,7 @@ td.label {
     padding: 12px 2%;
     color: #333333;
     /*background-color: #cccccc;*/
-	border-bottom: 2px solid #DFDFDF;
+	/*border-bottom: 2px solid #DFDFDF;*/
     /*border-bottom: 5px solid #fff;*/
 }
 
@@ -117,7 +122,8 @@ td.label {
     /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat;
     background-position: 10px -25px;
-	background-color: #cccccc;
+	/*background-color: #cccccc;*/
+	font-weight:bold;	
     padding-left: 29px;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
@@ -155,16 +161,18 @@ tr.nivel-4 td:first-child {
 .nivel-5 td{
     padding: 12px 2%;
     color: #333333;
+	border-bottom: 1px solid #CFCFCF;	
 }
 
 .nivel-5 .label{
     /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat;
     background-position: 10px -25px;
-    padding-left: 29px;
-    
+    padding-left: 49px;
+    font-size: 0.9em;
     font-weight: bold;
-    text-transform: uppercase;
+	border-bottom: 1px solid #CFCFCF;	
+    /*text-transform: uppercase;*/
     background-color: #e6e6e6;
 }
 
@@ -188,9 +196,9 @@ tr.nivel-4 td:first-child {
 
 .nivel-6 .label{
     background-position: 22px -31px;
-    padding-left: 40px;
+    padding-left: 49px;
     
-    text-transform: uppercase;
+
 
     /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat; 
@@ -220,7 +228,8 @@ tr.nivel-4 td:first-child {
 
 .nivel-7 .label{
     background-position: 22px -31px;
-    padding-left: 40px;
+    padding-left: 69px;
+	font-size: 0.9em;
     font-weight: bold;
     /*background-image: url('./../../../img/seta_setimo_e_oitavo_nivel.png');*/
     background-repeat: no-repeat; 
@@ -246,7 +255,7 @@ tr.nivel-4 td:first-child {
 
 .nivel-8 .label{
     background-position: 41px -31px;
-    padding-left: 60px;
+    padding-left: 69px;
     /*background-image: url('./../../../img/seta_setimo_e_oitavo_nivel.png');*/
     background-repeat: no-repeat; 
 }
@@ -270,7 +279,7 @@ tr.nivel-4 td:first-child {
 
 .nivel-9 .label{
     background-position: 41px -31px;
-    padding-left: 60px;
+    padding-left: 69px;
     font-style: italic;
 }
 
