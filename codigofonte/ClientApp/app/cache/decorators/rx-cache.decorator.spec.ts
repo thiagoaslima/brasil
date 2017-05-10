@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { RxCache } from '.';
-import { BasicLRUCache } from '../basic-lru-cache.model';
+import { BasicLRUCache } from '../model';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';

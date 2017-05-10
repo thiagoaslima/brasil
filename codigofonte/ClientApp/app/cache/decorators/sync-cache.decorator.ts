@@ -1,4 +1,4 @@
-import { BasicLRUCache } from '../basic-lru-cache.model';
+import { BasicLRUCache } from '../model';
 export function SyncCache({cache}: {cache: BasicLRUCache}) {
 
     return function _ObservableCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {

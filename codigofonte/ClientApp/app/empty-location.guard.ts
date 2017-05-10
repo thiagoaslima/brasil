@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { isBrowser } from 'angular2-universal'
+import { isBrowser, isNode } from 'angular2-universal'
 
 import { Localidade } from './shared2/localidade/localidade.model';
 import { LocalidadeService2 } from './shared2/localidade/localidade.service';
@@ -16,6 +16,10 @@ export class EmptyLocationGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
         let params;
+        if (isNode) {
+            return true;
+        }
+
         if(isBrowser){
             params = JSON.parse(localStorage.getItem('lastParams'));
         }

@@ -1,5 +1,8 @@
-import { BasicLRUCache } from './basic-lru-cache.model';
+import { Injectable } from '@angular/core';
 
+import { BasicLRUCache } from './model';
+
+@Injectable()
 export class CacheFactory {
     private static _caches = Object.create(null) as {[name: string]: BasicLRUCache};
     static recordsLimit = 50;
@@ -10,13 +13,14 @@ export class CacheFactory {
 
     static getCache(name: string): BasicLRUCache {
         if (!CacheFactory.hasCache(name)) {
-           CacheFactory.createCache(name);
+           return CacheFactory.createCache(name);
         } 
 
         return CacheFactory._caches[name];
     }
 
-    static createCache(name: string, recordsLimit?) {
+    static createCache(name: string, recordsLimit?): BasicLRUCache {
         CacheFactory._caches[name] = new BasicLRUCache(recordsLimit || CacheFactory.recordsLimit);
+        return CacheFactory._caches[name];
     }
 }

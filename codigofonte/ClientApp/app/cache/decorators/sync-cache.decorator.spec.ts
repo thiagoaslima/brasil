@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { SyncCache } from '.';
-import { BasicLRUCache } from '../basic-lru-cache.model';
+import { BasicLRUCache } from '../model';
 
 describe('SyncCache', () => {
 
