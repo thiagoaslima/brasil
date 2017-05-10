@@ -58,7 +58,7 @@ export class BuscaService {
                 
                 let indicadoresPesquisa = this._indicadoresService.getIndicadoresByPosicao(pesquisa.id, '0', EscopoIndicadores.filhos);
    
-                return indicadoresPesquisa.map(indicadores => { debugger; return flatTree(indicadores, 'indicadores')});
+                return indicadoresPesquisa.map(indicadores => { return flatTree(indicadores, 'indicadores')});
 
             }));
         }).map( (indicadores: Indicador[][]) => flat(indicadores));     
