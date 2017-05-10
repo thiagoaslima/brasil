@@ -18,6 +18,7 @@
 
         <panorama-card-regua title='No Estado' [ranking]="rankingUf$ | async" [itens]="lengthUf$ | async" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
         <panorama-card-regua title='No País' [ranking]="rankingPais$ | async" [itens]="lengthPais" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
+        <panorama-card-regua title='Na Microrregião' [ranking]="rankingMicrorregiao$ | async" [itens]="(rankingMicrorregiao$ | async)?.qtdeItensComparados" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
         <!--
         <panorama-card-regua title='No Estado' [posicao]="getRankingPosition(this.localidade?.parent.codigo)" [itens]="getRankingItems(this.localidade?.parent.codigo)"></panorama-card-regua>
         <panorama-card-regua title='No País' [posicao]="getRankingPosition('BR')" [itens]="getRankingItems('BR')"></panorama-card-regua>
@@ -61,7 +62,7 @@
             <div class="botao" *ngIf="dados && dados.indicador && dados.indicador.fontes && dados.indicador.fontes.length">
                 <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
                 <button (click)="mostrarFontes=true">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fontes
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fonte
                 </button>
                 <div *ngIf="mostrarFontes" class="fontes__lista-container">
                     <ol>
