@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared3/services/batch.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">ClientApp/app/shared3/services</a> batch.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">56.16% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>41/73</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">58.14% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>25/43</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">29.41% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>5/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">51.61% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>32/62</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/Beha<span class="branch-0 cbranch-no" title="branch not covered" >viorSub</span>ject';<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+impo<span class="missing-if-branch" title="if path not taken" >I</span>rt { Subject } from 'rxjs/Subject';<span class="cstat-no" title="statement not covered" ></span>
+import 'rxjs/add/operator/share';<span class="branch-1 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span></span>
+&nbsp;
+export class FooService {
+&nbsp;
+    <span class="missing-if-branch" title="else path not taken" >E</span>@BatchRequest({passThrough: true})
+    passingThrough(id) {
+        return this.simulateHttpRequest(id);
+    }
+&nbsp;
+    @BatchRequest({passThrough: false})
+    batch(arr) {
+        retur<span class="fstat-no" title="function not covered" >n this.simu</span>lateHttpRequest(arr);
+    }
+<span class="fstat-no" title="function not covered" ></span>
+    simu<span class="cstat-no" title="statement not covered" >lateHttpRequest(id: number | number[]</span>) {
+        const arr = Array.isArray(id) ? id : [id];
+        return Observable.of(arr.<span class="fstat-no" title="function not covered" >ma</span>p(id =&gt; ({id: id})));
+    }<span class="cstat-no" title="statement not covered" ></span>
+}
+<span class="fstat-no" title="function not covered" ></span>
+function BatchRequ<span class="cstat-no" title="statement not covered" >est(filterFn, { debounceTime =</span> 10, passThrough = false } = {}) {
+    let <span class="cstat-no" title="statement not covered" >argumentsQueue = [];<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+    let clearTimeoutId = null;
+&nbsp;
+    const updateArgumentsQueue = function (...args) {
+        argumentsQueue.push(args)
+    }
+    const queueCalls = function (callback, context) {
+        if (clearTimeoutId) return;
+&nbsp;
+        clearTimeoutId = setTimeout(() =&gt; {
+            callback.apply(context, argumentsQueue).subscribe(val =&gt; {
+                console.log('callback', val);
+                results.next(val)
+            });
+            reset();
+        }, debounceTime)
+    }
+&nbsp;
+    const reset = function() {<span class="branch-1 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span></span>
+        argumentsQueue = [];
+        clearTimeoutId = null;
+    }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    cons<span class="cstat-no" title="statement not covered" >t results = new Subject();</span>
+    const re<span class="cstat-no" title="statement not covered" >sponse = results.asObserva</span>ble().share();
+    
+<span class="cstat-no" title="statement not covered" ></span>
+    return function _batchRequestDecorator(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        const origina<span class="fstat-no" title="function not covered" >lM</span>ethod = descriptor.value.bind(target);
+<span class="cstat-no" title="statement not covered" ></span>
+        desc<span class="cstat-no" title="statement not covered" >riptor.v</span>alue = (...args) =&gt; {
+<span class="cstat-no" title="statement not covered" >            if (passThrough || origi<span class="fstat-no" title="function not covered" >na</span>lMethod.__batchRequestDecorated) {</span>
+<span class="cstat-no" title="statement not covered" >                console.log('test flag', originalMethod.__batc<span class="fstat-no" title="function not covered" >hR</span>equestDecorated);</span>
+<span class="cstat-no" title="statement not covered" >                return originalMethod.apply(ta</span>rget, args);
+            } <span class="cstat-no" title="statement not covered" ></span>
+            const sub = new Subject();
+<span class="cstat-no" title="statement not covered" >            const sub</span>s = response
+                .subscribe(val =&gt; {
+                    sub.next(val);
+<span class="fstat-no" title="function not covered" ></span>                    subs.unsubscribe();
+<span class="cstat-no" title="statement not covered" >                })</span>
+<span class="cstat-no" title="statement not covered" ></span>
+            updateArgumentsQueue(args);
+            queueCalls(originalMethod, target);
+            
+            return sub.asObservable().filter(filterFn);
+        };
+<span class="fstat-no" title="function not covered" ></span>
+        descriptor.valu<span class="cstat-no" title="statement not covered" >e._</span>_batchRequestDecorated = true;
+    };<span class="cstat-no" title="statement not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

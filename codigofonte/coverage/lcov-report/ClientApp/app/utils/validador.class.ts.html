@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/utils/validador.class.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">ClientApp/app/utils</a> validador.class.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/28</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interf<span class="cstat-no" title="statement not covered" >ace Teste {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >    propriedade: string,</span>
+    mensagemErro:<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > s</span>tring,</span>
+    funcaoTes<span class="fstat-no" title="function not covered" >te: (data)</span> =&gt; Boolean,
+}<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+export class Validador {
+<span class="cstat-no" title="statement not covered" >    private _erros = [] as string[];<span class="fstat-no" title="function not covered" ></span></span>
+    private _testes <span class="cstat-no" title="statement not covered" >= [] </span>as Teste[];
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+    constructor() {}
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    resg<span class="cstat-no" title="statement not covered" >itrarTestes(testes: Teste[]) {</span>
+        test<span class="cstat-no" title="statement not covered" >es.forEach(teste =&gt; this.r</span>egistrarTeste(teste));
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    registrarTeste(teste: Teste): void {<span class="fstat-no" title="function not covered" ></span></span>
+        if (!this.<span class="cstat-no" title="statement not covered" >_testes.find(this._equals.bind(null, teste))) {</span>
+<span class="cstat-no" title="statement not covered" >            this._testes.push(teste);</span>
+        }<span class="cstat-no" title="statement not covered" ></span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    deregistrarTeste(teste: Teste): boolean {
+<span class="cstat-no" title="statement not covered" >        const idx = this._testes.f<span class="fstat-no" title="function not covered" >in</span>dIndex(this._equals.bind(this, teste));</span>
+        if (idx &gt;= 0<span class="cstat-no" title="statement not covered" >) { t</span>his._testes.splice(idx, 1); }
+<span class="cstat-no" title="statement not covered" >        return idx &gt;= 0;<span class="fstat-no" title="function not covered" ></span></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    validar(data<span class="cstat-no" title="statement not covered" >, cb) {</span>
+        this._testes.forEach(teste =&gt; {
+            if (!teste.funcaoTeste(data)) {
+<span class="cstat-no" title="statement not covered" >                // console.log(teste.mensagemErro, data);</span>
+<span class="cstat-no" title="statement not covered" >                this._erros.push(teste.mensagemErro);</span>
+            }
+<span class="cstat-no" title="statement not covered" >        });</span>
+        if (this._erros.length) {
+<span class="cstat-no" title="statement not covered" >            throw new TypeError(th<span class="fstat-no" title="function not covered" >is</span>._erros.join(','));</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+        return cb(data);
+<span class="cstat-no" title="statement not covered" >    }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    private _equals(referencia:</span> Teste, comparacao: Teste): boolean {
+        return referencia.funcaoTeste === comparacao.funcaoTeste &amp;&amp; referencia.propriedade === comparacao.propriedade;
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

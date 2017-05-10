@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared3/services/indicador.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">ClientApp/app/shared3/services/</a> indicador.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>47/94</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">29.79% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">34.62% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>9/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">62.69% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>42/67</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+&nbsp;
+import { PesquisaService3 } from '.';
+import { Indicador, Pesquisa } from '../models';
+import { escopoIndicadores, ServicoDados as servidor } from '../values';
+import { arrayUniqueValues, converterObjArrayEmHash } from '../../utils2';
+&nbsp;
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/zip';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/share';
+&nbsp;
+&nbsp;
+const headers = new Headers({ 'accept': '*/*' });
+const options = new RequestOptions({ headers: headers, withCredentials: false });
+&nbsp;
+@Injectable()
+export class IndicadorService3 {
+&nbsp;
+    constructor(
+        private _http: Http,
+        private _pesquisaService: <span class="branch-1 cbranch-no" title="branch not covered" >PesquisaService3<span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
+    ) { }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    getIndicadoresDaPesquisa(pesquisaId: number, <span class="cstat-no" title="statement not covered" >{ <span class="cstat-no" title="statement not covered" >arvoreCompleta = false,</span> <span class="cstat-no" title="statement not covered" >localidades = [] as Array&lt;number | string&gt; </span>} = {}<span class="fstat-no" title="function not covered" >)</span>: Observable&lt;Indicador[]&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        return this.getIndicadoresFilhosByPosicao(pesquisaId, '0', { arvoreCompleta, localidades })</span>
+            .catch(err<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._handleError(err))</span></span>;
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    getIndicadoresFilhosByPosicao(pesquisaId: number, posicao: string, <span class="cstat-no" title="statement not covered" >{ <span class="cstat-no" title="statement not covered" >arvoreCompleta = false,</span> <span class="cstat-no" title="statement not covered" >localidades = [] as Array&lt;number | string&gt; </span>} = {}<span class="fstat-no" title="function not covered" >)</span>: Observable&lt;Indicador[]&gt; {</span></span>
+        const escopo = <span class="cstat-no" title="statement not covered" >arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;</span>
+        const url = <span class="cstat-no" title="statement not covered" >servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&amp;localidade=${localidades.join(',')}`);</span>
+        const errorMessage = <span class="cstat-no" title="statement not covered" >`Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this._request(url)</span>
+            .map(arr<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >arr.map(obj<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId })))</span></span>)</span></span>
+            .catch(err<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._handleError(err, new Error(errorMessage)))</span></span>
+    }
+<span class="cstat-no" title="statement not covered" >    getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao: string, <span class="cstat-no" title="statement not covered" >{ <span class="cstat-no" title="statement not covered" >arvoreCompleta = false,</span> <span class="cstat-no" title="statement not covered" >localidades = [] as Array&lt;number | string&gt; </span>} = {}<span class="fstat-no" title="function not covered" >)</span>: Observable&lt;Indicador[]&gt; {</span></span>
+        const escopo = <span class="cstat-no" title="statement not covered" >arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;</span>
+        const url = <span class="cstat-no" title="statement not covered" >servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&amp;localidade=${localidades.join(',')}`);</span>
+        const errorMessage = <span class="cstat-no" title="statement not covered" >`Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))</span>
+            .map(([<span class="cstat-no" title="statement not covered" >arr,</span> <span class="cstat-no" title="statement not covered" >pesquisa]<span class="fstat-no" title="function not covered" ></span>) =&gt; <span class="cstat-no" title="statement not covered" >arr.map(obj<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >Indicador.criar(Object.assign(obj, { pesquisa: pesquisa })))</span></span>)</span></span>
+            .catch(err<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._handleError(err, new Error(errorMessage)))</span></span>
+    }
+&nbsp;
+    getIndicadoresById(indicadoresId: number[], <span class="missing-if-branch" title="else path not taken" >E</span>localidades = [] as Array&lt;number | string&gt;): Observable&lt;Indicador[]&gt; {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+        const errorMessage = `Não foi possível retornar indicadores para os parâmetros informados. [id: ${indicadoresId.join(', ') || 'nenhum valor informado'}]`
+&nbsp;
+        return this._request(url)
+            .map(array =&gt; array.map(Indicador.criar))
+            .catch(err =&gt; this._handleError(err, new Error(errorMessage)));
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    getIndicadoresComPesquisaById(indicadoresId: number[], <span class="cstat-no" title="statement not covered" >localidades = [] as Array&lt;number | string&gt;<span class="fstat-no" title="function not covered" >)</span>: Observable&lt;Indicador[]&gt; {</span></span>
+        const url = <span class="cstat-no" title="statement not covered" >servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);</span>
+        const errorMessage = <span class="cstat-no" title="statement not covered" >`Não foi possível retornar indicadores para os parâmetros informados. [id: ${indicadoresId.join(', ') || 'nenhum valor informado'}}]`</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this._request(url)</span>
+            .mergeMap(responseIndicadores<span class="fstat-no" title="function not covered" > =&gt; {</span>
+                const pesquisasId = <span class="cstat-no" title="statement not covered" >arrayUniqueValues(responseIndicadores.map(obj<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >obj.pesquisa_id)</span></span>);</span>
+<span class="cstat-no" title="statement not covered" >                return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >[responseIndicadores, pesquisas])</span></span>;</span>
+            })
+            .map(([<span class="cstat-no" title="statement not covered" >responseIndicadores,</span> <span class="cstat-no" title="statement not covered" >pesquisas]<span class="fstat-no" title="function not covered" ></span>) =&gt; {</span>
+                const hashPesquisas = <span class="cstat-no" title="statement not covered" >converterObjArrayEmHash(pesquisas, 'id');</span>
+<span class="cstat-no" title="statement not covered" >                return responseIndicadores.map(obj<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))</span></span></span>
+            })
+            .catch(err<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._handleError(err, new Error(errorMessage)))</span></span>;
+    }
+&nbsp;
+&nbsp;
+    private _request(url: string) {
+        return this._http.get(url, options)
+            .retry(3)
+            .map(res =&gt; {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (res.status === 404) {
+<span class="cstat-no" title="statement not covered" >                    throw new Error(`Não foi encontrado o endereço solicitado. [url: ${url}]`);</span>
+                }
+&nbsp;
+                if (res.status === 400 || res.status === 500) {
+                    throw new Error();
+                }
+&nbsp;
+                const obj = res.json();
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (this._isServerError(obj)) {
+<span class="cstat-no" title="statement not covered" >                    throw new Error();</span>
+                }
+&nbsp;
+                return obj;
+            })
+            .share();
+    }
+&nbsp;
+    private _handleError(error: Error, customError?: Error): Observable&lt;any&gt; {
+        return Observable.throw(error.message ? <span class="branch-0 cbranch-no" title="branch not covered" >error </span>: customError);
+    }
+&nbsp;
+    private _isServerError(res) {
+        return Object.keys(res).length === 1 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >Object.prototype.hasOwnProperty.apply(res, 'message');</span>
+    }
+&nbsp;
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

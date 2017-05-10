@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "moduleResolution": "node",
     "target": "es5",
     "sourceMap": true,
@@ -7,8 +8,8 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es6", "dom" ],
-    "types": [ "node", "jasmine" ]
+    "types": [ "node" ]
   },
-  "exclude": [ "bin", "node_modules", "**/*.spec.ts" ],
+  "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }
 }

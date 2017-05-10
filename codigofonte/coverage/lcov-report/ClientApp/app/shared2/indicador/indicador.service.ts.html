@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared2/indicador/indicador.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">ClientApp/app/shared2/indicador</a> indicador.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/210</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/109</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/74</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/171</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Inje<span class="cstat-no" title="statement not covered" >ctable } from '@angular/core'<span class="cstat-no" title="statement not covered" >;</span></span>
+import { Http, He<span class="cstat-no" title="statement not covered" >aders, RequestOptions } from <span class="fstat-no" title="function not covered" >'@</span>angular/http';</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+impo<span class="cstat-no" title="statement not covered" >rt { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador, Ranking } fr<span class="cstat-no" title="statement not covered" >om './indicador.model';</span></span>
+import { <span class="cstat-no" title="statement not covered" >flatTree } from '../../utils/flatFunctions';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/<span class="cstat-no" title="statement not covered" >observable/of';<span class="fstat-no" title="function not covered" ></span></span>
+impo<span class="cstat-no" title="statement not covered" >rt 'rxjs/add/observable/zip';<span class="cstat-no" title="statement not covered" ></span></span>
+import 'rxjs/add/operator/catch';
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/do';</span>
+import 'rxjs/<span class="cstat-no" title="statement not covered" >add/operator/filter';</span>
+import 'rxjs/<span class="cstat-no" title="statement not covered" >add/operator/map';</span>
+import 'rxjs/add/operato<span class="cstat-no" title="statement not covered" >r/mergeMap';</span>
+import 'rxjs/add/opera<span class="cstat-no" title="statement not covered" >tor/retry';</span>
+import 'rxjs/add/op<span class="cstat-no" title="statement not covered" >erator/share';</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >const headers = new Headers({ 'accep</span>t': '*/*' });
+<span class="cstat-no" title="statement not covered" >const options = new RequestOptions({</span> headers: headers, withCredentials: false });
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >@Injectable()</span>
+<span class="cstat-no" title="statement not covered" >export class IndicadorService2 {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    constructor(</span>
+<span class="cstat-no" title="statement not covered" >        private _http: Http</span>
+    ) {<span class="cstat-no" title="statement not covered" ></span>
+        Indica<span class="cstat-no" title="statement not covered" >dor.setIndicadoresStrategy({</span>
+            retrieve: thi<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >s.</span>getIndicadoresByPosicao.bind(this)</span>
+        })<span class="fstat-no" title="function not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    getI<span class="cstat-no" title="statement not covered" >ndicadoresByPosicao(pesquisaId: number, po</span>sicao: string, escopo: string): Observable&lt;Indicador[]&gt; {
+<span class="cstat-no" title="statement not covered" >        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}`;</span>
+&nbsp;
+        return this._http.get(url, options)
+            .retry(3)
+<span class="cstat-no" title="statement not covered" >            .catch(err =&gt; Observable.of({ json: () =&gt; ({})<span class="fstat-no" title="function not covered" > }</span>))</span>
+            .map(res<span class="cstat-no" title="statement not covered" > =&gt; r</span>es.json())
+            .map(j<span class="cstat-no" title="statement not covered" >son =&gt; flatTree(json))</span>
+<span class="cstat-no" title="statement not covered" >            .map(array =&gt; array.map(obj =&gt; Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId })))))</span>
+            .map(array =&gt; this._rebuildTree(array))
+            // .do(<span class="fstat-no" title="function not covered" >in</span>dicador =&gt; cons<span class="cstat-no" title="statement not covered" >ole.log(`getIndicadoresByPosicao`, indicad<span class="fstat-no" title="function not covered" >or</span>))<span class="cstat-no" title="statement not covered" ></span></span>
+            .shar<span class="fstat-no" title="function not covered" >e(</span>);<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+    getIndicadore<span class="fstat-no" title="function not covered" >sB</span>yId(pesquisaId: n<span class="cstat-no" title="statement not covered" >umber, indicadorId: number | numbe</span>r[], escopo: string, localidade?, fontesNotas = false): Observable&lt;Indicador[]&gt; {
+        const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
+        const queryLocalidade = localidade === undefined ? '' : `&amp;localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
+<span class="cstat-no" title="statement not covered" >        let url = `http://servicodados.ibge.gov.br/ap<span class="fstat-no" title="function not covered" >i/</span>v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+        return thi<span class="cstat-no" title="statement not covered" >s._http.get(url, options)</span>
+            .retry(3)<span class="cstat-no" title="statement not covered" ></span>
+            .catch<span class="cstat-no" title="statement not covered" >(err =&gt; Observable.of({ json: () =&gt; ({}) }))</span>
+<span class="cstat-no" title="statement not covered" >            .map(res =&gt; res.json())</span>
+            //.map(json =&gt; flatTree(json))
+            .map(ar<span class="fstat-no" title="function not covered" >ra</span>y =&gt; array.map(<span class="cstat-no" title="statement not covered" >obj =&gt; Indicador.criar(Indicador.converter<span class="fstat-no" title="function not covered" >(O</span>bject.assign<span class="cstat-no" title="statement not covered" >(obj, { pesqu</span>isaId </span>})))))
+            //.ma<span class="fstat-no" title="function not covered" >p(</span>array =&gt; this._<span class="cstat-no" title="statement not covered" >rebuildTree(array))</span>
+            .do(i<span class="fstat-no" title="function not covered" >nd</span>icadores =&gt; {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+<span class="fstat-no" title="function not covered" >                //</span>adiciona fonte e notas, da pesquisa nos indicadores
+                if (fontesNotas &amp;&amp; indicadores.length &gt; 0) {
+<span class="cstat-no" title="statement not covered" >                    indicadores[0].pesquisa.subscribe((pesquisa) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        //organiza os períodos da <span class="fstat-no" title="function not covered" >pe</span>squisa em ordem crescente</span>
+                        pesquisa.periodos.sort((a, b) =&gt; a.nome &gt; b.nome ? 1 : -1);
+<span class="cstat-no" title="statement not covered" >                        //pega fontes e not<span class="fstat-no" title="function not covered" >as</span> do período mais<span class="cstat-no" title="statement not covered" > recente</span></span>
+                        let fontes = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
+                        let notas<span class="cstat-no" title="statement not covered" > = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : nul</span>l;
+                        for (let<span class="cstat-no" title="statement not covered" > i = 0; i &lt; indicadores.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                            indicadores[i].fontes = fontes;</span>
+<span class="cstat-no" title="statement not covered" >                            indicadores[i].notas = notas</span>;
+<span class="cstat-no" title="statement not covered" >                        }</span>
+                    });
+                }
+                // console.log(`getIndicadorById`, indicadores);
+            })
+            .share();
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    private _getVariosIndicadoresByIdCache = {};<span class="fstat-no" title="function not covered" ></span></span>
+    priv<span class="cstat-no" title="statement not covered" >ate getVariosIndicadoresByIdKe<span class="cstat-no" title="statement not covered" >yCache(indicadorMapPe</span>sq</span>uisa, indicadorId: number | number[], localidade?, fontesNotas = false): string {
+        let indicadorIdString = <span class="cstat-no" title="statement not covered" >Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();</span>
+        let localidadeString = <span class="cstat-no" title="statement not covered" >localidade === undefined ? '' : Array.isArray(localidade) ? localidade.join(',') : localidade;</span>
+        let fontesNotasString = <span class="cstat-no" title="statement not covered" >fontesNotas.toString();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        return [indicadorIdString, localidadeString, fontesNotasString].join(';');
+<span class="cstat-no" title="statement not covered" >    }<span class="fstat-no" title="function not covered" ></span></span>
+    getV<span class="cstat-no" title="statement not covered" >ariosIndicadoresById(indicador<span class="cstat-no" title="statement not covered" >MapPesquisa, indicado</span>rI</span>d: number | number[], localidade?, fontesNotas = false): Observable&lt;Indicador[]&gt; {
+        let keyCache = <span class="cstat-no" title="statement not covered" >this.getVariosIndicadoresByIdKeyCache(indicadorMapPesquisa, indicadorId, localidade, fontesNotas);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        if (!this._getVariosIndicad<span class="cstat-no" title="statement not covered" >oresByIdCache[keyCache]) {</span>
+            const queryIndicadores <span class="cstat-no" title="statement not covered" >= Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();</span>
+            const queryLocali<span class="cstat-no" title="statement not covered" >dades = localidade === undefined ? '' : `&amp;localidades=${Array.isArray(localidade) ? localidade.join(',') : loc</span>alidade}`;
+<span class="cstat-no" title="statement not covered" ></span>
+            let urlValores = `ht<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >tp</span>://servicodados<span class="cstat-no" title="statement not covered" >.ibge.gov.br/api/v1/pesquisas/valores?indi<span class="fstat-no" title="function not covered" >ca</span>dores=${quer<span class="cstat-no" title="statement not covered" >yIndicadores}</span>${quer</span>yL</span>ocalidades}`;
+<span class="cstat-no" title="statement not covered" >            let urlIndicadores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores?indicadores=${queryIndicadores}`;</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span>
+            let fallB<span class="fstat-no" title="function not covered" >ac</span>kError = err =&gt; Observable.of({ json: () =&gt; ({}) });
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+            this<span class="cstat-no" title="statement not covered" >._getVariosIndicadoresByIdCache[keyCache] = O</span>bservable.zip(
+                this._http.get(urlValores, options).retry(3),
+                this.<span class="fstat-no" title="function not covered" >_h</span>ttp.get(urlIndicadores, options).retry(3)
+            )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                .catch(err =&gt; Observabl<span class="fstat-no" title="function not covered" >e.</span>of([{ json: () =&gt; ({}) }, { json: () =&gt; ({}) }]))</span>
+                .map(([valores, <span class="cstat-no" title="statement not covered" >indicadores])<span class="fstat-no" title="function not covered" > =</span>&gt; [valores.json()<span class="cstat-no" title="statement not covered" >, indicadores.json()])</span></span>
+                .map<span class="cstat-no" title="statement not covered" >(([valores, indicadores]: any[][]) =&gt; {</span>
+                    retu<span class="cstat-no" title="statement not covered" >rn indicadores.map((indicad</span>or) =&gt; {
+                        let valor = valores.find((valor) =&gt; valor.id === indicador.id);
+                        if (valor) {
+<span class="cstat-no" title="statement not covered" >                            indicador.res = valor.res;</span>
+                        } else {
+                            indicador.res = [{
+                                localidade: localidade,
+                                res: {}
+<span class="cstat-no" title="statement not covered" >                            }]</span>
+                        }
+&nbsp;
+<span class="fstat-no" title="function not covered" ></span>                        return indicador<span class="cstat-no" title="statement not covered" >;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+<span class="fstat-no" title="function not covered" >                    })</span>
+                })
+<span class="cstat-no" title="statement not covered" >                .map(array =&gt; array.map(obj =&gt; Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisaId: indicadorMapPesquisa[obj.id.toString()] })))))</span>
+                .do(indicadores =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
+                    //ad<span class="cstat-no" title="statement not covered" >iciona fonte e notas, da pesquisa <span class="fstat-no" title="function not covered" >no</span>s indicadores</span>
+                    if (fontesNotas &amp;&amp; indicadores.length &gt; 0) {
+                        for <span class="cstat-no" title="statement not covered" >(let i = 0; i &lt; indicad<span class="fstat-no" title="function not covered" >or</span>es.length; i++) <span class="cstat-no" title="statement not covered" >{</span></span>
+                            indicadores[i].pesquisa.subscribe((pesquisa) =&gt; {
+                                //organiz<span class="cstat-no" title="statement not covered" >a os períodos da pesquisa em ordem crescente</span>
+                                pesquisa<span class="cstat-no" title="statement not covered" >.periodos.sort((a, b) =&gt; a.nome &gt; b.nome ? 1 : -1);</span>
+<span class="cstat-no" title="statement not covered" >                                //pega fontes e notas do per</span>íodo mais recente
+<span class="cstat-no" title="statement not covered" >                                let fontes = pesquisa.peri</span>odos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
+                                let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
+                                indicadores[i].fontes = fontes;
+<span class="cstat-no" title="statement not covered" >                                indicadores[i].notas = notas;</span>
+<span class="cstat-no" title="statement not covered" >                            });</span>
+                        }
+                    }
+                })
+                .share();
+        }
+<span class="cstat-no" title="statement not covered" ></span>
+        return this._getVariosIndicadoresByIdCache[keyCache];
+<span class="cstat-no" title="statement not covered" >    }<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    getP<span class="cstat-no" title="statement not covered" >osicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable&lt;Ranking&gt; {</span>
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&amp;localidade=${codigoLocalidade}&amp;lower=0`;   
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+        return th<span class="fstat-no" title="function not covered" >is</span>._http.get(url,<span class="cstat-no" title="statement not covered" > options)</span>
+            .retr<span class="fstat-no" title="function not covered" >y(</span>3)
+            .catch(err =&gt; <span class="cstat-no" title="statement not covered" >Observa</span>ble.of({ json: () =&gt; [{ res: [] }] }))
+            .map(res =&gt; re<span class="cstat-no" title="statement not covered" >s.j</span>son())<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            .map(arr =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                const ranking = arr[0];</span>
+<span class="cstat-no" title="statement not covered" >                let valores = {}, universo = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (ranking.res.length &gt; 0) {</span>
+                    valores = ranking.res[0];
+                    universo = ranking.res[ranking.res.length - 1]['#'];
+                }
+&nbsp;
+                return {
+                    localidade: parseInt(valores['localidade'] || codigoLocalidade, 10),
+                    indicador: parseInt(ranking.indicador, 10),
+                    periodo: periodo,
+                    contexto: contexto,
+                    posicaoAbsoluta: valores['#'],
+                    ranking: valores['ranking'],
+<span class="cstat-no" title="statement not covered" >                    res: valores['res'],<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                    qtdeI</span>tensComparados: universo
+                } as Rank<span class="cstat-no" title="statement not covered" >ing</span>
+<span class="cstat-no" title="statement not covered" >            })<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    _cacheRankin<span class="cstat-no" title="statement not covered" >g = Object.create(null) as {[label: string]: Observable&lt;Ranking&gt;|Observable&lt;Ranking[]&gt;};</span>
+    public getRankings(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable&lt;Ranking[]&gt; {
+        const permutacao = [];
+        contexto = contexto.map(c =&gt; c.toString())
+&nbsp;
+        indicadoresId.forEach((id, idx) =&gt; {
+            contexto.forEach(contexto =&gt; {
+                permutacao.push({
+<span class="cstat-no" title="statement not covered" >                    id: id,<span class="fstat-no" title="function not covered" ></span></span>
+                    peri<span class="cstat-no" title="statement not covered" >odo: periodos[idx],</span>
+<span class="cstat-no" title="statement not covered" >                    localidade: codigoLocalidade,</span>
+<span class="cstat-no" title="statement not covered" >                    contexto: contexto.</span>toString()
+                })
+            })
+        });<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+        let <span class="cstat-no" title="statement not covered" >cases = perm</span>utacao.reduce( (acc, obj) =&gt; {
+            let cache = this._cacheRanking[this._convertIntoKey(obj)];
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            if (cache) {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span>
+                acc.cache.push(cache);
+            } else {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                acc.requests.push(obj);</span>
+            }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return acc;</span>
+        }, {cache: [], requests: []})
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+        if (case<span class="fstat-no" title="function not covered" >s.</span>requests.length === 0<span class="cstat-no" title="statement not covered" >) {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+            retur<span class="fstat-no" title="function not covered" >n </span>Observable.zip&lt;Rankin<span class="cstat-no" title="statement not covered" >g&gt;(...cases.cache).map(arr =&gt; arr.redu</span>ce( (agg, val) =&gt; agg.concat(val), [] ) );
+        }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        const removeDupl<span class="cstat-no" title="statement not covered" >icates = cases<span class="fstat-no" title="function not covered" >.r</span>equests.reduce( <span class="cstat-no" title="statement not covered" >(acc, obj) =&gt; {</span></span>
+            if (<span class="cstat-no" title="statement not covered" >!acc[obj.id]) {</span>
+                acc[<span class="cstat-no" title="statement not covered" >obj.id] = obj</span>.periodo
+            }
+            return acc;
+        }, {<span class="cstat-no" title="statement not covered" >})</span>
+&nbsp;
+        const request = this._getRankingsRequest(Object.keys(removeDuplicates).map(Number.parseInt), Object.keys(removeDuplicates).map(k =&gt; removeDuplicates[k]), codigoLocalidade, contexto)
+<span class="cstat-no" title="statement not covered" >            .do(responses =&gt; ca<span class="fstat-no" title="function not covered" >se</span>s.requests.forEach((<span class="cstat-no" title="statement not covered" >obj, idx) =&gt; this._cacheRanking[this._convertIntoKey(obj)] = Observab<span class="fstat-no" title="function not covered" >le</span>.of(responses[idx])))<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >            .map(respons</span>es =&gt; responses.concat(cases.cache))
+            .map(rankings =&gt; indicadoresId.reduce( (acc, id) =&gt; {
+<span class="cstat-no" title="statement not covered" >                contexto.forEach(contexto =&gt; {<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                    let r = rankings.find(rank =&gt; rank.indicador === id &amp;&amp; rank.context</span>o === contexto);
+                    if (r) { acc.push(r) }
+<span class="cstat-no" title="statement not covered" >                })<span class="fstat-no" title="function not covered" ></span></span>
+                retu<span class="cstat-no" title="statement not covered" >rn acc;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+            }, []))<span class="cstat-no" title="statement not covered" ></span>
+            .share<span class="cstat-no" title="statement not covered" >();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        cases.requests.forEach((obj, idx) =&gt; this._cacheRanking[this._convertIntoKey(obj)] = request.map(responses =&gt; responses.filter(rank =&gt; rank.indicador === obj.id &amp;&amp; rank.localidade === obj.localidade &amp;&amp; rank.contexto === obj.contexto)))
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+        return re<span class="fstat-no" title="function not covered" >qu</span>est;<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    private _convertIntoKey(ob<span class="cstat-no" title="statement not covered" >j) </span>{<span class="cstat-no" title="statement not covered" ></span>
+        return o<span class="cstat-no" title="statement not covered" >bj.id + '-' + obj.periodo + '-' + obj.localidade + '-' + obj.contexto;</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    private _getRankingsRequest(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable&lt;Ranking[]&gt; {
+        const qu<span class="cstat-no" title="statement not covered" >ery = indicadoresId.map((id, index) =&gt; `${id}(${periodos[index]})`).join('|');</span>
+        const _contexto = contexto.join(',')
+        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${query}?lower=0&amp;contexto=${_contexto}&amp;localidade=${codigoLocalidade}`;
+&nbsp;
+        return this._http.get(url, options)
+            .retry(3)
+            .catch(err =&gt; Observable.of({ json: () =&gt; [{ res: [] }] }))
+            .map(res =&gt; res.json())
+            .map(rankings =&gt; {
+&nbsp;
+                return rankings.map(ranking =&gt; {
+                    let valores = {}, universo = 1;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (ranking.res.length &gt; 0)<span class="fstat-no" title="function not covered" > {</span></span>
+<span class="cstat-no" title="statement not covered" ></span>                        valores = ranking.res[0];
+<span class="cstat-no" title="statement not covered" >                        universo = ran<span class="fstat-no" title="function not covered" >ki</span>ng.res[ranking.res.length - 1]['#'];</span>
+<span class="cstat-no" title="statement not covered" >                    }</span>
+&nbsp;
+                    return {
+<span class="cstat-no" title="statement not covered" >                        localidade: parseInt</span>(valores['localidade'] || codigoLocalidade, 10),
+<span class="cstat-no" title="statement not covered" >                        indicador: parseInt(ranking<span class="fstat-no" title="function not covered" >.i</span>ndicador, 10),<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                        periodo: ranking.periodo,<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                        contexto: ranking.context</span>o,
+<span class="cstat-no" title="statement not covered" >                        posicaoAbsoluta: valores['#'],</span>
+<span class="cstat-no" title="statement not covered" >                        ranking: valo</span>res['ranking'],
+<span class="cstat-no" title="statement not covered" >                        res:</span> valores['res'],
+                        qtdeItensComparados: universo
+                    } as Ran<span class="cstat-no" title="statement not covered" >king</span>
+<span class="cstat-no" title="statement not covered" >                })</span>
+<span class="cstat-no" title="statement not covered" ></span>
+            })
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    private _rebuildTree(indicadores: Indicador[]): Indicador[] {
+<span class="cstat-no" title="statement not covered" >        let arr = [] as Indica</span>dor[];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        const hash: Indicador[] = indicadores.reduce((hash, item) =&gt; Object.assign(hash, { [item.posicao]: item }), Object.create(null))</span>
+        const keys = Object.keys(hash).sort();
+        const minLen = Math.min(...keys.map(key =&gt; key.toString().split('.').length));
+        const children = Object.keys(hash).sort().reduce((agg, key) =&gt; {
+<span class="cstat-no" title="statement not covered" >            const _key = key.toString().split('</span>.');
+&nbsp;
+            if (_key.length === minLen) {
+                arr.push(hash[key]);
+                return agg;
+            }
+&nbsp;
+            const parentKey = _key.slice(0, -1).join('.');
+            if (!agg[parentKey]) { agg[parentKey] = []; }
+            agg[parentKey].push(hash[key]);
+            return agg;
+&nbsp;
+        }, Object.create(null));
+&nbsp;
+        return arr;
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>
