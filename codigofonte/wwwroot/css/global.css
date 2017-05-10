@@ -473,8 +473,34 @@ sintese>dados
         padding: 7px 5%;
     }
 
+    aside #localidade nav#local {
+        position: absolute;
+        width: calc(87% - 151px);
+        margin-left: 46px;
+        text-align: center;
+        margin-top: 3px;
+    }
+
+    aside #localidade ul li{
+        display: none;
+    }
+
+    aside #localidade ul li:not(:first-child):before{
+        content: '';
+    }
+
+    aside #localidade ul li:last-child{
+        display: inline;
+    }
+
     aside #localidade h1{
-        min-height: 55px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        /* float: left; */
+        font-size: 1.4em;
+
     }
     aside.localidade--static #localidade h1{
         /*min-height: auto;*/
@@ -494,11 +520,12 @@ sintese>dados
     }
 
     aside.aside--municipio.localidade--static{
-        padding-top: 92px;
+        padding-top: 0px;
+        top: 100px;
     }
 
     aside #localidade button{
-        margin: 15px 0% 5px;
+        margin: 3px 0% 7px;
         float: right;
     }
     
@@ -509,7 +536,6 @@ sintese>dados
         font-size: 18px;
         padding: 0px;
         display: block;
-        margin-bottom: 12px;
     }
 
     aside #menu{
@@ -525,7 +551,10 @@ sintese>dados
         -ms-transition: left 500ms ease;
         -o-transition: left 500ms ease;
         transition: left 500ms ease;
-        margin-top: 52px;
+        margin-top: 36px;
+    }
+    aside.localidade--static #menu{
+        margin-top: -63px;
     }
 
     aside #menu ul{
@@ -534,17 +563,17 @@ sintese>dados
 
     aside #menu.aberto{
         left: 0%;
-        margin-top: 52px;
+        margin-top: 36px;
     }
     aside.localidade--static #menu.aberto{
-        margin-top: 30px;
+        margin-top: -63px;
     }
 
     .conteudo{
         width: 100%;
         border-left: none;
         margin-left: 0px;
-        margin-top: 180px;
+        margin-top: 114px;
     }
 
     .conteudo__dados, .conteudo__dados--com-scroll{
@@ -586,7 +615,7 @@ sintese>dados
         border-left: none;
         margin-left: 0;
         width: auto;
-        margin-top: 204px;
+        margin-top: 112px;
     }
     #sintese #dados{
         float: none;
