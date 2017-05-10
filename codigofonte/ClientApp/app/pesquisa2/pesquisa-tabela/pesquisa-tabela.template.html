@@ -3,9 +3,12 @@
         <tr class='{{getStyleClass(indicador.posicao)}} mobile-tr' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
             
             <td class='label p '>
-                <div class='label--com-acao'>{{ indicador.indicador }} <span class='mobile-unidade' *ngIf='indicador.unidade?.id'>({{ indicador.unidade?.id }})</span></div> 
-                <div class='acoes'>
+                <div class="seta">
+                    <i class="fa fa-chevron-right" aria-hidden="true" *ngIf="!isListaAberta(indicador)"></i>
+                    <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="isListaAberta(indicador)"></i>
                 </div>
+                <div class='label--com-acao'>{{ indicador.indicador }} <span class='mobile-unidade' *ngIf='indicador.unidade?.id'>({{ indicador.unidade?.id }})</span></div> 
+                <div class='acoes'></div>
             </td>  
 
             <td class='valor s' [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeA ? (indicador.localidadeA[periodo] | resultado: indicador?.unidade?.id) : "" }}</td>

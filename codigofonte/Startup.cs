@@ -35,7 +35,7 @@ namespace Brasil
 
             services.AddDistributedCacheHandler(options =>
             {
-                options.Configuration = "192.168.152.85:6379,192.168.152.85:6380";//,192.168.152.85:6381,192.168.152.85:6382,192.168.152.85:6383,192.168.152.85:6384,192.168.152.85:6385";
+                options.Configuration = "192.168.152.85:6379,192.168.152.85:6380,192.168.152.83:6379,192.168.152.83:6380";
                 options.InstanceName = "bs:";
                 options.AbortOnConnectFail = true;
             });

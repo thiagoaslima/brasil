@@ -19,6 +19,16 @@ td.s{
     width: 15.5%;
 }
 
+.seta{
+    float: left;
+    font-size: 0.7em;
+    padding: 5px 10px;
+}
+
+.sem-filho .seta{
+    visibility: hidden;
+} 
+
 td.label {
     border-right: 3px solid #fff;
     background-color: #e6e6e6;
@@ -79,7 +89,7 @@ td.label {
     /*background-color: #808080;*/
 	background-color: #e6e6e6;
     color: #1b779b;
-    background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat;
     background-position: 10px -24px;
     padding-left: 29px;
@@ -109,7 +119,7 @@ td.label {
 }
 
 .nivel-4 .label{
-    background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat;
     background-position: 10px -25px;
 	/*background-color: #cccccc;*/
@@ -155,7 +165,7 @@ tr.nivel-4 td:first-child {
 }
 
 .nivel-5 .label{
-    background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat;
     background-position: 10px -25px;
     padding-left: 49px;
@@ -190,7 +200,7 @@ tr.nivel-4 td:first-child {
     
 
 
-    background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');
+    /*background-image: url('./../../../img/seta_quarta_e_quinto_e_sexto_nivel.png');*/
     background-repeat: no-repeat; 
     background-color: #e6e6e6;
 }
@@ -221,7 +231,7 @@ tr.nivel-4 td:first-child {
     padding-left: 69px;
 	font-size: 0.9em;
     font-weight: bold;
-    background-image: url('./../../../img/seta_setimo_e_oitavo_nivel.png');
+    /*background-image: url('./../../../img/seta_setimo_e_oitavo_nivel.png');*/
     background-repeat: no-repeat; 
 }
 
@@ -246,7 +256,7 @@ tr.nivel-4 td:first-child {
 .nivel-8 .label{
     background-position: 41px -31px;
     padding-left: 69px;
-    background-image: url('./../../../img/seta_setimo_e_oitavo_nivel.png');
+    /*background-image: url('./../../../img/seta_setimo_e_oitavo_nivel.png');*/
     background-repeat: no-repeat; 
 }
 
@@ -288,7 +298,7 @@ tr.nivel-4 td:first-child {
 }
 
 .sem-filho .label{
-    background-image: none;
+    /*background-image: none;*/
     cursor: default;
 }
 

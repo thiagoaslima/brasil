@@ -62,7 +62,7 @@
             <div class="botao" *ngIf="dados && dados.indicador && dados.indicador.fontes && dados.indicador.fontes.length">
                 <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
                 <button (click)="mostrarFontes=true">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fontes
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fonte
                 </button>
                 <div *ngIf="mostrarFontes" class="fontes__lista-container">
                     <ol>
