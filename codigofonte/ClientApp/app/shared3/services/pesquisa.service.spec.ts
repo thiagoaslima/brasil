@@ -3,6 +3,8 @@ import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/ht
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
+import { BasicLRUCache } from '../../cache/model'
+import { CacheFactory } from '../../cache/cacheFactory.service';
 import { Pesquisa } from '../models';
 import { niveisTerritoriais } from '../values';
 
@@ -39,9 +41,12 @@ describe('PesquisaService', () => {
         })
     });
 
+    afterEach(() => {
+        PesquisaService3.cache.clear();
+    })
     
 
-    xdescribe('getAllPesquisas', () => {
+    describe('getAllPesquisas', () => {
 
         it('retorna 3 pesquisas', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
@@ -88,7 +93,7 @@ describe('PesquisaService', () => {
 
     })
 
-    xdescribe('getPesquisasPorAbrangenciaTerritorial', () => {
+    describe('getPesquisasPorAbrangenciaTerritorial', () => {
 
         it('deve responder apenas as pesquisas com determinada abrangência territorial', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {
@@ -130,7 +135,7 @@ describe('PesquisaService', () => {
 
     })
 
-    xdescribe('getPesquisas', () => {
+    describe('getPesquisas', () => {
 
         it('retorna 2 pesquisas', fakeAsync(
             inject([PesquisaService3, MockBackend], (pesquisaService: PesquisaService3, mockBackend: MockBackend) => {

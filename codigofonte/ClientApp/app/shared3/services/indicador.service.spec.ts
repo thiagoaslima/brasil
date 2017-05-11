@@ -5,6 +5,7 @@ import { MockBackend } from '@angular/http/testing';
 
 import { Indicador, Pesquisa } from '../models';
 import { IndicadorService3, PesquisaService3 } from './';
+import { BasicLRUCache } from '../../cache/model';
 import { ServicoDados as servidor } from '../values'
 
 import { Observable } from 'rxjs/Observable';

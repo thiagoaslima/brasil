@@ -13,13 +13,11 @@ export function RxMultiCache({ cache, labelsFromArguments, labelsFromResponse }:
         descriptor.value = function (...args) {
             // identificar cada item a ser recuperado
             let items = labelsFromArguments(...args);
-            console.log('items', items);
 
             // buscar no cache cada item individualmente
             // testar se todos os itens foram recuperados do cache
             let { caches, notFound } = items.reduce((acc, label) => {
                 let item = cache.get(label);
-                console.log('label', label);
 
                 if (!item) {
                     item = new ReplaySubject(1);

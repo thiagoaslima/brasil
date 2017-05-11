@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import { RxCache } from '.';
+import { RxSimpleCache } from '.';
 import { BasicLRUCache } from '../model';
 
 import { Observable } from 'rxjs/Observable';
@@ -8,15 +8,13 @@ import 'rxjs/add/observable/of';
 describe('RxCache', () => {
 
     let obj, decorated, mock;
+    const cache = new BasicLRUCache(5);
 
     beforeEach(() => {
-        // const decorate = RxCache({
-        //     cache: new BasicLRUCache(5)
-        // });
         mock = jest.fn();
         class Obj {
-            @RxCache({
-                cache: new BasicLRUCache(5)
+            @RxSimpleCache({
+                cache: cache
             })
             identity (val) {
                 mock(); 
@@ -24,9 +22,9 @@ describe('RxCache', () => {
             }
         }
         obj = new Obj()
-
-        // decorate(obj, 'identity', Object.getOwnPropertyDescriptor(obj, 'identity'));
     })
+
+    afterEach(() => cache.clear())
 
     it('should call the original method the first time', () => {
         obj.identity(1).subscribe(res => {
