@@ -37,6 +37,8 @@ export class RootComponent implements OnInit, OnDestroy {
     public abrirMenuPesquisa = false;
     public itemSelecionado;
 
+    public versao = require('./version.json');
+
     public isBrowser = isBrowser;
 
     private _localidade$$: Subscription;
