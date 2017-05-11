@@ -22,9 +22,9 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
-    IndicadorService3,
     PesquisaService3,
-    ResultadoService3
+    // IndicadorService3,
+    // ResultadoService3
 ]
 
 @NgModule({
@@ -41,10 +41,10 @@ const PROVIDERS = [
         ...COMPONENTS
     ]
 })
-export class SharedModule2 {
+export class SharedModule3 {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: SharedModule2,
+            ngModule: SharedModule3,
             providers: [
                 ...PROVIDERS
             ]

@@ -69,7 +69,8 @@ export class PesquisaService3 {
     }
 
     @RxCache({
-        cache: pesquisaCache
+        cache: pesquisaCache,
+        labelFromArguments: (id) => id
     })
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         const url = servidor.setUrl(`pesquisas/${pesquisaId}`);

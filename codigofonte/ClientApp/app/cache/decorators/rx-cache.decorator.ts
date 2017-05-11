@@ -4,14 +4,14 @@ import { PesquisaService3 } from '../../shared3/services'
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 
-const _generateLabel = (...args) => JSON.stringify(args);
+const _generateLabel = (args) => JSON.stringify(args);
 export function RxCache({cache, labelFromArguments = _generateLabel}: {cache: BasicLRUCache, labelFromArguments?: (...args) => number|string}) {    
 
     return function _RxCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
        const originalMethod = descriptor.value;
 
        descriptor.value = function (...args) {
-           const label = labelFromArguments(...args);
+           const label = args.map(labelFromArguments)[0];
            let cached: ReplaySubject<any> = cache.get(label);
         
            if (!cached) {

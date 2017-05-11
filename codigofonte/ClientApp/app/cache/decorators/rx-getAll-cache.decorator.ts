@@ -6,7 +6,7 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/do';
 
 
-export function RxGetAllCache({ cache, labelForAll = '__all', labelsFromResponse }: { cache: BasicLRUCache, labelForAll?: string, labelsFromResponse: (...args) => Array<number | string> }) {
+export function RxGetAllCache({ cache, labelForAll = '__multi__all', labelsFromResponse }: { cache: BasicLRUCache, labelForAll?: string, labelsFromResponse: (...args) => Array<number | string> }) {
 
     return function _RxGetAllCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
@@ -23,7 +23,7 @@ export function RxGetAllCache({ cache, labelForAll = '__all', labelsFromResponse
                 originalMethod.apply(this, args)
                     .subscribe(resp => {
                         let labels = labelsFromResponse(resp);
-                        labels.forEach((label, idx) => cache.set(label, resp[idx]).next(resp[idx]));
+                        labels.forEach((label, idx) => cache.get(label).next(resp[idx]));
                         Observable
                             .combineLatest(...labels.map(label => cache[label]))
                             .subscribe(arr => this.cached.next(arr))
