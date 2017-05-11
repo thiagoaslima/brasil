@@ -10,21 +10,22 @@ describe('RxMultiCache', () => {
     const objects = { 1: { id: 1 }, 2: { id: 2 }, 3: { id: 3 }, 4: { id: 4 }, 5: { id: 5 }, 6: { id: 6 } };
 
     beforeEach(() => {
-        const decorate = RxMultiCache({
-            cache: new BasicLRUCache(5),
-            labelsFromArguments: (ids) => ids.map(JSON.stringify),
-            labelsFromResponse: (objArray) => objArray.map(obj => JSON.stringify(obj.id))
-        });
 
         mock = jest.fn();
-        obj = {
-            getObjects: (ids: number[]) => {
+        class Obj {
+
+            @RxMultiCache({
+                cache: new BasicLRUCache(5),
+                labelsFromArguments: (ids) => ids.map(JSON.stringify),
+                labelsFromResponse: (objArray) => objArray.map(obj => JSON.stringify(obj.id))
+            })
+            getObjects(ids: number[]) {
                 mock();
                 return Observable.of(ids.map(id => objects[id]));
             }
         }
 
-        decorate(obj, 'getObjects', Object.getOwnPropertyDescriptor(obj, 'getObjects'));
+        obj = new Obj()
     })
 
     it('should call the original method the first time', () => {

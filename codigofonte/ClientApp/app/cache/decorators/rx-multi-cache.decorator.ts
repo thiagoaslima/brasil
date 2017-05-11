@@ -10,7 +10,7 @@ export function RxMultiCache({ cache, labelsFromArguments, labelsFromResponse }:
     return function _RxMultiCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
 
-        descriptor.value = (...args) => {
+        descriptor.value = function (...args) {
             // identificar cada item a ser recuperado
             let items = labelsFromArguments(...args);
 
@@ -28,12 +28,12 @@ export function RxMultiCache({ cache, labelsFromArguments, labelsFromResponse }:
                 acc.caches.push(item);
                 return acc;
             }, { caches: [], notFound: false })
-
+            
             const data$ = Observable.combineLatest(...caches);
 
             // rodar a função original para recuperar os itens não presentes no cache
             if (notFound) {
-                originalMethod.call(target, ...args)
+                originalMethod.apply(this, args)
                     .subscribe(resp => {
                         let labels = labelsFromResponse(resp);
                         labels.forEach((label, idx) => cache.get(label).next(resp[idx]));
@@ -43,7 +43,6 @@ export function RxMultiCache({ cache, labelsFromArguments, labelsFromResponse }:
             return data$;
         }
 
-        Object.defineProperty(target, propertyKey, descriptor);
-        return descriptor.value;
+        return descriptor;
     };
 }

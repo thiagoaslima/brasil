@@ -10,7 +10,7 @@ export function RxCache({cache, labelFromArguments = _generateLabel}: {cache: Ba
     return function _RxCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
        const originalMethod = descriptor.value;
 
-       descriptor.value = (...args) => {
+       descriptor.value = function (...args) {
            const label = labelFromArguments(...args);
            let cached: ReplaySubject<any> = cache.get(label);
         
@@ -18,9 +18,7 @@ export function RxCache({cache, labelFromArguments = _generateLabel}: {cache: Ba
                cached = new ReplaySubject(1);
                cache.set(label, cached);
 
-               console.log(target, typeof target, target._http);
-
-               originalMethod.call(target, ...args).subscribe(
+               originalMethod.apply(this, args).subscribe(
                    (resp) => cached.next(resp),
                    (err) => {
                        cached.error(err);
@@ -33,7 +31,6 @@ export function RxCache({cache, labelFromArguments = _generateLabel}: {cache: Ba
            return cached;
        } 
 
-        Object.defineProperty(target, propertyKey, descriptor);
-       return descriptor.value;
+       return descriptor;
     };
 }

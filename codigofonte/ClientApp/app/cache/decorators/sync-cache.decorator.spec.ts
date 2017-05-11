@@ -7,18 +7,20 @@ describe('SyncCache', () => {
     let obj, decorated, mock;
 
     beforeEach(() => {
-        const decorate = SyncCache({
-            cache: new BasicLRUCache(5)
-        });
+
         mock = jest.fn();
-        obj = {
-            identity: (val) => {
+        class Obj {
+            @SyncCache({
+                cache: new BasicLRUCache(5)
+            })
+            identity(val) {
                 mock();
                 return val;
             }
-        }
 
-        decorate(obj, 'identity', Object.getOwnPropertyDescriptor(obj, 'identity'));
+        }
+        obj = new Obj()
+        
     })
 
     it('should call the original method the first time', () => {

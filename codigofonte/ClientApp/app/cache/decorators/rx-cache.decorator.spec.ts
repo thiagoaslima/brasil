@@ -10,18 +10,22 @@ describe('RxCache', () => {
     let obj, decorated, mock;
 
     beforeEach(() => {
-        const decorate = RxCache({
-            cache: new BasicLRUCache(5)
-        });
+        // const decorate = RxCache({
+        //     cache: new BasicLRUCache(5)
+        // });
         mock = jest.fn();
-        obj = {
-            identity: (val) => {
-                mock();
+        class Obj {
+            @RxCache({
+                cache: new BasicLRUCache(5)
+            })
+            identity (val) {
+                mock(); 
                 return Observable.of(val);
             }
         }
+        obj = new Obj()
 
-        decorate(obj, 'identity', Object.getOwnPropertyDescriptor(obj, 'identity'));
+        // decorate(obj, 'identity', Object.getOwnPropertyDescriptor(obj, 'identity'));
     })
 
     it('should call the original method the first time', () => {

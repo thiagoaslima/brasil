@@ -11,23 +11,22 @@ export function RxGetAllCache({ cache, labelForAll = '__all', labelsFromResponse
     return function _RxGetAllCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
 
-        descriptor.value = (...args) => {
+        descriptor.value = function (...args) {
             let cached: ReplaySubject<any> = cache.get(labelForAll);
 
             if (cached) {
                 return cached;
             } else {
-                cached =  new ReplaySubject(1);
+                cached = new ReplaySubject(1);
                 cache.set(labelForAll, cached);
 
-                originalMethod.call(target, ...args)
+                originalMethod.apply(this, args)
                     .subscribe(resp => {
                         let labels = labelsFromResponse(resp);
                         labels.forEach((label, idx) => cache.set(label, resp[idx]).next(resp[idx]));
                         Observable
                             .combineLatest(...labels.map(label => cache[label]))
                             .subscribe(arr => this.cached.next(arr))
-
                     });
 
                 return cached;
@@ -35,7 +34,6 @@ export function RxGetAllCache({ cache, labelForAll = '__all', labelsFromResponse
 
         }
 
-        Object.defineProperty(target, propertyKey, descriptor);
         return descriptor.value;
     };
 }

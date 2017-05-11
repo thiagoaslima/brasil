@@ -4,18 +4,18 @@ export function SyncCache({cache}: {cache: BasicLRUCache}) {
     return function _ObservableCache(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
        const originalMethod = descriptor.value;
 
-       descriptor.value = (...args) => {
-           let cached = cache.get(JSON.stringify(args));
+       descriptor.value = function (...args) {
+           const label = JSON.stringify(args)
+           let cached = cache.get(label);
 
            if (!cached) {
-               cached = originalMethod.call(target, ...args)
-               cache.set(JSON.stringify(args), cached);
+               cached = originalMethod.apply(this, args)
+               cache.set(label, cached);
            };
 
            return cached;
        } 
 
-        Object.defineProperty(target, propertyKey, descriptor);
-       return descriptor.value;
+       return descriptor;
     };
 }
