@@ -4,7 +4,6 @@
 
 .hist__texto{
     line-height: 145%;
-
 }
 
 .caixa{
@@ -24,17 +23,25 @@
     width: 90%;
 }
 
-
 .caixa__conteudo{
     line-height: 2em;
     font-size: .95em;
     padding: 16px 52px 52px 52px;
 	width: 100%;
-	max-width:900px;
+    max-width: 900px;
 }
 
 @media screen and (max-width: 768px) {
 	.caixa__conteudo{
-	padding-left:0;
+	    padding-left:0;
 	}
+}
+
+/*tela gigante*/
+@media screen and (min-width: 1600px) {
+    .caixa__conteudo{
+        width: 60%;
+        max-width: none;
+        padding-right: 0px;
+    }
 }

@@ -1,7 +1,7 @@
 <div class="component">
     <div class="comp__conteudo">
 		<div   *ngIf="preview1 == '' && preview2 == '' && preview3 == ''" class="sem_fotos">
-        Não há fotos para este município
+            Não há fotos para este município
 		</div>
         
         <div class="preview" (click)="mostrar()"  *ngIf="preview1 != '' && preview2 == '' && preview3 == ''">
@@ -19,6 +19,19 @@
             </div>
             <div class="preview__foto-pequena">
                 <img class="foto__preview" [style.background-image]="'url(' + preview3 +')'"/>
+            </div>
+        </div>
+
+        <div class="preview2" (click)="mostrar()" *ngIf="preview4 != '' && preview5 != '' && preview6 != ''">
+            <!--preview extra para telas gigantes-->
+            <div class="preview__foto-grande">
+                <img class="foto__preview" [style.background-image]="'url(' + preview4 +')'"/>
+            </div>
+            <div class="preview__foto-pequena">
+                <img class="foto__preview" [style.background-image]="'url(' + preview5 +')'"/>
+            </div>
+            <div class="preview__foto-pequena">
+                <img class="foto__preview" [style.background-image]="'url(' + preview6 +')'"/>
             </div>
         </div>
 
@@ -68,7 +81,6 @@
                 </div>
             </div>
 
-            
             <i class="fa fa-chevron-right foto__seta-direita" aria-hidden="true" (click)="posterior()"></i>
 
         </div>
