@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/infografia/ng2-charts.module.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">ClientApp/app/infografia/</a> ng2-charts.module.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/123</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/80</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/113</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import {</span>
+	OnDestroy,
+	OnInit,
+	OnChanges,
+	EventEmitter,
+	ElementRef,
+	Input,
+	Output,
+	NgModule,
+	SimpleChanges,
+	Directive
+} from '@angular/core';
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { isBrowser } from 'angular2-universal';</span>
+&nbsp;
+declare var Chart: any;
+&nbsp;
+/* tslint:disable-next-line */
+@Directive({ selector: 'canvas[baseChart]', exportAs: 'base-chart' })
+e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >BaseChartDirective<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>implements OnDestroy, OnChanges, OnInit {</span>
+	public <span class="cstat-no" title="statement not covered" >isBrowser = isBrowser;</span>
+	public static <span class="cstat-no" title="statement not covered" >defaultColors: Array&lt;number[]&gt; = [</span>
+		[255, 99, 132],
+		[54, 162, 235],
+		[255, 206, 86],
+		[231, 233, 237],
+		[75, 192, 192],
+		[151, 187, 205],
+		[220, 220, 220],
+		[247, 70, 74],
+		[70, 191, 189],
+		[253, 180, 92],
+		[148, 159, 177],
+		[77, 83, 96]
+	];
+&nbsp;
+	@Input() <span class="cstat-no" title="statement not covered" >public data: number[] | any[];</span>
+	@Input() <span class="cstat-no" title="statement not covered" >public datasets: any[];</span>
+	@Input() <span class="cstat-no" title="statement not covered" >public <span class="cstat-no" title="statement not covered" >labels: Array&lt;any&gt; = [];</span></span>
+	@Input() <span class="cstat-no" title="statement not covered" >public <span class="cstat-no" title="statement not covered" >options: any = {};</span></span>
+	@Input() <span class="cstat-no" title="statement not covered" >public chartType: string;</span>
+	@Input() <span class="cstat-no" title="statement not covered" >public colors: Array&lt;any&gt;;</span>
+	@Input() <span class="cstat-no" title="statement not covered" >public legend: boolean;</span>
+&nbsp;
+	@Output() <span class="cstat-no" title="statement not covered" >public <span class="cstat-no" title="statement not covered" >chartClick: EventEmitter&lt;any&gt; = new EventEmitter();</span></span>
+	@Output() <span class="cstat-no" title="statement not covered" >public <span class="cstat-no" title="statement not covered" >chartHover: EventEmitter&lt;any&gt; = new EventEmitter();</span></span>
+&nbsp;
+	public ctx: any;
+	public chart: any;
+	private cvs: any;
+	private <span class="cstat-no" title="statement not covered" >initFlag: boolean = false;</span>
+&nbsp;
+	private element: ElementRef;
+&nbsp;
+	public constructor(element: ElementRef<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >		this.element = element;</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	public <span class="cstat-no" title="statement not covered" >ngOnInit(): any {</span></span>
+<span class="cstat-no" title="statement not covered" >		if (this.isBrowser) {</span>
+<span class="cstat-no" title="statement not covered" >			this.ctx = this.element.nativeElement.getContext('2d');</span>
+<span class="cstat-no" title="statement not covered" >			this.cvs = this.element.nativeElement;</span>
+<span class="cstat-no" title="statement not covered" >			this.initFlag = true;</span>
+<span class="cstat-no" title="statement not covered" >			if (this.data || this.datasets) {</span>
+<span class="cstat-no" title="statement not covered" >				this.refresh();</span>
+			}
+		}
+	}
+&nbsp;
+	public <span class="cstat-no" title="statement not covered" >ngOnChanges(changes: SimpleChanges<span class="fstat-no" title="function not covered" >): void {</span></span>
+<span class="cstat-no" title="statement not covered" >		if (this.initFlag &amp;&amp; this.isBrowser) {</span>
+			// Check if the changes are in the data or datasets
+<span class="cstat-no" title="statement not covered" >			if (changes.hasOwnProperty('data') || changes.hasOwnProperty('datasets')) {</span>
+<span class="cstat-no" title="statement not covered" >				if (changes['data']) {</span>
+<span class="cstat-no" title="statement not covered" >					this.updateChartData(changes['data'].currentValue);</span>
+				} else {
+<span class="cstat-no" title="statement not covered" >					this.updateChartData(changes['datasets'].currentValue);</span>
+				}
+&nbsp;
+				//this.chart.update();
+			}
+			// else {
+			// // otherwise rebuild the chart
+			// this.refresh();
+			// }
+<span class="cstat-no" title="statement not covered" >			this.refresh();</span>
+		}
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	public <span class="cstat-no" title="statement not covered" >ngOnDestroy(): any {</span></span>
+<span class="cstat-no" title="statement not covered" >		if (this.chart &amp;&amp; this.isBrowser) {</span>
+<span class="cstat-no" title="statement not covered" >			this.chart.destroy();</span>
+<span class="cstat-no" title="statement not covered" >			this.chart = void 0;</span>
+		}
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	public <span class="cstat-no" title="statement not covered" >getChartBuilder(ctx: any/*, data:Array&lt;any&gt;, options:any*/<span class="fstat-no" title="function not covered" >): any {</span></span></span>
+		let datasets: any = <span class="cstat-no" title="statement not covered" >this.getDatasets();</span>
+&nbsp;
+		let options: any = <span class="cstat-no" title="statement not covered" >Object.assign({}, this.options);</span>
+<span class="cstat-no" title="statement not covered" >		if (this.legend === false) {</span>
+<span class="cstat-no" title="statement not covered" >			options.legend = { display: false };</span>
+		}
+		// hock for onHover and onClick events
+<span class="cstat-no" title="statement not covered" >		options.hover = options.hover || {};</span>
+<span class="cstat-no" title="statement not covered" >		if (!options.hover.onHover) {</span>
+<span class="cstat-no" title="statement not covered" >			options.hover.onHover = (active: Array&lt;any&gt;<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >				if (active &amp;&amp; !active.length) {</span>
+<span class="cstat-no" title="statement not covered" >					return;</span>
+				}
+<span class="cstat-no" title="statement not covered" >				this.chartHover.emit({ active });</span>
+			};
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (!options.onClick) {</span>
+<span class="cstat-no" title="statement not covered" >			options.onClick = (event: any, active: Array&lt;any&gt;<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >				this.chartClick.emit({ event, active });</span>
+			};
+		}
+&nbsp;
+		let opts = <span class="cstat-no" title="statement not covered" >{</span>
+			type: this.chartType,
+			data: {
+				labels: this.labels,
+				datasets: datasets
+			},
+			options: options
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (typeof Chart === 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >			throw new Error('ng2-charts configuration issue: Embedding Chart.js lib is mandatory');</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return new Chart(ctx, opts);</span>
+	}
+&nbsp;
+	private <span class="cstat-no" title="statement not covered" >updateChartData(newDataValues: number[] | any[]<span class="fstat-no" title="function not covered" >): void {</span></span>
+<span class="cstat-no" title="statement not covered" >		if (Array.isArray(newDataValues[0].data)) {</span>
+<span class="cstat-no" title="statement not covered" >			this.chart.data.datasets.forEach((dataset: any, i: number<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >				dataset.data = newDataValues[i].data;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if (newDataValues[i].label) {</span>
+<span class="cstat-no" title="statement not covered" >					dataset.label = newDataValues[i].label;</span>
+				}
+			});
+		} else {
+<span class="cstat-no" title="statement not covered" >			this.chart.data.datasets[0].data = newDataValues;</span>
+		}
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >	private <span class="cstat-no" title="statement not covered" >getDatasets(): any {</span></span></span>
+		let datasets: any = <span class="cstat-no" title="statement not covered" >void 0;</span>
+		// in case if datasets is not provided, but data is present
+<span class="cstat-no" title="statement not covered" >		if (!this.datasets || !this.datasets.length &amp;&amp; (this.data &amp;&amp; this.data.length)) {</span>
+<span class="cstat-no" title="statement not covered" >			if (Array.isArray(this.data[0])) {</span>
+<span class="cstat-no" title="statement not covered" >				datasets = (this.data as Array&lt;number[]&gt;).map((data: number[], index: number<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >					return { data, label: this.labels[index] || `Label ${index}` };</span>
+				});
+			} else {
+<span class="cstat-no" title="statement not covered" >				datasets = [{ data: this.data, label: `Label 0` }];</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (this.datasets &amp;&amp; this.datasets.length ||</span>
+			(datasets &amp;&amp; datasets.length)) {
+<span class="cstat-no" title="statement not covered" >			datasets = (this.datasets || datasets)</span>
+				.map((elm: number, index: number<span class="fstat-no" title="function not covered" >) =&gt; {</span>
+					let newElm: any = <span class="cstat-no" title="statement not covered" >Object.assign({}, elm);</span>
+<span class="cstat-no" title="statement not covered" >					if (this.colors &amp;&amp; this.colors.length) {</span>
+<span class="cstat-no" title="statement not covered" >						Object.assign(newElm, this.colors[index]);</span>
+					} else {
+<span class="cstat-no" title="statement not covered" >						Object.assign(newElm, getColors(this.chartType, index, newElm.data.length));</span>
+					}
+<span class="cstat-no" title="statement not covered" >					return newElm;</span>
+				});
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (!datasets) {</span>
+<span class="cstat-no" title="statement not covered" >			throw new Error(`ng-charts configuration error,</span>
+	  data or datasets field are required to render char ${this.chartType}`);
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return datasets;</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	private <span class="cstat-no" title="statement not covered" >refresh(): any {</span></span>
+		// if (this.options &amp;&amp; this.options.responsive) {
+		//   setTimeout(() =&gt; this.refresh(), 50);
+		// }
+&nbsp;
+		// todo: remove this line, it is producing flickering
+<span class="cstat-no" title="statement not covered" >		this.ngOnDestroy();</span>
+<span class="cstat-no" title="statement not covered" >		this.chart = this.getChartBuilder(this.ctx/*, data, this.options*/);</span>
+	}
+<span class="cstat-no" title="statement not covered" >}</span>
+&nbsp;
+// private helper functions
+export interface Color {
+	backgroundColor?: string | string[];
+	borderWidth?: number | number[];
+	borderColor?: string | string[];
+	borderCapStyle?: string;
+	borderDash?: number[];
+	borderDashOffset?: number;
+	borderJoinStyle?: string;
+&nbsp;
+	pointBorderColor?: string | string[];
+	pointBackgroundColor?: string | string[];
+	pointBorderWidth?: number | number[];
+&nbsp;
+	pointRadius?: number | number[];
+	pointHoverRadius?: number | number[];
+	pointHitRadius?: number | number[];
+&nbsp;
+	pointHoverBackgroundColor?: string | string[];
+	pointHoverBorderColor?: string | string[];
+	pointHoverBorderWidth?: number | number[];
+	pointStyle?: string | string[];
+&nbsp;
+	hoverBackgroundColor?: string | string[];
+	hoverBorderColor?: string | string[];
+	hoverBorderWidth?: number;
+}
+&nbsp;
+// pie | doughnut
+export interface Colors extends Color {
+	data?: number[];
+	label?: string;
+}
+&nbsp;
+function rgba(colour: Array&lt;number&gt;, alpha: number<span class="fstat-no" title="function not covered" >): string {</span>
+<span class="cstat-no" title="statement not covered" >	return 'rgba(' + colour.concat(alpha).join(',') + ')';</span>
+}
+&nbsp;
+function getRandomInt(min: number, max: number<span class="fstat-no" title="function not covered" >): number {</span>
+<span class="cstat-no" title="statement not covered" >	return Math.floor(Math.random() * (max - min + 1)) + min;</span>
+}
+&nbsp;
+function formatLineColor(colors: Array&lt;number&gt;<span class="fstat-no" title="function not covered" >): Color {</span>
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		backgroundColor: rgba(colors, 0.4),
+		borderColor: rgba(colors, 1),
+		pointBackgroundColor: rgba(colors, 1),
+		pointBorderColor: '#fff',
+		pointHoverBackgroundColor: '#fff',
+		pointHoverBorderColor: rgba(colors, 0.8)
+	};
+}
+&nbsp;
+function formatBarColor(colors: Array&lt;number&gt;<span class="fstat-no" title="function not covered" >): Color {</span>
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		backgroundColor: rgba(colors, 0.6),
+		borderColor: rgba(colors, 1),
+		hoverBackgroundColor: rgba(colors, 0.8),
+		hoverBorderColor: rgba(colors, 1)
+	};
+}
+&nbsp;
+function formatPieColors(colors: Array&lt;number[]&gt;<span class="fstat-no" title="function not covered" >): Colors {</span>
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		backgroundColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 0.6))</span></span>,
+		borderColor: colors.map(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >'#fff')</span></span>,
+		pointBackgroundColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 1))</span></span>,
+		pointBorderColor: colors.map(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >'#fff')</span></span>,
+		pointHoverBackgroundColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 1))</span></span>,
+		pointHoverBorderColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 1))</span></span>
+	};
+}
+&nbsp;
+function formatPolarAreaColors(colors: Array&lt;number[]&gt;<span class="fstat-no" title="function not covered" >): Color {</span>
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		backgroundColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 0.6))</span></span>,
+		borderColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 1))</span></span>,
+		hoverBackgroundColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 0.8))</span></span>,
+		hoverBorderColor: colors.map((color: number[]<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >rgba(color, 1))</span></span>
+	};
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function getRandomColor(): number[] {</span>
+<span class="cstat-no" title="statement not covered" >	return [getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255)];</span>
+}
+&nbsp;
+/**
+ * Generate colors for line|bar charts
+ * @param index
+ * @returns {number[]|Color}
+ */
+function generateColor(index: number<span class="fstat-no" title="function not covered" >): number[] {</span>
+<span class="cstat-no" title="statement not covered" >	return BaseChartDirective.defaultColors[index] || getRandomColor();</span>
+}
+&nbsp;
+/**
+ * Generate colors for pie|doughnut charts
+ * @param count
+ * @returns {Colors}
+ */
+function generateColors(count: number<span class="fstat-no" title="function not covered" >): Array&lt;number[]&gt; {</span>
+	let colorsArr: Array&lt;number[]&gt; = <span class="cstat-no" title="statement not covered" >new Array(count);</span>
+<span class="cstat-no" title="statement not covered" >	for (let i = 0; i &lt; count; i++) {</span>
+<span class="cstat-no" title="statement not covered" >		colorsArr[i] = BaseChartDirective.defaultColors[i] || getRandomColor();</span>
+	}
+<span class="cstat-no" title="statement not covered" >	return colorsArr;</span>
+}
+&nbsp;
+/**
+ * Generate colors by chart type
+ * @param chartType
+ * @param index
+ * @param count
+ * @returns {Color}
+ */
+function getColors(chartType: string, index: number, count: number<span class="fstat-no" title="function not covered" >): Color {</span>
+<span class="cstat-no" title="statement not covered" >	if (chartType === 'pie' || chartType === 'doughnut') {</span>
+<span class="cstat-no" title="statement not covered" >		return formatPieColors(generateColors(count));</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if (chartType === 'polarArea') {</span>
+<span class="cstat-no" title="statement not covered" >		return formatPolarAreaColors(generateColors(count));</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if (chartType === 'line' || chartType === 'radar') {</span>
+<span class="cstat-no" title="statement not covered" >		return formatLineColor(generateColor(index));</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if (chartType === 'bar' || chartType === 'horizontalBar') {</span>
+<span class="cstat-no" title="statement not covered" >		return formatBarColor(generateColor(index));</span>
+	}
+<span class="cstat-no" title="statement not covered" >	return generateColor(index);</span>
+}
+&nbsp;
+@NgModule({
+	declarations: [
+		BaseChartDirective
+	],
+	exports: [
+		BaseChartDirective
+	],
+	imports: []
+})
+<span class="fstat-no" title="function not covered" >e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >ChartsModule<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>{</span></span>
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

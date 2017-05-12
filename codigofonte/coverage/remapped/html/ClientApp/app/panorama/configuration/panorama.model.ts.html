@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/panorama/configuration/panorama.model.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">ClientApp/app/panorama/configuration/</a> panorama.model.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
+<span class="cstat-no" title="statement not covered" >import { Indicador, Ranking } from '../../shared2/indicador/indicador.model';</span>
+&nbsp;
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+&nbsp;
+export type GraficoConfiguration = {
+    tipo: string,
+    titulo: string,
+    subtitulo?: string,
+    dados: Array&lt;{
+        indicadorId: number,
+        pesquisaId: number,
+        indicador: Indicador
+    }&gt;
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span>export class <span class="cstat-no" title="statement not covered" >PanoramaConfigurationItem </span>{</span>
+    public titulo: string
+    public subtitulo: string
+    public tema: string
+    public largura: string
+    public link: string
+    public pesquisaId: number
+    public indicadorId: number
+    public unidade: string
+    public periodo: string
+    public visualizacao: string
+    public indicador: Indicador
+    public grafico: GraficoConfiguration;
+    public ranking: {[contexto: string]: Ranking}
+    public <span class="cstat-no" title="statement not covered" >maiorMelhor = true;</span>
+&nbsp;
+    constructor(data<span class="fstat-no" title="function not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >        this.titulo = data.titulo || "";</span>
+<span class="cstat-no" title="statement not covered" >        this.subtitulo = data.subtitulo || "";</span>
+<span class="cstat-no" title="statement not covered" >        this.tema = data.tema;</span>
+<span class="cstat-no" title="statement not covered" >        this.largura = data.largura || "full";</span>
+<span class="cstat-no" title="statement not covered" >        this.link = data.link || "";</span>
+<span class="cstat-no" title="statement not covered" >        this.pesquisaId = data.pesquisaId || 0;</span>
+<span class="cstat-no" title="statement not covered" >        this.indicadorId = data.indicadorId || 0;</span>
+<span class="cstat-no" title="statement not covered" >        this.unidade = data.unidade || "";</span>
+<span class="cstat-no" title="statement not covered" >        this.visualizacao = data.visualizacao;</span>
+<span class="cstat-no" title="statement not covered" >        this.periodo = data.periodo || "";</span>
+<span class="cstat-no" title="statement not covered" >        this.ranking = data.ranking </span>
+            ? data.ranking.reduce( (acc, rank<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >Object.assign(acc, {[rank.contexto]: rank}),</span></span> {}) 
+            : null;
+<span class="cstat-no" title="statement not covered" >        this.maiorMelhor = data.maiorMelhor === undefined ? true : data.maiorMelhor;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (data.indicador &amp;&amp; data.indicador instanceof Indicador) {</span>
+<span class="cstat-no" title="statement not covered" >            this.indicador = data.indicador;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.indicador = null;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (data.grafico &amp;&amp; data.grafico.dados &amp;&amp; data.grafico.dados.length) {</span>
+<span class="cstat-no" title="statement not covered" >            this.grafico = Object.assign(</span>
+                {},
+                data.grafico,
+                {
+                    dados: data.grafico.dados.map(obj<span class="fstat-no" title="function not covered" > =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        if (obj.indicador === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                            obj.indicador = null;</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        return obj;</span>
+                    })
+                });
+<span class="cstat-no" title="statement not covered" >            if (this.grafico.titulo === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.grafico.titulo = this.titulo;</span>
+            }
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.grafico = null;</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >}</span>
+&nbsp;
+export const <span class="cstat-no" title="statement not covered" >PanoramaVisualizacao = {</span>
+    grafico: "grafico",
+    mapa: "cartograma",
+    numerico: "numero",
+    painel: "painel"
+}
+&nbsp;
+export type PanoramaItem = {
+    tema: string,
+    painel: PanoramaConfigurationItem[]
+    grafico: PanoramaConfigurationItem[]
+    cartograma: PanoramaConfigurationItem[]
+    numero: PanoramaConfigurationItem[]
+}
+&nbsp;
+export type PanoramaDescriptor = PanoramaItem[]
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

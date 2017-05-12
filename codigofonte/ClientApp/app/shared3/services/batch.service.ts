@@ -22,7 +22,7 @@ export class FooService {
     }
 }
 
-function BatchRequest({ debounceTime = 10, passThrough = false } = {}) {
+function BatchRequest(filterFn, { debounceTime = 10, passThrough = false } = {}) {
     let argumentsQueue = [];
     let clearTimeoutId = null;
 
@@ -68,7 +68,7 @@ function BatchRequest({ debounceTime = 10, passThrough = false } = {}) {
             updateArgumentsQueue(args);
             queueCalls(originalMethod, target);
             
-            return sub.asObservable();
+            return sub.asObservable().filter(filterFn);
         };
 
         descriptor.value.__batchRequestDecorated = true;

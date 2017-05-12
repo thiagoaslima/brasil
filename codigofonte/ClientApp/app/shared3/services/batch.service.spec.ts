@@ -1,5 +1,5 @@
+/// <reference types="jest" />
 import { FooService } from './batch.service';
-import 'rxjs/RX'
 
 xdescribe('Batch Service', () => {
     let service: FooService;

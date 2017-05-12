@@ -8,6 +8,8 @@ import { PanoramaComponent } from './panorama/panorama.component';
 import { PesquisaComponent2 } from './pesquisa2/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
 
+import { PesquisaCacheComponent } from './cache/components';
+
 
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
@@ -15,17 +17,20 @@ import { ValidParametersGuard } from './valid-parameters.guard';
 const children = [
   { path: '', redirectTo: 'panorama', pathMatch: 'full' },
 
-  { path: 'panorama',
+  {
+    path: 'panorama',
     component: PanoramaComponent
   },
 
-  { path: 'historico',
+  {
+    path: 'historico',
     component: VisaoHistoricaComponent
   },
 
-  { path: 'pesquisa', component: PesquisaComponent2},
-  { path: 'pesquisa/:pesquisa', component: PesquisaComponent2},
-  { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent2},
+  { path: 'pesquisa', component: PesquisaComponent2 },
+  { path: 'pesquisa/:pesquisa', component: PesquisaComponent2 },
+  { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent2 }
+
 ];
 
 @NgModule({
@@ -44,11 +49,6 @@ const children = [
       {
         path: 'brasil/sandbox',
         redirectTo: 'v4/brasil/sandbox',
-      },
-      {
-        path: 'v4/municipio/:codmun',
-        canActivate: [V3RouterGuard],
-        component: EmptyComponent
       },
       {
         path: 'v4/brasil',
@@ -71,6 +71,18 @@ const children = [
       {
         path: 'brasil/:uf/:municipio',
         redirectTo: 'v4/brasil/:uf/:municipio',
+      },
+      {
+        path: 'v4/municipio/:codmun',
+        canActivate: [V3RouterGuard],
+        component: EmptyComponent
+      },
+      {
+        path: 'cache',
+        children: [
+          { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
+          { path: 'pesquisas', component: PesquisaCacheComponent }
+        ]
       },
       {
         path: '**',

@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/panorama/configuration/panorama.model.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">ClientApp/app/panorama/configuration</a> panorama.model.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/32</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Pesq<span class="cstat-no" title="statement not covered" >uisa } from '../../shared2/pe<span class="cstat-no" title="statement not covered" >s</span>quisa/pesquis</span>a.model';
+<span class="cstat-no" title="statement not covered" >import { Indicador, Ranking } from '../../shared2/indicador/ind</span>icador.model';
+<span class="cstat-no" title="statement not covered" ></span>
+import { Observable } from 'rxjs/<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >Ob</span>servable';</span>
+import { Subs<span class="fstat-no" title="function not covered" >cription } from 'rxjs/Subs</span>cription';
+<span class="cstat-no" title="statement not covered" ></span>
+export t<span class="cstat-no" title="statement not covered" >ype GraficoConfiguration = {</span>
+    tipo<span class="cstat-no" title="statement not covered" >: string,</span>
+    titu<span class="cstat-no" title="statement not covered" >lo: string,</span>
+    subt<span class="cstat-no" title="statement not covered" >itulo?: string,</span>
+    dado<span class="cstat-no" title="statement not covered" >s: Array&lt;{</span>
+<span class="cstat-no" title="statement not covered" >        indicadorId: number,</span>
+<span class="cstat-no" title="statement not covered" >        pesquisaId: number,</span>
+<span class="cstat-no" title="statement not covered" >        indicador: Indicador</span>
+    }&gt;<span class="cstat-no" title="statement not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+export class PanoramaConfiguration<span class="fstat-no" title="function not covered" >It</span>em {
+    public titul<span class="cstat-no" title="statement not covered" >o: string</span>
+    public subtitulo: string
+    public tema: string
+    public largura: string
+    publ<span class="cstat-no" title="statement not covered" >ic link: string</span>
+    publ<span class="cstat-no" title="statement not covered" >ic pesquisaId: number</span>
+    public i<span class="cstat-no" title="statement not covered" >ndicadorId: number</span>
+    public unidade: string
+    public periodo: string
+    public v<span class="cstat-no" title="statement not covered" >isualizacao: string</span>
+    public indicador: Indicador
+    publ<span class="cstat-no" title="statement not covered" >ic grafico: GraficoConfiguration;</span>
+    public r<span class="cstat-no" title="statement not covered" >anking: {[contexto: string]: Ranking}</span>
+    public maiorMelhor = true;<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    constructor(data) {<span class="cstat-no" title="statement not covered" ></span>
+        this.titulo = data.titulo || "";
+        this.subtitu<span class="cstat-no" title="statement not covered" >lo = data.su</span>btitulo || "";
+        this.tema = data.tema;
+        this.largura = data.largura || "full";
+        this<span class="cstat-no" title="statement not covered" >.link = data.link || "";</span>
+        this.pes<span class="cstat-no" title="statement not covered" >quisaId = data.pesquisaId || 0;</span>
+        this.indicadorId = data.indicadorId || 0;
+        this.unidade = data.unidade || "";
+        this.visualizacao = data.visualizacao;
+        this<span class="cstat-no" title="statement not covered" >.periodo = data.perio</span>do || "";
+        this.ranking = data.ranking 
+            ? data.ranking.reduce( (acc, rank) =&gt; Object.assign(acc, {[rank.contexto]: rank}), {}) 
+<span class="cstat-no" title="statement not covered" >            : null;</span>
+        this.maiorMelhor = data.maiorMelhor === undefined ? true : data.maiorMelhor;
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (data.indicador &amp;&amp; data.indicador instanceof Indicador) {</span>
+            this.indicador = data.indicador;
+        } else {
+            this.indicador = null;
+        }
+&nbsp;
+        if (data.grafico &amp;&amp; data.grafico.dados &amp;&amp; data.grafico.dados.length) {
+            this.grafico = Object.assign(
+                {},
+                data.grafico,
+                {
+                    dados: data.grafico.dados.map(obj =&gt; {
+                        if (obj.indicador === undefined) {
+                            obj.indicador = null;
+                        }
+                        return obj;
+                    })
+                });
+            if (this.grafico.titulo === undefined) {
+                this.grafico.titulo = this.titulo;
+            }
+        } else {
+            this.grafico = null;
+        }
+    }
+}
+&nbsp;
+export const PanoramaVisualizacao = {
+    grafico: "grafico",
+    mapa: "cartograma",
+    numerico: "numero",
+    painel: "painel"
+}
+&nbsp;
+export type PanoramaItem = {
+    tema: string,
+    painel: PanoramaConfigurationItem[]
+    grafico: PanoramaConfigurationItem[]
+    cartograma: PanoramaConfigurationItem[]
+    numero: PanoramaConfigurationItem[]
+}
+&nbsp;
+export type PanoramaDescriptor = PanoramaItem[]
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

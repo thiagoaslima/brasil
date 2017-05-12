@@ -43,7 +43,8 @@ export class BuscaComponent implements OnInit {
 
     ngOnInit() {
 
-        this._appState.observable$.subscribe(localidade => this._localidadeAtual = localidade);
+        this._appState.observable$
+            .subscribe(localidade => this._localidadeAtual = localidade);
 
         Observable.fromEvent<KeyboardEvent>(this.campoBusca.nativeElement, "keyup")
             .debounceTime(400)
@@ -81,7 +82,7 @@ export class BuscaComponent implements OnInit {
                 tipo: pesquisa.descricao,
                 categoria: 1,
                 destaque: '',
-                link: this._localidadeAtual.link + '/pesquisa/' + pesquisa.id
+                link: this._localidadeAtual.localidade.link + '/pesquisa/' + pesquisa.id
             };
 
             this.resultadoPesquisas.push(itemResultado);
