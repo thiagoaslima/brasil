@@ -3,7 +3,7 @@
 
         <div *ngIf="!tema.tema" class="topo">
 
-            <div *ngFor="let item of tema.indicadores; let first = first; let last=last" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': last}">
+            <div *ngFor="let item of tema.indicadores; let first = first; let last=last; let i = index" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': i === 1, 'topo__celula-linha': i > 1}">
                 <h3 class="topo__titulo">
                     {{ item.titulo || item.indicador?.nome }}
                 </h3>

@@ -13,6 +13,7 @@ export interface ItemConfiguracao {
 
     titulo?: string
     tema: string
+    largura?: string
     
     visualizacao: string
     grafico?: {
@@ -23,4 +24,7 @@ export interface ItemConfiguracao {
             pesquisaId?: number
         }>
     }
+
+    correlacaoPositivaValorQualidade?: boolean
+    correlacaoNegativaValorQualidade?: boolean
 }

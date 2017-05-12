@@ -76,6 +76,10 @@ describe('IndicadorService', () => {
             })
         })
 
+        afterEach(() => {
+            IndicadorService3.cache.clear();
+        })
+
         it('deve ser instanciado',
             inject([IndicadorService3, MockBackend],
                 (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
@@ -220,6 +224,10 @@ describe('IndicadorService', () => {
                 })
             })
 
+            afterEach(() => {
+                IndicadorService3.cache.clear();
+            })
+
             it('deve construir instancias de Indicador com Resultado', fakeAsync(
                 inject([IndicadorService3, MockBackend],
                     (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
@@ -305,6 +313,10 @@ describe('IndicadorService', () => {
                     }
                 ]
             })
+        })
+
+        afterEach(() => {
+            IndicadorService3.cache.clear();
         })
 
         it('deve ser instanciado',

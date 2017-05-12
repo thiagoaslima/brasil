@@ -6,7 +6,7 @@ import { Indicador, Pesquisa } from '../models';
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { RxSimpleCache } from '../../cache/decorators';
 import { escopoIndicadores, ServicoDados as servidor } from '../values';
-import { arrayUniqueValues, converterObjArrayEmHash } from '../../utils2';
+import { arrayUniqueValues, converterObjArrayEmHash, curry, getProperty } from '../../utils2';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -85,7 +85,7 @@ export class IndicadorService3 {
 
         return this._request(url)
             .mergeMap(responseIndicadores => {
-                const pesquisasId = arrayUniqueValues(responseIndicadores.map(obj => obj.pesquisa_id));
+                const pesquisasId = arrayUniqueValues(responseIndicadores.map(curry(getProperty, 'pesquisa_id')));
                 return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas => [responseIndicadores, pesquisas]);
             })
             .map(([responseIndicadores, pesquisas]) => {

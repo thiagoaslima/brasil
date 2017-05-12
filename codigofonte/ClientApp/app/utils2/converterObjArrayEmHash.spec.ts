@@ -1,4 +1,5 @@
-import { converterObjArrayEmHash } from './';
+/// <reference types="jest" />
+import { converterObjArrayEmHash } from './converterObjArrayEmHash';
 
 describe('converterArrayEmHash', () => {
 

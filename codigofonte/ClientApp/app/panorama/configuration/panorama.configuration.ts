@@ -123,24 +123,26 @@ export const PANORAMA = {
                 largura: 'half',
                 visualizacao: PanoramaVisualizacao.numerico
             },
+
             {
                 pesquisaId: 33,
-                indicadorId: 29170,
-                titulo: "Prefeito",
+                indicadorId: 60409,
+                titulo: "Gentílico",
                 tema: TEMAS.nenhum,
                 largura: 'half',
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
+            {
+                pesquisaId: 33,
+                indicadorId: 29170,
+                titulo: "Prefeito",
+                tema: TEMAS.nenhum,
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+
 
             // --- População
-            // {
-            //     pesquisaId: 33,
-            //     indicadorId: 60409,
-            //     titulo: " Gentílico",
-            //     tema: TEMAS.populacao,
-            //     visualizacao: PanoramaVisualizacao.numerico
-            // },
             {
                 pesquisaId: 23,
                 indicadorId: 22423,
@@ -171,7 +173,21 @@ export const PANORAMA = {
                 titulo: "População estimada",
                 subtitulo: "População estimada",
                 tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "População residente por religião",
+                    tipo: TiposGrafico.coluna,
+                    dados: [{
+                        pesquisaId: 23,
+                        indicadorId: 22423
+                    }, {
+                        pesquisaId: 23,
+                        indicadorId: 22424
+                    }, {
+                        pesquisaId: 23,
+                        indicadorId: 22426
+                    }]
+                }
             },
             {
                 pesquisaId: 33,

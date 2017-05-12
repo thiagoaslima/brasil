@@ -35,6 +35,7 @@ import { BasicCacheModule } from './cache/basic-cache.module';
         PesquisaModule2,
         SinteseModule,
         PanoramaModule,
+        Panorama2Module,
         VisaoHistoricaModule,
         SandboxModule,
         Ng2PageScrollModule.forRoot(),

@@ -7,7 +7,6 @@ import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
-import { SystemCacheService } from '../../shared/system-cache.service';
 import { slugify } from '../../utils/slug';
 import { flat, flatTree, flatMap } from '../../utils/flatFunctions';
 
@@ -23,66 +22,30 @@ export class BuscaService {
     }
 
     constructor(
-        private _cache: SystemCacheService,
         private _localidadeService: LocalidadeService2,
         private _pesquisaService: PesquisaService2,
         private _indicadoresService: IndicadorService2
     ) { }
 
-    search(termo: string): Observable<{ pesquisas: Pesquisa[], indicadores: Indicador[], localidades: Localidade[] }> {
+    search(termo: string): Observable<{ pesquisas: Pesquisa[], localidades: Localidade[] }> {
         termo = slugify(termo.trim());
         const cacheKey = this._cacheKeys.busca(termo);
 
-        if (this._cache.has(cacheKey)) {
-            return Observable.of(this._cache[cacheKey]);
-        }
 
         let filtro = this._filterSearchResponse(termo);
         let _termo = termo.slice(0, -1);
 
-        while (_termo) {
-            if (this._cache.has(this._cacheKeys.busca(_termo))) {
-                break;
-            }
-            _termo = _termo.slice(0, -1)
-        }
 
         let pesquisas$ = this._pesquisaService.getAllPesquisas();
-        // let pesquisas$: Observable<Pesquisa[]> = _termo
-        //     ? this._cache.get(_termo).pesquisas
-        //     : this._pesquisaService.getAllPesquisas();
-
-        let indicadores$ = pesquisas$.flatMap(pesquisas => {
-
-            return Observable.forkJoin(...pesquisas.map(pesquisa => { 
-                
-                let indicadoresPesquisa = this._indicadoresService.getIndicadoresByPosicao(pesquisa.id, '0', EscopoIndicadores.filhos);
    
-                return indicadoresPesquisa.map(indicadores => { return flatTree(indicadores, 'indicadores')});
-
-            }));
-        }).map( (indicadores: Indicador[][]) => flat(indicadores));     
-    
         let localidade$: Observable<Localidade[]> = Observable.of(this._localidadeService.buscar(termo));
 
-        return Observable.zip(pesquisas$, indicadores$, localidade$)
-            .map(([pesquisas, indicadores, localidades]) => {
+        return Observable.zip(pesquisas$, localidade$)
+            .map(([pesquisas, localidades]) => {
 
                 pesquisas = pesquisas.filter(filtro.pesquisa);
                 
-                // let hash = indicadores.filter(filtro.indicador).reduce( (obj, indicador) => {
-                //     obj[indicador.pesquisaId] = indicador.pesquisa;
-                //     return obj;
-                // }, {});
-
-                // Object.keys(hash).forEach(key => {
-                //     let pesquisa = hash[key];
-                //     if (pesquisas.indexOf(pesquisa) === -1) {
-                //         pesquisas.push(pesquisa);
-                //     }
-                // })
-
-                return { pesquisas, indicadores, localidades }
+                return { pesquisas, localidades }
             });
     }
 

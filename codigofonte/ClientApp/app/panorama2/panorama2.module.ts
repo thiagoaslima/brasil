@@ -9,6 +9,6 @@ import { PanoramaShellComponent } from './panorama-shell/panorama-shell.componen
     declarations: [
         PanoramaShellComponent
     ],
-    providers: [],
+    providers: []
 })
 export class Panorama2Module { }

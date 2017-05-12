@@ -1,11 +1,16 @@
 import { TEMAS } from './temas.values';
-import { PanoramaVisualizacao } from './panorama.values';
+import { PanoramaVisualizacao, ItemConfiguracao } from './panorama.values';
 
 import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
 import { TiposGrafico } from '../../infografia/grafico-base/grafico.component';
 
 
-export const PANORAMA = {
+export const PANORAMA: {
+    [label: string]: {
+        temas: string[],
+        indicadores: ItemConfiguracao[]
+    }
+} = {
     [NiveisTerritoriais.pais.label]: {
         temas: [
             TEMAS.nenhum,
@@ -82,7 +87,7 @@ export const PANORAMA = {
         ]
     },
 
-    [NiveisTerritoriais.uf.label]: {},
+    // [NiveisTerritoriais.uf.label]: {},
 
     [NiveisTerritoriais.municipio.label]: {
         temas: [
@@ -126,7 +131,6 @@ export const PANORAMA = {
                 pesquisaId: 23,
                 indicadorId: 22423,
                 titulo: "População residente, religião católica apostólica romana",
-                subtitulo: "População residente, religião católica apostólica romana",
                 tema: TEMAS.populacao,
                 visualizacao: PanoramaVisualizacao.numerico
             },
@@ -134,7 +138,6 @@ export const PANORAMA = {
                 pesquisaId: 23,
                 indicadorId: 22424,
                 titulo: "População residente, religião espírita",
-                subtitulo: "População residente, religião espírita",
                 tema: TEMAS.populacao,
                 visualizacao: PanoramaVisualizacao.numerico
             },
@@ -142,7 +145,6 @@ export const PANORAMA = {
                 pesquisaId: 23,
                 indicadorId: 22426,
                 titulo: "População residente, religião evangélicas",
-                subtitulo: "População residente, religião evangélicas",
                 tema: TEMAS.populacao,
                 visualizacao: PanoramaVisualizacao.numerico
             },
@@ -150,7 +152,6 @@ export const PANORAMA = {
                 pesquisaId: 33,
                 indicadorId: 29171,
                 titulo: "População estimada",
-                subtitulo: "População estimada",
                 tema: TEMAS.populacao,
                 visualizacao: PanoramaVisualizacao.numerico
             },
@@ -159,7 +160,6 @@ export const PANORAMA = {
                 indicadorId: 29166,
                 periodo: "2010",
                 titulo: "População no último censo",
-                subtitulo: "População no último censo",
                 tema: TEMAS.populacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -168,7 +168,6 @@ export const PANORAMA = {
                 indicadorId: 29168,
                 periodo: "2010",
                 titulo: "Densidade demográfica",
-                subtitulo: "Densidade demográfica",
                 tema: TEMAS.populacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -180,7 +179,6 @@ export const PANORAMA = {
                 pesquisaId: 33,
                 indicadorId: 29167,
                 titulo: "Área da unidade territorial",
-                subtitulo: "Área da unidade territorial",
                 tema: TEMAS.meioAmbiente,
                 visualizacao: PanoramaVisualizacao.numerico
             },
@@ -189,7 +187,6 @@ export const PANORAMA = {
                 indicadorId: 60030,
                 periodo: "2010",
                 titulo: "Esgotamento sanitário adequado",
-                subtitulo: "Esgotamento sanitário adequado",
                 tema: TEMAS.meioAmbiente,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -198,7 +195,6 @@ export const PANORAMA = {
                 indicadorId: 60029,
                 periodo: "2010",
                 titulo: "Arborização de vias públicas",
-                subtitulo: "Arborização de vias públicas",
                 tema: TEMAS.meioAmbiente,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -207,7 +203,6 @@ export const PANORAMA = {
                 indicadorId: 60031,
                 periodo: "2010",
                 titulo: "Urbanização de vias públicas",
-                subtitulo: "Urbanização de vias públicas",
                 tema: TEMAS.meioAmbiente,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -218,8 +213,7 @@ export const PANORAMA = {
                 pesquisaId: 40,
                 indicadorId: 30277,
                 periodo: "2013",
-                titulo: "IDEB",
-                subtitulo: "Índice de Desenvolvimento da Educação Básica",
+                titulo: "IDEB – Índice de Desenvolvimento da Educação Básica",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel,
 
@@ -229,7 +223,6 @@ export const PANORAMA = {
                 indicadorId: 60045,
                 periodo: "2010",
                 titulo: "Taxa de escolarização de 6 a 14 anos de idade",
-                subtitulo: "6 a 14 anos de idade",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -237,8 +230,7 @@ export const PANORAMA = {
                 pesquisaId: 10058,
                 indicadorId: 60041,
                 periodo: "2015",
-                titulo: "IDEB - Anos  iniciais do ensino fundamental",
-                subtitulo: "Anos iniciais e finais do ensino fundamental",
+                titulo: "IDEB – Anos iniciais do ensino fundamental",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -246,8 +238,7 @@ export const PANORAMA = {
                 pesquisaId: 10058,
                 indicadorId: 60042,
                 periodo: "2015",
-                titulo: "IDEB - Anos finais do ensino fundamental",
-                subtitulo: "Anos finais do ensino fundamental",
+                titulo: "IDEB – Anos finais do ensino fundamental",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.painel
             },
@@ -255,8 +246,7 @@ export const PANORAMA = {
             {
                 pesquisaId: 13,
                 indicadorId: 5908,
-                titulo: "Matrículas",
-                subtitulo: "no ensino fundamental",
+                titulo: "Matrículas no ensino fundamental",
                 tema: TEMAS.educacao,
                 visualizacao: PanoramaVisualizacao.grafico,
                 grafico: {
@@ -321,7 +311,7 @@ export const PANORAMA = {
                 titulo: "Mortalidade Infantil",
                 tema: TEMAS.saude,
                 visualizacao: PanoramaVisualizacao.painel,
-                maiorMelhor: false
+                correlacaoNegativaValorQualidade: true
             },
             {
                 pesquisaId: 10058,
@@ -330,7 +320,7 @@ export const PANORAMA = {
                 titulo: "Internações por diarreia",
                 tema: TEMAS.saude,
                 visualizacao: PanoramaVisualizacao.painel,
-                maiorMelhor: false
+                correlacaoNegativaValorQualidade: true
             },
             {
                 pesquisaId: 32,
@@ -357,7 +347,7 @@ export const PANORAMA = {
                 titulo: "Percentual das receitas oriundas de fontes externas",
                 tema: TEMAS.economia,
                 visualizacao: PanoramaVisualizacao.painel,
-                maiorMelhor: false
+                correlacaoNegativaValorQualidade: true
             },
 
             {
