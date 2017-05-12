@@ -98,7 +98,7 @@ export class PanoramaTemasComponent implements OnInit {
     }
 
     private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any> {
-        return this._indicadorService.getPosicaoRelativa(idPesquisa, indicador, periodo, codigoLocalidade, contexto)
+        return this._indicadorService.getRankings([indicador], [periodo], codigoLocalidade, [contexto]).map(r => r[0])
     }
 
 
@@ -139,14 +139,16 @@ export class PanoramaTemasComponent implements OnInit {
             return;
         }
 
-        // const hash = this.temas.reduce((arr, tema) => arr.concat(tema.painel), []).reduce((acc, painel) => {
-        //     return Object.assign(acc, { [painel.indicadorId]: painel.ranking })
-        // }, {});
+        const hash = this.temas.reduce((arr, tema) => arr.concat(tema.painel), []).reduce((acc, painel) => {
+            return Object.assign(acc, { [painel.indicadorId]: painel.ranking })
+        }, {});
+
         const contextoLocal = this.localidade.parent.codigo.toString();
         const universoLocal = this.localidade.parent.children.length;
         const contextoGeral = 'BR';
         const universoGeral = '5570';
 
+        console.log(hash);
 
         // Texto POPULAÇÂO
         // 

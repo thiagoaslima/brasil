@@ -56,6 +56,7 @@ export class PesquisaService2 {
                 .map(res => res.json())
                 // .filter(obj => this._pesquisasConfig.isValida(obj.id))
                 .map(obj => Pesquisa.criar(obj))
+                .do(pesquisa => this._getPesquisaCache[keyCache] = Observable.of(pesquisa))
                 // .do(pesquisa => console.log(`get(${pesquisaId})`, pesquisa))
                 .share();
         }

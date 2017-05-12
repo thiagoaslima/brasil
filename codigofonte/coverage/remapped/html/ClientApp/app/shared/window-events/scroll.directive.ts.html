@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared/window-events/scroll.directive.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">ClientApp/app/shared/window-events/</a> scroll.directive.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/73</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/39</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/66</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Attribute, Directive, HostListener, Input, Output, EventEmitter, ElementRef, Renderer, OnInit, OnDestroy } from '@angular/core';</span>
+<span class="cstat-no" title="statement not covered" >import { WindowEventsService } from './window-events.service';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { Observable } from 'rxjs/Observable';</span>
+import { Subscription } from 'rxjs/Subscription';
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/observable/fromEventPattern';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/throttleTime';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/share';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/startWith';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span>export class <span class="cstat-no" title="statement not covered" >ScrollEvent </span>{</span></span>
+<span class="cstat-no" title="statement not covered" >    toTop = false;</span>
+<span class="cstat-no" title="statement not covered" >    toLeft = false;</span>
+<span class="cstat-no" title="statement not covered" >    toRight = false;</span>
+<span class="cstat-no" title="statement not covered" >    toBottom = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    top = 0;</span>
+<span class="cstat-no" title="statement not covered" >    left = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    target?= null;</span>
+<span class="cstat-no" title="statement not covered" >    originalEvent: Event = null;</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+&nbsp;
+@Directive({
+    selector: '[scroll]',
+    exportAs: 'scrollDirective',
+    providers: [
+        ScrollEvent
+    ]
+})
+e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >ScrollDirective<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>{</span>
+    public host$: Observable&lt;ScrollEvent&gt;;
+    public window$: Observable&lt;ScrollEvent&gt;;
+    public scrollEl$: Observable&lt;ScrollEvent&gt;;
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_defaultTimer = 200;</span>
+    private _timer: number;
+    private _el;
+    private <span class="cstat-no" title="statement not covered" >_listeners = {};</span>
+&nbsp;
+    @Input()
+<span class="cstat-no" title="statement not covered" >    set scroll(value<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (value &amp;&amp; typeof value === 'object' &amp;&amp; !Array.isArray(value)) {</span>
+<span class="cstat-no" title="statement not covered" >            Object.assign(value, { events: this });</span>
+        }
+    }
+&nbsp;
+    @Input()
+<span class="cstat-no" title="statement not covered" >    set timer(value: number<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._timer = value;</span>
+    }
+<span class="fstat-no" title="function not covered" >    get timer() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._timer || this._defaultTimer;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    @Input()</span>
+<span class="cstat-no" title="statement not covered" >    set element(el<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!el) { <span class="cstat-no" title="statement not covered" >return; </span>}</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._el = el;</span>
+&nbsp;
+        // Avoid memory leak!!!
+<span class="cstat-no" title="statement not covered" >        this.reset();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.scrollEl$ = Observable</span>
+            .fromEventPattern(this._createElListener.bind(this), this._removeListener.bind(this, 'el'))
+            .throttleTime(this.timer)
+            .scan&lt;ScrollEvent&gt;((acc: ScrollEvent, evt: Event<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >this.setScrollEvent(acc, evt.target))</span></span>
+            .share()
+            .startWith(this.setScrollEvent(new ScrollEvent, el));
+    }
+<span class="fstat-no" title="function not covered" >    get element() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._el;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    constructor(</span>
+        private <span class="cstat-no" title="statement not covered" >host: ElementRef,</span>
+        private <span class="cstat-no" title="statement not covered" >renderer: Renderer,</span>
+        private <span class="cstat-no" title="statement not covered" >windowEvents: WindowEventsService<span class="fstat-no" title="function not covered" ></span></span>
+    ) {
+<span class="cstat-no" title="statement not covered" >        this.window$ = this.windowEvents</span>
+            .scroll$.throttleTime(this.timer)
+            .scan&lt;ScrollEvent&gt;((acc: ScrollEvent, evt: Event<span class="fstat-no" title="function not covered" >) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                return this.setScrollEvent(acc, evt.target)</span>
+            })
+            .share()
+            .startWith(new ScrollEvent());
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.host$ = Observable</span>
+            .fromEventPattern(this._createHostListener.bind(this), this._removeListener.bind(this, 'host'))
+            .throttleTime(this.timer)
+            .scan&lt;ScrollEvent&gt;((acc: ScrollEvent, evt: Event<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >this.setScrollEvent(acc, evt.target))</span></span>
+            .share()
+            .startWith(this.setScrollEvent(new ScrollEvent, this.host.nativeElement));
+    }
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_createElListener(handler<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._listeners['el'] = this.renderer.listen(this.element, 'scroll', handler);</span>
+    }
+    private <span class="cstat-no" title="statement not covered" >_createHostListener(handler<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._listeners['host'] = this.renderer.listen(this.host.nativeElement, 'scroll', handler);</span>
+    }
+    private <span class="cstat-no" title="statement not covered" >_removeListener(key<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return this._listeners[key];</span>
+    }
+<span class="cstat-no" title="statement not covered" >    private <span class="cstat-no" title="statement not covered" >reset(key?<span class="fstat-no" title="function not covered" >) {</span></span></span>
+        // Avoid memory leak!!!
+<span class="cstat-no" title="statement not covered" >        if (key) {</span>
+<span class="cstat-no" title="statement not covered" >            (!!this._listeners[key]) &amp;&amp; this._listeners[key]();</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        Object.keys(this._listeners).forEach(key<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this._listeners[key]())</span></span>;</span>
+    }
+    private <span class="cstat-no" title="statement not covered" >setScrollEvent(acc: ScrollEvent, evt<span class="fstat-no" title="function not covered" >) {</span></span>
+        let target;
+        let top = <span class="cstat-no" title="statement not covered" >0,</span> left = <span class="cstat-no" title="statement not covered" >0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (evt['target']) {</span>
+<span class="cstat-no" title="statement not covered" >            target = evt.target;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            target = evt;</span>
+<span class="cstat-no" title="statement not covered" >            evt = null;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (target &amp;&amp; (target['scrollTop'] || target['scrollY'] || target['body'])) {</span>
+            // target instanceOf Element || target === document || target === window
+<span class="cstat-no" title="statement not covered" >            top = target['scrollTop'] !== undefined ? target['scrollTop'] : target['body'] ? target['body'].scrollTop : target['scrollY'];</span>
+<span class="cstat-no" title="statement not covered" >            left = target['scrollLeft'] !== undefined ? target['scrollLeft'] : target['body'] ? target['body'].scrollLeft : target['scrollX'];</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            toTop: (top &lt; acc.top),
+            toBottom: (top &gt; acc.top),
+            toLeft: (left &lt; acc.left),
+            toRight: (left &gt; acc.left),
+&nbsp;
+            top, left,
+&nbsp;
+            target,
+            originalEvent: evt
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    ngOnDestroy() {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.reset();</span>
+    }
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

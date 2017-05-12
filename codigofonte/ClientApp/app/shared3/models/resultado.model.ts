@@ -1,4 +1,5 @@
 import { ResultadoDTO } from '../dto';
+import { Indicador } from '.';
 
 export interface ResultadoParameters {
     id: number
@@ -22,7 +23,8 @@ export class Resultado {
         }, []);
     }
 
-    public readonly indicadorId: number
+    public readonly indicadorId?: number
+    public readonly indicador?: Indicador
     public readonly localidadeCodigo: number
     public readonly periodos: string[]
     public readonly valores: string[]

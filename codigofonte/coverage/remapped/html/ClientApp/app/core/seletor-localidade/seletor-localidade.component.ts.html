@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/core/seletor-localidade/seletor-localidade.component.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">ClientApp/app/core/seletor-localidade/</a> seletor-localidade.component.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/154</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/96</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/141</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { isBrowser } from 'angular2-universal';</span>
+<span class="cstat-no" title="statement not covered" >import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'; </span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { AppState } from '../../shared2/app-state';</span>
+import { Localidade } from '../../shared2/localidade/localidade.model';
+<span class="cstat-no" title="statement not covered" >import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';</span>
+<span class="cstat-no" title="statement not covered" >import { slugify } from '../../utils/slug';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { Observable } from 'rxjs/Observable';</span>
+import { Subscription } from 'rxjs/Subscription';
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/debounceTime';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/operator/distinctUntilChanged';</span>
+<span class="cstat-no" title="statement not covered" >import 'rxjs/add/observable/fromEvent';</span>
+<span class="cstat-no" title="statement not covered" >import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { IsMobileService } from '../../shared/is-mobile.service';</span>
+&nbsp;
+@Component({
+    selector: 'seletor-localidade',
+    templateUrl: 'seletor-localidade.template.html',
+    styleUrls: ['seletor-localidade.styles.css'],
+    exportAs: 'seletor-localidade'
+})
+e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >SeletorLocalidadeComponent<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>implements OnInit, OnDestroy {</span>
+    @Input() <span class="cstat-no" title="statement not covered" >aberto = false;</span>
+    @Output() <span class="cstat-no" title="statement not covered" >isSeletorAberto = new EventEmitter();</span>
+    @ViewChild('buscaInput') <span class="cstat-no" title="statement not covered" >buscaInput: ElementRef;</span>
+    @ViewChild('selecionarLocalidade') <span class="cstat-no" title="statement not covered" >selecionarLocalidade: ElementRef;</span>
+&nbsp;
+    private _buscaInput$$: Subscription;
+    private _selecionada$$: Subscription;
+&nbsp;
+    public <span class="cstat-no" title="statement not covered" >ufs: Localidade[] = [];</span>
+    public selecaoLocalidadesAtual: Observable&lt;Localidade[]&gt;;
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_ufSelecionada = null;</span>
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >hist = null; </span>//guarda a referência para o objeto 'history' do browser
+&nbsp;
+    public <span class="cstat-no" title="statement not covered" >isBrowser = isBrowser;</span>
+&nbsp;
+    public <span class="cstat-no" title="statement not covered" >URLEnd = '';</span>
+&nbsp;
+    public <span class="cstat-no" title="statement not covered" >listaMunicipios = {</span>
+        maisVistos: &lt;Localidade[]&gt;[],
+        base: &lt;Localidade[]&gt;[],
+        atual: &lt;Localidade[]&gt;[],
+        totalAtual: 0,
+&nbsp;
+        build(array, <span class="cstat-no" title="statement not covered" >termo = ''<span class="fstat-no" title="function not covered" >)</span> {</span>
+<span class="cstat-no" title="statement not covered" >            termo = slugify(termo);</span>
+&nbsp;
+            let hash = <span class="cstat-no" title="statement not covered" >array.reduce((agg, municipio<span class="fstat-no" title="function not covered" >) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (!municipio.identificador.includes(termo)) {</span>
+<span class="cstat-no" title="statement not covered" >                    return agg;</span>
+                }
+&nbsp;
+                let initialLetter = <span class="cstat-no" title="statement not covered" >municipio.identificador.charAt(0);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (!agg[initialLetter]) {</span>
+<span class="cstat-no" title="statement not covered" >                    agg[initialLetter] = [];</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                agg[initialLetter].push(municipio);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                return agg;</span>
+            }, {});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.atual = Object.keys(hash).sort().map(letter<span class="fstat-no" title="function not covered" > =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                return {</span>
+                    letter,
+                    municipios: hash[letter]
+                }
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.totalAtual = this.atual.reduce((sum, obj<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >!!obj.municipios &amp;&amp; (sum + obj.municipios) ? obj.municipios.length : 0,</span></span> 0);</span>
+        }
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    set ufSelecionada(uf<span class="fstat-no" title="function not covered" >) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._ufSelecionada = uf;</span>
+<span class="cstat-no" title="statement not covered" >        if (uf) {</span>
+<span class="cstat-no" title="statement not covered" >            this.listaMunicipios.base = uf.children;</span>
+<span class="cstat-no" title="statement not covered" >            this.listaMunicipios.build(uf.children);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.listaMunicipios.build([]);</span>
+<span class="cstat-no" title="statement not covered" >            this.listaMunicipios.base = this._localidadeService.getAllMunicipios();</span>
+        }
+&nbsp;
+    }
+<span class="fstat-no" title="function not covered" >    get ufSelecionada() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._ufSelecionada;</span>
+    }
+&nbsp;
+&nbsp;
+    public <span class="cstat-no" title="statement not covered" >states = {</span>
+        "estados": false,
+        "municipios": false,
+        "municipiosTodos": false,
+        "municipiosEstados": false,
+        "municipiosMunicipios": false
+    };
+&nbsp;
+    private <span class="cstat-no" title="statement not covered" >_stateSelecionado = '';</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >    set stateSelecionado(stateName<span class="fstat-no" title="function not covered" >) {</span></span></span>
+<span class="cstat-no" title="statement not covered" >        if (this._stateSelecionado) {</span>
+<span class="cstat-no" title="statement not covered" >            this.states[this._stateSelecionado] = false;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this._stateSelecionado = stateName;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (stateName) {</span>
+<span class="cstat-no" title="statement not covered" >            setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                this.states.municipios = stateName.startsWith('municipios');</span>
+<span class="cstat-no" title="statement not covered" >                this.states[stateName] = true;</span>
+            }, 10);
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.states.municipios = false;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (stateName === 'municipiosTodos') {</span>
+<span class="cstat-no" title="statement not covered" >            this.listaMunicipios.base = this._localidadeService.getAllMunicipios();</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    get stateSelecionado() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._stateSelecionado;</span>
+    }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    constructor(</span>
+        private <span class="cstat-no" title="statement not covered" >_appState: AppState,</span>
+        private <span class="cstat-no" title="statement not covered" >_localidadeService: LocalidadeService2,</span>
+        private <span class="cstat-no" title="statement not covered" >pageScrollService: PageScrollService,</span>
+        private <span class="cstat-no" title="statement not covered" >_isMobileService: IsMobileService,</span>
+        private <span class="cstat-no" title="statement not covered" >_router: Router<span class="fstat-no" title="function not covered" ></span></span>
+    ) {
+&nbsp;
+        //escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
+        //o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
+<span class="cstat-no" title="statement not covered" >        this._router.events.filter(event<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >event instanceof NavigationEnd)</span></span>.subscribe(route<span class="fstat-no" title="function not covered" > =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(route.url.indexOf('/panorama') &gt;= 0){</span>
+<span class="cstat-no" title="statement not covered" >                this.URLEnd = '/panorama';</span>
+            }else <span class="cstat-no" title="statement not covered" >if(route.url.indexOf('/historico') &gt;= 0){</span>
+<span class="cstat-no" title="statement not covered" >                this.URLEnd = '/historico';</span>
+            }else <span class="cstat-no" title="statement not covered" >if(route.url.indexOf('/pesquisa') &gt;= 0){</span>
+                let arr = <span class="cstat-no" title="statement not covered" >route.url.split('/');</span>
+<span class="cstat-no" title="statement not covered" >                arr = arr.slice(arr.indexOf('pesquisa') + 1)</span>
+<span class="cstat-no" title="statement not covered" >                if(arr.length == 1)</span>
+<span class="cstat-no" title="statement not covered" >                    this.URLEnd = '/pesquisa/' + arr[0];</span>
+<span class="cstat-no" title="statement not covered" >                if(arr.length == 2)</span>
+<span class="cstat-no" title="statement not covered" >                    this.URLEnd = '/pesquisa/' + arr[0] + '/' + arr[1].split('?')[0];</span>
+            }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.selecaoLocalidadesAtual = this._appState.observable$</span>
+            .map(({ <span class="cstat-no" title="statement not covered" >localidade </span>}<span class="fstat-no" title="function not covered" >) =&gt; {</span>
+                const locais = <span class="cstat-no" title="statement not covered" >[localidade];</span>
+<span class="cstat-no" title="statement not covered" >                if (localidade) { <span class="cstat-no" title="statement not covered" >locais.push(localidade.parent); </span>}</span>
+<span class="cstat-no" title="statement not covered" >                if (localidade &amp;&amp; localidade.parent) { <span class="cstat-no" title="statement not covered" >locais.push(localidade.parent.parent); </span>}</span>
+                
+<span class="cstat-no" title="statement not covered" >                return locais.filter(Boolean).reverse();</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.ufs = this._localidadeService.getUfs().sort((a, b<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >a.nome &lt; b.nome ? -1 : 1)</span></span>;</span>
+<span class="cstat-no" title="statement not covered" >        this.listaMunicipios.maisVistos = this.ufs.map(uf<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >uf.capital)</span></span>.sort((a, b<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >a.slug &lt; b.slug ? -1 : 1)</span></span>;</span>
+    }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    ngOnInit() {</span></span></span>
+<span class="cstat-no" title="statement not covered" >        this._selecionada$$ = this._appState.observable$.pluck('localidade')</span>
+            .distinctUntilChanged()
+            .subscribe(_<span class="fstat-no" title="function not covered" > =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                this.fecharSeletor();</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._buscaInput$$ = Observable.fromEvent&lt;KeyboardEvent&gt;(this.buscaInput.nativeElement, "keyup")</span>
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .map(e<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >e.target['value'])</span></span>
+            .filter((termo: string<span class="fstat-no" title="function not covered" >) =&gt; <span class="cstat-no" title="statement not covered" >!!termo &amp;&amp; termo.length &gt;= 3)</span></span>
+            .subscribe(termo<span class="fstat-no" title="function not covered" > =&gt; <span class="cstat-no" title="statement not covered" >this.search(termo))</span></span>;
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    ngOnDestroy() {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._selecionada$$.unsubscribe();</span>
+<span class="cstat-no" title="statement not covered" >        this._buscaInput$$.unsubscribe();</span>
+    }
+&nbsp;
+    //'popstate' é o evento gerado ao usar o botão de voltar do browser
+    @HostListener('window:popstate', ['$event'])
+<span class="cstat-no" title="statement not covered" >    onPopState(event<span class="fstat-no" title="function not covered" >) {</span></span>
+        //ao voltar no browser, se o seletor de localidade estiver aberto, fecha
+<span class="cstat-no" title="statement not covered" >        this.fecharSeletor();</span>
+    }
+&nbsp;
+    @HostListener('window:mousedown', ['$event'])
+<span class="cstat-no" title="statement not covered" >    onMouseDown(event<span class="fstat-no" title="function not covered" >) {</span></span>
+        //guarda a referência da Window do browser (melhorar a forma de pegar essa referência???)
+<span class="cstat-no" title="statement not covered" >        this.hist = event.view &amp;&amp; event.view.history ? event.view.history : null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    abrirSeletor() {</span></span>
+        //insere um state fake(apenas uma vez) para fazer com que o voltar do browser feche o seletor de locais (não volte para a página anterior do histórico)
+<span class="cstat-no" title="statement not covered" >        if (this.hist &amp;&amp; !(this.hist.state &amp;&amp; this.hist.state.seletor_localidade))</span>
+<span class="cstat-no" title="statement not covered" >            this.hist.pushState({ seletor_localidade: true }, '', '');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.aberto = true;</span>
+<span class="cstat-no" title="statement not covered" >        this.setState('municipiosTodos');</span>
+<span class="cstat-no" title="statement not covered" >        this.isSeletorAberto.emit(true);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    fecharSeletor() {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.setState('');</span>
+<span class="cstat-no" title="statement not covered" >        this.aberto = false;</span>
+<span class="cstat-no" title="statement not covered" >        this.isSeletorAberto.emit(false);</span>
+<span class="cstat-no" title="statement not covered" >        this.clearSearch();</span>
+<span class="cstat-no" title="statement not covered" >        this.selecionarLocalidade.nativeElement.scrollTop = '0';</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    setState(stateName: string, <span class="cstat-no" title="statement not covered" >uf = null<span class="fstat-no" title="function not covered" >)</span> {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.stateSelecionado = stateName;</span>
+<span class="cstat-no" title="statement not covered" >        this.ufSelecionada = uf;</span>
+<span class="cstat-no" title="statement not covered" >        this.search(this.buscaInput.nativeElement.value);</span>
+        //this.clearSearch();
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.isBrowser) {</span>
+            //scroll to top ao selecionar uf
+<span class="cstat-no" title="statement not covered" >            this.pageScrollService.stopAll();</span>
+            var pos = <span class="cstat-no" title="statement not covered" >window.pageYOffset;</span>
+<span class="cstat-no" title="statement not covered" >            if (pos &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                window.scrollTo(0, -pos);</span>
+            }
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    search(<span class="cstat-no" title="statement not covered" >termo = ''<span class="fstat-no" title="function not covered" >)</span> {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!termo) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.ufSelecionada) {</span>
+<span class="cstat-no" title="statement not covered" >            if (termo.length &gt;= 3) //mostra o resultado da busca</span>
+<span class="cstat-no" title="statement not covered" >                return this.listaMunicipios.build(this.ufSelecionada.children, termo);</span>
+<span class="cstat-no" title="statement not covered" >            if (termo.length == 0) //mostra a lista inicial</span>
+<span class="cstat-no" title="statement not covered" >                return this.listaMunicipios.build(this.ufSelecionada.children);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            if (termo.length &gt;= 3) //mostra o resultado da busca</span>
+<span class="cstat-no" title="statement not covered" >                return this.listaMunicipios.build(this.listaMunicipios.base, termo);</span>
+<span class="cstat-no" title="statement not covered" >            if (termo.length == 0) //mostra a lista inicial</span>
+<span class="cstat-no" title="statement not covered" >                return this.listaMunicipios.build(this.listaMunicipios.base);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    clearSearch() {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.buscaInput.nativeElement.value = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    voltarMobile() {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this.states.municipios || this.states.estados) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState('');</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.fecharSeletor();</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    focusBuscaInputMobile() {</span></span>
+<span class="cstat-no" title="statement not covered" >        if(this._isMobileService.any()){</span>
+<span class="cstat-no" title="statement not covered" >            this.selecionarLocalidade.nativeElement.scrollTop = '246';</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

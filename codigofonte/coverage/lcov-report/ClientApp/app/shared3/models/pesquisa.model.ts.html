@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared3/models/pesquisa.model.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">ClientApp/app/shared3/models</a> pesquisa.model.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.57% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>55/70</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">82.14% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>46/56</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">172x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">258x</span>
+<span class="cline-any cline-yes">258x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
+import { arrayUniqueValues, converterEmNumero } from '../../utils2';
+import { PesquisaDTO } from '../dto';
+import { niveisTerritoriais, listaNiveisTerritoriais } from '../values';
+&nbsp;
+export class Pesquisa {
+    static criar(data: PesquisaDTO) {
+        return new Pesquisa(data);
+    }
+&nbsp;
+    static get niveisTerritoriaisPossiveis() {
+        return listaNiveisTerritoriais.slice(0);
+    }
+&nbsp;
+    public readonly id: number
+    public readonly nome: string
+    public readonly descricao: string
+    public readonly observacao: string
+    public readonly periodos: Array&lt;{
+        nome: string,
+        dataPublicacao: Date,
+        fontes: string[],
+        notas: string[]
+    }&gt;
+    public readonly contextos: { [nivelTerritorial: string]: boolean }
+&nbsp;
+    constructor(dados: PesquisaDTO) {<span class="fstat-no" title="function not covered" ></span>
+        this.id = da<span class="cstat-no" title="statement not covered" >dos.i</span>d;
+<span class="cstat-no" title="statement not covered" >        this.nome = dados.nome;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+        this.descricao = dados.descricao || "";
+        this.observacao = dados.observ<span class="fstat-no" title="function not covered" >ac</span>ao || "";
+        this.periodos<span class="cstat-no" title="statement not covered" > = this._setPeriodos(<span class="fstat-no" title="function not covered" >da</span>dos.periodos);<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >        this.contextos = this._setContextos(Number.</span>parseInt(dados.contexto, 10));
+    }
+<span class="fstat-no" title="function not covered" ></span>
+    abrangeNivelTe<span class="cstat-no" title="statement not covered" >rritorial(contexto:<span class="fstat-no" title="function not covered" > s</span>tring) {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >        return this.contextos[contexto</span>];
+    }
+<span class="fstat-no" title="function not covered" ></span>
+    getAbrangenciaTe<span class="cstat-no" title="statement not covered" >rritorialDaPesquisa()<span class="fstat-no" title="function not covered" >: </span>string[] {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >        return Pesquisa.niveisTerritoriaisPossivei</span>s.filter(contexto =&gt; Boolean(this.contextos[contexto]));
+    }
+<span class="fstat-no" title="function not covered" ></span>
+    getAllFontes()<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >        const fontes = this.periodos.</span>reduce((fontes, periodo) =&gt; fontes.concat(periodo.fontes), [] as string[]);
+        return arrayUniqueValues(fontes);
+    }
+&nbsp;
+    getFontesDoPeriodo(periodo: string) {
+        const obj = this.periodos.find(_periodo =&gt; _periodo.nome === periodo);
+        return obj ? obj.fontes : [];
+    }
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    getAllNotas() {
+        const notas = this.periodos.reduce((notas, periodo) =&gt; notas.concat(periodo.notas), [] as string[]);
+        return arrayUniqueValues(notas);
+    }
+&nbsp;
+    getNotasDoPeriodo(periodo: string) {
+        const obj = this.periodos.find(_periodo =&gt; _periodo.nome === periodo);
+        return obj ? obj.notas : [];
+    }
+&nbsp;
+    private _setContextos(binario: number) {
+        const contextos = Boolean(binario)
+            ? binario.toString()
+                .split('')
+                .reverse()
+            <span class="missing-if-branch" title="else path not taken" >E</span>    .map(str =&gt; Number.parseInt(str))
+            : [];
+&nbsp;
+        const len = contextos.length;
+        contextos.length = 6;
+        contextos.fill(0, len);
+        contextos.reverse();
+&nbsp;
+        return Pesquisa.niveisTerritoriaisPossiveis.reduce((acc, propertyName, index) =&gt; {
+            acc[propertyName] = Boolean(contextos[index]);
+            return acc;
+        }, {});
+    }
+&nbsp;
+    private _setPeriodos(periodos) {
+        return periodos.map(periodo =&gt; {
+            const nome = periodo.periodo;
+            const fontes = periodo.fonte;
+            const notas = periodo.nota;
+            let dataPublicacao = null;
+&nbsp;
+            if (periodo.publicacao) {
+                const [data, horario] = periodo.publicacao.split(' ');
+                const [dia, mes, ano] = data.split('/').map(converterEmNumero);
+                const [hora, minuto, segundo] = horario.split(':').map(converterEmNumero);
+                dataPublicacao = new Date(Date.UTC(ano, mes - 1, dia, hora, minuto, segundo));
+            }
+&nbsp;
+            return {
+                nome,
+                dataPublicacao,
+                fontes,
+                notas
+            };
+        })
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:39:59 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

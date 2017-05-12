@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/pesquisa2/pesquisa.component.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">ClientApp/app/pesquisa2/</a> pesquisa.component.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/33</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';</span>
+&nbsp;
+import { Observable } from 'rxjs/Observable';
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { SinteseService } from '../sintese/sintese.service';</span>
+&nbsp;
+import { Localidade } from '../shared2/localidade/localidade.model';
+import { Pesquisa } from '../shared2/pesquisa/pesquisa.model';
+<span class="cstat-no" title="statement not covered" >import { EscopoIndicadores, Indicador } from '../shared2/indicador/indicador.model'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { RouterParamsService } from '../shared/router-params.service';</span>
+<span class="cstat-no" title="statement not covered" >import { LocalidadeService2 } from '../shared2/localidade/localidade.service';</span>
+<span class="cstat-no" title="statement not covered" >import { PesquisaService2 } from '../shared2/pesquisa/pesquisa.service';</span>
+<span class="cstat-no" title="statement not covered" >import { IndicadorService2 } from '../shared2/indicador/indicador.service';</span>
+&nbsp;
+import { flatTree } from '../utils/flatFunctions';
+&nbsp;
+@Component({
+    selector: 'pesquisa',
+    templateUrl: './pesquisa.template.html',
+    styleUrls: ['./pesquisa.style.css']
+})
+&nbsp;
+e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >PesquisaComponent2<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>implements OnInit {</span>
+&nbsp;
+    @ViewChild('dados') <span class="cstat-no" title="statement not covered" >dados: ElementRef;</span>
+&nbsp;
+    pesquisa$;
+    localidade: Localidade;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    posicaoIndicador: string = "2";</span>
+<span class="cstat-no" title="statement not covered" >    localidades: number[] = [null, null, null];</span>
+    periodo: string;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    isOcultarValoresVazios = true;</span>
+    
+    
+    constructor(
+        private <span class="cstat-no" title="statement not covered" >_routerParams:RouterParamsService,</span>
+        private <span class="cstat-no" title="statement not covered" >_localidadeService2: LocalidadeService2,</span>
+        private <span class="cstat-no" title="statement not covered" >_pesquisaService: PesquisaService2,</span>
+        private <span class="cstat-no" title="statement not covered" >_sintese:SinteseService,</span>
+        private <span class="cstat-no" title="statement not covered" >_indicadorService: IndicadorService2<span class="fstat-no" title="function not covered" ></span></span>
+    ) { }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    ngOnInit() {</span></span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._routerParams.params$.subscribe(urlParams<span class="fstat-no" title="function not covered" > =&gt; {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if(!!urlParams.params['indicador']){</span>
+<span class="cstat-no" title="statement not covered" >                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.proprio)</span>
+                    .subscribe((indicadores<span class="fstat-no" title="function not covered" >) =&gt; {</span>
+                        
+                       
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if(!!indicadores &amp;&amp; indicadores.length &gt; 0){ </span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            this.posicaoIndicador = indicadores[0].posicao;</span>
+                        } 
+                        else { 
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            this.posicaoIndicador = "2";</span>
+                        }
+                });
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.pesquisa$ = this._pesquisaService.getPesquisa(urlParams.params['pesquisa']);</span>
+&nbsp;
+            // Obter localidade principal
+<span class="cstat-no" title="statement not covered" >            this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;</span>
+&nbsp;
+            // Obter localidades de comparação
+<span class="cstat-no" title="statement not covered" >            this.localidades[1] = urlParams.queryParams['localidade1'];</span>
+<span class="cstat-no" title="statement not covered" >            this.localidades[2] = urlParams.queryParams['localidade2'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.localidades = this.localidades.slice(0);</span>
+&nbsp;
+            // Obter período de análise
+<span class="cstat-no" title="statement not covered" >            this.periodo = urlParams.queryParams['ano'];</span>
+&nbsp;
+        });
+&nbsp;
+&nbsp;
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    ocultarValoresVazios(event<span class="fstat-no" title="function not covered" >){</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.isOcultarValoresVazios = event['OcultarValoresVazios'];</span>
+    }
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

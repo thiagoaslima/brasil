@@ -6,10 +6,12 @@ import { flatTree } from '../../utils/flatFunctions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
 
@@ -110,7 +112,7 @@ export class IndicadorService2 {
                                 res: {}
                             }]
                         }
-                        
+
                         return indicador;
                     })
                 })
@@ -137,8 +139,9 @@ export class IndicadorService2 {
         return this._getVariosIndicadoresByIdCache[keyCache];
     }
 
+
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable<Ranking> {
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
 
         return this._http.get(url, options)
             .retry(3)
@@ -166,7 +169,67 @@ export class IndicadorService2 {
             })
     }
 
+    _cacheRanking = Object.create(null) as {[label: string]: Observable<Ranking>|Observable<Ranking[]>};
     public getRankings(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable<Ranking[]> {
+        const permutacao = [];
+        contexto = contexto.map(c => c.toString())
+
+        indicadoresId.forEach((id, idx) => {
+            contexto.forEach(contexto => {
+                permutacao.push({
+                    id: id,
+                    periodo: periodos[idx],
+                    localidade: codigoLocalidade,
+                    contexto: contexto.toString()
+                })
+            })
+        });
+
+        let cases = permutacao.reduce( (acc, obj) => {
+            let cache = this._cacheRanking[this._convertIntoKey(obj)];
+
+            if (cache) {
+                acc.cache.push(cache);
+            } else {
+                acc.requests.push(obj);
+            }
+
+            return acc;
+        }, {cache: [], requests: []})
+
+        if (cases.requests.length === 0) {
+            return Observable.zip<Ranking>(...cases.cache).map(arr => arr.reduce( (agg, val) => agg.concat(val), [] ) );
+        }
+
+        const removeDuplicates = cases.requests.reduce( (acc, obj) => {
+            if (!acc[obj.id]) {
+                acc[obj.id] = obj.periodo
+            }
+            return acc;
+        }, {})
+
+        const request = this._getRankingsRequest(Object.keys(removeDuplicates).map(Number.parseInt), Object.keys(removeDuplicates).map(k => removeDuplicates[k]), codigoLocalidade, contexto)
+            .do(responses => cases.requests.forEach((obj, idx) => this._cacheRanking[this._convertIntoKey(obj)] = Observable.of(responses[idx])))
+            .map(responses => responses.concat(cases.cache))
+            .map(rankings => indicadoresId.reduce( (acc, id) => {
+                contexto.forEach(contexto => {
+                    let r = rankings.find(rank => rank.indicador === id && rank.contexto === contexto);
+                    if (r) { acc.push(r) }
+                })
+                return acc;
+            }, []))
+            .share();
+
+        cases.requests.forEach((obj, idx) => this._cacheRanking[this._convertIntoKey(obj)] = request.map(responses => responses.filter(rank => rank.indicador === obj.id && rank.localidade === obj.localidade && rank.contexto === obj.contexto)))
+
+        return request;
+    }
+
+    private _convertIntoKey(obj) {
+        return obj.id + '-' + obj.periodo + '-' + obj.localidade + '-' + obj.contexto;
+    }
+
+    private _getRankingsRequest(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable<Ranking[]> {
         const query = indicadoresId.map((id, index) => `${id}(${periodos[index]})`).join('|');
         const _contexto = contexto.join(',')
         const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${query}?lower=0&contexto=${_contexto}&localidade=${codigoLocalidade}`;

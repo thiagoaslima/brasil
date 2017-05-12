@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClientApp/app/shared2/shared.module.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">ClientApp/app/shared2/</a> shared.module.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/23</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { NgModule, ModuleWithProviders, APP_INITIALIZER } from '@angular/core';</span>
+<span class="cstat-no" title="statement not covered" >import { CommonModule } from '@angular/common';</span>
+<span class="cstat-no" title="statement not covered" >import { RouterModule } from '@angular/router';</span>
+<span class="cstat-no" title="statement not covered" >import { FormsModule, ReactiveFormsModule } from '@angular/forms';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { AppState } from './app-state';</span>
+<span class="cstat-no" title="statement not covered" >import { LocalidadeService2 } from './localidade/localidade.service';</span>
+<span class="cstat-no" title="statement not covered" >import { PesquisaService2 } from './pesquisa/pesquisa.service';</span>
+<span class="cstat-no" title="statement not covered" >import { IndicadorService2 } from './indicador/indicador.service';</span>
+<span class="cstat-no" title="statement not covered" >import { ResultadoService2 } from './resultado/resultado.service';</span>
+<span class="cstat-no" title="statement not covered" >import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { ResultadoPipe } from './resultado.pipe';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import {ShareModule} from 'ng2share/share.module';</span> //social share module
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export function getLRU() {</span></span>
+<span class="cstat-no" title="statement not covered" >    return new Map();</span>
+}
+&nbsp;
+const MODULES = <span class="cstat-no" title="statement not covered" >[</span>
+    // Do NOT include UniversalModule, HttpModule, or JsonpModule here
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ShareModule,
+    ReactiveFormsModule
+];
+&nbsp;
+const PIPES = <span class="cstat-no" title="statement not covered" >[</span>
+    ResultadoPipe
+];
+&nbsp;
+const COMPONENTS = <span class="cstat-no" title="statement not covered" >[</span>
+    // put shared components here
+];
+&nbsp;
+const PROVIDERS = <span class="cstat-no" title="statement not covered" >[</span>
+    AppState,
+    LocalidadeService2,
+    PesquisaService2,
+    IndicadorService2,
+    ResultadoService2,
+    PesquisaConfiguration,
+    { provide: 'LRU', useFactory: getLRU, deps: [] }
+]
+&nbsp;
+@NgModule({
+    imports: [
+        ...MODULES
+    ],
+    declarations: [
+        ...PIPES,
+        ...COMPONENTS
+    ],
+    exports: [
+        ...MODULES,
+        ...PIPES,
+        ...COMPONENTS
+    ]
+})
+<span class="fstat-no" title="function not covered" >e</span></span>xport class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >SharedModule2<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > </span>{</span></span>
+<span class="fstat-no" title="function not covered" >    static <span class="cstat-no" title="statement not covered" >forRoot(): ModuleWithProviders {</span></span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            ngModule: SharedModule2,
+            providers: [
+                ...PROVIDERS,
+                {
+                    provide: APP_INITIALIZER,
+                    useFactory: loadConfig,
+                    deps: [
+                        LocalidadeService2,
+                        PesquisaService2,
+                        IndicadorService2,
+                        ResultadoService2,
+                        PesquisaConfiguration
+                    ],
+                    multi: true
+                }
+            ]
+        };
+    }
+<span class="cstat-no" title="statement not covered" >}</span>
+export const <span class="cstat-no" title="statement not covered" >loadConfig = <span class="fstat-no" title="function not covered" >(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >...args</span>)</span> =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {};</span></span></span></span></pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 08 2017 19:40:10 GMT-0300 (BRT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

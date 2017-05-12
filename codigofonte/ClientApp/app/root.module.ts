@@ -24,6 +24,8 @@ import { BASES, PESQUISAS } from './global-config';
 
 import { SubmenuComponent } from './submenu/submenu.component';
 
+import { BasicCacheModule } from './cache/basic-cache.module';
+
 @NgModule({
     imports: [
         CoreModule,
@@ -34,7 +36,8 @@ import { SubmenuComponent } from './submenu/submenu.component';
         PanoramaModule,
         VisaoHistoricaModule,
         SandboxModule,
-        Ng2PageScrollModule.forRoot()
+        Ng2PageScrollModule.forRoot(),
+        BasicCacheModule
     ],
     declarations: [
         RootComponent,
