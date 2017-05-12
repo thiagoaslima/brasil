@@ -37,13 +37,6 @@ const children = [
   imports: [
     RouterModule.forRoot([
       {
-        path: 'cache',
-        children: [
-          { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
-          { path: 'pesquisas', component: PesquisaCacheComponent }
-        ]
-      },
-      {
         path: '',
         canActivate: [EmptyLocationGuard],
         component: EmptyComponent,
@@ -56,11 +49,6 @@ const children = [
       {
         path: 'brasil/sandbox',
         redirectTo: 'v4/brasil/sandbox',
-      },
-      {
-        path: 'v4/municipio/:codmun',
-        canActivate: [V3RouterGuard],
-        component: EmptyComponent
       },
       {
         path: 'v4/brasil',
@@ -83,6 +71,18 @@ const children = [
       {
         path: 'brasil/:uf/:municipio',
         redirectTo: 'v4/brasil/:uf/:municipio',
+      },
+      {
+        path: 'v4/municipio/:codmun',
+        canActivate: [V3RouterGuard],
+        component: EmptyComponent
+      },
+      {
+        path: 'cache',
+        children: [
+          { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
+          { path: 'pesquisas', component: PesquisaCacheComponent }
+        ]
       },
       {
         path: '**',

@@ -78,7 +78,7 @@ export class AppState {
                 }
 
                 return {
-                    localidade: _localidadeService.getRoot(),
+                    localidade: _localidadeService.getUfBySigla('sp'),
                     tipo: NiveisTerritoriais.pais.label
                 }
             });
@@ -87,30 +87,12 @@ export class AppState {
             .map(({ params = { pesquisa: 0 } }) => params['pesquisa'])
             .flatMap(id => id ? _pesquisaService.getPesquisa(id): Observable.of(null));
 
-        // Observable.merge(
-        //     pesquisa$, localidade$
-        // ).forEach(console.log.bind(console, 'teste'));
 
-
-        pesquisa$.merge(localidade$)
-            .scan((acc, obj) => Object.assign(acc, obj), _initialState)
+        pesquisa$.zip(localidade$)
+            .scan((acc, [pesquisa, localidade]) => Object.assign(acc, pesquisa, localidade), _initialState)
             .subscribe(state => this.notify(state));
 
-        /*
-        this._routerParamsService.params$
-            .flatMap(({ urlParams, queryParams }) =>  _pesquisaService.getPesquisa(urlParams['pesquisa']))
-            .combineLatest(this._localidadeService.selecionada$)
-            .subscribe(([pesquisa, localidade]) => {
 
-                this._localidade = localidade;
-                this._pesquisa = pesquisa;
-
-                this.notify({
-                    "localidade": localidade,
-                    "pesquisa": pesquisa
-                });
-            });  
-            */
     }
 
 
