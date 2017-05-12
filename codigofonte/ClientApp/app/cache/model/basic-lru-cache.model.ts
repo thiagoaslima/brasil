@@ -26,7 +26,6 @@ export class BasicLRUCache {
             value: value,
             uses: 0
         };
-        console.log(this._cache);
     }
 
     /**

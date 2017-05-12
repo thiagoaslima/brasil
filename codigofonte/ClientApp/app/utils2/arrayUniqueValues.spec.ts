@@ -1,4 +1,5 @@
-import { arrayUniqueValues } from '.';
+/// <reference types="jest" />
+import { arrayUniqueValues } from './arrayUniqueValues';
 
 describe('arrayUniqueValues', () => {
 

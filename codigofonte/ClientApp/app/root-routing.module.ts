@@ -5,10 +5,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { PanoramaComponent } from './panorama/panorama.component';
+import { PanoramaShellComponent } from './panorama2/panorama-shell/panorama-shell.component';
 import { PesquisaComponent2 } from './pesquisa2/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
 
-import { PesquisaCacheComponent } from './cache/components';
+import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
 
 import { SandboxComponent } from './sandbox/sandbox.component';
@@ -20,6 +21,11 @@ const children = [
   {
     path: 'panorama',
     component: PanoramaComponent
+  },
+
+   {
+    path: 'panorama',
+    component: PanoramaShellComponent
   },
 
   {

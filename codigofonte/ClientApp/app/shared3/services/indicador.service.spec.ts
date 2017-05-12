@@ -5,6 +5,7 @@ import { MockBackend } from '@angular/http/testing';
 
 import { Indicador, Pesquisa } from '../models';
 import { IndicadorService3, PesquisaService3 } from './';
+import { BasicLRUCache } from '../../cache/model';
 import { ServicoDados as servidor } from '../values'
 
 import { Observable } from 'rxjs/Observable';
@@ -73,6 +74,10 @@ describe('IndicadorService', () => {
                     }
                 ]
             })
+        })
+
+        afterEach(() => {
+            IndicadorService3.cache.clear();
         })
 
         it('deve ser instanciado',
@@ -219,6 +224,10 @@ describe('IndicadorService', () => {
                 })
             })
 
+            afterEach(() => {
+                IndicadorService3.cache.clear();
+            })
+
             it('deve construir instancias de Indicador com Resultado', fakeAsync(
                 inject([IndicadorService3, MockBackend],
                     (indicadorService: IndicadorService3, mockBackend: MockBackend) => {
@@ -304,6 +313,10 @@ describe('IndicadorService', () => {
                     }
                 ]
             })
+        })
+
+        afterEach(() => {
+            IndicadorService3.cache.clear();
         })
 
         it('deve ser instanciado',

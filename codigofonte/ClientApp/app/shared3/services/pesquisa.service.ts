@@ -6,7 +6,7 @@ import { PesquisaDTO } from '../dto';
 import { Indicador, Pesquisa } from '../models';
 import { escopoIndicadores, listaNiveisTerritoriais, ServicoDados as servidor } from '../values';
 import { CacheFactory } from '../../cache/cacheFactory.service';
-import { RxCache, RxGetAllCache, RxMultiCache } from '../../cache/decorators';
+import { RxSimpleCache } from '../../cache/decorators';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -18,18 +18,17 @@ import 'rxjs/add/operator/retry';
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
-const pesquisaCache = CacheFactory.createCache('PesquisaCache', 50);
-
 @Injectable()
 export class PesquisaService3 {
+
+    static readonly cache = CacheFactory.createCache('pesquisaCache', 50);
 
     constructor(
         private _http: Http
     ) { }
 
-    @RxGetAllCache({
-        cache: pesquisaCache,
-        labelsFromResponse: (pesquisas) => pesquisas.map(pesquisa => pesquisa.id)
+    @RxSimpleCache({
+        cache: PesquisaService3.cache
     })
     getAllPesquisas(): Observable<Pesquisa[]> {
         const url = servidor.setUrl('pesquisas');
@@ -40,8 +39,8 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
-    @RxCache({
-        cache: pesquisaCache
+   @RxSimpleCache({
+        cache: PesquisaService3.cache
     })
     getPesquisasPorAbrangenciaTerritorial(nivelTerritorial: string): Observable<Pesquisa[]> {
         if (Pesquisa.niveisTerritoriaisPossiveis.indexOf(nivelTerritorial) === -1) {
@@ -54,10 +53,8 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err));
     }
 
-    @RxMultiCache({
-        cache: pesquisaCache,
-        labelsFromArguments: (ids) => ids,
-        labelsFromResponse: (pesquisas) => pesquisas.map(pesquisa => pesquisa.id)
+   @RxSimpleCache({
+        cache: PesquisaService3.cache
     })
     getPesquisas(pesquisasId: number[]): Observable<Pesquisa[]> {
         return this.getAllPesquisas()
@@ -68,9 +65,8 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err));
     }
 
-    @RxCache({
-        cache: pesquisaCache,
-        labelFromArguments: (id) => id
+   @RxSimpleCache({
+        cache: PesquisaService3.cache
     })
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         const url = servidor.setUrl(`pesquisas/${pesquisaId}`);

@@ -1,16 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { CacheFactory } from '../cache/cacheFactory.service';
 import { IndicadorService3, PesquisaService3, ResultadoService3 } from './services'
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
     CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule
+    RouterModule
 ];
 
 const PIPES = [
@@ -23,7 +22,12 @@ const COMPONENTS = [
 
 const PROVIDERS = [
     PesquisaService3,
-    // IndicadorService3,
+    {
+        provide: IndicadorService3,
+        deps: [Http, PesquisaService3],
+        useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+    }
+    
     // ResultadoService3
 ]
 
