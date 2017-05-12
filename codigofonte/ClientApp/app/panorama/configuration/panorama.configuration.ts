@@ -143,30 +143,30 @@ export const PANORAMA = {
 
 
             // --- População
-            {
-                pesquisaId: 23,
-                indicadorId: 22423,
-                titulo: "População residente, religião católica apostólica romana",
-                subtitulo: "População residente, religião católica apostólica romana",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
-            },
-            {
-                pesquisaId: 23,
-                indicadorId: 22424,
-                titulo: "População residente, religião espírita",
-                subtitulo: "População residente, religião espírita",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
-            },
-            {
-                pesquisaId: 23,
-                indicadorId: 22426,
-                titulo: "População residente, religião evangélicas",
-                subtitulo: "População residente, religião evangélicas",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
-            },
+            // {
+            //     pesquisaId: 23,
+            //     indicadorId: 22423,
+            //     titulo: "População residente, religião católica apostólica romana",
+            //     subtitulo: "População residente, religião católica apostólica romana",
+            //     tema: TEMAS.populacao,
+            //     visualizacao: PanoramaVisualizacao.numerico
+            // },
+            // {
+            //     pesquisaId: 23,
+            //     indicadorId: 22424,
+            //     titulo: "População residente, religião espírita",
+            //     subtitulo: "População residente, religião espírita",
+            //     tema: TEMAS.populacao,
+            //     visualizacao: PanoramaVisualizacao.numerico
+            // },
+            // {
+            //     pesquisaId: 23,
+            //     indicadorId: 22426,
+            //     titulo: "População residente, religião evangélicas",
+            //     subtitulo: "População residente, religião evangélicas",
+            //     tema: TEMAS.populacao,
+            //     visualizacao: PanoramaVisualizacao.numerico
+            // },
             {
                 pesquisaId: 33,
                 indicadorId: 29171,

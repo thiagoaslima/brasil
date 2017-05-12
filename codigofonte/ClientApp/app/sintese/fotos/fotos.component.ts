@@ -30,6 +30,9 @@ export class FotosComponent implements OnInit {
     private preview1 = "";
     private preview2 = "";
     private preview3 = "";
+    private preview4 = "";
+    private preview5 = "";
+    private preview6 = "";
     private titulo = "";
     private detalhes = "";
     private downloadLink = "";
@@ -80,21 +83,29 @@ export class FotosComponent implements OnInit {
             .map(state => state.localidade)
             .flatMap(localidade => this._sinteseService.getFotografias(localidade.codigo))
             .subscribe((fotos) => {
-
                 this.fotos = fotos;
+
+                this.preview1 = '';
+                this.preview2 = '';
+                this.preview3 = '';
+                this.preview4 = '';
+                this.preview5 = '';
+                this.preview6 = '';
+                
                 if(fotos.length >= 3){
                     //mostra as 3 fotos de preview
                     this.preview1 = this.servicoImagem + fotos[0].LINK;
                     this.preview2 = this.servicoImagem + fotos[1].LINK;
                     this.preview3 = this.servicoImagem + fotos[2].LINK;
+                    //preview extra para telas gigantes
+                    if(fotos.length >= 6){
+                        this.preview4 = this.servicoImagem + fotos[3].LINK;
+                        this.preview5 = this.servicoImagem + fotos[4].LINK;
+                        this.preview6 = this.servicoImagem + fotos[5].LINK;
+                    }
                 } else if(fotos.length > 0 && fotos.length <= 2){
                     //mostra apenas 1 foto de preview
                     this.preview1 = this.servicoImagem + fotos[0].LINK;
-                    this.preview2 = '';
-                    this.preview3 = '';
-                } else{
-                    //não mostra o preview
-                    this.preview1 = '';
                     this.preview2 = '';
                     this.preview3 = '';
                 }
