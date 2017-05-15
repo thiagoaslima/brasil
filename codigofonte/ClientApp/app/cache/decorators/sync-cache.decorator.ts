@@ -5,7 +5,7 @@ export function SyncCache({cache}: {cache: BasicLRUCache}) {
        const originalMethod = descriptor.value;
 
        descriptor.value = function (...args) {
-           const label = JSON.stringify(args)
+           const label = `${propertyKey}-${JSON.stringify(args)}`
            let cached = cache.get(label);
 
            if (!cached) {
