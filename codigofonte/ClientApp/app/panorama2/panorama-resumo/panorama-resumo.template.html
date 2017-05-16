@@ -1,0 +1,82 @@
+<template ngFor let-tema [ngForOf]="temas">
+
+    <div *ngIf="tema === ''" class="topo">
+
+        <div *ngFor="let item of hashDadosPorTema[tema]; let i = index" [ngClass]="{'topo__celula-esquerda': first, 'topo__celula-direita': i === 1, 'topo__celula-linha': i > 1}">
+            <h3 class="topo__titulo">
+                {{ item.titulo || item.indicador?.nome }}
+            </h3>
+            <p class="topo__valor">
+                {{ (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.valorValidoMaisRecente }}
+            </p>
+        </div>
+
+    </div>
+
+
+
+    <!--Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo    -->
+    <div [ngClass]="{'resumo__icons__1':tema.tema==='Trabalho','resumo__icons__2':tema.tema==='Educação','resumo__icons__3':tema.tema==='Território e Ambiente','resumo__icons__4':tema.tema==='Economia','resumo__icons__5':tema.tema==='Saúde', 'resumo__icons__6':tema.tema==='População','resumo-fixo': isHeaderStatic | async}">
+        <div *ngIf="tema.tema" class="mobile__exclusive temas__horizontais ">
+            <div [ngSwitch]="tema.tema" class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())">
+
+                <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
+               Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
+               e se recalcular as margens de todas as anteriores-->
+                <img *ngSwitchCase="'Agricultura'" class="ico" src="./img/ico/ico-agricultura.svg" />
+                <img *ngSwitchCase="'Educação'" class="ico" src="./img/ico/ico-educacao.svg" />
+                <img *ngSwitchCase="'Economia'" class="ico" src="./img/ico/ico-economia.svg" />
+                <img *ngSwitchCase="'Território e Ambiente'" class="ico" src="./img/ico/ico-ambiente.svg" />
+                <img *ngSwitchCase="'População'" class="ico" src="./img/ico/ico-populacao.svg" />
+                <img *ngSwitchCase="'Saúde'" class="ico" src="./img/ico/ico-saude.svg" />
+                <img *ngSwitchCase="'Trabalho e Rendimento'" class="ico" src="./img/ico/ico-trabalho.svg" />
+                <img *ngSwitchCase="'Frota'" class="ico" src="./img/ico/frota.svg" />
+
+                <!--<div *ngSwitchCase="'Agricultura'" class="ico ico--agri "></div>
+                <div *ngSwitchCase="'Frota'" class="ico ico--frota"></div>-->
+
+            </div>
+        </div>
+    </div>
+
+    <table *ngIf="tema.tema" class="lista" (click)="fireTemaSelecionado('#'+tema?.tema?.substr(0,2).toLowerCase())" [class.hide-content]="temaAtual != '#'+tema?.tema?.substr(0,2).toLowerCase()">
+        <tr class="lista__cabecalho">
+
+            <th [ngSwitch]="tema.tema" class="lista__icone">
+                <img *ngSwitchCase="'Agricultura'" class="ico" src="./img/ico/ico-agricultura.svg" />
+                <img *ngSwitchCase="'Educação'" class="ico" src="./img/ico/ico-educacao.svg" />
+                <img *ngSwitchCase="'Economia'" class="ico" src="./img/ico/ico-economia.svg" />
+                <img *ngSwitchCase="'Território e Ambiente'" class="ico" src="./img/ico/ico-ambiente.svg" />
+                <img *ngSwitchCase="'População'" class="ico" src="./img/ico/ico-populacao.svg" />
+                <img *ngSwitchCase="'Saúde'" class="ico" src="./img/ico/ico-saude.svg" />
+                <img *ngSwitchCase="'Trabalho e Rendimento'" class="ico" src="./img/ico/ico-trabalho.svg" />
+                <img *ngSwitchCase="'Frota'" class="ico" src="./img/ico/frota.svg" />
+            </th>
+
+            <th class="lista__titulo" colspan="2">{{tema.tema}}</th>
+            <th class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></th>
+        </tr>
+
+        <template ngFor let-item let-last="last" [ngForOf]="tema.indicadores">
+            <tr class="lista__indicador">
+                <td></td>
+                <td class="lista__nome">
+                    {{item.titulo || item.indicador?.nome}}
+                    <small *ngIf="(item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.periodoValidoMaisRecente">
+                        {{ '[' + (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.periodoValidoMaisRecente + ']' }}
+                        </small>
+                </td>
+                <td class="lista__valor" colspan="2">
+                    {{ (item.indicador?.getResultadoByLocal(tema.localidade?.codigo) | async)?.valorValidoMaisRecente | resultado}}
+                    <span class="lista__unidade">{{item.unidade || item.indicador?.unidade.nome }}</span>
+                </td>
+            </tr>
+            <tr *ngIf="!last" class="lista__separador">
+                <td colspan="4">
+                    <div class="lista__linha"></div>
+                </td>
+            </tr>
+        </template>
+
+    </table>
+</template>
