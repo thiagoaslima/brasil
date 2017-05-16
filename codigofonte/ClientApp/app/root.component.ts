@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import {TituloBrowserComponent} from './core/titulo-browser/titulo-browser.component'
+import { Localidade } from './shared2/localidade/localidade.model';
+
 
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
@@ -147,6 +149,15 @@ export class RootComponent implements OnInit, OnDestroy {
 
     handleCloseMenu($event) {
         this.abrirMenuPesquisa = false;
+    }
+
+    navegarPara(localidade: Localidade){
+
+        let url = this.router.url.split('/');
+        url[3] = localidade.parent.sigla.toLowerCase();
+        url[4] = localidade.slug;
+
+        this.router.navigateByUrl(url.join('/'));
     }
 
 }

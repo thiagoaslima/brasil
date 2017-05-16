@@ -78,7 +78,7 @@ export class AppState {
                 }
 
                 return {
-                    localidade: _localidadeService.getUfBySigla('sp'),
+                    localidade: 'BR',
                     tipo: NiveisTerritoriais.pais.label
                 }
             });
