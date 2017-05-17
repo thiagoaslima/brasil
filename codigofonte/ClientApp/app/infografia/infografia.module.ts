@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { GraficoComponent } from './grafico-base/grafico.component';
 import { CartogramaComponent, LocalCartogramaComponent } from './cartograma/cartograma.component';
 import { MapaService } from './cartograma/mapa.service';
+import { LinhaTempo } from './linha-tempo/linha-tempo.component';
 
 @NgModule({
 	imports: [
@@ -14,12 +15,14 @@ import { MapaService } from './cartograma/mapa.service';
 	declarations: [ 
 		GraficoComponent,
 		CartogramaComponent,
-		LocalCartogramaComponent
+		LocalCartogramaComponent,
+		LinhaTempo
 	],
 	exports: [
 		GraficoComponent,
 		CartogramaComponent,
-		LocalCartogramaComponent
+		LocalCartogramaComponent,
+		LinhaTempo
 	],
 	providers: [
 		MapaService

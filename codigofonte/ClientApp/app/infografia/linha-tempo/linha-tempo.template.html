@@ -1,0 +1,13 @@
+<div class="linhatempo" *ngIf="anos != undefined && anos.length > 0">
+    <div class="linhatempo__linha"></div>
+    
+    <div class="linhatempo__anos">
+        <div class="linhatempo__ano"
+            *ngFor="let ano of anos; let i = index;"
+            [class.linhatempo__ano--selecionado]="i == indexSelecionado"
+            (click)="onSelect(i)">
+            <div class="linhatempo__circulo"></div>
+            <span class="linhatempo__texto">{{ ano }}</span>
+        </div>
+    </div>
+</div>
