@@ -24,7 +24,7 @@ export class EmptyLocationGuard implements CanActivate {
             params = JSON.parse(localStorage.getItem('lastParams'));
         }
 
-        if(params) {
+        if(params && params.params && params.params.uf && params.params.municipio) {
             this._router.navigateByUrl(`/v4/brasil/${params.params.uf}/${params.params.municipio}/panorama`);
         } else {
             let allCapitais: Localidade[] = this._localidadeServ.getAllCapitais();

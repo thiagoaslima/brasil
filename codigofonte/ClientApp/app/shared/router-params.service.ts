@@ -23,7 +23,7 @@ export class RouterParamsService {
             .map(e => this.extractParamsFromTree(this._route.snapshot, {}))
             .do((params) => {
 
-                if(isBrowser){
+                if(isBrowser && params && params.params && params.params.uf && params.params.municipio){
                     localStorage.setItem('lastParams', JSON.stringify(params));
                 }
                 
