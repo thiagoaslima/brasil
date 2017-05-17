@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { CacheFactory } from '../cache/cacheFactory.service';
-import { IndicadorService3, PesquisaService3, ResultadoService3 } from './services'
+import { IndicadorService3, LocalidadeService3, PesquisaService3, ResultadoService3 } from './services'
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -22,13 +22,17 @@ const COMPONENTS = [
 
 const PROVIDERS = [
     PesquisaService3,
+    LocalidadeService3,
     {
         provide: IndicadorService3,
         deps: [Http, PesquisaService3],
         useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+    },
+    {
+        provide: ResultadoService3,
+        deps: [Http, PesquisaService3, LocalidadeService3],
+        useFactory: (http, pesquisaService, localidadeService) => new ResultadoService3(http, pesquisaService, localidadeService)
     }
-    
-    // ResultadoService3
 ]
 
 @NgModule({

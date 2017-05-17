@@ -15,10 +15,10 @@ interface UfDTO {
 
 interface MunicipioDTO {
     codigo: number,
-    codigoUf: 52,
+    codigoUf: number,
     nome: string,
     slug: string,
     microrregiao: number
 }
 
-export type LocalDTO = PaisDTO | UfDTO | MunicipioDTO; 
+export type LocalidadeDTO = PaisDTO | UfDTO | MunicipioDTO; 

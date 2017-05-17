@@ -11,14 +11,14 @@ describe('Resultado Model', () => {
 
     it('deve converter o objeto do servidor em parâmetro para o construtor de Resultado', () => {
         const expected = [
-            { id: 5903, localidade: "330455", res: { "2005": "172242", "2007": "126100", "2009": "128983", "2012": "128154", "2015": "137100" } }
+            { id: 5903, codigoLocalidade: "330455", res: { "2005": "172242", "2007": "126100", "2009": "128983", "2012": "128154", "2015": "137100" } }
         ];
         expect(Resultado.convertDTOintoParameters(resultadoDTO)).toEqual(expected)
     })
 
     it('deve gerar objetos do tipo Resultado', () => {
         const actual = Resultado.convertDTOintoParameters(resultadoDTO).map(param => Resultado.criar(param))[0];
-        const expected = { indicadorId: 5903, localidadeCodigo: 330455, periodos: ["2015", "2012", "2009", "2007", "2005"], valores: ["137100", "128154", "128983", "126100", "172242"] } as Resultado
+        const expected = { indicadorId: 5903, codigoLocalidade: 330455, periodos: ["2015", "2012", "2009", "2007", "2005"], valores: ["137100", "128154", "128983", "126100", "172242"] } as Resultado
 
         expect(actual).toEqual(expected)
     })
@@ -29,13 +29,13 @@ describe('Resultado Model', () => {
 
         expect(actual.length).toBe(4)
         expect(actual[0].indicadorId).toBe(5903)
-        expect(actual[0].localidadeCodigo).toBe(330010)
+        expect(actual[0].codigoLocalidade).toBe(330010)
         expect(actual[1].indicadorId).toBe(5903)
-        expect(actual[1].localidadeCodigo).toBe(330455)
+        expect(actual[1].codigoLocalidade).toBe(330455)
         expect(actual[2].indicadorId).toBe(5904)
-        expect(actual[2].localidadeCodigo).toBe(330010)
+        expect(actual[2].codigoLocalidade).toBe(330010)
         expect(actual[3].indicadorId).toBe(5904)
-        expect(actual[3].localidadeCodigo).toBe(330455)
+        expect(actual[3].codigoLocalidade).toBe(330455)
     })
 
     describe('instância', () => {
@@ -70,7 +70,7 @@ describe('Resultado Model', () => {
     })
 
     describe('instância sem valor', () => {
-        let resultado = Resultado.criar({id: 1, localidade: "1"})
+        let resultado = Resultado.criar({id: 1, codigoLocalidade: "1"})
 
         it('deve criar uma instância com periodos e valores valendo []', () => {
             expect(resultado.periodos).toEqual([]);

@@ -87,8 +87,13 @@ const children = [
         path: 'cache',
         children: [
           { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
-          { path: 'pesquisas', component: PesquisaCacheComponent }
+          { path: 'pesquisas', component: PesquisaCacheComponent },
+          { path: 'indicadores', component: IndicadorCacheComponent }
         ]
+      },
+      {
+        path: 'v4/brasil/:uf/:municipio/panorama2',
+        component: PanoramaShellComponent
       },
       {
         path: '**',

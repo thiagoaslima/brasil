@@ -87,6 +87,6 @@ export class Indicador {
     }
 
     getResultadoByLocal(localidadeCodigo: number): Resultado {
-        return this.resultados.find(resultado => resultado.localidadeCodigo === localidadeCodigo) || null;
+        return this.resultados.find(resultado => resultado.codigoLocalidade === localidadeCodigo) || null;
     }
 }
