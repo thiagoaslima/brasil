@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador } from '../indicador/indicador.model';
-import { Localidade } from './localidade.model';
-import { municipios } from '../../../api/municipios';
-import { ufs } from '../../../api/ufs';
-import { brasil } from '../../../api/brasil';
-import { slugify } from '../../utils/slug';
-
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -16,8 +9,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
 
+import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador } from '../indicador/indicador.model';
+import { Localidade } from './localidade.model';
+import { municipios } from '../../../api/municipios';
+import { ufs } from '../../../api/ufs';
+import { brasil } from '../../../api/brasil';
+import { slugify } from '../../utils/slug';
+
 
 class LocalidadeCache {
+
     private _list = <Localidade[]>[];
     private _codigo = <{ [idx: number]: Localidade }>{};
     private _identificador = <{ [idx: string]: Localidade[] }>{};
@@ -64,9 +65,11 @@ export class LocalidadeService2 {
     private _municipios = new LocalidadeCache();
     private _ufs = new LocalidadeCache();
 
-    constructor() {
+
+    constructor(private _http: Http) {
+
         this._buildLocalidadesTree();
-        Localidade.setLocalidadeStrategy({ retrieve: this.get.bind(this) });
+        Localidade.setLocalidadeStrategy({ retrieve: this.get.bind(this) })
     }
 
     get(codigo: number, escopo: 'proprio' | 'filhos' = 'proprio'): Localidade[] {
@@ -121,6 +124,10 @@ export class LocalidadeService2 {
         return this._ufs.buscarPorIdentificador(ufSigla)[0];
     }
 
+    public getUfByNome(ufNome: string){
+        return this.getUfs().filter(localidade => localidade.nome.toLowerCase() == ufNome.toLowerCase())[0];
+    }
+
     public getAllMunicipios() {
         return this._municipios.todos;
     }
@@ -144,6 +151,20 @@ export class LocalidadeService2 {
     public getMunicipiosByRegiao(codigoRegiao: string) {
         const codigo = codigoRegiao.replace(/x/g, '');
         return this._municipios.todos.filter(municipio => municipio.codigo.toString().indexOf(codigo) === 0);
+    }
+
+    public getMunicipioByCoordinates(latitude: number, longitude: number){
+
+        const serviceEndpointURL = `http://nominatim.openstreetmap.org/reverse?format=xml&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1&format=json`;
+        
+        return this._http.get(serviceEndpointURL)
+            .map(res => res.json())
+            .flatMap(json => {
+
+                let municipio: Localidade = this.getMunicipioBySlug(this.getUfByNome(json.address.state).sigla.toLowerCase(), slugify(json.address.city));
+
+                return Observable.of(municipio);
+            });
     }
 
     public buscar(termo: string): Localidade[] {
