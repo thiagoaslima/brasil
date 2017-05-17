@@ -8,22 +8,27 @@ import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localid
 import { BuscaComponent } from './busca/busca.component';
 import { BuscaService } from './busca/busca.service';
 import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
-
+import { GeolocationComponent } from './geolocation/geolocation.component';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    HttpModule,
+    JsonpModule
   ],
   declarations: [
     SeletorLocalidadeComponent,
     BuscaComponent,
-    TituloBrowserComponent
+    TituloBrowserComponent,
+    GeolocationComponent
   ],
   exports: [
     SeletorLocalidadeComponent,
     BuscaComponent,
-    TituloBrowserComponent
+    TituloBrowserComponent,
+    GeolocationComponent
   ],
   providers: [
     BuscaService
