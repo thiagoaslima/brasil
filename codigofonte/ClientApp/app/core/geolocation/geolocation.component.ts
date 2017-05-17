@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, style } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -13,7 +13,8 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
  */
 @Component({
     selector: 'geolocation',
-    template: `<button (click)="getGeoLocation()">Geolocalização</button>`
+    styleUrls: ['./geolocation.style.css'],
+    templateUrl: './geolocation.template.html'
 })
 export class GeolocationComponent {
 
