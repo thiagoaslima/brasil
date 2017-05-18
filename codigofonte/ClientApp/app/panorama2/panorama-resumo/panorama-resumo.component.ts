@@ -13,6 +13,10 @@ import { TEMAS } from '../../panorama2/configuration';
 import { converterObjArrayEmHash } from '../../utils2';
 import { Resultado } from '../../shared3/models'
 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+
 @Component({
     selector: 'panorama-resumo',
     templateUrl: './panorama-resumo.template.html',
@@ -35,10 +39,10 @@ export class PanoramaResumoComponent implements OnChanges {
 
     public cabecalho = [];
     public temas = [];
-    public isHeaderStatic: boolean;
+    public isHeaderStatic: Observable<boolean>;
 
     private _valores = {};
-    private _scrollTop$
+    private _scrollTop$ = new BehaviorSubject(0);
 
     @Output() temaSelecionado = new EventEmitter();
     temaAtual = '#po';
@@ -72,6 +76,11 @@ export class PanoramaResumoComponent implements OnChanges {
         if (changes.hasOwnProperty('resultados') && changes.resultados.currentValue.length > 0) {
             this._valores = converterObjArrayEmHash(changes.resultados.currentValue, 'indicadorId', false);
         }
+    }
+
+    ngOnDestroy() {
+        this._scrollTop$.complete();
+        this._scrollTop$ = null;
     }
 
     getTitulo(indicadorId: number): string {
