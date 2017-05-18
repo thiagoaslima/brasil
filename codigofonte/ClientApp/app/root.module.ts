@@ -10,7 +10,7 @@ import { SharedModule2 } from './shared2/shared.module';
 import { SinteseModule } from './sintese/sintese.module';
 import { PanoramaModule } from './panorama/panorama.module'
 import { Panorama2Module } from './panorama2/panorama2.module'
-import { PesquisaModule2 } from './pesquisa2/pesquisa.module';
+import { PesquisaModule2 } from './pesquisa/pesquisa.module';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';

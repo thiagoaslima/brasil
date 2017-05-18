@@ -21,7 +21,7 @@ import { flatTree } from '../utils/flatFunctions';
     styleUrls: ['./pesquisa.style.css']
 })
 
-export class PesquisaComponent2 implements OnInit {
+export class PesquisaComponent implements OnInit {
 
     @ViewChild('dados') dados: ElementRef;
 

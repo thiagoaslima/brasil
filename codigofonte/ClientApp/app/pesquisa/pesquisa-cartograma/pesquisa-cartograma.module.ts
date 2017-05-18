@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule2 } from '../shared2/shared.module';
+import { SharedModule2 } from '../../shared2/shared.module';
 import { PesquisaCartogramaComponent } from './pesquisa-cartograma.component';
 
 
