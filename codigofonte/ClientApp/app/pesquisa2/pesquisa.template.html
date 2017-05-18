@@ -2,5 +2,9 @@
     
     <pesquisa-header (onDownload)="dados.downloadCSV();" (onOcultarValoresVazios)="ocultarValoresVazios($event)"></pesquisa-header>
 
-    <pesquisa-tabela #dados [pesquisa]="pesquisa$ | async"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-tabela>
+    <pesquisa-tabela #dados *ngIf="tipo == 'tabela'" [pesquisa]="pesquisa$ | async"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-tabela>
+    <pesquisa-graficos *ngIf="tipo == 'grafico'"></pesquisa-graficos>
+    <pesquisa-cartograma *ngIf="tipo == 'cartograma'"></pesquisa-cartograma>
+    <pesquisa-ranking *ngIf="tipo == 'ranking'"></pesquisa-ranking>
+    
 </div>
