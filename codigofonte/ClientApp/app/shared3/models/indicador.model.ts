@@ -24,6 +24,25 @@ export interface IndicadorParameters extends IndicadorDTO {
     resultados?: Resultado[]
 }
 
+class UnidadeIndicador {
+     nome: string
+     classe: string
+     multiplicador: number
+
+     constructor({nome = '', classe = '', multiplicador = 1}) {
+         this.nome = nome
+         this.classe = classe
+         this.multiplicador = multiplicador
+     }
+
+     toString() {
+         if (this.multiplicador === 0 || this.multiplicador === 1) {
+            return this.nome;
+         }
+         return this.nome + ' (×' + this.multiplicador + ')';
+     }
+}
+
 export class Indicador {
     static criar(dados: IndicadorParameters) {
         return new Indicador(dados);
@@ -71,13 +90,13 @@ export class Indicador {
         }, dados.metadado);
 
         if (dados.unidade) {
-            this.unidade = {
-                nome: dados.unidade.id || '',
-                classe: dados.unidade.classe || '',
-                multiplicador: dados.unidade.multiplicador || 1
-            }
+            this.unidade = new UnidadeIndicador({
+                nome: dados.unidade.id,
+                classe: dados.unidade.classe,
+                multiplicador: dados.unidade.multiplicador
+            })
         } else {
-            this.unidade = { nome: '', classe: '', multiplicador: 1 };
+            this.unidade = new UnidadeIndicador({});
         }
 
         if (dados.pesquisa_id && !dados.pesquisa) { this.pesquisaId = dados.pesquisa_id; }

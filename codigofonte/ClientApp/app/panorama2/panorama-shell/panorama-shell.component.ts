@@ -30,7 +30,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
     })
     static getConfiguracao(tipo) {
         const { temas, indicadores } = PANORAMA[tipo] || { temas: [], indicadores: [] };
-        const hash = converterObjArrayEmHash(indicadores, 'tema');
+        const hash = converterObjArrayEmHash(indicadores, 'tema', true);
         return temas.reduce((agg, tema) => agg.concat(hash[tema]), [] as ItemConfiguracao[]);
     }
 

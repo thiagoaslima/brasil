@@ -189,6 +189,7 @@ export const PANORAMA = {
                     }]
                 }
             },
+            
             {
                 pesquisaId: 33,
                 indicadorId: 29166,

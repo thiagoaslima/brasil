@@ -30,8 +30,8 @@ const PROVIDERS = [
     },
     {
         provide: ResultadoService3,
-        deps: [Http, PesquisaService3, LocalidadeService3],
-        useFactory: (http, pesquisaService, localidadeService) => new ResultadoService3(http, pesquisaService, localidadeService)
+        deps: [Http, IndicadorService3, LocalidadeService3],
+        useFactory: (http, indicadorService, localidadeService) => new ResultadoService3(http, indicadorService, localidadeService)
     }
 ]
 
