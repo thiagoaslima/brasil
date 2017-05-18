@@ -1,0 +1,19 @@
+<div class='conteudo'>
+    
+    <pesquisa-header (onDownload)="dados.downloadCSV();" (onOcultarValoresVazios)="ocultarValoresVazios($event)"></pesquisa-header>
+
+    <pesquisa-tabela #dados *ngIf="tipo == 'tabela'" [pesquisa]="pesquisa$ | async"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-tabela>
+    <div *ngIf="tipo == 'grafico'">
+        <pesquisa-indicadores></pesquisa-indicadores>
+        <pesquisa-graficos></pesquisa-graficos>
+    </div>
+    <div *ngIf="tipo == 'cartograma'">
+        <pesquisa-indicadores></pesquisa-indicadores>
+        <pesquisa-cartograma></pesquisa-cartograma>
+    </div>
+    <div *ngIf="tipo == 'ranking'">
+        <pesquisa-indicadores></pesquisa-indicadores>
+        <pesquisa-ranking></pesquisa-ranking>
+    </div>
+   
+</div>
