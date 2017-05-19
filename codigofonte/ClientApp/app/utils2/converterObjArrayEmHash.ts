@@ -15,7 +15,7 @@ function _hashUniqueValue(array: Array<any>, keyPath: string) {
         
 
         if (hash[label]) {
-            throw new Error(`Mais de um item possui o mesmo valor de referência. Verifique as informações ou considere utilizar a função com a flag 'manyElementsAtSameProperty'. [elemento1: ${hash[label]}, elemento2: ${item}}]`)
+            throw new Error(`Mais de um item possui o mesmo valor de referência. Verifique as informações ou considere utilizar a função com a flag 'manyElementsAtSameProperty'. [elemento1: ${JSON.stringify(hash[label])}, elemento2: ${JSON.stringify(item)}}]`)
         }
 
         hash[label] = item;

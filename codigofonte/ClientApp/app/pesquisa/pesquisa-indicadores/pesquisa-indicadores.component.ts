@@ -6,18 +6,20 @@ import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { SinteseService } from '../../sintese/sintese.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 
+
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
 var FileSaver = require('file-saver');
 
 @Component({
-    selector: 'pesquisa-tabela',
-    templateUrl: './pesquisa-tabela.template.html',
-    styleUrls: ['./pesquisa-tabela.style.css']
+    selector: 'pesquisa-indicadores',
+    templateUrl: './pesquisa-indicadores.template.html',
+    styleUrls: ['./pesquisa-indicadores.style.css']
 })
 
-export class PesquisaTabelaComponent implements OnChanges {
-   
+export class PesquisaIndicadoresComponent implements OnChanges {
+
+
     @Input() localidades: number[];
     @Input() pesquisa: Pesquisa;
     @Input() posicaoIndicador: string;
@@ -33,7 +35,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     ) {  }
 
 
-    ngOnChanges() {
+   ngOnChanges() {
 
         if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
 
@@ -63,7 +65,7 @@ export class PesquisaTabelaComponent implements OnChanges {
             let localidadeC = this.localidades.length > 2 ? this.localidades[2] : null;
 
             let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
-
+                
                 this.indicadores = this.flat(indicadores).map(indicador => {
 
                     indicador.nivel = this.getNivelIndicador(indicador.posicao);
@@ -215,7 +217,7 @@ export class PesquisaTabelaComponent implements OnChanges {
         return "nivel-" + this.getNivelIndicador(posicaoIndicador);
     }
 
-    public downloadCSV(){
+     public downloadCSV(){
         let ind = this.indicadores;
         let localidadeA = this._localidade.getMunicipioByCodigo(this.localidades[0]).nome;
         let localidadeB = this.localidades[1] ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';

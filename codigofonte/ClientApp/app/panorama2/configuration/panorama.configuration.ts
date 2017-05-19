@@ -13,16 +13,16 @@ export const PANORAMA: {
 } = {
     [NiveisTerritoriais.pais.label]: {
         temas: [
-            TEMAS.nenhum,
-            TEMAS.territorio,
-            TEMAS.populacao,
-            TEMAS.educacao,
-            TEMAS.trabalho,
-            TEMAS.agropecuaria,
-            TEMAS.industria,
-            TEMAS.comercio,
-            TEMAS.servicos,
-            TEMAS.economia
+            TEMAS.nenhum.label,
+            TEMAS.territorio.label,
+            TEMAS.populacao.label,
+            TEMAS.educacao.label,
+            TEMAS.trabalho.label,
+            TEMAS.agropecuaria.label,
+            TEMAS.industria.label,
+            TEMAS.comercio.label,
+            TEMAS.servicos.label,
+            TEMAS.economia.label
         ],
 
         indicadores: [
@@ -31,7 +31,7 @@ export const PANORAMA: {
                 pesquisaId: 10065,
                 periodo: "2017",
                 titulo: "Área territorial",
-                tema: TEMAS.territorio,
+                tema: TEMAS.territorio.label,
                 visualizacao: PanoramaVisualizacao.grafico,
                 grafico: {
                     titulo: "Área por bioma",
@@ -63,7 +63,7 @@ export const PANORAMA: {
                 pesquisaId: 10065,
                 periodo: "2017",
                 titulo: "Número de municípios",
-                tema: TEMAS.territorio,
+                tema: TEMAS.territorio.label,
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
@@ -73,7 +73,7 @@ export const PANORAMA: {
                 pesquisaId: 10065,
                 periodo: "2010",
                 titulo: "Total de habitantes",
-                tema: TEMAS.populacao,
+                tema: TEMAS.populacao.label,
                 visualizacao: PanoramaVisualizacao.grafico,
                 grafico: {
                     titulo: "Total de habitantes",
@@ -91,13 +91,13 @@ export const PANORAMA: {
 
     [NiveisTerritoriais.municipio.label]: {
         temas: [
-            TEMAS.nenhum,
-            TEMAS.populacao,
-            TEMAS.trabalho,
-            TEMAS.educacao,
-            TEMAS.economia,
-            TEMAS.saude,
-            TEMAS.meioAmbiente
+            TEMAS.nenhum.label,
+            TEMAS.populacao.label,
+            TEMAS.trabalho.label,
+            TEMAS.educacao.label,
+            TEMAS.economia.label,
+            TEMAS.saude.label,
+            TEMAS.meioAmbiente.label
         ],
 
         indicadores: [
@@ -105,70 +105,67 @@ export const PANORAMA: {
                 pesquisaId: 33,
                 indicadorId: 29169,
                 titulo: "Código do Município",
-                tema: TEMAS.nenhum,
+                tema: TEMAS.nenhum.label,
                 largura: 'half',
                 visualizacao: PanoramaVisualizacao.numerico
             },
+
+            {
+                pesquisaId: 33,
+                indicadorId: 60409,
+                titulo: "Gentílico",
+                tema: TEMAS.nenhum.label,
+                largura: 'half',
+                visualizacao: PanoramaVisualizacao.numerico
+            },
+
             {
                 pesquisaId: 33,
                 indicadorId: 29170,
                 titulo: "Prefeito",
-                tema: TEMAS.nenhum,
-                largura: 'half',
+                tema: TEMAS.nenhum.label,
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
 
             // --- População
-            // {
-            //     pesquisaId: 33,
-            //     indicadorId: 60409,
-            //     titulo: " Gentílico",
-            //     tema: TEMAS.populacao,
-            //     visualizacao: PanoramaVisualizacao.numerico
-            // },
-            {
-                pesquisaId: 23,
-                indicadorId: 22423,
-                titulo: "População residente, religião católica apostólica romana",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
-            },
-            {
-                pesquisaId: 23,
-                indicadorId: 22424,
-                titulo: "População residente, religião espírita",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
-            },
-            {
-                pesquisaId: 23,
-                indicadorId: 22426,
-                titulo: "População residente, religião evangélicas",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
-            },
             {
                 pesquisaId: 33,
                 indicadorId: 29171,
                 titulo: "População estimada",
-                tema: TEMAS.populacao,
-                visualizacao: PanoramaVisualizacao.numerico
+                tema: TEMAS.populacao.label,
+                visualizacao: PanoramaVisualizacao.grafico,
+                grafico: {
+                    titulo: "População residente por religião",
+                    tipo: TiposGrafico.coluna,
+                    dados: [{
+                        pesquisaId: 23,
+                        indicadorId: 22423
+                    }, {
+                        pesquisaId: 23,
+                        indicadorId: 22424
+                    }, {
+                        pesquisaId: 23,
+                        indicadorId: 22426
+                    }]
+                }
             },
+
             {
                 pesquisaId: 33,
                 indicadorId: 29166,
                 periodo: "2010",
                 titulo: "População no último censo",
-                tema: TEMAS.populacao,
+                tema: TEMAS.populacao.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
+
             {
                 pesquisaId: 33,
                 indicadorId: 29168,
                 periodo: "2010",
                 titulo: "Densidade demográfica",
-                tema: TEMAS.populacao,
+                tema: TEMAS.populacao.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
@@ -179,7 +176,7 @@ export const PANORAMA: {
                 pesquisaId: 33,
                 indicadorId: 29167,
                 titulo: "Área da unidade territorial",
-                tema: TEMAS.meioAmbiente,
+                tema: TEMAS.meioAmbiente.label,
                 visualizacao: PanoramaVisualizacao.numerico
             },
             {
@@ -187,7 +184,7 @@ export const PANORAMA: {
                 indicadorId: 60030,
                 periodo: "2010",
                 titulo: "Esgotamento sanitário adequado",
-                tema: TEMAS.meioAmbiente,
+                tema: TEMAS.meioAmbiente.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -195,7 +192,7 @@ export const PANORAMA: {
                 indicadorId: 60029,
                 periodo: "2010",
                 titulo: "Arborização de vias públicas",
-                tema: TEMAS.meioAmbiente,
+                tema: TEMAS.meioAmbiente.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -203,7 +200,7 @@ export const PANORAMA: {
                 indicadorId: 60031,
                 periodo: "2010",
                 titulo: "Urbanização de vias públicas",
-                tema: TEMAS.meioAmbiente,
+                tema: TEMAS.meioAmbiente.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
@@ -214,7 +211,7 @@ export const PANORAMA: {
                 indicadorId: 30277,
                 periodo: "2013",
                 titulo: "IDEB – Índice de Desenvolvimento da Educação Básica",
-                tema: TEMAS.educacao,
+                tema: TEMAS.educacao.label,
                 visualizacao: PanoramaVisualizacao.painel,
 
             },
@@ -223,7 +220,7 @@ export const PANORAMA: {
                 indicadorId: 60045,
                 periodo: "2010",
                 titulo: "Taxa de escolarização de 6 a 14 anos de idade",
-                tema: TEMAS.educacao,
+                tema: TEMAS.educacao.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -231,7 +228,7 @@ export const PANORAMA: {
                 indicadorId: 60041,
                 periodo: "2015",
                 titulo: "IDEB – Anos iniciais do ensino fundamental",
-                tema: TEMAS.educacao,
+                tema: TEMAS.educacao.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -239,7 +236,7 @@ export const PANORAMA: {
                 indicadorId: 60042,
                 periodo: "2015",
                 titulo: "IDEB – Anos finais do ensino fundamental",
-                tema: TEMAS.educacao,
+                tema: TEMAS.educacao.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
@@ -247,7 +244,7 @@ export const PANORAMA: {
                 pesquisaId: 13,
                 indicadorId: 5908,
                 titulo: "Matrículas no ensino fundamental",
-                tema: TEMAS.educacao,
+                tema: TEMAS.educacao.label,
                 visualizacao: PanoramaVisualizacao.grafico,
                 grafico: {
                     titulo: "Matrículas",
@@ -275,7 +272,7 @@ export const PANORAMA: {
                 indicadorId: 29765,
                 periodo: "2014",
                 titulo: "Salário médio mensal dos trabalhadores formais",
-                tema: TEMAS.trabalho,
+                tema: TEMAS.trabalho.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -283,7 +280,7 @@ export const PANORAMA: {
                 indicadorId: 29763,
                 periodo: "2014",
                 titulo: "Pessoal ocupado",
-                tema: TEMAS.trabalho,
+                tema: TEMAS.trabalho.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -291,7 +288,7 @@ export const PANORAMA: {
                 indicadorId: 60036,
                 periodo: "2014",
                 titulo: "População ocupada",
-                tema: TEMAS.trabalho,
+                tema: TEMAS.trabalho.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
             {
@@ -299,7 +296,7 @@ export const PANORAMA: {
                 indicadorId: 60037,
                 periodo: "2010",
                 titulo: "Percentual da população com rendimento nominal mensal per capita de até 1/2 salário mínimo",
-                tema: TEMAS.trabalho,
+                tema: TEMAS.trabalho.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
@@ -309,7 +306,7 @@ export const PANORAMA: {
                 indicadorId: 30279,
                 periodo: "2014",
                 titulo: "Mortalidade Infantil",
-                tema: TEMAS.saude,
+                tema: TEMAS.saude.label,
                 visualizacao: PanoramaVisualizacao.painel,
                 correlacaoNegativaValorQualidade: true
             },
@@ -318,7 +315,7 @@ export const PANORAMA: {
                 indicadorId: 60032,
                 periodo: "2016",
                 titulo: "Internações por diarreia",
-                tema: TEMAS.saude,
+                tema: TEMAS.saude.label,
                 visualizacao: PanoramaVisualizacao.painel,
                 correlacaoNegativaValorQualidade: true
             },
@@ -326,7 +323,7 @@ export const PANORAMA: {
                 pesquisaId: 32,
                 indicadorId: 28242,
                 titulo: "Estabelecimentos de Saúde SUS",
-                tema: TEMAS.saude,
+                tema: TEMAS.saude.label,
                 visualizacao: PanoramaVisualizacao.numerico
             },
 
@@ -336,7 +333,7 @@ export const PANORAMA: {
                 indicadorId: 60047,
                 periodo: "2014",
                 titulo: "PIB per capita",
-                tema: TEMAS.economia,
+                tema: TEMAS.economia.label,
                 visualizacao: PanoramaVisualizacao.painel
             },
 
@@ -345,7 +342,7 @@ export const PANORAMA: {
                 indicadorId: 60048,
                 periodo: "2015",
                 titulo: "Percentual das receitas oriundas de fontes externas",
-                tema: TEMAS.economia,
+                tema: TEMAS.economia.label,
                 visualizacao: PanoramaVisualizacao.painel,
                 correlacaoNegativaValorQualidade: true
             },
@@ -354,7 +351,7 @@ export const PANORAMA: {
                 pesquisaId: 37,
                 indicadorId: 30255,
                 titulo: "Índice de Desenvolvimento Humano Municipal",
-                tema: TEMAS.economia,
+                tema: TEMAS.economia.label,
                 visualizacao: PanoramaVisualizacao.numerico
             }
 

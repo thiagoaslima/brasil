@@ -21,7 +21,7 @@ import { flatTree } from '../utils/flatFunctions';
     styleUrls: ['./pesquisa.style.css']
 })
 
-export class PesquisaComponent2 implements OnInit {
+export class PesquisaComponent implements OnInit {
 
     @ViewChild('dados') dados: ElementRef;
 
@@ -31,6 +31,7 @@ export class PesquisaComponent2 implements OnInit {
     posicaoIndicador: string = "2";
     localidades: number[] = [null, null, null];
     periodo: string;
+    tipo: string;
 
     isOcultarValoresVazios = true;
     
@@ -77,6 +78,9 @@ export class PesquisaComponent2 implements OnInit {
 
             // Obter período de análise
             this.periodo = urlParams.queryParams['ano'];
+
+            // Obtém o tipo de resultado a ser exibido
+            this.tipo = !!urlParams.queryParams['tipo'] ? urlParams.queryParams['tipo'] : 'tabela';
 
         });
 

@@ -3,8 +3,10 @@ import { Indicador } from '.';
 
 export interface ResultadoParameters {
     id: number
-    localidade: string
+    codigoLocalidade: string
     res?: { [periodo: string]: string }
+    indicador?: Indicador,
+    localidade?: any
 }
 export class Resultado {
     static criar(dados: ResultadoParameters) {
@@ -16,7 +18,7 @@ export class Resultado {
         return array.reduce((acc, dados) => {
             let arr = dados.res.map(item => ({
                 id: dados.id,
-                localidade: item.localidade,
+                codigoLocalidade: item.localidade,
                 res: item.res
             }))
             return acc.concat(arr);
@@ -25,17 +27,25 @@ export class Resultado {
 
     public readonly indicadorId?: number
     public readonly indicador?: Indicador
-    public readonly localidadeCodigo: number
+    public readonly codigoLocalidade: number
+    public readonly localidade?
     public readonly periodos: string[]
     public readonly valores: string[]
 
-    constructor({ id, localidade, res = [] } = {} as ResultadoParameters) {
+    constructor({ id, codigoLocalidade, res = [], indicador, localidade } = {} as ResultadoParameters) {
         this.indicadorId = id;
-        this.localidadeCodigo = Number.parseInt(localidade, 10);
+        this.codigoLocalidade = Number.parseInt(codigoLocalidade, 10);
 
         const periodos = Object.keys(res).sort().reverse();
         this.periodos = periodos;
         this.valores = periodos.map(periodo => res[periodo]);
+
+        if (indicador) {
+            this.indicador = indicador;
+        }
+        if (localidade) {
+            this.localidade = localidade;
+        }
     }
 
     get valoresValidos() {

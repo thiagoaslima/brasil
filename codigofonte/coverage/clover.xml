@@ -2212,9 +2212,9 @@
           <line num="270" count="0" type="stmt"/>
         </file>
       </package>
-      <package name="ClientApp.app.pesquisa2">
+      <package name="ClientApp.app.pesquisa">
         <metrics statements="61" coveredstatements="0" conditionals="87" coveredconditionals="0" methods="11" coveredmethods="0"/>
-        <file name="pesquisa.component.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa2/pesquisa.component.ts">
+        <file name="pesquisa.component.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa/pesquisa.component.ts">
           <metrics statements="45" coveredstatements="0" conditionals="65" coveredconditionals="0" methods="8" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="cond" truecount="0" falsecount="3"/>
@@ -2262,7 +2262,7 @@
           <line num="64" count="0" type="stmt"/>
           <line num="72" count="0" type="stmt"/>
         </file>
-        <file name="pesquisa.module.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa2/pesquisa.module.ts">
+        <file name="pesquisa.module.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa/pesquisa.module.ts">
           <metrics statements="16" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="3" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="cond" truecount="0" falsecount="3"/>
@@ -2282,9 +2282,9 @@
           <line num="33" count="0" type="stmt"/>
         </file>
       </package>
-      <package name="ClientApp.app.pesquisa2.pesquisa-header">
+      <package name="ClientApp.app.pesquisa.pesquisa-header">
         <metrics statements="114" coveredstatements="0" conditionals="108" coveredconditionals="0" methods="23" coveredmethods="0"/>
-        <file name="pesquisa-header.component.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa2/pesquisa-header/pesquisa-header.component.ts">
+        <file name="pesquisa-header.component.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa/pesquisa-header/pesquisa-header.component.ts">
           <metrics statements="114" coveredstatements="0" conditionals="108" coveredconditionals="0" methods="23" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="cond" truecount="0" falsecount="3"/>
@@ -2402,9 +2402,9 @@
           <line num="173" count="0" type="stmt"/>
         </file>
       </package>
-      <package name="ClientApp.app.pesquisa2.pesquisa-tabela">
+      <package name="ClientApp.app.pesquisa.pesquisa-tabela">
         <metrics statements="123" coveredstatements="0" conditionals="137" coveredconditionals="0" methods="22" coveredmethods="0"/>
-        <file name="pesquisa-tabela.component.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa2/pesquisa-tabela/pesquisa-tabela.component.ts">
+        <file name="pesquisa-tabela.component.ts" path="/Users/thiagolima/Documents/projetos/ibge/brasil/codigofonte/ClientApp/app/pesquisa/pesquisa-tabela/pesquisa-tabela.component.ts">
           <metrics statements="123" coveredstatements="0" conditionals="137" coveredconditionals="0" methods="22" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="cond" truecount="0" falsecount="3"/>

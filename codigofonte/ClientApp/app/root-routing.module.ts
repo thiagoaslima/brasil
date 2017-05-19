@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { PanoramaComponent } from './panorama/panorama.component';
 import { PanoramaShellComponent } from './panorama2/panorama-shell/panorama-shell.component';
-import { PesquisaComponent2 } from './pesquisa2/pesquisa.component';
+import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
 
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
@@ -33,9 +33,9 @@ const children = [
     component: VisaoHistoricaComponent
   },
 
-  { path: 'pesquisa', component: PesquisaComponent2 },
-  { path: 'pesquisa/:pesquisa', component: PesquisaComponent2 },
-  { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent2 }
+  { path: 'pesquisa', component: PesquisaComponent },
+  { path: 'pesquisa/:pesquisa', component: PesquisaComponent },
+  { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent }
 
 ];
 
@@ -87,8 +87,13 @@ const children = [
         path: 'cache',
         children: [
           { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
-          { path: 'pesquisas', component: PesquisaCacheComponent }
+          { path: 'pesquisas', component: PesquisaCacheComponent },
+          { path: 'indicadores', component: IndicadorCacheComponent }
         ]
+      },
+      {
+        path: 'v4/brasil/:uf/:municipio/panorama2',
+        component: PanoramaShellComponent
       },
       {
         path: '**',

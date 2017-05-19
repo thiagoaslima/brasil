@@ -1,0 +1,59 @@
+<div class="topo">
+    <div *ngFor="let item of cabecalho; let idx = index" [ngClass]="{'topo__celula-esquerda': idx === 0, 'topo__celula-direita': idx === 1, 'topo__celula-linha': idx > 1}">
+        <h3 class="topo__titulo">
+            {{ item.titulo || getTitulo(item.indicadorId) }}
+        </h3>
+        <p class="topo__valor">
+            {{ getValorMaisRecente(item.indicadorId) }}
+        </p>
+    </div>
+</div>
+
+
+<!-- Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo -->
+<template ngFor let-item let-idx="index" [ngForOf]="temas">
+    <div [ngClass]="'resumo__icons__'+idx" [ngClass]="{'resumo-fixo': isHeaderStatic | async}">
+
+        <div class="mobile__exclusive temas__horizontais ">
+            <div class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())">
+                <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
+                    Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
+                    e se recalcular as margens de todas as anteriores-->
+                <img class="ico" [src]="getIconSrc(item.tema)" />
+            </div>
+        </div>
+    </div>
+</template>
+
+<template ngFor let-item let-idx="index" [ngForOf]="temas">
+    <table class="lista" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
+
+        <tr class="lista__cabecalho" *ngIf="temas[idx-1] && item.tema !== temas[idx-1].tema">
+            <th class="lista__icone">
+                <img class="ico" [src]="getIconSrc(item.tema)" />
+            </th>
+
+            <th class="lista__titulo" colspan="2">{{item.tema}}</th>
+            <th class="lista__seta"><i class="fa fa-chevron-right" aria-hidden="true"></i></th>
+        </tr>
+
+
+        <tr class="lista__indicador">
+            <td></td>
+            <td class="lista__nome">
+                {{ item.titulo || getTitulo(item.indicadorId) }}
+                <small>{{ '[' + getPeriodoMaisRecente(item.indicadorId) + ']' }}</small>
+            </td>
+            <td class="lista__valor" colspan="2">
+                {{ getValorMaisRecente(item.indicadorId) }}
+                <span class="lista__unidade">{{item.unidade || getUnidade(indicadorId) }}</span>
+            </td>
+        </tr>
+        <tr *ngIf="!last" class="lista__separador">
+            <td colspan="4">
+                <div class="lista__linha"></div>
+            </td>
+        </tr>
+
+    </table>
+</template>

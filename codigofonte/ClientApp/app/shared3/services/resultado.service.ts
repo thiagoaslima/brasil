@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { Resultado } from '../models';
+import { ResultadoDTO } from "../dto";
+import { Indicador, Localidade, Resultado } from '../models';
 import { ServicoDados as servidor } from '../values';
+import { IndicadorService3, LocalidadeService3 } from ".";
+import { forceArray } from '../../utils2';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
@@ -17,12 +21,14 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class ResultadoService3 {
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private _indicadorService: IndicadorService3,
+        private _localidadeService: LocalidadeService3
     ) { }
 
     getResultados(indicadoresId: number | number[], codigolocalidades: number | number[]) {
-        const _indicadores = Array.isArray(indicadoresId) ? indicadoresId : [indicadoresId];
-        const _localidades = Array.isArray(codigolocalidades) ? codigolocalidades : [codigolocalidades];
+        const _indicadores = forceArray(indicadoresId);
+        const _localidades = forceArray(codigolocalidades);
         const url = servidor.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${_localidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadores.join(', ')}, localidades: ${_localidades.join(', ')}]`
 
@@ -32,7 +38,25 @@ export class ResultadoService3 {
     }
 
     getResultadosCompletos(indicadoresId: number | number[], codigolocalidades: number | number[]) {
-        
+        const _indicadoresId = forceArray(indicadoresId);
+        const _codigoLocalidades = forceArray(codigolocalidades);
+
+        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
+        const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${_codigoLocalidades.join(', ')}]`
+
+        return Observable.zip(
+            this._request(url),
+            this._indicadorService.getIndicadoresComPesquisaById(_indicadoresId),
+            Observable.of(this._localidadeService.getLocalidadesByCodigo(_codigoLocalidades))
+        )
+            .map(([json, indicadores, localidades]: [ResultadoDTO, Indicador[], Localidade[]]) => {
+                return Resultado.convertDTOintoParameters(json).map(parameter => {
+                    const indicador = indicadores.find(_indicador => _indicador.id === parameter.id);
+                    const localidade = localidades.find(_localidade => _localidade.codigo === parameter.localidade);
+                    return Resultado.criar(Object.assign({}, parameter, { indicador, localidade }));
+                })
+            })
+            .catch(err => this._handleError(err, new Error(errorMessage)));
     }
     private _request(url: string) {
         return this._http.get(url, options)
