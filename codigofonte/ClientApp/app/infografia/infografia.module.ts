@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { ChartsModule } from './ng2-charts.module';
 import { SharedModule } from '../shared/shared.module';
 import { GraficoComponent } from './grafico-base/grafico.component';
-import { CartogramaComponent, LocalCartogramaComponent } from './cartograma/cartograma.component';
-import { MapaService } from './cartograma/mapa.service';
+// import { CartogramaComponent, LocalCartogramaComponent } from './cartograma/cartograma.component';
+// import { MapaService } from './cartograma/mapa.service';
 import { LinhaTempo } from './linha-tempo/linha-tempo.component';
 
 @NgModule({
@@ -14,18 +14,18 @@ import { LinhaTempo } from './linha-tempo/linha-tempo.component';
 	],
 	declarations: [ 
 		GraficoComponent,
-		CartogramaComponent,
-		LocalCartogramaComponent,
+		// CartogramaComponent,
+		// LocalCartogramaComponent,
 		LinhaTempo
 	],
 	exports: [
 		GraficoComponent,
-		CartogramaComponent,
-		LocalCartogramaComponent,
+		// CartogramaComponent,
+		// LocalCartogramaComponent,
 		LinhaTempo
 	],
 	providers: [
-		MapaService
+		// MapaService
 	]
 })
 export class InfografiaModule {

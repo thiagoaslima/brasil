@@ -15,6 +15,8 @@ import { Indicador } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { IsMobileService } from '../../shared/is-mobile.service';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { ResultadoService3 } from '../../shared3/services/resultado.service';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -55,15 +57,21 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public shouldAppear$: Observable<Boolean>;
     private _novosDados = true;
 
+    public resultados;
+
     // card
     public posicao = 0;
     public card = 0;
     public navProximo = true;
     public navAnterior = false;
+
+    indicador;
     
     constructor(
         private element: ElementRef,
-        private _isMobileServ: IsMobileService
+        private _isMobileServ: IsMobileService,
+        private _localidadeServ: LocalidadeService2,
+        private _resultadoServ: ResultadoService3
     ) { }
 
     isMobile() {
@@ -79,7 +87,17 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         this.indicador$ = this._selecionarIndicador$
             .filter(Boolean)
             // .sample(this._isOnScreen$.filter(isOnScreen => isOnScreen.valueOf()))
-            .do(indicador => this.localSelecionado = indicador.id);
+            .do(indicador => this.localSelecionado = indicador.id)
+            .share();
+        
+        this.indicador$.subscribe((indicador) => {
+            this.indicador = indicador;
+            this._resultadoServ.getResultadosCartograma(indicador.id, this.localidade.parent.codigo)
+                .subscribe((resultados) => {
+                    this.resultados = resultados;
+                });
+
+        });
 
         if(isBrowser){
 

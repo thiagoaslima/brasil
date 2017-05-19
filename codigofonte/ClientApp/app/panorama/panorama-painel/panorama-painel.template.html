@@ -4,7 +4,7 @@
             <div>
                 <div class="cartograma" *ngIf="!isMobile() && (shouldAppear$ | async)">
                     <!--Não mostra o cartograma de Brasília (código 530010)-->
-                    <cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [indicador]="indicador$ | async" [titulo]="tituloCartograma"></cartograma>
+                    <ibge-cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [resultados]="resultados" [titulo]="tituloCartograma"></ibge-cartograma>
                 </div>
             </div>
 

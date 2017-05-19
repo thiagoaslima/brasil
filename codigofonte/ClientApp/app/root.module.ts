@@ -6,6 +6,7 @@ import { CoreModule } from './core/core.module';
 
 import { SharedModule } from './shared/shared.module';
 import { SharedModule2 } from './shared2/shared.module';
+import { SharedModule3 } from './shared3/shared3.module';
 
 import { SinteseModule } from './sintese/sintese.module';
 import { PanoramaModule } from './panorama/panorama.module'
@@ -32,6 +33,7 @@ import { BasicCacheModule } from './cache/basic-cache.module';
         CoreModule,
         SharedModule.forRoot(),
         SharedModule2.forRoot(),
+        SharedModule3.forRoot(),
         PesquisaModule2,
         SinteseModule,
         PanoramaModule,

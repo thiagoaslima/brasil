@@ -1,0 +1,363 @@
+.container{
+    overflow: hidden;
+}
+
+.mapa{
+    width: 80%;
+    float: left;
+	margin-top: 26px;
+}
+
+.mapa svg {
+    width: 100%;
+	max-height: 600px;
+	
+}
+
+.alturafixa_legenda {
+	height: 40px;
+	margin-top:20px;
+	}
+	
+
+
+/* Hack para correto dimensionamento do mapa no IE 10 */
+.ie10 .mapa svg {
+	height: 600px;
+	}
+
+
+/* Hack para correto dimensionamento do mapa no IE 11 */
+@media all and (-ms-high-contrast:none) {
+	.mapa svg {
+		height: 600px;/*altura no IE*/
+		
+	}
+}
+/*Fim do hack ie11 */
+.mapa__label--mun-selecionado {
+    width: 100%;
+    padding-bottom: 3px;
+}
+.mapa__label--mun-selecionado .tip {
+    font-size: 0.7em;
+    padding: 0;
+    /*border-bottom: 2px solid black;*/
+}
+.ic-mun-selecionado--circle-top {
+    fill: #ff1f76;
+    stroke: none;
+}
+.ic-mun-selecionado--path {
+    stroke: #ff1f76;
+    stroke-width: 1px;
+    }
+    /* Microsoft Edge Browser 12+ (All) - @supports method */
+    @supports (-ms-ime-align:auto) {
+        .ic-mun-selecionado--path {
+        stroke-width: 0.01px;
+        } 
+    }
+
+@media all and (-ms-high-contrast:none) {
+
+.ic-mun-selecionado--path {
+    stroke-width: 0.02px;
+}
+}
+
+#faixas{
+    padding:0 0 7px 5%;
+}
+#faixas h4{ 
+    font-size: 0.85em; 
+    color: #FFF; 
+    margin:0 0 5px 0; 
+    padding:5px; 
+    text-align: center;
+    background-color: #888;
+}
+.txt-faixa{ 
+    font-size: 0.82em; 
+    line-height: 23px;
+    margin-left: 5px; 
+    vertical-align: bottom;
+}
+.ico-faixa{ 
+    display:inline-block; 
+    border:1px solid #aaa; 
+    width:20px; 
+    height:12px; 
+    margin-left: 10px; 
+}
+.seletor-periodos{
+    text-align: center;
+}
+.periodo-link:after {
+    content: ' /';
+}
+.ico-faixa.faixa1{ background: #1B779B; }
+.ico-faixa.faixa0{ background: #308BC9; }
+.ico-faixa.faixa2{ background: #41B6C4; }
+.ico-faixa.faixa3{ background: #7FCDBB; }
+.ico-faixa.faixa3{ background: #C7E9B4; }
+.ico-faixa.selecionado{ background: #0D4768; }
+
+g.semValor polygon { fill: #ccc;}
+/*g.semValor polygon { fill: #a6a6a6;}*/
+g.faixa4 polygon{ fill: #1B779B; }
+g.faixa3 polygon{ fill: #308BC9; }
+g.faixa2 polygon{ fill: #41B6C4; }
+g.faixa1 polygon{ fill: #7FCDBB; }
+/*g.faixa5 polygon{ fill: #C7E9B4; }*/
+polygon {
+    stroke: #fff;
+    stroke-width: 0.01px;
+    fill: #E8E267;
+	cursor: default;
+	-webkit-transition: all 700ms ease;
+	-moz-transition: all 700ms ease;
+	-ms-transition: all 700ms ease;
+	-o-transition: all 700ms ease;
+	transition: all 700ms ease;
+}
+g.checked polygon {
+    stroke: #fff;
+    stroke-width: 0.01px;
+    fill: #0D4768;
+}
+polygon:hover {
+	fill-opacity: 0.75;
+	-webkit-transition: all 300ms ease;
+	-moz-transition: all 300ms ease;
+	-ms-transition: all 300ms ease;
+	-o-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+
+g, .periodo-link {
+    cursor: pointer;
+}
+
+.mapa-legendalocal{
+    /*position: absolute;*/
+    margin-left: 50px;
+}
+.local-atual{
+    font-weight: bold;
+    color: #0d4768;
+}
+.local-selecionado{
+    font-size: small;
+    text-align: right;
+    margin-right: 50px;
+    float: right;
+}
+.local-selecionado a{
+    text-decoration: underline;
+}
+.local-selecionado a:hover{
+    color: #0d4768;
+}
+.hide{
+    display: none;
+}
+.loading{
+    padding-top: 30px;
+    color: #999;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*----------------------------------------*/
+
+/*barra de título*/
+
+.barratitulo{
+    width: 90%;
+    background-color: #E6E6E6;
+    color: #333333;
+    font-weight: bold;
+    margin: 0% 5%;
+    padding: 1.5% 2%;
+    overflow: hidden;
+}
+
+.barratitulo__icone{
+    font-weight: normal;
+    color: #1B779B;
+    padding-right: 5px;
+    font-size: 1.2em;
+    vertical-align: baseline;
+}
+
+.barratitulo__seta{
+    font-weight: normal;
+    color: #1F9982;
+    font-size: 1.2em;
+    vertical-align: middle;
+    padding-left: 15%;
+}
+
+.barratitulo__unidade{
+    font-size: 0.8em;
+    color: #999999;
+}
+
+.barratitulo__dados-container{
+    width: 60%;
+    float: left;
+}
+
+.barratitulo__link-container{
+    width: 30%;
+    float: right;
+    text-align: right;
+}
+
+.barratitulo__valor-container{
+    display: inline-block;
+    overflow: hidden;
+    padding-left: 5%;
+    vertical-align: bottom;
+}
+
+.barratitulo__link{
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+/*legenda*/
+
+.legenda{
+    width: 15%;
+    float: right;
+	min-height: 290px;
+}
+
+.legenda__item{
+    margin-top: 18px;
+}
+
+.legenda__cor{
+    width: 100%;
+    height: 6px;
+}
+
+.legenda__texto{
+    padding-top: 5px;
+    font-size: 0.75em;
+    font-style: italic;
+}
+
+.legenda__municipio {
+	font-size: 0.8em;
+	font-weight: bold;
+	background-color: #EBEBEB;
+	padding:5px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	}
+
+/*linha do tempo*/
+
+.linhatempo{
+    width: 90%;
+    margin: 3% 5%;
+    position: relative;
+}
+
+.linhatempo__linha{
+    width: 100%;
+    height: 2px;
+    background-color: #B3B3B3;
+}
+
+.linhatempo__ano{
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    width: 36px;
+    margin: -8px 0 0 -18px;
+}
+
+.linhatempo__circulo{
+    width: 14px;
+    height: 14px;
+    background-color: #CCCCCC;
+    border: 2px solid #B3B3B3;
+    border-radius: 7px;
+    margin: 0px auto;
+}
+
+.linhatempo__ano--selecionado{
+    margin: -11px 0 0 -18px;
+}
+
+.linhatempo__ano--selecionado .linhatempo__circulo{
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: #148C99;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.linhatempo__texto{
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+/*faixas de cores*/
+
+.faixa4{
+    background-color: #1B779B;
+    fill: #1B779B;
+}
+
+.faixa3{
+    background-color: #308BC9;
+    fill: #308BC9;
+}
+
+.faixa2{
+    background-color: #41B6C4;
+    fill: #41B6C4;
+}
+
+.faixa1{
+    background-color: #7FCDBB;
+    fill: #7FCDBB;
+}
+
+/*.faixa5{
+    background-color: #C7E9B4;
+    fill: #C7E9B4;
+}*/
+
+
+@media screen and (max-width: 1200px) {
+
+.mapa {
+	width:100%;
+	}
+	
+
+.legenda {
+	width:100%;
+	
+	}
+
+.legenda-item {
+	float: left;
+	margin-left: 20px;
+}
+
+
+
+}

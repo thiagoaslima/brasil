@@ -1,0 +1,67 @@
+<div class="container">
+
+    <div class="local-atual">{{titulo}}</div>
+    
+    <div class="mapa" *ngIf="malha?.viewBox">
+        <div class="alturafixa_legenda">
+        <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
+                <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> {{municSelected[1] | resultado:dado?.unidade?.id }} {{indicador?.unidade.nome}}</span></p>
+            </div>
+        </div>
+        <svg [attr.viewBox]="malha?.viewBox" preserveAspectRatio="xMidYMid meet">
+            <svg:g class="uf" transform="scale(1 -1)">
+                
+                <svg:g *ngFor="let item of malha?.geometries; trackBy: trackByFn"
+                    (mouseover)="municSelected = [item.nome, getValorMunicipio(item.codigo), item.center]"
+                    (mouseleave)="municSelected = ''"
+                    vector-effect="non-scaling-stroke"
+                >
+                    <svg:g 
+                        [attr.class]="getFaixaMunicipio(item.codigo)"
+                        [attr.codigo]="item.codigo" 
+                        [attr.nome]="item.nome" 
+                        [attr.link]="item.link" 
+                        [attr.ano]="'2010'"
+                        [attr.valor]="2" 
+                        [attr.faixa]="getFaixaMunicipio(item.codigo)">
+                        
+                        <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                    </svg:g>
+                </svg:g>
+                <svg:g class="ic-mun-selecionado" [attr.transform]="'translate('+getCenter(malha?.geometries, localidade.codigo).join(' ')+')'">
+                    <svg:path class="ic-mun-selecionado--path" [attr.d]="'M0 0v'+getIconHeight(malha?.bbox, getCenter(malha?.geometries, localidade.codigo))" vector-effect="non-scaling-stroke"></svg:path>
+                    <!--<svg:circle class="ic-mun-selecionado--circle-bottom" cx="0" cy="0" r="0.03"></svg:circle> -->
+                    <svg:circle class="ic-mun-selecionado--circle-top" cx="0" [attr.cy]="getIconHeight(malha?.bbox, getCenter(malha?.geometries, localidade.codigo)) - 0.025" r="0.025"><svg:title>{{municSelected[0]}}</svg:title></svg:circle>
+                </svg:g>
+            </svg:g>
+        </svg>
+        
+        
+        
+    </div>
+
+    <div class="legenda" *ngIf="valores && valores.length > 0">
+        <!--<div class="legenda__item" *ngFor="let valor of quartis$ | async; let i = index">-->
+            <p class="legenda__texto">Legenda</p>
+        <div class="legenda__item" *ngFor="let valor of valores; let i = index">
+            <div class="legenda__cor faixa{{i+1}}"></div>
+            <p class="legenda__texto" *ngIf="i == 0">0 |-- {{ valor | resultado: dado?.unidade?.id }} {{ indicador?.unidade.nome }}</p>
+            <p class="legenda__texto" *ngIf="i > 0">{{ valores[i - 1] | resultado: dado?.unidade?.id }} |-- {{ valor | resultado: dado?.unidade?.id }} {{indicador?.unidade.nome}}</p>
+        </div>
+        <div class="legenda__item">
+            <div class="legenda__cor faixa{{valores.length + 1}}"></div>
+            <p class="legenda__texto">{{ valores[valores.length - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade.nome}} ou mais</p>
+        </div>
+        <div class="legenda__item" *ngIf="existeVazio == true">
+            <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
+            <p class="legenda__texto">sem informação</p>
+        </div>
+        <div class="legenda__item">
+            <p class="legenda__texto"><i class="fa fa-map-pin" aria-hidden="true" style="color:#ff1f76; float:left; width:22px;height:25px;"></i> Município selecionado</p>
+        </div>
+
+        
+
+    </div>
+
+</div>
