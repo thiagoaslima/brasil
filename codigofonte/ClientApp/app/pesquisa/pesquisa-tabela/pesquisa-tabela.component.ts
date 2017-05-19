@@ -216,10 +216,13 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
     public downloadCSV(){
+
+        debugger;
+
         let ind = this.indicadores;
         let localidadeA = this._localidade.getMunicipioByCodigo(this.localidades[0]).nome;
-        let localidadeB = this.localidades[1] ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';
-        let localidadeC = this.localidades[2] ? this._localidade.getMunicipioByCodigo(this.localidades[2]).nome : '';
+        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';
+        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidade.getMunicipioByCodigo(this.localidades[2]).nome : '';
         let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
         //valores dos indicadores
         for(let i = 0; i < ind.length; i++){
