@@ -28,23 +28,13 @@ export class IBGECartograma implements OnInit, OnChanges{
     }
 
     updateCartograma() {
-        // const municipios = this._localidadeServ.getMunicipiosByRegiao(this.localidade.parent.codigo.toString());
         if(this.localidade) {
-            debugger;
             this._mapaService.getMalhaSubdivisao(this.localidade.parent.codigo)
                 .subscribe((malha) => {
-                    debugger;
                     this.malha = malha;
                 });
         }
 
-        // this.malha$ = this.localidade$
-        //     .asObservable()
-        //     .filter(Boolean)
-        //     .flatMap((localidade) => {
-        //         return this._mapaService.getMalhaSubdivisao(localidade.parent.codigo);
-        //     });
-        
         if(this.resultados) {
             this.existeVazio = false;
             let valores = Object.keys(this.resultados)
