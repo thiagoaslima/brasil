@@ -1,0 +1,16 @@
+<p class="breadcrumb">
+    <template ngFor let-item [ngForOf]="caminho" let-i="index">
+        <!--pedaços clicáveis do breadcrumb-->
+        <a *ngIf="caminho && (i < caminho.length - 1)" [href]="urlBase + '/' + item.id">
+            {{ item.nome }}
+        </a>
+
+        <!--separador '/'-->
+        <span *ngIf="caminho && (i < caminho.length - 1)"> / </span>
+        
+        <!--última parte do breadcrumb, em negrito e não clicável-->
+        <span class="breadcrumb__local-atual" *ngIf="caminho && (i == caminho.length - 1)">
+            {{ item.nome }}
+        </span>
+    </template>
+</p>

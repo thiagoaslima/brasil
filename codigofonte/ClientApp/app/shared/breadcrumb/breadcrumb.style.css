@@ -1,0 +1,7 @@
+.breadcrumb{
+    font-size: 1em;
+}
+
+.breadcrumb__local-atual{
+    font-weight: bold;
+}

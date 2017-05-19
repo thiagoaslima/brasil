@@ -11,6 +11,7 @@ import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
 import { IsMobileService } from './is-mobile.service';
 import { QRCodeComponent } from './qrcode/qrcode.component';
+import { Breadcrumb } from './breadcrumb/breadcrumb.component';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -28,7 +29,8 @@ const PIPES = [
 
 const COMPONENTS = [
     // put shared components here
-    QRCodeComponent
+    QRCodeComponent,
+    Breadcrumb
 ];
 
 const PROVIDERS = [
