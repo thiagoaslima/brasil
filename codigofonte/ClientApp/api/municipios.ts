@@ -10075,8 +10075,8 @@ export const municipios = [
   {
     "codigoUf": 17,
     "codigo": 1706001,
-    "nome": "Couto de Magalhães",
-    "slug": "couto-de-magalhaes",
+    "nome": "Couto Magalhães",
+    "slug": "couto-magalhaes",
     "microrregiao": 17003
   },
   {
