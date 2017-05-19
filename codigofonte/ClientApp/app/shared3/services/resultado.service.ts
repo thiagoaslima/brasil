@@ -46,7 +46,7 @@ export class ResultadoService3 {
                 return Resultado.convertDTOintoParameters(json)
                 .map(Resultado.criar)
                 .reduce((acc, resultado) => {
-                    acc[resultado.localidadeCodigo] = resultado;
+                    acc[resultado.codigoLocalidade] = resultado;
                     return acc;
                 }, {})
             })

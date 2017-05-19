@@ -3,8 +3,7 @@
 }
 
 .mapa{
-    width: 80%;
-    float: left;
+    width: 100%;
 	margin-top: 26px;
 }
 
@@ -15,7 +14,7 @@
 }
 
 .alturafixa_legenda {
-	height: 40px;
+	height: 45px;
 	margin-top:20px;
 	}
 	
@@ -231,12 +230,15 @@ g, .periodo-link {
 /*legenda*/
 
 .legenda{
-    width: 15%;
+    width: 100%;
+    max-width: 800px;
     float: right;
 	min-height: 290px;
 }
 
 .legenda__item{
+    width: 25%;
+    float: left;
     margin-top: 18px;
 }
 
@@ -246,6 +248,7 @@ g, .periodo-link {
 }
 
 .legenda__texto{
+    font-weight: bold;
     padding-top: 5px;
     font-size: 0.75em;
     font-style: italic;
