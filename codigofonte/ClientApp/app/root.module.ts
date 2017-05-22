@@ -28,6 +28,8 @@ import { SubmenuComponent } from './submenu/submenu.component';
 
 import { BasicCacheModule } from './cache/basic-cache.module';
 
+import { IBGECartogramaModule } from './infografia/ibge-cartograma/ibge-cartograma.module';
+
 @NgModule({
     imports: [
         CoreModule,
@@ -41,7 +43,8 @@ import { BasicCacheModule } from './cache/basic-cache.module';
         VisaoHistoricaModule,
         SandboxModule,
         Ng2PageScrollModule.forRoot(),
-        BasicCacheModule
+        BasicCacheModule,
+        IBGECartogramaModule.forRoot()
     ],
     declarations: [
         RootComponent,

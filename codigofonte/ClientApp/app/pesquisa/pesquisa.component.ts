@@ -33,6 +33,8 @@ export class PesquisaComponent implements OnInit {
     periodo: string;
     tipo: string;
 
+    indicador;
+
     isOcultarValoresVazios = true;
     
     
@@ -55,7 +57,7 @@ export class PesquisaComponent implements OnInit {
                        
 
                         if(!!indicadores && indicadores.length > 0){ 
-
+                            this.indicador = indicadores[0];
                             this.posicaoIndicador = indicadores[0].posicao;
                         } 
                         else { 
