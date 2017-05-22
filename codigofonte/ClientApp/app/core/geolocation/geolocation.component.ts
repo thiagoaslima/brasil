@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, style } from '@angular/core';
 import { Observable } from 'rxjs';
+import { isBrowser } from 'angular2-universal';
 
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
@@ -38,7 +39,9 @@ export class GeolocationComponent {
      */
     private getGeoLocation() {
 
-        navigator.geolocation.getCurrentPosition(position => this.getLocalidade(position));
+        if(isBrowser){
+            navigator.geolocation.getCurrentPosition(position => this.getLocalidade(position));
+        }
     }
 
     /**
