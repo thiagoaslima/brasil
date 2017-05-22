@@ -31,8 +31,9 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     objetoURL:any = {};
     baseURL = '';
     listaPeriodos = [];
+    tipo;
 
-    private subs$$
+    private subs$$;
     private isOcultarValoresVazios = true;
 
     constructor(
@@ -61,7 +62,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
                 this.localidade1 = params.queryParams.localidade1 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1) : null;
                 this.localidade2 = params.queryParams.localidade2 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2) : null;
-                
+                this.tipo = params.queryParams.tipo ? params.queryParams.tipo : '';
+
                 this.objetoURL.uf = params.params.uf;
                 this.objetoURL.municipio = params.params.municipio;
                 this.objetoURL.pesquisa = params.params.pesquisa;
@@ -75,11 +77,16 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         this.subs$$.unsubscribe();
     }
 
-    navegarPara(indicador = null, ano = null, localidade1 = null, localidade2 = null){
+    navegarPara(indicador = null, ano = null, tipo = null, localidade1 = null, localidade2 = null){
         this.objetoURL.indicador = indicador ? indicador : this.objetoURL.indicador;
 
         if(ano)
             this.objetoURL.queryParams.ano = ano;
+        
+        if(tipo == '')
+            delete this.objetoURL.queryParams.tipo;
+        else if(tipo != null)
+            this.objetoURL.queryParams.tipo = tipo;
         
         if(localidade1 == 0)
             delete this.objetoURL.queryParams.localidade1;
@@ -96,11 +103,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     setaLocalidade1(localidade){
-        this.navegarPara(null, null, localidade ? localidade.codigo : 0);
+        this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
     }
 
     setaLocalidade2(localidade){
-        this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
+        this.navegarPara(null, null, null, null, localidade ? localidade.codigo : 0);
     }
 
     mudaIndicador(event){
@@ -109,6 +116,10 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     mudaAno(event){
         this.navegarPara(null, event.srcElement.value.trim());
+    }
+
+    setaTipo(tipo){
+        this.navegarPara(null, null, tipo);
     }
 
     fazerDownload(){

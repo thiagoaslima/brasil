@@ -47,10 +47,10 @@
         </template>
     </div>
     <div class="cabecalho__seletor-visualizacao-dados">
-        <div class="cabecalho__seletor-visualizacao-dados__item selecionado"><i class="fa fa-table" aria-hidden="true"></i> TABELA</div>
-        <!--<div class="cabecalho__seletor-visualizacao-dados__item"><i class="fa fa-bar-chart" aria-hidden="true"></i> GRÁFICOS</div>
-        <div class="cabecalho__seletor-visualizacao-dados__item"><i class="fa fa-area-chart" aria-hidden="true"></i> SÉRIE HISTÓRICA</div>
-        <div class="cabecalho__seletor-visualizacao-dados__item"><i class="fa fa-list-ol" aria-hidden="true"></i> RANKING</div>-->
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == ''" (click)="setaTipo('')"><i class="fa fa-table" aria-hidden="true"></i> Tabela</div>
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')"><i class="fa fa-bar-chart" aria-hidden="true"></i> Gráficos</div>
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="setaTipo('cartograma')"><i class="fa fa-area-chart" aria-hidden="true"></i> Cartogramas</div>
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="setaTipo('ranking')"><i class="fa fa-list-ol" aria-hidden="true"></i> Ranking</div>
     </div>
     <div class="cabecalho__visualizacao-dados">
         <div class="cabecalho__visualizacao-dados__item">

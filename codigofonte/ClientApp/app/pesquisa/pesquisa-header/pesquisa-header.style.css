@@ -118,6 +118,8 @@
     border-bottom: 3px solid #CCC;
     height: 65px;
     padding-top: 15px;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
 .cabecalho__seletor-visualizacao-dados__item.selecionado{
