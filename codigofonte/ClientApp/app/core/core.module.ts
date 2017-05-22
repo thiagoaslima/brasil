@@ -9,14 +9,12 @@ import { BuscaComponent } from './busca/busca.component';
 import { BuscaService } from './busca/busca.service';
 import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
-import { HttpModule, JsonpModule } from '@angular/http';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
-    HttpModule,
-    JsonpModule
+    SharedModule
   ],
   declarations: [
     SeletorLocalidadeComponent,
