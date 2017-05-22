@@ -53,27 +53,21 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                     this.ano = params.queryParams.ano;
                 }
                 else {
-
-                   
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     this.ano = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
                 }
 
+                this.indicador = params.params.indicador;
+                this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
+                this.localidade1 = params.queryParams.localidade1 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1) : null;
+                this.localidade2 = params.queryParams.localidade2 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2) : null;
+                
+                this.objetoURL.uf = params.params.uf;
+                this.objetoURL.municipio = params.params.municipio;
+                this.objetoURL.pesquisa = params.params.pesquisa;
+                this.objetoURL.indicador = params.params.indicador ? params.params.indicador : 0;
+                this.objetoURL.queryParams = params.queryParams ? params.queryParams : {};
             });
-
-            this.indicador = params.params.indicador;
-            this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
-
-            this.localidade1 = params.queryParams.localidade1 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1) : null;
-            this.localidade2 = params.queryParams.localidade2 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2) : null;
-            
-            this.objetoURL.uf = params.params.uf;
-            this.objetoURL.municipio = params.params.municipio;
-            this.objetoURL.pesquisa = params.params.pesquisa;
-            this.objetoURL.indicador = params.params.indicador ? params.params.indicador : 0;
-            this.objetoURL.ano = params.queryParams.ano ? params.queryParams.ano : 0;
-            this.objetoURL.localidade1 = params.queryParams.localidade1 ? params.queryParams.localidade1 : 0;
-            this.objetoURL.localidade2 = params.queryParams.localidade2 ? params.queryParams.localidade2 : 0;
         });
     }
 
@@ -83,15 +77,22 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     navegarPara(indicador = null, ano = null, localidade1 = null, localidade2 = null){
         this.objetoURL.indicador = indicador ? indicador : this.objetoURL.indicador;
-        this.objetoURL.ano = ano ? ano : this.objetoURL.ano;
-        this.objetoURL.localidade1 = localidade1 != null ? localidade1 : this.objetoURL.localidade1;
-        this.objetoURL.localidade2 = localidade2 != null ? localidade2 : this.objetoURL.localidade2;
+
+        if(ano)
+            this.objetoURL.queryParams.ano = ano;
+        
+        if(localidade1 == 0)
+            delete this.objetoURL.queryParams.localidade1;
+        else if(localidade1 != null)
+            this.objetoURL.queryParams.localidade1 = localidade1;
+        
+        if(localidade2 == 0)
+            delete this.objetoURL.queryParams.localidade2;
+        else if(localidade2 != null)
+            this.objetoURL.queryParams.localidade2 = localidade2;
+        
         let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa', this.objetoURL.pesquisa, this.objetoURL.indicador];
-        let queryParams:any = {};
-        if(this.objetoURL.ano) queryParams.ano = this.objetoURL.ano;
-        if(this.objetoURL.localidade1) queryParams.localidade1 = this.objetoURL.localidade1;
-        if(this.objetoURL.localidade2) queryParams.localidade2 = this.objetoURL.localidade2;
-        this._router.navigate(url, {'queryParams' : queryParams});
+        this._router.navigate(url, {'queryParams' : this.objetoURL.queryParams});
     }
 
     setaLocalidade1(localidade){
