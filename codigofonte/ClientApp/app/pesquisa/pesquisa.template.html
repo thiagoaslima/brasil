@@ -9,7 +9,7 @@
     </div>
     <div *ngIf="tipo == 'cartograma'">
         <pesquisa-indicadores #dados [pesquisa]="pesquisa$ | async"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-indicadores>
-        <div id="pesquisa-dados"><pesquisa-cartograma></pesquisa-cartograma></div>
+        <div id="pesquisa-dados"><pesquisa-cartograma [indicador]="indicador" [localidades]="localidades"></pesquisa-cartograma></div>
     </div>
     <div *ngIf="tipo == 'ranking'">
         <pesquisa-indicadores #dados [pesquisa]="pesquisa$ | async"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-indicadores>

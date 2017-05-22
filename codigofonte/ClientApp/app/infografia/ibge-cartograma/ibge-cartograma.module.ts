@@ -16,11 +16,15 @@ import { MapaService } from './mapa.service';
     ],
     exports: [
         IBGECartograma
-    ],
-    providers: [
-        MapaService
     ]
 })
 export class IBGECartogramaModule {
-
+    static forRoot() {
+        return {
+            ngModule: IBGECartogramaModule,
+            providers: [
+                MapaService
+            ]
+        }
+    }
 }
