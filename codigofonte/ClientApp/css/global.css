@@ -197,10 +197,30 @@ aside #localidade button{
     transition: background 200ms ease, color 200ms ease;
 }
 
+
 aside #localidade button:hover{
     background-color: #FFFFFF;
     color: #1B779B;
 }
+
+.obter_localidade {
+	background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 21px;
+    font-size: 1em;
+    padding: 4px 10px;
+    cursor: pointer;
+    -webkit-transition: background 200ms ease, color 200ms ease;
+    -moz-transition: background 200ms ease, color 200ms ease;
+    -ms-transition: background 200ms ease, color 200ms ease;
+    -o-transition: background 200ms ease, color 200ms ease;
+    transition: background 200ms ease, color 200ms ease;
+}
+
+.obter_localidade:hover {
+	background-color: #FFFFFF;
+    color: #1B779B;
+	}
 
 aside #localidade button#menu-principal{
     display: none;
@@ -501,6 +521,11 @@ sintese>dados
         margin: 15px 0% 5px;
         float: right;
     }
+	.obter_localidade {
+		float:right;
+		margin-top: 15px;
+	    margin-right: 5px;
+		}
     
     aside #localidade button#menu-principal{
         float: left;
