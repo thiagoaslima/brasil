@@ -1,1 +1,5 @@
-<h4>Pesquisa - Cartogramas</h4>
+<div class="container">
+    <h4>Pesquisa - Cartogramas</h4>
+    <breadcrumb></breadcrumb>
+    <linha-tempo [anos]="[1991, 2000, 2010]" [indexSelecionado]="2" (onAno)="mudaAno($event);"></linha-tempo>
+</div>
