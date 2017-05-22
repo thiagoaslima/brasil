@@ -37,6 +37,22 @@ export class ResultadoService3 {
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
+    getResultadosCartograma(indicadorId: number, codigoLocalidade: number) {
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${codigoLocalidade}xxxx`);
+        const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicador: ${indicadorId}, localidade: ${codigoLocalidade}]`
+        
+        return this._request(url)
+            .map(json => {
+                return Resultado.convertDTOintoParameters(json)
+                .map(Resultado.criar)
+                .reduce((acc, resultado) => {
+                    acc[resultado.codigoLocalidade] = resultado;
+                    return acc;
+                }, {})
+            })
+            .catch(err => this._handleError(err, new Error(errorMessage)));
+    }
+
     getResultadosCompletos(indicadoresId: number | number[], codigolocalidades: number | number[]) {
         const _indicadoresId = forceArray(indicadoresId);
         const _codigoLocalidades = forceArray(codigolocalidades);

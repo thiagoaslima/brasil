@@ -9,12 +9,16 @@ import { PanoramaCardComponent, PanoramaCardReguaComponent } from './panorama-pa
 import { InfografiaModule } from '../infografia/infografia.module';
 import { SharedModule } from '../shared/shared.module';
 import { SharedModule2 } from '../shared2/shared.module';
+import { SharedModule3 } from '../shared3/shared3.module';
+import { IBGECartogramaModule } from '../infografia/ibge-cartograma';
 
 @NgModule({
     imports: [
         InfografiaModule,
         SharedModule,
-        SharedModule2
+        SharedModule2,
+        SharedModule3,
+        IBGECartogramaModule
     ],
     exports: [],
     declarations: [
