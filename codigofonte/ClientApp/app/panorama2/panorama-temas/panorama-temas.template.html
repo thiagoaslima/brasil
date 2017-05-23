@@ -1,1 +1,3 @@
-PanoramaTemas
+<div *ngFor="let item of configuracao; let isFirst = first; let idx = index">
+    <p *ngIf="isFirst || item.tema !== configuracao[idx-1].tema">{{item.tema}}</p>
+</div>

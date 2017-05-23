@@ -81,19 +81,19 @@ export class GraficoComponent implements OnInit, OnChanges {
         bar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
         horizontalBar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
         line: [{
-            borderColor: '#00A99D', 
+            borderColor: '#00A99D',
             pointBackgroundColor: '#00A99D',
             pointBorderColor: '#fff',
         }, {
-            borderColor: '#177437', 
+            borderColor: '#177437',
             pointBackgroundColor: '#177437',
             pointBorderColor: '#fff',
         }, {
-            borderColor: '#22B573', 
+            borderColor: '#22B573',
             pointBackgroundColor: '#22B573',
             pointBorderColor: '#fff',
         }, {
-            borderColor: '#8CC63F', 
+            borderColor: '#8CC63F',
             pointBackgroundColor: '#8CC63F',
             pointBorderColor: '#fff',
         }],
@@ -148,13 +148,13 @@ export class GraficoComponent implements OnInit, OnChanges {
                 const _indicadores = indicadores.map(item => item.indicador).filter(Boolean)
                 return Observable.zip(..._indicadores.map(indicador => indicador.getResultadoByLocal(localidade.codigo)))
             })
-            // .do(_ => this.carregando = false)
-            // .do(console.log.bind(console, 'resultados'))
+        // .do(_ => this.carregando = false)
+        // .do(console.log.bind(console, 'resultados'))
 
 
         this.labels$ = resultados$
             .map(resultados => this.mostrarApenasPeriodosValidos ? resultados[0].periodosValidos : resultados[0].periodos)
-            // .do(console.log.bind(console, 'label'));
+        // .do(console.log.bind(console, 'label'));
 
         this.datasets$ = this._indicadores$
             .zip(resultados$)
@@ -218,9 +218,7 @@ export class GraficoComponent implements OnInit, OnChanges {
     ngOnInit() {
 
         this._commonService.notifyObservable$.subscribe((mensagem) => {
-
             if (mensagem['tipo'] == 'getDataUrl') {
-
                 // Envia por serviço a imagem do gráfico em base64
                 this._commonService.notifyOther({ "tipo": "dataURL", "url": this.graficoRef.nativeElement.toDataURL() });
             }
@@ -262,6 +260,10 @@ export class GraficoComponent implements OnInit, OnChanges {
         }
     }
 
+
+    private configurarOptions() {
+        
+    }
 
     /*
     private plotChart(dados, nomeSerie, tipoGrafico) {
@@ -319,19 +321,19 @@ export class GraficoComponent implements OnInit, OnChanges {
     */
 
     private converterParaNumero(valor: string): number {
-        if(valor == '99999999999999' || valor == '99999999999998' || valor == '99999999999997' ||
+        if (valor == '99999999999999' || valor == '99999999999998' || valor == '99999999999997' ||
             valor == '99999999999996' || valor == '99999999999995' || valor == '99999999999992' ||
-            valor == '99999999999991'){
-            
+            valor == '99999999999991') {
+
             valor = '0';
         }
-        
+
         return !!valor ? Number(valor.replace(',', '.')) : Number(valor)
     }
 
-    navegarTabela(){
+    navegarTabela() {
         //console.log(">>>>>>>>>>>>>>", this.indicadores);
-        if(this.indicadores.length > 0){
+        if (this.indicadores.length > 0) {
             let url = this.localidade.link + '/pesquisa/' + this.indicadores[0].pesquisaId/* + '/' + this.indicadores[0].indicadorId*/;
             this._router.navigate(url.split('/'));
         }

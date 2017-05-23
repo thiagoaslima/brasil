@@ -24,7 +24,6 @@ import 'rxjs/add/operator/debounceTime';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanoramaResumoComponent implements OnChanges {
-
     static readonly getTema = (function (value) {
         const temas = converterObjArrayEmHash(Object.keys(value).map(k => value[k]), 'label');
 

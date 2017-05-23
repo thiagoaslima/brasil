@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class PesquisaGraficosComponent implements OnInit {
-
     
     constructor() { }
 

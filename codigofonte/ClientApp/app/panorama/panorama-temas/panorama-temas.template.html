@@ -1,5 +1,5 @@
 <template ngFor let-tema [ngForOf]="temas" let-i="index">
-    <div  [id]="tema.tema.substr(0,2).toLowerCase()" class="ancora-click-resumo">
+    <div [id]="tema.tema.substr(0,2).toLowerCase()" class="ancora-click-resumo">
         <div  [id]="tema.tema.substr(0,2).toLowerCase()+'-alt'"></div>
     </div>
     <div [class.borda]="i!=0"></div>

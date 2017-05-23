@@ -37,13 +37,13 @@ export class PesquisaComponent implements OnInit {
     indicadores;
 
     isOcultarValoresVazios = true;
-    
-    
+
+
     constructor(
-        private _routerParams:RouterParamsService,
+        private _routerParams: RouterParamsService,
         private _localidadeService2: LocalidadeService2,
         private _pesquisaService: PesquisaService2,
-        private _sintese:SinteseService,
+        private _sintese: SinteseService,
         private _indicadorService: IndicadorService2
     ) { }
 
@@ -51,27 +51,25 @@ export class PesquisaComponent implements OnInit {
 
         this._routerParams.params$.subscribe(urlParams => {
 
-            if(!!urlParams.params['indicador']){
+            if (!!urlParams.params['indicador']) {
                 this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos)
                     .subscribe((indicadores) => {
-                        
                         this.indicadores = indicadores;
 
-                        if(!!indicadores && indicadores.length > 0){ 
+                        if (!!indicadores && indicadores.length > 0) {
                             this.indicador = indicadores[0];
                             this.posicaoIndicador = indicadores[0].posicao;
-                        } 
-                        else { 
-
+                        }
+                        else {
                             this.posicaoIndicador = "2";
                         }
-                });
+                    });
             }
 
             this.pesquisa$ = this._pesquisaService.getPesquisa(urlParams.params['pesquisa']);
 
             // Obter localidade principal
-            this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
+            this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;
 
             // Obter localidades de comparação
             this.localidades[1] = urlParams.queryParams['localidade1'];
@@ -90,8 +88,7 @@ export class PesquisaComponent implements OnInit {
 
     }
 
-    ocultarValoresVazios(event){
-
+    ocultarValoresVazios(event) {
         this.isOcultarValoresVazios = event['OcultarValoresVazios'];
     }
 }
