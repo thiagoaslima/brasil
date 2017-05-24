@@ -208,7 +208,7 @@ export class IndicadorService2 {
             return acc;
         }, {})
 
-        const request = this._getRankingsRequest(Object.keys(removeDuplicates).map(Number.parseInt), Object.keys(removeDuplicates).map(k => removeDuplicates[k]), codigoLocalidade, contexto)
+        const request = this._getRankingsRequest(Object.keys(removeDuplicates).map(n => Number.parseInt(n, 10)), Object.keys(removeDuplicates).map(k => removeDuplicates[k]), codigoLocalidade, contexto)
             .do(responses => cases.requests.forEach((obj, idx) => this._cacheRanking[this._convertIntoKey(obj)] = Observable.of(responses[idx])))
             .map(responses => responses.concat(cases.cache))
             .map(rankings => indicadoresId.reduce( (acc, id) => {

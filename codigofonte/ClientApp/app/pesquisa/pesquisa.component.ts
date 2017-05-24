@@ -22,7 +22,6 @@ import { flatTree } from '../utils/flatFunctions';
 })
 
 export class PesquisaComponent implements OnInit {
-
     @ViewChild('dados') dados: ElementRef;
 
     pesquisa$;
@@ -84,7 +83,6 @@ export class PesquisaComponent implements OnInit {
             this.tipo = !!urlParams.queryParams['tipo'] ? urlParams.queryParams['tipo'] : 'tabela';
 
         });
-
 
     }
 
