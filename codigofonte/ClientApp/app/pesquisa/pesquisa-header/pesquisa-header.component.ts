@@ -31,7 +31,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     objetoURL:any = {};
     baseURL = '';
     listaPeriodos = [];
-    tipo;
+    tipo = '';
 
     private subs$$;
     private isOcultarValoresVazios = true;
