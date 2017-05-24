@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { LinhaTempo } from '../../infografia/linha-tempo/linha-tempo.component';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.component';
@@ -22,12 +23,17 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
     @Input() indicadorSelecionado;
     @Input() pesquisa;
 
+    @Output() onAno = new EventEmitter;
+
+    public mapas: {mun, resultados}[] = [];
+
     public mun;
 
     public resultados;
     public tituloCartograma;
 
     public listaPeriodos
+    public indexSelecionado;
     public anoSelecionado;
 
     constructor(
@@ -38,14 +44,31 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.mun = this._localidadeServ.getMunicipioByCodigo(this.localidades[0]);
 
-        this.atualizaCartograma();
+        this._routerParamsService.params$.subscribe((params) => {
+            this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
+                this.pesquisa = pesquisa;
+                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
+
+                if(params.queryParams.ano){
+                    this.anoSelecionado = params.queryParams.ano;
+                }
+                else {
+                    // Quando não houver um período selecionado, é exibido o período mais recente
+                    this.anoSelecionado = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
+                }
+
+            });
+        });
+
+        if(this.localidades && this.localidades.length > 0) {
+            this.mapas = [];
+            this.atualizaCartograma();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if(this.localidades.length > 0) {
-            this.mun = this._localidadeServ.getMunicipioByCodigo(this.localidades[0]);
+        if(this.localidades && this.localidades.length > 0) {
             this.atualizaCartograma();
         }
 
@@ -54,7 +77,12 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
                 return parseInt(periodo.nome);
             });
 
-            this.anoSelecionado = this.listaPeriodos.length - 1;
+            if(this.anoSelecionado) {
+                this.indexSelecionado = this.listaPeriodos.findIndex((periodo) => periodo == this.anoSelecionado);
+            } else {
+                this.indexSelecionado = this.listaPeriodos.length - 1;
+            }
+
         }
     }
 
@@ -62,13 +90,59 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
         if(this.indicadorSelecionado === undefined || this.indicadorSelecionado.id === undefined) {
             return;
         }
-        this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado.id, this.mun.parent.codigo)
-            .subscribe((resultados) => {
-                this.resultados = resultados;
+
+        let mapaLocalidades = [];
+        let mapaLocalidadesMarcadas = {};
+
+        (<Localidade[]>this.localidades)
+            .map((localidade) => this._localidadeServ.getMunicipioByCodigo(localidade))
+            .filter(mun => mun !== undefined)
+            .forEach((mun) => {
+                if(!mapaLocalidadesMarcadas[mun.parent.codigo]) {
+                    mapaLocalidades.push(mun.parent);
+                    mapaLocalidadesMarcadas[mun.parent.codigo] = [];
+                }
+                mapaLocalidadesMarcadas[mun.parent.codigo].push(mun);
             });
+        let resultadosCartograma$ = mapaLocalidades.map((localidade) => this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado.id, localidade.codigo));
+        
+        Observable.zip(...resultadosCartograma$)
+            .subscribe(resultados => {
+                let mapas = [];
+
+                for(let i=0; i<resultados.length; i++) {
+                    mapas.push({
+                        localidade: mapaLocalidades[i],
+                        localidadesMarcadas: mapaLocalidadesMarcadas[mapaLocalidades[i].codigo],
+                        resultados: resultados[i],
+                        titulo: mapaLocalidades[i].nome
+                    });
+                }
+
+                this.mapas = mapas;
+            });
+
+        // this.localidades.forEach(localidade => {
+        //     let mun = this._localidadeServ.getMunicipioByCodigo(localidade)
+
+        //     if(mun === undefined) {
+        //         return;
+        //     }
+
+        //     this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado.id, mun.parent.codigo)
+        //         .subscribe((resultados) => {
+        //             this.mapas.push({
+        //                 mun,
+        //                 resultados
+        //             });
+        //         });
+        // });
+        
     }
 
     mudaAno(ano){
+        this.anoSelecionado = ano;
+        this.onAno.emit(ano);
         console.log(ano);
     }
 }
