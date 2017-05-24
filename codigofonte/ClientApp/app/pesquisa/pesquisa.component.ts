@@ -34,6 +34,7 @@ export class PesquisaComponent implements OnInit {
     tipo: string;
 
     indicador;
+    indicadores;
 
     isOcultarValoresVazios = true;
     
@@ -51,10 +52,10 @@ export class PesquisaComponent implements OnInit {
         this._routerParams.params$.subscribe(urlParams => {
 
             if(!!urlParams.params['indicador']){
-                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.proprio)
+                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos)
                     .subscribe((indicadores) => {
                         
-                       
+                        this.indicadores = indicadores;
 
                         if(!!indicadores && indicadores.length > 0){ 
                             this.indicador = indicadores[0];

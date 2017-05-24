@@ -16,7 +16,8 @@ import { ResultadoService3 } from '../../shared3/services/resultado.service';
 export class PesquisaCartogramaComponent implements OnInit, OnChanges {
 
     @Input() localidades;
-    @Input() indicador;
+    @Input() indicadores;
+    @Input() indicadorSelecionado;
 
     public mun;
 
@@ -41,10 +42,10 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
     }
 
     atualizaCartograma() {
-        if(this.indicador === undefined || this.indicador.id === undefined) {
+        if(this.indicadorSelecionado === undefined || this.indicadorSelecionado.id === undefined) {
             return;
         }
-        this._resultadoServ.getResultadosCartograma(this.indicador.id, this.mun.parent.codigo)
+        this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado.id, this.mun.parent.codigo)
             .subscribe((resultados) => {
                 this.resultados = resultados;
             });

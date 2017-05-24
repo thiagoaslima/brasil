@@ -1,6 +1,27 @@
 <div class="container">
-    <h4>Pesquisa - Cartogramas</h4>
-    <breadcrumb></breadcrumb>
+    
+    <breadcrumb [indicadores]="indicadores" [indicadorSelecionado]="indicadorSelecionado"></breadcrumb>
     <linha-tempo [anos]="[1991, 2000, 2010]" [indexSelecionado]="2" (onAno)="mudaAno($event);"></linha-tempo>
-    <ibge-cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [resultados]="resultados" [titulo]="tituloCartograma"></ibge-cartograma>
+    
+    
+    <div class="mapas--variosMapas">
+        
+        <div class="mapas__mapa">
+            <h4>MUNICÍPO DO RIO DE JANEIRO</h4>
+            <ibge-cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [resultados]="resultados" [titulo]="tituloCartograma"></ibge-cartograma>
+        </div>
+
+        <div class="mapas__mapa">
+            <h4>ESTADOS DO BRASIL</h4>
+            <ibge-cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [resultados]="resultados" [titulo]="tituloCartograma"></ibge-cartograma>
+        </div>
+
+
+        <div class="mapas__mapa">
+            <h4>ESTADOS DO BRASIL</h4>
+            <ibge-cartograma [localidade]="mun" *ngIf="!isPrerender && mun?.codigo != 530010" [resultados]="resultados" [titulo]="tituloCartograma"></ibge-cartograma>
+        </div>
+    
+    </div>
+
 </div>

@@ -232,8 +232,9 @@ g, .periodo-link {
 .legenda{
     width: 100%;
     max-width: 800px;
-    float: right;
-	min-height: 290px;
+    /* float: right; */
+    min-height: 200px;
+    margin: auto;
 }
 
 .legenda__item{
