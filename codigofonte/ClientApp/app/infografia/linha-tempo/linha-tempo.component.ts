@@ -13,7 +13,6 @@ export class LinhaTempo implements OnInit, OnChanges {
     @Output() onAno = new EventEmitter();
 
     ngOnChanges(){
-
     }
 
     ngOnInit(){
