@@ -11,14 +11,14 @@ h4{
 }
 
 /*MAIS DE 1 MAPA NA TELA*/
-.mapas[variosMapas="true"] .mapas__mapa{
+.mapas--variosMapas .mapas__mapa{
     width: 50%;
     float: left;
     padding-right: 5%;
     border-left: 7px solid #FFF;
 }
 
-.mapas[variosMapas="true"] .mapas__mapa:nth-child(2){
+.mapas--variosMapas .mapas__mapa:nth-child(2){
     padding-left: 5%;
     padding-right: 0%;
     border-color: #ccc;
