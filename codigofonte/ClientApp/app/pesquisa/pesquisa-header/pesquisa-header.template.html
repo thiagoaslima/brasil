@@ -11,7 +11,7 @@
             </span>
         </div>
         <!--select do ano-->
-        <div class="select-ano-container">
+        <div class="select-ano-container" *ngIf="mostraAno">
             Ano:
             <select class="select-ano" (change)="mudaAno($event)">
                 <option *ngFor="let periodo of listaPeriodos" [selected]="periodo.nome == ano">{{ periodo.nome }}</option>
@@ -48,7 +48,7 @@
     </div>
     <div class="cabecalho__seletor-visualizacao-dados">
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == ''" (click)="setaTipo('')"><i class="fa fa-table" aria-hidden="true"></i> Tabela</div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')"><i class="fa fa-bar-chart" aria-hidden="true"></i> Gráficos</div>
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')"><i class="fa fa-bar-chart" aria-hidden="true"></i> Série Histórica</div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="setaTipo('cartograma')"><i class="fa fa-area-chart" aria-hidden="true"></i> Cartogramas</div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="setaTipo('ranking')"><i class="fa fa-list-ol" aria-hidden="true"></i> Ranking</div>
     </div>

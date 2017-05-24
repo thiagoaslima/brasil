@@ -99,7 +99,7 @@
 
 .cabecalho__seletor-visualizacao-dados{
     background-color: #fff;
-    color: #E2871A;
+    color: #727272;
 }
 
 .cabecalho__visualizacao-dados__item select:first-child, .cabecalho__seletor-visualizacao-dados__item select:first-child{
@@ -122,8 +122,14 @@
     text-transform: uppercase;
 }
 
+.cabecalho__seletor-visualizacao-dados__item:hover{
+    border-bottom: 3px solid #333;
+    color:#333;
+}
+
 .cabecalho__seletor-visualizacao-dados__item.selecionado{
     border-bottom: 3px solid #E2871A;
+    color:#E2871A;
 }
 
 .cabecalho__seletor-visualizacao-dados i {

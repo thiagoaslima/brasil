@@ -13,7 +13,7 @@
 }
 
 .grupo:nth-child(odd){
-    border-right: 7px solid #CCCCCC;
+    border-right: 4px solid #CCCCCC;
     margin-right: 18px;
 }
 
@@ -33,7 +33,7 @@
 .grupo__item__posicao{
     float: left;
     /*background-color: green;*/
-    width: 13%;
+    width: 15%;
     margin-left: 2%;
 }
 
@@ -47,7 +47,7 @@
 .grupo__item__barra{
     float: left;
     /*background-color: yellow;*/
-    width: 37%;
+    width: 35%;
     height: 15px;
     margin-top: 5px;
 }
@@ -56,4 +56,15 @@
     background-color: #F7931E;
     width: 0%;
     height: 15px;
+}
+
+@media screen and (max-width: 1460px) {
+ .grupo{
+     width: 100%;
+     border-right: 0px;
+ }   
+ .grupo:nth-child(odd){
+     border-right: 0px;
+ }
+
 }

@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="local-atual">{{titulo}}</div>
+    <div class="local-atual" *ngIf="titulo">{{titulo}}</div>
     
     <div class="mapa" *ngIf="malha?.viewBox">
         <div class="alturafixa_legenda">
@@ -28,7 +28,9 @@
                         <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
                     </svg:g>
                 </svg:g>
-                <svg:g class="ic-mun-selecionado" [attr.transform]="'translate('+getCenter(malha?.geometries, localidade.codigo).join(' ')+')'">
+                <svg:g class="ic-mun-selecionado" *ngFor="let localidade of localidadesMarcadas"
+                    [attr.transform]="'translate('+getCenter(malha?.geometries, localidade.codigo).join(' ')+')'"
+                >
                     <svg:path class="ic-mun-selecionado--path" [attr.d]="'M0 0v'+getIconHeight(malha?.bbox, getCenter(malha?.geometries, localidade.codigo))" vector-effect="non-scaling-stroke"></svg:path>
                     <svg:circle class="ic-mun-selecionado--circle-top" cx="0" [attr.cy]="getIconHeight(malha?.bbox, getCenter(malha?.geometries, localidade.codigo)) - 0.025" r="0.025"><svg:title>{{municSelected[0]}}</svg:title></svg:circle>
                 </svg:g>

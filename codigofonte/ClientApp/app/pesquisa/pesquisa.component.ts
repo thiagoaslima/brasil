@@ -24,7 +24,6 @@ import { flatTree } from '../utils/flatFunctions';
 export class PesquisaComponent implements OnInit {
     @ViewChild('dados') dados: ElementRef;
 
-    pesquisa$;
     localidade: Localidade;
 
     posicaoIndicador: string = "2";
@@ -36,7 +35,11 @@ export class PesquisaComponent implements OnInit {
     indicadores;
 
     isOcultarValoresVazios = true;
-
+    
+    
+    public pesquisa;
+    public listaPeriodos = [1991, 2000, 2010];
+    public anoSelecionado = 0;
 
     constructor(
         private _routerParams: RouterParamsService,
@@ -65,7 +68,10 @@ export class PesquisaComponent implements OnInit {
                     });
             }
 
-            this.pesquisa$ = this._pesquisaService.getPesquisa(urlParams.params['pesquisa']);
+            this._pesquisaService.getPesquisa(urlParams.params['pesquisa'])
+                .subscribe((pesquisa) => {
+                    this.pesquisa = pesquisa;
+                });
 
             // Obter localidade principal
             this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;

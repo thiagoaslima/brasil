@@ -10,6 +10,7 @@ import { MapaService } from './mapa.service';
 })
 export class IBGECartograma implements OnInit, OnChanges{
     @Input() localidade: Localidade;
+    @Input() localidadesMarcadas: Localidade[];
     @Input() resultados;
     @Input() periodo;
     @Input() titulo;
@@ -29,7 +30,7 @@ export class IBGECartograma implements OnInit, OnChanges{
 
     updateCartograma() {
         if(this.localidade) {
-            this._mapaService.getMalhaSubdivisao(this.localidade.parent.codigo)
+            this._mapaService.getMalhaSubdivisao(this.localidade.codigo)
                 .subscribe((malha) => {
                     this.malha = malha;
                 });
@@ -39,8 +40,18 @@ export class IBGECartograma implements OnInit, OnChanges{
             this.existeVazio = false;
             let valores = Object.keys(this.resultados)
                 .map((resultadoKey) => this.resultados[resultadoKey])
-                .map(resultado => Number.parseFloat(resultado && resultado.valorValidoMaisRecente))
+                .map(resultado => {
+                    let valor;
+                    // resultado && resultado.getValor(this.periodo)
+                    if (this.periodo) {
+                        valor = resultado && resultado.getValor(this.periodo);
+                    } else {
+                        valor = resultado && resultado.valorMaisRecente;
+                    }
+                    return Number.parseFloat(valor);
+                })
                 .filter(val => !Number.isNaN(val))
+                .filter(this._isValorValido)
                 .sort( (a, b) => a < b ? -1 : 1);
             
             const len = valores.length;
@@ -55,10 +66,33 @@ export class IBGECartograma implements OnInit, OnChanges{
     }
 
     getValorMunicipio(codmun: number) {
-        return this.resultados
-                && this.resultados[codmun]
-                && this.resultados[codmun].valorValidoMaisRecente;
+        let valor;
+
+        let resultado = this.resultados && this.resultados[codmun];
+
+        if (this.periodo) {
+            valor = resultado && resultado.getValor(this.periodo);
+        } else {
+            valor = resultado && resultado.valorMaisRecente;
+        }
+
+        return valor;
     }
+
+    private _isValorValido(valor) {
+        let valoresInvalidos = [
+            '99999999999999',
+            '99999999999998',
+            '99999999999997',
+            '99999999999996',
+            '99999999999995',
+            '99999999999992',
+            '99999999999991'
+        ];
+
+        return valoresInvalidos.findIndex((v) => v == valor.toString()) === -1;
+    }
+
     getFaixaMunicipio(codmun: number) {
 
         let valor = this.getValorMunicipio(codmun);
