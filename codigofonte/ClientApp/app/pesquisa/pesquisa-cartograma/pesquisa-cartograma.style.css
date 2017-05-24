@@ -25,3 +25,7 @@ h4{
     border-color: #ccc;
 }
 
+.mapas--variosMapas .mapas__mapa:nth-child(3){
+    clear: both;
+}
+
