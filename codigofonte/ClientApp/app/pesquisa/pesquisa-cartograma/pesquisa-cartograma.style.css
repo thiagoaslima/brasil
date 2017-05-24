@@ -4,6 +4,7 @@
 
 h4{
     font-size: 1.3em;
+    min-height: 60px;
 }
 
 .mapas__mapa{
@@ -23,3 +24,4 @@ h4{
     padding-right: 0%;
     border-color: #ccc;
 }
+
