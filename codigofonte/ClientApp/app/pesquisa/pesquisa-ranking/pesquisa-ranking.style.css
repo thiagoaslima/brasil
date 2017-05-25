@@ -13,7 +13,7 @@
 }
 
 .grupo:nth-child(odd){
-    border-right: 4px solid #CCCCCC;
+    border-right: 2px solid #CCCCCC;
     margin-right: 18px;
 }
 
