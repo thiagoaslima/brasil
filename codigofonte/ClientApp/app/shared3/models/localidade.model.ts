@@ -1,4 +1,3 @@
-import { TiposGrafico } from '../../infografia/grafico-base/grafico.component';
 import { niveisTerritoriais } from '../values';
 import { LocalidadeDTO } from "../dto";
 import { converterObjArrayEmHash, converterEmNumero } from "../../utils2";
@@ -100,25 +99,31 @@ export class Localidade {
 
     public readonly codigo: number
     public readonly codigoCompleto: number
-    public readonly digitoVerificador: number
+    public readonly digitoVerificador?: number
     public readonly nome: string
     public readonly tipo: string
-    public readonly sigla: string
+    public readonly sigla?: string
     public readonly slug: string
-    public readonly codigoCapital: number
-    public readonly codigoParent: number
+    public readonly codigoCapital?: number
+    public readonly codigoParent?: number
     public readonly microrregiao?: number
 
     constructor(dados) {
         this.codigo = dados.codigo;
         this.codigoCompleto = dados.codigoCompleto;
 
-        if (dados.digitoVerificador) {
-            this.digitoVerificador = dados.digitoVerificador
-        }
+        if (dados.digitoVerificador) { this.digitoVerificador = dados.digitoVerificador }
 
         this.nome = dados.nome;
         this.tipo = dados.tipo;
+
+        if (dados.sigla) { this.sigla = dados.sigla; }
+
+        this.slug = dados.slug;
+
+        if (dados.codigoCapital) { this.codigoCapital = dados.codigoCapital }
+        if (dados.codigoParent) { this.codigoParent = dados.codigoParent }
+        if (dados.microrregiao) { this.microrregiao = dados.microrregiao }
     }
 
     private _link: string = ''

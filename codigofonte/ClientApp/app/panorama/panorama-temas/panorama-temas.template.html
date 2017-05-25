@@ -46,8 +46,7 @@
             </div>
         </div>
         
-        <grafico *ngIf="!isPrerender" [localidade]="tema.localidade" [indicadores]="grafico.dados" [tipoGrafico]="grafico.tipo"></grafico>
-        <grafico2 *ngIf="!isPrerender" [eixo-x]="getEixo(tema.tema, i)" [dados]="getDados(tema.tema, i)" [tipo]="grafico.tipo"></grafico2>
+        <grafico *ngIf="!isPrerender" [mostrar-legenda]="false" [eixo-x]="['2010']" [dados]="[{data: [404645], label: 'Católica'}, {data: [15630], label: 'Espírita'}, {data: [86743], label: 'Evangélica'}]" [tipo]="grafico.tipo"></grafico>
 
         <div class="botao-container">
             <div class="botao" *ngIf="grafico.dados && grafico.dados.length && grafico.dados[0].indicador && grafico.dados[0].indicador.fontes && grafico.dados[0].indicador.fontes.length > 0">

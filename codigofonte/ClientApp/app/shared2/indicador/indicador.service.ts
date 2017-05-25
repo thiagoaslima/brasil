@@ -141,7 +141,7 @@ export class IndicadorService2 {
 
 
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable<Ranking> {
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
+        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
 
         return this._http.get(url, options)
             .retry(3)

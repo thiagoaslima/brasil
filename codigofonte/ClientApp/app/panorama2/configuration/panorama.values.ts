@@ -1,3 +1,5 @@
+import { Indicador, Localidade, Resultado } from '../../shared3/models';
+
 export const PanoramaVisualizacao = {
     grafico: "grafico",
     mapa: "cartograma",
@@ -14,7 +16,7 @@ export interface ItemConfiguracao {
     titulo?: string
     tema: string
     largura?: string
-    
+
     visualizacao: string
     grafico?: {
         titulo: string
@@ -27,4 +29,26 @@ export interface ItemConfiguracao {
 
     correlacaoPositivaValorQualidade?: boolean
     correlacaoNegativaValorQualidade?: boolean
+}
+
+export interface ItemTemaView {
+    tema: string
+
+    painel: Array<{
+        titulo: string
+        indicador: Indicador
+        localidade: Localidade
+        periodo: string
+        valor: string
+        ranking: { [contexto: string]: number }
+        fontes: string[]
+        link: string
+    }>
+    
+    graficos: Array<{
+        titulo: string
+        tipo: string
+        fontes: string[]
+        link: string
+    }>
 }

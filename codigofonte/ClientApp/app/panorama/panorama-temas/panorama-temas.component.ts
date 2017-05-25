@@ -101,7 +101,7 @@ export class PanoramaTemasComponent implements OnInit {
         if (changes.temas && changes.temas.currentValue && changes.temas.currentValue.length > 0) {
             this.localidade = changes.temas.currentValue[0].localidade;
             this.configurarTextosTemas();
-            this.configurarGraficosTemas();
+            // this.configurarGraficosTemas();
         }
         if (this.isBrowser) {
             this.goToTema();
@@ -160,34 +160,29 @@ export class PanoramaTemasComponent implements OnInit {
 
     private configurarGraficosTemas() {
         this.graficos = {};
-        const subscribes = {};
 
         this.temas.forEach(tema => {
-
+            this.graficos[tema.tema] = [];
             tema.grafico.map((grafico,index) => {
                 
-                if (grafico.tipo === 'barra') {
+                if (grafico.tipo === 'coluna' && grafico.dados[0].indicador) {
                     
-                    subscribes[tema.tema] = Observable.zip(
+                    Observable.zip(
                         ...grafico.dados.map(obj => obj.indicador.getResultadoByLocal(this.localidade.codigo))
-                    ).map( (resultados) => {
+                    ).subscribe( (resultados) => {
                         const eixoX = resultados[0].periodoValidoMaisRecente;
                         const valores = resultados.map( (resultado, idx) => {
                             return {
-                                data: resultado.getValor(eixoX),
+                                data: [resultado.getValor(eixoX)],
                                 label: grafico.dados[idx].indicador.nome
                             }
                         })
-                        this.graficos[tema.tema][index] = {eixoX, valores};
-                        subscribes[tema.tema].unsubscribe();
+                        
+                        this.graficos[tema.tema][index] = {eixoX: [eixoX], valores};
                     });
                         
                 }
             })
-
-
-            
-
 
         })
     }

@@ -1,27 +1,27 @@
 <div class="grafico">
-    <div class="loading" *ngIf="!(datasets$ | async)">
+    <div class="loading" *ngIf="isLoading()">
         <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
     </div>
 
     <div >
         <!--<div *ngIf="datasets | async">-->
             
-            <canvas *ngIf="datasets$ | async" #grafico
+            <canvas *ngIf="isValid()" #grafico
                 baseChart
                 class="chart"
-                width="510" 
+                width="510"
                 height="220"
-                [datasets]="datasets$ | async"
-                [labels]="labels$ | async"
-                [options]="options$ | async"
-                [chartType]="tipo"
-                [colors]="colors[tipo]"
+                [datasets]="dados"
+                [labels]="labelsEixoX"
+                [options]="getOptions()"
+                [chartType]="tipoGrafico"
+                [colors]="getColors()"
             ></canvas>
 
         <!--</div>-->
     </div>
 
-    <div class="botao-container">
+    <!--<div class="botao-container">
         <div class="botao" *ngIf="indicadores && indicadores.length && indicadores[0].indicador && indicadores[0].indicador.fontes && indicadores[0].indicador.fontes.length">
             <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
             <button (click)="mostrarFontes=true">
@@ -49,5 +49,5 @@
         <div class="botao" *ngIf="indicadores && indicadores.length && _pesquisasConfig.isValida(indicadores[0].pesquisaId)">
             <button (click)="navegarTabela();"><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
         </div>
-    </div>
+    </div>-->
 </div>

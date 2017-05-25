@@ -1,3 +1,24 @@
-<div *ngFor="let item of configuracao; let isFirst = first; let idx = index">
-    <p *ngIf="isFirst || item.tema !== configuracao[idx-1].tema">{{item.tema}}</p>
+<div *ngFor="let item of temas; let first = first; let idx = index">
+    
+    <div class="cabecalho" id="cont" *ngIf="first || temas[idx-1].tema !== item.tema">
+        <div class="cabecalho__celula-esquerda">
+            <h2 class="cabecalho__titulo">{{item.tema}}</h2>
+        </div>          
+            
+            <div class="cabecalho__celula-direita cabecalho__celula-direita--fader" [class.cabecalho__descricao__aberto]="textoAberto" (click)="textoAberto=!textoAberto">
+                <!--Inserir CLICK na div toda, adicionando/removendo a classe "cabecalho__descricao__aberto"-->
+                <p class="cabecalho__descricao">
+                    {{ getTexto(item.tema) }}
+                </p>
+                
+                <div class="mobile-exclusive cabecalho__descricao__showhide">
+                    <i class="fa fa-chevron-down cabecalho__descricao__bt--show" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-up cabecalho__descricao__bt--hide" aria-hidden="true"></i>
+                </div>
+            </div>
+    </div>
+    
+    <h3>{{ item.titulo }} | {{ item.visualizacao }}</h3>
+    
+
 </div>

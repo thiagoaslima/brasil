@@ -1,8 +1,8 @@
 import { TEMAS } from './temas.values';
 import { PanoramaVisualizacao, ItemConfiguracao } from './panorama.values';
 
-import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
-import { TiposGrafico } from '../../infografia/grafico-base/grafico.component';
+import { niveisTerritoriais } from '../../shared3/values';
+import { TiposGrafico } from '../../infografia/grafico-base/grafico.values';
 
 
 export const PANORAMA: {
@@ -11,7 +11,7 @@ export const PANORAMA: {
         indicadores: ItemConfiguracao[]
     }
 } = {
-    [NiveisTerritoriais.pais.label]: {
+    [niveisTerritoriais.pais.label]: {
         temas: [
             TEMAS.nenhum.label,
             TEMAS.territorio.label,
@@ -89,7 +89,7 @@ export const PANORAMA: {
 
     // [NiveisTerritoriais.uf.label]: {},
 
-    [NiveisTerritoriais.municipio.label]: {
+    [niveisTerritoriais.municipio.label]: {
         temas: [
             TEMAS.nenhum.label,
             TEMAS.populacao.label,

@@ -5,7 +5,7 @@ import { PANORAMA, ItemConfiguracao } from '../configuration';
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { SyncCache } from '../../cache/decorators';
 import { converterObjArrayEmHash, getProperty } from '../../utils2';
-import { ResultadoService3 } from '../../shared3/services';
+import { LocalidadeService3, ResultadoService3 } from '../../shared3/services';
 
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -34,9 +34,14 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
         return temas.reduce((agg, tema) => agg.concat(hash[tema]), [] as ItemConfiguracao[]);
     }
 
+    /*
+     * TO DO
+     * retirar localidade service quando o AppState servir a Localidade do SharedModule3 
+    */
     constructor(
         private _appState: AppState,
-        private _resultadoService: ResultadoService3
+        private _resultadoService: ResultadoService3,
+        private _localidadeService: LocalidadeService3
     ) { }
 
     ngOnInit() {
@@ -45,13 +50,14 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
             .filter(Boolean)
             .distinctUntilChanged()
             .mergeMap(localidade => {
+                const _localidade = this._localidadeService.getByCodigo(localidade.codigo, 'proprio')[0];
                 let configuracao = PanoramaShellComponent.getConfiguracao(localidade.tipo)
                 return this._resultadoService
                     .getResultadosCompletos(<number[]>configuracao.map(getProperty('indicadorId')), localidade.codigo)
                     .map(resultados => ({
                         configuracao: configuracao,
                         resultados: resultados,
-                        localidade: localidade
+                        localidade: _localidade
                     }))
             })
             .subscribe(({ configuracao, resultados, localidade }) => {
