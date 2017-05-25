@@ -44,6 +44,11 @@
     margin-right: 1%;
 }
 
+.grupo__item__nome--selecionado{
+	color: #F7931E;
+
+}
+
 .grupo__item__barra{
     float: left;
     /*background-color: yellow;*/
