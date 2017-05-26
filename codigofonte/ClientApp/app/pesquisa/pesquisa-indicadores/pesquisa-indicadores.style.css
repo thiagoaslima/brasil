@@ -2,6 +2,11 @@
 * estrutura tabela
 */
 
+.selecionado{
+    background-color: #1B779B !important;
+    color: white !important;
+}
+
 table{
     width: 38%;
     font-size: .95em;
@@ -31,8 +36,14 @@ td.s{
 } 
 
 td.label {
-    border-right: 3px solid #fff;
+    /*border-right: 3px solid #fff;*/
     background-color: #e6e6e6;
+    width: 100%;
+}
+
+td.label:hover {
+    color: white;
+    background-color: #1B779B;
 }
 
 .nivel-2{

@@ -5,6 +5,10 @@ import { Localidade } from '../../shared2/localidade/localidade.model';
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { SinteseService } from '../../sintese/sintese.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
+import { RouterParamsService } from '../../shared/router-params.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { isBrowser } from 'angular2-universal';
 
 
 // Biblioteca usada no download de arquivos.
@@ -19,7 +23,6 @@ var FileSaver = require('file-saver');
 
 export class PesquisaIndicadoresComponent implements OnChanges {
 
-
     @Input() localidades: number[];
     @Input() pesquisa: Pesquisa;
     @Input() posicaoIndicador: string;
@@ -27,16 +30,56 @@ export class PesquisaIndicadoresComponent implements OnChanges {
     @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     private indicadores;
+    private indicadorComparacao;
 
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese:SinteseService,
-        private _localidade:LocalidadeService2
+        private _localidade:LocalidadeService2,
+        private _pesquisaService: PesquisaService2,
+        private _routerParamsService: RouterParamsService,
+        private _route: ActivatedRoute,
+        private _router: Router
     ) {  }
 
+    navegarPara(indicador){
+        if (isBrowser) {
+            let url = window.location.href;
+            let path:any = url.split('?')[0];
+            let queryParams = {};
+            path = path.split('/');
+            path.splice(0, path.indexOf('brasil'));
+            if(url.indexOf('?') >= 0){
+                let qp:any = url.split('?')[1];
+                qp = qp.split('&');
+                for(let i = 0; i < qp.length; i++){
+                    let keyValue = qp[i].split('=');
+                    queryParams[keyValue[0]] = keyValue[1];
+                }
+                queryParams['indicador'] = indicador;
+            }
+            //navega para a url
+            this._router.navigate(path, {'queryParams' : queryParams});
+        }
+    }
 
-   ngOnChanges() {
+    getIndicadorComparacao(){
+        if (isBrowser) {
+            let url = window.location.href;
+            if(url.indexOf('?') >= 0){
+                let qp:any = url.split('?')[1];
+                qp = qp.split('&');
+                for(let i = 0; i < qp.length; i++){
+                    let keyValue = qp[i].split('=');
+                    if(keyValue[0] == 'indicador')
+                        return keyValue[1];
+                }
+            }
+        }
+        return 0;
+    }
 
+    ngOnChanges() {
         if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
 
             //organiza os períodos da pesquisa em orderm crescente
@@ -75,6 +118,23 @@ export class PesquisaIndicadoresComponent implements OnChanges {
 
                     return indicador;
                 });
+
+                //motra o indicador selecionado para comparação (expandindo a árvore dos pais, se preciso)
+                this.indicadorComparacao = this.getIndicadorComparacao();
+                for(let i = 0; i < this.indicadores.length; i++){
+                    if(this.indicadores[i].id == this.indicadorComparacao){
+                        let nivel = this.indicadores[i].nivel
+                        for(; i >= 0; i--){
+                            if(this.indicadores[i].nivel == nivel - 1){
+                                nivel -= 1;
+                                for(let j = 0; j < this.indicadores[i].children.length; j++)
+                                    this.indicadores[i].children[j].visivel = true;
+                            }
+                        }
+                        break;
+                    }
+                }
+                //-----------------
 
                 subscription$$.unsubscribe();
             });

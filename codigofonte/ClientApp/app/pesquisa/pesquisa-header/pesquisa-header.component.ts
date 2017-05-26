@@ -16,6 +16,8 @@ import { Observable } from 'rxjs/Observable';
 
 export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
+    @Input() mostraAno: boolean;
+
     @Output() onDownload = new EventEmitter();
     @Output() onOcultarValoresVazios = new EventEmitter();
 
@@ -31,7 +33,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     objetoURL:any = {};
     baseURL = '';
     listaPeriodos = [];
-    tipo;
+    tipo = '';
 
     private subs$$;
     private isOcultarValoresVazios = true;

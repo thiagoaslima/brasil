@@ -2,6 +2,36 @@
     margin: 3% 5%;
 }
 
-.container *{
-    margin-bottom: 32px;
+h4{
+    font-size: 1.3em;
+    min-height: 60px;
 }
+
+.mapas__mapa{
+    margin-top: 50px;
+}
+
+/*MAIS DE 1 MAPA NA TELA*/
+.mapas--variosMapas .mapas__mapa{
+    width: 50%;
+    float: left;
+    padding-right: 5%;
+    border-left: 7px solid #FFF;
+}
+
+.mapas--variosMapas .mapas__mapa:nth-child(2){
+    padding-left: 5%;
+    padding-right: 0%;
+    border-left: 2px solid #ccc;
+}
+
+.mapas--variosMapas .mapas__mapa:nth-child(3){
+    clear: both;
+}
+.linhatempo{
+    width: 90%;
+    margin: 5% 5%;
+    position: relative;
+	margin-top: 30px;
+}
+
