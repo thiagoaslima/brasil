@@ -1,3 +1,8 @@
+import { log } from 'util';
+import { Localidade } from '../localidade/localidade.model';
+import { ItemRanking, RankingLocalidade } from '../../pesquisa/pesquisa-ranking/ranking.model';
+import { discardPeriodicTasks } from '@angular/core/testing';
+import { LocalidadeService2 } from '../localidade/localidade.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
@@ -22,7 +27,8 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class IndicadorService2 {
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private _localidadeService: LocalidadeService2
     ) {
         Indicador.setIndicadoresStrategy({
             retrieve: this.getIndicadoresByPosicao.bind(this)
@@ -41,6 +47,15 @@ export class IndicadorService2 {
             .map(array => this._rebuildTree(array))
             // .do(indicador => console.log(`getIndicadoresByPosicao`, indicador))
             .share();
+    }
+
+    getIndicadorById(indicadorId: number, localidade: number | string): Observable<Indicador[]> {
+
+        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/${indicadorId}?localidade=${localidade}}`;
+
+        return this._http.get(url, options)
+            .map(res => res.json())
+            .map(array => array.map(Indicador.criar));
     }
 
     getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false): Observable<Indicador[]> {
@@ -223,6 +238,54 @@ export class IndicadorService2 {
         cases.requests.forEach((obj, idx) => this._cacheRanking[this._convertIntoKey(obj)] = request.map(responses => responses.filter(rank => rank.indicador === obj.id && rank.localidade === obj.localidade && rank.contexto === obj.contexto)))
 
         return request;
+    }
+
+
+    public getRankingIndicador(indicadorId: number, periodo: string, contexto: string[], localidade: number){
+
+        const _contexto = contexto.join(',');
+
+        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}`;
+
+        return this._rankingRequest(url).map(res => {
+            
+            let listaRankingLocalidade: RankingLocalidade[] = [];
+            for(let i = 0; i < contexto.length; i++){
+
+                let rankingLocalidade: RankingLocalidade = new RankingLocalidade(indicadorId, periodo, contexto[i], localidade, res[i]);
+
+                listaRankingLocalidade.push(rankingLocalidade);
+            }
+
+            return listaRankingLocalidade;
+        });
+    }
+
+    private _rankingRequest(url){
+
+        return this._http.get(url)
+            .retry(3)
+            .catch(err => Observable.of({ json: () => [{ res: [] }] }))
+            .map(res => res.json())
+            .map(rankings => {
+
+                return rankings.map(rankings => {
+
+                    let grupo: ItemRanking[] = [];
+
+                    rankings.res.map(ranking => {
+
+                        grupo.push( new ItemRanking(
+                            this._localidadeService.getMunicipioByCodigo(parseInt(ranking['localidade'], 10)),
+                            ranking['ranking'],
+                            ranking['res']
+                        ) );
+                    });
+
+                    return grupo;
+                });
+
+            });
     }
 
     private _convertIntoKey(obj) {
