@@ -30,6 +30,7 @@ export class PesquisaIndicadoresComponent implements OnChanges {
     @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     private indicadores;
+    private indicadorComparacao;
 
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
@@ -48,7 +49,7 @@ export class PesquisaIndicadoresComponent implements OnChanges {
             let queryParams = {};
             path = path.split('/');
             path.splice(0, path.indexOf('brasil'));
-            if(url.indexOf('&') >= 0){
+            if(url.indexOf('?') >= 0){
                 let qp:any = url.split('?')[1];
                 qp = qp.split('&');
                 for(let i = 0; i < qp.length; i++){
@@ -60,6 +61,22 @@ export class PesquisaIndicadoresComponent implements OnChanges {
             //navega para a url
             this._router.navigate(path, {'queryParams' : queryParams});
         }
+    }
+
+    getIndicadorComparacao(){
+        if (isBrowser) {
+            let url = window.location.href;
+            if(url.indexOf('?') >= 0){
+                let qp:any = url.split('?')[1];
+                qp = qp.split('&');
+                for(let i = 0; i < qp.length; i++){
+                    let keyValue = qp[i].split('=');
+                    if(keyValue[0] == 'indicador')
+                        return keyValue[1];
+                }
+            }
+        }
+        return 0;
     }
 
     ngOnChanges() {
@@ -101,6 +118,23 @@ export class PesquisaIndicadoresComponent implements OnChanges {
 
                     return indicador;
                 });
+
+                //motra o indicador selecionado para comparação (expandindo a árvore dos pais, se preciso)
+                this.indicadorComparacao = this.getIndicadorComparacao();
+                for(let i = 0; i < this.indicadores.length; i++){
+                    if(this.indicadores[i].id == this.indicadorComparacao){
+                        let nivel = this.indicadores[i].nivel
+                        for(; i >= 0; i--){
+                            if(this.indicadores[i].nivel == nivel - 1){
+                                nivel -= 1;
+                                for(let j = 0; j < this.indicadores[i].children.length; j++)
+                                    this.indicadores[i].children[j].visivel = true;
+                            }
+                        }
+                        break;
+                    }
+                }
+                //-----------------
 
                 subscription$$.unsubscribe();
             });

@@ -4,7 +4,7 @@
 
 .mapa{
     width: 100%;
-	margin-top: 26px;
+	margin-top: 0px;
 }
 
 .mapa svg {
@@ -14,8 +14,8 @@
 }
 
 .alturafixa_legenda {
-	height: 45px;
-	margin-top:20px;
+	height: 50px;
+	margin-top:0px;
 	}
 	
 
@@ -240,7 +240,7 @@ g, .periodo-link {
 .legenda__item{
     width: 25%;
     float: left;
-    margin-top: 18px;
+    margin-top: 6px;
     height: 30px;
 }
 
@@ -249,11 +249,40 @@ g, .periodo-link {
     height: 6px;
 }
 
-.legenda__texto{
-    font-weight: bold;
-    padding-top: 5px;
-    font-size: 0.75em;
-    font-style: italic;
+.legenda__item--sem-informacao{
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    height: 22px;
+    
+}
+
+.legenda__item--municipio{
+    margin-left: 0px;
+    width: 100%;
+}
+
+.legenda__item--municipio i{
+    margin-right: 8px;
+    text-align: center;
+    color:#ff1f76;
+    float:left;
+    width:22px;
+    height:25px;
+}
+
+.legenda__item--sem-informacao .legenda__cor{
+    float: left;
+    width: 20px;
+    height: 20px;
+}
+
+.legenda__item--sem-informacao .legenda__texto{
+    float: left;
+    width: calc(100% - 30px);
+    margin-left: 10px;
+    /* margin-top: -3px; */
+    /* line-height: 12px; */
 }
 
 .legenda__municipio {
@@ -266,7 +295,8 @@ g, .periodo-link {
 	-ms-transition: all 400ms ease;
 	-o-transition: all 400ms ease;
 	transition: all 400ms ease;
-	}
+	position: absolute;
+    }
 
 /*linha do tempo*/
 
