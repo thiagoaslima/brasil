@@ -12,43 +12,6 @@ import {
 import { CommonService } from '../../shared/common.service';
 import { dicionarioTiposGrafico, TiposGrafico } from './grafico.values';
 
-const _defaultColors = {
-    bar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
-    horizontalBar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
-    line: [{
-        borderColor: '#00A99D',
-        pointBackgroundColor: '#00A99D',
-        pointBorderColor: '#fff',
-    }, {
-        borderColor: '#177437',
-        pointBackgroundColor: '#177437',
-        pointBorderColor: '#fff',
-    }, {
-        borderColor: '#22B573',
-        pointBackgroundColor: '#22B573',
-        pointBorderColor: '#fff',
-    }, {
-        borderColor: '#8CC63F',
-        pointBackgroundColor: '#8CC63F',
-        pointBorderColor: '#fff',
-    }]
-}
-
-const _defaultOptions = {
-    legend: {
-        display: false,
-        position: 'top'
-    },
-    scales: {
-        yAxes: [{
-            stacked: false,
-            ticks: { beginAtZero: true }
-        }],
-        xAxes: [{
-            stacked: false
-        }]
-    }
-};
 @Component({
     selector: 'grafico',
     templateUrl: 'grafico.template.html',
@@ -57,46 +20,72 @@ const _defaultOptions = {
 })
 export class GraficoComponent implements OnInit, OnChanges {
 
-    static setColors(obj: { [tipo: string]: any }): void {
-        Object.assign(_defaultColors, obj);
-    }
-    static getColors() {
-        return Object.assign({}, _defaultColors);
-    }
-
-    static setOptions(obj): void {
-        Object.assign(_defaultOptions, obj);
-    }
-
-    static getOptions() {
-        return Object.assign({}, _defaultOptions);
-    }
-
     /** VALORES **/
     public tipoGrafico: string = 'bar'
     @Input('tipo') set tipo(tipo: string) {
         this.tipoGrafico = dicionarioTiposGrafico[tipo] || 'bar';
     }
-    @Input() titulo: string;
-    @Input('eixo-x') labelsEixoX: string[];
-    @Input() dados: number[] | Array<{ data: number[], label: string }>
+    @Input() titulo: string = '';
+    @Input('eixo') labelsEixoX: string[] = [];
+    @Input() dados: number[] | Array<{ data: number[], label: string }> = [];
 
     /** CONFIGURAÇÃO **/
-    @Input('mostrar-legenda') mostrarLegenda: boolean
-    @Input('posicao-legenda') posicaoLegenda: string
-    @Input('zero-na-origem') comecaNoZero: boolean
+    @Input('mostrar-legenda') mostrarLegenda: boolean = false;
+    @Input('posicao-legenda') posicaoLegenda: string = 'top';
+    @Input('zero-na-origem') comecaNoZero: boolean = true;
 
     /** ELEMENTO **/
     @ViewChild("grafico") graficoRef: ElementRef;
     @Input() largura = 510;
     @Input() altura = 220;
 
-    private _colors = GraficoComponent.getColors();
-    private _options = GraficoComponent.getOptions();
+    public colors = {
+        bar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
+        horizontalBar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
+        line: [{
+            borderColor: '#00A99D',
+            pointBackgroundColor: '#00A99D',
+            pointBorderColor: '#fff',
+        }, {
+            borderColor: '#177437',
+            pointBackgroundColor: '#177437',
+            pointBorderColor: '#fff',
+        }, {
+            borderColor: '#22B573',
+            pointBackgroundColor: '#22B573',
+            pointBorderColor: '#fff',
+        }, {
+            borderColor: '#8CC63F',
+            pointBackgroundColor: '#8CC63F',
+            pointBorderColor: '#fff',
+        }]
+    }
+
+    public options = {
+        legend: {
+            display: false,
+            position: 'top'
+        },
+        scales: {
+            yAxes: [{
+                stacked: false,
+                ticks: { beginAtZero: true }
+            }],
+            xAxes: [{
+                stacked: false
+            }]
+        }
+    };;
 
     constructor(
-        private _commonService?: CommonService
-    ) { }
+        private _commonService?: CommonService,
+        // options = {} as { legend: any, scales: any, colors: any },
+    ) {
+        // let { legend, scales, colors } = options;
+        // if (legend) { Object.assign(this.options, legend) }
+        // if (scales) { Object.assign(this.options, scales) }
+        // if (colors) { Object.assign(this.options, colors) }
+    }
 
     ngOnInit() {
         if (this._commonService) {
@@ -111,46 +100,38 @@ export class GraficoComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         if (changes.hasOwnProperty('tipo') && changes.tipo.currentValue) {
-            switch(changes.tipo.currentValue) {
+            switch (changes.tipo.currentValue) {
                 case 'barraJustaposta':
-                    this._options.scales.xAxes[0].stacked = true;
+                    this.options.scales.xAxes[0].stacked = true;
                     break;
 
                 case 'colunaEmpilhada':
-                    this._options.scales.yAxes[0].stacked = true;
+                    this.options.scales.yAxes[0].stacked = true;
                     break;
 
                 default:
-                    this._options.scales.xAxes[0].stacked = false;
-                    this._options.scales.yAxes[0].stacked = false;
+                    this.options.scales.xAxes[0].stacked = false;
+                    this.options.scales.yAxes[0].stacked = false;
             }
         }
 
         if (changes.hasOwnProperty('posicaoLegenda') && changes.posicaoLegenda.currentValue) {
-            this._options.legend.position = changes.posicaoLegenda.currentValue;
+            this.options.legend.position = changes.posicaoLegenda.currentValue;
         }
 
-        if (changes.hasOwnProperty('mostrarLegenda') && changes.mostrarLegenda.currentValue) {
-            this._options.legend.display = changes.mostrarLegenda.currentValue;
+        if (changes.hasOwnProperty('mostrarLegenda')) {
+            this.options.legend.display = changes.mostrarLegenda.currentValue;
         }
     }
 
     setColors(colors: { [tipoGrafico: string]: any }) {
-        Object.assign(this._colors, colors);
+        Object.assign(this.colors, colors);
     }
-    getColors() {
-        return this._colors[this.tipoGrafico];
-    }
-
-    getOptions() {
-        return Object.assign({}, this._options);
-    }
-
     isValid() {
         return this.tipoGrafico && this.dados && this.dados.length > 0;
     }
 
-    isLoading(){
+    isLoading() {
         return !this.isValid();
     }
 

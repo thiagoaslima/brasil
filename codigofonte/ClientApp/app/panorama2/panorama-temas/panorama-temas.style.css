@@ -1,0 +1,270 @@
+.borda{
+    border-top: 4px solid #F7931E;
+    margin-top: 44px;
+    margin-bottom: 30px;
+}
+
+.cabecalho{
+    margin: 0 5%;
+    overflow: hidden;
+    border-bottom: 1px solid #F7931E;
+    padding-bottom: 2%;
+}
+
+.cabecalho__celula-esquerda{
+    float: left;
+    width: 25%;
+}
+
+.cabecalho__celula-direita{
+    float: right;
+    width: 70%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 960px) {
+	
+.cabecalho__celula-direita {
+	float: none;
+	margin-top: 45px;
+	}
+	
+}
+
+.cabecalho__titulo{
+    font-size: 1.2em;
+}
+
+.cabecalho__descricao{
+    font-size: 0.8em;
+}
+
+.ancora-click-resumo{
+    position:absolute;
+    margin-top: -40px;
+}
+
+.ancora-click-resumo:first-of-type {
+    margin-top: -90px;
+}
+
+@media screen and (min-width: 1200px) {
+    .cabecalho__titulo{
+        font-size: 1.7em;
+    }
+}
+
+
+/*---------------------------------*/
+
+
+.grafico{
+    margin: 2% 5%;
+}
+
+.grafico__titulo{
+    font-weight: bold;
+}
+
+.grafico__subtitulo{
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #4D4D4D;
+    float: left;
+    /*width: 27%;*/
+}
+
+.grafico__info{
+    padding-left: 5px;
+    color: #1B779B;
+    cursor: pointer;
+}
+
+.grafico__detalhes{
+    overflow: hidden;
+}
+
+.grafico__legenda{
+    float: right;
+    width: 70%;
+    overflow: hidden;
+}
+
+.grafico__legenda-item{
+    width: 24%;
+    float: left;
+    padding-left: 15px;
+    min-width: 100px;
+}
+
+.grafico__legenda-cor{
+    width: 100%;
+    height: 4px;
+}
+
+.grafico__legenda-cor--1{
+    background-color: #00A99D;
+}
+
+.grafico__legenda-cor--2{
+    background-color: #177437;
+}
+
+.grafico__legenda-cor--3{
+    background-color: #22B573;
+}
+
+.grafico__legenda-cor--4{
+    background-color: #8CC63F;
+}
+
+.grafico__legenda-texto{
+    padding-top: 5px;
+    font-size: 0.8em;
+}
+
+.grafico__texto-eixo-x{
+    font-size: 0.9em;
+}
+
+.grafico__texto-eixo-y{
+    font-size: 0.8em;
+    color: #B3B3B3;
+}
+
+.mobile-exclusive{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    /*Mobile*/
+    .mobile-exclusive{
+        display: block;
+    }
+    
+    .cabecalho{
+        border-bottom: none;
+    }
+    
+    .cabecalho__celula-esquerda{
+        float: none;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    
+    .cabecalho__celula-direita{
+        float: none;
+        width: 100%;
+    }
+    .cabecalho__celula-direita--fader {
+        cursor: pointer;
+    }
+    .cabecalho__celula-direita--fader p{
+        background: -webkit-linear-gradient(#000, #ddd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        
+        height: 42px;
+        overflow: hidden;
+    }
+    
+    .cabecalho__descricao__showhide{
+        border-top: 1px solid #ccc;
+        color: #ccc;
+        text-align: center;
+        margin-top: 10px;
+        padding-top: 3px;
+        margin-bottom: 10px;
+        font-size: 1em;
+    }
+    
+    /*Abrir/Fechar*/
+    .cabecalho__descricao__bt--show{ display: inline; }
+    .cabecalho__descricao__bt--hide{ display: none; }
+    .cabecalho__descricao__aberto .cabecalho__descricao__bt--show{ display: none; }
+    .cabecalho__descricao__aberto .cabecalho__descricao__bt--hide{ display: inline; }
+    
+    .cabecalho__descricao__aberto.cabecalho__celula-direita--fader p{
+        background: none;
+        -webkit-text-fill-color: #000;
+        height: auto;
+        overflow: visible;
+    }
+    
+    .cabecalho__celula-direita--maybe-empty{
+        height: auto;
+        padding-bottom: 10px;
+    }
+    
+    .ancora-click-resumo{
+        position: relative;
+        margin-top: 0 !important;
+        height: 0;
+    }
+    .ancora-click-resumo ~ .ancora-click-resumo{
+        height: 125px;
+    }
+    
+}
+
+/** Fontes e Tabela **/
+button{
+    border: none;
+    background-color: #E6E6E6;
+    padding: 2px 3px;
+    font-size: .8em;
+}
+
+button .fa{
+    color: #1B779B;
+}
+
+.notas__lista-container {
+    margin-left: 128px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    margin-top: 56px;
+    font-size: .9em;
+}
+
+.fontes__lista-container {
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    font-size: .9em;
+    margin-left: -138px;
+}
+
+.area-click{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    display: none;
+}
+
+.area-click--visivel{
+    display: block;
+}
+
+.botao{
+    display: inline-block;
+}
+
+.botao button{
+    cursor: pointer;
+}
+
+.botao-container{
+    text-align: right;
+    margin-top: 25px;
+}

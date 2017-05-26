@@ -19,8 +19,9 @@ export interface ItemConfiguracao {
 
     visualizacao: string
     grafico?: {
-        titulo: string
+        titulo: string,
         tipo: string,
+        fontes?: string[],
         dados: Array<{
             indicadorId: number
             pesquisaId?: number
@@ -31,24 +32,19 @@ export interface ItemConfiguracao {
     correlacaoNegativaValorQualidade?: boolean
 }
 
-export interface ItemTemaView {
-    tema: string
+export interface dadosGrafico {
+    tipo: string
+    eixoX: string[]
+    dados: Array<{data: number[], label: string}>
+    fontes?: string
+    link?: string 
+}
 
-    painel: Array<{
-        titulo: string
-        indicador: Indicador
-        localidade: Localidade
-        periodo: string
-        valor: string
-        ranking: { [contexto: string]: number }
-        fontes: string[]
-        link: string
-    }>
-    
-    graficos: Array<{
-        titulo: string
-        tipo: string
-        fontes: string[]
-        link: string
-    }>
+export interface dadosPainel {
+    titulo: string;
+    valor: string;
+    ranking?: {
+        BR: number
+        local: number
+    }
 }

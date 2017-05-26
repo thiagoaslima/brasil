@@ -1,3 +1,3 @@
 export { PANORAMA } from './panorama.configuration';
-export { PanoramaVisualizacao, ItemConfiguracao, ItemTemaView } from './panorama.values';
+export { PanoramaVisualizacao, ItemConfiguracao, dadosGrafico, dadosPainel } from './panorama.values';
 export { TEMAS } from './temas.values';

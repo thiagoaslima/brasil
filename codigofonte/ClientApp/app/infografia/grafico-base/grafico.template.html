@@ -13,9 +13,9 @@
                 height="220"
                 [datasets]="dados"
                 [labels]="labelsEixoX"
-                [options]="getOptions()"
+                [options]="this.options"
                 [chartType]="tipoGrafico"
-                [colors]="getColors()"
+                [colors]="this.colors[tipoGrafico]"
             ></canvas>
 
         <!--</div>-->

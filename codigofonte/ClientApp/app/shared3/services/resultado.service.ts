@@ -114,6 +114,6 @@ export class ResultadoService3 {
     }
 
     private _isServerError(res) {
-        return !Array.isArray(res) && Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
+        return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
     }
 }

@@ -143,10 +143,10 @@ export const PANORAMA: {
                         indicadorId: 22423
                     }, {
                         pesquisaId: 23,
-                        indicadorId: 22424
+                        indicadorId: 22426
                     }, {
                         pesquisaId: 23,
-                        indicadorId: 22426
+                        indicadorId: 22424
                     }]
                 }
             },

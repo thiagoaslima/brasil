@@ -23,6 +23,8 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
     public localidade = null;
     public resultados = [];
 
+    public temaSelecionado = '';
+
     private _configuracao$$: Subscription;
 
     @SyncCache({
@@ -64,10 +66,15 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
                 this.configuracao = configuracao;
                 this.resultados = resultados;
                 this.localidade = localidade;
+                this.temaSelecionado = '';
             });
     }
 
     ngOnDestroy() {
         this._configuracao$$.unsubscribe()
+    }
+
+    handleTemaSelecionado(tema) {
+        this.temaSelecionado = tema;
     }
 }
