@@ -1,3 +1,4 @@
+import { IndicadorService3 } from '../../shared3/services';
 import { Observable } from 'rxjs/Rx';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
@@ -25,6 +26,8 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
 
     @Output() onAno = new EventEmitter;
 
+    public indicador;
+
     public mapas: {mun, resultados}[] = [];
 
     public mun;
@@ -40,6 +43,7 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
         private _localidadeServ: LocalidadeService2,
         private _resultadoServ: ResultadoService3,
         private _pesquisaService: PesquisaService2,
+        private _indicadorServ: IndicadorService3,
         private _routerParamsService: RouterParamsService
     ) { }
 
@@ -87,24 +91,30 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
     }
 
     atualizaCartograma() {
-        if(this.indicadorSelecionado === undefined || this.indicadorSelecionado.id === undefined) {
+        if(this.indicadorSelecionado === undefined) {
             return;
         }
 
         let mapaLocalidades = [];
         let mapaLocalidadesMarcadas = {};
 
+        this._indicadorServ.getIndicadoresById([this.indicadorSelecionado])
+            .subscribe((indicadores) => {
+                this.indicador = indicadores[0];
+            });
+
         (<Localidade[]>this.localidades)
             .map((localidade) => this._localidadeServ.getMunicipioByCodigo(localidade))
             .filter(mun => mun !== undefined)
             .forEach((mun) => {
+                if(mun.parent.codigo === 53) { return; }
                 if(!mapaLocalidadesMarcadas[mun.parent.codigo]) {
                     mapaLocalidades.push(mun.parent);
                     mapaLocalidadesMarcadas[mun.parent.codigo] = [];
                 }
                 mapaLocalidadesMarcadas[mun.parent.codigo].push(mun);
             });
-        let resultadosCartograma$ = mapaLocalidades.map((localidade) => this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado.id, localidade.codigo));
+        let resultadosCartograma$ = mapaLocalidades.map((localidade) => this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado, localidade.codigo));
         
         Observable.zip(...resultadosCartograma$)
             .subscribe(resultados => {
@@ -115,7 +125,7 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
                         localidade: mapaLocalidades[i],
                         localidadesMarcadas: mapaLocalidadesMarcadas[mapaLocalidades[i].codigo],
                         resultados: resultados[i],
-                        titulo: mapaLocalidades[i].nome
+                        titulo: this.indicador.nome
                     });
                 }
 
@@ -129,7 +139,7 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
         //         return;
         //     }
 
-        //     this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado.id, mun.parent.codigo)
+        //     this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado, mun.parent.codigo)
         //         .subscribe((resultados) => {
         //             this.mapas.push({
         //                 mun,

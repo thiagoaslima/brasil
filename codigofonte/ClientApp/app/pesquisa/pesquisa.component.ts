@@ -53,7 +53,9 @@ export class PesquisaComponent implements OnInit {
     ngOnInit() {
 
         this._routerParams.params$.subscribe(urlParams => {
-
+            if (urlParams.queryParams['indicador']) {
+                this.indicador = parseInt(urlParams.queryParams['indicador']);
+            }
             if(!!urlParams.params['indicador']){
                 this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos)
                     .subscribe((indicadores) => {
@@ -61,7 +63,7 @@ export class PesquisaComponent implements OnInit {
                         this.indicadores = indicadores;
 
                         if(!!indicadores && indicadores.length > 0){ 
-                            this.indicador = indicadores[0];
+                            this.indicador = this.indicador || indicadores[0].id;
                             this.posicaoIndicador = indicadores[0].posicao;
                         } 
                         else { 
