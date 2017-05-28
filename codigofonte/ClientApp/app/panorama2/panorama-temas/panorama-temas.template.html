@@ -2,7 +2,7 @@
     <div [id]="item.tema.substr(0,2).toLowerCase()" *ngIf="first || temas[idx-1].tema !== item.tema" class="ancora-click-resumo">
         <div [id]="item.tema.substr(0,2).toLowerCase()+'-alt'"></div>
     </div>
-    <div [class.borda]="i!=0"></div>
+    <div class="borda" *ngIf="!first"></div>
 
     <div class="cabecalho" id="cont" *ngIf="first || temas[idx-1].tema !== item.tema">
         <div class="cabecalho__celula-esquerda">
@@ -23,8 +23,7 @@
         </div>
     </div>
 
-
-    <panorama-painel [dados]="item.painel"></panorama-painel>
+    <panorama-painel [dados]="item.painel" [localidade]="localidade"></panorama-painel>
 
     
     <div class="grafico" *ngFor="let obj of item.graficos; let i = index">

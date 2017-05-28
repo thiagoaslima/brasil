@@ -1,27 +1,20 @@
-PAINEL
-
-<p *ngFor="let painel of dados">{{ painel | json }}</p>
-<!--<div>
-    <h2>{{dados.tema}}</h2>
-    
-    <div>
-        <div class="cartograma" *ngIf="!isMobile() && (shouldAppear$ | async)">
-            <!--Não mostra o cartograma de Brasília (código 530010)-->
-            <!--<ibge-cartograma [localidade]="mun?.parent" [localidadesMarcadas]="[mun]" *ngIf="!isPrerender && mun?.codigo != 530010" [resultados]="resultados" [titulo]="tituloCartograma"></ibge-cartograma>
-        </div>
+<div>
+    <div class="cartograma" *ngIf="!isMobile() && (shouldAppear$ | async)">
+        <!--Não mostra o cartograma de Brasília (código 530010)-->
+        <ibge-cartograma *ngIf="!isPrerender && localidade?.codigo != 530010" [localidade]="localidade?.parent" [localidadesMarcadas]="[localidade]" [resultados]="resultadosCartograma" [titulo]="cardSelecionado?.titulo"></ibge-cartograma>
     </div>
+</div>
 
-    <div class="nav__cards__anterior" [class.nav__cards__anterior--desabilitado]="!navAnterior" (click)="selectPainel(indexSelecionado - 1)">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-    </div>
-    <div class="cards">
-        <div class="scroll" [style.transform]="'translateX(' + posicao + 'px)'">
-            <panorama-card (click)="selectPainel(i)"  *ngFor="let painel of dados; let i = index" [dados]="painel" [localidade]="localidade" [selecionado]="painel?.indicadorId === localSelecionado"></panorama-card>
-        </div>
-    </div>
+<div class="nav__cards__anterior" [class.nav__cards__anterior--desabilitado]="indexSelecionado === 0" (click)="selectPainel(indexSelecionado - 1)">
+    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+</div>
 
-    <div class="nav__cards__proximo" [class.nav__cards__proximo--desabilitado]="!navProximo" (click)="selectPainel(indexSelecionado + 1)">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+<div class="cards">
+    <div class="scroll" [style.transform]="'translateX(' + posicaoCards + 'px)'">
+        <panorama-card *ngFor="let painel of dados; let i = index" (click)="selectPainel(i)" [titulo]="painel.titulo" [valor]="painel.valor" [unidade]="painel.unidade" [ranking]="painel.ranking"></panorama-card>
     </div>
+</div>
 
-</div>-->
+<div class="nav__cards__proximo" [class.nav__cards__proximo--desabilitado]="indexSelecionado === dados.length - 1" (click)="selectPainel(indexSelecionado + 1)">
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</div>

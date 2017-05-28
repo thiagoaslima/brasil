@@ -34,6 +34,7 @@ export interface ItemConfiguracao {
 
 export interface dadosGrafico {
     tipo: string
+    titulo: string
     eixoX: string[]
     dados: Array<{data: number[], label: string}>
     fontes?: string
@@ -41,10 +42,14 @@ export interface dadosGrafico {
 }
 
 export interface dadosPainel {
-    titulo: string;
-    valor: string;
+    indicadorId: number
+    titulo: string
+    valor: string
+    unidade: string
     ranking?: {
-        BR: number
-        local: number
+        [contexto: string]: {
+            posicao: number,
+            itens: number
+        }
     }
 }

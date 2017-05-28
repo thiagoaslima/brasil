@@ -7,6 +7,7 @@ import { PanoramaShellComponent } from './panorama-shell/panorama-shell.componen
 import { PanoramaResumoComponent } from './panorama-resumo/panorama-resumo.component';
 import { PanoramaTemasComponent } from './panorama-temas/panorama-temas.component';
 import { PanoramaPainelComponent } from './panorama-painel/panorama-painel.component';
+import { PanoramaCardComponent } from './panorama-card/panorama-card.component';
 import { SharedModule3 } from "../shared3/shared3.module";
 
 
@@ -21,7 +22,8 @@ import { SharedModule3 } from "../shared3/shared3.module";
         PanoramaShellComponent,
         PanoramaResumoComponent,
         PanoramaTemasComponent,
-        PanoramaPainelComponent
+        PanoramaPainelComponent,
+        PanoramaCardComponent
     ],
     providers: [
         Panorama2Service
