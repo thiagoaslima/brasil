@@ -11,8 +11,8 @@
 
 
 <!-- Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo -->
-<template ngFor let-item let-idx="index" [ngForOf]="temas">
-    <div [ngClass]="'resumo__icons__'+idx" [ngClass]="{'resumo-fixo': isHeaderStatic | async}">
+<template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
+    <div *ngIf="first || temas[idx-1].tema !== item.tema" [ngClass]="'resumo__icons__'+idx" [ngClass]="{'resumo-fixo': isHeaderStatic | async}">
 
         <div class="mobile__exclusive temas__horizontais ">
             <div class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())">

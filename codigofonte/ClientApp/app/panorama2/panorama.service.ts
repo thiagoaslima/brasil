@@ -64,7 +64,11 @@ export class Panorama2Service {
         let ctxMicro = localidade.microrregiao.toString();
 
         let ranks = indicadores.reduce((agg, indicadorId) => {
-            let ranking = { 'BR': 2, [ctxLocal]: 2, [ctxMicro]: 2 };
+            let ranking = { 
+                'BR': {posicao: 2, itens: 5570}, 
+                'local': {posicao: 2, itens: localidade.parent.children.length}, 
+                'microrregiao': {posicao: 2, itens: 50 } 
+            };
             agg[indicadorId] = ranking;
              return agg;
         }, {});
@@ -89,7 +93,7 @@ export class Panorama2Service {
                 }
 
                 if (item.visualizacao === PanoramaVisualizacao.painel) {
-                    const painel = this._prepararDadosPainel(item, resultados);
+                    const painel = this._prepararDadosPainel(item, resultados, rankings);
                     temas[item.tema].painel.push(painel);
                 }
 
@@ -110,16 +114,22 @@ export class Panorama2Service {
             .reduce((arr, itens) => arr.concat(itens), []);
     }
 
-    private _prepararDadosPainel(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): dadosPainel {
+    private _prepararDadosPainel(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }, rankings): dadosPainel {
+        const resultado = resultados[item.indicadorId];
+
         return {
+            indicadorId: item.indicadorId,
             titulo: item.titulo,
-            valor: resultados[item.indicadorId].valorValidoMaisRecente
+            valor: resultado.valorValidoMaisRecente,
+            unidade: resultado.indicador.unidade.toString(),
+            ranking: rankings[item.indicadorId]
         }
     }
 
     private _prepararDadosGrafico(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }) {
         return {
             tipo: item.grafico.tipo,
+            titulo: item.grafico.titulo,
             eixoX: this.getEixoX(item, resultados),
             dados: this.getDados(item, resultados),
             fontes: this.getFontes(item, resultados)
