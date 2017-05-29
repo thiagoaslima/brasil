@@ -24,7 +24,7 @@ const children = [
   },
 
    {
-    path: 'panorama',
+    path: 'panorama2',
     component: PanoramaShellComponent
   },
 
@@ -91,10 +91,7 @@ const children = [
           { path: 'indicadores', component: IndicadorCacheComponent }
         ]
       },
-      {
-        path: 'v4/brasil/:uf/:municipio/panorama2',
-        component: PanoramaShellComponent
-      },
+
       {
         path: '**',
         redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama'
