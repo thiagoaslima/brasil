@@ -109,7 +109,7 @@ export class IndicadorService3 {
                 }
 
                 const obj = res.json();
-                if (this._isServerError(obj)) {
+                if (!Array.isArray(obj) && this._isServerError(obj)) {
                     throw new Error();
                 }
 
