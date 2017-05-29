@@ -18,13 +18,17 @@ export class IBGECartograma implements OnInit, OnChanges {
     municSelected = '';
     valores;
     malha;
-    existeVazio = false;
+    existeVazio = true;
 
     constructor(
         private _mapaService: MapaService,
     ) { }
 
     ngOnInit() {
+        this.updateCartograma();
+    }
+
+     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         this.updateCartograma();
     }
 
@@ -37,7 +41,7 @@ export class IBGECartograma implements OnInit, OnChanges {
         }
 
         if (this.resultados) {
-            this.existeVazio = false;
+            // this.existeVazio = false;
             let valores = Object.keys(this.resultados)
                 .map((resultadoKey) => this.resultados[resultadoKey])
                 .map(resultado => {
@@ -100,7 +104,7 @@ export class IBGECartograma implements OnInit, OnChanges {
         let faixa;
         const valorNumerico = Number.parseFloat(valor);
         if (Number.isNaN(valorNumerico)) {
-            this.existeVazio = true;
+            // this.existeVazio = true;
             return 'semValor';
         }
 
@@ -147,7 +151,5 @@ export class IBGECartograma implements OnInit, OnChanges {
     }
 
 
-    ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-        this.updateCartograma();
-    }
+   
 }
