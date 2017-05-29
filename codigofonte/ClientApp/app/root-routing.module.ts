@@ -18,13 +18,13 @@ import { ValidParametersGuard } from './valid-parameters.guard';
 const children = [
   { path: '', redirectTo: 'panorama', pathMatch: 'full' },
 
-  // {
-  //   path: 'panorama',
-  //   component: PanoramaComponent
-  // },
+  {
+    path: 'panorama',
+    component: PanoramaComponent
+  },
 
    {
-    path: 'panorama',
+    path: 'panorama2',
     component: PanoramaShellComponent
   },
 
