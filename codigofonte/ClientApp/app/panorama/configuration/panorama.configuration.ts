@@ -1,6 +1,6 @@
 import { PanoramaDescriptor, PanoramaItem, PanoramaConfigurationItem, PanoramaVisualizacao } from './panorama.model';
 import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
-import { TiposGrafico } from '../../infografia/grafico-base/grafico.component';
+import { TiposGrafico } from '../../infografia/grafico-base/grafico.values';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';

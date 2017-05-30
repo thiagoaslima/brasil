@@ -1,62 +1,16 @@
 <div class="content-card">
     <div class='card' [ngClass]="{selecionado: isSelecionado}" id='card-{{dados?.indicador?.id}}'>
-    <div class="selecionar">
-        <div class="card__titulo">{{ dados.titulo }}</div>
-        <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
-        <!--<div class="card__sub-titulo">{{dados.subtitulo}}</div> O SUBTITULO QUE APARECE É APENAS UMA REPETIÇÃO DO TÍTULO-->
-        
-           
-	</div>
+    
+        <div class="selecionar">
+            <div class="card__titulo">{{ dados.titulo }}</div>
+            <div class="card__nota">{{ (dados.indicador?.getResultadoByLocal(localidade.codigo) | async)?.valorValidoMaisRecente | resultado }} <span class="card_unidade">{{ dados.unidade }}</span></div>
+        </div>
+ 
         <p class="card__comparando">Comparando a outros municípios</p>
-
-        <!--<div class="card__regua-comparacao">
-            <p>Na Microrregião</p>
-            <div class="card__regua-comparacao__regua">
-                <div [ngStyle]='{left: (ranking$ | async)?.pais | async }' class="card__regua-comparacao__regua__marcador"></div>
-            </div>
-        </div>-->
 
         <panorama-card-regua title='No Estado' [ranking]="rankingUf$ | async" [itens]="lengthUf$ | async" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
         <panorama-card-regua title='No País' [ranking]="rankingPais$ | async" [itens]="lengthPais" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
         <panorama-card-regua title='Na Microrregião' [ranking]="rankingMicrorregiao$ | async" [itens]="(rankingMicrorregiao$ | async)?.qtdeItensComparados" [maiorMelhor]="dados.maiorMelhor"></panorama-card-regua>
-        <!--
-        <panorama-card-regua title='No Estado' [posicao]="getRankingPosition(this.localidade?.parent.codigo)" [itens]="getRankingItems(this.localidade?.parent.codigo)"></panorama-card-regua>
-        <panorama-card-regua title='No País' [posicao]="getRankingPosition('BR')" [itens]="getRankingItems('BR')"></panorama-card-regua>
-        -->
-        
-        <!--<div class="card__regua-comparacao">
-            <p>No Estado</p>
-            <div class="card__regua-comparacao__regua">
-                <div [ngStyle]='{left: rankingPais }' class="card__regua-comparacao__regua__marcador"></div>
-            </div>
-        </div>-->
-
-        
-        <!--<div class="card__regua-comparacao">
-            <p>No Brasil | {{rankingPais}}</p>
-            <div class="card__regua-comparacao__regua">
-                <div [ngStyle]='{left: rankingUf }' class="card__regua-comparacao__regua__marcador"></div>
-            </div>
-        </div>-->
-
-
-        <!--<button><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
-
-        <button *ngIf="dados && dados.indicador && dados.indicador.notas && dados.indicador.notas.length" (click)="mostrarNotas = !mostrarNotas;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas</button>
-
-        <button *ngIf="dados && dados.indicador && dados.indicador.fontes && dados.indicador.fontes.length" (click)="mostrarFontes = !mostrarFontes;"><i class="fa fa-info-circle" aria-hidden="true"></i> Fontes</button>
-
-        <div *ngIf="mostarNotas" class="notas__lista-container">
-            <ol>
-                <li *ngFor="let nota of dados?.indicador?.notas;">{{ nota }}</li>
-            </ol>
-        </div>
-
-        <div *ngIf="mostrarFontes" class="fontes__lista-container">
-            <ol>
-                <li *ngFor="let fonte of dados?.indicador?.fontes;">{{ fonte }}</li>
-            </ol>
-        </div>-->
 
         <div class="botao-container">
             <div class="botao" *ngIf="dados && dados.indicador && dados.indicador.fontes && dados.indicador.fontes.length">

@@ -6,8 +6,11 @@
     <div [class.mapas--variosMapas]="mapas.length > 1">
         
         <div class="mapas__mapa" *ngFor="let mapa of mapas">
-            <h4>Municípios de {{mapa.titulo}}</h4>
+            <h4>Municípios de {{mapa.localidade.nome}}</h4>
+            <div class="tamanho_cartograma">
             <ibge-cartograma [localidade]="mapa.localidade" [localidadesMarcadas]="mapa.localidadesMarcadas" *ngIf="!isPrerender && mapa.localidade?.codigo != 53" [resultados]="mapa.resultados" [periodo]="anoSelecionado"></ibge-cartograma>
+            </div>
+
         </div>
 
     </div>

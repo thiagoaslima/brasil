@@ -1,96 +1,16 @@
-<div class="content__grupos">
-   
-   
-    <div class="grupo">
-        <div class="grupo__titulo">RIO DE JANEIRO NO estado DO RIO DE JANEIRO</div>
-        
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.560</div>
-            <div class="grupo__item__nome">Rio de Janeiro</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:10%"></div>
+
+    <div class="content__grupos">
+
+        <div class="grupo" *ngFor="let contexto of indicadores">
+            <div class="grupo__titulo">{{getTitulo(contexto.localidade, contexto.contexto)}}</div>
+            
+            <div class="grupo__item" *ngFor="let localidade of contexto.listaGrupos">
+                <div class="grupo__item__posicao">{{localidade.posicao}}</div>
+                <div class="grupo__item__nome">{{localidade.localidade.nome}}</div>
+                <div class="grupo__item__barra" title={{localidade.valor}}>
+                    <div class="grupo__item__barra__porcento" [style.width.%]="localidade.proporcao"></div>
+                </div>
             </div>
         </div>
 
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.561</div>
-            <div class="grupo__item__nome">São Paulo</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:30%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.562</div>
-            <div class="grupo__item__nome">Centro do Guilherme</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:50%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.563</div>
-            <div class="grupo__item__nome">Acre</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:85%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.564</div>
-            <div class="grupo__item__nome">Centro do Guilherme</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:100%"></div>
-            </div>
-        </div>
     </div>
-
-
-
-
-    <div class="grupo">
-        <div class="grupo__titulo">RIO DE JANEIRO NO estado DO RIO DE JANEIRO</div>
-        
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.560</div>
-            <div class="grupo__item__nome">Rio de Janeiro</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:10%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.561</div>
-            <div class="grupo__item__nome">São Paulo</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:80%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.562</div>
-            <div class="grupo__item__nome">Centro do Guilherme</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:50%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.563</div>
-            <div class="grupo__item__nome">Acre</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:100%"></div>
-            </div>
-        </div>
-
-        <div class="grupo__item">
-            <div class="grupo__item__posicao">5.564</div>
-            <div class="grupo__item__nome">Centro do Guilherme</div>
-            <div class="grupo__item__barra">
-                <div class="grupo__item__barra__porcento" style="width:68%"></div>
-            </div>
-        </div>
-    </div>
-
-
-</div>

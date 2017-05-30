@@ -13,7 +13,7 @@ const MODULES = [
 ];
 
 const PIPES = [
-    
+
 ];
 
 const COMPONENTS = [

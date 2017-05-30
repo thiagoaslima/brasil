@@ -6,9 +6,9 @@ import { MapaService } from './mapa.service';
 @Component({
     selector: 'ibge-cartograma',
     templateUrl: './ibge-cartograma.component.html',
-    styleUrls: [ './ibge-cartograma.component.css' ]
+    styleUrls: ['./ibge-cartograma.component.css']
 })
-export class IBGECartograma implements OnInit, OnChanges{
+export class IBGECartograma implements OnInit, OnChanges {
     @Input() localidade: Localidade;
     @Input() localidadesMarcadas: Localidade[];
     @Input() resultados;
@@ -18,26 +18,30 @@ export class IBGECartograma implements OnInit, OnChanges{
     municSelected = '';
     valores;
     malha;
-    existeVazio = false;
+    existeVazio = true;
 
     constructor(
         private _mapaService: MapaService,
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.updateCartograma();
     }
 
+     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+        this.updateCartograma();
+    }
+
     updateCartograma() {
-        if(this.localidade) {
+        if (this.localidade) {
             this._mapaService.getMalhaSubdivisao(this.localidade.codigo)
                 .subscribe((malha) => {
                     this.malha = malha;
                 });
         }
 
-        if(this.resultados) {
-            this.existeVazio = false;
+        if (this.resultados) {
+            // this.existeVazio = false;
             let valores = Object.keys(this.resultados)
                 .map((resultadoKey) => this.resultados[resultadoKey])
                 .map(resultado => {
@@ -52,8 +56,8 @@ export class IBGECartograma implements OnInit, OnChanges{
                 })
                 .filter(val => !Number.isNaN(val))
                 .filter(this._isValorValido)
-                .sort( (a, b) => a < b ? -1 : 1);
-            
+                .sort((a, b) => a < b ? -1 : 1);
+
             const len = valores.length;
             const q1 = valores[Math.round(0.25 * (len + 1))];
             const q2 = len % 2 ? valores[(len + 1) / 2] : ((valores[len / 2] + valores[(len / 2) + 1]) / 2).toFixed(2);
@@ -100,7 +104,7 @@ export class IBGECartograma implements OnInit, OnChanges{
         let faixa;
         const valorNumerico = Number.parseFloat(valor);
         if (Number.isNaN(valorNumerico)) {
-            this.existeVazio = true;
+            // this.existeVazio = true;
             return 'semValor';
         }
 
@@ -122,8 +126,8 @@ export class IBGECartograma implements OnInit, OnChanges{
 
     public getCenter(geometries, codigo) {
         if (codigo) {
-            let el = geometries.find(item => item.codigo.toString() == codigo.toString().substring(0,6));
-            if (el.center)
+            let el = geometries.find(item => item.codigo.toString() == codigo.toString().substring(0, 6));
+            if (el && el.center)
                 return el.center;
             else
                 return [0, 0];
@@ -132,10 +136,10 @@ export class IBGECartograma implements OnInit, OnChanges{
         }
     }
     public getIconHeight(bbox, pos) {
-        return bbox[3]-pos[1];
+        return bbox[3] - pos[1];
     }
     public getPercLeftIconPosition(bbox, pos) {
-        return Math.round(100*(pos[0]-bbox[0])/(bbox[2]-bbox[0]));
+        return Math.round(100 * (pos[0] - bbox[0]) / (bbox[2] - bbox[0]));
     }
     public getPercRightIconPosition(bbox, pos) {
         return 100 - this.getPercLeftIconPosition(bbox, pos);
@@ -143,11 +147,9 @@ export class IBGECartograma implements OnInit, OnChanges{
     public getPercIconPosition(bbox, pos) {
         let left = this.getPercLeftIconPosition(bbox, pos);
         let right = this.getPercRightIconPosition(bbox, pos);
-        return left < right ? {left: left, right: 0, align: 'left', borderLeft: 3, borderRight: 0} : {left: 0, right: right, align: 'right', borderLeft: 0, borderRight: 3};
+        return left < right ? { left: left, right: 0, align: 'left', borderLeft: 3, borderRight: 0 } : { left: 0, right: right, align: 'right', borderLeft: 0, borderRight: 3 };
     }
 
 
-    ngOnChanges(changes: { [propKey: string]: SimpleChange}) {
-        this.updateCartograma();
-    }
+   
 }

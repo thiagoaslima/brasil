@@ -1,9 +1,9 @@
 .content__grupos{
     display: table;
-    width: 95%;
+    width: 89%;
     margin-bottom: 50px;
     margin-top: 32px;
-    margin-left: 5%;
+    margin-left: 10%;
 }
 .grupo {
     width: 46%;
@@ -13,7 +13,7 @@
 }
 
 .grupo:nth-child(odd){
-    border-right: 4px solid #CCCCCC;
+    border-right: 2px solid #CCCCCC;
     margin-right: 18px;
 }
 
@@ -42,6 +42,11 @@
     /* background-color: blue; */
     width: 47%;
     margin-right: 1%;
+}
+
+.grupo__item__nome--selecionado{
+	color: #F7931E;
+
 }
 
 .grupo__item__barra{

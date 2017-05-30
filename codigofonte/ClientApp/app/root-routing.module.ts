@@ -18,10 +18,10 @@ import { ValidParametersGuard } from './valid-parameters.guard';
 const children = [
   { path: '', redirectTo: 'panorama', pathMatch: 'full' },
 
-  {
-    path: 'panorama',
-    component: PanoramaComponent
-  },
+  // {
+  //   path: 'panorama',
+  //   component: PanoramaComponent
+  // },
 
    {
     path: 'panorama',
@@ -91,10 +91,7 @@ const children = [
           { path: 'indicadores', component: IndicadorCacheComponent }
         ]
       },
-      {
-        path: 'v4/brasil/:uf/:municipio/panorama2',
-        component: PanoramaShellComponent
-      },
+
       {
         path: '**',
         redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama'

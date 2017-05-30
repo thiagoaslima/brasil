@@ -4,7 +4,7 @@
 
 .mapa{
     width: 100%;
-	margin-top: 26px;
+	margin-top: 0px;
 }
 
 .mapa svg {
@@ -14,8 +14,8 @@
 }
 
 .alturafixa_legenda {
-	height: 45px;
-	margin-top:20px;
+	height: 50px;
+	margin-top:0px;
 	}
 	
 
@@ -233,14 +233,14 @@ g, .periodo-link {
     width: 100%;
     max-width: 800px;
     /* float: right; */
-    min-height: 200px;
+    min-height: 100px;
     margin: auto;
 }
 
 .legenda__item{
     width: 25%;
     float: left;
-    margin-top: 18px;
+    margin-top: 6px;
     height: 30px;
 }
 
@@ -249,11 +249,40 @@ g, .periodo-link {
     height: 6px;
 }
 
-.legenda__texto{
-    font-weight: bold;
-    padding-top: 5px;
-    font-size: 0.75em;
-    font-style: italic;
+.legenda__item--sem-informacao{
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    height: 22px;
+    
+}
+
+.legenda__item--municipio{
+    margin-left: 0px;
+    width: 100%;
+}
+
+.legenda__item--municipio i{
+    margin-right: 8px;
+    text-align: center;
+    color:#ff1f76;
+    float:left;
+    width:22px;
+    height:25px;
+}
+
+.legenda__item--sem-informacao .legenda__cor{
+    float: left;
+    width: 20px;
+    height: 20px;
+}
+
+.legenda__item--sem-informacao .legenda__texto{
+    float: left;
+    width: calc(100% - 30px);
+    margin-left: 10px;
+    /* margin-top: -3px; */
+    /* line-height: 12px; */
 }
 
 .legenda__municipio {
@@ -266,78 +295,34 @@ g, .periodo-link {
 	-ms-transition: all 400ms ease;
 	-o-transition: all 400ms ease;
 	transition: all 400ms ease;
-	}
+	position: absolute;
+    }
 
-/*linha do tempo*/
-
-.linhatempo{
-    width: 90%;
-    margin: 3% 5%;
-    position: relative;
-}
-
-.linhatempo__linha{
-    width: 100%;
-    height: 2px;
-    background-color: #B3B3B3;
-}
-
-.linhatempo__ano{
-    cursor: pointer;
-    text-align: center;
-    display: inline-block;
-    position: absolute;
-    width: 36px;
-    margin: -8px 0 0 -18px;
-}
-
-.linhatempo__circulo{
-    width: 14px;
-    height: 14px;
-    background-color: #CCCCCC;
-    border: 2px solid #B3B3B3;
-    border-radius: 7px;
-    margin: 0px auto;
-}
-
-.linhatempo__ano--selecionado{
-    margin: -11px 0 0 -18px;
-}
-
-.linhatempo__ano--selecionado .linhatempo__circulo{
-    width: 18px;
-    height: 18px;
-    border-radius: 9px;
-    background-color: #148C99;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.linhatempo__texto{
-    font-size: 0.8em;
-    font-weight: bold;
-}
 
 /*faixas de cores*/
 
 .faixa4{
     background-color: #1B779B;
     fill: #1B779B;
+	border-left: 3px solid #fff;
 }
 
 .faixa3{
     background-color: #308BC9;
     fill: #308BC9;
+	border-left: 3px solid #fff;
 }
 
 .faixa2{
     background-color: #41B6C4;
     fill: #41B6C4;
+	border-left: 3px solid #fff;
 }
 
 .faixa1{
     background-color: #7FCDBB;
     fill: #7FCDBB;
+	
 }
 
 /*.faixa5{

@@ -5,12 +5,14 @@ import {
     HostListener,
     Input,
     OnChanges,
+    OnInit,
     Output,
     SimpleChange
 } from '@angular/core';
 
 import { TEMAS } from '../../panorama2/configuration';
 import { converterObjArrayEmHash } from '../../utils2';
+import { Panorama2Service } from '../panorama.service';
 import { Resultado } from '../../shared3/models'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -20,23 +22,15 @@ import 'rxjs/add/operator/debounceTime';
 @Component({
     selector: 'panorama-resumo',
     templateUrl: './panorama-resumo.template.html',
-    styleUrls: ['./panorama-resumo.style.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./panorama-resumo.style.css']
 })
-export class PanoramaResumoComponent implements OnChanges {
-
-    static readonly getTema = (function (value) {
-        const temas = converterObjArrayEmHash(Object.keys(value).map(k => value[k]), 'label');
-
-        return function (label: string) {
-            return temas[label] || null;
-        }
-    })(TEMAS);
+export class PanoramaResumoComponent implements OnInit, OnChanges {
 
     @Input() configuracao = [];
     @Input() localidade = null;
     @Input() resultados = [];
 
+    public icones: { [tema: string]: string } = {};
     public cabecalho = [];
     public temas = [];
     public isHeaderStatic: Observable<boolean>;
@@ -54,53 +48,39 @@ export class PanoramaResumoComponent implements OnChanges {
         }
     }
 
-    constructor() { }
+    constructor(
+        private _panoramaService: Panorama2Service
+    ) {
+        this.setIcones();
+    }
 
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-        if (changes.hasOwnProperty('configuracao') && changes.configuracao.currentValue.length > 0) {
-            let temas = changes.configuracao.currentValue.slice(0);
-            let cabecalho = [];
-            let i = 0;
-            while (temas[i].tema === "") {
-                cabecalho.push(temas.shift());
-            }
+        if (
+            changes.hasOwnProperty('configuracao') && changes.configuracao.currentValue && changes.configuracao.currentValue.length > 0 ||
+            changes.hasOwnProperty('localidade') && changes.localidade.currentValue &&
+            this.localidade && this.configuracao && this.configuracao.length > 0
+        ) {
+            this._panoramaService.getResumo(this.configuracao, this.localidade).subscribe(resp => {
+                let temas = resp.slice(0);
+                let cabecalho = [];
+                let i = 0;
+                while (temas[i].tema === "") {
+                    cabecalho.push(temas.shift());
+                }
 
-            this.cabecalho = cabecalho;
-            this.temas = temas;
-        }
-
-        if (changes.hasOwnProperty('resultados') && changes.resultados.currentValue.length > 0) {
-            this._valores = converterObjArrayEmHash(changes.resultados.currentValue, 'indicadorId', false);
+                this.cabecalho = cabecalho;
+                this.temas = temas;
+            })
         }
     }
 
     ngOnDestroy() {
         this._scrollTop$.complete();
         this._scrollTop$ = null;
-    }
-
-    getTitulo(indicadorId: number): string {
-        return this._valores[indicadorId] ? this._valores[indicadorId].indicador.nome : '';
-    }
-
-    getUnidade(indicadorId: number): string {
-        return this._valores[indicadorId] ? this._valores[indicadorId].indicador.unidade.toString() : '';
-    }
-
-    getValorMaisRecente(indicadorId: number): string {
-        return this._valores[indicadorId] ? (<Resultado>this._valores[indicadorId]).valorValidoMaisRecente : '';
-    }
-
-    getPeriodoMaisRecente(indicadorId: number): string {
-        return this._valores[indicadorId] ? (<Resultado>this._valores[indicadorId]).periodoValidoMaisRecente : '';
-    }
-
-    getIconSrc(label: string): string {
-        return './img/ico/' + PanoramaResumoComponent.getTema(label).icon;
     }
 
     fireTemaSelecionado(tema) {
@@ -112,6 +92,13 @@ export class PanoramaResumoComponent implements OnChanges {
             this.temaSelecionado.emit(tema);
             this.temaAtual = tema;
         }
+    }
+
+    private setIcones(): void {
+        Object.keys(TEMAS).forEach(key => {
+            let { label, icon } = TEMAS[key];
+            this.icones[label] = `./img/ico/${icon}`;
+        })
     }
 
 }
