@@ -103,7 +103,7 @@ export class PesquisaService3 {
     }
 
     private _isServerError(res) {
-        return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
+        return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
     }
 
     private _filterPesquisas(hash, pesquisasId) {

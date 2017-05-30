@@ -28,10 +28,8 @@ h4{
 .mapas--variosMapas .mapas__mapa:nth-child(3){
     clear: both;
 }
-.linhatempo{
-    width: 90%;
-    margin: 5% 5%;
-    position: relative;
-	margin-top: 30px;
-}
 
+.tamanho_cartograma
+{
+	width: 90%;
+	}

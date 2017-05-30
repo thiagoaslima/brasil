@@ -1,5 +1,5 @@
 <template ngFor let-tema [ngForOf]="temas" let-i="index">
-    <div  [id]="tema.tema.substr(0,2).toLowerCase()" class="ancora-click-resumo">
+    <div [id]="tema.tema.substr(0,2).toLowerCase()" class="ancora-click-resumo">
         <div  [id]="tema.tema.substr(0,2).toLowerCase()+'-alt'"></div>
     </div>
     <div [class.borda]="i!=0"></div>
@@ -32,7 +32,7 @@
     <panorama-painel *ngIf="tema.painel.length" [dados]="tema.painel" [localidade]="tema.localidade"></panorama-painel>
 
     
-    <div class="grafico" *ngFor="let grafico of tema.grafico">
+    <div class="grafico" *ngFor="let grafico of tema.grafico; let i = index">
         
         <h2 class="grafico__titulo">{{grafico.titulo}}<!--<i class="fa fa-info-circle grafico__info" aria-hidden="true"></i>--></h2>
         
@@ -46,7 +46,37 @@
             </div>
         </div>
         
-        <grafico *ngIf="!isPrerender" [localidade]="tema.localidade" [indicadores]="grafico.dados" [tipoGrafico]="grafico.tipo"></grafico>
+        <grafico *ngIf="!isPrerender" [mostrar-legenda]="false" [eixo]="['2010']" [dados]="[{data: [404645], label: 'Católica'}, {data: [15630], label: 'Espírita'}, {data: [86743], label: 'Evangélica'}]" [tipo]="grafico.tipo"></grafico>
+
+        <div class="botao-container">
+            <div class="botao" *ngIf="grafico.dados && grafico.dados.length && grafico.dados[0].indicador && grafico.dados[0].indicador.fontes && grafico.dados[0].indicador.fontes.length > 0">
+                <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
+                <button (click)="mostrarFontes=true">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fonte
+                </button>
+                <div *ngIf="mostrarFontes" class="fontes__lista-container">
+                    <ol>
+                        <li *ngFor="let fonte of grafico.dados[0].indicador?.fontes;">{{ fonte }}</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="botao" *ngIf="grafico.dados && grafico.dados.length && grafico.dados[0].indicador && grafico.dados[0].indicador.notas && grafico.dados[0].indicador.notas.length > 0">
+                <div class="area-click" [class.area-click--visivel]="mostrarNotas" (click)="mostrarNotas=false"></div>
+                <button (click)="mostrarNotas=true">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas
+                </button>
+                <div *ngIf="mostrarNotas" class="notas__lista-container">
+                    <ol>
+                        <li *ngFor="let nota of grafico.dados[0].indicador?.notas;">{{ nota }}</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="botao" *ngIf="grafico.dados && grafico.dados.length && _pesquisasConfig.isValida(grafico.dados[0].pesquisaId)">
+                <button (click)="navegarTabela(grafico.dados[0].pesquisaId);"><i class="fa fa-table" aria-hidden="true"></i> Tabela</button>
+            </div>
+        </div>
 
     </div>
 </template>

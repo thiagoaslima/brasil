@@ -6,6 +6,8 @@ import { Indicador, Localidade, Resultado } from '../models';
 import { ServicoDados as servidor } from '../values';
 import { IndicadorService3, LocalidadeService3 } from ".";
 import { forceArray } from '../../utils2';
+import { CacheFactory } from "../../cache/cacheFactory.service";
+import { RxSimpleCache } from "../../cache/decorators";
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -19,6 +21,7 @@ const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 @Injectable()
 export class ResultadoService3 {
+    static readonly cache = CacheFactory.createCache('resultadosService', 50);
 
     constructor(
         private _http: Http,
@@ -26,6 +29,9 @@ export class ResultadoService3 {
         private _localidadeService: LocalidadeService3
     ) { }
 
+    @RxSimpleCache({
+        cache: ResultadoService3.cache
+    })
     getResultados(indicadoresId: number | number[], codigolocalidades: number | number[]) {
         const _indicadores = forceArray(indicadoresId);
         const _localidades = forceArray(codigolocalidades);
@@ -37,25 +43,31 @@ export class ResultadoService3 {
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
+    @RxSimpleCache({
+        cache: ResultadoService3.cache
+    })
     getResultadosCartograma(indicadorId: number, codigoLocalidade: number) {
         const url = servidor.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${codigoLocalidade}xxxx`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicador: ${indicadorId}, localidade: ${codigoLocalidade}]`
-        
+
         return this._request(url)
             .map(json => {
                 return Resultado.convertDTOintoParameters(json)
-                .map(Resultado.criar)
-                .reduce((acc, resultado) => {
-                    acc[resultado.codigoLocalidade] = resultado;
-                    return acc;
-                }, {})
+                    .map(Resultado.criar)
+                    .reduce((acc, resultado) => {
+                        acc[resultado.codigoLocalidade] = resultado;
+                        return acc;
+                    }, {})
             })
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
+    @RxSimpleCache({
+        cache: ResultadoService3.cache
+    })
     getResultadosCompletos(indicadoresId: number | number[], codigolocalidades: number | number[]) {
         const _indicadoresId = forceArray(indicadoresId);
-        const _codigoLocalidades = forceArray(codigolocalidades);
+        const _codigoLocalidades = forceArray(codigolocalidades).filter(Boolean);
 
         const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${_codigoLocalidades.join(', ')}]`
@@ -74,6 +86,7 @@ export class ResultadoService3 {
             })
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
+
     private _request(url: string) {
         return this._http.get(url, options)
             .retry(3)
@@ -101,6 +114,6 @@ export class ResultadoService3 {
     }
 
     private _isServerError(res) {
-        return !Array.isArray(res) && Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
+        return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
     }
 }

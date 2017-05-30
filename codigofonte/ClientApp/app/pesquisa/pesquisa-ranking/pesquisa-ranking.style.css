@@ -1,9 +1,9 @@
 .content__grupos{
     display: table;
-    width: 95%;
+    width: 89%;
     margin-bottom: 50px;
     margin-top: 32px;
-    margin-left: 5%;
+    margin-left: 10%;
 }
 .grupo {
     width: 46%;

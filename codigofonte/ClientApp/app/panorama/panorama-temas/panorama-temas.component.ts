@@ -1,3 +1,6 @@
+import { escopoIndicadores } from '../../shared3/values';
+import { converterObjArrayEmHash } from '../../utils2';
+import { Router } from '@angular/router';
 import { Component, Input, OnInit, ChangeDetectionStrategy, SimpleChanges, ViewChild, ElementRef, Inject } from '@angular/core';
 import { isBrowser, isNode } from 'angular2-universal';
 
@@ -5,12 +8,15 @@ import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { GraficoConfiguration, PanoramaConfigurationItem, PanoramaDescriptor, PanoramaItem, PanoramaVisualizacao } from '../configuration/panorama.model';
 import { TEMAS } from '../configuration/panorama.configuration';
 import { Localidade } from '../../shared2/localidade/localidade.model';
+import { PesquisaConfiguration } from "../../shared2/pesquisa/pesquisa.configuration";
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
-import { Indicador, EscopoIndicadores } from '../../shared2/indicador/indicador.model';
+import { Indicador, EscopoIndicadores, Ranking } from '../../shared2/indicador/indicador.model';
 import { Resultado } from '../../shared2/resultado/resultado.model';
 
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/zip';
+import 'rxjs/add/operator/mergeMap';
 
 declare var document: any;
 
@@ -46,13 +52,17 @@ export class PanoramaTemasComponent implements OnInit {
 
     isBrowser = isBrowser;
 
+    graficos: { [tema: string]: any[] } = {};
+
     constructor(
         private _indicadorService: IndicadorService2,
         private pageScrollService: PageScrollService,
+        private _router: Router,
+        public _pesquisasConfig: PesquisaConfiguration
     ) { }
 
     public getTextoAnalitico(nomeTema) {
-        
+
         if (nomeTema === TEMAS.populacao) {
             return Observable.of(this.textoPopulacao);
         }
@@ -91,10 +101,25 @@ export class PanoramaTemasComponent implements OnInit {
         if (changes.temas && changes.temas.currentValue && changes.temas.currentValue.length > 0) {
             this.localidade = changes.temas.currentValue[0].localidade;
             this.configurarTextosTemas();
+            // this.configurarGraficosTemas();
         }
-        if(this.isBrowser){
+        if (this.isBrowser) {
             this.goToTema();
         }
+    }
+
+    public getEixo(tema, index) {
+        let obj = this.graficos[tema] ? this.graficos[tema][index] : null;
+        if (!obj) return [];
+
+        return obj.eixoX;
+    }
+
+    public getDados(tema, index) {
+        let obj = this.graficos[tema] ? this.graficos[tema][index] : null;
+        if (!obj) return [];
+
+        return obj.valores;
     }
 
     private getPosicaoIndicador(idPesquisa: number, indicador: number, codigoLocalidade: number, periodo: string, contexto: string = 'BR'): Observable<any> {
@@ -108,7 +133,7 @@ export class PanoramaTemasComponent implements OnInit {
             .switchMap(indicadores => indicadores[0].getResultadoByLocal(this.localidade.codigo))
             .map(resultado => {
                 if (!resultado) {
-                     return {
+                    return {
                         "valor": '-',
                         "ano": ''
                     }
@@ -122,7 +147,7 @@ export class PanoramaTemasComponent implements OnInit {
 
     public goToTema(): void {
 
-        if(this.isBrowser){
+        if (this.isBrowser) {
             let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(document, this.temaSelecionado && this.temaSelecionado.toString());
             this.pageScrollService.start(pageScrollInstance);
         }
@@ -132,6 +157,45 @@ export class PanoramaTemasComponent implements OnInit {
     //      let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#cont', scrollingViews: [this.container.nativeElement]});
     //      this.pageScrollService.start(pageScrollInstance);
     //  };
+
+    private configurarGraficosTemas() {
+        this.graficos = {};
+
+        this.temas.forEach(tema => {
+            this.graficos[tema.tema] = [];
+            tema.grafico.map((grafico,index) => {
+                
+                if (grafico.tipo === 'coluna' && grafico.dados[0].indicador) {
+                    
+                    Observable.zip(
+                        ...grafico.dados.map(obj => obj.indicador.getResultadoByLocal(this.localidade.codigo))
+                    ).subscribe( (resultados) => {
+                        const eixoX = resultados[0].periodoValidoMaisRecente;
+                        const valores = resultados.map( (resultado, idx) => {
+                            return {
+                                data: [resultado.getValor(eixoX)],
+                                label: grafico.dados[idx].indicador.nome
+                            }
+                        })
+                        
+                        this.graficos[tema.tema][index] = {eixoX: [eixoX], valores};
+                    });
+                        
+                }
+            })
+
+        })
+    }
+
+    private converterParaNumero(valor: string): number {
+        if (valor == '99999999999999' || valor == '99999999999998' || valor == '99999999999997' ||
+            valor == '99999999999996' || valor == '99999999999995' || valor == '99999999999992' ||
+            valor == '99999999999991') {
+
+            valor = '0';
+        }
+        return !!valor ? Number(valor.replace(',', '.')) : Number(valor)
+    }
 
     private configurarTextosTemas() {
 
@@ -153,32 +217,32 @@ export class PanoramaTemasComponent implements OnInit {
         // Texto POPULAÇÂO
         // 
         let populacaoUF$ = this.getValorIndicador(33, 29166, this.localidade.codigo)
-             .flatMap(resultado => this.getPosicaoIndicador(33, 29166, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+            .flatMap(resultado => this.getPosicaoIndicador(33, 29166, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
         // 
         let populacaoBrasil$ = this.getValorIndicador(33, 29166, this.localidade.codigo)
             .flatMap(resultado => this.getPosicaoIndicador(33, 29166, this.localidade.codigo, resultado.ano));
-            
+
         // 
         let densidadeUF$ = this.getValorIndicador(33, 29168, this.localidade.codigo)
-             .flatMap(resultado => this.getPosicaoIndicador(33, 29168, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+            .flatMap(resultado => this.getPosicaoIndicador(33, 29168, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
         // 
         let densidadeBrasil$ = this.getValorIndicador(33, 29168, this.localidade.codigo)
-            .flatMap(resultado => this.getPosicaoIndicador(33, 29168, this.localidade.codigo, resultado.ano));   
-            
-        populacaoUF$.zip(populacaoBrasil$, densidadeUF$, densidadeBrasil$)
-           .subscribe(([populacaoUF, populacaoBrasil, densidadeUF, densidadeBrasil]) => {
+            .flatMap(resultado => this.getPosicaoIndicador(33, 29168, this.localidade.codigo, resultado.ano));
 
-        this.textoPopulacao = `
+        populacaoUF$.zip(populacaoBrasil$, densidadeUF$, densidadeBrasil$)
+            .subscribe(([populacaoUF, populacaoBrasil, densidadeUF, densidadeBrasil]) => {
+
+                this.textoPopulacao = `
         
         O município tinha ${populacaoUF.res} habitantes no último Censo. Isso coloca o município na posição ${populacaoUF.ranking} dentre ${universoLocal} do mesmo estado. Em comparação com outros municípios do Brasil, fica na posição ${populacaoBrasil.ranking} dentre ${universoGeral}. Sua densidade demográfica é de ${densidadeUF.res} habitantes por kilometro quadrado, colocando-o na posição ${densidadeUF.ranking} de ${universoLocal} do mesmo estado. Quando comparado com outros municípios no Brasil, fica na posição ${densidadeBrasil.ranking} de ${universoGeral}.`;
-        });
+            });
 
         //Texto TRABALHO
         // const salarioMedioMensalUF = hash[29765][contextoLocal];
         let salarioMedioMensalUF$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
-             .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
+            .flatMap(resultado => this.getPosicaoIndicador(19, 29765, this.localidade.codigo, resultado.ano, this.localidade.parent.codigo.toString()));
 
         // const salarioMedioMensalBrasil = hash[29765][contextoGeral];
         let salarioMedioMensalBrasil$ = this.getValorIndicador(19, 29765, this.localidade.codigo)
@@ -200,10 +264,10 @@ export class PanoramaTemasComponent implements OnInit {
         let rendimentoMensalBrasil$ = this.getValorIndicador(10058, 60037, this.localidade.codigo)
             .flatMap(resultado => this.getPosicaoIndicador(10058, 60037, this.localidade.codigo, resultado.ano));
 
-       salarioMedioMensalUF$.zip(salarioMedioMensalBrasil$, pessoasOcupadasUF$, pessoasOcupadasBrasil$, rendimentoMensalUF$, rendimentoMensalBrasil$)
-           .subscribe(([salarioMedioMensalUF, salarioMedioMensalBrasil, pessoasOcupadasUF, pessoasOcupadasBrasil, rendimentoMensalUF, rendimentoMensalBrasil]) => {
+        salarioMedioMensalUF$.zip(salarioMedioMensalBrasil$, pessoasOcupadasUF$, pessoasOcupadasBrasil$, rendimentoMensalUF$, rendimentoMensalBrasil$)
+            .subscribe(([salarioMedioMensalUF, salarioMedioMensalBrasil, pessoasOcupadasUF, pessoasOcupadasBrasil, rendimentoMensalUF, rendimentoMensalBrasil]) => {
 
-        this.textoTrabalho = `
+                this.textoTrabalho = `
         Em ${salarioMedioMensalUF.periodo}, o salário médio mensal era de ${salarioMedioMensalUF.res} salários mínimos. A proporção de pessoas ocupadas em relação à população total era de ${pessoasOcupadasUF.res}%. 
         
         Na comparação com os outros municípios do estado, ocupava as posições ${salarioMedioMensalUF.ranking} de ${universoLocal} e ${pessoasOcupadasUF.ranking} de ${universoLocal}, respectivamente. 
@@ -211,7 +275,7 @@ export class PanoramaTemasComponent implements OnInit {
         Já na comparação com municípios do Brasil todo, ficava na posição ${salarioMedioMensalBrasil.ranking} de ${universoGeral} e ${pessoasOcupadasBrasil.ranking} de ${universoGeral}, respectivamente.
         
         Considerando domicílios com rendimentos mensais de até meio salário mínimo por pessoa, tinha ${rendimentoMensalUF.res}% da população nessas condições, o que o colocava na posição ${rendimentoMensalUF.ranking} de ${universoLocal} dentre os municípios do estado e na posição ${rendimentoMensalBrasil.ranking} de ${universoGeral} dentre os municípios do Brasil.`;
-        });
+            });
 
 
         // TODO: Texto MEIO-AMBIENTE
@@ -242,14 +306,14 @@ export class PanoramaTemasComponent implements OnInit {
         esgotamentoSanitarioUF$.zip(esgotamentoSanitarioBrasil$, arborizacaoUF$, arborizacaoBrasil$, urbanizacaoUF$, urbanizacaoBrasil$)
             .subscribe(([esgotamentoSanitarioUF, esgotamentoSanitarioBrasil, arborizacaoUF, arborizacaoBrasil, urbanizacaoUF, urbanizacaoBrasil]) => {
 
-        this.textoMeioAmbiente = `
+                this.textoMeioAmbiente = `
         
         Apresenta ${esgotamentoSanitarioUF.res}% de domicílios com esgotamento sanitário adequado, ${arborizacaoUF.res}% de domicílios urbanos em vias públicas com arborização e  ${urbanizacaoUF.res}% de domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). Quando comparado com os outros municípios do estado, fica na posição ${esgotamentoSanitarioUF.ranking} de ${universoLocal}, ${arborizacaoUF.ranking} de ${universoLocal} e ${urbanizacaoUF.ranking} de ${universoLocal}, respectivamente. 
                 
         Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamentoSanitarioBrasil.ranking} de ${universoGeral}, 
                 ${arborizacaoBrasil.ranking} de ${universoGeral} e 
                 ${urbanizacaoBrasil.ranking} de ${universoGeral}, respectivamente.`;
-        });
+            });
 
 
         // Texto ECONOMIA
@@ -273,13 +337,13 @@ export class PanoramaTemasComponent implements OnInit {
         pipPerCaptaUF$.zip(pipPerCaptaBrasil$, receitasFontesExternasUF$, receitasFontesExternasBrasil$)
             .subscribe(([pipPerCaptaUF, pipPerCaptaBrasil, receitasFontesExternasUF, receitasFontesExternasBrasil]) => {
 
-        this.textoEconomia = `
+                this.textoEconomia = `
         
         
         Em ${pipPerCaptaUF.periodo}, tinha um PIB per capita de R$ ${pipPerCaptaUF.res}. Na comparação com os demais municípios do estado, sua posição era de ${pipPerCaptaUF.ranking} de ${universoLocal}. Já na comparação com municípios do Brasil todo, sua colocação era de ${pipPerCaptaBrasil.ranking} de ${universoGeral}. 
         
         Em ${receitasFontesExternasUF.periodo}, tinha ${receitasFontesExternasUF.res}% do seu orçamento proveniente de fontes externas. Em comparação aos outros municípios do estado, estava na posição ${receitasFontesExternasUF.ranking} de ${universoLocal} e, quando comparado a municípios do Brasil todo, ficava em ${receitasFontesExternasBrasil.ranking} de ${universoGeral}.`;
-        });
+            });
 
 
         // Texto SAUDE
@@ -302,14 +366,14 @@ export class PanoramaTemasComponent implements OnInit {
         mortaldadeInfantilUF$.zip(mortaldadeInfantilBrasil$, intermacoesDiarreiaUF$, internacoesDiarreiaBrasil$)
             .subscribe(([mortaldadeInfantilUF, mortaldadeInfantilBrasil, intermacoesDiarreiaUF, internacoesDiarreiaBrasil]) => {
 
-        this.textoSaude = `
+                this.textoSaude = `
         
         A taxa de mortalidade infantil média no município é de ${mortaldadeInfantilUF.res} para 1.000 nascidos vivos. As internações devido a diarreias são de ${intermacoesDiarreiaUF.res} para cada 1.000 habitantes. Comparado com todos os municípios do estado, fica nas posições ${mortaldadeInfantilUF.ranking} de ${universoLocal} e 
             ${intermacoesDiarreiaUF.ranking} de ${universoLocal}, respectivamente. 
             
             Quando comparado a municípios do Brasil todo, essas posições são de ${mortaldadeInfantilBrasil.ranking} de ${universoGeral} e 
             ${internacoesDiarreiaBrasil.ranking} de ${universoGeral}, respectivamente.`;
-        });
+            });
 
 
         // Texto EDUCAÇÃO
@@ -340,7 +404,7 @@ export class PanoramaTemasComponent implements OnInit {
         idebAnosIniciaisUF$.zip(idebAnosIniciaisBrasil$, idebAnosFinaisUF$, idebAnosFinaisBrasil$, taxaEscolarizacao6A14AnosUF$, taxaEscolarizacao6A14AnosBrasil$)
             .subscribe(([idebAnosIniciaisUF, idebAnosIniciaisBrasil, idebAnosFinaisUF, idebAnosFinaisBrasil, taxaEscolarizacao6A14AnosUF, taxaEscolarizacao6A14AnosBrasil]) => {
 
-        this.textoEducacao = `
+                this.textoEducacao = `
         
         Em ${idebAnosIniciaisBrasil.periodo}, os alunos dos anos inicias da rede pública do município tiveram nota média de ${idebAnosIniciaisBrasil.res} no IDEB. Para os alunos dos anos finais, essa nota foi de ${idebAnosFinaisBrasil.res}. 
         
@@ -351,15 +415,21 @@ export class PanoramaTemasComponent implements OnInit {
         A taxa de escolarização (para pessoas de 6 a 14 anos) foi de ${taxaEscolarizacao6A14AnosBrasil.res} em ${taxaEscolarizacao6A14AnosBrasil.periodo}. 
         
         Isso posicionava o município na posição ${taxaEscolarizacao6A14AnosUF.ranking} de ${universoLocal} dentre os municípios do estado e na posição ${taxaEscolarizacao6A14AnosBrasil.ranking} de ${universoGeral} dentre os municípios do Brasil.`;
-         });
+            });
 
 
     }
 
     public goToTop(tema): void {
-        if(this.isBrowser && !!document){
+        if (this.isBrowser && !!document) {
             let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(document, tema);
             this.pageScrollService.start(pageScrollInstance);
         }
     };
+
+    public navegarTabela(pesquisaId, indicadorId?) {
+        let url = this.localidade.link + '/pesquisa/' + pesquisaId;
+        if (indicadorId) { url += '/' + indicadorId }
+        this._router.navigate(url.split('/'));
+    }
 }

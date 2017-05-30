@@ -156,7 +156,7 @@ export class IndicadorService2 {
 
 
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable<Ranking> {
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
+        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
 
         return this._http.get(url, options)
             .retry(3)
@@ -223,7 +223,7 @@ export class IndicadorService2 {
             return acc;
         }, {})
 
-        const request = this._getRankingsRequest(Object.keys(removeDuplicates).map(Number.parseInt), Object.keys(removeDuplicates).map(k => removeDuplicates[k]), codigoLocalidade, contexto)
+        const request = this._getRankingsRequest(Object.keys(removeDuplicates).map(n => Number.parseInt(n, 10)), Object.keys(removeDuplicates).map(k => removeDuplicates[k]), codigoLocalidade, contexto)
             .do(responses => cases.requests.forEach((obj, idx) => this._cacheRanking[this._convertIntoKey(obj)] = Observable.of(responses[idx])))
             .map(responses => responses.concat(cases.cache))
             .map(rankings => indicadoresId.reduce( (acc, id) => {
