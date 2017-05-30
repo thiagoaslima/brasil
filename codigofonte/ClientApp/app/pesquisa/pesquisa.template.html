@@ -5,7 +5,15 @@
     <pesquisa-tabela #dados *ngIf="tipo == 'tabela'" [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-tabela>
     <div *ngIf="tipo == 'grafico'">
          <pesquisa-indicadores #dados [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-indicadores>
-        <div id="pesquisa-dados"> <pesquisa-graficos></pesquisa-graficos> </div>
+        <div id="pesquisa-dados">
+            <pesquisa-graficos
+                [pesquisa]="pesquisa"
+                [indicadores]="indicadores"
+                [indicadorSelecionado]="indicador"
+                [localidades]="localidades"
+                (onAno)="header.navegarPara(null, $event)"
+            ></pesquisa-graficos>
+        </div>
     </div>
     <div *ngIf="tipo == 'cartograma'">
         <pesquisa-indicadores #dados [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-indicadores>

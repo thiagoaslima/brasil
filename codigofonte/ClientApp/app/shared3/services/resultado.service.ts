@@ -67,7 +67,7 @@ export class ResultadoService3 {
     })
     getResultadosCompletos(indicadoresId: number | number[], codigolocalidades: number | number[]) {
         const _indicadoresId = forceArray(indicadoresId);
-        const _codigoLocalidades = forceArray(codigolocalidades);
+        const _codigoLocalidades = forceArray(codigolocalidades).filter(Boolean);
 
         const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${_codigoLocalidades.join(', ')}]`
