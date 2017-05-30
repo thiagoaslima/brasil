@@ -10,6 +10,6 @@
     "lib": [ "es6", "dom" ],
     "types": [ "node" ]
   },
-  "exclude": [ "bin", "node_modules" ],
+  "exclude": [ "bin", "node_modules", "**/barra-gov", "**/api", "*/backend", "*/dist" ],
   "atom": { "rewriteTsconfig": false }
 }

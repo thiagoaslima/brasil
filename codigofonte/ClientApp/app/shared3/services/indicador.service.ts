@@ -109,7 +109,7 @@ export class IndicadorService3 {
                 }
 
                 const obj = res.json();
-                if (this._isServerError(obj)) {
+                if (!Array.isArray(obj) && this._isServerError(obj)) {
                     throw new Error();
                 }
 
@@ -123,7 +123,7 @@ export class IndicadorService3 {
     }
 
     private _isServerError(res) {
-        return Object.keys(res).length === 1 && Object.prototype.hasOwnProperty.apply(res, 'message');
+        return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
     }
 
 }

@@ -17,7 +17,7 @@ export class Breadcrumb implements OnInit, OnChanges {
         this.caminho = [];
         if(this.indicadores){
             for(let i = 0; i < this.indicadores.length; i++){
-                if(this.indicadores[i].id == this.indicadorSelecionado.id){
+                if(this.indicadores[i].id == this.indicadorSelecionado){
                     let nivel = this.indicadores[i].nivel;
                     this.caminho = [{'nome' : this.indicadores[i].nome, 'id' : this.indicadores[i].id}];
                     for(; i >= 0; i--){

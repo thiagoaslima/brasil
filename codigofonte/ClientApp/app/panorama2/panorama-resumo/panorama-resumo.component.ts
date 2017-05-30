@@ -5,6 +5,7 @@ import {
     HostListener,
     Input,
     OnChanges,
+    OnInit,
     Output,
     SimpleChange
 } from '@angular/core';
@@ -23,20 +24,13 @@ import 'rxjs/add/operator/debounceTime';
     styleUrls: ['./panorama-resumo.style.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanoramaResumoComponent implements OnChanges {
-
-    static readonly getTema = (function (value) {
-        const temas = converterObjArrayEmHash(Object.keys(value).map(k => value[k]), 'label');
-
-        return function (label: string) {
-            return temas[label] || null;
-        }
-    })(TEMAS);
+export class PanoramaResumoComponent implements OnInit, OnChanges {
 
     @Input() configuracao = [];
     @Input() localidade = null;
     @Input() resultados = [];
 
+    public icones: {[tema: string]: string} = {};
     public cabecalho = [];
     public temas = [];
     public isHeaderStatic: Observable<boolean>;
@@ -54,7 +48,9 @@ export class PanoramaResumoComponent implements OnChanges {
         }
     }
 
-    constructor() { }
+    constructor() { 
+        this.setIcones();
+    }
 
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
@@ -99,10 +95,6 @@ export class PanoramaResumoComponent implements OnChanges {
         return this._valores[indicadorId] ? (<Resultado>this._valores[indicadorId]).periodoValidoMaisRecente : '';
     }
 
-    getIconSrc(label: string): string {
-        return './img/ico/' + PanoramaResumoComponent.getTema(label).icon;
-    }
-
     fireTemaSelecionado(tema) {
         if (this.temaAtual == tema) {
             this.temaSelecionado.emit(tema + '-alt');
@@ -112,6 +104,13 @@ export class PanoramaResumoComponent implements OnChanges {
             this.temaSelecionado.emit(tema);
             this.temaAtual = tema;
         }
+    }
+
+    private setIcones(): void {
+        Object.keys(TEMAS).forEach(key => {
+            let {label, icon} = TEMAS[key];
+            this.icones[label] = `./img/ico/${icon}`;
+        })
     }
 
 }
