@@ -23,7 +23,7 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 
 @Injectable()
 export class IndicadorService3 {
-    static readonly cache = CacheFactory.createCache('indicadoresService', 50);
+    static readonly cache = CacheFactory.createCache('indicadoresService', 10);
 
     constructor(
         private _http: Http,

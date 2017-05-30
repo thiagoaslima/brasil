@@ -5,6 +5,7 @@ import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
 import { TiposGrafico } from '../../infografia/grafico-base/grafico.values';
 import { ItemConfiguracao, TEMAS, dadosGrafico, dadosPainel } from "../configuration";
 import { Panorama2Service } from '../panorama.service';
+import { ResultadoPipe } from '../../shared/resultado.pipe';
 import { Ranking } from '../../shared2/indicador/indicador.model';
 import { Localidade, Resultado } from "../../shared3/models";
 import { converterObjArrayEmHash } from "../../utils2";

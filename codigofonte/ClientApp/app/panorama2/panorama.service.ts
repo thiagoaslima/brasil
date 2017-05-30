@@ -16,8 +16,21 @@ export class Panorama2Service {
         private _resultadoService: ResultadoService3
     ) { }
 
-    getResumo() {
+    getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
+        return this._getResultadosIndicadores(configuracao, localidade)
+            .map( resultados => {
+                return configuracao.map(item => {
+                    const periodo = item.periodo || resultados[item.indicadorId].periodoValidoMaisRecente;
 
+                    return {
+                        tema: item.tema,
+                        titulo: item.titulo || resultados[item.indicadorId].indicador.nome,
+                        periodo: periodo,
+                        valor: resultados[item.indicadorId].getValor(periodo),
+                        unidade: resultados[item.indicadorId].indicador.unidade.toString()
+                    }
+                })
+            })
     }
 
     getTemas(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
