@@ -4,7 +4,7 @@
         <div class="nome-pesquisa">
             {{ pesquisa?.nome }}/
             <br/> 
-            <span>
+            <span *ngIf="pesquisa?.id == 23"> <!--só mostra no censo-->
                 <select (change)="mudaIndicador($event);">
                     <option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.id" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>
                 </select>

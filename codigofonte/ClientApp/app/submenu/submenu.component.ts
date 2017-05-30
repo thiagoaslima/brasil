@@ -63,8 +63,8 @@ export class SubmenuComponent implements OnInit, OnDestroy {
         this.idPesquisaSubmenu = pesquisa.id;
 
         pesquisa.indicadores.take(1).subscribe(indicadores => {
-            if (indicadores.length === 1) {
-                this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id], { queryParams: {detalhes: true,  localidade1: this.codigoCapital} });
+            if (indicadores.length === 1 || pesquisa.id != 23) { //pesquisa 23 é o censo
+                this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id], { queryParams: {detalhes: true} });
                 this.closeMenu.emit();
             }
         });
