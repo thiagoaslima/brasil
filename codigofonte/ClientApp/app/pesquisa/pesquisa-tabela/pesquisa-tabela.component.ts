@@ -55,6 +55,7 @@ export class PesquisaTabelaComponent implements OnChanges {
         this.localidades[2] = urlParams.queryParams['localidade2'];
         this.pesquisaId = urlParams.params['pesquisa'];
         this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
+            this.pesquisa = pesquisa;
             let periodos = pesquisa['periodos'];
             if(urlParams.queryParams['ano'])
                 this.periodo = urlParams.queryParams['ano'];
