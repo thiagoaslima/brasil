@@ -15,7 +15,6 @@ export class PanoramaCardComponent implements OnChanges {
     public cssRanking: any = {};
     
     ngOnChanges(changes: any) {
-        debugger;
         if(this.ranking && this.ranking.BR) {
             this.cssRanking.BR = (this.ranking.BR.posicao / this.ranking.BR.itens)*96;
         }

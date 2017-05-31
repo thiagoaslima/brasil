@@ -86,7 +86,6 @@ export class IndicadorService3 {
         return this._request(url)
             .mergeMap(responseIndicadores => {
                 const pesquisasId = arrayUniqueValues(responseIndicadores.map(curry(getProperty, 'pesquisa_id')));
-                debugger;
                 return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas => [responseIndicadores, pesquisas]);
             })
             .map(([responseIndicadores, pesquisas]) => {

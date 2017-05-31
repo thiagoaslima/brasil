@@ -123,7 +123,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this.getResultadosCartograma(this.cardSelecionado.indicadorId);
             this._indicadorServ.getIndicadoresById([this.cardSelecionado.indicadorId])
                 .subscribe((indicador) => {
-                    this.indicador = indicador;
+                    this.indicador = indicador[0];
                 });
         }
     }
