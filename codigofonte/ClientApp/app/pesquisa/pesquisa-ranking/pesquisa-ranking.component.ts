@@ -41,13 +41,11 @@ export class PesquisaRankingComponent implements OnInit {
             // Obter localidade principal
             this.idLocalidades[0] = (this._localidadeService.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
 
-            debugger;
-
             // Obter localidades de comparação
-            if(urlParams.queryParams['localidade1']){
+            if(urlParams.queryParams['localidade1'] && urlParams.queryParams['localidade1'] > 0){
                 this.idLocalidades.push(urlParams.queryParams['localidade1']);
             }
-            if(urlParams.queryParams['localidade2']){
+            if(urlParams.queryParams['localidade2'] && urlParams.queryParams['localidade2'] > 0){
                 this.idLocalidades.push(urlParams.queryParams['localidade2']);
             }
 
@@ -69,6 +67,11 @@ export class PesquisaRankingComponent implements OnInit {
         }
 
         return `${this._localidadeService.getMunicipioByCodigo(idLocalidade).nome.toUpperCase()} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
+    }
+
+    public getRotulo(valor, unidade, multiplicador){
+
+        return `${valor}${!!multiplicador && multiplicador > 1 ? ' x' + multiplicador : ''} ${!!unidade ? unidade : ''}`;
     }
 
 
@@ -94,6 +97,8 @@ export class PesquisaRankingComponent implements OnInit {
 
     private _calcularProporcaoValor(maiorValor: number, valor: number){
 
+        debugger;
+
         return (valor * 100) / maiorValor;
     }
 
@@ -116,10 +121,11 @@ export class PesquisaRankingComponent implements OnInit {
                     mergedRanking[contexto].listaGrupos = this._mergeLista(mergedRanking[contexto].listaGrupos, listaRankingLocalidade[i][j].listaGrupos);
                 }
 
+
                 // Calcula a proporção para exibição do grafico
                 for(let itemRanking of listaRankingLocalidade[i][j].listaGrupos){
 
-                    itemRanking['proporcao'] = this._calcularProporcaoValor(parseInt(listaRankingLocalidade[i][j].listaGrupos[0].valor, 10), parseInt(itemRanking.valor, 10));
+                    itemRanking['proporcao'] = this._calcularProporcaoValor(Number(listaRankingLocalidade[i][j].listaGrupos[0].valor), Number(itemRanking.valor));
                 }
             }
         }
