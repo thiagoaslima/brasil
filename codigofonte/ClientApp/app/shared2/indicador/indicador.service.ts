@@ -285,8 +285,6 @@ export class IndicadorService2 {
                             item.unidadeMedida = rankings.unidade.id;
                         }
 
-                        debugger;
-
                         grupo.push(item);
                     });
 

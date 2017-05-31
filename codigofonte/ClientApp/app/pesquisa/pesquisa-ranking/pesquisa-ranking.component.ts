@@ -44,8 +44,6 @@ export class PesquisaRankingComponent implements OnInit {
 
     private carregarRanking(urlParams){
 
-        debugger;
-
         this.idLocalidades = [];
 
         // Obter localidade principal

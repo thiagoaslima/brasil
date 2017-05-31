@@ -24,22 +24,16 @@ import { flatTree } from '../utils/flatFunctions';
 export class PesquisaComponent implements OnInit {
     @ViewChild('dados') dados: ElementRef;
 
-    localidade: Localidade;
-
     posicaoIndicador: string = "2";
-    localidades: number[] = [null, null, null];
+    localidades: number[];
     periodo: string;
     tipo: string;
 
     indicador;
     indicadores;
+    pesquisa;
 
     isOcultarValoresVazios = true;
-    
-    
-    public pesquisa;
-    public listaPeriodos = [1991, 2000, 2010];
-    public anoSelecionado = 0;
 
     constructor(
         private _routerParams: RouterParamsService,
@@ -50,50 +44,39 @@ export class PesquisaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
         this._routerParams.params$.subscribe(urlParams => {
-            if (urlParams.queryParams['indicador']) {
-                this.indicador = parseInt(urlParams.queryParams['indicador']);
-            }
-            if(!!urlParams.params['indicador']){
-                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos)
-                    .subscribe((indicadores) => {
-                        this.indicadores = indicadores;
-
-                        if(!!indicadores && indicadores.length > 0){ 
-                            this.indicador = this.indicador || indicadores[0].id;
-                            this.posicaoIndicador = indicadores[0].posicao;
-                        }
-                        else {
-                            this.posicaoIndicador = "2";
-                        }
-                    });
-            }
-            if(!!urlParams.params['pesquisa']) {
-                this._pesquisaService.getPesquisa(urlParams.params['pesquisa'])
-                    .subscribe((pesquisa) => {
-                        this.pesquisa = pesquisa;
-                    });
-            }
-
-            // Obter localidade principal
-            this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;
-
-            // Obter localidades de comparação
-            this.localidades[1] = urlParams.queryParams['localidade1'];
-            this.localidades[2] = urlParams.queryParams['localidade2'];
-
-            this.localidades = this.localidades.slice(0);
-
-            // Obter período de análise
-            this.periodo = urlParams.queryParams['ano'];
-
-            // Obtém o tipo de resultado a ser exibido
-            this.tipo = !!urlParams.queryParams['tipo'] ? urlParams.queryParams['tipo'] : 'tabela';
-
+            this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
+                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {
+                    this.pesquisa = pesquisa;
+                    this.localidades = new Array(3);
+                    // Obter localidade principal
+                    this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;
+                    // Obter localidades de comparação
+                    this.localidades[1] = urlParams.queryParams['localidade1'];
+                    this.localidades[2] = urlParams.queryParams['localidade2'];
+                    //indicador usado no ranking/series históricas/graficos
+                    if(urlParams.queryParams && urlParams.queryParams['indicador'])
+                        this.indicador = parseInt(urlParams.queryParams['indicador']);
+                    // Obtém o tipo de resultado a ser exibido
+                    this.tipo = !!urlParams.queryParams['tipo'] ? urlParams.queryParams['tipo'] : 'tabela';
+                    // Quando não houver um período selecionado, é exibido o período mais recente
+                    let periodos = pesquisa['periodos'];
+                    if(urlParams.queryParams['ano'])
+                        this.periodo = urlParams.queryParams['ano'];
+                    else
+                        this.periodo = periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(periodos.length - 1)].nome;
+                    this.indicadores = indicadores;
+                    if(urlParams.params['pesquisa'] != 23) //23 = censo
+                        this.posicaoIndicador = '0';
+                    else if(indicadores && indicadores.length > 0)
+                        this.posicaoIndicador = indicadores[0]['posicao'];
+                    else
+                        this.posicaoIndicador = '2';
+                });
+            });
         });
-
     }
+
 
     ocultarValoresVazios(event) {
         this.isOcultarValoresVazios = event['OcultarValoresVazios'];
