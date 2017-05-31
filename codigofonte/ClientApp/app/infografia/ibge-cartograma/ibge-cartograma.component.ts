@@ -1,3 +1,4 @@
+import { Indicador } from '../../shared3/models/indicador.model';
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 
@@ -9,6 +10,7 @@ import { MapaService } from './mapa.service';
     styleUrls: ['./ibge-cartograma.component.css']
 })
 export class IBGECartograma implements OnInit, OnChanges {
+    @Input() indicador: Indicador;
     @Input() localidade: Localidade;
     @Input() localidadesMarcadas: Localidade[];
     @Input() resultados;

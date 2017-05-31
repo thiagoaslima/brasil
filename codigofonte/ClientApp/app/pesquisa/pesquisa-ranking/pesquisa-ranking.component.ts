@@ -97,7 +97,7 @@ export class PesquisaRankingComponent implements OnInit {
 
     private _calcularProporcaoValor(maiorValor: number, valor: number){
 
-        debugger;
+        // debugger;
 
         return (valor * 100) / maiorValor;
     }

@@ -275,7 +275,7 @@ export class IndicadorService2 {
 
                     rankings.res.map(ranking => {
 
-                        debugger;
+                        // debugger;
 
                         let item = new ItemRanking(
                             this._localidadeService.getMunicipioByCodigo(parseInt(ranking['localidade'], 10)),
