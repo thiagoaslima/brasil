@@ -4,7 +4,7 @@ import { isBrowser, isNode } from 'angular2-universal';
 import { IsMobileService } from "../../shared/is-mobile.service";
 import { dadosPainel } from '../configuration/panorama.values';
 import { Localidade } from '../../shared3/models';
-import { ResultadoService3 } from "../../shared3/services";
+import { ResultadoService3, IndicadorService3 } from "../../shared3/services";
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -27,6 +27,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public posicaoCards = 0;
     public resultadosCartograma;
 
+    public indicador;
+
     private _isOnScreen = false;
     private _isOnScreen$ = new BehaviorSubject<Boolean>(this._isOnScreen);
     public shouldAppear$: Observable<Boolean>;
@@ -35,7 +37,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     constructor(
         private element: ElementRef,
         private _isMobileServ: IsMobileService,
-        private _resultadoServ: ResultadoService3
+        private _resultadoServ: ResultadoService3,
+        private _indicadorServ: IndicadorService3
     ) { }
 
     isMobile() {
@@ -118,6 +121,10 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this.indexSelecionado = idx;
             this.scrollCard(idx);
             this.getResultadosCartograma(this.cardSelecionado.indicadorId);
+            this._indicadorServ.getIndicadoresById([this.cardSelecionado.indicadorId])
+                .subscribe((indicador) => {
+                    this.indicador = indicador;
+                });
         }
     }
 
