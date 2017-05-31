@@ -18,7 +18,15 @@
 
 <div class="cards">
     <div class="scroll" [style.transform]="'translateX(' + posicaoCards + 'px)'">
-        <panorama-card *ngFor="let painel of dados; let i = index" (click)="selectPainel(i)" [titulo]="painel.titulo" [valor]="painel.valor" [unidade]="painel.unidade" [ranking]="painel.ranking"></panorama-card>
+        <panorama-card
+            *ngFor="let painel of dados; let i = index"
+            (click)="selectPainel(i)"
+            [titulo]="painel.titulo"
+            [valor]="painel.valor"
+            [unidade]="painel.unidade"
+            [ranking]="painel.ranking"
+            [selecionado]="i === indexSelecionado"
+        ></panorama-card>
     </div>
 </div>
 

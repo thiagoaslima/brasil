@@ -11,6 +11,7 @@ export class PanoramaCardComponent implements OnChanges {
     @Input() valor: string = ''
     @Input() unidade: string = ''
     @Input() ranking: any = {};
+    @Input('selecionado') isSelecionado;
 
     public cssRanking: any = {};
     
