@@ -10,6 +10,7 @@
     /*background-color: red;*/
     float: left;    
     padding: 17px 18px 18px 0px;
+    margin-bottom: 50px;
 }
 
 .grupo:nth-child(odd){
