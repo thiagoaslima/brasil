@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable, Observer } from 'rxjs/Rx';
 
@@ -24,39 +25,55 @@ export class PesquisaRankingComponent implements OnInit {
 
     constructor(
         private _routerParams:RouterParamsService,
+        private _activatedRoute: ActivatedRoute,
         private _indicadorService: IndicadorService2,
         private _localidadeService: LocalidadeService2
     ) { }
 
     ngOnInit() {
 
-        this._routerParams.params$.map(urlParams => {
+        // Inicializa o ranking
+        this.carregarRanking(this._activatedRoute.snapshot);
+        
+        // Configura o listener da rota
+        this._routerParams.params$.subscribe(urlParams => {
 
-            return urlParams;
+            this.carregarRanking(urlParams);
+        });
+    }
 
-        }).flatMap(urlParams => {
+    private carregarRanking(urlParams){
 
-            this.idLocalidades = [];
+        debugger;
 
-            // Obter localidade principal
-            this.idLocalidades[0] = (this._localidadeService.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
+        this.idLocalidades = [];
 
-            // Obter localidades de comparação
-            if(urlParams.queryParams['localidade1'] && urlParams.queryParams['localidade1'] > 0){
-                this.idLocalidades.push(urlParams.queryParams['localidade1']);
-            }
-            if(urlParams.queryParams['localidade2'] && urlParams.queryParams['localidade2'] > 0){
-                this.idLocalidades.push(urlParams.queryParams['localidade2']);
-            }
+        // Obter localidade principal
+        this.idLocalidades[0] = (this._localidadeService.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
 
-            return this._obterRanking(parseInt(urlParams.queryParams['indicador']), this.periodo, this.idLocalidades);
+        // Obter localidades de comparação
+        if(urlParams.queryParams['localidade1'] && urlParams.queryParams['localidade1'] > 0){
+            this.idLocalidades.push(urlParams.queryParams['localidade1']);
+        }
+        if(urlParams.queryParams['localidade2'] && urlParams.queryParams['localidade2'] > 0){
+            this.idLocalidades.push(urlParams.queryParams['localidade2']);
+        }
 
-        }).subscribe(ranking => {
+        let indicador;
+        if(!!urlParams.queryParams['indicador'] && urlParams.queryParams['indicador'] > 0){
+            indicador = urlParams.queryParams['indicador'];
+        }
+        else {
+            indicador = urlParams.params['indicador']
+        }
+
+        this._obterRanking(parseInt(indicador), this.periodo, this.idLocalidades).subscribe(ranking => {
 
             this.indicadores = [];
 
             this.indicadores = this._mergeRankingsByContext(ranking);
         });
+
     }
 
     public getTitulo(idLocalidade, contexto){
@@ -97,8 +114,6 @@ export class PesquisaRankingComponent implements OnInit {
 
     private _calcularProporcaoValor(maiorValor: number, valor: number){
 
-        debugger;
-
         return (valor * 100) / maiorValor;
     }
 
@@ -119,6 +134,10 @@ export class PesquisaRankingComponent implements OnInit {
                 } else {
 
                     mergedRanking[contexto].listaGrupos = this._mergeLista(mergedRanking[contexto].listaGrupos, listaRankingLocalidade[i][j].listaGrupos);
+                }
+
+                if(!listaRankingLocalidade[i][j].listaGrupos){
+                    return;
                 }
 
 
