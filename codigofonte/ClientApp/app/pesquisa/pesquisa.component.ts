@@ -69,11 +69,12 @@ export class PesquisaComponent implements OnInit {
                         }
                     });
             }
-
-            this._pesquisaService.getPesquisa(urlParams.params['pesquisa'])
-                .subscribe((pesquisa) => {
-                    this.pesquisa = pesquisa;
-                });
+            if(!!urlParams.params['pesquisa']) {
+                this._pesquisaService.getPesquisa(urlParams.params['pesquisa'])
+                    .subscribe((pesquisa) => {
+                        this.pesquisa = pesquisa;
+                    });
+            }
 
             // Obter localidade principal
             this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;
