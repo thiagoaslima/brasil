@@ -34414,8 +34414,8 @@ export const municipios = [
   {
     "codigoUf": 17,
     "codigo": 1720499,
-    "nome": "São Valério da Natividade",
-    "slug": "sao-valerio-da-natividade",
+    "nome": "São Valério",
+    "slug": "sao-valerio",
     "microrregiao": 17008
   },
   {

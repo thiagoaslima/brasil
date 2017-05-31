@@ -1,3 +1,4 @@
+import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,8 +15,9 @@ import { SharedModule3 } from "../shared3/shared3.module";
 @NgModule({
     imports: [
         CommonModule,
-        SharedModule3,
-        InfografiaModule
+        InfografiaModule,
+        SharedModule,
+        SharedModule3
     ],
     exports: [],
     declarations: [

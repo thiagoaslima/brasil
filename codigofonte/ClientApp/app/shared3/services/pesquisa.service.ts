@@ -21,7 +21,7 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 @Injectable()
 export class PesquisaService3 {
 
-    static readonly cache = CacheFactory.createCache('pesquisaCache', 50);
+    static readonly cache = CacheFactory.createCache('pesquisaCache', 10);
 
     constructor(
         private _http: Http

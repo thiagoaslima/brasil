@@ -21,7 +21,7 @@ const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 @Injectable()
 export class ResultadoService3 {
-    static readonly cache = CacheFactory.createCache('resultadosService', 50);
+    static readonly cache = CacheFactory.createCache('resultadosService', 10);
 
     constructor(
         private _http: Http,

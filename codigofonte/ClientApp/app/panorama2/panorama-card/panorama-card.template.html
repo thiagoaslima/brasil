@@ -2,7 +2,7 @@
     <div class='card' [ngClass]="{selecionado: isSelecionado}" id='card-{{dados?.indicador?.id}}'>
     <div class="selecionar">
         <div class="card__titulo">{{ titulo }}</div>
-        <div class="card__nota">{{ valor }} <span class="card_unidade">{{ unidade }}</span></div>
+        <div class="card__nota">{{ valor | resultado }} <span class="card_unidade">{{ unidade }}</span></div>
         
            
 	</div>

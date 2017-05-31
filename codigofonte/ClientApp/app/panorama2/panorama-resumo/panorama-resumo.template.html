@@ -1,10 +1,10 @@
 <div class="topo">
     <div *ngFor="let item of cabecalho; let idx = index" [ngClass]="{'topo__celula-esquerda': idx === 0, 'topo__celula-direita': idx === 1, 'topo__celula-linha': idx > 1}">
         <h3 class="topo__titulo">
-            {{ item.titulo || getTitulo(item.indicadorId) }}
+            {{ item.titulo }}
         </h3>
         <p class="topo__valor">
-            {{ getValorMaisRecente(item.indicadorId) }}
+            {{ item.valor }}
         </p>
     </div>
 </div>
@@ -28,7 +28,7 @@
 <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
     <table class="lista" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
 
-        <tr class="lista__cabecalho" *ngIf="first || item.tema !== temas[idx-1].tema">
+        <tr *ngIf="first || item.tema !== temas[idx-1].tema" class="lista__cabecalho">
             <th class="lista__icone">
                 <img class="ico" [src]="icones[item.tema]" />
             </th>
@@ -41,12 +41,12 @@
         <tr class="lista__indicador">
             <td></td>
             <td class="lista__nome">
-                {{ item.titulo || getTitulo(item.indicadorId) }}
-                <small>{{ '[' + getPeriodoMaisRecente(item.indicadorId) + ']' }}</small>
+                {{ item.titulo }}
+                <small>{{ '[' + item.periodo + ']' }}</small>
             </td>
             <td class="lista__valor" colspan="2">
-                {{ getValorMaisRecente(item.indicadorId) }}
-                <span class="lista__unidade">{{item.unidade || getUnidade(indicadorId) }}</span>
+                {{ item.valor | resultado }}
+                <span class="lista__unidade">{{ item.unidade }}</span>
             </td>
         </tr>
         <tr *ngIf="!last" class="lista__separador">

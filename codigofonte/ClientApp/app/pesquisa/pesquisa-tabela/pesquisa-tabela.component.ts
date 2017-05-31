@@ -1,10 +1,15 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
 import { EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { SinteseService } from '../../sintese/sintese.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
+import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
+import { RouterParamsService } from '../../shared/router-params.service';
+
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
@@ -25,142 +30,98 @@ export class PesquisaTabelaComponent implements OnChanges {
     @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     private indicadores;
+    private pesquisaId;
+    private isVazio;
 
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese:SinteseService,
-        private _localidade:LocalidadeService2
+        private _localidade:LocalidadeService2,
+        private _routerParamsService: RouterParamsService,
+        private _indicadorService: IndicadorService2,
+        private _localidadeService2: LocalidadeService2,
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private _pesquisaService: PesquisaService2
     ) {  }
 
-
     ngOnChanges() {
-
-        if(!!this.pesquisa && !!this.localidades && this.localidades.length > 0){
-
-            //organiza os períodos da pesquisa em orderm crescente
-            this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 );
-
-            //valida o período
-            let valido = false;
-            for(let i = 0; i < this.pesquisa.periodos.length; i++){
-                //verifica se o período é válido
-                if(this.pesquisa.periodos[i].nome == this.periodo){
-                    valido = true;
-                    break;
-                }
-            }
-            //se nao for válido, usa o período mais recente
-            if(!valido)
-                this.periodo = this.pesquisa.periodos[this.pesquisa.periodos.length - 1].nome;
-
-            if(!this.posicaoIndicador){
-
-                this.posicaoIndicador = "1";
-            }
-
-            let localidadeA = this.localidades[0];
-            let localidadeB =  this.localidades.length > 1 ? this.localidades[1] : null;
-            let localidadeC = this.localidades.length > 2 ? this.localidades[2] : null;
-
-            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa.id, localidadeA, localidadeB, localidadeC, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
-
-                this.indicadores = this.flat(indicadores).map(indicador => {
-
-                    indicador.nivel = this.getNivelIndicador(indicador.posicao);
-                    indicador.visivel = indicador.nivel <= 4 ? true : false;
-
-                    indicador.isVazio = !this.hasValue(indicador, this.periodo) && !this.hasChildrenWithValue(indicador.children, this.periodo);
-
-                    return indicador;
+        let urlParams = this._route.snapshot;
+        this.posicaoIndicador = '0';
+        this.indicadores = null;
+        this.localidades = new Array(3);
+        this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
+        this.localidades[1] = urlParams.queryParams['localidade1'];
+        this.localidades[2] = urlParams.queryParams['localidade2'];
+        this.pesquisaId = urlParams.params['pesquisa'];
+        this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
+            let periodos = pesquisa['periodos'];
+            if(urlParams.queryParams['ano'])
+                this.periodo = urlParams.queryParams['ano'];
+            else // Quando não houver um período selecionado, é exibido o período mais recente
+                this.periodo = periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(periodos.length - 1)].nome;
+            this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {
+                if(this.pesquisaId != 23) //23 = censo
+                    this.posicaoIndicador = '0';
+                else if(indicadores && indicadores.length > 0)
+                    this.posicaoIndicador = indicadores[0]['posicao'];
+                else
+                    this.posicaoIndicador = '2';
+                let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisaId, this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+                    this.indicadores = this.flat(indicadores);
+                    this.isVazio = true;
+                    //cria algumas propriedades nos indicadores para contralor sua exibição/interação
+                    for(let i = 0; i < this.indicadores.length; i++){
+                        let indicador = this.indicadores[i];
+                        indicador.nivel = this.getNivelIndicador(indicador.posicao);
+                        indicador.visivel = indicador.nivel <= 4 ? true : false;
+                        indicador.isVazio = !this.hasValue(indicador, this.periodo);
+                        if(!indicador.isVazio) //tem algo para mostrar
+                            this.isVazio = false;
+                    }
+                    subscription$$.unsubscribe();
                 });
-
-                subscription$$.unsubscribe();
             });
-
-        }
+        });
     }
 
-
     private isFolha(indicador){
-
-        return !indicador.children || indicador.children.length == 0;
+        return indicador.children == null || indicador.children == undefined || indicador.children.length == 0;
     }
 
     private hasValue(indicador, periodo){
+        if((indicador.localidadeA && this.isValor(indicador.localidadeA[periodo])) ||
+            (indicador.localidadeB && this.isValor(indicador.localidadeB[periodo])) ||
+            (indicador.localidadeC && this.isValor(indicador.localidadeC[periodo])))
+            return true;
+        if(indicador.children){
+            for(let i = 0; i < indicador.children.length; i++)
+                if(this.hasValue(indicador.children[i], periodo))
+                    return true;
+        }
+        return false;
+    }
 
-        if(!indicador || !periodo || !(indicador.localidadeA || indicador.localidadeB || indicador.localidadeC)){
-
+    private isValor(valor){
+        if(valor == undefined ||
+            valor == null ||
+            valor.trim() == '99999999999999' ||
+            valor.trim() == '99999999999998' ||
+            valor.trim() == '99999999999997' ||
+            valor.trim() == '99999999999996' ||
+            valor.trim() == '99999999999995' ||
+            valor.trim() == '99999999999992' ||
+            valor.trim() == '99999999999991' ||
+            valor.trim() == '-' ||
+            valor.trim().toLowerCase() == 'x' ||
+            valor.trim() == 'Não existente')
             return false;
-        }
-
-        let _isNotEmpty = !this.isEmpty(indicador.localidadeA[periodo]);
-        if(indicador.localidadeB) {
-            _isNotEmpty = _isNotEmpty || !this.isEmpty(indicador.localidadeB[periodo]);
-        }
-        if(indicador.localidadeC) {
-            _isNotEmpty = _isNotEmpty || !this.isEmpty(indicador.localidadeC[periodo]);
-        }
-
-        return _isNotEmpty;
-    }
-
-    private hasChildrenWithValue(children: any[], periodo){
-
-        if(!children || !periodo){
-
-            return false;
-        }
-
-        let hasChildrenWithValue = false;
-
-        for(let i = 0; i < children.length; i++){
-
-            hasChildrenWithValue = this.hasValue(children[i], periodo) || this.hasChildrenWithValue(children[i].children, periodo)
-
-            if(hasChildrenWithValue){
-                break;
-            }
-        }
-
-        return hasChildrenWithValue;
-    }
-
-    isEmpty(valor){
-
-        return (!valor || 
-                valor.trim() == '99999999999999' ||
-                valor.trim() == '99999999999998' ||
-                valor.trim() == '99999999999997' ||
-                valor.trim() == '99999999999996' ||
-                valor.trim() == '99999999999995' ||
-                valor.trim() == '99999999999992' ||
-                valor.trim() == '99999999999991' ||
-                valor.trim() == '-' ||
-                valor.trim().toLowerCase() == 'x' ||
-                valor.trim() == 'Não existente');
-    }
-
-    private ocultarValoresVazios(listaIndicadores){
-
-        // TODO: Ocultar valores vazios
-        // Se a opção oultar valores vazios estiver habilitada
-        if(this.isOcultarValoresVazios){
-
-            // Se for um nó folha, oculta o nó
-
-            // Se for um nó galho, o oculta caso todos os filhos já sejam ocultos
-        }
+        else
+            return true;
     }
 
     //chamada quando abre os nós nível 2 da tabela de dados
     private controlarExibicao(item){
-
-        if(item.nivel < 3) {
-
-            return;
-        }
-
-       
         if(this.isListaAberta(item)) //se estiver aberta
             this.flat(item.children).map(child => child.visivel = false); //fecha os filhos e todos os subfilhos
         else //senão, se estiver fechado
@@ -168,7 +129,6 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
     private isListaAberta(indicador){
-
         return !!indicador.children && indicador.children.length > 0 && indicador.children[0].visivel;
     }
 
@@ -176,49 +136,32 @@ export class PesquisaTabelaComponent implements OnChanges {
      * Função que transforma a árvore num array linear.
      */
     private flat(item){
-
         let flatItem = [];
-
         if(item.length){ //é um array
-            
             for(let i = 0; i < item.length; i++){
-                
                 flatItem = flatItem.concat(this.flat(item[i]));
             }
-
         } else if(item.children){//é um item
-
             flatItem.push(item);
-
             for(let i = 0; i < item.children.length; i++){
-
                 flatItem = flatItem.concat(this.flat(item.children[i]));
             }
-
         }
-
         return flatItem;
     }
 
 
     private getNivelIndicador(posicaoIndicador) {
-
         let char = '.';
-
         return posicaoIndicador.split('').reduce((acc, ch) => ch === char ? acc + 1: acc, 2);
     }
 
 
     private getStyleClass(posicaoIndicador){
-        
-
         return "nivel-" + this.getNivelIndicador(posicaoIndicador);
     }
 
     public downloadCSV(){
-
-        debugger;
-
         let ind = this.indicadores;
         let localidadeA = this._localidade.getMunicipioByCodigo(this.localidades[0]).nome;
         let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';

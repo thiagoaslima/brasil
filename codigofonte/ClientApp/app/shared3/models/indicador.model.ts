@@ -1,6 +1,6 @@
 import { ResultadoDTO } from '../dto/resultado.interface';
 import { IndicadorDTO } from '../dto';
-import { Pesquisa, Resultado } from './'
+import { Pesquisa, Resultado, Unidade } from './'
 import { escopoIndicadores } from '../values'
 
 export interface IndicadorParameters extends IndicadorDTO {
@@ -24,24 +24,7 @@ export interface IndicadorParameters extends IndicadorDTO {
     resultados?: Resultado[]
 }
 
-class UnidadeIndicador {
-     nome: string
-     classe: string
-     multiplicador: number
 
-     constructor({nome = '', classe = '', multiplicador = 1}) {
-         this.nome = nome
-         this.classe = classe
-         this.multiplicador = multiplicador
-     }
-
-     toString() {
-         if (this.multiplicador === 0 || this.multiplicador === 1) {
-            return this.nome;
-         }
-         return this.nome + ' (×' + this.multiplicador + ')';
-     }
-}
 
 export class Indicador {
     static criar(dados: IndicadorParameters) {
@@ -90,13 +73,13 @@ export class Indicador {
         }, dados.metadado);
 
         if (dados.unidade) {
-            this.unidade = new UnidadeIndicador({
+            this.unidade = new Unidade({
                 nome: dados.unidade.id,
                 classe: dados.unidade.classe,
                 multiplicador: dados.unidade.multiplicador
             })
         } else {
-            this.unidade = new UnidadeIndicador({});
+            this.unidade = new Unidade({});
         }
 
         if (dados.pesquisa_id && !dados.pesquisa) { this.pesquisaId = dados.pesquisa_id; }
