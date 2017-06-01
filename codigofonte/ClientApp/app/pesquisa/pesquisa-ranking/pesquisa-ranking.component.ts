@@ -122,6 +122,19 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         return `${valor}${!!multiplicador && multiplicador > 1 ? ' x' + multiplicador : ''} ${!!unidade ? unidade : ''}`;
     }
 
+    public isSelecionado(idLocalidade): boolean{
+
+        let isSelecionado = false;
+
+        this.localidades.forEach(id => {
+
+            if(id ==  idLocalidade){
+                isSelecionado = true;
+            }            
+        });
+
+        return isSelecionado;
+    }
 
     private _obterRanking(idIndicador: number, periodo: string, idLocalidades: number[]){
 
