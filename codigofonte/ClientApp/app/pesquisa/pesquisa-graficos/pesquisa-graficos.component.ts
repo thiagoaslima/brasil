@@ -42,6 +42,28 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
     public eixo;
     public dados;
 
+    public colors = {
+        bar: [{ backgroundColor: '#6BC9C7' }, { backgroundColor: '#F7931E' }, { backgroundColor: '#9F55A3' }, { backgroundColor: '#8CC63F' }],
+        horizontalBar: [{ backgroundColor: '#6BC9C7' }, { backgroundColor: '#F7931E' }, { backgroundColor: '#9F55A3' }, { backgroundColor: '#8CC63F' }],
+        line: [{
+            borderColor: '#6BC9C7',
+            pointBackgroundColor: '#6BC9C7',
+            pointBorderColor: '#6BC9C7',
+        }, {
+            borderColor: '#F7931E',
+            pointBackgroundColor: '#F7931E',
+            pointBorderColor: '#F7931E',
+        }, {
+            borderColor: '#9F55A3',
+            pointBackgroundColor: '#9F55A3',
+            pointBorderColor: '#9F55A3',
+        }, {
+            borderColor: '#8CC63F',
+            pointBackgroundColor: '#8CC63F',
+            pointBorderColor: '#fff',
+        }]
+    }
+
     constructor(
         private _localidadeServ: LocalidadeService2,
         private _resultadoServ: ResultadoService3,
