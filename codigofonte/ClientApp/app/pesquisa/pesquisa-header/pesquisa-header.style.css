@@ -449,6 +449,16 @@
         width: 33%;
     }
     
+    .cabecalho__seletor-visualizacao-dados__item{
+         display: none
+    }
+
+    .cabecalho__seletor-visualizacao-dados__item:first-child{
+         display: block
+    }
+
+ 
+
     .por-estado__selecionar-municipio{
         min-width: 207px;
         max-width: 207px;
