@@ -8,7 +8,9 @@ h4{
 }
 
 .mapas__mapa{
-    margin-top: 50px;
+    margin-top: 20px;
+	margin-left: 5%;
+	width: 70%;
 }
 
 /*MAIS DE 1 MAPA NA TELA*/
@@ -17,6 +19,7 @@ h4{
     float: left;
     padding-right: 5%;
     border-left: 7px solid #FFF;
+	margin-left: 0;
 }
 
 .mapas--variosMapas .mapas__mapa:nth-child(2){
@@ -32,4 +35,5 @@ h4{
 .tamanho_cartograma
 {
 	width: 90%;
+	margin-top: -15px;
 	}
