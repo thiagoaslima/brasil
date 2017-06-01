@@ -8,7 +8,8 @@ h4{
 }
 
 .mapas__mapa{
-    margin-top: 50px;
+    margin-top: 20px;
+	width: 70%;
 }
 
 /*MAIS DE 1 MAPA NA TELA*/
@@ -32,4 +33,5 @@ h4{
 .tamanho_cartograma
 {
 	width: 90%;
+	margin-top: -15px;
 	}
