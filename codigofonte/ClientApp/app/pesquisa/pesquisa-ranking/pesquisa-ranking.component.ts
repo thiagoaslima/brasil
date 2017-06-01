@@ -1,11 +1,12 @@
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { Observable, Observer } from 'rxjs/Rx';
 
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
-import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
+import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
+import { Localidade } from '../../shared2/localidade/localidade.model';
 import { ItemRanking, RankingLocalidade } from './ranking.model';
 
 
@@ -16,62 +17,94 @@ import { ItemRanking, RankingLocalidade } from './ranking.model';
 })
 export class PesquisaRankingComponent implements OnInit {
 
-    idIndicador: number;
-    periodo: string = '2010';
-    idLocalidades: number[] = [];
+    @Input() localidades;
+    @Input() indicadores;
+    @Input() indicadorSelecionado;
+    @Input() pesquisa;
 
-    indicadores;
+    @Output() onAno = new EventEmitter;
+
+
+    public rankings;
+
+    public listaPeriodos
+    public indexSelecionado;
+    public anoSelecionado;
 
 
     constructor(
         private _routerParams:RouterParamsService,
         private _activatedRoute: ActivatedRoute,
         private _indicadorService: IndicadorService2,
-        private _localidadeService: LocalidadeService2
+        private _localidadeService: LocalidadeService2,
+        private _pesquisaService: PesquisaService2
     ) { }
 
     ngOnInit() {
 
-        // Inicializa o ranking
-        this.carregarRanking(this._activatedRoute.snapshot);
-        
-        // Configura o listener da rota
-        this._routerParams.params$.subscribe(urlParams => {
-
-            this.carregarRanking(urlParams);
+        this._carregarRanking(this._activatedRoute.snapshot);
+    
+        this._routerParams.params$.subscribe((params) => {
+  
+            this._carregarRanking(params);                
         });
     }
 
-    private carregarRanking(urlParams){
+    private _carregarRanking(params){
 
-        this.idLocalidades = [];
+        this._pesquisaService.getPesquisa(params.params['pesquisa'])
+            .map((pesquisa) => {
 
-        // Obter localidade principal
-        this.idLocalidades[0] = (this._localidadeService.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
+                // Pesquisa que possui o indicador avaliado
+                this.pesquisa = pesquisa;
 
-        // Obter localidades de comparação
-        if(urlParams.queryParams['localidade1'] && urlParams.queryParams['localidade1'] > 0){
-            this.idLocalidades.push(urlParams.queryParams['localidade1']);
-        }
-        if(urlParams.queryParams['localidade2'] && urlParams.queryParams['localidade2'] > 0){
-            this.idLocalidades.push(urlParams.queryParams['localidade2']);
-        }
+                // Períodos disponíveis para pesquisa
+                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
+                this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
 
-        let indicador;
-        if(!!urlParams.queryParams['indicador'] && urlParams.queryParams['indicador'] > 0){
-            indicador = urlParams.queryParams['indicador'];
-        }
-        else {
-            indicador = urlParams.params['indicador']
-        }
+                    return parseInt(periodo.nome);
+                });
 
-        this._obterRanking(parseInt(indicador), this.periodo, this.idLocalidades).subscribe(ranking => {
+                // Ano a ser exibido
+                if(params.queryParams['ano']){
 
-            this.indicadores = [];
+                    this.anoSelecionado = params.queryParams['ano'];
+                }
+                else {
 
-            this.indicadores = this._mergeRankingsByContext(ranking);
-        });
+                    // Quando não houver um período selecionado, é exibido o período mais recente
+                    this.anoSelecionado = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
+                }
 
+                // Configuração do ase selecionado na barra de periodo
+                if(this.anoSelecionado) {
+
+                    this.indexSelecionado = this.listaPeriodos.findIndex((periodo) => periodo == this.anoSelecionado);
+
+                } else {
+
+                    this.indexSelecionado = this.listaPeriodos.length - 1;
+                }
+
+                // Indicador a ter o ranking exibido
+                this.indicadorSelecionado = !!params.queryParams['indicador'] ? params.queryParams['indicador'] : this.indicadores[0].id;
+
+
+            }).subscribe(res => {
+
+                this._obterRanking(this.indicadorSelecionado, this.anoSelecionado, this.localidades).subscribe(ranking => {
+
+                    this.rankings = this._mergeRankingsByContext(ranking);
+                });
+            });
+
+    }
+
+
+    public mudaAno(ano){
+        this.anoSelecionado = ano;
+        this.onAno.emit(ano);
+        console.log(ano);
     }
 
     public getTitulo(idLocalidade, contexto){
@@ -92,9 +125,15 @@ export class PesquisaRankingComponent implements OnInit {
 
     private _obterRanking(idIndicador: number, periodo: string, idLocalidades: number[]){
 
+        debugger;
+
         let requests: Observable<RankingLocalidade[]>[] = []; 
 
         idLocalidades.forEach(id => {
+
+            if(!id){
+                return;
+            }
             
             let localidade: Localidade = this._obterLocalidade(id);
             let contextos: string[] = ['br', localidade.parent.codigo.toString()];

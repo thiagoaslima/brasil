@@ -1,3 +1,7 @@
+.container{
+    margin: 3% 5%;
+}
+
 .content__grupos{
     display: table;
     width: 89%;
