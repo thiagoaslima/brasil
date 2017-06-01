@@ -30,7 +30,6 @@ export class PesquisaTabelaComponent implements OnChanges {
     @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     private indicadores;
-    private pesquisaId;
     private isVazio;
 
     constructor(
@@ -46,43 +45,23 @@ export class PesquisaTabelaComponent implements OnChanges {
     ) {  }
 
     ngOnChanges() {
-        let urlParams = this._route.snapshot;
-        this.posicaoIndicador = '0';
-        this.indicadores = null;
-        this.localidades = new Array(3);
-        this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'],  urlParams.params['municipio'])).codigo;
-        this.localidades[1] = urlParams.queryParams['localidade1'];
-        this.localidades[2] = urlParams.queryParams['localidade2'];
-        this.pesquisaId = urlParams.params['pesquisa'];
-        this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
-            let periodos = pesquisa['periodos'];
-            if(urlParams.queryParams['ano'])
-                this.periodo = urlParams.queryParams['ano'];
-            else // Quando não houver um período selecionado, é exibido o período mais recente
-                this.periodo = periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(periodos.length - 1)].nome;
-            this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {
-                if(this.pesquisaId != 23) //23 = censo
-                    this.posicaoIndicador = '0';
-                else if(indicadores && indicadores.length > 0)
-                    this.posicaoIndicador = indicadores[0]['posicao'];
-                else
-                    this.posicaoIndicador = '2';
-                let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisaId, this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
-                    this.indicadores = this.flat(indicadores);
-                    this.isVazio = true;
-                    //cria algumas propriedades nos indicadores para contralor sua exibição/interação
-                    for(let i = 0; i < this.indicadores.length; i++){
-                        let indicador = this.indicadores[i];
-                        indicador.nivel = this.getNivelIndicador(indicador.posicao);
-                        indicador.visivel = indicador.nivel <= 4 ? true : false;
-                        indicador.isVazio = !this.hasValue(indicador, this.periodo);
-                        if(!indicador.isVazio) //tem algo para mostrar
-                            this.isVazio = false;
-                    }
-                    subscription$$.unsubscribe();
-                });
+        if(this.pesquisa){
+            this.indicadores = null;
+            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+                this.indicadores = this.flat(indicadores);
+                this.isVazio = true;
+                //cria algumas propriedades nos indicadores para contralor sua exibição/interação
+                for(let i = 0; i < this.indicadores.length; i++){
+                    let indicador = this.indicadores[i];
+                    indicador.nivel = this.getNivelIndicador(indicador.posicao);
+                    indicador.visivel = indicador.nivel <= 4 || (indicador.parent && indicador.parent.visivel && !this.hasValue(indicador.parent, this.periodo)) ? true : false;
+                    indicador.isVazio = !this.hasAnyValue(indicador, this.periodo);
+                    if(!indicador.isVazio) //tem algo para mostrar
+                        this.isVazio = false;
+                }
+                subscription$$.unsubscribe();
             });
-        });
+        }
     }
 
     private isFolha(indicador){
@@ -94,9 +73,18 @@ export class PesquisaTabelaComponent implements OnChanges {
             (indicador.localidadeB && this.isValor(indicador.localidadeB[periodo])) ||
             (indicador.localidadeC && this.isValor(indicador.localidadeC[periodo])))
             return true;
+        else
+            return false;
+    }
+
+    private hasAnyValue(indicador, periodo){
+        if((indicador.localidadeA && this.isValor(indicador.localidadeA[periodo])) ||
+            (indicador.localidadeB && this.isValor(indicador.localidadeB[periodo])) ||
+            (indicador.localidadeC && this.isValor(indicador.localidadeC[periodo])))
+            return true;
         if(indicador.children){
             for(let i = 0; i < indicador.children.length; i++)
-                if(this.hasValue(indicador.children[i], periodo))
+                if(this.hasAnyValue(indicador.children[i], periodo))
                     return true;
         }
         return false;
@@ -144,6 +132,7 @@ export class PesquisaTabelaComponent implements OnChanges {
         } else if(item.children){//é um item
             flatItem.push(item);
             for(let i = 0; i < item.children.length; i++){
+                item.children[i]['parent'] = item;
                 flatItem = flatItem.concat(this.flat(item.children[i]));
             }
         }
@@ -176,16 +165,16 @@ export class PesquisaTabelaComponent implements OnChanges {
             csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
         }
         //fontes e notas
-        for(let i = 0; i < this.pesquisa.periodos.length; i++){
-            if(this.pesquisa.periodos[i].nome == this.periodo){
+        for(let i = 0; i < this.pesquisa['periodos'].length; i++){
+            if(this.pesquisa['periodos'][i].nome == this.periodo){
                 csv += '\n';
-                let notas = this.pesquisa.periodos[i].notas;
+                let notas = this.pesquisa['periodos'][i].notas;
                 for(let j = 0; j < notas.length; j++){
                     csv += 'Nota: ' + notas[j];
                     csv += '\n';
                 }
                 csv += '\n';
-                let fontes = this.pesquisa.periodos[i].fontes;
+                let fontes = this.pesquisa['periodos'][i].fontes;
                 for(let j = 0; j < fontes.length; j++){
                     csv += 'Fonte: ' + fontes[j];
                     csv += '\n';
@@ -194,6 +183,6 @@ export class PesquisaTabelaComponent implements OnChanges {
         }
         //baixa o arquivo
         let blob = new Blob([csv], { type: 'text/csv' });
-        FileSaver.saveAs(blob, this.pesquisa.nome + '(' + this.periodo + ').csv');
+        FileSaver.saveAs(blob, this.pesquisa['nome'] + '(' + this.periodo + ').csv');
     }
 }

@@ -119,10 +119,8 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
         if(this.indicadorSelecionado === undefined) {
             return;
         }
-        debugger;
         this._resultadoServ.getResultadosCompletos(this.indicadorSelecionado, this.localidades)
             .subscribe((resultados) => {
-                debugger;
                 this.eixo = resultados[0].periodos.slice();
                 this.eixo.reverse();
                 this.dados = resultados.map(resultado => {

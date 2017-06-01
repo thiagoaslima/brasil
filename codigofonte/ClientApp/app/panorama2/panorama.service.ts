@@ -26,10 +26,10 @@ export class Panorama2Service {
 
                     return {
                         tema: item.tema,
-                        titulo: item.titulo || resultados[item.indicadorId].indicador.nome,
+                        titulo: item.titulo || (resultados[item.indicadorId] && resultados[item.indicadorId].indicador.nome),
                         periodo: periodo,
-                        valor: resultados[item.indicadorId].getValor(periodo),
-                        unidade: resultados[item.indicadorId].indicador.unidade.toString()
+                        valor: resultados[item.indicadorId] && resultados[item.indicadorId].getValor(periodo),
+                        unidade: resultados[item.indicadorId] && resultados[item.indicadorId].indicador.unidade.toString()
                     }
                 })
             })
@@ -88,17 +88,19 @@ export class Panorama2Service {
                         agg[id] = {}
                     }
 
+                    const _ranking = ranking && ranking.res && ranking.res[0] && ranking.res[0].ranking;
+
                     switch (ranking.contexto) {
                         case 'BR':
-                            agg[id].BR = { posicao: ranking.res[0].ranking, itens: 5570 }
+                            agg[id].BR = { posicao: _ranking, itens: 5570 }
                             break;
 
                         case localidade.parent.codigo.toString():
-                            agg[id].local = { posicao: ranking.res[0].ranking, itens: localidade.parent.children.length }
+                            agg[id].local = { posicao: _ranking, itens: localidade.parent.children.length }
                             break;
 
                         case localidade.microrregiao.toString():
-                            agg[id].microrregiao = { posicao: ranking.res[0].ranking, itens: 50 }
+                            agg[id].microrregiao = { posicao: _ranking, itens: 50 }
                             break;
                     }
 
@@ -153,8 +155,8 @@ export class Panorama2Service {
         return {
             indicadorId: item.indicadorId,
             titulo: item.titulo,
-            valor: resultado.valorValidoMaisRecente,
-            unidade: resultado.indicador.unidade.toString(),
+            valor: resultado && resultado.valorValidoMaisRecente,
+            unidade: resultado && resultado.indicador.unidade.toString(),
             ranking: rankings[item.indicadorId]
         }
     }

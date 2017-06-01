@@ -29,7 +29,13 @@
     </div>
     <div *ngIf="tipo == 'ranking'">
         <pesquisa-indicadores #dados [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios"></pesquisa-indicadores>
-        <div id="pesquisa-dados"><pesquisa-ranking></pesquisa-ranking></div>
+        <div id="pesquisa-dados"><pesquisa-ranking
+                [pesquisa]="pesquisa"
+                [indicadores]="indicadores"
+                [indicadorSelecionado]="indicador"
+                [localidades]="localidades"
+                (onAno)="header.navegarPara(null, $event)"
+        ></pesquisa-ranking></div>
     </div>
    
 </div>

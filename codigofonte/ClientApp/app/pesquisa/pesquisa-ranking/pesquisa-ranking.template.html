@@ -1,16 +1,19 @@
+<div class="container">
+
+    <linha-tempo [anos]="listaPeriodos" [indexSelecionado]="indexSelecionado" (onAno)="mudaAno($event);"></linha-tempo>
 
     <div class="content__grupos">
-
-        <div class="grupo" *ngFor="let contexto of indicadores">
+        <div class="grupo" *ngFor="let contexto of rankings">
             <div class="grupo__titulo">{{getTitulo(contexto.localidade, contexto.contexto)}}</div>
             
             <div class="grupo__item" *ngFor="let localidade of contexto.listaGrupos">
                 <div class="grupo__item__posicao">{{localidade.posicao}}</div>
-                <div class="grupo__item__nome">{{localidade.localidade.nome}}</div>
-                <div class="grupo__item__barra" title={{localidade.valor}}>
+                <div class="grupo__item__nome" [class.grupo__item__nome--selecionado]="contexto.localidade == localidade.localidade.codigo">{{localidade.localidade.nome}}</div>
+                <div class="grupo__item__barra" [title]="getRotulo(localidade.valor, localidade.unidadeMedida, localidade.fatorMultiplicativo)">
                     <div class="grupo__item__barra__porcento" [style.width.%]="localidade.proporcao"></div>
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>

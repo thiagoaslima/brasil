@@ -11,21 +11,21 @@
         <div class="card__regua-comparacao" *ngIf="ranking?.BR">
             <p>No país</p>
             <div class="card__regua-comparacao__regua" [class.card__regua-comparacao__regua--desabilitada]="!ranking?.BR" [attr.pos]="ranking?.BR?.posicao" [attr.len]="ranking?.BR?.itens">
-                <div [ngStyle]='{right: cssRanking}' [title]="ranking?.BR?.posicao" class="card__regua-comparacao__regua__marcador"></div>
+                <div [ngStyle]='{right: cssRanking?.BR+"%"}' [title]="ranking?.BR?.posicao+' / '+ranking?.BR?.itens" class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
 
         <div class="card__regua-comparacao" *ngIf="ranking?.local">
             <p>No estado</p>
             <div class="card__regua-comparacao__regua" [class.card__regua-comparacao__regua--desabilitada]="!ranking?.local" [attr.pos]="ranking?.local?.posicao" [attr.len]="ranking?.local?.itens">
-                <div [ngStyle]='{right: cssRanking}' [title]="ranking?.local?.posicao" class="card__regua-comparacao__regua__marcador"></div>
+                <div [ngStyle]='{right: cssRanking?.local+"%"}' [title]="ranking?.local?.posicao+' / '+ranking?.local?.itens" class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
 
         <div class="card__regua-comparacao" *ngIf="ranking?.microrregiao">
             <p>Na microrregião</p>
             <div class="card__regua-comparacao__regua" [class.card__regua-comparacao__regua--desabilitada]="!ranking?.microrregiao" [attr.pos]="ranking?.microrregiao?.posicao" [attr.len]="ranking?.microrregiao?.itens">
-                <div [ngStyle]='{right: cssRanking}' [title]="ranking?.microrregiao?.posicao" class="card__regua-comparacao__regua__marcador"></div>
+                <div [ngStyle]='{right: cssRanking?.microrregiao+"%"}' [title]="ranking?.microrregiao?.posicao+' / '+ranking?.microrregiao?.itens" class="card__regua-comparacao__regua__marcador"></div>
             </div>
         </div>
 

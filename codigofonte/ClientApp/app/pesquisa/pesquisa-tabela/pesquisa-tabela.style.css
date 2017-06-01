@@ -35,7 +35,8 @@ td.label {
 }
 
 .nivel-2{
-    color: #E2871A;
+    color: #000;
+	font-weight: bold;
 }
 
 .nivel-2 td {

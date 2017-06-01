@@ -275,11 +275,17 @@ export class IndicadorService2 {
 
                     rankings.res.map(ranking => {
 
-                        grupo.push( new ItemRanking(
+                        let item = new ItemRanking(
                             this._localidadeService.getMunicipioByCodigo(parseInt(ranking['localidade'], 10)),
                             ranking['ranking'],
-                            ranking['res']
-                        ) );
+                            ranking['res']);
+
+                        if(!!rankings.unidade){
+                            item.fatorMultiplicativo = rankings.unidade.multiplicador;
+                            item.unidadeMedida = rankings.unidade.id;
+                        }
+
+                        grupo.push(item);
                     });
 
                     return grupo;
