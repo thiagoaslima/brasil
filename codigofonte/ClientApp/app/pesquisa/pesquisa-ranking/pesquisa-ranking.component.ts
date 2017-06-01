@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs/Rx';
 
@@ -15,7 +15,7 @@ import { ItemRanking, RankingLocalidade } from './ranking.model';
     templateUrl: './pesquisa-ranking.template.html',
     styleUrls: ['./pesquisa-ranking.style.css']
 })
-export class PesquisaRankingComponent implements OnInit {
+export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     @Input() localidades;
     @Input() indicadores;
@@ -43,11 +43,11 @@ export class PesquisaRankingComponent implements OnInit {
     ngOnInit() {
 
         this._carregarRanking(this._activatedRoute.snapshot);
-    
-        this._routerParams.params$.subscribe((params) => {
-  
-            this._carregarRanking(params);                
-        });
+    }
+
+    ngOnChanges(){
+
+        this._carregarRanking(this._activatedRoute.snapshot);
     }
 
     private _carregarRanking(params){
@@ -124,8 +124,6 @@ export class PesquisaRankingComponent implements OnInit {
 
 
     private _obterRanking(idIndicador: number, periodo: string, idLocalidades: number[]){
-
-        debugger;
 
         let requests: Observable<RankingLocalidade[]>[] = []; 
 
