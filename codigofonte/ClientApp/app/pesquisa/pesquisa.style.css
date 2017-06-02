@@ -1,4 +1,13 @@
 #pesquisa-dados{
     width: 62%;
-    float: left;
+    float: right;
 }
+
+
+.conteudo{
+    background: -webkit-linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
+       background: -o-linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
+       background: -moz-linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
+       background: linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
+}
+
