@@ -2,10 +2,9 @@
     <div class="cabecalho__nome-pesquisa">
         <!--pesquisa atual e select do indicador-->
         <div class="nome-pesquisa">
-            {{ pesquisa?.nome }}/
-            <br/> 
+            <h2 class="titulo-pesquisa">{{ pesquisa?.nome }}</h2> 
             <span *ngIf="pesquisa?.id == 23"> <!--só mostra no censo-->
-                <select (change)="mudaIndicador($event);">
+                <select class="select-indicador" (change)="mudaIndicador($event);">
                     <option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.id" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>
                 </select>
             </span>
