@@ -95,6 +95,8 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                 this._obterRanking(this.indicadorSelecionado, this.anoSelecionado, this.localidades).subscribe(ranking => {
 
                     this.rankings = this._mergeRankingsByContext(ranking);
+
+                    debugger;
                 });
             });
 
