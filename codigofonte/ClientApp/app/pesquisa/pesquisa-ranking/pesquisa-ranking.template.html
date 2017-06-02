@@ -1,6 +1,6 @@
 <div class="container">
 
-    <linha-tempo [anos]="listaPeriodos" [indexSelecionado]="indexSelecionado" (onAno)="mudaAno($event);"></linha-tempo>
+    <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
 
     <div class="content__grupos">
         <div class="grupo" *ngFor="let contexto of rankings">
