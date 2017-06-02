@@ -81,4 +81,8 @@ export class PesquisaComponent implements OnInit {
     ocultarValoresVazios(event) {
         this.isOcultarValoresVazios = event['OcultarValoresVazios'];
     }
+
+    setaIndicador(indicador){
+        this.indicador = indicador;
+    }
 }
