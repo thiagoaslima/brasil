@@ -4,7 +4,7 @@
 
     <div class="content__grupos">
         <div class="grupo" *ngFor="let contexto of rankings">
-            <div class="grupo__titulo">{{getTitulo(contexto.localidade, contexto.contexto)}}</div>
+            <div class="grupo__titulo">{{getTitulo(contexto.contexto)}}</div>
             
             <div *ngFor="let localidade of contexto.listaGrupos; let i = index;">
                 

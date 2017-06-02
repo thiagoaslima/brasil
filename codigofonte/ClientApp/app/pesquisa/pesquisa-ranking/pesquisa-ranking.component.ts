@@ -109,14 +109,35 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         console.log(ano);
     }
 
-    public getTitulo(idLocalidade, contexto){
+    public getTitulo(contexto){
+
+        let contextos = {};
+
+        this.localidades.forEach(id => {
+
+            if(!!id){
+
+                let localidade = this._localidadeService.getMunicipioByCodigo(id);
+                
+                if(!!contextos[localidade.parent.codigo]){
+
+                    contextos[localidade.parent.codigo].push(localidade.nome.toUpperCase());
+                } 
+                else {
+
+                    contextos[localidade.parent.codigo] = [localidade.nome.toUpperCase()];
+
+                }
+
+            }            
+        });
 
         if(contexto.toUpperCase() == 'BR'){
 
             return 'NO BRASIL';
         }
 
-        return `${this._localidadeService.getMunicipioByCodigo(idLocalidade).nome.toUpperCase()} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
+        return `${contextos[contexto].join(', ')} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
     }
 
     public getRotulo(valor, unidade, multiplicador){
