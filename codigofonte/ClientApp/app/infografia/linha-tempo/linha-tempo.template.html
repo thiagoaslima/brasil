@@ -3,9 +3,9 @@
     
     <div class="linhatempo__anos">
         <div class="linhatempo__ano"
-            *ngFor="let ano of anos; let i = index;"
-            [class.linhatempo__ano--selecionado]="i == indexSelecionado"
-            (click)="onSelect(i)">
+            *ngFor="let ano of anos;"
+            [class.linhatempo__ano--selecionado]="ano == anoSelecionado"
+            (click)="onSelect(ano)">
             <div class="linhatempo__circulo"></div>
             <span class="linhatempo__texto">{{ ano }}</span>
         </div>

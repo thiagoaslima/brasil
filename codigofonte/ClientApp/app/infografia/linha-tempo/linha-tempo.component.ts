@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angu
 export class LinhaTempo implements OnInit, OnChanges {
 
     @Input() anos : Number[];
-    @Input() indexSelecionado;
+    @Input() anoSelecionado;
 
     @Output() onAno = new EventEmitter();
 
@@ -19,9 +19,9 @@ export class LinhaTempo implements OnInit, OnChanges {
 
     }
 
-    onSelect(index){
-        this.indexSelecionado = index;
-        this.onAno.emit(this.anos[index]);
+    onSelect(ano){
+        this.anoSelecionado = ano;
+        this.onAno.emit(ano);
     }
 
 }

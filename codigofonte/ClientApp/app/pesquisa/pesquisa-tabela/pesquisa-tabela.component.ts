@@ -45,7 +45,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     ) {  }
 
     ngOnChanges() {
-        if(this.pesquisa){
+        if(this.pesquisa && this.localidades && this.localidades.length > 0){
             this.indicadores = null;
             let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
                 this.indicadores = this.flat(indicadores);

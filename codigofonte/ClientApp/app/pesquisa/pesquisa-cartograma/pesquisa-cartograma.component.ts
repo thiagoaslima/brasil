@@ -17,27 +17,22 @@ import { RouterParamsService } from '../../shared/router-params.service';
     styleUrls: ['./pesquisa-cartograma.style.css']
 })
 
-export class PesquisaCartogramaComponent implements OnInit, OnChanges {
+export class PesquisaCartogramaComponent implements OnChanges {
 
     @Input() localidades;
     @Input() indicadores;
     @Input() indicadorSelecionado;
     @Input() pesquisa;
+    @Input() periodo: string;
 
     @Output() onAno = new EventEmitter;
 
     public indicador;
-
     public mapas: {mun, resultados}[] = [];
-
     public mun;
-
     public resultados;
     public tituloCartograma;
-
-    public listaPeriodos
-    public indexSelecionado;
-    public anoSelecionado;
+    public listaPeriodos;
 
     constructor(
         private _localidadeServ: LocalidadeService2,
@@ -47,46 +42,12 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
         private _routerParamsService: RouterParamsService
     ) { }
 
-    ngOnInit() {
-
-        this._routerParamsService.params$.subscribe((params) => {
-            this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
-                this.pesquisa = pesquisa;
-                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
-
-                if(params.queryParams.ano){
-                    this.anoSelecionado = params.queryParams.ano;
-                }
-                else {
-                    // Quando não houver um período selecionado, é exibido o período mais recente
-                    this.anoSelecionado = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
-                }
-
-            });
-        });
-
-        if(this.localidades && this.localidades.length > 0) {
-            this.mapas = [];
-            this.atualizaCartograma();
-        }
-    }
-
     ngOnChanges(changes: SimpleChanges) {
-        if(this.localidades && this.localidades.length > 0) {
-            this.atualizaCartograma();
-        }
-
-        if(this.pesquisa) {
+        if(this.pesquisa && this.localidades && this.localidades.length > 0) {
             this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
-                return parseInt(periodo.nome);
+                return periodo.nome;
             });
-
-            if(this.anoSelecionado) {
-                this.indexSelecionado = this.listaPeriodos.findIndex((periodo) => periodo == this.anoSelecionado);
-            } else {
-                this.indexSelecionado = this.listaPeriodos.length - 1;
-            }
-
+            this.atualizaCartograma();
         }
     }
 
@@ -151,8 +112,6 @@ export class PesquisaCartogramaComponent implements OnInit, OnChanges {
     }
 
     mudaAno(ano){
-        this.anoSelecionado = ano;
         this.onAno.emit(ano);
-        console.log(ano);
     }
 }

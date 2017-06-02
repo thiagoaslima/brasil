@@ -1,7 +1,7 @@
 <div class="container">
     
     <breadcrumb [indicadores]="indicadores" [indicadorSelecionado]="indicadorSelecionado"></breadcrumb>
-    <linha-tempo [anos]="listaPeriodos" [indexSelecionado]="indexSelecionado" (onAno)="mudaAno($event);"></linha-tempo>
+    <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
     
     <div [class.mapas--variosMapas]="mapas.length > 1">
         
@@ -13,7 +13,7 @@
                 [localidadesMarcadas]="mapa.localidadesMarcadas"
                 *ngIf="!isPrerender && mapa.localidade?.codigo != 53"
                 [resultados]="mapa.resultados"
-                [periodo]="anoSelecionado"
+                [periodo]="periodo"
                 [indicador]="indicador"
             ></ibge-cartograma>
             </div>

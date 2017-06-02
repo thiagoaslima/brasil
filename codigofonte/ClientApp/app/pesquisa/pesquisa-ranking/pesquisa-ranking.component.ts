@@ -21,16 +21,12 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     @Input() indicadores;
     @Input() indicadorSelecionado;
     @Input() pesquisa;
+    @Input() periodo: string;
 
     @Output() onAno = new EventEmitter;
 
-
     public rankings;
-
     public listaPeriodos
-    public indexSelecionado;
-    public anoSelecionado;
-
 
     constructor(
         private _routerParams:RouterParamsService,
@@ -51,70 +47,49 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     }
 
     private _carregarRanking(params){
-
-        this._pesquisaService.getPesquisa(params.params['pesquisa'])
-            .map((pesquisa) => {
-
-                // Pesquisa que possui o indicador avaliado
-                this.pesquisa = pesquisa;
-
-                // Períodos disponíveis para pesquisa
-                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
-                this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
-
-                    return parseInt(periodo.nome);
-                });
-
-                // Ano a ser exibido
-                if(params.queryParams['ano']){
-
-                    this.anoSelecionado = params.queryParams['ano'];
-                }
-                else {
-
-                    // Quando não houver um período selecionado, é exibido o período mais recente
-                    this.anoSelecionado = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
-                }
-
-                // Configuração do ase selecionado na barra de periodo
-                if(this.anoSelecionado) {
-
-                    this.indexSelecionado = this.listaPeriodos.findIndex((periodo) => periodo == this.anoSelecionado);
-
-                } else {
-
-                    this.indexSelecionado = this.listaPeriodos.length - 1;
-                }
-
-                // Indicador a ter o ranking exibido
-                this.indicadorSelecionado = !!params.queryParams['indicador'] ? params.queryParams['indicador'] : this.indicadores[0].id;
-
-
-            }).subscribe(res => {
-
-                this._obterRanking(this.indicadorSelecionado, this.anoSelecionado, this.localidades).subscribe(ranking => {
-
-                    this.rankings = this._mergeRankingsByContext(ranking);
-                });
+        if(this.pesquisa && this.localidades && this.localidades.length > 0) {
+            this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
+                return periodo.nome;
             });
-
+            this._obterRanking(this.indicadorSelecionado, this.periodo, this.localidades).subscribe(ranking => {
+                this.rankings = this._mergeRankingsByContext(ranking);
+            });
+        }
     }
-
 
     public mudaAno(ano){
-        this.anoSelecionado = ano;
         this.onAno.emit(ano);
-        console.log(ano);
     }
 
-    public getTitulo(idLocalidade, contexto){
+    public getTitulo(contexto){
+
+        let contextos = {};
+
+        this.localidades.forEach(id => {
+
+            if(!!id){
+
+                let localidade = this._localidadeService.getMunicipioByCodigo(id);
+                
+                if(!!contextos[localidade.parent.codigo]){
+
+                    contextos[localidade.parent.codigo].push(localidade.nome.toUpperCase());
+                } 
+                else {
+
+                    contextos[localidade.parent.codigo] = [localidade.nome.toUpperCase()];
+
+                }
+
+            }            
+        });
 
         if(contexto.toUpperCase() == 'BR'){
 
             return 'NO BRASIL';
         }
 
-        return `${this._localidadeService.getMunicipioByCodigo(idLocalidade).nome.toUpperCase()} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
+        return `${contextos[contexto].join(', ')} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
     }
 
     public getRotulo(valor, unidade, multiplicador){
