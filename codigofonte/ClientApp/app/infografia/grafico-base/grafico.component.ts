@@ -39,7 +39,7 @@ export class GraficoComponent implements OnInit, OnChanges {
     @Input() largura = 510;
     @Input() altura = 220;
 
-    public colors = {
+    @Input() colors = {
         bar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
         horizontalBar: [{ backgroundColor: '#00A99D' }, { backgroundColor: '#177437' }, { backgroundColor: '#22B573' }, { backgroundColor: '#8CC63F' }],
         line: [{

@@ -67,29 +67,38 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
         this.temas.forEach(({tema}) => this.textos[tema] = this._textos[tema]() || '');
     }
 
+    private _extrairDadosIndicador(indicadorId) {
+        return {
+            periodo: this.resultados[indicadorId].periodoValidoMaisRecente,
+            res: this.resultados[indicadorId].valorValidoMaisRecente,
+            rankingLocal: this.rankings[indicadorId]['local']['posicao'],
+            rankingGeral: this.rankings[indicadorId]['BR']['posicao']
+        }
+    }
+
+    private _isDadosIndicadorValidos(indicadorId) {
+        return this.resultados[indicadorId]
+                && this.resultados[indicadorId].periodoValidoMaisRecente
+                && this.resultados[indicadorId].valorValidoMaisRecente
+                && this.rankings[indicadorId]['local']['posicao']
+                && this.rankings[indicadorId]['BR']['posicao'];
+    }
+
     private _textos = {
         [TEMAS.trabalho.label]: () => {
             const universoLocal = this.localidade.parent.children.length;
             const universoGeral = 5570;
 
-            let salarioMedio = {
-                periodo: this.resultados[29765].periodoValidoMaisRecente,
-                res: this.resultados[29765].valorValidoMaisRecente,
-                rankingLocal: this.rankings[29765]['local']['posicao'],
-                rankingGeral: this.rankings[29765]['BR']['posicao']
+            if( !(this._isDadosIndicadorValidos(29765)
+                && this._isDadosIndicadorValidos(60036)
+                && this._isDadosIndicadorValidos(60037))
+            ) {
+                return '';
             }
-            let pessoasOcupadas = {
-                periodo: this.resultados[60036].periodoValidoMaisRecente,
-                res: this.resultados[60036].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60036]['local']['posicao'],
-                rankingGeral: this.rankings[60036]['BR']['posicao']
-            }
-            let rendimento = {
-                periodo: this.resultados[60037].periodoValidoMaisRecente,
-                res: this.resultados[60037].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60037]['local']['posicao'],
-                rankingGeral: this.rankings[60037]['BR']['posicao']
-            }
+
+            let salarioMedio = this._extrairDadosIndicador(29765);
+            let pessoasOcupadas = this._extrairDadosIndicador(60036);
+            let rendimento = this._extrairDadosIndicador(60037);
 
             return `
                 Em ${salarioMedio.periodo}, o salário médio mensal era de ${salarioMedio.res} salários mínimos. 
@@ -104,18 +113,14 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             const universoLocal = this.localidade.parent.children.length;
             const universoGeral = 5570;
 
-            let populacao = {
-                periodo: this.resultados[29166].periodoValidoMaisRecente,
-                res: this.resultados[29166].valorValidoMaisRecente,
-                rankingLocal: this.rankings[29166]['local']['posicao'],
-                rankingGeral: this.rankings[29166]['BR']['posicao']
+            if( !(this._isDadosIndicadorValidos(29166)
+                && this._isDadosIndicadorValidos(29168))
+            ) {
+                return '';
             }
-            let densidade = {
-                periodo: this.resultados[29168].periodoValidoMaisRecente,
-                res: this.resultados[29168].valorValidoMaisRecente,
-                rankingLocal: this.rankings[29168]['local']['posicao'],
-                rankingGeral: this.rankings[29168]['BR']['posicao']
-            }
+
+            let populacao = this._extrairDadosIndicador(29166);
+            let densidade = this._extrairDadosIndicador(29168);
 
             return `
                 O município tinha ${populacao.res} habitantes no último Censo. 
@@ -130,24 +135,16 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             const universoLocal = this.localidade.parent.children.length;
             const universoGeral = 5570;
 
-            let esgotamento = {
-                periodo: this.resultados[60030].periodoValidoMaisRecente,
-                res: this.resultados[60030].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60030]['local']['posicao'],
-                rankingGeral: this.rankings[60030]['BR']['posicao']
+            if( !(this._isDadosIndicadorValidos(60030)
+                && this._isDadosIndicadorValidos(60029)
+                && this._isDadosIndicadorValidos(60031))
+            ) {
+                return '';
             }
-            let arborizacao = {
-                periodo: this.resultados[60029].periodoValidoMaisRecente,
-                res: this.resultados[60029].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60029]['local']['posicao'],
-                rankingGeral: this.rankings[60029]['BR']['posicao']
-            }
-            let urbanizacao = {
-                periodo: this.resultados[60031].periodoValidoMaisRecente,
-                res: this.resultados[60031].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60031]['local']['posicao'],
-                rankingGeral: this.rankings[60031]['BR']['posicao']
-            }
+
+            let esgotamento = this._extrairDadosIndicador(60030);
+            let arborizacao = this._extrairDadosIndicador(60029);
+            let urbanizacao = this._extrairDadosIndicador(60031);
 
             return `
                 Apresenta ${esgotamento.res}% de domicílios com esgotamento sanitário adequado, ${arborizacao.res}% de domicílios urbanos em vias públicas com arborização e ${urbanizacao.res}% de domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). 
@@ -160,18 +157,14 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             const universoLocal = this.localidade.parent.children.length;
             const universoGeral = 5570;
 
-            let pib = {
-                periodo: this.resultados[60047].periodoValidoMaisRecente,
-                res: this.resultados[60047].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60047]['local']['posicao'],
-                rankingGeral: this.rankings[60047]['BR']['posicao']
+            if( !(this._isDadosIndicadorValidos(60047)
+                && this._isDadosIndicadorValidos(60048))
+            ) {
+                return '';
             }
-            let receitas = {
-                periodo: this.resultados[60048].periodoValidoMaisRecente,
-                res: this.resultados[60048].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60048]['local']['posicao'],
-                rankingGeral: this.rankings[60048]['BR']['posicao']
-            }
+
+            let pib = this._extrairDadosIndicador(60047);
+            let receitas = this._extrairDadosIndicador(60048);
 
             return `
                 Em ${pib.periodo}, tinha um PIB per capita de R$ ${pib.res}. 
@@ -186,18 +179,14 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             const universoLocal = this.localidade.parent.children.length;
             const universoGeral = 5570;
 
-            let mortalidade = {
-                periodo: this.resultados[30279].periodoValidoMaisRecente,
-                res: this.resultados[30279].valorValidoMaisRecente,
-                rankingLocal: this.rankings[30279]['local']['posicao'],
-                rankingGeral: this.rankings[30279]['BR']['posicao']
+            if( !(this._isDadosIndicadorValidos(30279)
+                && this._isDadosIndicadorValidos(60032))
+            ) {
+                return '';
             }
-            let internacoes = {
-                periodo: this.resultados[60032].periodoValidoMaisRecente,
-                res: this.resultados[60032].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60032]['local']['posicao'],
-                rankingGeral: this.rankings[60032]['BR']['posicao']
-            }
+
+            let mortalidade = this._extrairDadosIndicador(30279);
+            let internacoes = this._extrairDadosIndicador(60032);
 
             return `
                 A taxa de mortalidade infantil média no município é de ${mortalidade.res} para 1.000 nascidos vivos. 
@@ -211,24 +200,16 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             const universoLocal = this.localidade.parent.children.length;
             const universoGeral = 5570;
 
-            let idebInicial = {
-                periodo: this.resultados[60041].periodoValidoMaisRecente,
-                res: this.resultados[60041].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60041]['local']['posicao'],
-                rankingGeral: this.rankings[60041]['BR']['posicao']
+            if( !(this._isDadosIndicadorValidos(60041)
+                && this._isDadosIndicadorValidos(60042)
+                && this._isDadosIndicadorValidos(60045))
+            ) {
+                return '';
             }
-            let idebFinal = {
-                periodo: this.resultados[60042].periodoValidoMaisRecente,
-                res: this.resultados[60042].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60042]['local']['posicao'],
-                rankingGeral: this.rankings[60042]['BR']['posicao']
-            }
-            let escolarizacao = {
-                periodo: this.resultados[60045].periodoValidoMaisRecente,
-                res: this.resultados[60045].valorValidoMaisRecente,
-                rankingLocal: this.rankings[60045]['local']['posicao'],
-                rankingGeral: this.rankings[60045]['BR']['posicao']
-            }
+
+            let idebInicial = this._extrairDadosIndicador(60041);
+            let idebFinal = this._extrairDadosIndicador(60042);
+            let escolarizacao = this._extrairDadosIndicador(60045);
 
             return `
                 Em ${idebInicial.periodo}, os alunos dos anos inicias da rede pública do município tiveram nota média de ${idebInicial.res} no IDEB. 
