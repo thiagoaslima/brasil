@@ -28,6 +28,8 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     public rankings;
     public listaPeriodos
 
+    private localidadeByContexto;
+
     constructor(
         private _routerParams:RouterParamsService,
         private _activatedRoute: ActivatedRoute,
@@ -38,10 +40,14 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     ngOnInit() {
 
+        this.localidadeByContexto = this.getLocalidadesByContexto(this.localidades);
+
         this._carregarRanking(this._activatedRoute.snapshot);
     }
 
     ngOnChanges(){
+
+        this.localidadeByContexto = this.getLocalidadesByContexto(this.localidades);
 
         this._carregarRanking(this._activatedRoute.snapshot);
     }
@@ -57,17 +63,13 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         }
     }
 
-    public mudaAno(ano){
-        this.onAno.emit(ano);
-    }
-
-    public getTitulo(contexto){
+    private getLocalidadesByContexto(idLocalidade: number[]): Object{
 
         let contextos = {};
 
-        this.localidades.forEach(id => {
+        idLocalidade.forEach(id => {
 
-            if(!!id){
+            if(!!id && id > 0){
 
                 let localidade = this._localidadeService.getMunicipioByCodigo(id);
                 
@@ -84,12 +86,25 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
             }            
         });
 
-        if(contexto.toUpperCase() == 'BR'){
+        return contextos;
+    }
+
+    public mudaAno(ano){
+        this.onAno.emit(ano);
+    }
+
+    public getTitulo(contexto){
+
+       if(contexto.toUpperCase() == 'BR'){
 
             return 'NO BRASIL';
         }
 
-        return `${contextos[contexto].join(', ')} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
+        if(!this.localidadeByContexto[contexto]){
+            return;
+        }
+
+        return `${this.localidadeByContexto[contexto].join(', ')} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
     }
 
     public getRotulo(valor, unidade, multiplicador){
@@ -117,7 +132,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
         idLocalidades.forEach(id => {
 
-            if(!id){
+            if(!id || id == 0){
                 return;
             }
             
