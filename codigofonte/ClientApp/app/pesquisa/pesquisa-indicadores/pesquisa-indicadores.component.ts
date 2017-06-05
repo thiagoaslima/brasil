@@ -30,6 +30,7 @@ export class PesquisaIndicadoresComponent implements OnChanges {
     @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
    
     @Output() onIndicador = new EventEmitter;
+    @Output() onBreadcrumb = new EventEmitter;
 
     private indicadores;
     private isVazio;
@@ -65,13 +66,15 @@ export class PesquisaIndicadoresComponent implements OnChanges {
                         this.indicadorComparacao = indicador.id;
                     //expande a arvore de indicadores para sempre mostrar o indicador selecionado para comparação
                     if(indicador.id == this.indicadorComparacao){
-                        indicador.visivel = true;
                         let parent = indicador.parent;
+                        let breadcrumb = [{'nome': indicador.indicador, 'id': indicador.id , 'hasValue': this.hasValue(indicador, this.periodo)}];
                         while(parent){
+                            breadcrumb.unshift({'nome': parent.indicador, 'id': parent.id , 'hasValue': this.hasValue(parent, this.periodo)});
                             parent.visivel = true;
                             parent.children.map(child => child.visivel = true);
                             parent = parent.parent;
                         }
+                        this.onBreadcrumb.emit(breadcrumb);
                     }
                 }
                 subscription$$.unsubscribe();

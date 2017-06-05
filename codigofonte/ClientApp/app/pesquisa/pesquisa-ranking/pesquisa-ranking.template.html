@@ -1,5 +1,7 @@
 <div class="container">
 
+    <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+
     <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
 
     <div class="content__grupos">

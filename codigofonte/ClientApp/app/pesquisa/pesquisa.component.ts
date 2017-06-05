@@ -32,6 +32,7 @@ export class PesquisaComponent implements OnInit {
     indicador;
     indicadores;
     pesquisa;
+    breadcrumb;
 
     isOcultarValoresVazios = true;
 
@@ -84,5 +85,10 @@ export class PesquisaComponent implements OnInit {
 
     setaIndicador(indicador){
         this.indicador = indicador;
+    }
+
+    setaBreadcrumb(event){
+        this.breadcrumb = event;
+        console.log(event);
     }
 }

@@ -5,3 +5,13 @@
 .breadcrumb__local-atual{
     font-weight: bold;
 }
+
+.breadcrumb__parent{
+    
+}
+
+
+.breadcrumb__parent--clicavel{
+    cursor: pointer;
+    text-decoration: underline
+}

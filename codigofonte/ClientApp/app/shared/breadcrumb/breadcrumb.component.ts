@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { isBrowser } from 'angular2-universal';
 
 @Component({
     selector: 'breadcrumb',
@@ -10,30 +12,40 @@ export class Breadcrumb implements OnInit, OnChanges {
     @Input() indicadores; //array linear de indicadores (já com flat aplicado)
     @Input() indicadorSelecionado; // modelo indicador selecionado
     @Input() urlBase = '';
+    @Input() breadcrumb;
 
-    caminho = [];
+    constructor(
+        private _route: ActivatedRoute,
+        private _router: Router
+    ){}
 
     ngOnChanges(){
-        this.caminho = [];
-        if(this.indicadores){
-            for(let i = 0; i < this.indicadores.length; i++){
-                if(this.indicadores[i].id == this.indicadorSelecionado){
-                    let nivel = this.indicadores[i].nivel;
-                    this.caminho = [{'nome' : this.indicadores[i].nome, 'id' : this.indicadores[i].id}];
-                    for(; i >= 0; i--){
-                        if(this.indicadores[i].nivel == nivel - 1){
-                            nivel -= 1;
-                            this.caminho.unshift({'nome' : this.indicadores[i].indicador, 'id' : this.indicadores[i].id});
-                        }
-                    }
-                    break;
-                }
-            }
-        }
+        
     }
 
     ngOnInit(){
         
+    }
+
+    navegarPara(indicador){
+        if (isBrowser) {
+            let url = window.location.href;
+            let path:any = url.split('?')[0];
+            let queryParams = {};
+            path = path.split('/');
+            path.splice(0, path.indexOf('brasil'));
+            if(url.indexOf('?') >= 0){
+                let qp:any = url.split('?')[1];
+                qp = qp.split('&');
+                for(let i = 0; i < qp.length; i++){
+                    let keyValue = qp[i].split('=');
+                    queryParams[keyValue[0]] = keyValue[1];
+                }
+                queryParams['indicador'] = indicador;
+            }
+            //navega para a url
+            this._router.navigate(path, {'queryParams' : queryParams});
+        }
     }
 
 }
