@@ -280,20 +280,39 @@ tr.nivel-4 td:first-child {
 
 .nivel-9 .label{
     background-position: 41px -31px;
-    padding-left: 69px;
+    padding-left: 90px;
     font-style: italic;
 }
 
-.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+.nivel-10:hover {
+	background-color: #E6E6E6;
+	-webkit-transition: all 100ms ease;
+	-moz-transition: all 100ms ease;
+	-ms-transition: all 100ms ease;
+	-o-transition: all 100ms ease;
+	transition: all 100ms ease;
+	}
+	
+.nivel-10 td{
+    padding: 7px 2%;
+    color: #333333;
+}
+
+.nivel-10 .label{
+    padding-left: 90px;
+
+}
+
+.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8, .nivel-9, .nivel-10{
     cursor: pointer;
 }
 
-.ie10 .nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+.ie10 .nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8, .nivel-9, .nivel-10{
 	background-color:#fff;
 }
 
 @media all and (-ms-high-contrast:none) {
-	.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8{
+	.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5, .nivel-6, .nivel-7, .nivel-8, .nivel-9, .nivel-10{
 	background-color: #fff;
 }
 }

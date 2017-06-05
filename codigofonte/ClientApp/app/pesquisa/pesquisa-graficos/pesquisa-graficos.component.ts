@@ -1,12 +1,11 @@
+import { Localidade } from '../../shared3/models';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { IndicadorService3 } from '../../shared3/services';
+import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
 import { Observable } from 'rxjs/Rx';
 
 import { LinhaTempo } from '../../infografia/linha-tempo/linha-tempo.component';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.component';
 
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { ResultadoService3 } from '../../shared3/services/resultado.service';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
@@ -19,7 +18,7 @@ import { RouterParamsService } from '../../shared/router-params.service';
 
 export class PesquisaGraficosComponent implements OnInit, OnChanges {
 
-    @Input() localidades;
+    @Input('localidades') codigosLocalidades: any[];
     @Input() indicadores;
     @Input() indicadorSelecionado;
     @Input() pesquisa;
@@ -42,6 +41,8 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
 
     public eixo;
     public dados;
+
+    public localidades: Localidade[];
 
     public colors = {
         bar: [{ backgroundColor: '#6BC9C7' }, { backgroundColor: '#F7931E' }, { backgroundColor: '#9F55A3' }, { backgroundColor: '#8CC63F' }],
@@ -66,7 +67,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
     }
 
     constructor(
-        private _localidadeServ: LocalidadeService2,
+        private _localidadeServ: LocalidadeService3,
         private _resultadoServ: ResultadoService3,
         private _pesquisaService: PesquisaService2,
         private _indicadorServ: IndicadorService3,
@@ -91,14 +92,14 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
             });
         });
 
-        if(this.localidades && this.localidades.length > 0) {
+        if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
             this.mapas = [];
             this.atualizaGraficos();
         }
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if(this.localidades && this.localidades.length > 0) {
+        if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
             this.atualizaGraficos();
         }
 
@@ -120,18 +121,24 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
         if(this.indicadorSelecionado === undefined) {
             return;
         }
-        this._resultadoServ.getResultadosCompletos(this.indicadorSelecionado, this.localidades)
+        this._resultadoServ.getResultadosCompletos(this.indicadorSelecionado, this.codigosLocalidades)
             .subscribe((resultados) => {
+                this.localidades = [];
                 this.eixo = resultados[0].periodos.slice();
                 this.eixo.reverse();
-                this.dados = resultados.map(resultado => {
-                    let data = resultado.valores.slice();
-                    data.reverse();
-                    return {
-                        data: data,
-                        label: resultado.codigoLocalidade
-                    }
-                })
+                this.dados = resultados
+                    .filter(Boolean)
+                    .map(resultado => {
+                        let data = resultado.valores.slice();
+                        data.reverse();
+
+                        let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
+                        this.localidades.push(localidade);
+                        return {
+                            data: data,
+                            label: localidade.nome
+                        }
+                    });
             });
 
     }

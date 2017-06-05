@@ -71,6 +71,23 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     }
 
+    get marcadores() {
+        let [minX, minY, width, height] = this.malha.viewBox.split(" ").map(parseFloat);
+        let marcadorSize = Math.max(width, height)/15;
+
+        let marcadores = this.localidadesMarcadas.map((localidade) => {
+
+        });
+        return this.localidadesMarcadas.map((localidade) => {
+            return {
+                x: this.getCenter(this.malha.geometries, localidade.codigo)[0] - marcadorSize/2,
+                y: this.getCenter(this.malha.geometries, localidade.codigo)[1] - marcadorSize/2,
+                width: marcadorSize,
+                height: marcadorSize
+            }
+        });
+    }
+
     getValorMunicipio(codmun: number) {
         let valor;
 

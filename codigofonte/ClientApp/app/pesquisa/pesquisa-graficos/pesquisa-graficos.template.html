@@ -10,4 +10,13 @@
         [colors]="colors"
     ></grafico>
 
+      <div class="legenda">
+
+        <div class="legenda__item" *ngFor="let localidade of localidades; let i = index">
+            <div class="legenda__cor faixa{{i+1}}"></div>
+            <p class="legenda__texto">{{ localidade?.nome }}</p>
+        </div>
+
+    </div>
+
 </div>

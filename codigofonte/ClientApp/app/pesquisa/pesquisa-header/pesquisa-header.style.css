@@ -16,7 +16,7 @@
 .cabecalho .select-ano-container {
     font-weight: bold;
     font-size: small;
-    margin-top: 30px;
+    margin-top: 25px;
     float: left;
 }
 
@@ -29,7 +29,7 @@
     font-size: small;
     padding: 2px 5px;
     float: right;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-right: 4px;
     background: #ccc;
 }
@@ -64,22 +64,47 @@
 .notas.notas__aberto > .notas__lista-container {
     display: block;
 }
-.nome-pesquisa {
-	border-bottom: 1px solid black;
-	}
+	
+.titulo-pesquisa {
+	font-weight:bold;
+	font-size: 1.3em;
+	margin:0;
+	padding:0;
+}
+
+
 .cabecalho__nome-pesquisa{
     float: left;
-    background-color: #E6E6E6;
+    background-color: #E6E6E6;	
     width: 38%; 
     height: 120px;
     padding: 1% 15px;
     border-bottom: 3px solid #E2871A;
     border-right: 3px solid #fff;
+	
 }
 
 .cabecalho__nome-pesquisa span, .cabecalho__nome-pesquisa span select:first-child{
     font-weight: bold;
     width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+
+.cabecalho__nome-pesquisa span{
+	-webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;	
+}
+
+.cabecalho__nome-pesquisa span:hover{
+	background-color: #ccc;
+	-webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;	
 }
 
 .cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
@@ -449,6 +474,16 @@
         width: 33%;
     }
     
+    .cabecalho__seletor-visualizacao-dados__item{
+         display: none
+    }
+
+    .cabecalho__seletor-visualizacao-dados__item:first-child{
+         display: block
+    }
+
+ 
+
     .por-estado__selecionar-municipio{
         min-width: 207px;
         max-width: 207px;
