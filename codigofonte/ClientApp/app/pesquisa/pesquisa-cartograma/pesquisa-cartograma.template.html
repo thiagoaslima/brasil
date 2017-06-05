@@ -1,6 +1,7 @@
 <div class="container">
     
-    <breadcrumb [indicadores]="indicadores" [indicadorSelecionado]="indicadorSelecionado"></breadcrumb>
+    <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+    
     <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
     
     <div [class.mapas--variosMapas]="mapas.length > 1">

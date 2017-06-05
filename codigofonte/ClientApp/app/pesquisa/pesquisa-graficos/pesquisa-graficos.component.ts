@@ -22,6 +22,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
     @Input() indicadores;
     @Input() indicadorSelecionado;
     @Input() pesquisa;
+    @Input() breadcrumb;
 
     @Output() onAno = new EventEmitter;
     

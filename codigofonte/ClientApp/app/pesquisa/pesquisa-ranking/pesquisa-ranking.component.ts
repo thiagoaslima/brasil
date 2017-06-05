@@ -22,6 +22,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     @Input() indicadorSelecionado;
     @Input() pesquisa;
     @Input() periodo: string;
+    @Input() breadcrumb;
 
     @Output() onAno = new EventEmitter;
 
