@@ -100,10 +100,6 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
             this.atualizaGraficos();
-            this.localidades = this.codigosLocalidades.map((codigosLocalidade) => {
-                    return this._localidadeServ.getMunicipioByCodigo(codigosLocalidade);
-                })
-                .filter(Boolean);
         }
 
         if(this.pesquisa) {
@@ -126,6 +122,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
         }
         this._resultadoServ.getResultadosCompletos(this.indicadorSelecionado, this.codigosLocalidades)
             .subscribe((resultados) => {
+                this.localidades = [];
                 this.eixo = resultados[0].periodos.slice();
                 this.eixo.reverse();
                 this.dados = resultados
@@ -133,9 +130,12 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
                     .map(resultado => {
                         let data = resultado.valores.slice();
                         data.reverse();
+
+                        let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
+                        this.localidades.push(localidade);
                         return {
                             data: data,
-                            label: resultado.codigoLocalidade
+                            label: localidade.nome
                         }
                     });
             });
