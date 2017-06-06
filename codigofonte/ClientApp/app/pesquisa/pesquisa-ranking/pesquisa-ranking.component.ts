@@ -105,7 +105,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
             return;
         }
 
-        return `${this.localidadeByContexto[contexto].join(', ')} NO ESTADO DE ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
+        return `${this.localidadeByContexto[contexto].join(', ')} NO ESTADO ${this.getPreprosisaoTitulo(this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome)} ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
     }
 
     public getRotulo(valor, unidade, multiplicador){
@@ -245,4 +245,28 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         return indice[infoLocalidade.localidade.codigo];
     }
 
+    private getPreprosisaoTitulo(nomeUF: string): string{
+
+        let preposicaoDo = ['acre', 'amapá', 'amazonas', 'ceará', 'distrito federal', 'mato grosso', 'mato grosso do sul', 'maranhão', 'paraná', 'pará', 'piauí', 'rio grande do norte', 'rio grande do sul', 'rio de janeiro'];
+        let preposicaoDa = ['bahia', 'paraíba'];
+        let preposicaoDe = ['alagoas', 'goiás', 'minas gerais', 'pernanbuco', 'rondônia', 'roraima', 'santa catarina', 'sergipe', 'são paulo', 'tocantins'];
+
+        if(preposicaoDo.indexOf(nomeUF.toLowerCase()) >= 0){
+
+            return 'DO';
+        }
+
+
+        if(preposicaoDa.indexOf(nomeUF.toLowerCase()) >= 0){
+
+            return 'DA';
+        }
+
+        if(preposicaoDe.indexOf(nomeUF.toLowerCase()) >= 0){
+
+            return 'DE';
+        }
+
+        return 'DE';
+    }
 }
