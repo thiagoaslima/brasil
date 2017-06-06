@@ -37,3 +37,34 @@ h4{
 	width: 90%;
 	margin-top: -15px;
 	}
+
+@media screen and (max-width: 1460px) {
+    .mapas--variosMapas .mapas__mapa{
+        width: 100%;
+        border-right: 0px;
+    }   
+    .mapas--variosMapas .mapas__mapa:nth-child(odd){
+        border-right: 0px;
+    }
+
+
+    /*MAIS DE 1 MAPA NA TELA*/
+    .mapas--variosMapas .mapas__mapa{
+        width: 100%;
+        float: none;
+        padding-right: 0%;
+        border-left: none;
+        margin-left: 0;
+    }
+
+    .mapas--variosMapas .mapas__mapa:nth-child(2){
+        padding-left: 0%;
+        padding-right: 0%;
+        border-left: none;
+    }
+
+    .mapas--variosMapas .mapas__mapa:nth-child(3){
+        clear: both;
+    }
+
+}
