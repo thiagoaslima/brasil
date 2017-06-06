@@ -21,7 +21,7 @@
         </tr>
     </template>
     
-    <div class="mensagem-vazio" *ngIf="indicadores && indicadores.length > 0 && indicadores[0].isVazio && isOcultarValoresVazios">
+    <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
         Nenhum valor para exibir.
     </div>
 </table>
