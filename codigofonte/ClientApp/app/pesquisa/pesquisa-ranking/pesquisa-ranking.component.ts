@@ -58,7 +58,10 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
             this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
                 return periodo.nome;
             });
-            this._obterRanking(this.indicadorSelecionado, this.periodo, this.localidades).subscribe(ranking => {
+
+            let indicadador = !!this.indicadorSelecionado ? this.indicadorSelecionado : this.indicadores[0].id;
+
+            this._obterRanking(indicadador, this.periodo, this.localidades).subscribe(ranking => {
                 this.rankings = this._mergeRankingsByContext(ranking);
             });
         }
