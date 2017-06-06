@@ -89,6 +89,5 @@ export class PesquisaComponent implements OnInit {
 
     setaBreadcrumb(event){
         this.breadcrumb = event;
-        console.log(event);
     }
 }
