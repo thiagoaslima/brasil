@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Rx';
 
 import { SinteseService } from '../sintese/sintese.service';
 
@@ -21,7 +23,7 @@ import { flatTree } from '../utils/flatFunctions';
     styleUrls: ['./pesquisa.style.css']
 })
 
-export class PesquisaComponent implements OnInit {
+export class PesquisaComponent implements OnInit, OnDestroy {
     @ViewChild('dados') dados: ElementRef;
 
     posicaoIndicador: string = "2";
@@ -36,6 +38,8 @@ export class PesquisaComponent implements OnInit {
 
     isOcultarValoresVazios = true;
 
+    private subscription: Subscription;
+
     constructor(
         private _routerParams: RouterParamsService,
         private _localidadeService2: LocalidadeService2,
@@ -45,7 +49,8 @@ export class PesquisaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._routerParams.params$.subscribe(urlParams => {
+        
+        this.subscription = this._routerParams.params$.subscribe(urlParams => {
             this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
                 this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {
                     this.pesquisa = pesquisa;
@@ -89,5 +94,10 @@ export class PesquisaComponent implements OnInit {
 
     setaBreadcrumb(event){
         this.breadcrumb = event;
+    }
+
+    ngOnDestroy(){
+
+        this.subscription.unsubscribe();
     }
 }

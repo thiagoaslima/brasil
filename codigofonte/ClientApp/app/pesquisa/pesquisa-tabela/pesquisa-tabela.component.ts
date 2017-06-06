@@ -65,7 +65,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
     private isFolha(indicador){
-        return indicador.children == null || indicador.children == undefined || indicador.children.length == 0;
+        return !indicador.children || indicador.children.length == 0 || (this.isOcultarValoresVazios && !this.childrenHasValue(indicador));
     }
 
     private hasValue(indicador, periodo){
@@ -85,6 +85,15 @@ export class PesquisaTabelaComponent implements OnChanges {
         if(indicador.children){
             for(let i = 0; i < indicador.children.length; i++)
                 if(this.hasAnyValue(indicador.children[i], periodo))
+                    return true;
+        }
+        return false;
+    }
+
+    private childrenHasValue(indicador){
+        if(indicador.children){
+            for(let i = 0; i < indicador.children.length; i++)
+                if(!indicador.children[i].isVazio)
                     return true;
         }
         return false;
