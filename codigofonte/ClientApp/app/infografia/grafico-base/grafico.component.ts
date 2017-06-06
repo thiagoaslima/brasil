@@ -27,7 +27,8 @@ export class GraficoComponent implements OnInit, OnChanges {
     }
     @Input() titulo: string = '';
     @Input('eixo') labelsEixoX: string[] = [];
-    @Input() dados: number[] | Array<{ data: number[], label: string }> = [];
+    @Input() dados: Array<{ data: number[], label: string }> = [];
+    // :  | Array<{ data: number[], label: string }>
 
     /** CONFIGURAÇÃO **/
     @Input('mostrar-legenda') mostrarLegenda: boolean = false;
@@ -69,7 +70,16 @@ export class GraficoComponent implements OnInit, OnChanges {
         scales: {
             yAxes: [{
                 stacked: false,
-                ticks: { beginAtZero: true }
+                ticks: { 
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                        if(parseInt(value) >= 1000){
+                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                        } else {
+                            return value;
+                        }
+                    }
+                }
             }],
             xAxes: [{
                 stacked: false
@@ -99,6 +109,9 @@ export class GraficoComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+
+        this.removerBGColorGraficoLinha();
+
         if (changes.hasOwnProperty('tipo') && changes.tipo.currentValue) {
             switch (changes.tipo.currentValue) {
                 case 'barraJustaposta':
@@ -133,6 +146,19 @@ export class GraficoComponent implements OnInit, OnChanges {
 
     isLoading() {
         return !this.isValid();
+    }
+
+    private removerBGColorGraficoLinha(){
+
+        if(this.dados){
+
+            this.dados = this.dados.map(res => {
+
+                res['fill'] = false;
+
+                return res;
+            });
+        }
     }
 
 }

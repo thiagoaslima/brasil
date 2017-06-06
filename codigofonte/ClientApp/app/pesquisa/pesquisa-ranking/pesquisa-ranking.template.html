@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="grupo__item">
-                    <div class="grupo__item__posicao">{{localidade.posicao}}</div>
+                    <div class="grupo__item__posicao">{{localidade.posicao}}&ordm;</div>
                     <div class="grupo__item__nome" [class.grupo__item__nome--selecionado]="isSelecionado(localidade.localidade.codigo)">{{localidade.localidade.nome}}</div>
                     <div class="grupo__item__barra" [title]="getRotulo(localidade.valor, localidade.unidadeMedida, localidade.fatorMultiplicativo)">
                         <div class="grupo__item__barra__porcento" [style.width.%]="localidade.proporcao"></div>

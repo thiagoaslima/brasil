@@ -238,8 +238,11 @@ g, .periodo-link {
 
 .legenda__item{
     margin-top: 18px;
+	padding-left:3px;
 }
 
+
+	
 .legenda__cor{
     width: 100%;
     height: 6px;

@@ -129,7 +129,13 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
                 this.dados = resultados
                     .filter(Boolean)
                     .map(resultado => {
-                        let data = resultado.valores.slice();
+                        let data = resultado.valores.slice().map((valor) => {
+                            if (valor >= 99999999999990) {
+                                return undefined;
+                            }
+
+                            return valor;
+                        });
                         data.reverse();
 
                         let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
