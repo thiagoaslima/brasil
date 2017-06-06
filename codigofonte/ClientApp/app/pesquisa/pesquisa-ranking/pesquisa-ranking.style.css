@@ -20,6 +20,7 @@
 .grupo:nth-child(odd){
     border-right: 2px solid #CCCCCC;
     margin-right: 18px;
+    clear: both;
 }
 
 .grupo__titulo{
