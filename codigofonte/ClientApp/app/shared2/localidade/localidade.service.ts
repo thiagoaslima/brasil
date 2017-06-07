@@ -184,6 +184,35 @@ export class LocalidadeService2 {
         });
         return arr;
     }
+
+    /**
+     * Retorna a preposição (do, da ou de) mais adequada ao nome da UF.
+     */
+    public getPreprosisaoTituloUF(nomeUF: string): string{
+
+        let ufsComPreposicaoDo = ['acre', 'amapá', 'amazonas', 'ceará', 'distrito federal', 'mato grosso', 'mato grosso do sul', 'maranhão', 'paraná', 'pará', 'piauí', 'rio grande do norte', 'rio grande do sul', 'rio de janeiro'];
+        let ufsComPreposicaoDa = ['bahia', 'paraíba'];
+        let ufsComPreposicaoDe = ['alagoas', 'goiás', 'minas gerais', 'pernanbuco', 'rondônia', 'roraima', 'santa catarina', 'sergipe', 'são paulo', 'tocantins'];
+
+        if(ufsComPreposicaoDo.indexOf(nomeUF.toLowerCase()) >= 0){
+
+            return 'do';
+        }
+
+
+        if(ufsComPreposicaoDa.indexOf(nomeUF.toLowerCase()) >= 0){
+
+            return 'da';
+        }
+
+        if(ufsComPreposicaoDe.indexOf(nomeUF.toLowerCase()) >= 0){
+
+            return 'de';
+        }
+
+
+        return 'de';
+    }
     
     private _buildLocalidadesTree() {
         this._brasil = Localidade.criar(Localidade.convertFromFile(brasil));
