@@ -19,7 +19,7 @@ export class RankingService3 {
         const _contexto = contextos.join(',');
         const _indicadores = indicadores.map(obj => `${obj.indicadorId}(${obj.periodo})`).join('|'); 
 
-        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${_indicadores}?localidade=${localidade}&contexto=${_contexto}&upper=0&lower=0`;
+        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${_indicadores}?localidade=${localidade}&contexto=${_contexto}&upper=0&lower=0`;
 
         return this._request(url).map(response => response.map(item => new Ranking(item)));
     }

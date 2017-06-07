@@ -15,10 +15,10 @@ import { Observable } from 'rxjs/Observable';
 })
 export class FotosComponent implements OnInit {
    
-    private servicoImagem = "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private servicoThumbs = "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
-    private urlDownload = "http://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoImagem = "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoThumbs = "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private urlDetalhes = "https://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
+    private urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?https=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
 
     private mostraGaleria = false;
     private mostraDetalhe = false;
@@ -67,15 +67,15 @@ export class FotosComponent implements OnInit {
     ngOnInit() {
 
         this.http
-            .get('http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
+            .get('https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
             .map(res => {
                 // If request fails, return false
                 // console.log(res.status);
                return (res.status < 200 || res.status >= 300) ? false : true;
             })
             .subscribe( (retornaServico) => {
-                this.servicoImagem = retornaServico ? "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-                this.servicoThumbs = retornaServico ? "http://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "http://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+                this.servicoImagem = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+                this.servicoThumbs = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
              }); // Reach true if res.status >= 200 && <= 299 // Reach false if fails
 
         this._appState.observable$

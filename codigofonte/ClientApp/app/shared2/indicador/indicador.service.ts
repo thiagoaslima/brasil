@@ -36,7 +36,7 @@ export class IndicadorService2 {
     }
 
     getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string): Observable<Indicador[]> {
-        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}`;
 
         return this._http.get(url, options)
             .retry(3)
@@ -51,7 +51,7 @@ export class IndicadorService2 {
 
     getIndicadorById(indicadorId: number, localidade: number | string): Observable<Indicador[]> {
 
-        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/${indicadorId}?localidade=${localidade}}`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/${indicadorId}?localidade=${localidade}}`;
 
         return this._http.get(url, options)
             .map(res => res.json())
@@ -61,7 +61,7 @@ export class IndicadorService2 {
     getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false): Observable<Indicador[]> {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
         const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
-        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}`;
 
         return this._http.get(url, options)
             .retry(3)
@@ -105,8 +105,8 @@ export class IndicadorService2 {
             const queryIndicadores = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
             const queryLocalidades = localidade === undefined ? '' : `&localidades=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
 
-            let urlValores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/valores?indicadores=${queryIndicadores}${queryLocalidades}`;
-            let urlIndicadores = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores?indicadores=${queryIndicadores}`;
+            let urlValores = `https://servicodados.ibge.gov.br/api/v1/pesquisas/valores?indicadores=${queryIndicadores}${queryLocalidades}`;
+            let urlIndicadores = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores?indicadores=${queryIndicadores}`;
 
             let fallBackError = err => Observable.of({ json: () => ({}) });
 
@@ -156,7 +156,7 @@ export class IndicadorService2 {
 
 
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable<Ranking> {
-        let url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0`;   
 
         return this._http.get(url, options)
             .retry(3)
@@ -245,7 +245,7 @@ export class IndicadorService2 {
 
         const _contexto = contexto.join(',');
 
-        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}`;
+        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}`;
 
         return this._rankingRequest(url).map(res => {
             
@@ -301,7 +301,7 @@ export class IndicadorService2 {
     private _getRankingsRequest(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable<Ranking[]> {
         const query = indicadoresId.map((id, index) => `${id}(${periodos[index]})`).join('|');
         const _contexto = contexto.join(',')
-        const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${query}?lower=0&contexto=${_contexto}&localidade=${codigoLocalidade}`;
+        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${query}?lower=0&contexto=${_contexto}&localidade=${codigoLocalidade}`;
 
         return this._http.get(url, options)
             .retry(3)

@@ -39,7 +39,7 @@ export class SinteseService {
      */
     public getInfoPesquisa(pesquisa: string) {
 
-        return this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}`)
+        return this._http.get(`https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}`)
             .map((res) => res.json())
             .map((pesquisa) => {
 
@@ -56,14 +56,14 @@ export class SinteseService {
 
     public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
 
-        const serviceEndpoint = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=${escopo}`;
+        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=${escopo}`;
 
         return this._http.get(serviceEndpoint).map((res => res.json()));
     }
 
     public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
 
-        const serviceEndpoint = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}`;
+        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint)
             .map((res => res.json()))
@@ -101,7 +101,7 @@ export class SinteseService {
 
         const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
 
-        const dadosPesquisa$ = this._http.get(`http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&${codigoIndicadores}`)
+        const dadosPesquisa$ = this._http.get(`https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&${codigoIndicadores}`)
             .map((res => res.json()))
             .map(this._excludeNullYearsFromResultados);
 
@@ -136,7 +136,7 @@ export class SinteseService {
         }
 
         const nomesPesquisa$ = this._http.get(
-            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`
         ).map((res => res.json()));
 
         return nomesPesquisa$
@@ -192,7 +192,7 @@ export class SinteseService {
 
         let codigo: string = codigoLocalidade.toString().substr(0, 6);
 
-        return this._http.get(`http://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
+        return this._http.get(`https://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
             .map((res) => {
 
                 return res.json();
@@ -221,7 +221,7 @@ export class SinteseService {
         let codigo = codigoMunicipio.toString().substr(0, 6);
 
         return this._http.get(
-            `http://servicodados.ibge.gov.br/api/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
+            `https://servicodados.ibge.gov.br/api/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
         )
             .map(res => res.json())
             .map((res) => {
@@ -386,7 +386,7 @@ export class SinteseService {
         }
 
         return this._http.get(
-            `http://servicomapas.ibge.gov.br/api/mapas/${codigo}/${nivel}`
+            `https://servicomapas.ibge.gov.br/api/mapas/${codigo}/${nivel}`
         ).map((res) => {
             let data = res.json();
             return convertTarsus2TopoJson(data.Tarsus);

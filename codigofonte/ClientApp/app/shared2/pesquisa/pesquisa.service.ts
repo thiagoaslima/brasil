@@ -29,7 +29,7 @@ export class PesquisaService2 {
     }
 
     getAllPesquisas(): Observable<Pesquisa[]> {
-        const url = 'http://servicodados.ibge.gov.br/api/v1/pesquisas';
+        const url = 'https://servicodados.ibge.gov.br/api/v1/pesquisas';
 
         return this._http.get(url, options)
             .retry(3)
@@ -48,7 +48,7 @@ export class PesquisaService2 {
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         let keyCache = this.getPesquisaKeyCache(pesquisaId);
         if(!this._getPesquisaCache[keyCache]) {
-            const url = `http://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}`;
+            const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}`;
 
             this._getPesquisaCache[keyCache] = this._http.get(url, options)
                 .retry(3)

@@ -4,7 +4,7 @@ var { Router } = require('express');
 import { fakeDemoRedisCache as cache } from './cache';
 
 const URL = {
-    _prefix: 'http://servicodados.ibge.gov.br/api/v1',
+    _prefix: 'https://servicodados.ibge.gov.br/api/v1',
 
     set: function (url) {
         return this._prefix + url;
