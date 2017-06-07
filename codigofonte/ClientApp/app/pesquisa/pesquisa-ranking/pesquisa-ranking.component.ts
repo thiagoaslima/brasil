@@ -8,6 +8,7 @@ import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { ItemRanking, RankingLocalidade } from './ranking.model';
+import { ResultadoPipe } from '../../shared/resultado.pipe';
 
 
 @Component({
@@ -31,13 +32,17 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     private localidadeByContexto;
 
+    private _resultadoPipe: ResultadoPipe;
+
     constructor(
         private _routerParams:RouterParamsService,
         private _activatedRoute: ActivatedRoute,
         private _indicadorService: IndicadorService2,
         private _localidadeService: LocalidadeService2,
         private _pesquisaService: PesquisaService2
-    ) { }
+    ) { 
+        this._resultadoPipe = new ResultadoPipe();
+    }
 
     ngOnInit() {
 
@@ -112,7 +117,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     }
 
     public getRotulo(valor, unidade, multiplicador){
-
+        valor = this._resultadoPipe.transform(valor, unidade);
         return `${valor}${!!multiplicador && multiplicador > 1 ? ' x' + multiplicador : ''} ${!!unidade ? unidade : ''}`;
     }
 
