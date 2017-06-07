@@ -142,19 +142,25 @@
 .cabecalho__seletor-visualizacao-dados__item{
     border-bottom: 3px solid #CCC;
     height: 65px;
-    padding-top: 15px;
+    /*padding-top: 15px;*/
     cursor: pointer;
     text-transform: uppercase;
+    background-repeat: no-repeat;
+    background-position: center 15px;
+    fill: #727272;
+    padding-top: 14px;
 }
 
 .cabecalho__seletor-visualizacao-dados__item:hover{
     border-bottom: 3px solid #333;
     color:#333;
+    fill: #333;
 }
 
 .cabecalho__seletor-visualizacao-dados__item.selecionado{
     border-bottom: 3px solid #E2871A;
     color:#E2871A;
+    fill: #E2871A;
 }
 
 .cabecalho__seletor-visualizacao-dados i {

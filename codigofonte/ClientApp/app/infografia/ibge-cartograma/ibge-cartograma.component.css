@@ -294,6 +294,9 @@ g, .periodo-link {
     /* margin-top: -3px; */
     /* line-height: 12px; */
 }
+.legenda__texto{
+	font-size: 0.8em;
+}
 
 .legenda__municipio {
 	font-size: 0.8em;

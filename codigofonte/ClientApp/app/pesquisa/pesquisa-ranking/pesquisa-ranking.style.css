@@ -4,10 +4,10 @@
 
 .content__grupos{
     display: table;
-    width: 89%;
+    width: 100%;
     margin-bottom: 50px;
     margin-top: 32px;
-    margin-left: 10%;
+
 }
 .grupo {
     width: 46%;
