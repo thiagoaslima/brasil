@@ -1,6 +1,7 @@
 <div class="container">
        
-    <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+    <breadcrumb [breadcrumb]="breadcrumb" style="display: inline-block;"></breadcrumb>
+    <span class="unidade" *ngIf="unidade != ''">(Unidade: {{unidade}}{{multiplicador}})</span>
     
     <grafico
         tipo="linha"

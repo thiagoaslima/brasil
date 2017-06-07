@@ -42,13 +42,10 @@
                 />
             </svg:g>
         </svg>
-        
-        
-        
     </div>
 
     <div class="legenda" *ngIf="valores && valores.length > 0">
-        <p class="legenda__texto">Legenda</p>
+        <p class="legenda__texto">Legenda <span *ngIf="indicador?.unidade?.multiplicador > 1">(fator multiplicador: x{{ indicador?.unidade?.multiplicador }})</span></p>
         <div class="legenda__cores">
             <div class="legenda__item" *ngFor="let valor of valores; let i = index">
                 <div class="legenda__cor faixa{{i+1}}"></div>
@@ -67,9 +64,6 @@
         <div class="legenda__item legenda__item--municipio">
             <p class="legenda__texto"><img src="img/marcador.svg"> Município selecionado</p>
         </div>
-
-        
-
     </div>
 
 </div>

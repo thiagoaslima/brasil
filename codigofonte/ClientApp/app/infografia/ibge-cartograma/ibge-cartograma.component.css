@@ -250,6 +250,10 @@ g, .periodo-link {
     font-size: 0.8em;	
 }
 
+.legenda__info{
+    font-size: 0.8em;	
+}
+
 .legenda__cor{
     width: 100%;
     height: 6px;

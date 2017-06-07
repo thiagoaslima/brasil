@@ -41,6 +41,8 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
 
     public eixo;
     public dados;
+    public unidade;
+    public multiplicador;
 
     public localidades: Localidade[];
 
@@ -126,6 +128,9 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
                 this.localidades = [];
                 this.eixo = resultados[0].periodos.slice();
                 this.eixo.reverse();
+                this.unidade = resultados.length > 0 && resultados[0].indicador && resultados[0].indicador.unidade ? resultados[0].indicador.unidade.nome : '';
+                this.multiplicador = resultados.length > 0 && resultados[0].indicador && resultados[0].indicador.unidade && resultados[0].indicador.unidade.multiplicador > 1 ?
+                    ' x' + resultados[0].indicador.unidade.multiplicador : '';
                 this.dados = resultados
                     .filter(Boolean)
                     .map(resultado => {
