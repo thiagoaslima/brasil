@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { AppState } from '../../shared2/app-state';
@@ -7,17 +7,18 @@ import { ScrollDirective } from '../../shared/window-events/scroll.directive';
 
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'fotos',
     templateUrl: './fotos.template.html',
     styleUrls: ['./fotos.style.css']
 })
-export class FotosComponent implements OnInit {
+export class FotosComponent implements OnInit, OnDestroy {
    
-    private servicoImagem = "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private servicoThumbs = "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private urlDetalhes = "https://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
+    private servicoImagem = "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoThumbs = "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
     private urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?https=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
 
     private mostraGaleria = false;
@@ -37,7 +38,7 @@ export class FotosComponent implements OnInit {
     private detalhes = "";
     private downloadLink = "";
     private downloadNome = "";
-    private http;
+    private _subscription: Subscription;
 
     //variável estática que guarda a referencia para o timer, precisa ser estática para evitar que dois timers sobrevivam ao mesmo tempo, criando um bug de flicking
     public static timer = null;
@@ -46,39 +47,26 @@ export class FotosComponent implements OnInit {
         private renderer: Renderer,
         private _sinteseService: SinteseService,
         private _appState: AppState,
-        http:Http
+        private http: Http
     ) {
-        //destroi o timer anterior
-        // if(FotosComponent.timer != null){
-        //     clearInterval(FotosComponent.timer);
-        // }
-        //cria novo timer para verificar se precisa carregar novas fotos a cada segundo
-        // FotosComponent.timer = setInterval(
-        //     () => this.lazyLoad(),
-        //     1000
-        // );
-
-        this.http = http;
 
     }
 
-
-
     ngOnInit() {
 
-        this.http
-            .get('https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
-            .map(res => {
-                // If request fails, return false
-                // console.log(res.status);
-               return (res.status < 200 || res.status >= 300) ? false : true;
-            })
-            .subscribe( (retornaServico) => {
-                this.servicoImagem = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-                this.servicoThumbs = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-             }); // Reach true if res.status >= 200 && <= 299 // Reach false if fails
+        // this.http
+        //     .get('https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
+        //     .map(res => {
+        //         // If request fails, return false
+        //         // console.log(res.status);
+        //        return (res.status < 200 || res.status >= 300) ? false : true;
+        //     })
+        //     .subscribe( (retornaServico) => {
+        //         this.servicoImagem = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+        //         this.servicoThumbs = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+        //      }); // Reach true if res.status >= 200 && <= 299 // Reach false if fails
 
-        this._appState.observable$
+        this._subscription = this._appState.observable$
             .filter( ({localidade}) => Boolean(localidade))
             .map(state => state.localidade)
             .flatMap(localidade => this._sinteseService.getFotografias(localidade.codigo))
@@ -110,6 +98,11 @@ export class FotosComponent implements OnInit {
                     this.preview3 = '';
                 }
             });
+    }
+
+    ngOnDestroy(){
+
+        this._subscription.unsubscribe();
     }
 
 
