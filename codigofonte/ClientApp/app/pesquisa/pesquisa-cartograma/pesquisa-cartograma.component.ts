@@ -112,6 +112,11 @@ export class PesquisaCartogramaComponent implements OnChanges {
         
     }
 
+    private getPreposicaoUF(nomeUf: string): string{
+
+        return this._localidadeServ.getPreprosisaoTituloUF(nomeUf);
+    }
+
     mudaAno(ano){
         this.onAno.emit(ano);
     }

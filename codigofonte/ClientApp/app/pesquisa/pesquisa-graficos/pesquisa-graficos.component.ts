@@ -1,7 +1,7 @@
 import { Localidade } from '../../shared3/models';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { LinhaTempo } from '../../infografia/linha-tempo/linha-tempo.component';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.component';
@@ -16,7 +16,7 @@ import { RouterParamsService } from '../../shared/router-params.service';
     styleUrls: ['./pesquisa-graficos.style.css']
 })
 
-export class PesquisaGraficosComponent implements OnInit, OnChanges {
+export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input('localidades') codigosLocalidades: any[];
     @Input() indicadores;
@@ -68,6 +68,8 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
         }]
     }
 
+    private routeSubscribe: Subscription;
+
     constructor(
         private _localidadeServ: LocalidadeService3,
         private _resultadoServ: ResultadoService3,
@@ -78,7 +80,11 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
 
     ngOnInit() {
 
-        this._routerParamsService.params$.subscribe((params) => {
+        this.routeSubscribe = this._routerParamsService.params$.subscribe((params) => {
+            if(!params.params.pesquisa) {
+                debugger;
+                return;
+            }
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
                 this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
@@ -97,6 +103,13 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
         if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
             this.mapas = [];
             this.atualizaGraficos();
+        }
+    }
+
+    ngOnDestroy(): void {
+        debugger;
+        if(this.routeSubscribe) {
+            this.routeSubscribe.unsubscribe();
         }
     }
 
@@ -159,4 +172,5 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges {
         this.onAno.emit(ano);
         console.log(ano);
     }
+
 }

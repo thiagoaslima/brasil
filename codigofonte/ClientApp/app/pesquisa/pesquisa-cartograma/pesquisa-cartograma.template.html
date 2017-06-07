@@ -7,7 +7,7 @@
     <div [class.mapas--variosMapas]="mapas.length > 1">
         
         <div class="mapas__mapa" *ngFor="let mapa of mapas">
-            <h4>Municípios de {{mapa.localidade.nome}}</h4>
+            <h4>Municípios {{getPreposicaoUF(mapa.localidade.nome)}} {{mapa.localidade.nome}}</h4>
             <div class="tamanho_cartograma">
             <ibge-cartograma
                 [localidade]="mapa.localidade"

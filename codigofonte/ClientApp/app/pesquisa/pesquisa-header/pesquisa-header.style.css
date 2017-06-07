@@ -468,8 +468,13 @@
         margin-top: 4px;
     }
 
-    .cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
+    .cabecalho__visualizacao-dados{
         width: 100%;
+    }
+
+    .cabecalho__seletor-visualizacao-dados{
+        width: 100%;
+        display: none;
     }
 
     .cabecalho__visualizacao-dados__item--compartilhar{
@@ -481,11 +486,11 @@
     }
     
     .cabecalho__seletor-visualizacao-dados__item{
-         display: none
+         /*display: none*/
     }
 
     .cabecalho__seletor-visualizacao-dados__item:first-child{
-         display: block
+         /*display: block*/
     }
 
  
