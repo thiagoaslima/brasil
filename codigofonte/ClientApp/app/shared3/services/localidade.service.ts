@@ -163,7 +163,7 @@ export class LocalidadeService3 {
 
     public getMunicipioByCoordinates(latitude: number, longitude: number): Observable<Localidade> {
 
-        const serviceEndpointURL = `http://nominatim.openstreetmap.org/reverse?format=xml&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1&format=json`;
+        const serviceEndpointURL = `https://nominatim.openstreetmap.org/reverse?format=xml&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1&format=json`;
 
         return this._http.get(serviceEndpointURL)
             .map(res => res.json())
