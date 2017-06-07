@@ -241,16 +241,22 @@ g, .periodo-link {
     width: 25%;
     float: left;
     margin-top: 6px;
-    height: 30px;
+    /*height: 30px;*/
+    overflow: hidden;
 }
 
 .legenda__item p{
-	margin-left: 3px;	
+	margin-left: 3px;
+    font-size: 0.8em;	
 }
 
 .legenda__cor{
     width: 100%;
     height: 6px;
+}
+
+.legenda__cores{
+    overflow: hidden;
 }
 
 .legenda__item--sem-informacao{
