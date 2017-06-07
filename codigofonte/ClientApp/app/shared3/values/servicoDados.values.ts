@@ -1,4 +1,4 @@
-const urlBase = 'http://servicodados.ibge.gov.br/api/v1';
+const urlBase = 'https://servicodados.ibge.gov.br/api/v1';
 
 export const ServicoDados = {
     setUrl(path) {
