@@ -4090,8 +4090,8 @@ export const municipios = [
   {
     "codigoUf": 26,
     "codigo": 2601607,
-    "nome": "Belém de São Francisco",
-    "slug": "belem-de-sao-francisco",
+    "nome": "Belém do São Francisco",
+    "slug": "belem-do-sao-francisco",
     "microrregiao": 26006
   },
   {
@@ -18853,8 +18853,8 @@ export const municipios = [
   {
     "codigoUf": 26,
     "codigo": 2608503,
-    "nome": "Lagoa do Itaenga",
-    "slug": "lagoa-do-itaenga",
+    "nome": "Lagoa de Itaenga",
+    "slug": "lagoa-de-itaenga",
     "microrregiao": 26013
   },
   {
@@ -19630,7 +19630,7 @@ export const municipios = [
   {
     "codigoUf": 51,
     "codigo": 5105309,
-    "nome": "Luciára",
+    "nome": "Luciara",
     "slug": "luciara",
     "microrregiao": 51009
   },
@@ -19805,7 +19805,7 @@ export const municipios = [
   {
     "codigoUf": 43,
     "codigo": 4311718,
-    "nome": "Maçambara",
+    "nome": "Maçambará",
     "slug": "macambara",
     "microrregiao": 43029
   },
@@ -27953,8 +27953,8 @@ export const municipios = [
   {
     "codigoUf": 51,
     "codigo": 5107008,
-    "nome": "Poxoréo",
-    "slug": "poxoreo",
+    "nome": "Poxoréu",
+    "slug": "poxoreu",
     "microrregiao": 51020
   },
   {
@@ -28625,7 +28625,7 @@ export const municipios = [
   {
     "codigoUf": 25,
     "codigo": 2512606,
-    "nome": "Quixabá",
+    "nome": "Quixaba",
     "slug": "quixaba",
     "microrregiao": 25004
   },
@@ -33693,8 +33693,8 @@ export const municipios = [
   {
     "codigoUf": 35,
     "codigo": 3550001,
-    "nome": "São Luís do Paraitinga",
-    "slug": "sao-luis-do-paraitinga",
+    "nome": "São Luiz do Paraitinga",
+    "slug": "sao-luiz-do-paraitinga",
     "microrregiao": 35053
   },
   {
