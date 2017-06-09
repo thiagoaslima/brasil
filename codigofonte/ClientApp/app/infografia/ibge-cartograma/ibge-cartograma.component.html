@@ -1,69 +1,73 @@
 <div class="container">
+    <div class="loading" *ngIf="carregando">
+        <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+    </div>
 
-    <div class="local-atual" *ngIf="titulo">{{titulo}}</div>
-    
-    <div class="mapa" *ngIf="malha?.viewBox">
-        <div class="alturafixa_legenda">
-        <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
-                <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> &nbsp; {{municSelected[1] | resultado:dado?.unidade?.id }} {{indicador?.unidade?.nome}}</span></p>
+    <div *ngIf="!carregando">
+        <div class="local-atual" *ngIf="titulo">{{titulo}}</div>
+        
+        <div class="mapa" *ngIf="malha?.viewBox">
+            <div class="alturafixa_legenda">
+            <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
+                    <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> &nbsp; {{municSelected[1] | resultado:dado?.unidade?.id }} {{indicador?.unidade?.nome}}</span></p>
+                </div>
             </div>
-        </div>
-        <svg [attr.viewBox]="malha?.viewBox" preserveAspectRatio="xMidYMid meet">
-            <svg:symbol id="marcador" width="0.1" height="0.1" viewBox="0 0 16 32">
-                <svg:g transform="matrix(-1.086962, 0, 0, -1.086962, 16.696741, 30.915565)">
-                    <svg:path fill="#ED1E79" d="M8,0.549c-3.049,0-5.521,2.472-5.521,5.521S7.634,15.452,8,15.452c0.366,0,5.523-6.332,5.523-9.382&#10;&#9;&#9;S11.049,0.549,8,0.549z M8,9.064c-1.653,0-2.992-1.34-2.992-2.994C5.006,4.417,6.347,3.078,8,3.078c1.655,0,2.994,1.34,2.994,2.992&#10;&#9;&#9;C10.993,7.725,9.652,9.064,8,9.064z"/>
-                    <svg:path fill="#FFFFFF" d="M8,15.772c-0.798,0-5.842-6.812-5.842-9.702c0-3.221,2.621-5.842,5.842-5.842&#10;&#9;&#9;c3.222,0,5.843,2.621,5.843,5.842C13.843,8.961,8.797,15.772,8,15.772z M8,0.87c-2.868,0-5.201,2.333-5.201,5.201&#10;&#9;&#9;c0,2.662,4.278,8.159,5.201,8.996c0.922-0.837,5.202-6.332,5.202-8.996C13.201,3.203,10.867,0.87,8,0.87z M8,9.385&#10;&#9;&#9;c-1.827,0-3.313-1.487-3.313-3.314c0-0.885,0.344-1.717,0.97-2.343C6.282,3.102,7.114,2.757,8,2.757&#10;&#9;&#9;c1.828,0,3.315,1.486,3.315,3.313C11.314,7.897,9.827,9.385,8,9.385z M8,3.399c-0.714,0-1.385,0.278-1.89,0.782&#10;&#9;&#9;C5.605,4.686,5.327,5.356,5.328,6.07c0,1.474,1.198,2.673,2.671,2.673s2.673-1.199,2.673-2.673C10.673,4.597,9.473,3.399,8,3.399z"/>
-                </svg:g>
-            </svg:symbol>
-            <svg:g class="uf" transform="scale(1 -1)">
-                
-                <svg:g *ngFor="let item of malha?.geometries; trackBy: trackByFn"
-                    (mouseover)="municSelected = [item.nome, getValorMunicipio(item.codigo), item.center]"
-                    (mouseleave)="municSelected = ''"
-                    vector-effect="non-scaling-stroke"
-                >
-                    <svg:g 
-                        [attr.class]="getFaixaMunicipio(item.codigo)"
-                        [attr.codigo]="item.codigo" 
-                        [attr.nome]="item.nome" 
-                        [attr.link]="item.link" 
-                        [attr.ano]="'2010'"
-                        [attr.valor]="2" 
-                        [attr.faixa]="getFaixaMunicipio(item.codigo)">
-                        
-                        <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+            <svg [attr.viewBox]="malha?.viewBox" preserveAspectRatio="xMidYMid meet">
+                <svg:symbol id="marcador" width="0.1" height="0.1" viewBox="0 0 16 32">
+                    <svg:g transform="matrix(-1.086962, 0, 0, -1.086962, 16.696741, 30.915565)">
+                        <svg:path fill="#ED1E79" d="M8,0.549c-3.049,0-5.521,2.472-5.521,5.521S7.634,15.452,8,15.452c0.366,0,5.523-6.332,5.523-9.382&#10;&#9;&#9;S11.049,0.549,8,0.549z M8,9.064c-1.653,0-2.992-1.34-2.992-2.994C5.006,4.417,6.347,3.078,8,3.078c1.655,0,2.994,1.34,2.994,2.992&#10;&#9;&#9;C10.993,7.725,9.652,9.064,8,9.064z"/>
+                        <svg:path fill="#FFFFFF" d="M8,15.772c-0.798,0-5.842-6.812-5.842-9.702c0-3.221,2.621-5.842,5.842-5.842&#10;&#9;&#9;c3.222,0,5.843,2.621,5.843,5.842C13.843,8.961,8.797,15.772,8,15.772z M8,0.87c-2.868,0-5.201,2.333-5.201,5.201&#10;&#9;&#9;c0,2.662,4.278,8.159,5.201,8.996c0.922-0.837,5.202-6.332,5.202-8.996C13.201,3.203,10.867,0.87,8,0.87z M8,9.385&#10;&#9;&#9;c-1.827,0-3.313-1.487-3.313-3.314c0-0.885,0.344-1.717,0.97-2.343C6.282,3.102,7.114,2.757,8,2.757&#10;&#9;&#9;c1.828,0,3.315,1.486,3.315,3.313C11.314,7.897,9.827,9.385,8,9.385z M8,3.399c-0.714,0-1.385,0.278-1.89,0.782&#10;&#9;&#9;C5.605,4.686,5.327,5.356,5.328,6.07c0,1.474,1.198,2.673,2.671,2.673s2.673-1.199,2.673-2.673C10.673,4.597,9.473,3.399,8,3.399z"/>
                     </svg:g>
+                </svg:symbol>
+                <svg:g class="uf" transform="scale(1 -1)">
+                    
+                    <svg:g *ngFor="let item of malha?.geometries; trackBy: trackByFn"
+                        (mouseover)="municSelected = [item.nome, getValorMunicipio(item.codigo), item.center]"
+                        (mouseleave)="municSelected = ''"
+                        vector-effect="non-scaling-stroke"
+                    >
+                        <svg:g 
+                            [attr.class]="getFaixaMunicipio(item.codigo)"
+                            [attr.codigo]="item.codigo" 
+                            [attr.nome]="item.nome" 
+                            [attr.link]="item.link" 
+                            [attr.ano]="'2010'"
+                            [attr.valor]="2" 
+                            [attr.faixa]="getFaixaMunicipio(item.codigo)">
+                            
+                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                        </svg:g>
+                    </svg:g>
+                    <svg:use href="#marcador" *ngFor="let marcador of marcadores"
+                        [attr.x]="marcador.x"
+                        [attr.y]="marcador.y"
+                        [attr.width]="marcador.width"
+                        [attr.height]="marcador.height"
+                    />
                 </svg:g>
-                <svg:use href="#marcador" *ngFor="let marcador of marcadores"
-                    [attr.x]="marcador.x"
-                    [attr.y]="marcador.y"
-                    [attr.width]="marcador.width"
-                    [attr.height]="marcador.height"
-                />
-            </svg:g>
-        </svg>
-    </div>
+            </svg>
+        </div>
 
-    <div class="legenda" *ngIf="valores && valores.length > 0">
-        <p class="legenda__texto">Legenda <span *ngIf="indicador?.unidade?.multiplicador > 1">(fator multiplicador: x{{ indicador?.unidade?.multiplicador }})</span></p>
-        <div class="legenda__cores">
-            <div class="legenda__item" *ngFor="let valor of valores; let i = index">
-                <div class="legenda__cor faixa{{i+1}}"></div>
-                <p class="legenda__texto" *ngIf="i == 0">0 {{ indicador?.unidade?.nome }}</p>
-                <p class="legenda__texto" *ngIf="i > 0">{{ valores[i - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade?.nome}}</p>
+        <div class="legenda" *ngIf="valores && valores.length > 0">
+            <p class="legenda__texto">Legenda <span *ngIf="indicador?.unidade?.multiplicador > 1">(fator multiplicador: x{{ indicador?.unidade?.multiplicador }})</span></p>
+            <div class="legenda__cores">
+                <div class="legenda__item" *ngFor="let valor of valores; let i = index">
+                    <div class="legenda__cor faixa{{i+1}}"></div>
+                    <p class="legenda__texto" *ngIf="i == 0">0 {{ indicador?.unidade?.nome }}</p>
+                    <p class="legenda__texto" *ngIf="i > 0">{{ valores[i - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade?.nome}}</p>
+                </div>
+                <div class="legenda__item">
+                    <div class="legenda__cor faixa{{valores.length + 1}}"></div>
+                    <p class="legenda__texto">{{ valores[valores.length - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade?.nome}}</p>
+                </div>
             </div>
-            <div class="legenda__item">
-                <div class="legenda__cor faixa{{valores.length + 1}}"></div>
-                <p class="legenda__texto">{{ valores[valores.length - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade?.nome}}</p>
+            <div class="legenda__item legenda__item--sem-informacao" *ngIf="existeVazio == true">
+                <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
+                <p class="legenda__texto">Sem Informação</p>
             </div>
-        </div>
-        <div class="legenda__item legenda__item--sem-informacao" *ngIf="existeVazio == true">
-            <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
-            <p class="legenda__texto">Sem Informação</p>
-        </div>
-        <div class="legenda__item legenda__item--municipio">
-            <p class="legenda__texto"><img src="img/marcador.svg"> Município selecionado</p>
+            <div class="legenda__item legenda__item--municipio">
+                <p class="legenda__texto"><img src="img/marcador.svg"> Município selecionado</p>
+            </div>
         </div>
     </div>
-
 </div>
