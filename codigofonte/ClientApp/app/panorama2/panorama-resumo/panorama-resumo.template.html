@@ -26,9 +26,9 @@
 </template>
 
 <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
-    <table class="lista" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
+    <table class="lista"  [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
 
-        <tr *ngIf="first || item.tema !== temas[idx-1].tema" class="lista__cabecalho">
+        <tr *ngIf="first || item.tema !== temas[idx-1].tema" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" class="lista__cabecalho">
             <th class="lista__icone">
                 <img class="ico" [src]="icones[item.tema]" />
             </th>
