@@ -475,7 +475,7 @@ sintese>dados
 
     aside #localidade nav#local {
         position: absolute;
-        width: calc(87% - 151px);
+        width: calc(87% - 183px);
         margin-left: 46px;
         text-align: center;
         margin-top: 3px;
@@ -527,6 +527,7 @@ sintese>dados
     aside #localidade button{
         margin: 3px 0% 7px;
         float: right;
+        margin-left: 6px;
     }
     
     aside #localidade button#menu-principal{
