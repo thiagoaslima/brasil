@@ -1,36 +1,45 @@
 <div class="container">
 
-    <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+    <div class="mensagem-vazio" *ngIf="!hasDados()">
+        Nenhum valor para exibir.
+    </div>
 
-    <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
+    <div *ngIf="hasDados()">
 
-    <div class="content__grupos">
-        <div class="grupo" *ngFor="let contexto of rankings">
-            <div class="grupo__titulo">{{getTitulo(contexto.contexto)}}</div>
-            
-            <div *ngFor="let localidade of contexto.listaGrupos; let i = index;">
+
+        <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+        <span class="unidade" *ngIf="!!unidade && unidade != ''">(Unidade: {{unidade}} {{multiplicador > 1 ? 'x' + multiplicador : ''}})</span>
+
+        <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
+
+        <div class="content__grupos">
+            <div class="grupo" *ngFor="let contexto of rankings">
+                <div class="grupo__titulo">{{getTitulo(contexto.contexto)}}</div>
                 
-                <div  class="grupo__item"  *ngIf="i > 0 && (localidade.posicao - contexto.listaGrupos[i - 1].posicao) > 1">
-                    <div class="grupo__item__posicao">&nbsp;</div>
-                    <div class="grupo__item__nome">...</div>
-                    <div class="grupo__item__barra">
-                        <div class="grupo__item__barra__porcento"></div>
+                <div *ngFor="let localidade of contexto.listaGrupos; let i = index;">
+                    
+                    <div  class="grupo__item"  *ngIf="i > 0 && (localidade.posicao - contexto.listaGrupos[i - 1].posicao) > 1">
+                        <div class="grupo__item__posicao">&nbsp;</div>
+                        <div class="grupo__item__nome">...</div>
+                        <div class="grupo__item__barra">
+                            <div class="grupo__item__barra__porcento"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="grupo__item">
-                    <div class="grupo__item__posicao">{{localidade.posicao}}&ordm;</div>
-                    <div class="grupo__item__nome" [class.grupo__item__nome--selecionado]="isSelecionado(localidade.localidade.codigo)">{{localidade.localidade.nome}}</div>
-                    <div class="grupo__item__barra" [title]="getRotulo(localidade.valor, localidade.unidadeMedida, localidade.fatorMultiplicativo)">
-                        <div class="grupo__item__barra__porcento" [style.width.%]="localidade.proporcao"></div>
+                    <div class="grupo__item">
+                        <div class="grupo__item__posicao">{{localidade.posicao}}&ordm;</div>
+                        <div class="grupo__item__nome" [class.grupo__item__nome--selecionado]="isSelecionado(localidade.localidade.codigo)">{{localidade.localidade.nome}}</div>
+                        <div class="grupo__item__barra" [title]="getRotulo(localidade.valor, localidade.unidadeMedida, localidade.fatorMultiplicativo)">
+                            <div class="grupo__item__barra__porcento" [style.width.%]="localidade.proporcao"></div>
+                        </div>
                     </div>
+
                 </div>
-
-
 
             </div>
-
         </div>
+
     </div>
+
 
 </div>

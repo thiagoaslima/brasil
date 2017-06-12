@@ -69,6 +69,19 @@
     height: 15px;
 }
 
+
+.unidade{
+    font-size: 0.9em;
+}
+
+.mensagem-vazio{
+    margin-left: 38%;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    padding: 20px;
+}
+
 @media screen and (max-width: 1460px) {
  .grupo{
      width: 100%;
