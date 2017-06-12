@@ -6,6 +6,9 @@
     font-weight: bold;
 }
 
+.breadcrumb__local-atual::first-letter{
+    text-transform: capitalize;
+}
 .breadcrumb__parent{
     
 }
