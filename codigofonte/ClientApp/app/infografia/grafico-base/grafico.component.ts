@@ -162,8 +162,6 @@ export class GraficoComponent implements OnInit, OnChanges {
 
 function formatarNumero(valor): string {        
 
-    debugger;
-
     if(isNaN(valor)){
 
         return;
