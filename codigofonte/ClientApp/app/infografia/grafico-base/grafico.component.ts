@@ -73,11 +73,8 @@ export class GraficoComponent implements OnInit, OnChanges {
                 ticks: { 
                     beginAtZero: true,
                     callback: function(value, index, values) {
-                        if(parseInt(value) >= 1000){
-                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                        } else {
-                            return value;
-                        }
+
+                        return formatarNumero(value);
                     }
                 }
             }],
@@ -161,4 +158,30 @@ export class GraficoComponent implements OnInit, OnChanges {
         }
     }
 
+}
+
+function formatarNumero(valor): string {        
+
+    debugger;
+
+    if(isNaN(valor)){
+
+        return;
+    }
+
+    let numeroFormatado = valor.toString();
+
+    // verifica se é decimal
+    if(valor % 1 != 0){
+
+        numeroFormatado = valor.toFixed(2);
+    }
+
+    // Formatar separador de milhar
+    if(valor > 1000){
+
+        numeroFormatado = numeroFormatado.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    return numeroFormatado;
 }
