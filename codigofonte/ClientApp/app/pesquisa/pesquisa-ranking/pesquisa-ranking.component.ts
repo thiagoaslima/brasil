@@ -74,15 +74,36 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
                 this.rankings = this._mergeRankingsByContext(ranking);
 
+
                 if(!!this.rankings && !!this.rankings[0] && !!this.rankings[0].listaGrupos && !!this.rankings[0].listaGrupos[0]){
 
                     this.unidade = this.rankings[0].listaGrupos[0].unidadeMedida;
                     this.multiplicador = this.rankings[0].listaGrupos[0].fatorMultiplicativo;
-
-                    debugger;
                 }
             });
         }
+    }
+
+    public hasDados(): boolean{
+
+        debugger;
+
+        if(!this.rankings){
+            return false;
+        }
+
+        let hasDados = false;
+
+        for(let ranking of this.rankings){
+
+            if(!!ranking.listaGrupos && ranking.listaGrupos.length > 0){
+
+                hasDados = true;
+                break;
+            }
+        }
+
+        return hasDados;
     }
 
     private getLocalidadesByContexto(idLocalidade: number[]): Object{
