@@ -58,8 +58,8 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                     // Obter localidade principal
                     this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;
                     // Obter localidades de comparação
-                    this.localidades[1] = urlParams.queryParams['localidade1'];
-                    this.localidades[2] = urlParams.queryParams['localidade2'];
+                    this.localidades[1] = parseInt(urlParams.queryParams['localidade1']);
+                    this.localidades[2] = parseInt(urlParams.queryParams['localidade2']);
                     //indicador usado no ranking/series históricas/graficos
                     if(urlParams.queryParams && urlParams.queryParams['indicador'])
                         this.indicador = parseInt(urlParams.queryParams['indicador']);

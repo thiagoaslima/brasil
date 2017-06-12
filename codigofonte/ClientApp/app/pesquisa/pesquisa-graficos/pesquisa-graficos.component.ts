@@ -44,7 +44,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
     public unidade;
     public multiplicador;
 
-    public localidades: Localidade[];
+    public localidades;
 
     public colors = {
         bar: [{ backgroundColor: '#6BC9C7' }, { backgroundColor: '#F7931E' }, { backgroundColor: '#9F55A3' }, { backgroundColor: '#8CC63F' }],
@@ -157,7 +157,17 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                         data.reverse();
 
                         let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
-                        this.localidades.push(localidade);
+                        this.localidades.push({'nome': localidade.nome, 'posicao': this.codigosLocalidades.indexOf(localidade.codigo), 'faixa': this.localidades.length});
+                        //faz o sort para manter a legenda na mesma ordem da comparação
+                        this.localidades.sort((a, b) => {
+                            if(a.posicao > b.posicao)
+                                return 1;
+                            else if(b.posicao > a.posicao)
+                                return -1;
+                            else
+                                return 0;
+                        });
+                        //-------------------
                         return {
                             data: data,
                             label: localidade.nome

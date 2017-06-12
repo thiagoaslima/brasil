@@ -13,9 +13,9 @@
 
       <div class="legenda">
 
-        <div class="legenda__item" *ngFor="let localidade of localidades; let i = index">
-            <div class="legenda__cor faixa{{i+1}}"></div>
-            <p class="legenda__texto">{{ localidade?.nome }}</p>
+        <div class="legenda__item" *ngFor="let localidade of localidades;">
+            <div class="legenda__cor faixa{{localidade.faixa + 1}}"></div>
+            <p class="legenda__texto">{{ localidade.nome }}</p>
         </div>
 
     </div>
