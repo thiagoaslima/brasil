@@ -69,6 +69,11 @@
     height: 15px;
 }
 
+
+.unidade{
+    font-size: 0.9em;
+}
+
 @media screen and (max-width: 1460px) {
  .grupo{
      width: 100%;
