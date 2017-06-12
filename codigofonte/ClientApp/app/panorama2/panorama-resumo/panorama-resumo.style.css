@@ -51,10 +51,11 @@
 .lista{
     width: 100%;
     border-collapse: collapse;
-    cursor: pointer;
     transition: background-color 0.3s;
-    border-bottom: 2px solid #cccccc;
+	
+	margin-bottom:-1px;
 }
+
 
 .lista:not(.hide-content) .lista__cabecalho {
     background: #d0d0d0;
@@ -67,6 +68,11 @@
 .lista__cabecalho{
     color: #1B779B;
     text-align: left;
+	cursor: pointer;
+	border-top: 1px solid #cccccc;
+}
+.lista__cabecalho:hover{
+	background-color: #ccc;
 }
 
 .lista__cabecalho--selecionado{
@@ -160,20 +166,22 @@
     text-transform: uppercase;
 	text-align:left;
     font-size: 0.9em;
+
 }
+
 
 .lista__indicador{
     background-color: #E6E6E6;
     transition: background-color 0.3s;
 }
 
-.lista:hover{
+/*.lista:hover{
     background-color: #CCCCCC;
-}
+}*/
 
-.lista:hover .lista__indicador{
+/*.lista:hover .lista__indicador{
     background-color: #CCCCCC;
-}
+}*/
 
 
 .lista__indicador--selecionado{

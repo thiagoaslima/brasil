@@ -22,6 +22,8 @@ export class IBGECartograma implements OnInit, OnChanges {
     malha;
     existeVazio = true;
 
+    carregando;
+
     constructor(
         private _mapaService: MapaService,
     ) { }
@@ -35,10 +37,12 @@ export class IBGECartograma implements OnInit, OnChanges {
     }
 
     updateCartograma() {
+        this.carregando = true;
         if (this.localidade) {
             this._mapaService.getMalhaSubdivisao(this.localidade.codigo)
                 .subscribe((malha) => {
                     this.malha = malha;
+                    this.carregando = false;
                 });
         }
 
