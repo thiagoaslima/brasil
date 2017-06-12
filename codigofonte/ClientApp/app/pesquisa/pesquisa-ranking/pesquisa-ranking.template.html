@@ -1,6 +1,7 @@
 <div class="container">
 
     <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+    <span class="unidade" *ngIf="unidade != ''">(Unidade: {{unidade}} {{multiplicador > 1 ? 'x' + multiplicador : ''}})</span>
 
     <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
 

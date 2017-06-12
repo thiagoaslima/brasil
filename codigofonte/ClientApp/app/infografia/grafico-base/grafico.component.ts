@@ -67,17 +67,27 @@ export class GraficoComponent implements OnInit, OnChanges {
             display: false,
             position: 'top'
         },
+        tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+                label: function(tooltipItems, data) { 
+                    if(parseInt(tooltipItems.yLabel) >= 1000){
+                        return tooltipItems.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                    } else {
+                        return tooltipItems.yLabel;
+                    }
+                }
+            }
+        },
         scales: {
             yAxes: [{
                 stacked: false,
                 ticks: { 
                     beginAtZero: true,
                     callback: function(value, index, values) {
-                        if(parseInt(value) >= 1000){
-                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                        } else {
-                            return value;
-                        }
+
+                        return formatarNumero(value);
                     }
                 }
             }],
@@ -161,4 +171,28 @@ export class GraficoComponent implements OnInit, OnChanges {
         }
     }
 
+}
+
+function formatarNumero(valor): string {        
+
+    if(isNaN(valor)){
+
+        return;
+    }
+
+    let numeroFormatado = valor.toString();
+
+    // verifica se é decimal
+    if(valor % 1 != 0){
+
+        numeroFormatado = valor.toFixed(2);
+    }
+
+    // Formatar separador de milhar
+    if(valor > 1000){
+
+        numeroFormatado = numeroFormatado.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    return numeroFormatado;
 }

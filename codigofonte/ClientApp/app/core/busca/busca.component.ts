@@ -110,7 +110,7 @@ export class BuscaComponent implements OnInit {
 
             let itemResultado: ItemResultado = {
 
-                nome: localidade.nome,
+                nome: localidade.codigo + ' - ' + localidade.nome,
                 tipo: tipo,
                 categoria: 2,
                 destaque: destaque,
