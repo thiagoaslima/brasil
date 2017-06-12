@@ -8,7 +8,7 @@ table{
 }
 
 td.p{
-    width: 38%; 
+    width: 36%; 
 }
 
 .mobile-unidade{
@@ -16,7 +16,8 @@ td.p{
 }
 
 td.s{
-    width: 15.5%;
+    width: 16%;
+    font-size: .9em;
 }
 
 .seta{
@@ -48,7 +49,7 @@ td.label {
 	}
 
 .nivel-2 td{
-    padding: 13px 2%;
+    padding: 13px 1%;
 	border-top: 1px solid #1b779b;	
 }
 
@@ -74,7 +75,7 @@ td.label {
 }
 
 .nivel-3 td {
-	padding: 13px 2%;
+	padding: 13px 1%;
 	}
     
 
@@ -116,7 +117,7 @@ td.label {
 }
 
 .nivel-4 td{
-    padding: 12px 2%;
+    padding: 12px 1%;
     color: #333333;
     /*background-color: #cccccc;*/
 	/*border-bottom: 2px solid #DFDFDF;*/
@@ -164,7 +165,7 @@ tr.nivel-4 td:first-child {
 	transition: all 100ms ease;
 	}
 .nivel-5 td{
-    padding: 12px 2%;
+    padding: 12px 1%;
     color: #333333;
 	border-top: 1px dashed #CFCFCF;	
 }
@@ -195,7 +196,7 @@ tr.nivel-4 td:first-child {
 	}
 
 .nivel-6 td{
-    padding: 7px 2%;
+    padding: 7px 1%;
     color: #333333;
 }
 
@@ -224,7 +225,7 @@ tr.nivel-4 td:first-child {
 	transition: all 100ms ease;
 	}
 .nivel-7 td{
-    padding: 7px 2%;
+    padding: 7px 1%;
     color: #333333;
 }
 
@@ -250,7 +251,7 @@ tr.nivel-4 td:first-child {
 }
 
 .nivel-8 td{
-    padding: 7px 2%;
+    padding: 7px 1%;
     color: #333333;
 }
 
@@ -276,7 +277,7 @@ tr.nivel-4 td:first-child {
 	transition: all 100ms ease;
 	}
 .nivel-9 td{
-    padding: 7px 2%;
+    padding: 7px 1%;
     color: #333333;
 }
 
@@ -297,7 +298,7 @@ tr.nivel-4 td:first-child {
 	}
 	
 .nivel-10 td{
-    padding: 7px 2%;
+    padding: 7px 1%;
     color: #333333;
 }
 
