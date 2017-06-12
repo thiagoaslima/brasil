@@ -107,7 +107,6 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        debugger;
         if(this.routeSubscribe) {
             this.routeSubscribe.unsubscribe();
         }

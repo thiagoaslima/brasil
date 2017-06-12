@@ -34,6 +34,9 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     private _resultadoPipe: ResultadoPipe;
 
+    public unidade;
+    public multiplicador;
+
     constructor(
         private _routerParams:RouterParamsService,
         private _activatedRoute: ActivatedRoute,
@@ -59,6 +62,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     }
 
     private _carregarRanking(params){
+
         if(this.pesquisa && this.localidades && this.localidades.length > 0) {
             this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
                 return periodo.nome;
@@ -67,9 +71,39 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
             let indicadador = !!this.indicadorSelecionado ? this.indicadorSelecionado : this.indicadores[0].id;
 
             this._obterRanking(indicadador, this.periodo, this.localidades).subscribe(ranking => {
+
                 this.rankings = this._mergeRankingsByContext(ranking);
+
+
+                if(!!this.rankings && !!this.rankings[0] && !!this.rankings[0].listaGrupos && !!this.rankings[0].listaGrupos[0]){
+
+                    this.unidade = this.rankings[0].listaGrupos[0].unidadeMedida;
+                    this.multiplicador = this.rankings[0].listaGrupos[0].fatorMultiplicativo;
+                }
             });
         }
+    }
+
+    public hasDados(): boolean{
+
+        debugger;
+
+        if(!this.rankings){
+            return false;
+        }
+
+        let hasDados = false;
+
+        for(let ranking of this.rankings){
+
+            if(!!ranking.listaGrupos && ranking.listaGrupos.length > 0){
+
+                hasDados = true;
+                break;
+            }
+        }
+
+        return hasDados;
     }
 
     private getLocalidadesByContexto(idLocalidade: number[]): Object{
@@ -117,6 +151,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     }
 
     public getRotulo(valor, unidade, multiplicador){
+
         valor = this._resultadoPipe.transform(valor, unidade);
         return `${valor}${!!multiplicador && multiplicador > 1 ? ' x' + multiplicador : ''} ${!!unidade ? unidade : ''}`;
     }
