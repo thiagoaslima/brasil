@@ -27,7 +27,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
     @ViewChild('dados') dados: ElementRef;
 
     posicaoIndicador: string = "2";
-    localidades: number[];
+    localidades: string[];
     periodo: string;
     tipo: string;
 
@@ -56,7 +56,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                     this.pesquisa = pesquisa;
                     this.localidades = new Array(3);
                     // Obter localidade principal
-                    this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo;
+                    this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo.toString();
                     // Obter localidades de comparação
                     this.localidades[1] = urlParams.queryParams['localidade1'];
                     this.localidades[2] = urlParams.queryParams['localidade2'];

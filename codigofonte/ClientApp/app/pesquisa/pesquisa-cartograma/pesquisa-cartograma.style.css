@@ -13,6 +13,12 @@ h4{
 	width: 70%;
 }
 
+.instrucao{
+    font-size: 0.9em;
+    background-color: #E6E6E6;
+    padding: 10px;
+}
+
 /*MAIS DE 1 MAPA NA TELA*/
 .mapas--variosMapas .mapas__mapa{
     width: 50%;

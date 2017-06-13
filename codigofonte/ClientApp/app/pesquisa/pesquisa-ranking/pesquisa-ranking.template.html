@@ -6,6 +6,7 @@
 
     <div *ngIf="hasDados()">
 
+        <p class="instrucao">Para alterar os dados selecione um novo indicador clicando em uma seta.</p>
 
         <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
         <span class="unidade" *ngIf="!!unidade && unidade != ''">(Unidade: {{unidade}} {{multiplicador > 1 ? 'x' + multiplicador : ''}})</span>

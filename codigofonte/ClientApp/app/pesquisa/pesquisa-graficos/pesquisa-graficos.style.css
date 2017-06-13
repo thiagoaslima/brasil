@@ -11,6 +11,11 @@ h4{
     font-size: 0.9em;
 }
 
+.instrucao{
+    font-size: 0.9em;
+    background-color: #E6E6E6;
+    padding: 10px;
+}
 
 /*legenda*/
 
@@ -24,10 +29,12 @@ h4{
 }
 
 .legenda__item{
-    width: 25%;
+    width: 33%;
     float: left;
     margin-top: 6px;
     height: 30px;
+    font-size: 0.8em;
+    padding-right: 3px;
 }
 
 .legenda__cor{
@@ -90,19 +97,16 @@ h4{
 .faixa4{
     background-color: #8CC63F;
     fill: #8CC63F;
-	border-left: 3px solid #fff;
 }
 
 .faixa3{
     background-color: #9F55A3;
     fill: #9F55A3;
-	border-left: 3px solid #fff;
 }
 
 .faixa2{
     background-color: #F7931E;
     fill: #F7931E;
-	border-left: 3px solid #fff;
 }
 
 .faixa1{
