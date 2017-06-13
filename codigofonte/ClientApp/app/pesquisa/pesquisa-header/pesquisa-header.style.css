@@ -76,7 +76,7 @@
 .cabecalho__nome-pesquisa{
     float: left;
     background-color: #E6E6E6;	
-    width: 38%; 
+    width: 36%; 
     height: 120px;
     padding: 1% 15px;
     border-bottom: 3px solid #E2871A;
@@ -109,7 +109,7 @@
 
 .cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
     float: left;
-    width: 62%;
+    width: 64%;
 }
 
 .cabecalho__visualizacao-dados {

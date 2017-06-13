@@ -5,9 +5,9 @@
 
 
 .conteudo{
-    background: -webkit-linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
-       background: -o-linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
-       background: -moz-linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
-       background: linear-gradient( to right, #e6e6e6 38%, #fff 38%, #fff );
+    background: -webkit-linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
+       background: -o-linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
+       background: -moz-linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
+       background: linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
 }
 
