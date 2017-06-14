@@ -266,6 +266,7 @@ sintese>dados
     position: fixed;
 /* overflow-y: scroll; */
     width: 31%;
+    z-index: 1;
 }
 
 .button_voltarTopo {
