@@ -50,11 +50,11 @@ export class Panorama2Service {
         }))
     }
 
-    getNotaEspecial(idLocalidade: number, idIndicador: number): string{
+    getNotaEspecial(idLocalidade, idIndicador): string{
 
         let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
 
-        return !!notaEspecial ? notaEspecial['nota'] : '';
+        return notaEspecial.length > 0 ? notaEspecial[0]['nota'] : '';
     }
 
     private _getResultadosIndicadores(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: Resultado }> {

@@ -38,6 +38,8 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     private _valores = {};
     private _scrollTop$ = new BehaviorSubject(0);
 
+    private nota;
+    
     @Output() temaSelecionado = new EventEmitter();
     temaAtual = '#po';
 
@@ -59,6 +61,8 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+        this.nota = false;
+
         if (
             changes.hasOwnProperty('configuracao') && changes.configuracao.currentValue && changes.configuracao.currentValue.length > 0 ||
             changes.hasOwnProperty('localidade') && changes.localidade.currentValue &&
@@ -92,6 +96,11 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
             this.temaSelecionado.emit(tema);
             this.temaAtual = tema;
         }
+    }
+
+    getNotaEspecial(idLocalidade, idIndicador){
+
+        return this._panoramaService.getNotaEspecial(idLocalidade, idIndicador);
     }
 
     private setIcones(): void {
