@@ -25,6 +25,11 @@
     font-weight: normal;
 }
 
+.desabilitado{
+    opacity: 0.3;
+    cursor: auto !important;
+}
+
 .notas {
     font-size: small;
     padding: 2px 5px;

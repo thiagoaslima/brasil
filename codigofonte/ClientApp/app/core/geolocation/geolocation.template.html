@@ -1,5 +1,8 @@
 <button (click)="getGeoLocation()">
     
-        <i class="fa fa-map-marker icone-pequeno"  aria-hidden="true"></i>
+
+        <i *ngIf="!isLoading" class="fa fa-map-marker icone-pequeno"  aria-hidden="true" title="Obter localidade"></i>
+
+        <i *ngIf="isLoading" class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true "title="Obtendo localidade..."></i>
     
 </button>

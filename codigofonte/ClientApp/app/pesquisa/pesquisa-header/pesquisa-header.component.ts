@@ -121,6 +121,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     setaTipo(tipo){
+        if(tipo == 'grafico' && this.listaPeriodos.length <= 1)
+            return;
         this.navegarPara(null, null, tipo);
     }
 

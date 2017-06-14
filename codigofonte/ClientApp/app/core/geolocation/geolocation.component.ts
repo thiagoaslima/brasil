@@ -28,6 +28,8 @@ export class GeolocationComponent {
     @Output() location: EventEmitter<Localidade> = new EventEmitter<Localidade>();
 
 
+    isLoading = false;
+
     constructor(private _localidadeService: LocalidadeService2){}
 
     /**
@@ -40,6 +42,9 @@ export class GeolocationComponent {
     private getGeoLocation() {
 
         if(isBrowser){
+
+            this.isLoading = true;
+
             navigator.geolocation.getCurrentPosition(position => this.getLocalidade(position));
         }
     }
@@ -55,6 +60,8 @@ export class GeolocationComponent {
     private getLocalidade(position){
 
         this._localidadeService.getMunicipioByCoordinates(position.coords.latitude, position.coords.longitude).subscribe(municipio => {
+
+            this.isLoading = false;
 
             this.location.emit(municipio);
         });
