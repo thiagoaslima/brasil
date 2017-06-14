@@ -194,14 +194,38 @@
 
 .lista__nome{
     font-size: 0.8em;
-    width: 60%;
+    width: 57%;
     padding: 5px;
 }
 
 .lista__valor{
-    width: 30%;
+    width: 32%;
     font-weight: bold;
     padding: 5px;
+}
+
+.lista__nota{
+    display: inline;
+}
+
+.lista__nota__icone{
+    color: #1B779B;
+}
+
+.lista__nota__content{
+    position: absolute;
+    background: #fff;
+    padding: 20px 15px 15px 30px;
+    width: 450px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    word-wrap: break-word;
+    display: inline;
+    font-size: .8em;
+    font-weight: normal;
+    transform: translateX(0px);
+    margin-top: 19px;
+    margin-left: -16px;
 }
 
 .lista__unidade{
