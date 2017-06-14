@@ -13,5 +13,5 @@ export const notasEspeciais = [
         "localidade": 2909208,
         "indicador": 29171,
         "nota": "Por determinação judicial o Município de Coronel João Sá - BA teve os efeitos das estimativas das populações de 2014, 2015 e 2016 suspensas, passando a vigorar, para efeito da distribuição do Funto de Participação dos Municípios, a população estimada para o ano de 2013, que foi de 17.422 habitantes. Processo Judicial número 0002222-53.2017.4.01.3306 - Vara Única de Paulo Afonso-BA"
-    },
+    }
 ]
