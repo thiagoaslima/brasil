@@ -86,8 +86,6 @@ export class PesquisaIndicadoresComponent implements OnChanges {
                             parent.children.map(child => child.visivel = true);
                             parent = parent.parent;
                         }
-                        console.log(indicador)
-                        console.log(breadcrumb);
                         this.onBreadcrumb.emit(breadcrumb);
                     }
                 }
