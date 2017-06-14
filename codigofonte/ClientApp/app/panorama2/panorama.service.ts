@@ -6,6 +6,7 @@ import { PANORAMA, ItemConfiguracao, PanoramaVisualizacao } from './configuratio
 import { ResultadoService3 } from '../shared3/services';
 import { Localidade, Resultado } from '../shared3/models';
 import { converterObjArrayEmHash, getProperty } from '../utils2';
+import { notasEspeciais } from '../../api/notas-demanda-legal';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -47,6 +48,13 @@ export class Panorama2Service {
             resultados: resultados,
             rankings: rankings
         }))
+    }
+
+    getNotaEspecial(idLocalidade: number, idIndicador: number): string{
+
+        let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
+
+        return !!notaEspecial ? notaEspecial['nota'] : '';
     }
 
     private _getResultadosIndicadores(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: Resultado }> {
