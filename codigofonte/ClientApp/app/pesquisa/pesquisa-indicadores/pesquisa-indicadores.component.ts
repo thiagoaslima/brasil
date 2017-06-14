@@ -67,13 +67,27 @@ export class PesquisaIndicadoresComponent implements OnChanges {
                     //expande a arvore de indicadores para sempre mostrar o indicador selecionado para comparação
                     if(indicador.id == this.indicadorComparacao){
                         let parent = indicador.parent;
-                        let breadcrumb = [{'nome': indicador.indicador, 'id': indicador.id , 'hasValue': this.hasValue(indicador, this.periodo)}];
+                        let breadcrumb = [{
+                            'nome': indicador.indicador,
+                            'id': indicador.id,
+                            'hasValue': this.hasValue(indicador, this.periodo),
+                            'unidade': (indicador.unidade && indicador.unidade.id ? indicador.unidade.id : ''),
+                            'multiplicador': (indicador.unidade && indicador.unidade.multiplicador ? indicador.unidade.multiplicador : '')
+                        }];
                         while(parent){
-                            breadcrumb.unshift({'nome': parent.indicador, 'id': parent.id , 'hasValue': this.hasValue(parent, this.periodo)});
+                            breadcrumb.unshift({
+                                'nome': parent.indicador,
+                                'id': parent.id,
+                                'hasValue': this.hasValue(parent, this.periodo),
+                                'unidade': (parent.unidade && parent.unidade.id ? parent.unidade.id : ''),
+                                'multiplicador': (parent.unidade && parent.unidade.multiplicador ? parent.unidade.multiplicador : '')
+                            });
                             parent.visivel = true;
                             parent.children.map(child => child.visivel = true);
                             parent = parent.parent;
                         }
+                        console.log(indicador)
+                        console.log(breadcrumb);
                         this.onBreadcrumb.emit(breadcrumb);
                     }
                 }

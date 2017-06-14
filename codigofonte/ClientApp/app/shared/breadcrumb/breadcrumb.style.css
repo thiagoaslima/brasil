@@ -1,5 +1,6 @@
 .breadcrumb{
     font-size: 1em;
+    margin: 1.3em 0em;
 }
 
 .breadcrumb__local-atual{
@@ -9,10 +10,14 @@
 .breadcrumb__local-atual::first-letter{
     text-transform: capitalize;
 }
+
 .breadcrumb__parent{
     
 }
 
+.breadcrumb__unidade{
+    font-size: 0.8em;
+}
 
 .breadcrumb__parent--clicavel{
     cursor: pointer;
