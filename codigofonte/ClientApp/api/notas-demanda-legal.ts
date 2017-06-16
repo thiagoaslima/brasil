@@ -2,7 +2,7 @@ export const notasEspeciais = [
     {
         "localidade": 1503754,
         "indicador": 'População estimada',
-        "nota": "Por determinação judicial e para efeito de distribuição de Fundo de Participação dos Municípios, a população do Município de Jacareacanga-PA é de 41.487 habitantes. Processo Judicial número 798-41.2011.4.01.3902, Seção Judiciária de Itaituba-PA."
+        "nota": "Por determinação judicial e para efeito de distribuição do Fundo de Participação dos Municípios, a população do Município de Jacareacanga-PA é de 41.487 habitantes. Processo Judicial número 798-41.2011.4.01.3902, Seção Judiciária de Itaituba-PA."
     },
     {
         "localidade": 1100205,
