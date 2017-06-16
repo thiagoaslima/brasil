@@ -110,7 +110,8 @@ export class BuscaComponent implements OnInit {
 
             let itemResultado: ItemResultado = {
 
-                nome: localidade.codigo + ' - ' + localidade.nome,
+                codigo: localidade.codigo,
+                nome: localidade.nome,
                 tipo: tipo,
                 categoria: 2,
                 destaque: destaque,
@@ -186,6 +187,7 @@ export class BuscaComponent implements OnInit {
 
 interface ItemResultado {
 
+    codigo?: number
     nome: string;
     tipo: string;
     categoria: number;

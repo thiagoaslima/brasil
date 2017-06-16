@@ -15,7 +15,7 @@
             <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultadoBusca">
                 <a [routerLink]="[item['link']]" (click)="limparBusca()">
                     <div class='busca__auto-completar__resultado__item__nome'>
-                        {{item['nome']}} <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
+                      {{item['nome']}} <small *ngIf="item['codigo']" class="busca__codigo">{{ '[' + item['codigo'] + ']' }}</small> <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
                     </div>
                     <div class='busca__auto-completar__resultado__item__tipo--municipio'>
                         {{item['tipo']}}

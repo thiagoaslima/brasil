@@ -15,6 +15,12 @@
     display: none;
 }
 
+
+.busca__codigo{
+    font-size: 0.6em;
+    vertical-align: text-top;
+}
+
 .busca.aberto .busca__hit{
     display: block;
 }
