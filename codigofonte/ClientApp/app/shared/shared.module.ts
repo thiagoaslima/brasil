@@ -12,6 +12,7 @@ import { ResultadoPipe } from './resultado.pipe';
 import { IsMobileService } from './is-mobile.service';
 import { QRCodeComponent } from './qrcode/qrcode.component';
 import { Breadcrumb } from './breadcrumb/breadcrumb.component';
+import { MensagemSetasComponent } from './mensagem-setas/mensagem-setas.component';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -30,7 +31,8 @@ const PIPES = [
 const COMPONENTS = [
     // put shared components here
     QRCodeComponent,
-    Breadcrumb
+    Breadcrumb,
+    MensagemSetasComponent
 ];
 
 const PROVIDERS = [
