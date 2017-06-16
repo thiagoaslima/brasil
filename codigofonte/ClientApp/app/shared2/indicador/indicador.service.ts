@@ -277,7 +277,7 @@ export class IndicadorService2 {
 
                         let item = new ItemRanking(
                             this._localidadeService.getMunicipioByCodigo(parseInt(ranking['localidade'], 10)),
-                            ranking['ranking'],
+                            ranking['#'],
                             ranking['res']);
 
                         if(!!rankings.unidade){
