@@ -23,6 +23,23 @@
 .cabecalho select.select-ano {
     width: initial;
     font-weight: normal;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    margin-top: -8px;
+    -webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;
+}
+
+.cabecalho select.select-ano:hover {
+    background-color: #CCC;
+    -webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;
 }
 
 .desabilitado{
