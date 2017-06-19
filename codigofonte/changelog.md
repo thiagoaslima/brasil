@@ -23,4 +23,4 @@
 - Bug que chamava o parseInt em uma localidade nula.
 - Layout da linha preta do menu pesquisa indo até o final da página.
 - Layout da coluna cinza em pesquisa, retirando o 'dente'.
-- Formatação dos valoers na série temporal.
+- Formatação dos valores na série temporal.
