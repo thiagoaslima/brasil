@@ -532,4 +532,35 @@ td.compara-blank {
     .mensagem-vazio{
         margin-left: 0px;
     }
+
+    .nivel-1 .label{
+        padding-left:5px;
+    }
+    .nivel-2 .label{
+        padding-left:5px;
+    }
+    .nivel-3 .label{
+        padding-left:5px;
+    }
+    .nivel-4 .label{
+        padding-left:5px;
+    }
+    .nivel-5 .label{
+        padding-left:15px;
+    }
+    .nivel-6 .label{
+        padding-left:15px;
+    }
+    .nivel-7 .label{
+        padding-left:15px;
+    }
+    .nivel-8 .label{
+        padding-left:25px;
+    }
+    .nivel-9 .label{
+        padding-left:25px;
+    }
+    .nivel-10 .label{
+        padding-left:25px;
+    }
 }

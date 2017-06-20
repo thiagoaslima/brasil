@@ -178,8 +178,8 @@ aside #localidade ul li:not(:first-child):before{
 }
 
 aside #localidade h1{
-    font-size: 1.6em;
-    line-height: 28px;
+    font-size: 2em;
+    line-height: 40px;
 }
 
 aside #localidade button{
@@ -236,9 +236,13 @@ aside #menu ul li:last-child{
     border-bottom: none;
 }
 
-aside #menu ul li:hover, aside #menu .menu--selecionado{
-    background-color: #165D72;
+aside #menu .menu--selecionado{
+    background-color: rgb(20, 145, 160);
     transition: background-color 0.3s;
+}
+
+aside #menu ul li:hover {
+    background-color: #165D72;
 }
 
 #sintese{
