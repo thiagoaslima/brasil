@@ -50,10 +50,10 @@
 
                 <div class="lista__nota" *ngIf="getNotaEspecial(cabecalho[0].valor, item.titulo)" >
                     <i (click)="nota = !nota" item.titulo class="fa fa-exclamation-triangle lista__nota__icone" aria-hidden="true"></i>
-                    <!-- <i (click)="nota = !nota" style='cursor:pointer; font-style: normal; font-size: 0.6em; vertical-align: 3px; color: #1b779b;'> -->
+                    <!--<i (click)="nota = !nota" style='cursor:pointer; font-style: normal; font-size: 0.6em; vertical-align: 3px; color: #1b779b;'>
                         <i (click)="nota = !nota" item.titulo class="fa fa-exclamation-triangle lista__nota__icone" aria-hidden="true"></i>
                         NOTAS
-                    </i>
+                    </i>-->
                     <div class="lista__nota__content" *ngIf="nota">
                         {{getNotaEspecial(cabecalho[0].valor, item.titulo)}}
                     </div>
