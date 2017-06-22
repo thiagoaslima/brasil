@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.1.10] - 2017-06-21
+### Changed
+- Reinclusão da opção 'versão anterior do site'.
+
+
 ## [v4.1.9] - 2017-06-19
 ### Added
 - Nota especial sobre processo judicial no indicador "População Estimada" para os municípios Coronel João Sá, Jacareacanga e Porto Velho.

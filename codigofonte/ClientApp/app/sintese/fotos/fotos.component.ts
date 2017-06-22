@@ -19,7 +19,7 @@ export class FotosComponent implements OnInit, OnDestroy {
     private servicoImagem = "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
     private servicoThumbs = "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
     private urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
-    private urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?https=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
 
     private mostraGaleria = false;
     private mostraDetalhe = false;
