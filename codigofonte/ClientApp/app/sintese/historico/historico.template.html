@@ -15,17 +15,18 @@
         <div class="caixa">
             
             <div class="caixa__conteudo">
+                <h2 class="hist__titulo">História</h2>
                 <div class="hist__texto" [innerHTML]="historico?.historico"></div>
 
-                <span *ngIf="!!historico?.formacaoAdministrativa">
-                    <h4 class="hist__titulo">Formação Administrativa</h4>
+                <div *ngIf="!!historico?.formacaoAdministrativa">
+                    <h2 class="hist__titulo">Formação Administrativa</h2>
                     <div class="hist__texto" [innerHTML]="historico?.formacaoAdministrativa"></div>
-                </span>
+                </div>
 
-                <span *ngIf="!!historico?.fonte">
-                    <h4 class="hist__titulo">Fonte</h4>
+                <div *ngIf="!!historico?.fonte">
+                    <h2 class="hist__titulo">Fonte</h2>
                     <div class="hist__texto"> {{ historico?.fonte }} </div>
-                </span>
+                </div>
             </div>
         </div>
        
