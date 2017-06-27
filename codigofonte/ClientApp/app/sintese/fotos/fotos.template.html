@@ -6,32 +6,33 @@
         
         <div class="preview" (click)="mostrar()"  *ngIf="preview1 != '' && preview2 == '' && preview3 == ''">
             <!--apenas uma foto-->
-            <img class="foto__preview" [style.background-image]="'url(' + preview1 +')'" [alt]="alt_preview1"/>
+            <!--<img class="foto__preview" [style.background-image]="'url(' + preview1 +')'" [alt]="alt_preview1"/>-->
+            <img class="foto__preview"  [src]="preview1" [alt]="alt_preview1"/>
         </div>
 
         <div class="preview" (click)="mostrar()" *ngIf="preview1 != '' && preview2 != '' && preview3 != ''">
             <!--3 ou mais fotos-->
             <div class="preview__foto-grande">
-                <img class="foto__preview" [style.background-image]="'url(' + preview1 +')'" [alt]="alt_preview1"/>
+                <img class="foto__preview" [src]="preview1" [alt]="alt_preview1"/>
             </div>
             <div class="preview__foto-pequena">
-                <img class="foto__preview" [style.background-image]="'url(' + preview2 +')'" [alt]="alt_preview2"/>
+                <img class="foto__preview" [src]="preview2" [alt]="alt_preview2"/>
             </div>
             <div class="preview__foto-pequena">
-                <img class="foto__preview" [style.background-image]="'url(' + preview3 +')'" [alt]="alt_preview3"/>
+                <img class="foto__preview" [src]="preview3" [alt]="alt_preview3"/>
             </div>
         </div>
 
         <div class="preview2" (click)="mostrar()" *ngIf="preview4 != '' && preview5 != '' && preview6 != ''">
             <!--preview extra para telas gigantes-->
             <div class="preview__foto-grande">
-                <img class="foto__preview" [style.background-image]="'url(' + preview4 +')'" [alt]="alt_preview4"/>
+                <img class="foto__preview" [src]="preview4" [alt]="alt_preview4"/>
             </div>
             <div class="preview__foto-pequena">
-                <img class="foto__preview" [style.background-image]="'url(' + preview5 +')'" [alt]="alt_preview5"/>
+                <img class="foto__preview" [src]="preview5" [alt]="alt_preview5"/>
             </div>
             <div class="preview__foto-pequena">
-                <img class="foto__preview" [style.background-image]="'url(' + preview6 +')'" [alt]="alt_preview6"/>
+                <img class="foto__preview" [src]="preview6" [alt]="alt_preview6"/>
             </div>
         </div>
 

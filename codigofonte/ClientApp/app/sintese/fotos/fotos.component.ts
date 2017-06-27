@@ -189,8 +189,8 @@ export class FotosComponent implements OnInit, OnDestroy {
 
     lazyLoad({element, value}, index){
        if (value && element && !element['src']) {
-            //this.renderer.setElementAttribute(element, 'src', this.servicoThumbs + this.fotos[index].LINK);
-            this.renderer.setElementStyle(element, 'backgroundImage', 'url(' + this.servicoThumbs + this.fotos[index].LINK + ')');
+            this.renderer.setElementAttribute(element, 'src', this.servicoThumbs + this.fotos[index].LINK);
+            //this.renderer.setElementStyle(element, 'backgroundImage', 'url(' + this.servicoThumbs + this.fotos[index].LINK + ')');
         }
     }
 
