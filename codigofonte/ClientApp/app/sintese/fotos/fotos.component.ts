@@ -34,6 +34,12 @@ export class FotosComponent implements OnInit, OnDestroy {
     private preview4 = "";
     private preview5 = "";
     private preview6 = "";
+    private alt_preview1 = "";
+    private alt_preview2 = "";
+    private alt_preview3 = "";
+    private alt_preview4 = "";
+    private alt_preview5 = "";
+    private alt_preview6 = "";
     private titulo = "";
     private detalhes = "";
     private downloadLink = "";
@@ -79,23 +85,37 @@ export class FotosComponent implements OnInit, OnDestroy {
                 this.preview4 = '';
                 this.preview5 = '';
                 this.preview6 = '';
+
+                this.alt_preview1 = '';
+                this.alt_preview2 = '';
+                this.alt_preview3 = '';
+                this.alt_preview4 = '';
+                this.alt_preview5 = '';
+                this.alt_preview6 = '';
                 
                 if(fotos.length >= 3){
                     //mostra as 3 fotos de preview
                     this.preview1 = this.servicoImagem + fotos[0].LINK;
                     this.preview2 = this.servicoImagem + fotos[1].LINK;
                     this.preview3 = this.servicoImagem + fotos[2].LINK;
+                    this.alt_preview1 = fotos[0].TITULO + ' - ' + fotos[0].ANO;
+                    this.alt_preview2 = fotos[1].TITULO + ' - ' + fotos[1].ANO;
+                    this.alt_preview3 = fotos[2].TITULO + ' - ' + fotos[2].ANO;
                     //preview extra para telas gigantes
                     if(fotos.length >= 6){
                         this.preview4 = this.servicoImagem + fotos[3].LINK;
                         this.preview5 = this.servicoImagem + fotos[4].LINK;
                         this.preview6 = this.servicoImagem + fotos[5].LINK;
+                        this.alt_preview4 = fotos[3].TITULO + ' - ' + fotos[3].ANO;
+                        this.alt_preview5 = fotos[4].TITULO + ' - ' + fotos[4].ANO;
+                        this.alt_preview6 = fotos[5].TITULO + ' - ' + fotos[5].ANO;
                     }
                 } else if(fotos.length > 0 && fotos.length <= 2){
                     //mostra apenas 1 foto de preview
                     this.preview1 = this.servicoImagem + fotos[0].LINK;
                     this.preview2 = '';
                     this.preview3 = '';
+                    this.alt_preview1 = fotos[0].TITULO + ' - ' + fotos[0].ANO;
                 }
             });
     }
