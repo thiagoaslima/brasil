@@ -29,3 +29,20 @@
 - Layout da linha preta do menu pesquisa indo até o final da página.
 - Layout da coluna cinza em pesquisa, retirando o 'dente'.
 - Formatação dos valores na série temporal.
+
+
+## [v4.1.6] - 2017-06-09
+### Added
+- Pesquisa Séries Históricas.
+- Pesquisa Cartogramas.
+- Pesquisa Ranking.
+- Obter localidade do usuário por geolocalização.
+
+### Changed
+- URL Rewrite configurado para redirecionar chamadar HTTP para HTTPS, ignorando localhost.
+- Alteração no protocolo dos serviços para HTTPS.
+
+### Fixed
+- Nomes de municípios.
+- Menu de pesquisa para mobile.
+- Serviço de fotos.
