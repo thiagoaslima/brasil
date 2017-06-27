@@ -217,6 +217,7 @@ export const PANORAMA = {
                 indicadorId: 29167,
                 titulo: "Área da unidade territorial",
                 subtitulo: "Área da unidade territorial",
+                periodo: "2016",
                 tema: TEMAS.meioAmbiente,
                 visualizacao: PanoramaVisualizacao.numerico
             },
