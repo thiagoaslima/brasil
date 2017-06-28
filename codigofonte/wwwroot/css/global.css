@@ -377,6 +377,8 @@ sintese>dados
 }
 
 #versaoAnterior{
+    display: inline-block;
+    text-align: center;
     position: absolute;
     bottom: 95px;
     margin-left: 0;
@@ -488,7 +490,7 @@ sintese>dados
         padding: 7px 5%;
     }
 
-    aside #localidade nav#local {
+    #local {
         position: absolute;
         width: calc(87% - 183px);
         margin-left: 46px;
