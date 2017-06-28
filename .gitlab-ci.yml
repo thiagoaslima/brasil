@@ -1,0 +1,64 @@
+#Documentacao em
+#http://docs.gitlab.com/ce/ci/yaml/
+
+
+
+####################
+#Configuracao geral
+####################
+
+#Comandos que rodam antes de todas as builds
+#before_script:
+
+#Comandos que rodam apos todas as builds
+#after_script:
+
+#ATENCAO! Leia sobre o cache na documentacao oficial (link acima)
+
+stages: 
+  - build
+#  - test   #So sera executado se build for concluido com sucesso
+  - deploy #So sera executado se test for concluido com sucesso
+
+#Obs: Todos os jobs dentro de um stage sao executados em paralelo.
+
+####################
+#Jobs do stage build
+####################
+build_node_e_dotnet_publish:
+  stage: build
+  script: #Ver sobre escaping de caracteres na documentacao oficial
+    - cd $CI_PROJECT_DIR\codigofonte; npm run build
+    - cd $CI_PROJECT_DIR\dotnet publish -c Release
+  tags: #so sera executado nos Runners que estao marcados com as seguintes tags
+    - node.js
+    - npm
+    - webpack
+    - dotnet_core
+    # interpretado como: php && mysql
+  when: manual
+  allow_failure: false
+  only:
+    - tags
+  except:
+    - master
+    - branches
+
+
+#####################
+#Jobs do stage deploy
+#####################
+deploy_para_HOMOLOG:
+  stage: deploy
+  script: #Ver sobre escaping de caracteres na documentacao oficial
+    - lftp
+  tags: #so sera executado nos Runners que estao marcados com as seguintes tags
+    - remote_file_manipulation
+    # interpretado como: php && mysql
+  when: manual
+  allow_failure: false
+  only:
+    - tags
+  except:
+    - master
+    - branches
