@@ -87,7 +87,7 @@ export class PesquisaCartogramaComponent implements OnChanges {
                         localidade: mapaLocalidades[i],
                         localidadesMarcadas: mapaLocalidadesMarcadas[mapaLocalidades[i].codigo],
                         resultados: resultados[i],
-                        titulo: this.indicador.nome
+                        titulo: this.indicador && this.indicador.nome
                     });
                 }
 
