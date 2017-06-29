@@ -4,6 +4,8 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var merge = require('webpack-merge');
 var CompressionPlugin = require("compression-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
 
 // Configuration in common to both client-side and server-side bundles
@@ -65,7 +67,11 @@ var clientBundleConfig = merge(sharedConfig, {
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0
-        })
+        }),
+        new HtmlWebpackPlugin({
+                inlineSource: '.(js|css)$' // embed all javascript and css inline 
+            }),
+        new HtmlWebpackInlineSourcePlugin()
     ])
 });
 

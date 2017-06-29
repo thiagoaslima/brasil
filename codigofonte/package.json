@@ -82,6 +82,8 @@
     "css-loader": "^0.25.0",
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-inline-source-plugin": "0.0.9",
+    "html-webpack-plugin": "^2.29.0",
     "ibge-version": "^0.1.1",
     "imports-loader": "0.6.5",
     "jasmine-core": "^2.5.2",
@@ -123,7 +125,7 @@
     "preset": "jest-preset-angular",
     "setupTestFrameworkScriptFile": "<rootDir>/ClientApp/setupJest.ts",
     "moduleNameMapper": {
-        "app/(.*)": "<rootDir>/ClientApp/app/$1"
+      "app/(.*)": "<rootDir>/ClientApp/app/$1"
     },
     "collectCoverage": false,
     "collectCoverageFrom": [
