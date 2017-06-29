@@ -20,7 +20,6 @@ export class IBGECartograma implements OnInit, OnChanges {
     municSelected = '';
     valores;
     malha;
-    existeVazio = true;
 
     carregando;
 
@@ -47,7 +46,6 @@ export class IBGECartograma implements OnInit, OnChanges {
         }
 
         if (this.resultados) {
-            // this.existeVazio = false;
             let valores = Object.keys(this.resultados)
                 .map((resultadoKey) => this.resultados[resultadoKey])
                 .map(resultado => {
@@ -63,13 +61,18 @@ export class IBGECartograma implements OnInit, OnChanges {
                 .filter(val => !Number.isNaN(val))
                 .filter(this._isValorValido)
                 .sort((a, b) => a < b ? -1 : 1);
+            
 
-            const len = valores.length;
-            const q1 = valores[Math.round(0.25 * (len + 1))];
-            const q2 = len % 2 ? valores[(len + 1) / 2] : ((valores[len / 2] + valores[(len / 2) + 1]) / 2).toFixed(2);
-            const q3 = valores[Math.round(0.75 * (len + 1))];
+            if(valores && valores.length > 0) {
+                const len = valores.length;
+                const q1 = valores[Math.round(0.25 * (len + 1))];
+                const q2 = len % 2 ? valores[(len + 1) / 2] : ((valores[len / 2] + valores[(len / 2) + 1]) / 2).toFixed(2);
+                const q3 = valores[Math.round(0.75 * (len + 1))];
 
-            this.valores = [q1, q2, q3];
+                this.valores = [q1, q2, q3];
+            } else {
+                valores = [];
+            }
 
         }
 
@@ -126,8 +129,7 @@ export class IBGECartograma implements OnInit, OnChanges {
 
         let faixa;
         const valorNumerico = Number.parseFloat(valor);
-        if (Number.isNaN(valorNumerico)) {
-            // this.existeVazio = true;
+        if (this.valores && this.valores.length == 0 || !this._isValorValido(valorNumerico) || Number.isNaN(valorNumerico)) {
             return 'semValor';
         }
 

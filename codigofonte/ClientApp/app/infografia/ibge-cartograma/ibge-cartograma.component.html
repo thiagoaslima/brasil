@@ -30,9 +30,7 @@
                             [attr.class]="getFaixaMunicipio(item.codigo)"
                             [attr.codigo]="item.codigo" 
                             [attr.nome]="item.nome" 
-                            [attr.link]="item.link" 
-                            [attr.ano]="'2010'"
-                            [attr.valor]="2" 
+                            [attr.link]="item.link"
                             [attr.faixa]="getFaixaMunicipio(item.codigo)">
                             
                             <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
@@ -48,9 +46,9 @@
             </svg>
         </div>
 
-        <div class="legenda" *ngIf="valores && valores.length > 0">
+        <div class="legenda" *ngIf="valores">
             <p class="legenda__texto">Legenda <span *ngIf="indicador?.unidade?.multiplicador > 1">(fator multiplicador: x{{ indicador?.unidade?.multiplicador }})</span></p>
-            <div class="legenda__cores">
+            <div class="legenda__cores" *ngIf="valores.length > 0">
                 <div class="legenda__item" *ngFor="let valor of valores; let i = index">
                     <div class="legenda__cor faixa{{i+1}}"></div>
                     <p class="legenda__texto" *ngIf="i == 0">0 {{ indicador?.unidade?.nome }}</p>
@@ -61,7 +59,7 @@
                     <p class="legenda__texto">{{ valores[valores.length - 1] | resultado: dado?.unidade?.id }} {{indicador?.unidade?.nome}}</p>
                 </div>
             </div>
-            <div class="legenda__item legenda__item--sem-informacao" *ngIf="existeVazio == true">
+            <div class="legenda__item legenda__item--sem-informacao">
                 <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
                 <p class="legenda__texto">Sem Informação</p>
             </div>
