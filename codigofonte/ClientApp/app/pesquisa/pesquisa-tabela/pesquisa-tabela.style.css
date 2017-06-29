@@ -5,6 +5,8 @@
 table{
     width: 100%;
     font-size: .95em;
+    border-collapse: collapse;
+    border: none;
 }
 
 td.p{

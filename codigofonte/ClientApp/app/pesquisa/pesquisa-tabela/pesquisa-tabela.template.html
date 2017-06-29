@@ -1,4 +1,4 @@
-<table cellspacing="0" border='0' class='mobile-table'>
+<table class='mobile-table'>
     <template ngFor let-indicador [ngForOf]="indicadores">
         <tr class='{{getStyleClass(indicador.posicao)}} mobile-tr' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
             
