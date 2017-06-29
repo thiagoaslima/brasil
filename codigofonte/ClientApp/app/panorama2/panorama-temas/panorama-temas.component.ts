@@ -103,9 +103,9 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             return `
                 Em ${salarioMedio.periodo}, o salário médio mensal era de ${salarioMedio.res} salários mínimos. 
                 A proporção de pessoas ocupadas em relação à população total era de ${pessoasOcupadas.res}%. 
-                Na comparação com os outros municípios do estado, ocupava as posições ${salarioMedio.rankingLocal} de ${universoLocal} e ${pessoasOcupadas.rankingLocal} de ${universoLocal}, respectivamente. 
-                Já na comparação com municípios do Brasil todo, ficava na posição ${salarioMedio.rankingGeral} de ${universoGeral} e ${pessoasOcupadas.rankingGeral} de ${universoGeral}, respectivamente.
-                Considerando domicílios com rendimentos mensais de até meio salário mínimo por pessoa, tinha ${rendimento.res}% da população nessas condições, o que o colocava na posição ${rendimento.rankingLocal} de ${universoLocal} dentre os municípios do estado e na posição ${rendimento.rankingGeral} de ${universoGeral} dentre os municípios do Brasil.
+                Na comparação com as outras cidades do estado, ocupava as posições ${salarioMedio.rankingLocal} de ${universoLocal} e ${pessoasOcupadas.rankingLocal} de ${universoLocal}, respectivamente. 
+                Já na comparação com cidades do Brasil todo, ficava na posição ${salarioMedio.rankingGeral} de ${universoGeral} e ${pessoasOcupadas.rankingGeral} de ${universoGeral}, respectivamente.
+                Considerando domicílios com rendimentos mensais de até meio salário mínimo por pessoa, tinha ${rendimento.res}% da população nessas condições, o que o colocava na posição ${rendimento.rankingLocal} de ${universoLocal} dentre as cidades do estado e na posição ${rendimento.rankingGeral} de ${universoGeral} dentre as cidades do Brasil.
             `;
         },
 
@@ -123,11 +123,11 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             let densidade = this._extrairDadosIndicador(29168);
 
             return `
-                O município tinha ${populacao.res} habitantes no último Censo. 
-                Isso coloca o município na posição ${populacao.rankingLocal} dentre ${universoLocal} do mesmo estado. 
-                Em comparação com outros municípios do Brasil, fica na posição ${populacao.rankingGeral} dentre ${universoGeral}. 
+                A cidade tinha ${populacao.res} habitantes no último Censo. 
+                Isso coloca a cidade na posição ${populacao.rankingLocal} dentre ${universoLocal} do mesmo estado. 
+                Em comparação com outras cidades do Brasil, fica na posição ${populacao.rankingGeral} dentre ${universoGeral}. 
                 Sua densidade demográfica é de ${densidade.res} habitantes por kilometro quadrado, colocando-o na posição ${densidade.rankingLocal} de ${universoLocal} do mesmo estado. 
-                Quando comparado com outros municípios no Brasil, fica na posição ${densidade.rankingGeral} de ${universoGeral}.
+                Quando comparado com outras cidades no Brasil, fica na posição ${densidade.rankingGeral} de ${universoGeral}.
             `
         },
 
@@ -148,8 +148,8 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
 
             return `
                 Apresenta ${esgotamento.res}% de domicílios com esgotamento sanitário adequado, ${arborizacao.res}% de domicílios urbanos em vias públicas com arborização e ${urbanizacao.res}% de domicílios urbanos em vias públicas com urbanização adequada (presença de bueiro, calçada, pavimentação e meio-fio). 
-                Quando comparado com os outros municípios do estado, fica na posição ${esgotamento.rankingLocal} de ${universoLocal}, ${arborizacao.rankingLocal} de ${universoLocal} e ${urbanizacao.rankingLocal} de ${universoLocal}, respectivamente. 
-                Já quando comparado a outros municípios do Brasil, sua posição é ${esgotamento.rankingGeral} de ${universoGeral}, ${arborizacao.rankingGeral} de ${universoGeral} e ${urbanizacao.rankingGeral} de ${universoGeral}, respectivamente.
+                Quando comparado com as outras cidades do estado, fica na posição ${esgotamento.rankingLocal} de ${universoLocal}, ${arborizacao.rankingLocal} de ${universoLocal} e ${urbanizacao.rankingLocal} de ${universoLocal}, respectivamente. 
+                Já quando comparado a outras cidades do Brasil, sua posição é ${esgotamento.rankingGeral} de ${universoGeral}, ${arborizacao.rankingGeral} de ${universoGeral} e ${urbanizacao.rankingGeral} de ${universoGeral}, respectivamente.
             `;
         },
 
@@ -168,10 +168,10 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
 
             return `
                 Em ${pib.periodo}, tinha um PIB per capita de R$ ${pib.res}. 
-                Na comparação com os demais municípios do estado, sua posição era de ${pib.rankingLocal} de ${universoLocal}. 
-                Já na comparação com municípios do Brasil todo, sua colocação era de ${pib.rankingGeral} de ${universoGeral}. 
+                Na comparação com as demais cidades do estado, sua posição era de ${pib.rankingLocal} de ${universoLocal}. 
+                Já na comparação com cidades do Brasil todo, sua colocação era de ${pib.rankingGeral} de ${universoGeral}. 
                 Em ${receitas.periodo}, tinha ${receitas.res}% do seu orçamento proveniente de fontes externas. 
-                Em comparação aos outros municípios do estado, estava na posição ${receitas.rankingLocal} de ${universoLocal} e, quando comparado a municípios do Brasil todo, ficava em ${receitas.rankingGeral} de ${universoGeral}.
+                Em comparação às outras cidades do estado, estava na posição ${receitas.rankingLocal} de ${universoLocal} e, quando comparado a cidades do Brasil todo, ficava em ${receitas.rankingGeral} de ${universoGeral}.
             `;
         },
 
@@ -189,10 +189,10 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             let internacoes = this._extrairDadosIndicador(60032);
 
             return `
-                A taxa de mortalidade infantil média no município é de ${mortalidade.res} para 1.000 nascidos vivos. 
+                A taxa de mortalidade infantil média na cidade é de ${mortalidade.res} para 1.000 nascidos vivos. 
                 As internações devido a diarreias são de ${internacoes.res} para cada 1.000 habitantes. 
-                Comparado com todos os municípios do estado, fica nas posições ${mortalidade.rankingLocal} de ${universoLocal} e ${internacoes.rankingLocal} de ${universoLocal}, respectivamente. 
-                Quando comparado a municípios do Brasil todo, essas posições são de ${mortalidade.rankingGeral} de ${universoGeral} e ${internacoes.rankingGeral} de ${universoGeral}, respectivamente.
+                Comparado com todas as cidades do estado, fica nas posições ${mortalidade.rankingLocal} de ${universoLocal} e ${internacoes.rankingLocal} de ${universoLocal}, respectivamente. 
+                Quando comparado a cidades do Brasil todo, essas posições são de ${mortalidade.rankingGeral} de ${universoGeral} e ${internacoes.rankingGeral} de ${universoGeral}, respectivamente.
             `;
         },
 
@@ -212,12 +212,12 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
             let escolarizacao = this._extrairDadosIndicador(60045);
 
             return `
-                Em ${idebInicial.periodo}, os alunos dos anos inicias da rede pública do município tiveram nota média de ${idebInicial.res} no IDEB. 
+                Em ${idebInicial.periodo}, os alunos dos anos inicias da rede pública da cidade tiveram nota média de ${idebInicial.res} no IDEB. 
                 Para os alunos dos anos finais, essa nota foi de ${idebFinal.res}. 
-                Na comparação com municípios do mesmo estado, a nota dos alunos dos anos iniciais colocava este município na posição ${idebInicial.rankingLocal} de ${universoLocal}. 
+                Na comparação com cidades do mesmo estado, a nota dos alunos dos anos iniciais colocava esta cidade na posição ${idebInicial.rankingLocal} de ${universoLocal}. 
                 Considerando a nota dos alunos dos anos finais, a posição passava a ${idebFinal.rankingLocal} de ${universoLocal}. 
                 A taxa de escolarização (para pessoas de 6 a 14 anos) foi de ${escolarizacao.res} em ${escolarizacao.periodo}. 
-                Isso posicionava o município na posição ${escolarizacao.rankingLocal} de ${universoLocal} dentre os municípios do estado e na posição ${escolarizacao.rankingGeral} de ${universoGeral} dentre os municípios do Brasil.
+                Isso posicionava a cidade na posição ${escolarizacao.rankingLocal} de ${universoLocal} dentre as cidades do estado e na posição ${escolarizacao.rankingGeral} de ${universoGeral} dentre as cidades do Brasil.
             `;
         }
 
