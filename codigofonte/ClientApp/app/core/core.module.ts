@@ -9,6 +9,7 @@ import { BuscaComponent } from './busca/busca.component';
 import { BuscaService } from './busca/busca.service';
 import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
+import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.component';
 
 
 @NgModule({
@@ -20,13 +21,15 @@ import { GeolocationComponent } from './geolocation/geolocation.component';
     SeletorLocalidadeComponent,
     BuscaComponent,
     TituloBrowserComponent,
-    GeolocationComponent
+    GeolocationComponent,
+    MetatagBrowserComponent
   ],
   exports: [
     SeletorLocalidadeComponent,
     BuscaComponent,
     TituloBrowserComponent,
-    GeolocationComponent
+    GeolocationComponent,
+    MetatagBrowserComponent
   ],
   providers: [
     BuscaService
