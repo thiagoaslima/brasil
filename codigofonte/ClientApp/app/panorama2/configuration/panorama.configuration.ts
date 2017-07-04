@@ -341,7 +341,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 37,
                     indicadorId: 30255,
-                    titulo: "Índice de Desenvolvimento Humano Municipal",
+                    titulo: "Índice de Desenvolvimento Humano Municipal (IDHM)",
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 }
