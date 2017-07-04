@@ -164,7 +164,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                         <i class="fa fa-times" aria-hidden="true"></i> {{ localidadeAtual.nome }}
                     </div>
                     <input placeholder="Qual município você procura?" type="text" (input)="onChangeInput($event)">
-                    <div id="todos-municipios">
+                    <div>
                         <ul>
                             <li *ngFor="let localidade of localidades" (click)="onClickItem(localidade)">
                                 <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
