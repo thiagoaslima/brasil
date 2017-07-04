@@ -3,15 +3,14 @@ import { BarraGov } from './barra-gov/barra-gov';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 import { CoreModule } from './core/core.module';
-
 import { SharedModule } from './shared/shared.module';
 import { SharedModule2 } from './shared2/shared.module';
 import { SharedModule3 } from './shared3/shared3.module';
-
 import { SinteseModule } from './sintese/sintese.module';
 import { PanoramaModule } from './panorama/panorama.module'
 import { Panorama2Module } from './panorama2/panorama2.module'
 import { PesquisaModule2 } from './pesquisa/pesquisa.module';
+import { AniversarioModule } from './aniversario/aniversario.module';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
@@ -41,6 +40,7 @@ import { IBGECartogramaModule } from './infografia/ibge-cartograma/ibge-cartogra
         PanoramaModule,
         Panorama2Module,
         VisaoHistoricaModule,
+        AniversarioModule,
         SandboxModule,
         Ng2PageScrollModule.forRoot(),
         BasicCacheModule,
