@@ -12,5 +12,13 @@ export class AniversarioComponent implements OnInit {
 
     constructor(private aniversarioService: AniversarioService) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+
+        this.aniversarioService.getAniversario('', "22", "09", "22", "09")
+            .subscribe(aniversarios => {
+
+
+                console.log(aniversarios);
+            });
+     }
 }
