@@ -63,6 +63,11 @@ export class SinteseService {
 
     public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
 
+        if(codigoLocalidade == "0"){
+
+            return Observable.of({});
+        }
+
         const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint)
@@ -175,7 +180,12 @@ export class SinteseService {
 
     public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA: number = 0, codigoLocalidadeB: number = 0, codigoLocalidadeC: number = 0, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
 
-        return Observable.zip(this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo), this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo))
+        return Observable.zip(
+            this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo)
+            )
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 
                 this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
