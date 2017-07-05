@@ -261,7 +261,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 19,
                     indicadorId: 29765,
-                    periodo: "2014",
+                    periodo: "2015",
                     titulo: "Salário médio mensal dos trabalhadores formais",
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -269,7 +269,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 19,
                     indicadorId: 29763,
-                    periodo: "2014",
+                    periodo: "2015",
                     titulo: "Pessoal ocupado",
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -277,7 +277,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 10058,
                     indicadorId: 60036,
-                    periodo: "2014",
+                    periodo: "2015",
                     titulo: "População ocupada",
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
