@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.1.14] - 2017-07-05
+### Fixed
+- Correção na visualização dos dados na tabela das pesquisas.
+
+
 ## [v4.1.13] - 2017-07-05
 ### Added
 - Metatags('description' e 'keywords').
