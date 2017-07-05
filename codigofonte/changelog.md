@@ -1,5 +1,21 @@
 # Change log
 
+## [v4.1.13] - 2017-07-05
+### Added
+- Metatags('description' e 'keywords').
+- Sitemaps.
+
+### Changed
+- Alteração do período de consulta dos indicadores "Salário médio mensal dos trabalhadores formais", "Pessoal ocupado" e "População ocupada" para 2015 no panorama.
+- Otimizações para google analytics.
+- Otimizações de SEO.
+- Font-awesome incluído do proprio servidor IBGE
+
+### Fixed
+- Ajustes na exibição do cartograma.
+- Correções apontadas pelo validador W3C.
+
+
 ## [v4.1.10] - 2017-06-21
 ### Changed
 - Reinclusão da opção 'versão anterior do site'.
