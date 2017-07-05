@@ -16,7 +16,8 @@ import 'rxjs/add/operator/map';
 const cache = CacheFactory.createCache('configuracao', 3);
 @Component({
     selector: 'panorama-shell',
-    templateUrl: './panorama-shell.template.html'
+    templateUrl: './panorama-shell.template.html',
+    styleUrls: ['./panorama-shell.style.css']
 })
 export class PanoramaShellComponent implements OnInit, OnDestroy {
     public configuracao = [];
