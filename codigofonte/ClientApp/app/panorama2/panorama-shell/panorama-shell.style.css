@@ -1,0 +1,10 @@
+.panorama__descricao{
+    margin: 0 5%;
+    font-size: 0.8em;
+}
+
+.panorama__borda{
+    border-top: 4px solid #F7931E;
+    margin-top: 44px;
+    margin-bottom: 30px
+}

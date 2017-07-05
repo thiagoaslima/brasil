@@ -39,21 +39,21 @@ export class MetatagBrowserComponent implements OnInit {
                 let url = window.location.href;
                 if(url.indexOf('panorama') >= 0){
                     //seta a metatag description
-                    this.setaMetatag('description', 'Panorama geral com dados geográficos e estatísticos do IBGE (' + local + ')');
+                    this.setaMetatag('description', 'Conheça o perfil das cidades brasileiras, através de infográficos, mapas e outras informações sobre temas relevantes, como Censo, PIB, IDH e IDEB (' + local + ').');
                     //seta a metatag keywords
                     this.setaMetatag('keywords', 'IBGE,dados,geografia,estatística,cidade,município,país,estado,PIB,IDH,IDEB,população,mapa,censo,panorama,' + localidade.nome + (localidade.parent ? ',' + localidade.parent.nome : ''));
                 }else if(url.indexOf('historico') >= 0){
                     //seta a metatag description
-                    this.setaMetatag('description', 'História e fotos (' + local + ')');
+                    this.setaMetatag('description', 'Conheça a história das cidades, vendo também as suas fotografias históricas (' + local + ').');
                     //seta a metatag keywords
                     this.setaMetatag('keywords', 'IBGE,dados,geografia,estatística,cidade,município,país,estado,PIB,IDH,IDEB,população,mapa,censo,história,fotos,' + localidade.nome + (localidade.parent ? ',' + localidade.parent.nome : ''));
                 }else if(url.indexOf('pesquisa') >= 0){
                     if(params.params.pesquisa){
                         this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                             //seta a metatag description
-                            this.setaMetatag('description', 'Pesquisa - ' + pesquisa['nome'] + ' - (' + local + ')');
+                            this.setaMetatag('description', 'Veja tabelas e gráficos com as pesquisas do IBGE sobre todas as cidades do país. Além disso você pode comparar municípios, ver rankings e séries históricas (pesquisa: ' + pesquisa['nome'] + ' | ' + local + ').');
                             //seta a metatag keywords
-                            this.setaMetatag('keywords', 'IBGE,dados,geografia,estatística,cidade,município,país,estado,PIB,IDH,IDEB,população,mapa,censo,pesquisa,' + localidade.nome + (localidade.parent ? ',' + localidade.parent.nome : ''));
+                            this.setaMetatag('keywords', 'IBGE,dados,geografia,estatística,cidade,município,país,estado,PIB,IDH,IDEB,população,mapa,censo,pesquisa,ranking,comparar,' + localidade.nome + (localidade.parent ? ',' + localidade.parent.nome : ''));
                         });
                     }
                 }
