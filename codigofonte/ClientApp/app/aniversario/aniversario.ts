@@ -1,16 +1,16 @@
+import { Localidade } from '../shared3/models';
+
+
 export class Aniversario{
 
+    localidade: Localidade;
     dia: number;
     mes: number;
-    nomeMunicipio: string;
-    codigoMunicipio: number;
-    siglaUF: string;
-    
-    constructor(siglaUF: string, codigoMunicipio: number, nomeMunicipio: string, dia: number, mes: number){
 
-        this.siglaUF = siglaUF;
-        this.codigoMunicipio = codigoMunicipio;
-        this.nomeMunicipio = nomeMunicipio;
+    
+    constructor(localidade: Localidade, dia: number, mes: number){
+
+        this.localidade = localidade;
         this.dia = dia;
         this.mes = mes;
     }

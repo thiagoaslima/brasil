@@ -1,22 +1,27 @@
-import { Observable } from 'rxjs/Rx';
-import { Aniversario } from './aniversario';
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 
+import { Aniversario } from './aniversario';
+import { AniversarioDataService } from './aniversario.data-service';
+import { LocalidadeService3 } from '../shared3/services';
 
-const headers = new Headers({ 'accept': '*/*'});
-const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 @Injectable()
 export class AniversarioService {
 
-    constructor(private http:Http) { }
+    constructor(
+        private aniversarioDataService: AniversarioDataService,
+        private localidadeService: LocalidadeService3
+    ) { }
 
+    getAniversariantes(siglaUF: string, mes: string){
 
-    public getAniversario(siglaUF: string = '', diaInicioPeriodo: string = '0', mesInicioPeriodo: string = '0', diaFimPeriodo: string = '0', mesFimPeriodo: string = '0'){
-
-        return this.http.get(`https://servicodados.ibge.gov.br/api/v1/localidades/aniversarios/${siglaUF}?diade=${diaInicioPeriodo}&mesde=${mesInicioPeriodo}&diaate=${diaFimPeriodo}&mesate=${mesFimPeriodo}`, options)
-                        .map( res => res.json() )
-                        .map( json => json.map(aniversario => new Aniversario(aniversario['uf'], aniversario['codigo'], aniversario['nome'], aniversario['dia'], aniversario['mes'])) );
+        return this.aniversarioDataService.getAniversario(siglaUF, '01', mes, '31', mes)
+            .map(listaAniversarios => 
+                listaAniversarios.map( aniversario => 
+                    new Aniversario(this.localidadeService.getByCodigo(aniversario['codigoMunicipio'])[0],  aniversario['diaAniversario'], aniversario['mesAniversario']) 
+                )
+            );
     }
+
 }
