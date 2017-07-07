@@ -1,0 +1,178 @@
+*{
+    color: inherit;
+    text-decoration: inherit;
+    font-family: 'Open Sans', sans-serif;
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
+    outline: 0;
+    box-sizing: border-box; 
+}
+
+html, body{
+    height: 100%;
+	color: #333333;
+} 
+/* INPUT RESET TEST */
+
+input { 
+	margin:0;
+	border:0;
+	padding:0;
+	display:inline-block;
+	vertical-align:middle;
+	white-space:normal;
+	background:none;
+	line-height:1;
+	}
+	
+.header{
+	background-color: #1b779b;
+	border-bottom: 4px solid #f7931e;
+	padding: 5%;
+}
+
+.header__logo {
+	width: 100px;
+}
+.header__title {
+	color: #fff;
+	font-size: 1.5em;
+}
+
+.header__error {
+	color: #104251;
+	font-size: 1.2em;
+}
+
+.body {
+	padding:5%; 
+}
+
+.body p, input {
+	margin: 0.5em 0 2em 0;	
+}
+
+.body input {
+	width: 100%;
+	height: 35px;
+	max-width: 480px;
+	margin-bottom: 20px;
+}
+
+.search-box {
+	background-image: url(search_icon.svg);
+	background-position: 99% 7px;
+	background-repeat: no-repeat;
+	border: 1px solid #ccc;
+	padding-right: 30px;
+	padding-left: 5px;
+		}
+	
+.btn {
+	border: 1px solid #1b779b;
+	border-radius: 20px;
+	padding: 5px 15px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+
+}
+
+.btn:hover {
+	color: #fff;
+	background-color: #1b779b;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+
+}
+.capitais {
+	width: 90%;
+	padding-bottom: 50px;
+	margin: auto;
+	padding-top: 25px;
+}
+
+.mais-acessadas {
+	list-style: none;
+}
+.mais-acessadas__item {
+	padding-top: 10px;
+	padding-bottom: 10px;	
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	break-inside: avoid;
+}
+.mais-acessadas__item:hover {
+	background-color: #e6e6e6;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+.graphcontainer {
+	padding: 2.5%;
+	border: 2px solid #ccc;
+	margin: 15px 2.5%;
+	min-height: 400px;
+}
+/*.graphcontainer__graph {
+	width: 450px;
+	height: 300px;
+	background-color:#ccc;
+
+}*/
+
+@media screen and (min-width: 960px) {
+	
+.body {
+	float:left; 
+	padding: 3%;
+}
+
+.capitais {
+	margin-top: 60px;
+    width: 60%;
+	padding-bottom: 50px;
+	padding-top: 0px;
+}
+
+.mais-acessadas {
+    column-count: 2;
+    column-gap: 40px;
+}
+
+
+.graphcontainer {
+	margin-left: 50%; 
+	max-width: 800px;
+	
+}
+
+.header{
+	padding: 2% 3%;
+}
+
+.header__logo {
+	width: 150px;
+}
+.header__title {
+	font-size: 2em;
+}
+
+.header__error {
+	font-size: 1.5em;
+}
+}
