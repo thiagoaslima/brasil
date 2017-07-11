@@ -5,6 +5,11 @@
 }
 
 .aniversarios{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
 }
 
 .bg{
@@ -21,6 +26,9 @@
     position: absolute;
     margin-left: 50%;
     left: -431px;
+    height: 404px;
+    top: 50vh;
+    margin-top: -215px;
 }
 
 i.fa-times{
@@ -37,7 +45,7 @@ h2{
 .aniversario__header{
     padding: 12px 25px;
     background-color: #1b779b;
-    height: 70px;
+    height: 105px;
 }
 .aniversario__header nav{
     width: 837px;
@@ -67,6 +75,10 @@ h2{
 
 .aniversario__header nav ul li:last-child{
     margin-left: 20px;
+}
+
+.aniversario__header .selecionar-data{
+    display: none;
 }
 
 .aniversario__content{
@@ -161,7 +173,7 @@ CALENDÁRIO
     width: 395px;
     /* background-color: yellow; */
     overflow-y: scroll;
-    height: 265px;
+    height: 333px;
     padding-top: 40px;
     padding-bottom: 40px;
 }
@@ -200,4 +212,66 @@ CALENDÁRIO
     color: #4d4d4d;
     margin-right: 4px;
     margin-left: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    h2{
+        font-size: 1.6em;
+    }
+
+    .container{
+        width: 80%;
+        margin-left: 10%;
+        left: 0px;
+        top: calc(50% - 220px);
+    }
+
+    .calendario{
+        display: none;
+    }
+
+    .aniversariantes{
+        width: 90%;
+        float: none;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .aniversariantes_municipios{
+        margin-top: 9px;
+        font-size: .9em;
+    }
+
+    .aniversariantes_numero{
+        width: 11%;
+    }
+    
+    .aniversariantes_municipios{
+        width: 84%
+    }
+    
+    .aniversario__header select{
+        float: left;
+        width: 50%;
+        margin-top: 6px;
+       
+    }
+
+    .aniversario__header .selecionar-data{
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 21px;
+        margin-top: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        color: #fff;
+        float: right;
+        display: block;
+    }
+    .aniversariantes_municipios{
+        width: 100%;
+    }
+    .aniversariantes_numero{
+        display: none;
+    }
 }
