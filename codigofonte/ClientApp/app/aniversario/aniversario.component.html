@@ -45,15 +45,15 @@
             </div>
 
             <div class="aniversariantes">
-                
-                <div class='aniversariantes__scroll__container'>
-                    <div class="aniversariantes_dia" *ngFor="let aniversariantesKey of aniversariantes | keys">
-                        <div class="aniversariantes_numero">
-                            {{ aniversariantesKey }}
-                        </div>
-                        <div class="aniversariantes_municipios">
-                            <div class="aniversariantes__municipios__municipio" *ngFor="let aniversariante of aniversariantes[aniversariantesKey]">{{aniversariante.localidade.nome}}<span>{{aniversariante.localidade.parent.sigla}}</span>| {{aniversariante.localidade.codigo}}</div>
-                        </div>
+                <div class='mascara-topo'></div>
+                <div class='mascara-rodape'></div>
+
+                <div class="aniversariantes_dia" *ngFor="let aniversariantesKey of aniversariantes | keys">
+                    <div class="aniversariantes_numero">
+                        {{ aniversariantesKey }}
+                    </div>
+                    <div class="aniversariantes_municipios">
+                        <div class="aniversariantes__municipios__municipio" *ngFor="let aniversariante of aniversariantes[aniversariantesKey]">{{aniversariante.localidade.nome}}<span>{{aniversariante.localidade.parent.sigla}}</span>| {{aniversariante.localidade.codigo}}</div>
                     </div>
                 </div>
 

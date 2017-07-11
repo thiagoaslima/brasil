@@ -178,6 +178,22 @@ CALENDÁRIO
     padding-bottom: 40px;
 }
 
+.mascara-topo{
+    width: 44%;
+    background-color: #fff;
+    height: 41px;
+    position: absolute;
+    margin-top: -40px;
+}
+
+.mascara-rodape{
+    width: 44%;
+    background-color: #fff;
+    height: 31px;
+    position: absolute;
+    margin-top: 262px;
+}
+
 .aniversariantes_dia{
     display: table;
     margin-bottom: 37px;
