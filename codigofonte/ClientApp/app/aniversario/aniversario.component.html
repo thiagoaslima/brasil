@@ -1,0 +1,63 @@
+<div class="aniversarios">
+    <div class="bg"></div>
+    <div class="container">
+        <div class="aniversario__header">
+            <i class="fa fa-times" aria-hidden="true"></i>
+
+            <h2>Aniversários</h2>
+            
+                        <select name="estado" (change)="onUFChange($event)"> 
+                            <option value="0">Todos os estados</option> 
+                            <option value="12">Acre</option> 
+                            <option value="27">Alagoas</option> 
+                            <option value="13">Amazonas</option> 
+                            <option value="16">Amapá</option> 
+                            <option value="29">Bahia</option> 
+                            <option value="23">Ceará</option> 
+                            <option value="53">Distrito Federal</option> 
+                            <option value="32">Espírito Santo</option> 
+                            <option value="52">Goiás</option> 
+                            <option value="21">Maranhão</option> 
+                            <option value="51">Mato Grosso</option> 
+                            <option value="50">Mato Grosso do Sul</option> 
+                            <option value="31">Minas Gerais</option> 
+                            <option value="15">Pará</option> 
+                            <option value="25">Paraíba</option> 
+                            <option value="41">Paraná</option> 
+                            <option value="26">Pernambuco</option> 
+                            <option value="22">Piauí</option> 
+                            <option value="33">Rio de Janeiro</option> 
+                            <option value="24">Rio Grande do Norte</option> 
+                            <option value="11">Rondônia</option> 
+                            <option value="43">Rio Grande do Sul</option> 
+                            <option value="14">Roraima</option> 
+                            <option value="42">Santa Catarina</option> 
+                            <option value="28">Sergipe</option> 
+                            <option value="35">São Paulo</option> 
+                            <option value="17">Tocantins</option> 
+                        </select>
+        </div>
+
+        <div class="aniversario__content">
+
+            <div class="calendario">
+                <my-date-picker name="mydate" locale="pt-br" [options]="myDatePickerOptions" [(ngModel)]="model" (dateChanged)="onDateChanged($event)" required></my-date-picker>
+            </div>
+
+            <div class="aniversariantes">
+                <div class='mascara-topo'></div>
+                <div class='mascara-rodape'></div>
+
+                <div class="aniversariantes_dia" *ngFor="let aniversariantesKey of aniversariantes | keys">
+                    <div class="aniversariantes_numero">
+                        {{ aniversariantesKey }}
+                    </div>
+                    <div class="aniversariantes_municipios">
+                        <div class="aniversariantes__municipios__municipio" *ngFor="let aniversariante of aniversariantes[aniversariantesKey]">{{aniversariante.localidade.nome}}<span>{{aniversariante.localidade.parent.sigla}}</span>| {{aniversariante.localidade.codigo}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
