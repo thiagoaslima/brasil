@@ -3,8 +3,8 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 
-const headers = new Headers({ 'accept': '*/*'});
-const options = new RequestOptions({ headers: headers, withCredentials: false });
+const headers = new Headers({ "accept": '*/*'});
+const options = new RequestOptions({ "headers": headers, "withCredentials": false });
 
 @Injectable()
 export class AniversarioDataService {

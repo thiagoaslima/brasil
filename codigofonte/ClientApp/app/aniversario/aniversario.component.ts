@@ -1,3 +1,4 @@
+import { IMyDate, IMyMarkedDate, IMyMarkedDates } from 'mydatepicker/dist';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Component, ElementRef, Inject, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
@@ -29,14 +30,14 @@ export class AniversarioComponent implements OnInit {
     myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
         inline: true,
-        disableUntil: {year: 0, month: 0, day: 0},
-        disableDays: [{year: 0, month: 0, day: 0}],
         showWeekNumbers: true,
         selectorHeight: '232px',
         selectorWidth: '252px'
     };
 
     model: Object = {};
+
+    isVisible = false;
 
     private subscription: Subscription;
 
@@ -56,8 +57,6 @@ export class AniversarioComponent implements OnInit {
         this.diaSelecionado = new Date().getDate();
         this.mesSelecionado = new Date().getMonth() + 1;
         this.model = { date: { year: new Date().getFullYear(), month: this.mesSelecionado, day: this.diaSelecionado } };
-
-        this.getAniversariantes();
     }
 
     ngOnDestroy(){
@@ -80,15 +79,6 @@ export class AniversarioComponent implements OnInit {
 
     public goToDay(day: string):void {
 
-        //let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, `#${day}`, this.container.nativeElement);
-
-        // let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
-        //     document: this.document,
-        //     scrollTarget: `#${day}`,
-        //     scrollingViews: [this.container.nativeElement],
-        //     advancedInlineOffsetCalculation: true
-        // });
-
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
             document: this.document,
             scrollTarget: `#${day}`,
@@ -99,6 +89,16 @@ export class AniversarioComponent implements OnInit {
         });
 
         this.pageScrollService.start(pageScrollInstance);
+    }
+
+    toggleVisible(){
+
+        this.isVisible = !this.isVisible;
+
+        if(this.isVisible){
+
+            this.getAniversariantes()
+        }
     }
 
     private getAniversariantes(){

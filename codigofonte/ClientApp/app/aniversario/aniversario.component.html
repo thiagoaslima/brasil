@@ -1,10 +1,10 @@
-<div class="bt-aniversarios"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Aniversários dos Municípios</div>
-<!--
-<div class="aniversarios">
+<div class="bt-aniversarios" (click)="toggleVisible()"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Aniversários dos Municípios</div>
+
+<div class="aniversarios" *ngIf="isVisible">
     <div class="bg"></div>
     <div class="container">
         <div class="aniversario__header">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times" aria-hidden="true" (click)="toggleVisible()"></i>
 
             <h2>Aniversários</h2>
             
@@ -64,4 +64,3 @@
     </div>
 </div>
 
--->
