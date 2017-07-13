@@ -44,12 +44,12 @@
                 <my-date-picker name="mydate" locale="pt-br" [options]="myDatePickerOptions" [(ngModel)]="model" (dateChanged)="onDateChanged($event)" required></my-date-picker>
             </div>
 
-            <div class="aniversariantes">
+            <div class="aniversariantes" #container>
                 <div class='mascara-topo'></div>
                 <div class='mascara-rodape'></div>
 
                 <div class="aniversariantes_dia" *ngFor="let aniversariantesKey of aniversariantes | keys">
-                    <div class="aniversariantes_numero">
+                    <div class="aniversariantes_numero" [id]="aniversariantesKey">
                         {{ aniversariantesKey }}
                     </div>
                     <div class="aniversariantes_municipios">

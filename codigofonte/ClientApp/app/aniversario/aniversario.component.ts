@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs/Rx';
+import { Component, ElementRef, Inject, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import { PageScrollInstance, PageScrollService, PageScrollConfig } from 'ng2-page-scroll';
+import { DOCUMENT } from '@angular/platform-browser';
+
+import { isBrowser, isNode } from 'angular2-universal';
 
 import { Aniversario } from './aniversario';
 import { AniversarioService } from './aniversario.service';
@@ -12,11 +17,14 @@ import { AniversarioService } from './aniversario.service';
 })
 export class AniversarioComponent implements OnInit {
 
+    public isPrerender = isNode;
+    public isBrowser = isBrowser;
+
     aniversariantes: Aniversario[] = [];
 
     codigoUFSelecionada: string;
     diaSelecionado;
-    mesSelecionado
+    mesSelecionado;
 
     myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
@@ -28,10 +36,18 @@ export class AniversarioComponent implements OnInit {
         selectorWidth: '252px'
     };
 
-    model: Object = { date: { year: 2018, month: 10, day: 9 } };
+    model: Object = {};
 
+    private subscription: Subscription;
 
-    constructor(private aniversarioService: AniversarioService) { }
+    @ViewChild('container')
+    private container: ElementRef;
+
+    constructor(
+        private aniversarioService: AniversarioService,
+        private pageScrollService: PageScrollService,
+        @Inject(DOCUMENT) private document: any
+    ) { }
 
 
     ngOnInit() { 
@@ -39,7 +55,14 @@ export class AniversarioComponent implements OnInit {
         this.codigoUFSelecionada = '0';
         this.diaSelecionado = new Date().getDate();
         this.mesSelecionado = new Date().getMonth() + 1;
+        this.model = { date: { year: new Date().getFullYear(), month: this.mesSelecionado, day: this.diaSelecionado } };
+
         this.getAniversariantes();
+    }
+
+    ngOnDestroy(){
+
+        this.subscription.unsubscribe();
     }
 
     onUFChange(event){
@@ -55,12 +78,40 @@ export class AniversarioComponent implements OnInit {
         this.getAniversariantes();
     }
 
+    public goToDay(day: string):void {
+
+        //let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, `#${day}`, this.container.nativeElement);
+
+        // let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+        //     document: this.document,
+        //     scrollTarget: `#${day}`,
+        //     scrollingViews: [this.container.nativeElement],
+        //     advancedInlineOffsetCalculation: true
+        // });
+
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+            document: this.document,
+            scrollTarget: `#${day}`,
+            scrollingViews: [this.container.nativeElement],
+            advancedInlineOffsetCalculation: true,
+            verticalScrolling: true,
+            pageScrollOffset: 150
+        });
+
+        this.pageScrollService.start(pageScrollInstance);
+    }
+
     private getAniversariantes(){
 
-        this.aniversarioService.getAniversariantes(this.codigoUFSelecionada, this.mesSelecionado)
+        this.subscription = this.aniversarioService.getAniversariantes(this.codigoUFSelecionada, this.mesSelecionado)
             .subscribe(aniversariantes => {
 
                 this.aniversariantes = this.groupByDiaAniversario(aniversariantes);
+
+                if (this.isBrowser) {
+
+                    this.goToDay(this.diaSelecionado);
+                }   
             });
     }
 
