@@ -13,5 +13,15 @@ export const notasEspeciais = [
         "localidade": 2909208,
         "indicador": 'População estimada',
         "nota": "Por determinação judicial o Município de Coronel João Sá - BA teve os efeitos das estimativas das populações de 2014, 2015 e 2016 suspensas, passando a vigorar, para efeito de distribuição do Fundo de Participação dos Municípios, a população estimada para o ano de 2013, que foi de 17.422 habitantes. Processo Judicial número 0002222-53.2017.4.01.3306 - Vara Única de Paulo Afonso-BA"
+    },
+    {
+        "localidade": 2508505,
+        "indicador": 'População estimada',
+        "nota": "Por determinação judicial, os Municípios de Livramento e Taperoá, do estado da  Paraíba, tiveram seus limites territoriais alterados passando a vigorar, para efeitos de distribuição do Fundo de Participação dos Municípios, as populações de 7.248  e 15.316 habitantes, respectivamente. Processo Judicial número 0000301-96.2006.4.05.8200 - Tribunal de Justiça da Paraíba - PB."
+    },
+    {
+        "localidade": 2516508,
+        "indicador": 'População estimada',
+        "nota": "Por determinação judicial, os Municípios de Livramento e Taperoá, do estado da  Paraíba, tiveram seus limites territoriais alterados passando a vigorar, para efeitos de distribuição do Fundo de Participação dos Municípios, as populações de 7.248  e 15.316 habitantes, respectivamente. Processo Judicial número 0000301-96.2006.4.05.8200 - Tribunal de Justiça da Paraíba - PB."
     }
 ]
