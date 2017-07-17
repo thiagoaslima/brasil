@@ -48,7 +48,10 @@ export class AniversarioComponent implements OnInit {
         private aniversarioService: AniversarioService,
         private pageScrollService: PageScrollService,
         @Inject(DOCUMENT) private document: any
-    ) { }
+    ) { 
+
+        PageScrollConfig.defaultScrollOffset = 150;
+     }
 
 
     ngOnInit() { 
@@ -79,14 +82,7 @@ export class AniversarioComponent implements OnInit {
 
     public goToDay(day: string):void {
 
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
-            document: this.document,
-            scrollTarget: `#${day}`,
-            scrollingViews: [this.container.nativeElement],
-            advancedInlineOffsetCalculation: true,
-            verticalScrolling: true,
-            pageScrollOffset: 150
-        });
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, `#${day}`, this.container.nativeElement);
 
         this.pageScrollService.start(pageScrollInstance);
     }
