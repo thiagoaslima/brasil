@@ -13,6 +13,7 @@ import { IsMobileService } from './is-mobile.service';
 import { QRCodeComponent } from './qrcode/qrcode.component';
 import { Breadcrumb } from './breadcrumb/breadcrumb.component';
 import { MensagemSetasComponent } from './mensagem-setas/mensagem-setas.component';
+import { NaoAcheiComponent } from './nao-achei/nao-achei.component';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -32,7 +33,8 @@ const COMPONENTS = [
     // put shared components here
     QRCodeComponent,
     Breadcrumb,
-    MensagemSetasComponent
+    MensagemSetasComponent,
+    NaoAcheiComponent
 ];
 
 const PROVIDERS = [
