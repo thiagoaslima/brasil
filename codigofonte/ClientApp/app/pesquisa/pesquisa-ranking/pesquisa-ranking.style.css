@@ -50,6 +50,10 @@
     margin-right: 1%;
 }
 
+.grupo__item__sigla{
+    font-size: .8em;
+}
+
 .grupo__item__nome--selecionado{
 	color: #F7931E;
 
