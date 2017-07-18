@@ -23,7 +23,7 @@ export class Panorama2Service {
         return this._getResultadosIndicadores(configuracao, localidade)
             .map(resultados => {
                 return configuracao.map(item => {
-                    const periodo = item.periodo || resultados[item.indicadorId].periodoValidoMaisRecente;
+                    const periodo = item.periodo || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente || '-';
 
                     return {
                         tema: item.tema,
