@@ -28,6 +28,8 @@
 
 .busca.aberto{
     background-color: #333333;
+    z-index: 2;
+    position: relative;
 }
 
 .busca .busca__auto-completar{
@@ -39,6 +41,7 @@
     z-index: 1;
     max-height: 100vh;
     overflow-y: auto;
+    width: 100%;
 }
 
 
@@ -46,7 +49,7 @@
     float: left;
     margin: 10px 1%;
     height: 30px;
-    width: 98%;
+    width: calc(98% - 275px);
     padding: 0px 40px 0px 10px;
 }
 
@@ -151,6 +154,18 @@
 .busca__respostas.load .busca__resposta--load{
     display: block;
 }
+
+
+
+/*.busca.aberto .aniversarios{
+    color: #fff;
+    border-color: #fff;
+}
+
+.busca.aberto .aniversarios i{
+    color: #fff;
+}*/
+
 
 @media screen and (max-width: 768px) {
     .busca{

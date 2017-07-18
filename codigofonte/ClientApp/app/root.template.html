@@ -14,7 +14,7 @@
     </div>
     
     <busca (buscaAberta)="seletor.fecharSeletor()"></busca>
-    <!--<aniversario></aniversario>-->
+    <aniversario></aniversario>
 
 </header>
 
@@ -79,6 +79,8 @@
         <router-outlet></router-outlet>
     </div>
     
+    <nao-achei></nao-achei>
+    
     <footer class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</footer>
     
     <div class="share_Button" *ngIf="isBrowser">
@@ -92,6 +94,5 @@
     </div>
 
     <qrcode></qrcode>
-    
 
 </div>

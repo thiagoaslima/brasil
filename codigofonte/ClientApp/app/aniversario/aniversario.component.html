@@ -1,8 +1,10 @@
-<div class="aniversarios">
+<div class="bt-aniversarios" (click)="toggleVisible()"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Aniversários dos Municípios</div>
+
+<div class="aniversarios" *ngIf="isVisible">
     <div class="bg"></div>
     <div class="container">
         <div class="aniversario__header">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times" aria-hidden="true" (click)="toggleVisible()"></i>
 
             <h2>Aniversários</h2>
             
@@ -44,10 +46,12 @@
                 <my-date-picker name="mydate" locale="pt-br" [options]="myDatePickerOptions" [(ngModel)]="model" (dateChanged)="onDateChanged($event)" required></my-date-picker>
             </div>
 
-            <div class="aniversariantes">
+            <div class="aniversariantes" #container>
+                <div class='mascara-topo'></div>
+                <div class='mascara-rodape'></div>
 
                 <div class="aniversariantes_dia" *ngFor="let aniversariantesKey of aniversariantes | keys">
-                    <div class="aniversariantes_numero">
+                    <div class="aniversariantes_numero" [id]="aniversariantesKey">
                         {{ aniversariantesKey }}
                     </div>
                     <div class="aniversariantes_municipios">
@@ -59,3 +63,4 @@
         </div>
     </div>
 </div>
+
