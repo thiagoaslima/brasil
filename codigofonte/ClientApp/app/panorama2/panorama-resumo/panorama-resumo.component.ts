@@ -33,12 +33,15 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     public icones: { [tema: string]: string } = {};
     public cabecalho = [];
     public temas = [];
+    public notas = [];
+    public fontes = [];
     public isHeaderStatic: Observable<boolean>;
 
     private _valores = {};
     private _scrollTop$ = new BehaviorSubject(0);
 
     private nota;
+    exibirFontesENotas = false;
     
     @Output() temaSelecionado = new EventEmitter();
     temaAtual = '#po';
@@ -69,6 +72,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
             this.localidade && this.configuracao && this.configuracao.length > 0
         ) {
             this._panoramaService.getResumo(this.configuracao, this.localidade).subscribe(resp => {
+
                 let temas = resp.slice(0);
                 let cabecalho = [];
                 let i = 0;
@@ -78,6 +82,14 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
 
                 this.cabecalho = cabecalho;
                 this.temas = temas;
+
+                debugger;
+
+                this.notas = resp.filter(resultado => resultado.notas.length > 0 && (resultado.notas[0]['periodo'] == resultado.periodo || resultado.notas[0]['periodo'] == "-"))
+                                 .map(resultado => `${resultado.titulo} - ${resultado.notas[0]['notas']}`);
+
+                this.fontes = resp.filter(resultado => !!resultado.fontes && resultado.fontes.length > 0 && (resultado.fontes[0]['periodo'] == resultado.periodo || resultado.fontes[0]['periodo'] == "-"))
+                                  .map(resultado => `${resultado.titulo} - ${resultado.fontes[0]['fontes']}`);
             })
         }
     }

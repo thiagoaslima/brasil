@@ -30,7 +30,9 @@ export class Panorama2Service {
                         titulo: item.titulo || (resultados[item.indicadorId] && resultados[item.indicadorId].indicador.nome),
                         periodo: periodo,
                         valor: resultados[item.indicadorId] && resultados[item.indicadorId].getValor(periodo),
-                        unidade: resultados[item.indicadorId] && resultados[item.indicadorId].indicador.unidade.toString()
+                        unidade: resultados[item.indicadorId] && resultados[item.indicadorId].indicador.unidade.toString(),
+                        notas: resultados[item.indicadorId].indicador.notas,
+                        fontes: resultados[item.indicadorId].indicador.fontes,
                     }
                 })
             })
@@ -72,7 +74,10 @@ export class Panorama2Service {
 
         return this._resultadoService
             .getResultadosCompletos(indicadoresId, localidade.codigo)
-            .map(resultados => converterObjArrayEmHash(resultados, 'indicador.id'))
+            .map(resultados => {
+
+                return converterObjArrayEmHash(resultados, 'indicador.id');;
+            })
     }
 
     private _getPosicaoRankings(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: { [contexto: string]: any } }> {

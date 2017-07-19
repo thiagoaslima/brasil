@@ -211,6 +211,8 @@
 .lista__nota__icone{
     color: #1B779B;
     cursor: pointer;
+    margin-top: 10px;
+    margin-left: 15px;
 }
 
 .lista__nota__content{
@@ -227,6 +229,7 @@
     transform: translateX(0px);
     margin-top: 19px;
     margin-left: -16px;
+    overflow-y: scroll;
 }
 
 .lista__unidade{
