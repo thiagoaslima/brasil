@@ -70,16 +70,18 @@
     </table>
 </template>
 
-<i (click)="exibirFontesENotas = !exibirFontesENotas" item.titulo class="fa fa-sticky-note lista__nota__icone" aria-hidden="true">Notas & Fontes</i>
+<i (click)="exibirFontesENotas = !exibirFontesENotas" item.titulo class="fa fa-sticky-note lista__nota__icone lista__titulo" aria-hidden="true">&nbsp; Notas & Fontes</i>
 <div class="lista__nota__content" *ngIf="exibirFontesENotas">
-    Notas:
+    <h1>Notas:</h1>
     <ol>
         <li *ngFor="let nota of notas">
             {{ nota }}
         </li>
     </ol>
 
-    Fontes:
+    <br>
+
+    <h1>Fontes:</h1>
     <ol>
         <li *ngFor="let fonte of fontes">
             {{ fonte }}

@@ -212,14 +212,14 @@
     color: #1B779B;
     cursor: pointer;
     margin-top: 10px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .lista__nota__content{
     position: absolute;
     background: #fff;
     padding: 20px 15px 15px 30px;
-    width: 450px;
+    width: 520px;
     border: 1px solid #ccc;
     z-index: 2;
     word-wrap: break-word;
@@ -227,9 +227,10 @@
     font-size: .8em;
     font-weight: normal;
     transform: translateX(0px);
-    margin-top: 19px;
-    margin-left: -16px;
+    margin-top: 41px;
+    margin-left: -126px;
     overflow-y: scroll;
+    max-height: 310px;
 }
 
 .lista__unidade{

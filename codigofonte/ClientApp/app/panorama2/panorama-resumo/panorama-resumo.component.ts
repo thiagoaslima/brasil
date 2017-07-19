@@ -83,13 +83,11 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
                 this.cabecalho = cabecalho;
                 this.temas = temas;
 
-                debugger;
-
                 this.notas = resp.filter(resultado => resultado.notas.length > 0 && (resultado.notas[0]['periodo'] == resultado.periodo || resultado.notas[0]['periodo'] == "-"))
-                                 .map(resultado => `${resultado.titulo} - ${resultado.notas[0]['notas']}`);
+                                 .map(resultado => `${resultado.titulo}: ${resultado.notas[0]['notas']}`);
 
                 this.fontes = resp.filter(resultado => !!resultado.fontes && resultado.fontes.length > 0 && (resultado.fontes[0]['periodo'] == resultado.periodo || resultado.fontes[0]['periodo'] == "-"))
-                                  .map(resultado => `${resultado.titulo} - ${resultado.fontes[0]['fontes']}`);
+                                  .map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
             })
         }
     }
