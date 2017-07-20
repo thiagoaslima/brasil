@@ -70,8 +70,11 @@
     </table>
 </template>
 
-<i (click)="exibirFontesENotas = !exibirFontesENotas" item.titulo class="fa fa-sticky-note lista__nota__icone lista__titulo" aria-hidden="true">&nbsp; Notas & Fontes</i>
-<div class="lista__nota__content" *ngIf="exibirFontesENotas">
+<div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas & Fontes
+</div>
+
+<div class="lista__nota__content__geral" *ngIf="exibirFontesENotas">
     <h1>Notas:</h1>
     <ol>
         <li *ngFor="let nota of notas">

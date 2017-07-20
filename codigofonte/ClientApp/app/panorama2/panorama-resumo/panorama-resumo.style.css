@@ -215,6 +215,18 @@
     margin-left: 10px;
 }
 
+.fontes-e-nota-geral{
+    float: right;
+    margin-right: 17px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    border: 1px solid;
+    margin-top: 30px;
+    padding: 4px;
+    color: #1b779b;
+    cursor: pointer;
+}
+
 .lista__nota__content{
     position: absolute;
     background: #fff;
@@ -233,6 +245,26 @@
     max-height: 310px;
 }
 
+.lista__nota__content__geral{
+    position: relative;
+    background: #fff;
+    padding: 20px 15px 15px 30px;
+    width: 520px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    word-wrap: break-word;
+    /* display: inline; */
+    font-size: .8em;
+    font-weight: normal;
+    /* transform: translateX(0px); */
+    margin-top: 53px;
+    /* margin-left: -126px; */
+    overflow-y: scroll;
+    max-height: 310px;
+    /* left: 363px; */
+    float: right;
+    margin-right: -519px;
+}
 .lista__unidade{
     font-size: 0.8em;
     font-weight: normal;
