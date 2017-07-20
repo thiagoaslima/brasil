@@ -8,10 +8,11 @@ export interface IndicadorParameters extends IndicadorDTO {
     indicador: string;
     posicao: string;
     classe: string;
-    children: IndicadorParameters[]
-    pesquisa_id?: number
-    pesquisa?: Pesquisa
-    nota: string[]
+    children: IndicadorParameters[];
+    pesquisa_id?: number;
+    pesquisa?: Pesquisa;
+    nota: string[];
+    fonte: string[];
     metadado?: {
         descricao: string
         calculo: string
@@ -39,6 +40,7 @@ export class Indicador {
     public readonly pesquisa?: Pesquisa
     public readonly indicadores: Indicador[]
     public readonly notas: string[]
+    public readonly fontes: string[]
     public readonly metadados: {
         descricao: string
         calculo: string
@@ -60,6 +62,7 @@ export class Indicador {
         this.posicao = dados.posicao;
         this.classe = dados.classe;
         this.notas = dados.nota.slice(0);
+        this.fontes = dados.fonte;
 
         this.indicadores = dados.children.map(child => {
             return dados.pesquisa

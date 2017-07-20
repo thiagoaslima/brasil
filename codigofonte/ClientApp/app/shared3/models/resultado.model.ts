@@ -33,6 +33,7 @@ export class Resultado {
     public readonly valores: string[]
 
     constructor({ id, codigoLocalidade, res = [], indicador, localidade } = {} as ResultadoParameters) {
+
         this.indicadorId = id;
         this.codigoLocalidade = Number.parseInt(codigoLocalidade, 10);
 

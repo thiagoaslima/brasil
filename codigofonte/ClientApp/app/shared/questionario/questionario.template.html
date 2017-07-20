@@ -1,0 +1,81 @@
+<div class="questionario" *ngIf="!esconde">
+    <div class="questionario__container">
+
+        <form class="questionario__form" [class.questionario__form--aberto]="aberto" *ngIf="pergunta == 1">
+            <p>{{pergunta}}/{{ultimaPergunta - 1}} perguntas</p>
+            <p class="questionario__instrucao">Indique o quanto concorda com os itens a seguir:</p>
+            <p class="questionario__pergunta">O site é fácil de utilizar?</p>
+            <p class="questionario__escala">
+                <span class="questionario__escala-label">Discordo <br> totalmente</span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="1"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="2"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="3"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="4"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="5"></span>
+                <span class="questionario__escala-label">Concordo <br> totalmente</span>
+            </p>
+        </form>
+
+        <form class="questionario__form" [class.questionario__form--aberto]="aberto" *ngIf="pergunta == 2">
+            <p>{{pergunta}}/{{ultimaPergunta - 1}} perguntas</p>
+            <p class="questionario__pergunta">É fácil encontrar uma informação buscada?</p>
+            <p class="questionario__escala">
+                <span class="questionario__escala-label">Discordo <br> totalmente</span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="1"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="2"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="3"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="4"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="5"></span>
+                <span class="questionario__escala-label">Concordo <br> totalmente</span>
+            </p>
+        </form>
+
+        <form class="questionario__form" [class.questionario__form--aberto]="aberto" *ngIf="pergunta == 3">
+            <p>{{pergunta}}/{{ultimaPergunta - 1}} perguntas</p>
+            <p class="questionario__pergunta">O site atende as suas necessidades?</p>
+            <p class="questionario__escala">
+                <span class="questionario__escala-label">Discordo <br> totalmente</span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="1"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="2"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="3"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="4"></span>
+                <span class="questionario__escala-radio"><input type="radio" name="opcao" value="5"></span>
+                <span class="questionario__escala-label">Concordo <br> totalmente</span>
+            </p>
+        </form>
+
+        <form class="questionario__form" [class.questionario__form--aberto]="aberto" *ngIf="pergunta == 4">
+            <p>{{pergunta}}/{{ultimaPergunta - 1}} perguntas</p>
+            <p class="questionario__pergunta">Com qual dos grupos a seguir você se identifica?</p>
+            <div class="questionario__respostas">
+                <p><input type="radio" name="opcao" value="1"> Acadêmico/Pesquisador</p>
+                <p><input type="radio" name="opcao" value="1"> Gestor público</p>
+                <p><input type="radio" name="opcao" value="1"> Empresário</p>
+                <p><input type="radio" name="opcao" value="1"> Estudante</p>
+                <p><input type="radio" name="opcao" value="1"> Jornalista</p>
+                <p><input type="radio" name="opcao" value="1"> Outros <input type="input" class="questionario__input"></p>
+            </div>
+        </form>
+
+        <form class="questionario__form" [class.questionario__form--aberto]="aberto" *ngIf="pergunta == 5">
+            <p>{{pergunta}}/{{ultimaPergunta - 1}} perguntas</p>
+            <p class="questionario__pergunta">Na sua opinião, como podemos melhorar o site?</p>
+            <textarea rows="5" placeholder="Mensagem" class="questionario__textarea"></textarea>
+        </form>
+
+        <form class="questionario__form" [class.questionario__form--aberto]="aberto" *ngIf="pergunta == 6">
+            <p class="questionario__pergunta">Obrigado pela sua colaboração!</p>
+            <p class="questionario__instrucao">
+                Suas respostas nos ajudam na missão de retratar o Brasil com
+                informações necessárias ao conhecimento de sua realidade e ao exercício da cidadania.
+            </p>
+        </form>
+
+        <p class="questionario__aba" [class.questionario__direita]="aberto">
+            <span [class.questionario__invisivel]="aberto">Ajude o IBGE a melhorar o Brasil em Síntese.</span>
+            <input type="submit" class="questionario__botao" [class.questionario__invisivel]="pergunta == ultimaPergunta" [value]="label" (click)="avancar()">
+            <i class="fa fa-times questionario__fechar" aria-hidden="true" (click)="esconde = true;"></i>
+        </p>
+
+    </div>
+</div>
