@@ -17,13 +17,13 @@ export class PanoramaCardComponent implements OnChanges {
     
     ngOnChanges(changes: any) {
         if(this.ranking && this.ranking.BR) {
-            this.cssRanking.BR = (this.ranking.BR.posicao / this.ranking.BR.itens)*96;
+            this.cssRanking.BR = 'p' + Math.round( 100 - (this.ranking.BR.posicao / this.ranking.BR.itens)*100 );
         }
         if(this.ranking && this.ranking.local) {
-            this.cssRanking.local = (this.ranking.local.posicao / this.ranking.local.itens)*96;
+            this.cssRanking.local = 'p' + Math.round( 100 - (this.ranking.local.posicao / this.ranking.local.itens)*100 );
         }
         if(this.ranking && this.ranking.microrregiao) {
-            this.cssRanking.microrregiao = (this.ranking.microrregiao.posicao / this.ranking.microrregiao.itens)*96;
+            this.cssRanking.microrregiao = 'p' + Math.round( 100 - (this.ranking.microrregiao.posicao / this.ranking.microrregiao.itens)*100 );
         }
     }
 }
