@@ -151,6 +151,7 @@
 .indicador.selecionado{
     width: calc(100% + 2px);
     background-color: #fff;
+    cursor: default;
 }
 
 .selecionado .comparacoes{
