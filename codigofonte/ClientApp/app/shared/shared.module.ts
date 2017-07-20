@@ -14,6 +14,7 @@ import { QRCodeComponent } from './qrcode/qrcode.component';
 import { Breadcrumb } from './breadcrumb/breadcrumb.component';
 import { MensagemSetasComponent } from './mensagem-setas/mensagem-setas.component';
 import { NaoAcheiComponent } from './nao-achei/nao-achei.component';
+import { QuestionarioComponent } from './questionario/questionario.component';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -34,7 +35,8 @@ const COMPONENTS = [
     QRCodeComponent,
     Breadcrumb,
     MensagemSetasComponent,
-    NaoAcheiComponent
+    NaoAcheiComponent,
+    QuestionarioComponent
 ];
 
 const PROVIDERS = [
