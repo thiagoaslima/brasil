@@ -10,6 +10,7 @@ morgan.log
 **/tsd_typings/
 **/dist/
 **/compiled/
+**/experimentos/
 
 # Node #
 npm-debug.log
