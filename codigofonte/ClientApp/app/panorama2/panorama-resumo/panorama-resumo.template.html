@@ -69,3 +69,25 @@
 
     </table>
 </template>
+
+<div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas & Fontes
+</div>
+
+<div class="lista__nota__content__geral" *ngIf="exibirFontesENotas">
+    <h1>Notas:</h1>
+    <ol>
+        <li *ngFor="let nota of notas">
+            {{ nota }}
+        </li>
+    </ol>
+
+    <br>
+
+    <h1>Fontes:</h1>
+    <ol>
+        <li *ngFor="let fonte of fontes">
+            {{ fonte }}
+        </li>
+    </ol>
+</div>
