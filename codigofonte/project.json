@@ -22,7 +22,10 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.Extensions.Caching.Redis": "1.1.0",
-    "Microsoft.Extensions.Caching.Abstractions": "1.1.0"
+    "Microsoft.Extensions.Caching.Abstractions": "1.1.0",
+    "Dapper": "1.50.2",
+    "MySqlConnector": "0.23.0",
+    "NETStandard.Library": "1.6.1"
   },
 
   "tools": {
@@ -43,7 +46,7 @@
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
     "compile": {
-      "exclude": ["node_modules"]
+      "exclude": [ "node_modules" ]
     }
   },
 
