@@ -5,6 +5,8 @@
     display: table;
     width: 90%;
     background-color: #e6e6e6;
+    margin-bottom: 70px;
+    margin-top: 24px;
 }
 
 .painel__indicadores{
@@ -142,7 +144,9 @@
     width: 65%;
     background-color: #fff;
     display: table-cell;
-    height: 800px;
+    /* height: 800px; */
+    padding: 30px;
+    padding-top: 0px;
 }
 
 
