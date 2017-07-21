@@ -142,7 +142,9 @@
     width: 65%;
     background-color: #fff;
     display: table-cell;
-    height: 800px;
+    /* height: 800px; */
+    padding: 30px;
+    padding-top: 0px;
 }
 
 
