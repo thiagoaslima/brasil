@@ -1,0 +1,26 @@
+São Paulo       355030
+Rio de Janeiro  330455
+Belo Horizonte  310620
+Vitória         320530
+Salvador        292740
+Florianópolis   420540
+Porto Alegre    431490
+Porto Velho     110020
+Brasília        530010
+Curitiba        410690
+Cuiabá
+Goiânia
+João Pessoa
+Natal
+Recife
+Fortaleza
+São Luis
+Boa vista
+Maceió
+Belém
+Macapá
+Palmas
+Teresina
+Campo Grande
+Rio Branco
+Joinville

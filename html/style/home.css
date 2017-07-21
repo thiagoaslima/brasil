@@ -1,0 +1,214 @@
+/** GENERAL **/
+
+html, body {
+    height: 100%;
+    background: transparent;
+    color: hsl(0, 0, 38);
+}
+
+#wrapper {
+    position: absolute;
+    min-height: 100%;
+    padding-bottom: 60px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+.button__action {
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 21px;
+    font-size: 1em;
+    margin: 4% 0%;
+    padding: 5px 10px;
+    cursor: pointer;
+    -webkit-transition: background 200ms ease, color 200ms ease;
+    -moz-transition: background 200ms ease, color 200ms ease;
+    -ms-transition: background 200ms ease, color 200ms ease;
+    -o-transition: background 200ms ease, color 200ms ease;
+    transition: background 200ms ease, color 200ms ease;
+}
+
+.search__field {
+    font-size: 15px;
+    line-height: 30px;
+}
+
+/** SPECIFIC **/
+
+header {
+    position: static;
+    height: 60px;
+    background-color: #1B779B;
+    padding: 10px 40px;
+    color: white;
+}
+
+.header__title {
+    float: left;
+    width: 40%;
+    font-size: 24px;
+    line-height: 35px;
+}
+
+.header__search {
+    width: 30%;
+    float: left;
+}
+
+.header__button {
+    margin: 2px 0 0;
+    font-size: 14px;
+    float: right;
+}
+
+.banner__container {
+    position: relative;
+    background-color: lightgray;
+    height: 0;
+    padding-top: 42.50%;
+    overflow: hidden;
+}
+
+.banner__item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.banner__content {
+    position: absolute;
+    width: 40%;
+    top: 10%;
+    left: 8%;
+}
+
+.banner__title {
+    font-size: 24px;
+    width: 70%;
+    margin-bottom: 1em;
+}
+
+.banner__text {
+    font-size: 14px;
+}
+
+
+.destaques__container {
+    display: table;
+    margin-bottom: 60px;
+}
+
+.destaques__item {
+    position: relative;
+    display: table-cell;
+    font-size: 14px;
+    width: 50%;
+    padding: 20px 40px;
+}
+
+.destaques__item__title {
+    margin-bottom: 2em;
+}
+
+.destaques__item__text {
+    margin-bottom: 3em;
+}
+
+.destaques__item__link {
+    position: absolute;
+    bottom: 10px;
+    color: blue;
+    text-decoration: underline;
+}
+
+.mais-acessados {
+    display: table;
+    width: 100%;
+    border-top: 1px solid gray;
+    padding: 20px 40px 40px;
+}
+
+.mais-acessados__coluna {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+    list-style: none;
+}
+.mais-acessados__coluna:first-of-type {
+    padding-right: 20px;
+}
+.mais-acessados__coluna + .mais-acessados__coluna {
+    padding-left: 40px;
+}
+
+.mais-acessados__coluna > li {
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+
+.mais-acessados__title {
+    display: table-row;
+    height: 60px;
+}
+
+.mais-acessados__nome-municipio {
+    font-size: 15px;
+}
+
+.mais-acessados__variavel {
+    font-size: 12px;
+}
+
+.mais-acessados__valor {
+    font-weight: bold;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background-color: lightslategray;
+    height: 50px;
+    padding: 10px 40px;
+}
+
+.footer__text {
+    float: left;
+    width: 40%;
+    line-height: 30px;
+}
+
+.footer__options {
+    float: left;
+    width: 60%;
+    text-align: justify;
+}
+
+.footer__button {
+    margin: 0;
+}
+
+footer .search__field {
+    width: 68%;
+}
+
+/** UTILS **/
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.fulljustify {
+  text-align: justify;
+}
+.fulljustify:after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}

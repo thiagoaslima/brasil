@@ -1,303 +1,198 @@
-.content-card{
-    /* float: left; */
-    height: 312px;
-    margin-bottom: 30px;
-    display: inline-block;
+.painel{
+    margin: 0px 5%;
+    border: 2px solid #d0d0d0;
+    border-top: 3px solid #F7931E;
+    display: table;
+    width: 90%;
+    background-color: #e6e6e6;
 }
 
-.card{
-    border: 1px solid #B3B3B3;
-    border-top: 3px solid #B3B3B3;
-    width: 238px;
-    height: 277px;
-    padding: 10px;
-    float: left;
-    margin-left: 30px;
-    margin-bottom: 30px;
-	-webkit-transition: all 230ms ease-in;
-	-moz-transition: all 230ms ease-in;
-	-ms-transition: all 230ms ease-in;
-	-o-transition: all 230ms ease-in;
-	transition: all 230ms ease-in;
-    white-space: normal;
+.painel__indicadores{
+    width: 35%;
+    background-color: #e6e6e6;
+    display: table-cell;
+    border-right: 2px solid #b3b3b3;
 }
 
-.card:hover{
-	margin-top: -5px;
-	box-shadow: 3px 5px 20px #ccc;
-	-webkit-transition: all 230ms ease-in;
-	-moz-transition: all 230ms ease-in;
-	-ms-transition: all 230ms ease-in;
-	-o-transition: all 230ms ease-in;
-	transition: all 230ms ease-in;
+.indicador{
+    padding: 20px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-bottom: 2px solid #b3b3b3;
+    background-color: #f9f8f8;
+    cursor: pointer;
+    z-index: 1;
+    position: relative;
 }
 
-.selecionar {
-	cursor:pointer;
-	height:90px;
-	width:100%;
-	}
-	
-.cards .card:nth-child(1) {
-    margin-left: 0px;
-}
 
-.card__titulo{
-    float: left;
-    font-size: .8em;
+.indicador__nome{
     font-weight: bold;
-    margin-top: 3px;
-	margin-right: 10px;
-	-moz-transition: all 230ms ease-in;
-	-ms-transition: all 230ms ease-in;
-	-o-transition: all 230ms ease-in;
-	transition: all 230ms ease-in;
+    line-height: 17.9px;
+    font-size: .9em;
 }
 
-.card__nota{
-    float: left;
+.indicador__valor{
     color: #29ABE2;
     font-weight: bold;
     font-size: 1.3em;
-    margin-top: -2px;
-	-moz-transition: all 230ms ease-in;
-	-ms-transition: all 230ms ease-in;
-	-o-transition: all 230ms ease-in;
-	transition: all 230ms ease-in;
 }
 
-.card_unidade {
-	font-size: 0.6em;
-	}
-
-.card__sub-titulo{
+.indicador__valor span{
     font-size: .7em;
-    clear: both;
-    float: left;
-    margin-top: -5px;
 }
 
-.card__reacao{
-    clear: both;
-    margin-top: 7px;
-    float: left;
+
+.comparacoes{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    max-height: 0px;
+    opacity: 0;
+
+    -webkit-transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
+    -moz-transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
+    -ms-transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
+    -o-transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
+    transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
 }
 
-.card__reacao__bola{
-    float: left;
-    width: 8px;
-    height: 8px;
-    border-radius: 20px;
-    margin-right: 4px;
-}
-
-.card__reacao__bola:nth-child(1){
-    background-color: #9E005D;
-}
-
-.card__reacao__bola:nth-child(2){
-    background-color: #662D91;
-}
-
-.card__reacao__bola:nth-child(3){
-    background-color: #0071BC;
-}
-
-.card__reacao__bola:nth-child(4){
-    background-color: #29ABE2;
-}
-
-.card__reacao__bola:nth-child(5){
-    background-color: #00B061;
-}
-
-.card__comparando{
-    font-size: .6em;
-    clear: both;
+.comparacoes_titulo{
     font-weight: bold;
-    padding-top: 20px;
-    padding-bottom: 10px;
-	-moz-transition: all 230ms ease-in;
-	-ms-transition: all 230ms ease-in;
-	-o-transition: all 230ms ease-in;
-	transition: all 230ms ease-in;
+    font-size: 0.84em;
+}
+.comparacao__regiao{
+    margin: 0px;
+
+        -webkit-transition: margin 500ms ease;
+    -moz-transition: margin 500ms ease;
+    -ms-transition: margin 500ms ease;
+    -o-transition: margin 500ms ease;
+    transition: margin 500ms ease;
 }
 
-.card__regua-comparacao{
-    font-size: .6em;
+.comparacao__regiao__titulo{
+    font-size: 0.95em;
 }
 
-.card__regua-comparacao__regua{
-    position: relative;
-    background-image: url(./../../../img/barra-compacarao.png);
+.comparacao__regiao__regua{
+    width: calc(100% - 3px);
+    height: 15px;
+    background-image: url('./../../../img/regua.png');
     background-repeat: no-repeat;
     background-size: 100% auto;
-    width: 100%;
-    height: 17px;
+    background-position: center;
+    margin-top: 20px;
+    margin-left: 3px;
 }
 
-.card__regua-comparacao__regua--desabilitada{
-    background-image: url(./../../../img/barra-compacarao-cinza.png);
-}
-
-.card__regua-comparacao__regua--desabilitada div{
-    display: none;
-}
-
-.card__regua-comparacao__regua__marcador{
-    position: absolute;
-    background-image: url(./../../../img/seta-marca-comparacao.png);
-    width: 11px;
-    height: 11px;
-}
-
-button{
-    border: none;
-    background-color: #E6E6E6;
-    padding: 2px 3px;
+.comparacao__regiao__regua__inicio{
+    float: left;
+    font-weight: bold;
     font-size: .8em;
+    margin-top: -18px;
+    margin-left: -3px;
 }
 
-button .fa{
-    color: #1B779B;
-}
-
-.card.selecionado{
-    border-top-color: #F7931E;
-    height: 312px;    
-    width: 277px;
-	box-shadow: 3px 5px 20px #ccc;
-}
-
-.selecionado .card__titulo{
-    font-size: 1em;
-    margin-top: 5px;
-}
-
-.selecionado .card__nota{
-    font-size: 1.5em;
-}
-
-.selecionado .card__comparando{
+.comparacao__regiao__regua__fim{
+    float: right;
+    font-weight: bold;
     font-size: .8em;
-    padding-top: 20px;
-	-moz-transition: all 230ms ease-in;
-	-ms-transition: all 230ms ease-in;
-	-o-transition: all 230ms ease-in;
-	transition: all 230ms ease-in;
+    margin-top: -18px;
+    margin-right: -8px;
 }
 
-.selecionado .card__regua-comparacao{
-    font-size: .7em;
+.comparacao__regiao__regua__posicao{
+    
 }
 
-.selecionado .card__regua-comparacao__regua__marcador{
-    width: 14px;
+.comparacao__regiao__regua__posicao__valor{
+    color: #f7931e;
+    font-size: .8em;
+    font-weight: bold;
+    text-align: center;
+    width: 0px;
+
+    -webkit-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    -moz-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    -ms-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    -o-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+
+    /* -webkit-transition-delay: 100ms;
+    transition-delay: 100ms; */
+}
+
+.comparacao__regiao__regua__posicao__traco{
+    width: 0px;
     height: 14px;
-    background-size: 100% auto;
-}
-
-.notas__lista-container {
-    margin-left: 128px;
-    position: absolute;
-    background: #fff;
-    padding: 10px 15px 15px 26px;
-    width: 200px;
-    border: 1px solid #ccc;
-    z-index: 2;
-    margin-top: 56px;
-    font-size: .9em;
-    word-wrap: break-word;
-}
-
-.fontes__lista-container {
-    position: absolute;
-    background: #fff;
-    padding: 10px 15px 15px 26px;
-    width: 200px;
-    border: 1px solid #ccc;
-    z-index: 2;
-    font-size: .9em;
-    margin-left: -138px;
-}
-
-.area-click{
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 1;
-    display: none;
-}
-
-.area-click--visivel{
-    display: block;
-}
-
-.botao{
-    display: inline-block;
-
-}
-.n2s-shareContainer{
-		float:right;
-		}
-
-.botao button{
-    cursor: pointer;
-}
-
-.botao-container{
-    text-align: right;
-    margin-top: 10px;
-}
-
-@media screen and (max-width: 768px) {
-    /*Mobile*/
-    .content-card{
-        float: none;
-        height: auto;
-        margin-bottom: 30px;
-        display: block;
-    }
-    .card, .card.selecionado{
-        float: none;
-        margin: 0;
-        width: 100%;
-		height:auto;
-    }
-	.card:hover{
-	margin-top: 0px;
-	box-shadow: none;
-	}
-    .card__titulo{
-    font-size: 1em;
-    margin-top: 5px;
-    }
+    border-right: 6px solid #f7931e;
     
-   .card__nota{
-        font-size: 1.5em;
-    }
-    
-    .card__comparando{
-        font-size: .8em;
-        padding-top: 20px;
-    }
-    
-    .card__regua-comparacao{
-        font-size: .7em;
-    }
-    
-   .card__regua-comparacao__regua__marcador{
-        width: 14px;
-        height: 14px;
-        background-size: 100% auto;
-    }
-    .card.selecionado{
-        height: auto;
-        border-top-color: #B3B3B3;
-		box-shadow:none;
-    }
-        
-  
+
+    -webkit-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    -moz-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    -ms-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    -o-transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+    transition: width 1000ms cubic-bezier(0, 0, 0, 1.01);
+
+    /* -webkit-transition-delay: 100ms;
+    transition-delay: 100ms; */
 }
+
+.painel__grafico{
+    width: 65%;
+    background-color: #fff;
+    display: table-cell;
+    /* height: 800px; */
+    padding: 30px;
+    padding-top: 0px;
+}
+
+
+
+
+.indicador.selecionado{
+    width: calc(100% + 2px);
+    background-color: #fff;
+    cursor: default;
+}
+
+.selecionado .comparacoes{
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+ 
+.selecionado .comparacao__regiao{
+    margin-top: 20px;
+    margin-bottom: 23px;
+}
+
+/* 
+.selecionado .p20 .comparacao__regiao__regua__posicao__traco{
+    width: 20%;
+}
+
+.selecionado .p20 .comparacao__regiao__regua__posicao__valor{
+    width: 40%;
+}
+
+.selecionado .p97 .comparacao__regiao__regua__posicao__traco{
+    width: 97%;
+}
+
+.selecionado .p97 .comparacao__regiao__regua__posicao__valor{
+    width: 194%;
+}
+
+.selecionado .p60 .comparacao__regiao__regua__posicao__traco{
+    width: 60%;
+}
+
+.selecionado .p60 .comparacao__regiao__regua__posicao__valor{
+    width: 120%;
+} */
+
+
+.selecionado .p0 .comparacao__regiao__regua__posicao__traco{ width: 0%}.selecionado .p1 .comparacao__regiao__regua__posicao__traco{ width: 1%}.selecionado .p2 .comparacao__regiao__regua__posicao__traco{ width: 2%}.selecionado .p3 .comparacao__regiao__regua__posicao__traco{ width: 3%}.selecionado .p4 .comparacao__regiao__regua__posicao__traco{ width: 4%}.selecionado .p5 .comparacao__regiao__regua__posicao__traco{ width: 5%}.selecionado .p6 .comparacao__regiao__regua__posicao__traco{ width: 6%}.selecionado .p7 .comparacao__regiao__regua__posicao__traco{ width: 7%}.selecionado .p8 .comparacao__regiao__regua__posicao__traco{ width: 8%}.selecionado .p9 .comparacao__regiao__regua__posicao__traco{ width: 9%}.selecionado .p10 .comparacao__regiao__regua__posicao__traco{ width: 10%}.selecionado .p11 .comparacao__regiao__regua__posicao__traco{ width: 11%}.selecionado .p12 .comparacao__regiao__regua__posicao__traco{ width: 12%}.selecionado .p13 .comparacao__regiao__regua__posicao__traco{ width: 13%}.selecionado .p14 .comparacao__regiao__regua__posicao__traco{ width: 14%}.selecionado .p15 .comparacao__regiao__regua__posicao__traco{ width: 15%}.selecionado .p16 .comparacao__regiao__regua__posicao__traco{ width: 16%}.selecionado .p17 .comparacao__regiao__regua__posicao__traco{ width: 17%}.selecionado .p18 .comparacao__regiao__regua__posicao__traco{ width: 18%}.selecionado .p19 .comparacao__regiao__regua__posicao__traco{ width: 19%}.selecionado .p20 .comparacao__regiao__regua__posicao__traco{ width: 20%}.selecionado .p21 .comparacao__regiao__regua__posicao__traco{ width: 21%}.selecionado .p22 .comparacao__regiao__regua__posicao__traco{ width: 22%}.selecionado .p23 .comparacao__regiao__regua__posicao__traco{ width: 23%}.selecionado .p24 .comparacao__regiao__regua__posicao__traco{ width: 24%}.selecionado .p25 .comparacao__regiao__regua__posicao__traco{ width: 25%}.selecionado .p26 .comparacao__regiao__regua__posicao__traco{ width: 26%}.selecionado .p27 .comparacao__regiao__regua__posicao__traco{ width: 27%}.selecionado .p28 .comparacao__regiao__regua__posicao__traco{ width: 28%}.selecionado .p29 .comparacao__regiao__regua__posicao__traco{ width: 29%}.selecionado .p30 .comparacao__regiao__regua__posicao__traco{ width: 30%}.selecionado .p31 .comparacao__regiao__regua__posicao__traco{ width: 31%}.selecionado .p32 .comparacao__regiao__regua__posicao__traco{ width: 32%}.selecionado .p33 .comparacao__regiao__regua__posicao__traco{ width: 33%}.selecionado .p34 .comparacao__regiao__regua__posicao__traco{ width: 34%}.selecionado .p35 .comparacao__regiao__regua__posicao__traco{ width: 35%}.selecionado .p36 .comparacao__regiao__regua__posicao__traco{ width: 36%}.selecionado .p37 .comparacao__regiao__regua__posicao__traco{ width: 37%}.selecionado .p38 .comparacao__regiao__regua__posicao__traco{ width: 38%}.selecionado .p39 .comparacao__regiao__regua__posicao__traco{ width: 39%}.selecionado .p40 .comparacao__regiao__regua__posicao__traco{ width: 40%}.selecionado .p41 .comparacao__regiao__regua__posicao__traco{ width: 41%}.selecionado .p42 .comparacao__regiao__regua__posicao__traco{ width: 42%}.selecionado .p43 .comparacao__regiao__regua__posicao__traco{ width: 43%}.selecionado .p44 .comparacao__regiao__regua__posicao__traco{ width: 44%}.selecionado .p45 .comparacao__regiao__regua__posicao__traco{ width: 45%}.selecionado .p46 .comparacao__regiao__regua__posicao__traco{ width: 46%}.selecionado .p47 .comparacao__regiao__regua__posicao__traco{ width: 47%}.selecionado .p48 .comparacao__regiao__regua__posicao__traco{ width: 48%}.selecionado .p49 .comparacao__regiao__regua__posicao__traco{ width: 49%}.selecionado .p50 .comparacao__regiao__regua__posicao__traco{ width: 50%}.selecionado .p51 .comparacao__regiao__regua__posicao__traco{ width: 51%}.selecionado .p52 .comparacao__regiao__regua__posicao__traco{ width: 52%}.selecionado .p53 .comparacao__regiao__regua__posicao__traco{ width: 53%}.selecionado .p54 .comparacao__regiao__regua__posicao__traco{ width: 54%}.selecionado .p55 .comparacao__regiao__regua__posicao__traco{ width: 55%}.selecionado .p56 .comparacao__regiao__regua__posicao__traco{ width: 56%}.selecionado .p57 .comparacao__regiao__regua__posicao__traco{ width: 57%}.selecionado .p58 .comparacao__regiao__regua__posicao__traco{ width: 58%}.selecionado .p59 .comparacao__regiao__regua__posicao__traco{ width: 59%}.selecionado .p60 .comparacao__regiao__regua__posicao__traco{ width: 60%}.selecionado .p61 .comparacao__regiao__regua__posicao__traco{ width: 61%}.selecionado .p62 .comparacao__regiao__regua__posicao__traco{ width: 62%}.selecionado .p63 .comparacao__regiao__regua__posicao__traco{ width: 63%}.selecionado .p64 .comparacao__regiao__regua__posicao__traco{ width: 64%}.selecionado .p65 .comparacao__regiao__regua__posicao__traco{ width: 65%}.selecionado .p66 .comparacao__regiao__regua__posicao__traco{ width: 66%}.selecionado .p67 .comparacao__regiao__regua__posicao__traco{ width: 67%}.selecionado .p68 .comparacao__regiao__regua__posicao__traco{ width: 68%}.selecionado .p69 .comparacao__regiao__regua__posicao__traco{ width: 69%}.selecionado .p70 .comparacao__regiao__regua__posicao__traco{ width: 70%}.selecionado .p71 .comparacao__regiao__regua__posicao__traco{ width: 71%}.selecionado .p72 .comparacao__regiao__regua__posicao__traco{ width: 72%}.selecionado .p73 .comparacao__regiao__regua__posicao__traco{ width: 73%}.selecionado .p74 .comparacao__regiao__regua__posicao__traco{ width: 74%}.selecionado .p75 .comparacao__regiao__regua__posicao__traco{ width: 75%}.selecionado .p76 .comparacao__regiao__regua__posicao__traco{ width: 76%}.selecionado .p77 .comparacao__regiao__regua__posicao__traco{ width: 77%}.selecionado .p78 .comparacao__regiao__regua__posicao__traco{ width: 78%}.selecionado .p79 .comparacao__regiao__regua__posicao__traco{ width: 79%}.selecionado .p80 .comparacao__regiao__regua__posicao__traco{ width: 80%}.selecionado .p81 .comparacao__regiao__regua__posicao__traco{ width: 81%}.selecionado .p82 .comparacao__regiao__regua__posicao__traco{ width: 82%}.selecionado .p83 .comparacao__regiao__regua__posicao__traco{ width: 83%}.selecionado .p84 .comparacao__regiao__regua__posicao__traco{ width: 84%}.selecionado .p85 .comparacao__regiao__regua__posicao__traco{ width: 85%}.selecionado .p86 .comparacao__regiao__regua__posicao__traco{ width: 86%}.selecionado .p87 .comparacao__regiao__regua__posicao__traco{ width: 87%}.selecionado .p88 .comparacao__regiao__regua__posicao__traco{ width: 88%}.selecionado .p89 .comparacao__regiao__regua__posicao__traco{ width: 89%}.selecionado .p90 .comparacao__regiao__regua__posicao__traco{ width: 90%}.selecionado .p91 .comparacao__regiao__regua__posicao__traco{ width: 91%}.selecionado .p92 .comparacao__regiao__regua__posicao__traco{ width: 92%}.selecionado .p93 .comparacao__regiao__regua__posicao__traco{ width: 93%}.selecionado .p94 .comparacao__regiao__regua__posicao__traco{ width: 94%}.selecionado .p95 .comparacao__regiao__regua__posicao__traco{ width: 95%}.selecionado .p96 .comparacao__regiao__regua__posicao__traco{ width: 96%}.selecionado .p97 .comparacao__regiao__regua__posicao__traco{ width: 97%}.selecionado .p98 .comparacao__regiao__regua__posicao__traco{ width: 98%}.selecionado .p99 .comparacao__regiao__regua__posicao__traco{ width: 99%}.selecionado .p100 .comparacao__regiao__regua__posicao__traco{ width: 100%}
+.selecionado .p0 .comparacao__regiao__regua__posicao__valor{ width: 0%}.selecionado .p1 .comparacao__regiao__regua__posicao__valor{ width: 2%}.selecionado .p2 .comparacao__regiao__regua__posicao__valor{ width: 4%}.selecionado .p3 .comparacao__regiao__regua__posicao__valor{ width: 6%}.selecionado .p4 .comparacao__regiao__regua__posicao__valor{ width: 8%}.selecionado .p5 .comparacao__regiao__regua__posicao__valor{ width: 10%}.selecionado .p6 .comparacao__regiao__regua__posicao__valor{ width: 12%}.selecionado .p7 .comparacao__regiao__regua__posicao__valor{ width: 14%}.selecionado .p8 .comparacao__regiao__regua__posicao__valor{ width: 16%}.selecionado .p9 .comparacao__regiao__regua__posicao__valor{ width: 18%}.selecionado .p10 .comparacao__regiao__regua__posicao__valor{ width: 20%}.selecionado .p11 .comparacao__regiao__regua__posicao__valor{ width: 22%}.selecionado .p12 .comparacao__regiao__regua__posicao__valor{ width: 24%}.selecionado .p13 .comparacao__regiao__regua__posicao__valor{ width: 26%}.selecionado .p14 .comparacao__regiao__regua__posicao__valor{ width: 28%}.selecionado .p15 .comparacao__regiao__regua__posicao__valor{ width: 30%}.selecionado .p16 .comparacao__regiao__regua__posicao__valor{ width: 32%}.selecionado .p17 .comparacao__regiao__regua__posicao__valor{ width: 34%}.selecionado .p18 .comparacao__regiao__regua__posicao__valor{ width: 36%}.selecionado .p19 .comparacao__regiao__regua__posicao__valor{ width: 38%}.selecionado .p20 .comparacao__regiao__regua__posicao__valor{ width: 40%}.selecionado .p21 .comparacao__regiao__regua__posicao__valor{ width: 42%}.selecionado .p22 .comparacao__regiao__regua__posicao__valor{ width: 44%}.selecionado .p23 .comparacao__regiao__regua__posicao__valor{ width: 46%}.selecionado .p24 .comparacao__regiao__regua__posicao__valor{ width: 48%}.selecionado .p25 .comparacao__regiao__regua__posicao__valor{ width: 50%}.selecionado .p26 .comparacao__regiao__regua__posicao__valor{ width: 52%}.selecionado .p27 .comparacao__regiao__regua__posicao__valor{ width: 54%}.selecionado .p28 .comparacao__regiao__regua__posicao__valor{ width: 56%}.selecionado .p29 .comparacao__regiao__regua__posicao__valor{ width: 58%}.selecionado .p30 .comparacao__regiao__regua__posicao__valor{ width: 60%}.selecionado .p31 .comparacao__regiao__regua__posicao__valor{ width: 62%}.selecionado .p32 .comparacao__regiao__regua__posicao__valor{ width: 64%}.selecionado .p33 .comparacao__regiao__regua__posicao__valor{ width: 66%}.selecionado .p34 .comparacao__regiao__regua__posicao__valor{ width: 68%}.selecionado .p35 .comparacao__regiao__regua__posicao__valor{ width: 70%}.selecionado .p36 .comparacao__regiao__regua__posicao__valor{ width: 72%}.selecionado .p37 .comparacao__regiao__regua__posicao__valor{ width: 74%}.selecionado .p38 .comparacao__regiao__regua__posicao__valor{ width: 76%}.selecionado .p39 .comparacao__regiao__regua__posicao__valor{ width: 78%}.selecionado .p40 .comparacao__regiao__regua__posicao__valor{ width: 80%}.selecionado .p41 .comparacao__regiao__regua__posicao__valor{ width: 82%}.selecionado .p42 .comparacao__regiao__regua__posicao__valor{ width: 84%}.selecionado .p43 .comparacao__regiao__regua__posicao__valor{ width: 86%}.selecionado .p44 .comparacao__regiao__regua__posicao__valor{ width: 88%}.selecionado .p45 .comparacao__regiao__regua__posicao__valor{ width: 90%}.selecionado .p46 .comparacao__regiao__regua__posicao__valor{ width: 92%}.selecionado .p47 .comparacao__regiao__regua__posicao__valor{ width: 94%}.selecionado .p48 .comparacao__regiao__regua__posicao__valor{ width: 96%}.selecionado .p49 .comparacao__regiao__regua__posicao__valor{ width: 98%}.selecionado .p50 .comparacao__regiao__regua__posicao__valor{ width: 100%}.selecionado .p51 .comparacao__regiao__regua__posicao__valor{ width: 102%}.selecionado .p52 .comparacao__regiao__regua__posicao__valor{ width: 104%}.selecionado .p53 .comparacao__regiao__regua__posicao__valor{ width: 106%}.selecionado .p54 .comparacao__regiao__regua__posicao__valor{ width: 108%}.selecionado .p55 .comparacao__regiao__regua__posicao__valor{ width: 110%}.selecionado .p56 .comparacao__regiao__regua__posicao__valor{ width: 112%}.selecionado .p57 .comparacao__regiao__regua__posicao__valor{ width: 114%}.selecionado .p58 .comparacao__regiao__regua__posicao__valor{ width: 116%}.selecionado .p59 .comparacao__regiao__regua__posicao__valor{ width: 118%}.selecionado .p60 .comparacao__regiao__regua__posicao__valor{ width: 120%}.selecionado .p61 .comparacao__regiao__regua__posicao__valor{ width: 122%}.selecionado .p62 .comparacao__regiao__regua__posicao__valor{ width: 124%}.selecionado .p63 .comparacao__regiao__regua__posicao__valor{ width: 126%}.selecionado .p64 .comparacao__regiao__regua__posicao__valor{ width: 128%}.selecionado .p65 .comparacao__regiao__regua__posicao__valor{ width: 130%}.selecionado .p66 .comparacao__regiao__regua__posicao__valor{ width: 132%}.selecionado .p67 .comparacao__regiao__regua__posicao__valor{ width: 134%}.selecionado .p68 .comparacao__regiao__regua__posicao__valor{ width: 136%}.selecionado .p69 .comparacao__regiao__regua__posicao__valor{ width: 138%}.selecionado .p70 .comparacao__regiao__regua__posicao__valor{ width: 140%}.selecionado .p71 .comparacao__regiao__regua__posicao__valor{ width: 142%}.selecionado .p72 .comparacao__regiao__regua__posicao__valor{ width: 144%}.selecionado .p73 .comparacao__regiao__regua__posicao__valor{ width: 146%}.selecionado .p74 .comparacao__regiao__regua__posicao__valor{ width: 148%}.selecionado .p75 .comparacao__regiao__regua__posicao__valor{ width: 150%}.selecionado .p76 .comparacao__regiao__regua__posicao__valor{ width: 152%}.selecionado .p77 .comparacao__regiao__regua__posicao__valor{ width: 154%}.selecionado .p78 .comparacao__regiao__regua__posicao__valor{ width: 156%}.selecionado .p79 .comparacao__regiao__regua__posicao__valor{ width: 158%}.selecionado .p80 .comparacao__regiao__regua__posicao__valor{ width: 160%}.selecionado .p81 .comparacao__regiao__regua__posicao__valor{ width: 162%}.selecionado .p82 .comparacao__regiao__regua__posicao__valor{ width: 164%}.selecionado .p83 .comparacao__regiao__regua__posicao__valor{ width: 166%}.selecionado .p84 .comparacao__regiao__regua__posicao__valor{ width: 168%}.selecionado .p85 .comparacao__regiao__regua__posicao__valor{ width: 170%}.selecionado .p86 .comparacao__regiao__regua__posicao__valor{ width: 172%}.selecionado .p87 .comparacao__regiao__regua__posicao__valor{ width: 174%}.selecionado .p88 .comparacao__regiao__regua__posicao__valor{ width: 176%}.selecionado .p89 .comparacao__regiao__regua__posicao__valor{ width: 178%}.selecionado .p90 .comparacao__regiao__regua__posicao__valor{ width: 180%}.selecionado .p91 .comparacao__regiao__regua__posicao__valor{ width: 182%}.selecionado .p92 .comparacao__regiao__regua__posicao__valor{ width: 184%}.selecionado .p93 .comparacao__regiao__regua__posicao__valor{ width: 186%}.selecionado .p94 .comparacao__regiao__regua__posicao__valor{ width: 188%}.selecionado .p95 .comparacao__regiao__regua__posicao__valor{ width: 190%}.selecionado .p96 .comparacao__regiao__regua__posicao__valor{ width: 192%}.selecionado .p97 .comparacao__regiao__regua__posicao__valor{ width: 194%}.selecionado .p98 .comparacao__regiao__regua__posicao__valor{ width: 196%}.selecionado .p99 .comparacao__regiao__regua__posicao__valor{ width: 198%}.selecionado .p100 .comparacao__regiao__regua__posicao__valor{ width: 200%}
