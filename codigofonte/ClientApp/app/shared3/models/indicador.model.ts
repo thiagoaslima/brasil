@@ -12,7 +12,7 @@ export interface IndicadorParameters extends IndicadorDTO {
     pesquisa_id?: number;
     pesquisa?: Pesquisa;
     nota: string[];
-    fonte: string[];
+    fonte?: string[];
     metadado?: {
         descricao: string
         calculo: string
