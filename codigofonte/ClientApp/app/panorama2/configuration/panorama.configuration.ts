@@ -87,7 +87,170 @@ export const PANORAMA: {
             ]
         },
 
-        // [NiveisTerritoriais.uf.label]: {},
+        [niveisTerritoriais.uf.label]: {
+            temas: [
+                TEMAS.nenhum.label,
+                TEMAS.populacao.label,
+                TEMAS.trabalho.label,
+                TEMAS.educacao.label,
+                TEMAS.economia.label,
+                TEMAS.saude.label,
+                TEMAS.meioAmbiente.label
+            ],
+            indicadores: [
+                /*
+                {
+                    pesquisaId: 48,
+                    indicadorId: 0,
+                    titulo: "Código do Estado",
+                    tema: TEMAS.nenhum.label,
+                    largura: 'half',
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 48,
+                    indicadorId: 0,
+                    titulo: "Gentílico",
+                    tema: TEMAS.nenhum.label,
+                    largura: 'half',
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 48,
+                    indicadorId: 0,
+                    titulo: "Número de municípios",
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 48,
+                    indicadorId: 0,
+                    titulo: "Capital",
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 48,
+                    indicadorId: 0,
+                    titulo: "Governador",
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                */
+
+                // --- População
+                {
+                    pesquisaId: 33,
+                    indicadorId: 29171,
+                    titulo: "População estimada",
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico,
+                    grafico: {
+                        titulo: "População residente por situação domiciliar (urbana/rural)",
+                        tipo: TiposGrafico.coluna,
+                        dados: [{
+                            pesquisaId: 23,
+                            indicadorId: 25191
+                        }, {
+                            pesquisaId: 23,
+                            indicadorId: 25199
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 23,
+                    indicadorId: 27653,
+                    periodo: "2010",
+                    titulo: "População no último censo",
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.painel,
+                    grafico: {
+                        titulo: "População residente por grupos de idade",
+                        tipo: TiposGrafico.coluna,
+                        dados: [{
+                            pesquisaId: 23,
+                            indicadorId: 25181
+                        }, {
+                            pesquisaId: 23,
+                            indicadorId: 25182
+                        }, {
+                            pesquisaId: 23,
+                            indicadorId: 25183
+                        }, {
+                            pesquisaId: 23,
+                            indicadorId: 25184
+                        }, {
+                            pesquisaId: 23,
+                            indicadorId: 25185
+                        }, {
+                            pesquisaId: 23,
+                            indicadorId: 25186
+                        }]
+                    }
+                },
+
+                // {
+                //     pesquisaId: 48,
+                //     indicadorId: 0,
+                //     periodo: "2010",
+                //     titulo: "Densidade demográfica",
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
+
+                // --- Educação
+                {
+                    pesquisaId: 10058,
+                    indicadorId: 60045,
+                    periodo: "2010",
+                    titulo: "Taxa de escolarização de 6 a 14 anos de idade",
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 10058,
+                    indicadorId: 60041,
+                    periodo: "2015",
+                    titulo: "IDEB – Anos iniciais do ensino fundamental",
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 10058,
+                    indicadorId: 60042,
+                    periodo: "2015",
+                    titulo: "IDEB – Anos finais do ensino fundamental",
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5908,
+                    titulo: "Matrículas no ensino fundamental",
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: "Matrículas",
+                        tipo: TiposGrafico.coluna,
+                        dados: [{
+                            pesquisaId: 13,
+                            indicadorId: 5903,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5908,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5913,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5918,
+                        }]
+                    }
+                }
+            ]
+        },
 
         [niveisTerritoriais.municipio.label]: {
             temas: [
@@ -152,8 +315,8 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 33,
-                    indicadorId: 29166,
+                    pesquisaId: 23,
+                    indicadorId: 25207,
                     periodo: "2010",
                     titulo: "População no último censo",
                     tema: TEMAS.populacao.label,

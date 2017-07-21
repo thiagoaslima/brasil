@@ -4,7 +4,7 @@ import { EmptyLocationGuard } from './empty-location.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { PanoramaComponent } from './panorama/panorama.component';
+import { ShellComponent } from './shell/shell.component';
 import { PanoramaShellComponent } from './panorama2/panorama-shell/panorama-shell.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
@@ -72,6 +72,7 @@ const children = [
       {
         path: 'v4/brasil/:uf/:municipio',
         canActivate: [ValidParametersGuard],
+        component: ShellComponent,
         children
       },
       {
@@ -85,6 +86,7 @@ const children = [
       },
       {
         path: 'cache',
+        component: ShellComponent,
         children: [
           { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
           { path: 'pesquisas', component: PesquisaCacheComponent },

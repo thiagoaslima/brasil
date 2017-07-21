@@ -1,33 +1,32 @@
-import { NgModule, OpaqueToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BarraGov } from './barra-gov/barra-gov';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
+// import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { SharedModule2 } from './shared2/shared.module';
 import { SharedModule3 } from './shared3/shared3.module';
-import { SinteseModule } from './sintese/sintese.module';
-import { PanoramaModule } from './panorama/panorama.module'
-import { Panorama2Module } from './panorama2/panorama2.module'
-import { PesquisaModule2 } from './pesquisa/pesquisa.module';
-import { AniversarioModule } from './aniversario/aniversario.module';
-import { SandboxModule } from './sandbox/sandbox.module';
+// import { SinteseModule } from './sintese/sintese.module';
+// import { Panorama2Module } from './panorama2/panorama2.module'
+// import { PesquisaModule2 } from './pesquisa/pesquisa.module';
+// import { AniversarioModule } from './aniversario/aniversario.module';
+// import { SandboxModule } from './sandbox/sandbox.module';
 import { RootComponent } from './root.component';
-import { RootRoutingModule } from './root-routing.module';
 import { EmptyComponent } from './empty.component';
-import { VisaoHistoricaModule } from './visao-historica/visao-historica.module';
+// import { VisaoHistoricaModule } from './visao-historica/visao-historica.module';
 
 import { ValidParametersGuard } from './valid-parameters.guard';
 import { EmptyLocationGuard } from './empty-location.guard';
 import { V3RouterGuard } from './v3-router.guard';
 
-import { BASES, PESQUISAS } from './global-config';
+// import { BASES, PESQUISAS } from './global-config';
 
-import { SubmenuComponent } from './submenu/submenu.component';
+// import { SubmenuComponent } from './submenu/submenu.component';
 
+import { ShellModule } from './shell/shell.module'
 import { BasicCacheModule } from './cache/basic-cache.module';
 
-import { IBGECartogramaModule } from './infografia/ibge-cartograma/ibge-cartograma.module';
+// import { IBGECartogramaModule } from './infografia/ibge-cartograma/ibge-cartograma.module';
 
 @NgModule({
     imports: [
@@ -35,32 +34,37 @@ import { IBGECartogramaModule } from './infografia/ibge-cartograma/ibge-cartogra
         SharedModule.forRoot(),
         SharedModule2.forRoot(),
         SharedModule3.forRoot(),
-        PesquisaModule2,
-        SinteseModule,
-        PanoramaModule,
-        Panorama2Module,
-        VisaoHistoricaModule,
-        AniversarioModule,
-        SandboxModule,
-        Ng2PageScrollModule.forRoot(),
+        ShellModule,
+        // PesquisaModule2,
+        // SinteseModule,
+        // Panorama2Module,
+        // VisaoHistoricaModule,
+        // AniversarioModule,
+        // SandboxModule,
+        // Ng2PageScrollModule.forRoot(),
         BasicCacheModule,
-        IBGECartogramaModule.forRoot()
+        // IBGECartogramaModule.forRoot()
     ],
     declarations: [
         RootComponent,
-        SubmenuComponent,
+        // SubmenuComponent,
         EmptyComponent,
         BarraGov
     ],
     exports: [
+        CoreModule,
+        SharedModule,
+        SharedModule2,
+        SharedModule3,
+        BasicCacheModule,
         RootComponent
     ],
     providers: [
         ValidParametersGuard,
         EmptyLocationGuard,
         V3RouterGuard,
-        PESQUISAS,
-        BASES
+        // PESQUISAS,
+        // BASES
     ]
 })
 export class RootModule { }
