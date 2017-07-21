@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { throwIfAlreadyLoaded } from './core.guard';
 
 import { SharedModule } from '../shared/shared.module';
+import { SharedModule2 } from '../shared2/shared.module';
 import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
 import { BuscaComponent } from './busca/busca.component';
 import { BuscaService } from './busca/busca.service';
@@ -15,7 +16,8 @@ import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.compo
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    SharedModule2
   ],
   declarations: [
     SeletorLocalidadeComponent,

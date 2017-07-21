@@ -5,7 +5,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prestart": "webpack --config webpack.config.vendor.js && webpack --config webpack.config.js",
-    "start": "webpack-dev-server --content-base wwwroot/ --history-api-fallback",
+    "start": "webpack-dev-server --https --content-base wwwroot/ --history-api-fallback",
     "build": "npm run version && webpack --env.prod --config webpack.config.vendor.js && webpack --env.prod --config webpack.config.js",
     "version": "./node_modules/.bin/ibge-version ./ClientApp/app/version.json"
   },
