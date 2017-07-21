@@ -1,12 +1,12 @@
-<div class="nao-achei" *ngIf="!esconde">
+<div class="nao-achei" [class.nao-achei__escondido]="esconde">
     <p class="nao-achei__aba">
         <span class="nao-achei__label" (click)="aberto = true;">Não encontrou o que procurava?</span>
-        <i class="fa fa-times nao-achei__fechar" aria-hidden="true" (click)="aberto ? aberto = false : esconde = true;"></i>
+        <i class="fa fa-times nao-achei__fechar" aria-hidden="true" (click)="esconde = true;"></i>
     </p>
-    <form class="nao-achei__form" [class.nao-achei__form--aberto]="aberto">
-        <input type="email" placeholder="Seu email" class="nao-achei__item">
-        <input type="input" placeholder="Assunto" class="nao-achei__item">
-        <textarea rows="5" placeholder="Mensagem" class="nao-achei__item"></textarea>
+    <form class="nao-achei__form" [class.nao-achei__form--aberto]="aberto" method="POST" action="/feedback">
+        <input type="email" name="email" placeholder="Seu email" required class="nao-achei__item">
+        <input type="text" name="assunto" placeholder="Assunto" required class="nao-achei__item">
+        <textarea rows="5" name="mensagem" placeholder="Mensagem" required class="nao-achei__item"></textarea>
         <div class="nao-achei__botao-container">
             <input type="submit" class="nao-achei__botao" value="Enviar">
         </div>
