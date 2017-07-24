@@ -4328,38 +4328,6 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Brasil/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.0",
-        "dependencies": {
-          "Dapper": "1.50.2",
-          "MailKit": "1.16.2",
-          "Microsoft.AspNetCore.AngularServices": "1.0.0",
-          "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-          "Microsoft.AspNetCore.Mvc": "1.0.1",
-          "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-          "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
-          "Microsoft.AspNetCore.StaticFiles": "1.0.0",
-          "Microsoft.Extensions.Caching.Abstractions": "1.1.0",
-          "Microsoft.Extensions.Caching.Redis": "1.1.0",
-          "Microsoft.Extensions.Configuration.CommandLine": "1.0.0",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Microsoft.Extensions.Logging.Console": "1.0.0",
-          "Microsoft.Extensions.Logging.Debug": "1.0.0",
-          "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.NETCore.App": "1.0.1",
-          "MySqlConnector": "0.23.0",
-          "NETStandard.Library": "1.6.1"
-        },
-        "compile": {
-          "netcoreapp1.0/Brasil.dll": {}
-        },
-        "runtime": {
-          "netcoreapp1.0/Brasil.dll": {}
-        }
-      },
       "codigofonte/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.0",
@@ -11124,11 +11092,6 @@
         "xunit.runner.utility.2.2.0-beta2-build3300.nupkg.sha512",
         "xunit.runner.utility.nuspec"
       ]
-    },
-    "Brasil/1.0.0": {
-      "type": "project",
-      "path": "../codigofonte/project.json",
-      "msbuildProject": "../codigofonte/Brasil.xproj"
     },
     "codigofonte/1.0.0": {
       "type": "project",
