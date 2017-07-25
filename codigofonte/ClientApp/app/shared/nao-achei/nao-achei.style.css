@@ -28,7 +28,7 @@
 }
 
 .nao-achei__form{
-    width: 40%;
+    max-width: 512px;
     margin: auto;
     padding: 0 10px;
     background-color: black;
@@ -65,4 +65,8 @@
     font-size: 1em;
     cursor: pointer;
     padding: 5px 10px;
+}
+
+.nao-achei__escondido{
+    display: none;
 }
