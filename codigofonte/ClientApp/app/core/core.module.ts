@@ -11,6 +11,7 @@ import { BuscaService } from './busca/busca.service';
 import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
 import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.component';
+import { Page404Component } from './page404/page404.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.compo
     BuscaComponent,
     TituloBrowserComponent,
     GeolocationComponent,
-    MetatagBrowserComponent
+    MetatagBrowserComponent,
+    Page404Component
   ],
   exports: [
     SeletorLocalidadeComponent,

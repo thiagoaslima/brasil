@@ -95,13 +95,13 @@ export class BuscaComponent implements OnInit {
             let destaque = '';
             let link = '';
 
-            if(localidade.tipo == 'uf'){
+            if (localidade.tipo == 'uf') {
 
                 tipo = 'Estado';
                 link = '/brasil/' + localidade.sigla.toLowerCase();
-            } 
+            }
 
-            if(localidade.tipo == 'municipio'){
+            if (localidade.tipo == 'municipio') {
 
                 tipo = 'Município';
                 destaque = localidade.parent.sigla;
@@ -117,13 +117,13 @@ export class BuscaComponent implements OnInit {
                 destaque: destaque,
                 link: link
             };
-            
+
             // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS. SÓ DELETAR ESSE IF
-            if(localidade.tipo == 'municipio'){
+            if (localidade.tipo == 'municipio') {
                 this.resultadoLocais.push(itemResultado);
             }
         });
-        
+
         // GAMBIARRA PARA A PRIMEIRA VERÃO, SÓ RETORNANDO MUNICIPIOS. SÓ DELETAR A PRÓXIMA LINHA
         this.qtdLocais = this.resultadoLocais.length;
 
@@ -134,7 +134,7 @@ export class BuscaComponent implements OnInit {
         this.carregando = false;
     }
 
-    selecionarCategoria(categoria){
+    selecionarCategoria(categoria) {
 
         this.categoria = categoria;
 
@@ -144,7 +144,7 @@ export class BuscaComponent implements OnInit {
                 this.resultadoBusca = this.resultadoPesquisas;
                 break;
             case 2:
-                this.resultadoBusca = this.resultadoLocais;  
+                this.resultadoBusca = this.resultadoLocais;
                 break;
             default:
                 this.resultadoBusca = this.resultadoTodos;
@@ -152,15 +152,14 @@ export class BuscaComponent implements OnInit {
         }
     }
 
-    ativarBusca(){
+    ativarBusca() {
 
         this.modoDigitacao = true;
 
-        if(this.resultadoBusca.length > 0){
+        if (this.resultadoBusca.length > 0) {
 
             this.menuAberto = true;
-        } 
-        else {
+        } else {
 
             this.menuAberto = false;
         }
@@ -168,15 +167,15 @@ export class BuscaComponent implements OnInit {
         this.buscaAberta.emit();
     }
 
-    desativarBusca(){
+    desativarBusca() {
         this.limparBusca();
         this.menuAberto = false;
         this.modoDigitacao = false;
     }
 
-    limparBusca(){
+    limparBusca() {
 
-        this.modoDigitacao = false; 
+        this.modoDigitacao = false;
         this.menuAberto = false;
         this.resultadoBusca = [];
         this.termo = ''

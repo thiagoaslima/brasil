@@ -8,6 +8,7 @@ import { ShellComponent } from './shell/shell.component';
 import { PanoramaShellComponent } from './panorama2/panorama-shell/panorama-shell.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
+import { Page404Component } from './core/page404/page404.component';
 
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
@@ -96,7 +97,7 @@ const children = [
 
       {
         path: '**',
-        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama'
+        component: Page404Component
       }
     ])
   ]

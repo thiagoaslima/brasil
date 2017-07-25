@@ -12,7 +12,7 @@ import { LocalidadeService2 } from './localidade/localidade.service';
  * @class GeolocationComponent
  */
 @Directive({
-    selector: '[getLocation]'
+    selector: '[geolocation]'
 })
 export class GeolocationDirective {
 
@@ -37,14 +37,12 @@ export class GeolocationDirective {
      * @memberOf GeolocationComponent
      */
     @HostListener('click') getGeoLocation() {
-        debugger;
+
         if (isBrowser) {
-            
             this.isLoading = true;
             this.onLoading.emit(this.isLoading);
 
             navigator.geolocation.getCurrentPosition(position => {
-                debugger;
                 return this.getLocalidade(position);
             });
         }
@@ -59,9 +57,8 @@ export class GeolocationDirective {
      * @memberOf GeolocationComponent
      */
     private getLocalidade(position) {
-        debugger;
+
         this._localidadeService.getMunicipioByCoordinates(position.coords.latitude, position.coords.longitude).subscribe(municipio => {
-            debugger;
             this.isLoading = false;
             this.onLoading.emit(this.isLoading);
 
