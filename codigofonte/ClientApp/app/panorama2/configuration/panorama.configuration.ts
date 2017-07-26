@@ -241,6 +241,15 @@ export const PANORAMA: {
                     periodo: '2016',
                     titulo: 'Total de veículos',
                     tema: TEMAS.frota.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+
+                {
+                    pesquisaId: 22,
+                    indicadorId: 28122,
+                    periodo: '2016',
+                    titulo: 'Total de automóveis',
+                    tema: TEMAS.frota.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
                         titulo: 'Veículos por tipo',

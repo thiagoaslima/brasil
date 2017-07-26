@@ -134,11 +134,13 @@ export class Panorama2Service {
 
         return this._rankingService3.getRankingsIndicador(indicadores, contextos, localidade.codigo)
             .map(response => {
+                debugger;
+
                 return response.reduce((agg, ranking) => {
                     const id = ranking.indicadorId;
 
                     if (!agg[id]) {
-                        agg[id] = {}
+                        agg[id] = {};
                     }
 
                     const _ranking = ranking && ranking.res && ranking.res[0] && ranking.res[0].ranking;
