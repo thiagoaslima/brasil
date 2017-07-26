@@ -10,6 +10,7 @@ import { IndicadorService2 } from './indicador/indicador.service';
 import { ResultadoService2 } from './resultado/resultado.service';
 import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';
 
+import { GeolocationDirective } from './geolocation.directive';
 import { ResultadoPipe } from './resultado.pipe';
 
 import {ShareModule} from 'ng2share/share.module'; //social share module
@@ -34,6 +35,7 @@ const PIPES = [
 
 const COMPONENTS = [
     // put shared components here
+    GeolocationDirective
 ];
 
 const PROVIDERS = [

@@ -4,10 +4,11 @@ import { EmptyLocationGuard } from './empty-location.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { PanoramaComponent } from './panorama/panorama.component';
+import { ShellComponent } from './shell/shell.component';
 import { PanoramaShellComponent } from './panorama2/panorama-shell/panorama-shell.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
+import { Page404Component } from './core/page404/page404.component';
 
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
@@ -72,6 +73,7 @@ const children = [
       {
         path: 'v4/brasil/:uf/:municipio',
         canActivate: [ValidParametersGuard],
+        component: ShellComponent,
         children
       },
       {
@@ -85,6 +87,7 @@ const children = [
       },
       {
         path: 'cache',
+        component: ShellComponent,
         children: [
           { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
           { path: 'pesquisas', component: PesquisaCacheComponent },
@@ -94,7 +97,7 @@ const children = [
 
       {
         path: '**',
-        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama'
+        component: Page404Component
       }
     ])
   ]

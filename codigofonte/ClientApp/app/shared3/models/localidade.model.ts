@@ -1,21 +1,36 @@
 import { niveisTerritoriais } from '../values';
-import { LocalidadeDTO } from "../dto";
-import { converterObjArrayEmHash, converterEmNumero } from "../../utils2";
+import { LocalidadeDTO } from '../dto';
+import { converterEmNumero } from '../../utils2';
 
 interface LocalidadeParameters {
-    codigo: number
-    codigoCompleto: number
-    digitoVerificador?: number
-    nome: string
-    tipo: string
-    slug: string
-    sigla?: string
-    codigoCapital?: number
-    codigoParent?: number
-    microrregiao?: number
+    codigo: number;
+    codigoCompleto: number;
+    digitoVerificador?: number;
+    nome: string;
+    tipo: 'pais' | 'uf' | 'municipio';
+    slug: string;
+    sigla?: string;
+    codigoCapital?: number;
+    codigoParent?: number;
+    microrregiao?: number;
 }
 
 export class Localidade {
+
+    static localidadeStrategy = null;
+
+    public readonly codigo: number;
+    public readonly codigoCompleto: number;
+    public readonly digitoVerificador?: number;
+    public readonly nome: string;
+    public readonly tipo: string;
+    public readonly sigla?: string;
+    public readonly slug: string;
+    public readonly codigoCapital?: number;
+    public readonly codigoParent?: number;
+    public readonly microrregiao?: number;
+
+    private _link = '';
     static criar(dados: LocalidadeParameters) {
         if (Localidade.validarParametros(dados)) {
             return new Localidade(dados);
@@ -42,8 +57,6 @@ export class Localidade {
         return true;
     }
 
-
-    static localidadeStrategy = null;
     static get(codigo: number): Localidade {
         return Localidade.localidadeStrategy.retrieve(codigo, 'proprio')[0];
     }
@@ -96,18 +109,6 @@ export class Localidade {
         Localidade.localidadeStrategy = strategy;
     }
 
-
-    public readonly codigo: number
-    public readonly codigoCompleto: number
-    public readonly digitoVerificador?: number
-    public readonly nome: string
-    public readonly tipo: string
-    public readonly sigla?: string
-    public readonly slug: string
-    public readonly codigoCapital?: number
-    public readonly codigoParent?: number
-    public readonly microrregiao?: number
-
     constructor(dados) {
         this.codigo = dados.codigo;
         this.codigoCompleto = dados.codigoCompleto;
@@ -126,7 +127,6 @@ export class Localidade {
         if (dados.microrregiao) { this.microrregiao = dados.microrregiao }
     }
 
-    private _link: string = ''
     public get identificador() {
         return this.sigla ? this.sigla.toLowerCase() : this.slug;
     }
@@ -148,7 +148,7 @@ export class Localidade {
 
     get capital() {
         if (this.codigoCapital) {
-            return Localidade.get(this.codigoCapital)
+            return Localidade.get(this.codigoCapital);
         }
         return null;
     }
