@@ -207,7 +207,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             this.hist.pushState({ seletor_localidade: true }, '', '');
 
         this.aberto = true;
-        this.setState('municipiosTodos');
+        //this.setState('municipiosTodos');
+        this.setState('estados');
         this.isSeletorAberto.emit(true);
     }
 
