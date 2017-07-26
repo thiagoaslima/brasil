@@ -27,14 +27,46 @@ export class Panorama2Service {
                         || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
                         || '-';
 
+                    const titulo = item.titulo
+                        || (
+                            resultados[item.indicadorId] &&
+                            resultados[item.indicadorId].indicador &&
+                            resultados[item.indicadorId].indicador.nome
+                        );
+
+                    const valor = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].getValor(periodo)
+                    ) || '-';
+
+
+                    const unidade = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.toString()
+                    ) || '';
+
+                    const notas = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.notas
+                    ) || [];
+
+                    const fontes = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.fontes
+                    ) || [];
+
                     return {
                         tema: item.tema,
-                        titulo: item.titulo || (resultados[item.indicadorId] && resultados[item.indicadorId].indicador.nome),
-                        periodo: periodo,
-                        valor: resultados[item.indicadorId] && resultados[item.indicadorId].getValor(periodo),
-                        unidade: resultados[item.indicadorId] && resultados[item.indicadorId].indicador.unidade.toString(),
-                        notas: resultados[item.indicadorId].indicador.notas,
-                        fontes: resultados[item.indicadorId].indicador.fontes,
+                        titulo,
+                        periodo,
+                        valor,
+                        unidade,
+                        notas,
+                        fontes
                     };
                 });
             });
