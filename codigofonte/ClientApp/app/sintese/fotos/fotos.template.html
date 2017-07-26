@@ -36,6 +36,8 @@
             </div>
         </div>
 
+        <p class="preview__observacao" *ngIf="localidade?.tipo=='estado'">Fotos da capital {{localidade?.capital?.nome}}</p>
+
         <!--galeria-->
         <div class="overlay" *ngIf="mostraGaleria">
             <div class="area-click-1" (click)="esconder()"></div>

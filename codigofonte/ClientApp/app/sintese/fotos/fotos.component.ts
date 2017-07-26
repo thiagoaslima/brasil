@@ -49,6 +49,8 @@ export class FotosComponent implements OnInit, OnDestroy {
     //variável estática que guarda a referencia para o timer, precisa ser estática para evitar que dois timers sobrevivam ao mesmo tempo, criando um bug de flicking
     public static timer = null;
 
+    localidade;
+
     constructor(
         private renderer: Renderer,
         private _sinteseService: SinteseService,
@@ -75,7 +77,10 @@ export class FotosComponent implements OnInit, OnDestroy {
         this._subscription = this._appState.observable$
             .filter( ({localidade}) => Boolean(localidade))
             .map(state => state.localidade)
-            .flatMap(localidade => this._sinteseService.getFotografias(localidade.codigo))
+            .flatMap(localidade => {
+                this.localidade = localidade;
+                return this._sinteseService.getFotografias(localidade.tipo == 'estado' ? localidade.capital.codigo : localidade.codigo);
+            })
             .subscribe((fotos) => {
                 this.fotos = fotos;
 

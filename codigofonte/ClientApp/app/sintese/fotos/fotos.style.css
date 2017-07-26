@@ -105,6 +105,13 @@ img {
     border-bottom-right-radius: 3px;
 }
 
+.preview__observacao{
+    font-size: 0.8em;
+    color: black;
+    text-align: right;
+    padding-top: 3px;
+}
+
 /*-------------------------------------------------*/
 
 /*Galeria*/
