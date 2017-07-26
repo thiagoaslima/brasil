@@ -65,10 +65,11 @@ const children = [
       },
       {
         path: 'v4/brasil/:uf',
-        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
-        pathMatch: 'full'
-        // canActivate: [ValidParametersGuard],
-        // children
+        // redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
+        // pathMatch: 'full'
+        canActivate: [ValidParametersGuard],
+        component: ShellComponent,
+        children
       },
       {
         path: 'v4/brasil/:uf/:municipio',

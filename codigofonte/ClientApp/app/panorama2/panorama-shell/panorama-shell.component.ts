@@ -34,7 +34,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
     static getConfiguracao(tipo) {
         const { temas, indicadores } = PANORAMA[tipo] || { temas: [], indicadores: [] };
         const hash = converterObjArrayEmHash(indicadores, 'tema', true);
-        return temas.reduce((agg, tema) => agg.concat(hash[tema]), [] as ItemConfiguracao[]);
+        return temas.reduce((agg, tema) => agg.concat(hash[tema]), [] as ItemConfiguracao[]).filter(Boolean);
     }
 
     /*
@@ -54,14 +54,15 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
             .distinctUntilChanged()
             .mergeMap(localidade => {
                 const _localidade = this._localidadeService.getByCodigo(localidade.codigo, 'proprio')[0];
-                let configuracao = PanoramaShellComponent.getConfiguracao(localidade.tipo)
+                let configuracao = PanoramaShellComponent.getConfiguracao(localidade.tipo);
+                let indicadoresId = <number[]>configuracao.map(item => getProperty('indicadorId', item));
                 return this._resultadoService
-                    .getResultadosCompletos(<number[]>configuracao.map(getProperty('indicadorId')), localidade.codigo)
+                    .getResultadosCompletos(indicadoresId, localidade.codigo)
                     .map(resultados => ({
                         configuracao: configuracao,
                         resultados: resultados,
                         localidade: _localidade
-                    }))
+                    }));
             })
             .subscribe(({ configuracao, resultados, localidade }) => {
                 this.configuracao = configuracao;

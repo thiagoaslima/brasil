@@ -2,10 +2,10 @@ import { RankingService3 } from '../shared3/services/ranking.service';
 import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { Injectable } from '@angular/core';
 
-import { PANORAMA, ItemConfiguracao, PanoramaVisualizacao } from './configuration';
+import { ItemConfiguracao, PanoramaVisualizacao } from './configuration';
 import { ResultadoService3 } from '../shared3/services';
 import { Localidade, Resultado } from '../shared3/models';
-import { converterObjArrayEmHash, getProperty } from '../utils2';
+import { converterObjArrayEmHash } from '../utils2';
 import { notasEspeciais } from '../../api/notas-demanda-legal';
 
 import { Observable } from 'rxjs/Observable';
@@ -23,7 +23,9 @@ export class Panorama2Service {
         return this._getResultadosIndicadores(configuracao, localidade)
             .map(resultados => {
                 return configuracao.map(item => {
-                    const periodo = item.periodo || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente || '-';
+                    const periodo = item.periodo
+                        || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
+                        || '-';
 
                     return {
                         tema: item.tema,
@@ -33,9 +35,9 @@ export class Panorama2Service {
                         unidade: resultados[item.indicadorId] && resultados[item.indicadorId].indicador.unidade.toString(),
                         notas: resultados[item.indicadorId].indicador.notas,
                         fontes: resultados[item.indicadorId].indicador.fontes,
-                    }
-                })
-            })
+                    };
+                });
+            });
     }
 
     getTemas(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
@@ -52,14 +54,17 @@ export class Panorama2Service {
         }))
     }
 
-    getNotaEspecial(idLocalidade, idIndicador): string{
+    getNotaEspecial(idLocalidade, idIndicador): string {
 
         let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
 
         return notaEspecial.length > 0 ? notaEspecial[0]['nota'] : '';
     }
 
-    private _getResultadosIndicadores(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: Resultado }> {
+    private _getResultadosIndicadores(
+        configuracao: Array<ItemConfiguracao>,
+        localidade: Localidade
+    ): Observable<{ [indicadorId: number]: Resultado }> {
         const indicadoresId = configuracao.reduce((arr, item) => {
             arr.push(item.indicadorId);
 
@@ -80,7 +85,10 @@ export class Panorama2Service {
             })
     }
 
-    private _getPosicaoRankings(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: { [contexto: string]: any } }> {
+    private _getPosicaoRankings(
+        configuracao: Array<ItemConfiguracao>,
+        localidade: Localidade
+    ): Observable<{ [indicadorId: number]: { [contexto: string]: any } }> {
         let indicadores = configuracao
             .filter(item => item.visualizacao === PanoramaVisualizacao.painel)
             .map(item => ({ indicadorId: item.indicadorId, periodo: item.periodo }));
@@ -89,7 +97,7 @@ export class Panorama2Service {
             TO DO: implementar chamada do serviço de ranking
         */
         let contextos = ['BR'];
-        if (localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()) }
+        if (localidade.parent && localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()) }
         if (localidade.microrregiao) { contextos.push(localidade.microrregiao.toString()) }
 
         return this._rankingService3.getRankingsIndicador(indicadores, contextos, localidade.codigo)
@@ -118,13 +126,17 @@ export class Panorama2Service {
                     }
 
                     return agg;
-                }, {})
-            })
+                }, {});
+            });
 
-        
+
     }
 
-    private _organizarConfiguracaoParaTemas(configuracao: ItemConfiguracao[], resultados: { [indicadorId: number]: Resultado }, rankings): Array<{ tema: string, painel: dadosPainel[], graficos: dadosGrafico[] }> {
+    private _organizarConfiguracaoParaTemas(
+        configuracao: ItemConfiguracao[],
+        resultados: { [indicadorId: number]: Resultado },
+        rankings
+    ): Array<{ tema: string, painel: dadosPainel[], graficos: dadosGrafico[] }> {
         const { temas } = configuracao
             .reduce(({ temas, posicao }, item) => {
                 if (!item.tema) {

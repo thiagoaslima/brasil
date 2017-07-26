@@ -36,10 +36,10 @@ const _localidadeDefaults = {
     codigo: null,
     codigoCompleto: null,
     digitoVerificador: null,
-    nome: "",
-    tipo: "",
-    slug: "",
-    sigla: "",
+    nome: '',
+    tipo: '',
+    slug: '',
+    sigla: '',
     codigoCapital: null,
     codigoParent: null
 };
@@ -51,7 +51,7 @@ localidadeValidador.resgitrarTestes([
         mensagemErro: 'valor de codigo da localidade inválido',
         funcaoTeste: (data) => Number.isInteger(data.codigo)
     }
-])
+]);
 
 export class Localidade {
 
@@ -90,7 +90,7 @@ export class Localidade {
                 break;
         }
     }
-    
+
     // 340ms 700ms
     //  63ms 388ms
     static convertBrasil(data) {
@@ -118,7 +118,7 @@ export class Localidade {
             sigla: data.sigla.toUpperCase(),
             codigoCapital: parseInt(data.codigoCapital.toString().slice(0, 6), 10),
             codigoParent: 0
-        }
+        };
     }
 
     static convertFileMunicipios(data) {
@@ -128,22 +128,22 @@ export class Localidade {
             digitoVerificador: parseInt(data.codigo.toString().slice(6), 10),
             nome: data.nome,
             tipo: tiposPossiveisLocalidade[6],
-            sigla: "",
+            sigla: '',
             slug: data.slug || slugify(data.nome),
             codigoCapital: null,
             codigoParent: parseInt(data.codigoUf, 10),
             microrregiao: data.microrregiao
-        }
+        };
     }
 
     static setLocalidadeStrategy(strategy) {
         Localidade.localidadeStrategy = strategy;
     }
 
-    static alterarContexto(codigoBase: number, nivelTerritorial: NivelTerritorial ) {
+    static alterarContexto(codigoBase: number, nivelTerritorial: NivelTerritorial) {
         let codigo = codigoBase !== 0 ? codigoBase.toString().split('') : [];
-		const len = codigo.length;
-		codigo.length = nivelTerritorial.codeLength;
+        const len = codigo.length;
+        codigo.length = nivelTerritorial.codeLength;
         codigo.fill('x', len);
         return codigo.join('');
     }
@@ -166,7 +166,7 @@ export class Localidade {
         Object.keys(_localidadeDefaults).forEach(property => {
             this[property] = data[property];
         });
-        if(data.microrregiao) { this.microrregiao = data.microrregiao}
+        if (data.microrregiao) { this.microrregiao = data.microrregiao; }
     }
 
     get identificador() {

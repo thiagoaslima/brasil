@@ -82,7 +82,6 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
 
         this.routeSubscribe = this._routerParamsService.params$.subscribe((params) => {
             if(!params.params.pesquisa) {
-                debugger;
                 return;
             }
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
