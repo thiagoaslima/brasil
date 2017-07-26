@@ -27,11 +27,8 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class NaoAcheiComponent implements OnInit {
     
     aberto = false;
-    esconde = false; //setar para false assim que tiver que entrar em produção (quando todos os serviços estiverem implementados).
-<<<<<<< HEAD
-=======
+    esconde = true; //setar para false assim que tiver que entrar em produção (quando todos os serviços estiverem implementados).
     enviado = false;
->>>>>>> 6a9cd3ec5b338fb63f3471632c8b9614989f0231
 
     constructor(
         private _routerParamsServ: RouterParamsService,
