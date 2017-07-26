@@ -16,7 +16,7 @@ import { RouterParamsService } from '../router-params.service';
 export class NaoAcheiComponent implements OnInit {
     
     aberto = false;
-    esconde = true; //setar para false assim que tiver que entrar em produção (quando todos os serviços estiverem implementados).
+    esconde = false; //setar para false assim que tiver que entrar em produção (quando todos os serviços estiverem implementados).
 
     constructor(
         private _routerParamsServ: RouterParamsService
