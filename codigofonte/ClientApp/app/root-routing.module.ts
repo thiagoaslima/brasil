@@ -64,6 +64,10 @@ const children = [
         // children
       },
       {
+        path: 'brasil/:uf',
+        redirectTo: 'v4/brasil/:uf',
+      },
+      {
         path: 'v4/brasil/:uf',
         // redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
         // pathMatch: 'full'
