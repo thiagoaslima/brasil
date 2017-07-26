@@ -87,7 +87,7 @@ h2{
     padding: 12px 0px;
     /* display: table; */
     padding-top: 0px;
-    height: 333px;
+    height: 370px;
     /* overflow-y: scroll; */
 }
 
@@ -117,13 +117,12 @@ CALENDÁRIO
 
 .calendario{
     width: 270px;
-    /* background-color: red; */
     display: table;
     margin-left: 20px;
     border: 1px solid #dadada;
     padding: 13px;
     float: left;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 67px;
 }
 
@@ -191,10 +190,9 @@ CALENDÁRIO
 .aniversariantes{
     float: right;
     width: 395px;
-    /* background-color: yellow; */
     overflow-y: scroll;
-    height: 333px;
-    padding-top: 40px;
+    height: 310px;
+    padding-top: 30px;
     padding-bottom: 40px;
 }
 
@@ -248,6 +246,14 @@ CALENDÁRIO
     color: #4d4d4d;
     margin-right: 4px;
     margin-left: 5px;
+}
+
+.mesSelecionado{
+    /* position: fixed; */
+    text-align: center;
+    width: 94%;
+    font-size: 1.3em;
+    padding-top: 22px;
 }
 
 @media screen and (max-width: 768px) {
