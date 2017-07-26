@@ -111,7 +111,7 @@ export class LocalidadeService3 {
 
     public getLocalidadesByCodigo(codigos: number | number[], escopo: 'proprio' | 'filhos' = 'proprio'): Localidade[] {
         const _codigos = forceArray(codigos);
-        return _codigos.reduce( (agg, codigo) => agg.concat(this.getByCodigo(codigo, escopo)), [] as Localidade[]);
+        return _codigos.reduce((agg, codigo) => agg.concat(this.getByCodigo(codigo, escopo)), [] as Localidade[]);
     }
 
     getLocalByIdentificador(identificador: string): Localidade[] {
@@ -198,7 +198,7 @@ export class LocalidadeService3 {
 
         ufs.forEach(uf => {
             let _uf = Localidade.criar(Localidade.convertDTO(uf));;
-            this._ufs.registerElement(_uf);
+            this._ufs.registerElement(_uf, this._brasil.codigo);
         });
 
         municipios.forEach(municipio => {

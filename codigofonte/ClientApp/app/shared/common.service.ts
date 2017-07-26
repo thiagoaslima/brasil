@@ -1,5 +1,5 @@
-import { Injectable, Inject } from '@angular/core';
-import { Subject }    from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class CommonService {
@@ -11,10 +11,10 @@ export class CommonService {
    */
   notifyObservable$ = this.notify.asObservable();
 
-  constructor(){}
+  constructor() { }
 
   public notifyOther(data: any) {
-      
+
     if (data) {
       this.notify.next(data);
     }

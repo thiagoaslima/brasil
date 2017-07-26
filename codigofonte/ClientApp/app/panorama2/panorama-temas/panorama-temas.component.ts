@@ -219,6 +219,10 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
                 A taxa de escolarização (para pessoas de 6 a 14 anos) foi de ${escolarizacao.res} em ${escolarizacao.periodo}. 
                 Isso posicionava o município na posição ${escolarizacao.rankingLocal} de ${universoLocal} dentre as cidades do estado e na posição ${escolarizacao.rankingGeral} de ${universoGeral} dentre as cidades do Brasil.
             `;
+        },
+
+        [TEMAS.frota.label]: () => {
+            return ``;
         }
 
     }

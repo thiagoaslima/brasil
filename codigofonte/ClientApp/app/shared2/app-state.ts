@@ -1,9 +1,7 @@
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable, Inject } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
@@ -14,7 +12,6 @@ import 'rxjs/add/operator/share';
 
 import { Localidade, NiveisTerritoriais } from '../shared2/localidade/localidade.model';
 import { Pesquisa } from '../shared2/pesquisa/pesquisa.model';
-import { Indicador } from '../shared2/indicador/indicador.model';
 
 
 import { LocalidadeService2 } from '../shared2/localidade/localidade.service';
@@ -26,10 +23,11 @@ const _initialState = {
     pesquisa: null,
     localidade: null,
     tipo: ''
-}
+};
+
 /**
- * 
- * 
+ *
+ *
  * @export
  * @class AppState
  */
@@ -38,8 +36,6 @@ export class AppState {
 
     private _localidade: Localidade;
     private _pesquisa: Pesquisa;
-    private _urlParams;
-    private _queryParams;
 
     private _notify = new BehaviorSubject<any>(_initialState);
     private _appState$ = this._notify.asObservable().share();
@@ -47,11 +43,11 @@ export class AppState {
 
     /**
      * Creates an instance of AppState.
-     * 
+     *
      * @param {LocalidadeService} _localidadeService
      * @param {RouterParamsService} _routerParamsService
      * @param {PesquisaService} _pesquisaService
-     * 
+     *
      * @memberOf AppState
      */
     public constructor(
@@ -67,25 +63,25 @@ export class AppState {
                     return {
                         localidade: _localidadeService.getMunicipioBySlug(uf, municipio),
                         tipo: NiveisTerritoriais.municipio.label
-                    }
+                    };
                 }
 
                 if (uf) {
                     return {
                         localidade: _localidadeService.getUfBySigla(uf),
                         tipo: NiveisTerritoriais.uf.label
-                    }
+                    };
                 }
 
                 return {
                     localidade: 'BR',
                     tipo: NiveisTerritoriais.pais.label
-                }
+                };
             });
 
         const pesquisa$ = this._routerParamsService.params$
             .map(({ params = { pesquisa: 0 } }) => params['pesquisa'])
-            .flatMap(id => id ? _pesquisaService.getPesquisa(id): Observable.of(null));
+            .flatMap(id => id ? _pesquisaService.getPesquisa(id) : Observable.of(null));
 
 
         pesquisa$.zip(localidade$)
@@ -97,8 +93,8 @@ export class AppState {
 
 
     /**
-     * 
-     * 
+     *
+     *
      * @readonly
      * @type {Observable<any>}
      * @memberOf AppState
@@ -109,8 +105,8 @@ export class AppState {
     }
 
     /**
-     * 
-     * 
+     *
+     *
      * @readonly
      * @type {Localidade}
      * @memberOf AppState
@@ -121,8 +117,8 @@ export class AppState {
     }
 
     /**
-     * 
-     * 
+     *
+     *
      * @readonly
      * @type {Pesquisa}
      * @memberOf AppState
@@ -133,11 +129,11 @@ export class AppState {
     }
 
     /*
-     * 
-     * 
+     *
+     *
      * @private
      * @param {*} data
-     * 
+     *
      * @memberOf AppState
      */
     private notify(data: any): void {

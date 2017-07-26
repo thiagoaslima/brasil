@@ -68,8 +68,10 @@ export class Localidade {
     static convertDTO(dto: LocalidadeDTO) {
         const codigoLen = dto.codigo.toString().length;
 
-        const nivelTerritorial = niveisTerritoriais.pais.codeLength === codigoLen ? niveisTerritoriais.pais
-            : niveisTerritoriais.uf.codeLength === codigoLen ? niveisTerritoriais.uf
+        const nivelTerritorial = niveisTerritoriais.pais.codeLength === codigoLen
+            ? niveisTerritoriais.pais
+            : niveisTerritoriais.uf.codeLength === codigoLen
+                ? niveisTerritoriais.uf
                 : niveisTerritoriais.municipio;
 
         let parameter: any = {
@@ -78,7 +80,7 @@ export class Localidade {
             tipo: nivelTerritorial.label,
             nome: dto.nome,
             slug: dto.slug
-        }
+        };
 
         if (codigoLen > nivelTerritorial.codeLength) {
             parameter.digitoVerificador = converterEmNumero(dto.codigo.toString().slice(6))
@@ -87,7 +89,7 @@ export class Localidade {
         if (dto.hasOwnProperty('codigoUf')) {
             parameter.codigoParent = converterEmNumero(dto['codigoUf'])
         } else if (parameter.codigo !== 0) {
-            parameter.codigoParent = 0
+            parameter.codigoParent = 0;
         }
 
         if (dto.hasOwnProperty('sigla')) {
@@ -113,7 +115,7 @@ export class Localidade {
         this.codigo = dados.codigo;
         this.codigoCompleto = dados.codigoCompleto;
 
-        if (dados.digitoVerificador) { this.digitoVerificador = dados.digitoVerificador }
+        if (dados.digitoVerificador) { this.digitoVerificador = dados.digitoVerificador; }
 
         this.nome = dados.nome;
         this.tipo = dados.tipo;
@@ -122,9 +124,9 @@ export class Localidade {
 
         this.slug = dados.slug;
 
-        if (dados.codigoCapital) { this.codigoCapital = dados.codigoCapital }
-        if (dados.codigoParent) { this.codigoParent = dados.codigoParent }
-        if (dados.microrregiao) { this.microrregiao = dados.microrregiao }
+        if (dados.codigoCapital) { this.codigoCapital = dados.codigoCapital; }
+        if (dados.codigoParent || dados.codigoParent === 0) { this.codigoParent = dados.codigoParent; }
+        if (dados.microrregiao) { this.microrregiao = dados.microrregiao; }
     }
 
     public get identificador() {

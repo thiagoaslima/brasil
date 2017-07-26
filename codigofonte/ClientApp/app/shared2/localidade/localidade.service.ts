@@ -218,12 +218,12 @@ export class LocalidadeService2 {
         this._brasil = Localidade.criar(Localidade.convertFromFile(brasil));
 
         ufs.forEach(uf => {
-            let _uf = Localidade.criar(Localidade.convertFromFile(uf));;
+            let _uf = Localidade.criar(Localidade.convertFromFile(uf));
             this._ufs.registerElement(_uf);
         });
 
         municipios.forEach(municipio => {
-            let _mun = Localidade.criar(Localidade.convertFromFile(municipio));;
+            let _mun = Localidade.criar(Localidade.convertFromFile(municipio));
             this._municipios.registerElement(_mun, _mun.codigoParent);
         });
     }

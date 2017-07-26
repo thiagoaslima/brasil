@@ -17,7 +17,7 @@ interface NiveisTerritoriais {
 export const niveisTerritoriais: NiveisTerritoriais = {
     pais: {
         label: "pais",
-        codeLength: 0
+        codeLength: 1
     },
     macrorregiao: {
         // regiões Norte, Nordeste, Centro-Oeste, Sudeste e Sul
