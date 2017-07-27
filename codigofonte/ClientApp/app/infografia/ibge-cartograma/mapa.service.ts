@@ -58,7 +58,8 @@ export class MapaService {
     }
 
     private _getMalha(localidadeCodigo: number, nivel: number) {
-        return this._http.get(`malhas/${localidadeCodigo}xxxxx.topojson`)
+        let caminhoArquivo = localidadeCodigo != undefined ? `${localidadeCodigo}xxxxx` : 'xx';
+        return this._http.get(`malhas/${caminhoArquivo}.topojson`)
             .map(res => res.json())
     }
 

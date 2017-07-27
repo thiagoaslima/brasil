@@ -37,12 +37,21 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     updateCartograma() {
         this.carregando = true;
+
         if (this.localidade) {
-            this._mapaService.getMalhaSubdivisao(this.localidade.codigo)
-                .subscribe((malha) => {
-                    this.malha = malha;
-                    this.carregando = false;
-                });
+            if (this.localidade.tipo === "pais") {
+                this._mapaService.getMalhaSubdivisao(undefined)
+                    .subscribe((malha) => {
+                        this.malha = malha;
+                        this.carregando = false;
+                    });
+            } else {
+                this._mapaService.getMalhaSubdivisao(this.localidade.codigo)
+                    .subscribe((malha) => {
+                        this.malha = malha;
+                        this.carregando = false;
+                    });
+            }
         }
 
         if (this.resultados) {
