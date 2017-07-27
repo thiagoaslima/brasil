@@ -1,9 +1,10 @@
-import { PesquisaIndicadoresComponent } from './pesquisa-indicadores/pesquisa-indicadores.component';
 import { NgModule } from '@angular/core';
 
 import { SharedModule2 } from '../shared2/shared.module';
 import { PesquisaComponent } from './pesquisa.component';
-import { PesquisaHeaderComponent, BuscaHeaderComponent } from './pesquisa-header/pesquisa-header.component';
+import { PesquisaHeaderComponent } from './pesquisa-header/pesquisa-header.component';
+import { BuscaHeaderComponent } from './busca-header/busca-header.component';
+import { PesquisaIndicadoresComponent } from './pesquisa-indicadores/pesquisa-indicadores.component';
 import { PesquisaTabelaComponent } from './pesquisa-tabela/pesquisa-tabela.component';
 import { PesquisaCartogramaModule } from './pesquisa-cartograma/pesquisa-cartograma.module';
 import { PesquisaGraficosModule } from './pesquisa-graficos/pesquisa-graficos.module';
