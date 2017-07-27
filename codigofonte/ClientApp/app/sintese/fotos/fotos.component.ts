@@ -79,7 +79,7 @@ export class FotosComponent implements OnInit, OnDestroy {
             .map(state => state.localidade)
             .flatMap(localidade => {
                 this.localidade = localidade;
-                return this._sinteseService.getFotografias(localidade.tipo == 'estado' ? localidade.capital.codigo : localidade.codigo);
+                return this._sinteseService.getFotografias(localidade.tipo == 'uf' ? localidade.capital.codigo : localidade.codigo);
             })
             .subscribe((fotos) => {
                 this.fotos = fotos;
