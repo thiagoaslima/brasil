@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { PesquisaConfiguration } from './pesquisa.configuration';
 import { Pesquisa } from './pesquisa.model';
+import { slugify } from '../../utils/slug';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -28,8 +29,13 @@ export class PesquisaService2 {
         });
     }
 
+    private _allPesquisasCache: Array<Pesquisa>;
     getAllPesquisas(): Observable<Pesquisa[]> {
         const url = 'https://servicodados.ibge.gov.br/api/v1/pesquisas';
+
+        if (this._allPesquisasCache) {
+            return Observable.of(this._allPesquisasCache);
+        }
 
         return this._http.get(url, options)
             .retry(3)
@@ -37,8 +43,19 @@ export class PesquisaService2 {
             .map(res => res.json())
             .map(json => json.filter(obj => this._pesquisasConfig.isValida(obj.id)))
             .map(json => json.map(obj => Pesquisa.criar(obj)))
-            // .do(pesquisas => console.log(`getAllPesquisas`, pesquisas))
+            .map(pesquisas => pesquisas.sort((a, b) => slugify(a.nome) < slugify(b.nome) ? -1 : 1))
+            .do(pesquisas => this._allPesquisasCache = pesquisas)
             .share();
+    }
+
+    private _byTipoCache = {};
+    getAllPesquisasPorTipoLocalidade(tipoLocalidade: string) {
+        if (this._byTipoCache[tipoLocalidade]) {
+            return Observable.of(this._byTipoCache[tipoLocalidade]);
+        }
+        return this.getAllPesquisas()
+            .map(pesquisas => pesquisas.filter(pesquisa => pesquisa.contexto[tipoLocalidade]))
+            .do(pesquisas => this._byTipoCache[tipoLocalidade] = pesquisas);
     }
 
     private _getPesquisaCache = {};

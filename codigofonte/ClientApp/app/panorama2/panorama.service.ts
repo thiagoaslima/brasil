@@ -1,3 +1,4 @@
+import { LocalidadeService3 } from '../shared3/services/localidade.service';
 import { RankingService3 } from '../shared3/services/ranking.service';
 import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { Injectable } from '@angular/core';
@@ -16,6 +17,7 @@ export class Panorama2Service {
 
     constructor(
         private _resultadoService: ResultadoService3,
+        private _localidadeService: LocalidadeService3,
         private _rankingService3: RankingService3
     ) { }
 
@@ -125,16 +127,13 @@ export class Panorama2Service {
             .filter(item => item.visualizacao === PanoramaVisualizacao.painel)
             .map(item => ({ indicadorId: item.indicadorId, periodo: item.periodo }));
 
-        /* 
-            TO DO: implementar chamada do serviço de ranking
-        */
+
         let contextos = ['BR'];
         if (localidade.parent && localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()) }
         if (localidade.microrregiao) { contextos.push(localidade.microrregiao.toString()) }
 
         return this._rankingService3.getRankingsIndicador(indicadores, contextos, localidade.codigo)
             .map(response => {
-                debugger;
 
                 return response.reduce((agg, ranking) => {
                     const id = ranking.indicadorId;
@@ -155,7 +154,8 @@ export class Panorama2Service {
                             break;
 
                         case localidade.microrregiao.toString():
-                            agg[id].microrregiao = { posicao: _ranking, itens: 50 }
+                            const qtde = this._localidadeService.getMunicipiosMicrorregiao(localidade.microrregiao).length;
+                            agg[id].microrregiao = { posicao: _ranking, itens: qtde };
                             break;
                     }
 

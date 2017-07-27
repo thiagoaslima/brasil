@@ -65,6 +65,7 @@ export class LocalidadeService3 {
     private _brasil: Localidade;
     private _municipios = new LocalidadeCache();
     private _ufs = new LocalidadeCache();
+    private _microrregioes = {} as { [codigo: number]: Localidade[] };
 
 
     constructor(private _http: Http) {
@@ -193,6 +194,10 @@ export class LocalidadeService3 {
         return arr;
     }
 
+    public getMunicipiosMicrorregiao(codMicrorregiao: number) {
+        return this._microrregioes[codMicrorregiao] || [];
+    } 
+
     private _buildLocalidadesTree() {
         this._brasil = Localidade.criar(Localidade.convertDTO(brasil));
 
@@ -204,6 +209,11 @@ export class LocalidadeService3 {
         municipios.forEach(municipio => {
             let _mun = Localidade.criar(Localidade.convertDTO(municipio));;
             this._municipios.registerElement(_mun, _mun.codigoParent);
+
+            if (!this._microrregioes[_mun.microrregiao]) {
+                this._microrregioes[_mun.microrregiao] = [];
+            }
+            this._microrregioes[_mun.microrregiao].push(_mun);
         });
     }
 }

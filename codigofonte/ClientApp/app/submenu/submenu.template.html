@@ -4,6 +4,8 @@
     <ul class="submenu">
         <li class="submenu__item" *ngFor="let pesquisa of pesquisas; let i = index;"
             [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada || pesquisa.visivel">
+
+            
             <!--botão-->
                 <p class="submenu__texto" (click)="onClick(i)">
                 <!--<span class="submenu__texto">-->

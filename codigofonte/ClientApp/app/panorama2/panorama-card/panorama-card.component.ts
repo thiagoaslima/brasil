@@ -11,11 +11,12 @@ export class PanoramaCardComponent implements OnChanges {
     @Input() valor = '';
     @Input() unidade = '';
     @Input() ranking: any = {};
-    @Input('selecionado') isSelecionado;
+    @Input() selecionado: boolean;
     @Input() tipoLocalidade: string;
 
     public textoComparacao: string;
     public cssRanking: any = {};
+    
     ngOnChanges(changes: any) {
         if (this.ranking && this.ranking.BR) {
             this.cssRanking.BR = 'p' + this.calcularPercentualRanking(this.ranking.BR.posicao,  this.ranking.BR.itens);
