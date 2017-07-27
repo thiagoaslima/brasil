@@ -1,0 +1,33 @@
+<div class="cabecalho__visualizacao-dados__item compara-blank">
+    <div class="area-click" [class.area-click--visivel]="mostrarMenu" (click)="mostrarMenu = false;"></div>
+    <div class="add-municipio" [class.submenu-aberto]="mostrarMenu">
+        <button (click)="mostrarMenu = true">
+            {{ localidadeAtual ? localidadeAtual.nome : "Adicionar comparação" }}
+            <i class="fa" [class.fa-caret-down]="!mostrarMenu" [class.fa-caret-up]="mostrarMenu" aria-hidden="true"></i>
+        </button>
+        <div class="por-estado__selecionar-municipio">
+            <!--div class="estado-selecionado">
+                <span class="selecionado">Município</span><span>Estado</span><span>Brasil</span>
+            </div-->
+            <div class="botao_remove" *ngIf="localidadeAtual" (click)="onClickItem(null)">
+                <i class="fa fa-times" aria-hidden="true"></i> {{ localidadeAtual.nome }}
+            </div>
+            <input placeholder="Qual município você procura?" type="text" (input)="onChangeInput($event)">
+            <div>
+                <ul>
+                    <li *ngFor="let localidade of localidades" (click)="onClickItem(localidade)">
+                        <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
+                    </li>
+                </ul>
+                <div *ngIf="localidades == null">
+                    <p class="todos-municipios__titulo">Mais acessados:</p>
+                    <ul>
+                        <li *ngFor="let localidade of capitais" (click)="onClickItem(localidade)">
+                            <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -50,21 +50,46 @@ export class PesquisaComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         
+        debugger;
+
         this.subscription = this._routerParams.params$.subscribe(urlParams => {
             this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
                 this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {
                     this.pesquisa = pesquisa;
                     this.localidades = new Array(3);
-                    // Obter localidade principal
-                    this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo.toString();
+
+                    // Obtém localidade principal
+                    // Identifica o nível regional da pesquisa, municipal ou estadual:
+                    // Municipal
+                    if(!!urlParams.params['uf'] && !!urlParams.params['municipio']){
+                        
+                        this.localidades[0] = (this._localidadeService2.getMunicipioBySlug(urlParams.params['uf'], urlParams.params['municipio'])).codigo.toString();
+                    }
+
+                    // Estadual
+                    if(!!urlParams.params['uf'] && !urlParams.params['municipio']){
+
+                        this.localidades[0] = (this._localidadeService2.getUfBySigla(urlParams.params['uf'])).codigo.toString();
+                    }
+
+                    // Nacional
+                    if(!urlParams.params['uf']){
+
+                        // TODO: Incluir o nível nacional
+                    }
+
                     // Obter localidades de comparação
                     this.localidades[1] = urlParams.queryParams['localidade1'];
                     this.localidades[2] = urlParams.queryParams['localidade2'];
+
+
                     //indicador usado no ranking/series históricas/graficos
                     if(urlParams.queryParams && urlParams.queryParams['indicador'])
                         this.indicador = parseInt(urlParams.queryParams['indicador']);
+
                     // Obtém o tipo de resultado a ser exibido
                     this.tipo = !!urlParams.queryParams['tipo'] ? urlParams.queryParams['tipo'] : 'tabela';
+                    
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     let periodos = pesquisa['periodos'];
                     if(urlParams.queryParams['ano'])
