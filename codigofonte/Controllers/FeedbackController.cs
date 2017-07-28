@@ -31,7 +31,7 @@ namespace Brasil.Controllers
         private static string CONNECTION = "server=srvbd;user id=cidadesAtend_w;password=Tj9*b7$r;database=cidades_atendimento";
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] Feedback feedback)
+        public IActionResult Index([FromBody] Feedback feedback)
         {
             if (!ModelState.IsValid)
             {
@@ -49,8 +49,8 @@ namespace Brasil.Controllers
                     id = conn.Query<int>(@"
                         SET NAMES UTF8;
                         INSERT INTO
-                            feedback(email, assunto, mensagem)
-                        VALUES(@email, @assunto, @mensagem);SELECT LAST_INSERT_ID()", new { email = feedback.Email, assunto = feedback.Assunto, mensagem = feedback.Mensagem }, dbTransaction).Single();
+                            feedback(email, assunto, mensagem, flag)
+                        VALUES(@email, @assunto, @mensagem, @flag);SELECT LAST_INSERT_ID()", new { email = feedback.Email, assunto = feedback.Assunto, mensagem = feedback.Mensagem, flag = 1 }, dbTransaction).Single();
 
                     dbTransaction.Commit();
                 }
@@ -80,25 +80,18 @@ namespace Brasil.Controllers
                      **/
                     // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                    await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
+                    SMTP.Connect("mailrelay.ibge.gov.br", 25, false);
 
                     /**
                      * XOAUTH2 authentication disabled - Não é usado no IBGE
                      **/
                     SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                    await SMTP.SendAsync(message);
-                    await SMTP.DisconnectAsync(true);
+                    SMTP.Send(message);
+                    SMTP.Disconnect(true);
                 }
             }
             catch (Exception e)
-            {
-                return Ok();
-            }
-
-            
-
-            if (id > 0)
             {
                 using (var conn = new MySqlConnection(CONNECTION))
                 {
@@ -106,9 +99,9 @@ namespace Brasil.Controllers
 
                     using (var dbTransaction = conn.BeginTransaction())
                     {
-                        await conn.ExecuteAsync(@"UPDATE feedback SET flag = 1 WHERE id = @id", new { id = id }, dbTransaction);
+                        conn.Execute(@"UPDATE feedback SET flag = 0 WHERE id = @id", new { id = id }, dbTransaction);
 
-                        await dbTransaction.CommitAsync();
+                        dbTransaction.Commit();
                     }
                 }
             }
