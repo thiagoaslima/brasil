@@ -12,6 +12,9 @@ export class ValidParametersGuard implements CanActivate {
     canActivate(
         route: ActivatedRouteSnapshot
     ) {
+
+        debugger;
+
         if (route.params['uf']) {
             let uf = this._localidadeService.getUfBySigla(route.params['uf']);
             if (!uf) {
@@ -19,7 +22,7 @@ export class ValidParametersGuard implements CanActivate {
             }
         }
 
-        if (route.params['municipio']) {
+        if (route.params['municipio'] && route.params['municipio'] != 'undefined') {
             let mun = this._localidadeService.getMunicipioBySlug(route.params['uf'], route.params['municipio']);
             if (!mun) {
                 return false;

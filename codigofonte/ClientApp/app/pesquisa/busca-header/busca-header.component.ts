@@ -15,6 +15,8 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
 export class BuscaHeaderComponent implements OnInit {
 
     @Input() localidadeAtual: Localidade;
+    // 'estadual' ou 'municipal'
+    @Input() nivelRegional: string = 'municipal';
     @Output() onLocalidade = new EventEmitter();
     
     mostrarMenu = false;
@@ -38,15 +40,20 @@ export class BuscaHeaderComponent implements OnInit {
         if(texto.length >= 3){
 
             this.localidades = this._localidadeService.buscar(texto)
-                .filter((item) => {return item.tipo == 'municipio';});
+                .filter((item) => {
+
+                    return item.tipo == (this.nivelRegional == 'municipal' ? 'municipio' : 'uf');
+                });
 
         }else{
-            
+
             this.localidades = null;
         }
     }
 
     onClickItem(localidade: Localidade){
+
+        debugger;
 
         this.mostrarMenu = false;
 

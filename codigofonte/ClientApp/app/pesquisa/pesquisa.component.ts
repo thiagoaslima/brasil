@@ -50,8 +50,6 @@ export class PesquisaComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         
-        debugger;
-
         this.subscription = this._routerParams.params$.subscribe(urlParams => {
             this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
                 this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {

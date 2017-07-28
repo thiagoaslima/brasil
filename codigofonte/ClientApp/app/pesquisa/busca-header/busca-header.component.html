@@ -12,14 +12,15 @@
             <div class="botao_remove" *ngIf="localidadeAtual" (click)="onClickItem(null)">
                 <i class="fa fa-times" aria-hidden="true"></i> {{ localidadeAtual.nome }}
             </div>
-            <input placeholder="Qual município você procura?" type="text" (input)="onChangeInput($event)">
+            <input *ngIf="nivelRegional == 'municipal'" placeholder="Qual município você procura?" type="text" (input)="onChangeInput($event)">
+            <input *ngIf="nivelRegional != 'municipal'" placeholder="Qual estado você procura?" type="text" (input)="onChangeInput($event)">
             <div>
                 <ul>
                     <li *ngFor="let localidade of localidades" (click)="onClickItem(localidade)">
-                        <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
+                        <p> {{ localidade.nome }} <span *ngIf="nivelRegional == 'municipal'"> {{ localidade.parent.sigla }} </span></p>
                     </li>
                 </ul>
-                <div *ngIf="localidades == null">
+                <div *ngIf="localidades == null && nivelRegional == 'municipal'">
                     <p class="todos-municipios__titulo">Mais acessados:</p>
                     <ul>
                         <li *ngFor="let localidade of capitais" (click)="onClickItem(localidade)">
