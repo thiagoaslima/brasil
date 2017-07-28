@@ -5,6 +5,17 @@
     padding-bottom: 10px;
 }
 
+
+.topo__bandeira{
+    width: 170px;
+    float: left;
+}
+
+.topo__bandeira img{
+    width: 100%;
+}
+
+
 .topo__celula-esquerda{
     width: 49%;
     float: left;
@@ -14,6 +25,13 @@
     width: 49%;
     float: right;
     text-transform: capitalize;
+}
+
+.comBandeira .topo__celula-esquerda, .comBandeira .topo__celula-direita{
+    float: left;
+    margin-left: 4%;
+    margin-top: 15px;
+    width: calc(96% - 171px);
 }
 
 .topo__celula-linha {
@@ -306,6 +324,18 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
+    .topo__bandeira{
+        width: 100%;
+    }
+    
+    .comBandeira .topo__celula-esquerda, .comBandeira .topo__celula-direita{
+        clear: both;
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 960px) {
 	.lista__icone{
 		display:none;
 	}
@@ -385,6 +415,13 @@
     }
    
     
+    .topo__bandeira{
+        display: none;
+    }
+
+    .comBandeira .topo__celula-esquerda, .comBandeira .topo__celula-direita{
+        margin-left: inherit;
+    }
     
     
 }
