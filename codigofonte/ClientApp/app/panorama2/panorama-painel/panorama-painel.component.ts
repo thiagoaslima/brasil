@@ -18,8 +18,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
     }
 })
 export class PanoramaPainelComponent implements OnInit, OnChanges {
-    @Input() dados = [] as dadosPainel[]
-    @Input() localidade: Localidade
+    @Input() dados = [] as dadosPainel[];
+    @Input() localidade: Localidade;
 
     public isPrerender = isNode;
     public indexSelecionado = 0;
@@ -56,9 +56,9 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
                 if (isOnScreen) {
                     this._novosDados = false;
                 }
-                let shouldAppear = isOnScreen || !novosDados
+                let shouldAppear = isOnScreen || !novosDados;
                 return shouldAppear;
-            })
+            });
         }
     }
 
@@ -69,7 +69,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             changes.dados.currentValue.length > 0
         ) {
             this._novosDados = true;
-            this.selectPainel(0); 
+            this.selectPainel(0);
         }
     }
 
@@ -135,6 +135,6 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     getResultadosCartograma(indicadorId: number): void {
         this._resultadoServ
             .getResultadosCartograma(indicadorId, this.localidade.parent.codigo)
-            .subscribe((resultados) => { this.resultadosCartograma = resultados;});
+            .subscribe((resultados) => { this.resultadosCartograma = resultados; });
     }
-}
+};

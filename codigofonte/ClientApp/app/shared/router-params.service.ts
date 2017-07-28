@@ -23,12 +23,11 @@ export class RouterParamsService {
             .map(e => this.extractParamsFromTree(this._route.snapshot, {}))
             .do((params) => {
 
-                if(isBrowser && params && params.params && params.params.uf && params.params.municipio){
+                if (isBrowser && params && params.params && params.params.uf && params.params.municipio) {
                     localStorage.setItem('lastParams', JSON.stringify(params));
                 }
-                
-            })
-        //.share();
+
+            });
 
         this._router.events
             .filter(e => e instanceof NavigationEnd)
@@ -43,7 +42,7 @@ export class RouterParamsService {
 
 
     private getActiveChildOnOutlet(route: ActivatedRouteSnapshot, outlet = 'primary'): ActivatedRouteSnapshot | null {
-        return route.children.reduce((agg, route) => route.outlet === outlet ? route : agg, null);
+        return route.children.reduce((agg, rota) => rota.outlet === outlet ? rota : agg, null);
     }
 
     private extractParamsFromTree(route, { params = {}, queryParams = {} }, outlet = 'primary') {
@@ -52,7 +51,7 @@ export class RouterParamsService {
             queryParams
         };
 
-        if (!route) return _params;
+        if (!route) { return _params; }
 
         Object.assign(_params.params, Object.keys(route.params).reduce((agg, key) => {
             let val = decodeURIComponent(route.params[key]);

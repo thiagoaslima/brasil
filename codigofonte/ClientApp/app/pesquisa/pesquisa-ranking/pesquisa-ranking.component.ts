@@ -86,8 +86,6 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     public hasDados(): boolean{
 
-        debugger;
-
         if(!this.rankings){
             return false;
         }

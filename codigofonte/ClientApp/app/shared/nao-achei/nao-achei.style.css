@@ -9,19 +9,22 @@
 
 .nao-achei__aba{
     display: inline-block;
-    background-color: black;
-    color: white;
+    background-color: #fff;
+    /* color: white; */
     border-radius: 5px 5px 0 0;
+    color: #000;
+    box-shadow: 0px 2px 15px #555;
 }
 
+
 .nao-achei__label{
-    padding: 5px 10px;
+    padding: 7px 12px;
     cursor: pointer;
     display: inline-block;
 }
 
 .nao-achei__fechar{
-    margin-left: 25px;
+    margin-left: 8px;
     cursor: pointer;
     padding: 5px 10px;
     display: inline-block;
@@ -30,8 +33,8 @@
 .nao-achei__form{
     max-width: 512px;
     margin: auto;
-    padding: 0 10px;
-    background-color: black;
+    padding: 0 25px;
+    background-color: #fff;
     border-radius: 5px 5px 0 0;
     max-height: 0px;
     transition: max-height 0.3s, padding 0.3s;
@@ -39,7 +42,10 @@
 
 .nao-achei__form--aberto{
     max-height: 500px;
-    padding: 10px 10px;
+    box-shadow: 0px 6px 11px #555;
+    z-index: 2;
+    position: relative;
+    padding: 20px 25px;
 }
 
 .nao-achei__item{
@@ -47,6 +53,7 @@
     width: 100%;
     margin-bottom: 7px;
     padding: 5px 10px;
+    border: 1px solid #ccc;
 }
 
 .nao-achei__item:last-child{
@@ -59,8 +66,8 @@
 
 .nao-achei__botao{
     background-color: transparent;
-    color: white;
-    border: 1px solid #fff;
+    color: #000;
+    border: 1px solid #000;
     border-radius: 21px;
     font-size: 1em;
     cursor: pointer;

@@ -1,11 +1,12 @@
+import { LocalidadeService3 } from '../shared3/services/localidade.service';
 import { RankingService3 } from '../shared3/services/ranking.service';
 import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { Injectable } from '@angular/core';
 
-import { PANORAMA, ItemConfiguracao, PanoramaVisualizacao } from './configuration';
+import { ItemConfiguracao, PanoramaVisualizacao } from './configuration';
 import { ResultadoService3 } from '../shared3/services';
 import { Localidade, Resultado } from '../shared3/models';
-import { converterObjArrayEmHash, getProperty } from '../utils2';
+import { converterObjArrayEmHash } from '../utils2';
 import { notasEspeciais } from '../../api/notas-demanda-legal';
 
 import { Observable } from 'rxjs/Observable';
@@ -13,29 +14,69 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class Panorama2Service {
+    private _totalMunicipios: number;
+    private _totalUfs: number;
 
     constructor(
         private _resultadoService: ResultadoService3,
+        private _localidadeService: LocalidadeService3,
         private _rankingService3: RankingService3
-    ) { }
+    ) {
+        this._totalUfs = this._localidadeService.getRoot().children.length;
+        this._totalMunicipios = this._localidadeService.getRoot().children.reduce((sum, uf) => sum + uf.children.length, 0);
+    }
 
     getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
         return this._getResultadosIndicadores(configuracao, localidade)
             .map(resultados => {
                 return configuracao.map(item => {
-                    const periodo = item.periodo || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente || '-';
+                    const periodo = item.periodo
+                        || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
+                        || '-';
+
+                    const titulo = item.titulo
+                        || (
+                            resultados[item.indicadorId] &&
+                            resultados[item.indicadorId].indicador &&
+                            resultados[item.indicadorId].indicador.nome
+                        );
+
+                    const valor = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].getValor(periodo)
+                    ) || '-';
+
+
+                    const unidade = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.toString()
+                    ) || '';
+
+                    const notas = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.notas
+                    ) || [];
+
+                    const fontes = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.fontes
+                    ) || [];
 
                     return {
                         tema: item.tema,
-                        titulo: item.titulo || (resultados[item.indicadorId] && resultados[item.indicadorId].indicador.nome),
-                        periodo: periodo,
-                        valor: resultados[item.indicadorId] && resultados[item.indicadorId].getValor(periodo),
-                        unidade: resultados[item.indicadorId] && resultados[item.indicadorId].indicador.unidade.toString(),
-                        notas: resultados[item.indicadorId].indicador.notas,
-                        fontes: resultados[item.indicadorId].indicador.fontes,
-                    }
-                })
-            })
+                        titulo,
+                        periodo,
+                        valor,
+                        unidade,
+                        notas,
+                        fontes
+                    };
+                });
+            });
     }
 
     getTemas(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
@@ -49,23 +90,26 @@ export class Panorama2Service {
             configuracao: this._organizarConfiguracaoParaTemas(configuracao, resultados, rankings),
             resultados: resultados,
             rankings: rankings
-        }))
+        }));
     }
 
-    getNotaEspecial(idLocalidade, idIndicador): string{
+    getNotaEspecial(idLocalidade, idIndicador): string {
 
-        let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
+        let notaEspecial = notasEspeciais.filter(nota => nota.localidade === idLocalidade && nota.indicador === idIndicador);
 
         return notaEspecial.length > 0 ? notaEspecial[0]['nota'] : '';
     }
 
-    private _getResultadosIndicadores(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: Resultado }> {
+    private _getResultadosIndicadores(
+        configuracao: Array<ItemConfiguracao>,
+        localidade: Localidade
+    ): Observable<{ [indicadorId: number]: Resultado }> {
         const indicadoresId = configuracao.reduce((arr, item) => {
             arr.push(item.indicadorId);
 
             if (item.grafico) {
                 item.grafico.dados.forEach(obj => {
-                    arr.push(obj.indicadorId)
+                    arr.push(obj.indicadorId);
                 });
             }
 
@@ -77,54 +121,64 @@ export class Panorama2Service {
             .map(resultados => {
 
                 return converterObjArrayEmHash(resultados, 'indicador.id');;
-            })
+            });
     }
 
-    private _getPosicaoRankings(configuracao: Array<ItemConfiguracao>, localidade: Localidade): Observable<{ [indicadorId: number]: { [contexto: string]: any } }> {
+    private _getPosicaoRankings(
+        configuracao: Array<ItemConfiguracao>,
+        localidade: Localidade
+    ): Observable<{ [indicadorId: number]: { [contexto: string]: any } }> {
         let indicadores = configuracao
             .filter(item => item.visualizacao === PanoramaVisualizacao.painel)
             .map(item => ({ indicadorId: item.indicadorId, periodo: item.periodo }));
 
-        /* 
-            TO DO: implementar chamada do serviço de ranking
-        */
+
         let contextos = ['BR'];
-        if (localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()) }
+        if (localidade.parent && localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()); }
         if (localidade.microrregiao) { contextos.push(localidade.microrregiao.toString()) }
 
         return this._rankingService3.getRankingsIndicador(indicadores, contextos, localidade.codigo)
             .map(response => {
+
                 return response.reduce((agg, ranking) => {
                     const id = ranking.indicadorId;
 
                     if (!agg[id]) {
-                        agg[id] = {}
+                        agg[id] = {};
                     }
 
                     const _ranking = ranking && ranking.res && ranking.res[0] && ranking.res[0].ranking;
 
                     switch (ranking.contexto) {
                         case 'BR':
-                            agg[id].BR = { posicao: _ranking, itens: 5570 }
+                            agg[id].BR = {
+                                posicao: _ranking,
+                                itens: localidade.tipo === 'municipio' ? this._totalMunicipios : this._totalUfs
+                            };
                             break;
 
                         case localidade.parent.codigo.toString():
-                            agg[id].local = { posicao: _ranking, itens: localidade.parent.children.length }
+                            agg[id].local = { posicao: _ranking, itens: localidade.parent.children.length };
                             break;
 
                         case localidade.microrregiao.toString():
-                            agg[id].microrregiao = { posicao: _ranking, itens: 50 }
+                            const qtde = this._localidadeService.getMunicipiosMicrorregiao(localidade.microrregiao).length;
+                            agg[id].microrregiao = { posicao: _ranking, itens: qtde };
                             break;
                     }
 
                     return agg;
-                }, {})
-            })
+                }, {});
+            });
 
-        
+
     }
 
-    private _organizarConfiguracaoParaTemas(configuracao: ItemConfiguracao[], resultados: { [indicadorId: number]: Resultado }, rankings): Array<{ tema: string, painel: dadosPainel[], graficos: dadosGrafico[] }> {
+    private _organizarConfiguracaoParaTemas(
+        configuracao: ItemConfiguracao[],
+        resultados: { [indicadorId: number]: Resultado },
+        rankings
+    ): Array<{ tema: string, painel: dadosPainel[], graficos: dadosGrafico[] }> {
         const { temas } = configuracao
             .reduce(({ temas, posicao }, item) => {
                 if (!item.tema) {
@@ -136,7 +190,7 @@ export class Panorama2Service {
                         idx: posicao,
                         painel: [],
                         graficos: []
-                    }
+                    };
                     posicao++;
                 }
 
@@ -171,7 +225,7 @@ export class Panorama2Service {
             valor: resultado && resultado.valorValidoMaisRecente,
             unidade: resultado && resultado.indicador.unidade.toString(),
             ranking: rankings[item.indicadorId]
-        }
+        };
     }
 
     private _prepararDadosGrafico(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }) {
@@ -181,7 +235,7 @@ export class Panorama2Service {
             eixoX: this.getEixoX(item, resultados),
             dados: this.getDados(item, resultados),
             fontes: this.getFontes(item, resultados)
-        }
+        };
     }
 
     private getEixoX(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {
@@ -196,8 +250,8 @@ export class Panorama2Service {
             const valores = resultado.valoresValidos.map(valor => this.converterParaNumero(valor));
             const nome = resultado.indicador.nome;
 
-            return { data: valores, label: nome }
-        })
+            return { data: valores, label: nome };
+        });
     }
 
     private getFontes(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {
@@ -216,7 +270,7 @@ export class Panorama2Service {
 
             valor = '0';
         }
-        return !!valor ? Number(valor.replace(',', '.')) : Number(valor)
+        return !!valor ? Number(valor.replace(',', '.')) : Number(valor);
     }
 
 }

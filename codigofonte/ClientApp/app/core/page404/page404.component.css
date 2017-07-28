@@ -1,0 +1,185 @@
+*{
+    color: inherit;
+    text-decoration: inherit;
+    font-family: 'Open Sans', sans-serif;
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
+    outline: 0;
+    box-sizing: border-box; 
+}
+
+html, body{
+    height: 100%;
+	color: #333333;
+} 
+/* INPUT RESET TEST */
+
+input { 
+	margin:0;
+	border:0;
+	padding:0;
+	display:inline-block;
+	vertical-align:middle;
+	white-space:normal;
+	background:none;
+	line-height:1;
+	}
+	
+.header{
+	background-color: #1b779b;
+	border-bottom: 4px solid #f7931e;
+	padding: 5%;
+}
+
+.header__logo {
+	width: 100px;
+}
+.header__title {
+	color: #fff;
+	font-size: 1.5em;
+}
+
+.header__error {
+	color: #104251;
+	font-size: 1.2em;
+}
+
+.body {
+	padding:5%; 
+}
+
+.body p, input {
+	margin: 0.5em 0 2em 0;	
+}
+
+.body input {
+	width: 100%;
+	height: 35px;
+	max-width: 480px;
+	margin-bottom: 20px;
+}
+
+.search-box {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="19.594px" height="19.688px" viewBox="0 0 19.594 19.688" enable-background="new 0 0 19.594 19.688" xml:space="preserve"><path fill-rule="evenodd" clip-rule="evenodd" fill="#B3B3B3" d="M18.98,16.951c-0.306-0.336-0.639-0.65-0.962-0.973 c-0.994-0.992-1.988-1.984-3.003-2.996c1.266-1.854,1.693-3.891,1.294-6.067c-0.401-2.19-1.516-3.97-3.366-5.237 C9.678-0.559,5.254-0.144,2.532,2.632c-2.75,2.806-3.087,7.231-0.903,10.397c1.987,2.881,6.823,4.99,11.309,2.064 c0.091,0.087,0.19,0.178,0.285,0.271c1.215,1.209,2.426,2.421,3.645,3.625c0.623,0.615,1.486,0.63,2.084,0.051 C19.542,18.47,19.563,17.591,18.98,16.951z M8.271,13.551c-2.839-0.016-5.186-2.395-5.141-5.209C3.178,5.459,5.487,3.163,8.32,3.186 c2.883,0.023,5.219,2.371,5.181,5.205C13.463,11.281,11.146,13.567,8.271,13.551z"/></svg>');
+	background-position: 99% 7px;
+	background-repeat: no-repeat;
+	border: 1px solid #ccc;
+	padding-right: 30px;
+	padding-left: 5px;
+		}
+	
+.btn {
+	background-color: white;
+	border: 1px solid #1b779b;
+	border-radius: 20px;
+	padding: 5px 15px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+
+}
+
+.btn:hover {
+	color: #fff;
+	background-color: #1b779b;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+
+}
+.capitais {
+	width: 90%;
+	padding-bottom: 50px;
+	margin: auto;
+	padding-top: 25px;
+}
+
+.mais-acessadas {
+	list-style: none;
+}
+.mais-acessadas__item {	
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	break-inside: avoid;
+}
+.mais-acessadas__item:hover {
+	background-color: #e6e6e6;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+.mais-acessadas__item a{
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.graphcontainer {
+	padding: 2.5%;
+	border: 2px solid #ccc;
+	margin: 15px 2.5%;
+	min-height: 400px;
+}
+/*.graphcontainer__graph {
+	width: 450px;
+	height: 300px;
+	background-color:#ccc;
+
+}*/
+
+@media screen and (min-width: 960px) {
+    .body {
+        float:left; 
+        padding: 3%;
+    }
+
+    .capitais {
+        margin-top: 60px;
+        width: 60%;
+        padding-bottom: 50px;
+        padding-top: 0px;
+    }
+
+    .mais-acessadas {
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        
+        column-gap: 40px;
+        -webkit-column-gap: 40px;
+        -moz-column-gap: 40px
+    }
+
+    .graphcontainer {
+        margin-left: 50%; 
+        max-width: 800px;
+        
+    }
+
+    .header{
+        padding: 2% 3%;
+    }
+
+    .header__logo {
+        width: 150px;
+    }
+    .header__title {
+        font-size: 2em;
+    }
+
+    .header__error {
+        font-size: 1.5em;
+    }
+}

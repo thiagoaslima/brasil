@@ -92,7 +92,7 @@
             </div>
             Tabela
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')" [class.desabilitado]="listaPeriodos.length <= 1">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')" [class.desabilitado]="listaPeriodos.length <= 1 || isNivelEstadual">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -110,7 +110,7 @@
             </div>
             Série Histórica
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="setaTipo('cartograma')">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="setaTipo('cartograma')" [class.desabilitado]="isNivelEstadual">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -124,7 +124,7 @@
             </div>
             Cartogramas
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="setaTipo('ranking')">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="setaTipo('ranking')" [class.desabilitado]="isNivelEstadual">
                 <div>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.449,7.235c1.131,0,2.262,0,3.393,0
@@ -168,8 +168,8 @@
             <div class="cabecalho__visualizacao-dados__item__label">{{ localidade?.nome }}</div>
         </div>
 
-        <busca-header [localidadeAtual]="localidade1" (onLocalidade)="setaLocalidade1($event);"></busca-header>
-        <busca-header [localidadeAtual]="localidade2" (onLocalidade)="setaLocalidade2($event);"></busca-header>
+        <busca-header [nivelRegional]="isNivelEstadual ? 'estadual': 'municipal'" [localidadeAtual]="localidade1" (onLocalidade)="setaLocalidade1($event);"></busca-header>
+        <busca-header [nivelRegional]="isNivelEstadual ? 'estadual': 'municipal'" [localidadeAtual]="localidade2" (onLocalidade)="setaLocalidade2($event);"></busca-header>
 
         <div class="cabecalho__visualizacao-dados__item cabecalho__visualizacao-dados__item--compartilhar">
             <div class="area-click" [class.area-click--visivel]="mostrarOpcoes" (click)="mostrarOpcoes=false"></div>

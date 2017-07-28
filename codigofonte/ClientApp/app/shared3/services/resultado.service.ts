@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { ResultadoDTO } from "../dto";
 import { Indicador, Localidade, Resultado } from '../models';
-import { ServicoDados as servidor } from '../values';
+import { ServicoDados as servidor, niveisTerritoriais } from '../values';
 import { IndicadorService3, LocalidadeService3 } from ".";
 import { forceArray } from '../../utils2';
 import { CacheFactory } from "../../cache/cacheFactory.service";
@@ -47,7 +47,19 @@ export class ResultadoService3 {
         cache: ResultadoService3.cache
     })
     getResultadosCartograma(indicadorId: number, codigoLocalidade: number) {
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${codigoLocalidade}xxxx`);
+
+        let requisicaoLocalidade: string;
+
+        switch (codigoLocalidade.toString().length) {
+            case 1:
+                requisicaoLocalidade = 'xx';
+                break;
+            case 2:
+                requisicaoLocalidade = `${codigoLocalidade}xxxx`;
+                break;
+        }
+
+        const url = servidor.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${requisicaoLocalidade}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicador: ${indicadorId}, localidade: ${codigoLocalidade}]`
 
         return this._request(url)
@@ -57,7 +69,7 @@ export class ResultadoService3 {
                     .reduce((acc, resultado) => {
                         acc[resultado.codigoLocalidade] = resultado;
                         return acc;
-                    }, {})
+                    }, {});
             })
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }

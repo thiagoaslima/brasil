@@ -181,8 +181,8 @@ export class Contexto {
 
         let len = contextos.length;
         contextos.length = 6;
-        contextos.fill(0, len);
-        
+        contextos.fill(0, len).reverse();
+
         this._contextos.forEach((propertyName, index) => {
             this[propertyName] = !!contextos[index];
         });

@@ -1,7 +1,6 @@
-import { NiveisTerritoriais } from '../../shared2/localidade/localidade.model';
 import { arrayUniqueValues, converterEmNumero } from '../../utils2';
 import { PesquisaDTO } from '../dto';
-import { niveisTerritoriais, listaNiveisTerritoriais } from '../values';
+import { listaNiveisTerritoriais } from '../values';
 
 export class Pesquisa {
     static criar(data: PesquisaDTO) {

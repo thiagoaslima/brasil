@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+
 import { Pesquisa} from '../../shared2/pesquisa/pesquisa.model';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { Localidade} from '../../shared2/localidade/localidade.model';
@@ -35,6 +36,10 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     listaPeriodos = [];
     tipo = '';
 
+    isNivelMunicipal;
+    isNivelEstadual;
+    isNivelNacional;
+
     private subs$$;
     private isOcultarValoresVazios = true;
 
@@ -47,6 +52,9 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(){
+
+        
+
         this.subs$$ = this._routerParamsService.params$.subscribe((params) => {
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
@@ -59,11 +67,15 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     this.ano = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
                 }
+                
+                this.isNivelMunicipal = !!params.params.uf && !!params.params.municipio;
+                this.isNivelEstadual = !!params.params.uf && !params.params.municipio;
+                this.isNivelNacional = !params.params.uf && !params.params.municipio;
 
                 this.indicador = params.params.indicador;
                 this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
-                this.localidade1 = params.queryParams.localidade1 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1) : null;
-                this.localidade2 = params.queryParams.localidade2 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2) : null;
+                this.localidade1 = this.obterLocalidade(params.queryParams.localidade1);
+                this.localidade2 = this.obterLocalidade(params.queryParams.localidade2);
                 this.tipo = params.queryParams.tipo ? params.queryParams.tipo : '';
 
                 this.objetoURL.uf = params.params.uf;
@@ -80,6 +92,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     navegarPara(indicador = null, ano = null, tipo = null, localidade1 = null, localidade2 = null){
+
         this.objetoURL.indicador = indicador ? indicador : this.objetoURL.indicador;
 
         if(ano)
@@ -100,15 +113,29 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         else if(localidade2 != null)
             this.objetoURL.queryParams.localidade2 = localidade2;
         
-        let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa', this.objetoURL.pesquisa, this.objetoURL.indicador];
+        let url = [];
+        url.push('brasil');
+        url.push(this.objetoURL.uf);
+
+        if(!!this.objetoURL.municipio){
+
+            url.push(this.objetoURL.municipio);
+        }
+
+        url.push('pesquisa');
+        url.push(this.objetoURL.pesquisa);
+        url.push(this.objetoURL.indicador);
+
         this._router.navigate(url, {'queryParams' : this.objetoURL.queryParams});
     }
 
     setaLocalidade1(localidade){
+
         this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
     }
 
     setaLocalidade2(localidade){
+
         this.navegarPara(null, null, null, null, localidade ? localidade.codigo : 0);
     }
 
@@ -117,12 +144,16 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     mudaAno(event){
+
         this.navegarPara(null, event.srcElement.value.trim());
     }
 
     setaTipo(tipo){
-        if(tipo == 'grafico' && this.listaPeriodos.length <= 1)
+        
+        if(this.isNivelEstadual || this.isNivelNacional || (this.isNivelMunicipal && tipo == 'grafico' && this.listaPeriodos.length <= 1) ){
             return;
+        }
+            
         this.navegarPara(null, null, tipo);
     }
 
@@ -140,79 +171,19 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     compartilhar(){
         this.mostrarOpcoes = false; //esconde o menu
     }
-}
 
-/***********************
-   componente do cabeçalho com busca de localidade
-************************/
+    private obterLocalidade(codigoLocalidade: string): Localidade{
 
-@Component({
-    selector: 'busca-header',
-    template: `
-        <div class="cabecalho__visualizacao-dados__item compara-blank">
-            <div class="area-click" [class.area-click--visivel]="mostrarMenu" (click)="mostrarMenu = false;"></div>
-            <div class="add-municipio" [class.submenu-aberto]="mostrarMenu">
-                <button (click)="mostrarMenu = true">
-                    {{ localidadeAtual ? localidadeAtual.nome : "Adicionar comparação" }}
-                    <i class="fa" [class.fa-caret-down]="!mostrarMenu" [class.fa-caret-up]="mostrarMenu" aria-hidden="true"></i>
-                </button>
-                <div class="por-estado__selecionar-municipio">
-                    <!--div class="estado-selecionado">
-                        <span class="selecionado">Município</span><span>Estado</span><span>Brasil</span>
-                    </div-->
-                    <div class="botao_remove" *ngIf="localidadeAtual" (click)="onClickItem(null)">
-                        <i class="fa fa-times" aria-hidden="true"></i> {{ localidadeAtual.nome }}
-                    </div>
-                    <input placeholder="Qual município você procura?" type="text" (input)="onChangeInput($event)">
-                    <div>
-                        <ul>
-                            <li *ngFor="let localidade of localidades" (click)="onClickItem(localidade)">
-                                <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
-                            </li>
-                        </ul>
-                        <div *ngIf="localidades == null">
-                            <p class="todos-municipios__titulo">Mais acessados:</p>
-                            <ul>
-                                <li *ngFor="let localidade of capitais" (click)="onClickItem(localidade)">
-                                    <p> {{ localidade.nome }} <span> {{ localidade.parent.sigla }} </span></p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `,
-    styleUrls: ['./pesquisa-header.style.css']
-})
+        if(!codigoLocalidade){
 
-export class BuscaHeaderComponent{
-    mostrarMenu = false;
-    localidades: Localidade[];
-    capitais: Localidade[];
-    @Output() onLocalidade = new EventEmitter();
-    @Input() localidadeAtual: Localidade;
-
-    constructor(
-        private _localidadeService: LocalidadeService2
-    ) { }
-
-     ngOnInit(){
-         this.capitais = this._localidadeService.getAllCapitais();
-    }
-
-    onChangeInput(event){
-        let texto = event.srcElement.value;
-        if(texto.length >= 3){
-            this.localidades = this._localidadeService.buscar(texto)
-                .filter((item) => {return item.tipo == 'municipio';});
-        }else{
-            this.localidades = null;
+            return null;
         }
-    }
 
-    onClickItem(localidade: Localidade){
-        this.mostrarMenu = false;
-        this.onLocalidade.emit(localidade);
+        if(codigoLocalidade.length == 2){
+
+            return this._localidadeService.getUfByCodigo( Number(codigoLocalidade) )
+        }
+
+        return this._localidadeService.getMunicipioByCodigo(codigoLocalidade);
     }
 }

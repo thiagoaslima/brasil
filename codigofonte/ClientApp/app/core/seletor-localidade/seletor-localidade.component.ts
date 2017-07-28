@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { isBrowser } from 'angular2-universal';
-import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'; 
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 
 import { AppState } from '../../shared2/app-state';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -137,20 +137,22 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _router: Router
     ) {
 
-        //escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
-        //o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
+        // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
+        // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
         this._router.events.filter(event => event instanceof NavigationEnd).subscribe(route => {
-            if(route.url.indexOf('/panorama') >= 0){
+            if (route.url.indexOf('/panorama') >= 0) {
                 this.URLEnd = '/panorama';
-            }else if(route.url.indexOf('/historico') >= 0){
+            } else if (route.url.indexOf('/historico') >= 0) {
                 this.URLEnd = '/historico';
-            }else if(route.url.indexOf('/pesquisa') >= 0){
+            } else if (route.url.indexOf('/pesquisa') >= 0) {
                 let arr = route.url.split('/');
-                arr = arr.slice(arr.indexOf('pesquisa') + 1)
-                if(arr.length == 1)
+                arr = arr.slice(arr.indexOf('pesquisa') + 1);
+                if (arr.length === 1) {
                     this.URLEnd = '/pesquisa/' + arr[0];
-                if(arr.length == 2)
+                }
+                if (arr.length === 2) {
                     this.URLEnd = '/pesquisa/' + arr[0] + '/' + arr[1].split('?')[0];
+                }
             }
         });
 
@@ -159,7 +161,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 const locais = [localidade];
                 if (localidade) { locais.push(localidade.parent); }
                 if (localidade && localidade.parent) { locais.push(localidade.parent.parent); }
-                
+
                 return locais.filter(Boolean).reverse();
             });
 
@@ -188,10 +190,10 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this._buscaInput$$.unsubscribe();
     }
 
-    //'popstate' é o evento gerado ao usar o botão de voltar do browser
+    // 'popstate' é o evento gerado ao usar o botão de voltar do browser
     @HostListener('window:popstate', ['$event'])
     onPopState(event) {
-        //ao voltar no browser, se o seletor de localidade estiver aberto, fecha
+        // ao voltar no browser, se o seletor de localidade estiver aberto, fecha
         this.fecharSeletor();
     }
 
@@ -202,12 +204,14 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     abrirSeletor() {
-        //insere um state fake(apenas uma vez) para fazer com que o voltar do browser feche o seletor de locais (não volte para a página anterior do histórico)
-        if (this.hist && !(this.hist.state && this.hist.state.seletor_localidade))
+        // insere um state fake(apenas uma vez) para fazer com que o voltar do browser
+        // feche o seletor de locais (não volte para a página anterior do histórico)
+        if (this.hist && !(this.hist.state && this.hist.state.seletor_localidade)) {
             this.hist.pushState({ seletor_localidade: true }, '', '');
+        }
 
         this.aberto = true;
-        this.setState('municipiosTodos');
+        this.setState('estados');
         this.isSeletorAberto.emit(true);
     }
 
@@ -268,7 +272,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     focusBuscaInputMobile() {
-        if(this._isMobileService.any()){
+        if (this._isMobileService.any()) {
             this.selecionarLocalidade.nativeElement.scrollTop = '246';
         }
     }

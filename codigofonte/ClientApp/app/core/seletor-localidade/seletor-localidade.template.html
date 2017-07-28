@@ -16,7 +16,7 @@
         </div>
 
         <div class="selecionar-localidade__titulo">
-            Alterar local
+            Selecionar local
         </div>
 
         <button class='selecionar-localidade__voltar--mobile' (click)="voltarMobile()">&lt; &nbsp; Voltar</button>
@@ -29,11 +29,11 @@
                         Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
                 </li>
-                <li id='menu__estado' (click)="setState('estados')">
+                -->
+                <li id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
                     Unidades Federativas <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
-                -->
-                <li id='menu__municipio' (click)="setState('municipiosTodos')">
+                <li id='menu__municipio' (click)="setState('municipiosTodos')" [class.selecionado]="states.municipios">
                     Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
             </ul>
@@ -56,7 +56,7 @@
                 <li *ngFor="let uf of ufs">
                     <div>
                         <a style="display:block" [routerLink]="uf?.link">
-                        {{uf.nome}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            {{uf.nome}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </li>

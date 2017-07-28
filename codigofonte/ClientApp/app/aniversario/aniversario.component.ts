@@ -26,6 +26,7 @@ export class AniversarioComponent implements OnInit {
     codigoUFSelecionada: string;
     diaSelecionado;
     mesSelecionado;
+    mesExtenso: string[] = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
     myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
@@ -63,8 +64,9 @@ export class AniversarioComponent implements OnInit {
     }
 
     ngOnDestroy(){
-
-        this.subscription.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     onUFChange(event){

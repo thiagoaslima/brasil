@@ -1,0 +1,90 @@
+<header [class.invisivel]="isHeaderStatic | async">
+    <div class="logo">
+        <a href="https://www.ibge.gov.br" target="_blank">
+            <img src="img/logo.png" alt="Logotipo do IBGE" class='logo--desk'>
+            <img src="img/logo_mobile.png" alt="Logotipo do IBGE" class='logo--mobile'>
+        </a>
+    </div>
+    
+    <busca (buscaAberta)="seletor.fecharSeletor()"></busca>
+    <aniversario></aniversario>
+
+</header>
+
+<div id='container' [class.no__scroll--mobile]="menuAberto">
+
+    <seletor-localidade #seletor="seletor-localidade" (isSeletorAberto)=handleSeletorAberto($event)></seletor-localidade>
+
+    <aside class='aside--municipio' [class.localidade--static]="isHeaderStatic | async">
+        <div id="localidade">
+            <div id='local'>
+                <ul>
+                    <template ngFor let-local [ngForOf]="locais" let-last="last">
+                        <li *ngIf="!last">
+                            <!--<a [routerLink]="local.link">-->{{local.nome}}<!--</a>-->
+                        </li>
+                        <li *ngIf="last">
+                            <div class="h1__mobile__completo">
+                                {{local.nome}}
+                            </div>
+                            <h1>
+                                {{local.nome}}
+                            </h1>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <button (click)="seletor.abrirSeletor()">Selecionar local</button>
+            <button #abreMenuGlobal id='menu-principal'><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <geolocation (location)="navegarPara($event)"></geolocation>
+        </div>
+
+        <nav id="menu" [class.aberto]="menuGlobalAberto" role="navigation">
+            <ul>
+                <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'panorama'">
+                    <a style="display:block" [routerLink]="getLink('panorama')">Panorama</a>
+                </li>
+
+                <li [class.menu--selecionado]="itemSelecionado == 'pesquisa' || abrirMenuPesquisa == true">
+                    <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
+                </li>
+
+                <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'historico'">
+                    <a style="display:block" [routerLink]="getLink('historico')">História & Fotos</a>
+                </li>
+
+            </ul>
+        </nav>
+        
+        <a id='versaoAnterior' href='http://cidades.ibge.gov.br/xtras/home.php '>
+            Acesse a versão anterior do Cidades
+        </a>
+
+
+    </aside>
+
+    <div class="conteudo__dados--com-scroll submenu">
+        <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu>
+    </div>
+
+    <div style="width:100%;" [class.position_fixed]="abrirMenuPesquisa || seletor.aberto">
+        <router-outlet></router-outlet>
+    </div>
+    
+    <nao-achei></nao-achei>
+    <questionario></questionario>
+    
+    <footer class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</footer>
+    
+    <div class="share_Button" *ngIf="isBrowser">
+    <share-container
+        direction="vertical"
+        [expandable]="false"
+        [textEnabled]="false"
+        [platforms]="['twitter','facebook','linkedin','googlePlus']"
+        >
+    </share-container>
+    </div>
+
+</div>

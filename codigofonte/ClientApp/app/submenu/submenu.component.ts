@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router'
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, SimpleChange } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { Localidade } from '../shared2/localidade/localidade.model';
 import { Pesquisa } from '../shared2/pesquisa/pesquisa.model';
 import { PesquisaService2 } from '../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../shared/router-params.service';
-import { slugify } from '../utils/slug';
 
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
     templateUrl: 'submenu.template.html',
     styleUrls: ['submenu.style.css']
 })
-export class SubmenuComponent implements OnInit, OnDestroy {
+export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
 
     public pesquisas = <Pesquisa[]>[];
     public idPesquisaSelecionada;
@@ -23,10 +23,8 @@ export class SubmenuComponent implements OnInit, OnDestroy {
     public baseURL;
     public codigoCapital = 0;
 
-    private allPesquisas$$: Subscription
-
     @Output() closeMenu = new EventEmitter();
-    @Input() localidade;
+    @Input() localidade: Localidade;
 
     constructor(
         private _routerParams: RouterParamsService,
@@ -36,26 +34,33 @@ export class SubmenuComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        //busca pesquisas disponíveis e as organiza em ordem alfabética
-        this.allPesquisas$$ = this._pesquisaService.getAllPesquisas()
-            .map(pesquisas => pesquisas.sort((a, b) => slugify(a.nome) < slugify(b.nome) ? -1 : 1))
-            .subscribe(pesquisas => this.pesquisas = pesquisas);
-
-        //pega a rota atual
+        // pega a rota atual
         this._routerParams.params$.subscribe(({ params }) => {
-            //pega o indicador e a pesquisa a partir da rota
+            // pega o indicador e a pesquisa a partir da rota
             this.idPesquisaSelecionada = params.pesquisa;
             this.idIndicadorSelecionado = params.indicador;
         });
 
-        if(this.localidade.tipo == 'municipio' && this.localidade.codigo != this.localidade.parent.codigoCapital)
-            this.codigoCapital = this.localidade.parent.codigoCapital;
-        else
-            this.codigoCapital = 0;
     }
 
     ngOnDestroy() {
-        this.allPesquisas$$.unsubscribe();
+        // this.allPesquisas$$.unsubscribe();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+
+        if (changes.localidade && changes.localidade.currentValue) {
+            this._pesquisaService.getAllPesquisasPorTipoLocalidade(this.localidade.tipo)
+                .toPromise()
+                .then(pesquisas => this.pesquisas = pesquisas);
+
+            if (this.localidade.tipo === 'municipio' && this.localidade.codigo !== this.localidade.parent.codigoCapital) {
+                this.codigoCapital = this.localidade.parent.codigoCapital;
+            } else {
+                this.codigoCapital = 0;
+            }
+
+        }
     }
 
     onClick(index) {

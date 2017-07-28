@@ -52,7 +52,7 @@ class LocalidadeCache {
             if (!this._identificador[_group]) {
                 this._identificador[_group] = [];
             }
-            
+
             this._identificador[_group].push(localidade);
         }
     }
@@ -73,7 +73,7 @@ export class LocalidadeService2 {
     }
 
     get(codigo: number, escopo: 'proprio' | 'filhos' = 'proprio'): Localidade[] {
-        if (codigo == undefined || codigo === null) { return [null];} 
+        if (codigo == undefined || codigo === null) { return [null]; }
 
         switch (codigo.toString().length) {
             case 1: // Brasil
@@ -124,7 +124,7 @@ export class LocalidadeService2 {
         return this._ufs.buscarPorIdentificador(ufSigla)[0];
     }
 
-    public getUfByNome(ufNome: string){
+    public getUfByNome(ufNome: string) {
         return this.getUfs().filter(localidade => localidade.nome.toLowerCase() == ufNome.toLowerCase())[0];
     }
 
@@ -153,10 +153,10 @@ export class LocalidadeService2 {
         return this._municipios.todos.filter(municipio => municipio.codigo.toString().indexOf(codigo) === 0);
     }
 
-    public getMunicipioByCoordinates(latitude: number, longitude: number){
+    public getMunicipioByCoordinates(latitude: number, longitude: number) {
 
         const serviceEndpointURL = `https://nominatim.openstreetmap.org/reverse?format=xml&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1&format=json`;
-        
+
         return this._http.get(serviceEndpointURL)
             .map(res => res.json())
             .flatMap(json => {
@@ -174,9 +174,9 @@ export class LocalidadeService2 {
         return pais.concat(ufs, municipios);
     }
 
-    public getAllCapitais(){
+    public getAllCapitais() {
         let arr = [];
-        for(let i = 0; i < this._ufs.todos.length; i++){
+        for (let i = 0; i < this._ufs.todos.length; i++) {
             arr.push(this._ufs.todos[i].capital);
         }
         arr.sort((a, b) => {
@@ -188,24 +188,24 @@ export class LocalidadeService2 {
     /**
      * Retorna a preposição (do, da ou de) mais adequada ao nome da UF.
      */
-    public getPreprosisaoTituloUF(nomeUF: string): string{
+    public getPreprosisaoTituloUF(nomeUF: string): string {
 
         let ufsComPreposicaoDo = ['acre', 'amapá', 'amazonas', 'ceará', 'distrito federal', 'mato grosso', 'mato grosso do sul', 'maranhão', 'paraná', 'pará', 'piauí', 'rio grande do norte', 'rio grande do sul', 'rio de janeiro'];
         let ufsComPreposicaoDa = ['bahia', 'paraíba'];
         let ufsComPreposicaoDe = ['alagoas', 'goiás', 'minas gerais', 'pernanbuco', 'rondônia', 'roraima', 'santa catarina', 'sergipe', 'são paulo', 'tocantins'];
 
-        if(ufsComPreposicaoDo.indexOf(nomeUF.toLowerCase()) >= 0){
+        if (ufsComPreposicaoDo.indexOf(nomeUF.toLowerCase()) >= 0) {
 
             return 'do';
         }
 
 
-        if(ufsComPreposicaoDa.indexOf(nomeUF.toLowerCase()) >= 0){
+        if (ufsComPreposicaoDa.indexOf(nomeUF.toLowerCase()) >= 0) {
 
             return 'da';
         }
 
-        if(ufsComPreposicaoDe.indexOf(nomeUF.toLowerCase()) >= 0){
+        if (ufsComPreposicaoDe.indexOf(nomeUF.toLowerCase()) >= 0) {
 
             return 'de';
         }
@@ -213,17 +213,17 @@ export class LocalidadeService2 {
 
         return 'de';
     }
-    
+
     private _buildLocalidadesTree() {
         this._brasil = Localidade.criar(Localidade.convertFromFile(brasil));
 
         ufs.forEach(uf => {
-            let _uf = Localidade.criar(Localidade.convertFromFile(uf));;
+            let _uf = Localidade.criar(Localidade.convertFromFile(uf));
             this._ufs.registerElement(_uf);
         });
 
         municipios.forEach(municipio => {
-            let _mun = Localidade.criar(Localidade.convertFromFile(municipio));;
+            let _mun = Localidade.criar(Localidade.convertFromFile(municipio));
             this._municipios.registerElement(_mun, _mun.codigoParent);
         });
     }
@@ -232,7 +232,7 @@ export class LocalidadeService2 {
 function searchTest(termo: string, local: Localidade) {
     termo = slugify(termo);
 
-    return local.codigo.toString().indexOf(termo) >= 0 
+    return local.codigo.toString().indexOf(termo) >= 0
         || local.sigla.indexOf(termo) >= 0
         || local.slug.indexOf(termo) >= 0;
 }
