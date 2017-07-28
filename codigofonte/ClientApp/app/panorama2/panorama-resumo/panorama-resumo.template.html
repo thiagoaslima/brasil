@@ -1,7 +1,12 @@
-<div class="topo">
-    <div *ngFor="let item of cabecalho; let idx = index" [ngClass]="{'topo__celula-esquerda': idx === 0, 'topo__celula-direita': idx === 1, 'topo__celula-linha': idx > 1}">
+<div class="topo" [ngClass]="{'comBandeira': localidade?.tipo == 'uf'}">    
+    <!-- <div *ngIf="localidade?.tipo == 'uf'"> uf </div> -->
+    <div class="topo__bandeira" *ngIf="localidade?.tipo == 'uf'">
+        <img src="../img/bandeiras/{{localidade?.sigla}}.gif" alt="">
+    </div>
+
+    <div  *ngFor="let item of cabecalho; let idx = index" [ngClass]="{'topo__celula-esquerda': idx === 0, 'topo__celula-direita': idx === 1, 'topo__celula-linha': idx > 1}">
         <h3 class="topo__titulo">
-            {{ item.titulo }}
+            {{ item.titulo }} 
         </h3>
         <p class="topo__valor">
             {{ item.valor }}
