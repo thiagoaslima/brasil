@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
-
 @Component({
     selector: 'panorama-card',
     templateUrl: './panorama-card.template.html',
@@ -16,7 +15,7 @@ export class PanoramaCardComponent implements OnChanges {
 
     public textoComparacao: string;
     public cssRanking: any = {};
-    
+
     ngOnChanges(changes: any) {
         if (this.ranking && this.ranking.BR) {
             this.cssRanking.BR = 'p' + this.calcularPercentualRanking(this.ranking.BR.posicao,  this.ranking.BR.itens);
@@ -37,8 +36,6 @@ export class PanoramaCardComponent implements OnChanges {
 
     private calcularPercentualRanking(posicao: number, numeroElementos: number): number {
 
-        debugger;
-
         const numeroClasses = 1 + (3.322 * Math.log10(numeroElementos));
 
         let amplitudeClasse = numeroElementos / numeroClasses;
@@ -48,4 +45,4 @@ export class PanoramaCardComponent implements OnChanges {
 
         return percentual;
     }
-}
+};

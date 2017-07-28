@@ -14,12 +14,17 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class Panorama2Service {
+    private _totalMunicipios: number;
+    private _totalUfs: number;
 
     constructor(
         private _resultadoService: ResultadoService3,
         private _localidadeService: LocalidadeService3,
         private _rankingService3: RankingService3
-    ) { }
+    ) {
+        this._totalUfs = this._localidadeService.getRoot().children.length;
+        this._totalMunicipios = this._localidadeService.getRoot().children.reduce((sum, uf) => sum + uf.children.length, 0);
+    }
 
     getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
         return this._getResultadosIndicadores(configuracao, localidade)
@@ -85,12 +90,12 @@ export class Panorama2Service {
             configuracao: this._organizarConfiguracaoParaTemas(configuracao, resultados, rankings),
             resultados: resultados,
             rankings: rankings
-        }))
+        }));
     }
 
     getNotaEspecial(idLocalidade, idIndicador): string {
 
-        let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
+        let notaEspecial = notasEspeciais.filter(nota => nota.localidade === idLocalidade && nota.indicador === idIndicador);
 
         return notaEspecial.length > 0 ? notaEspecial[0]['nota'] : '';
     }
@@ -104,7 +109,7 @@ export class Panorama2Service {
 
             if (item.grafico) {
                 item.grafico.dados.forEach(obj => {
-                    arr.push(obj.indicadorId)
+                    arr.push(obj.indicadorId);
                 });
             }
 
@@ -116,7 +121,7 @@ export class Panorama2Service {
             .map(resultados => {
 
                 return converterObjArrayEmHash(resultados, 'indicador.id');;
-            })
+            });
     }
 
     private _getPosicaoRankings(
@@ -129,7 +134,7 @@ export class Panorama2Service {
 
 
         let contextos = ['BR'];
-        if (localidade.parent && localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()) }
+        if (localidade.parent && localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()); }
         if (localidade.microrregiao) { contextos.push(localidade.microrregiao.toString()) }
 
         return this._rankingService3.getRankingsIndicador(indicadores, contextos, localidade.codigo)
@@ -146,11 +151,14 @@ export class Panorama2Service {
 
                     switch (ranking.contexto) {
                         case 'BR':
-                            agg[id].BR = { posicao: _ranking, itens: 5570 }
+                            agg[id].BR = {
+                                posicao: _ranking,
+                                itens: localidade.tipo === 'municipio' ? this._totalMunicipios : this._totalUfs
+                            };
                             break;
 
                         case localidade.parent.codigo.toString():
-                            agg[id].local = { posicao: _ranking, itens: localidade.parent.children.length }
+                            agg[id].local = { posicao: _ranking, itens: localidade.parent.children.length };
                             break;
 
                         case localidade.microrregiao.toString():
@@ -182,7 +190,7 @@ export class Panorama2Service {
                         idx: posicao,
                         painel: [],
                         graficos: []
-                    }
+                    };
                     posicao++;
                 }
 
@@ -217,7 +225,7 @@ export class Panorama2Service {
             valor: resultado && resultado.valorValidoMaisRecente,
             unidade: resultado && resultado.indicador.unidade.toString(),
             ranking: rankings[item.indicadorId]
-        }
+        };
     }
 
     private _prepararDadosGrafico(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }) {
@@ -227,7 +235,7 @@ export class Panorama2Service {
             eixoX: this.getEixoX(item, resultados),
             dados: this.getDados(item, resultados),
             fontes: this.getFontes(item, resultados)
-        }
+        };
     }
 
     private getEixoX(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {
@@ -242,8 +250,8 @@ export class Panorama2Service {
             const valores = resultado.valoresValidos.map(valor => this.converterParaNumero(valor));
             const nome = resultado.indicador.nome;
 
-            return { data: valores, label: nome }
-        })
+            return { data: valores, label: nome };
+        });
     }
 
     private getFontes(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {
@@ -262,7 +270,7 @@ export class Panorama2Service {
 
             valor = '0';
         }
-        return !!valor ? Number(valor.replace(',', '.')) : Number(valor)
+        return !!valor ? Number(valor.replace(',', '.')) : Number(valor);
     }
 
 }

@@ -58,7 +58,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
                 }
                 let shouldAppear = isOnScreen || !novosDados;
                 return shouldAppear;
-            })
+            });
         }
     }
 
@@ -69,7 +69,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             changes.dados.currentValue.length > 0
         ) {
             this._novosDados = true;
-            this.selectPainel(0); 
+            this.selectPainel(0);
         }
     }
 
@@ -137,4 +137,4 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             .getResultadosCartograma(indicadorId, this.localidade.parent.codigo)
             .subscribe((resultados) => { this.resultadosCartograma = resultados; });
     }
-}
+};
