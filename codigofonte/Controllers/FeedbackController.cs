@@ -31,7 +31,7 @@ namespace Brasil.Controllers
         private static string CONNECTION = "server=srvbd;user id=cidadesAtend_w;password=Tj9*b7$r;database=cidades_atendimento";
 
         [HttpPost]
-        public IActionResult Index([FromBody] Feedback feedback)
+        public async Task<IActionResult> Index([FromBody] Feedback feedback)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace Brasil.Controllers
              **/
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
-            message.To.Add(new MailboxAddress("", "arthur.garcia@ibge.gov.br"));
+            message.To.Add(new MailboxAddress("", feedback.Email));
             message.Subject = feedback.Assunto;
 
             message.Body = new TextPart("plain")
@@ -80,15 +80,15 @@ namespace Brasil.Controllers
                      **/
                     // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                    SMTP.Connect("mailrelay.ibge.gov.br", 25, false);
+                    await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
 
                     /**
                      * XOAUTH2 authentication disabled - Não é usado no IBGE
                      **/
                     SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                    SMTP.Send(message);
-                    SMTP.Disconnect(true);
+                    await SMTP.SendAsync(message);
+                    await SMTP.DisconnectAsync(true);
                 }
             }
             catch (Exception e)
