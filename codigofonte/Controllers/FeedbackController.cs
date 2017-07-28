@@ -6,6 +6,7 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace Brasil.Controllers
 {
@@ -30,7 +31,7 @@ namespace Brasil.Controllers
         private static string CONNECTION = "server=srvbd;user id=cidadesAtend_w;password=Tj9*b7$r;database=cidades_atendimento";
 
         [HttpPost]
-        public async Task<IActionResult> Index(Feedback feedback)
+        public async Task<IActionResult> Index([FromBody] Feedback feedback)
         {
             if (!ModelState.IsValid)
             {
@@ -70,23 +71,32 @@ namespace Brasil.Controllers
                 Text = feedback.Mensagem
             };
 
-            using (var SMTP = new SmtpClient())
+            try
             {
-                /**
-                 * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
-                 **/
-                // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                using (var SMTP = new SmtpClient())
+                {
+                    /**
+                     * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
+                     **/
+                    // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
+                    await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
 
-                /**
-                 * XOAUTH2 authentication disabled - Não é usado no IBGE
-                 **/
-                SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
+                    /**
+                     * XOAUTH2 authentication disabled - Não é usado no IBGE
+                     **/
+                    SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                await SMTP.SendAsync(message);
-                await SMTP.DisconnectAsync(true);
+                    await SMTP.SendAsync(message);
+                    await SMTP.DisconnectAsync(true);
+                }
             }
+            catch (Exception e)
+            {
+                return Ok();
+            }
+
+            
 
             if (id > 0)
             {
