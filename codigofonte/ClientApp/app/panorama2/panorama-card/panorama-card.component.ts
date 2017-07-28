@@ -37,8 +37,6 @@ export class PanoramaCardComponent implements OnChanges {
 
     private calcularPercentualRanking(posicao: number, numeroElementos: number): number {
 
-        debugger;
-
         const numeroClasses = 1 + (3.322 * Math.log10(numeroElementos));
 
         let amplitudeClasse = numeroElementos / numeroClasses;

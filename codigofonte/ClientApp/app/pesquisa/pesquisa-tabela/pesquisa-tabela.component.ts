@@ -160,10 +160,11 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
     public downloadCSV(){
+
         let ind = this.indicadores;
-        let localidadeA = this._localidade.getMunicipioByCodigo(this.localidades[0]).nome;
-        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidade.getMunicipioByCodigo(this.localidades[1]).nome : '';
-        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidade.getMunicipioByCodigo(this.localidades[2]).nome : '';
+        let localidadeA = this.getLocalidade(String(this.localidades[0])).nome;
+        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this.getLocalidade(String(this.localidades[1])).nome : '';
+        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this.getLocalidade(String(this.localidades[2])).nome : '';
         let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
         //valores dos indicadores
         for(let i = 0; i < ind.length; i++){
@@ -193,5 +194,15 @@ export class PesquisaTabelaComponent implements OnChanges {
         //baixa o arquivo
         let blob = new Blob([csv], { type: 'text/csv' });
         FileSaver.saveAs(blob, this.pesquisa['nome'] + '(' + this.periodo + ').csv');
+    }
+
+    private getLocalidade(codigoLocalidade: string): Localidade{
+
+        if(codigoLocalidade.length == 2){
+
+            return this._localidade.getUfByCodigo(Number(codigoLocalidade));
+        }
+
+        return this._localidade.getMunicipioByCodigo(codigoLocalidade);
     }
 }
