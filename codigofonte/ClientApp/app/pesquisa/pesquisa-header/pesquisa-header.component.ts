@@ -72,8 +72,6 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 this.isNivelEstadual = !!params.params.uf && !params.params.municipio;
                 this.isNivelNacional = !params.params.uf && !params.params.municipio;
 
-                debugger;
-
                 this.indicador = params.params.indicador;
                 this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
                 this.localidade1 = this.obterLocalidade(params.queryParams.localidade1);
@@ -94,8 +92,6 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     navegarPara(indicador = null, ano = null, tipo = null, localidade1 = null, localidade2 = null){
-
-        debugger;
 
         this.objetoURL.indicador = indicador ? indicador : this.objetoURL.indicador;
 
@@ -135,14 +131,10 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     setaLocalidade1(localidade){
 
-        debugger;
-
         this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
     }
 
     setaLocalidade2(localidade){
-
-        debugger;
 
         this.navegarPara(null, null, null, null, localidade ? localidade.codigo : 0);
     }

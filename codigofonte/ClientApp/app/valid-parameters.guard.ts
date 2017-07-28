@@ -13,8 +13,6 @@ export class ValidParametersGuard implements CanActivate {
         route: ActivatedRouteSnapshot
     ) {
 
-        debugger;
-
         if (route.params['uf']) {
             let uf = this._localidadeService.getUfBySigla(route.params['uf']);
             if (!uf) {

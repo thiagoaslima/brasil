@@ -53,8 +53,6 @@ export class BuscaHeaderComponent implements OnInit {
 
     onClickItem(localidade: Localidade){
 
-        debugger;
-
         this.mostrarMenu = false;
 
         this.onLocalidade.emit(localidade);
