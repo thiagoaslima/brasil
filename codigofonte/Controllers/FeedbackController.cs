@@ -6,6 +6,7 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace Brasil.Controllers
 {
@@ -30,7 +31,7 @@ namespace Brasil.Controllers
         private static string CONNECTION = "server=srvbd;user id=cidadesAtend_w;password=Tj9*b7$r;database=cidades_atendimento";
 
         [HttpPost]
-        public async Task<IActionResult> Index(Feedback feedback)
+        public async Task<IActionResult> Index([FromBody] Feedback feedback)
         {
             if (!ModelState.IsValid)
             {
@@ -48,8 +49,8 @@ namespace Brasil.Controllers
                     id = conn.Query<int>(@"
                         SET NAMES UTF8;
                         INSERT INTO
-                            feedback(email, assunto, mensagem)
-                        VALUES(@email, @assunto, @mensagem);SELECT LAST_INSERT_ID()", new { email = feedback.Email, assunto = feedback.Assunto, mensagem = feedback.Mensagem }, dbTransaction).Single();
+                            feedback(email, assunto, mensagem, flag)
+                        VALUES(@email, @assunto, @mensagem, @flag);SELECT LAST_INSERT_ID()", new { email = feedback.Email, assunto = feedback.Assunto, mensagem = feedback.Mensagem, flag = 1 }, dbTransaction).Single();
 
                     dbTransaction.Commit();
                 }
@@ -62,7 +63,7 @@ namespace Brasil.Controllers
              **/
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
-            message.To.Add(new MailboxAddress("", "arthur.garcia@ibge.gov.br"));
+            message.To.Add(new MailboxAddress("", feedback.Email));
             message.Subject = feedback.Assunto;
 
             message.Body = new TextPart("plain")
@@ -70,25 +71,27 @@ namespace Brasil.Controllers
                 Text = feedback.Mensagem
             };
 
-            using (var SMTP = new SmtpClient())
+            try
             {
-                /**
-                 * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
-                 **/
-                // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                using (var SMTP = new SmtpClient())
+                {
+                    /**
+                     * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
+                     **/
+                    // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
+                    await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
 
-                /**
-                 * XOAUTH2 authentication disabled - Não é usado no IBGE
-                 **/
-                SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
+                    /**
+                     * XOAUTH2 authentication disabled - Não é usado no IBGE
+                     **/
+                    SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                await SMTP.SendAsync(message);
-                await SMTP.DisconnectAsync(true);
+                    await SMTP.SendAsync(message);
+                    await SMTP.DisconnectAsync(true);
+                }
             }
-
-            if (id > 0)
+            catch (Exception e)
             {
                 using (var conn = new MySqlConnection(CONNECTION))
                 {
@@ -96,9 +99,9 @@ namespace Brasil.Controllers
 
                     using (var dbTransaction = conn.BeginTransaction())
                     {
-                        await conn.ExecuteAsync(@"UPDATE feedback SET flag = 1 WHERE id = @id", new { id = id }, dbTransaction);
+                        conn.Execute(@"UPDATE feedback SET flag = 0 WHERE id = @id", new { id = id }, dbTransaction);
 
-                        await dbTransaction.CommitAsync();
+                        dbTransaction.Commit();
                     }
                 }
             }

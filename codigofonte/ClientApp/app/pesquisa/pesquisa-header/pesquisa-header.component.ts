@@ -67,8 +67,6 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     this.ano = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
                 }
-
-                debugger;
                 
                 this.isNivelMunicipal = !!params.params.uf && !!params.params.municipio;
                 this.isNivelEstadual = !!params.params.uf && !params.params.municipio;
@@ -76,8 +74,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
                 this.indicador = params.params.indicador;
                 this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
-                this.localidade1 = params.queryParams.localidade1 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade1) : null;
-                this.localidade2 = params.queryParams.localidade2 ? this._localidadeService.getMunicipioByCodigo(params.queryParams.localidade2) : null;
+                this.localidade1 = this.obterLocalidade(params.queryParams.localidade1);
+                this.localidade2 = this.obterLocalidade(params.queryParams.localidade2);
                 this.tipo = params.queryParams.tipo ? params.queryParams.tipo : '';
 
                 this.objetoURL.uf = params.params.uf;
@@ -94,6 +92,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     navegarPara(indicador = null, ano = null, tipo = null, localidade1 = null, localidade2 = null){
+
         this.objetoURL.indicador = indicador ? indicador : this.objetoURL.indicador;
 
         if(ano)
@@ -114,15 +113,29 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         else if(localidade2 != null)
             this.objetoURL.queryParams.localidade2 = localidade2;
         
-        let url = ['brasil', this.objetoURL.uf, this.objetoURL.municipio, 'pesquisa', this.objetoURL.pesquisa, this.objetoURL.indicador];
+        let url = [];
+        url.push('brasil');
+        url.push(this.objetoURL.uf);
+
+        if(!!this.objetoURL.municipio){
+
+            url.push(this.objetoURL.municipio);
+        }
+
+        url.push('pesquisa');
+        url.push(this.objetoURL.pesquisa);
+        url.push(this.objetoURL.indicador);
+
         this._router.navigate(url, {'queryParams' : this.objetoURL.queryParams});
     }
 
     setaLocalidade1(localidade){
+
         this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
     }
 
     setaLocalidade2(localidade){
+
         this.navegarPara(null, null, null, null, localidade ? localidade.codigo : 0);
     }
 
@@ -131,6 +144,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     mudaAno(event){
+
         this.navegarPara(null, event.srcElement.value.trim());
     }
 
@@ -156,5 +170,20 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     compartilhar(){
         this.mostrarOpcoes = false; //esconde o menu
+    }
+
+    private obterLocalidade(codigoLocalidade: string): Localidade{
+
+        if(!codigoLocalidade){
+
+            return null;
+        }
+
+        if(codigoLocalidade.length == 2){
+
+            return this._localidadeService.getUfByCodigo( Number(codigoLocalidade) )
+        }
+
+        return this._localidadeService.getMunicipioByCodigo(codigoLocalidade);
     }
 }
