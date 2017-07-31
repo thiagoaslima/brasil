@@ -233,6 +233,6 @@ function searchTest(termo: string, local: Localidade) {
     termo = slugify(termo);
 
     return local.codigo.toString().indexOf(termo) >= 0
-        || local.sigla.indexOf(termo) >= 0
+        || local.sigla.indexOf(termo.toUpperCase()) >= 0
         || local.slug.indexOf(termo) >= 0;
 }
