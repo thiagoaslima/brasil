@@ -37,7 +37,7 @@ export class BuscaHeaderComponent implements OnInit {
 
         let texto = event.srcElement.value;
 
-        if(texto.length >= 3){
+        if(texto.length >= 2){
 
             this.localidades = this._localidadeService.buscar(texto)
                 .filter((item) => {
