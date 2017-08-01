@@ -7,6 +7,7 @@ using MailKit.Net.Smtp;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using System.Text;
 
 namespace Brasil.Controllers
 {
@@ -66,10 +67,45 @@ namespace Brasil.Controllers
             message.To.Add(new MailboxAddress("", feedback.Email));
             message.Subject = feedback.Assunto;
 
-            message.Body = new TextPart("plain")
-            {
-                Text = feedback.Mensagem
-            };
+            var builder = new BodyBuilder();
+            builder.HtmlBody = $@"
+                <html>
+                    <head>
+	                    <title>Cidades</title>
+	                    <style>
+		                    body {{
+			                    font: 14px arial, sans-serif;
+		                    }}
+		
+		                    p {{
+			                    margin-left: 0.75em;
+		                    }}
+		
+		                    p.footer {{
+			                    margin: 2.75em 0;
+			                    color: #777;
+		                    }}
+	                    </style>
+                    </head>
+                        <body>
+                            Prezado(a),<br /><br />
+                                O site cidades.ibge.gov.br recebeu a seguinte manifestação de um usuário<br /><br />
+
+                            <h3>Assunto</h3>
+                            <p>{feedback.Assunto}</p>
+
+                            <h3>Email</h3>
+                            <p>{feedback.Email}</p>
+
+                            <h3>Mensagem</h3>
+                            <p>{feedback.Mensagem}</p>
+
+                            <p class='footer'>Esta é uma mensagem automática. Favor não responder.</p>
+                        </body>
+                    </html>
+            ";
+
+            message.Body = builder.ToMessageBody();
 
             try
             {
