@@ -35,8 +35,13 @@ export class NaoAcheiComponent implements OnInit {
         private _http: Http
     ) {}
 
+    static timer;
+
     ngOnInit() {
-        
+        if(isBrowser){
+            if(NaoAcheiComponent.timer == undefined)
+                NaoAcheiComponent.timer = setTimeout(()=>this.esconde = false, 10000);
+        }
     }
 
     enviar(email, assunto, mensagem){
@@ -51,5 +56,13 @@ export class NaoAcheiComponent implements OnInit {
 
         this.enviado = true;
         this.aberto = false;
+    }
+
+    clique(){
+        if(this.enviado){
+            this.esconde = true;
+        }else{
+            this.aberto = !this.aberto;
+        }
     }
 }

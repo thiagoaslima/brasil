@@ -8,6 +8,7 @@
 }
 
 .nao-achei__aba{
+    cursor: pointer;
     display: inline-block;
     background-color: #fff;
     /* color: white; */
@@ -16,16 +17,12 @@
     box-shadow: 0px 2px 15px #555;
 }
 
-
 .nao-achei__label{
-    padding: 7px 12px;
-    cursor: pointer;
+    padding: 7px 0px 7px 10px;
     display: inline-block;
 }
 
-.nao-achei__fechar{
-    margin-left: 8px;
-    cursor: pointer;
+.nao-achei__icone{
     padding: 5px 10px;
     display: inline-block;
 }
@@ -37,6 +34,7 @@
     background-color: #fff;
     border-radius: 5px 5px 0 0;
     max-height: 0px;
+    box-shadow: 0px 6px 11px #555;
     transition: max-height 0.3s, padding 0.3s;
 }
 
