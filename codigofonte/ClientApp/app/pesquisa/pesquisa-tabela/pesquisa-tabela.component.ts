@@ -31,6 +31,7 @@ export class PesquisaTabelaComponent implements OnChanges {
    
     private indicadores;
     private isVazio;
+    private exclusiva;
 
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
@@ -46,6 +47,12 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     ngOnChanges() {
         if(this.pesquisa && this.localidades && this.localidades.length > 0){
+            //verifica se a pesquisa é exclusiva para estados (código dos estados vai de 0 a 99, maior que isso é um município)
+            if(this.localidades.length > 0 && this.localidades[0] > 99 && 
+                this.pesquisa['contexto'].municipio == false){
+                this.exclusiva = true;
+            }
+
             this.indicadores = null;
             let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
                 this.indicadores = this.flat(indicadores);
