@@ -10,6 +10,8 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
 import { Page404Component } from './core/page404/page404.component';
 
+import { PesquisaHomeComponent } from './home/pesquisa-home.component';
+
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
 
@@ -48,6 +50,15 @@ const children = [
         canActivate: [EmptyLocationGuard],
         component: EmptyComponent,
         pathMatch: 'full'
+      },
+      {
+        path: 'v4',
+        component: EmptyComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'v4/pesquisas',
+        component: PesquisaHomeComponent
       },
       {
         path: 'v4/brasil/sandbox',
