@@ -11,6 +11,7 @@ import { VisaoHistoricaComponent } from './visao-historica/visao-historica.compo
 import { Page404Component } from './core/page404/page404.component';
 
 import { PesquisaHomeComponent } from './home/pesquisa-home.component';
+import { HomeComponent } from './home/home.component';
 
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
@@ -53,7 +54,7 @@ const children = [
       },
       {
         path: 'v4',
-        component: EmptyComponent,
+        component: HomeComponent,
         pathMatch: 'full'
       },
       {

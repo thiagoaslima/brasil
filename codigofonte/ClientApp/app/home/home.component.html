@@ -1,0 +1,144 @@
+<div id="wrapper">
+        <!--
+        <header class="clearfix">
+            <h1 class="header__title">Brasil em síntese</h1>
+            <input class="search__field header__search" type="text" placeholder="O que você procura?">
+            <button class="button__action header__button" type="button">
+                <i aria-hidden="true" class="fa fa-birthday-cake"></i>
+                Aniversários do municípios
+            </button>
+        </header>
+        -->
+
+        <div class="banner__container">
+            <div class="banner__item">
+                <div class="banner__content">
+                    <h2 class="banner__title">CONHEÇA <br/> <strong>CIDADES E ESTADOS</strong> <br> DO BRASIL</h2>
+                    <p class="banner__text">
+                        O Brasil em Síntese é o sistema agregador de informações do IBGE sobre os municípios e estados do Brasil. Aqui você pode
+                        encontrar as pesquisas do IBGE, infográficos e mapas. Além disso pode comparar os indicadores entre
+                        municípios e estados.
+                    </p>
+                    <button class="button__action" type="button">Comece a usar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="destaques__container">
+            <div class="destaques__item">
+                <h2 class="destaques__item__title">Pesquisas</h2>
+                <p class="destaques__item__text">
+                    Veja tabelas e gráficos com as pesquisas do IBGE sobre todas as cidades e estados do país. Além disso você pode comparar
+                    municípios, ver rankings e séries históricas sobre diversos temas, como trabalho, educação, gênero, saúde,
+                    entre outros. Você pode encontrar dados do PIB, IPCA, IDH, Censo e de diversas outras pesquisas.
+                </p>
+                <a class="destaques__item__link" routerLink="/v4/pesquisas">Acesse a lista completa das pesquisas</a>
+            </div>
+
+            <div class="destaques__item">
+                <h2 class="destaques__item__title">História & Fotos</h2>
+                <p class="destaques__item__text">
+                    Conheça a história da sua cidade e veja fotos do local. Há desde fotos históricas, de pontos turísticos e até mesmo de locais
+                    menos conhecidos dos municípios. As fotos disponíveis pertencem ao Acervo Fotográfico da biblioteca do
+                    IBGE.
+                </p>
+                <a class="destaques__item__link" href="#">Escolha um município</a>
+            </div>
+        </div>
+<!-- 
+        <div class="mais-acessados">
+            <h2 class="mais-acessados__title">Municípios mais acessados</h2>
+            <ul class="mais-acessados__coluna">
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">São Paulo</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">12.038.175 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Rio de Janeiro</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">6.498.837 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Belo Horizonte</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">2.513.451 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Vitória</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">359.555 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Salvador</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">2.938.092 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="mais-acessados__coluna">
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Florianópolis</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">477.798 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Porto Alegre</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">1.481.019 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Porto Velho</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">511.219 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Brasília</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">2.977.216 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+                <li>
+                    <h4 class="mais-acessados__nome-municipio">Curitiba</h4>
+                    <div>
+                        <p class="mais-acessados__variavel">População estimada [2016] <span class="mais-acessados__valor">1.893.997 pessoas</span></p>
+                        <p class="mais-acessados__variavel">PIB per capita [2014] <span class="mais-acessados__valor">R$ 33.446,76</span></p>
+                        <p class="mais-acessados__variavel">IDHM [2010] <span class="mais-acessados__valor">0,737</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div> -->
+
+        <footer class="clearfix">
+            <h3 class="footer__text">
+                Não sabe por onde começar?
+                <button class="button__action footer__button" type="button">Selecionar local</button>
+            </h3>
+            
+        </footer>
+    </div>
