@@ -387,12 +387,16 @@ sintese>dados
 }
 
 .rodape-copyright{
-  float: right;
+    /*float: right;*/
+    /*margin-top: -15px;*/
+    /*position: relative;*/
+    
+    width: 100%;
+    clear: both;
+    text-align: right;
+
     font-size: 0.7em;
     color: #333;
-    margin-top: -15px;
-    position: relative;
-
 }
 
 .mobile{

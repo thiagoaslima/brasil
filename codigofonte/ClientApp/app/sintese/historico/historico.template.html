@@ -6,7 +6,9 @@
 <div class="component" *ngIf="!isCarregando">
 
     <div class="comp__conteudo" *ngIf="isHistoricoVazio()">
-        <p>Nenhum histórico encontrado.</p>
+        <div class="caixa__conteudo">
+            <p class="hist__sem-historico">Nenhum histórico encontrado.</p>
+        </div>
     </div>
     
     <div class="comp__conteudo" *ngIf="!isHistoricoVazio()">

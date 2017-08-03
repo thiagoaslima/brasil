@@ -31,7 +31,7 @@
                 </li>
                 -->
                 <li id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
-                    Unidades Federativas <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    Estados <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
                 <li id='menu__municipio' (click)="setState('municipiosTodos')" [class.selecionado]="states.municipios">
                     Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -42,7 +42,7 @@
 
     <div id="segunda-coluna" class='cor-fundo' [class.aberto]="states.estados || states.municipios">
         <div class="segunda-coluna__titulo">
-            Unidades Federativas
+            Estados
         </div>
 
         <ul>
@@ -55,7 +55,7 @@
             <template [ngIf]="states.estados">
                 <li *ngFor="let uf of ufs">
                     <div>
-                        <a style="display:block" [routerLink]="uf?.link">
+                        <a style="display:block" [routerLink]="uf?.link + URLEnd">
                             {{uf.nome}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </div>

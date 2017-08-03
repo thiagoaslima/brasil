@@ -6,6 +6,12 @@
     line-height: 145%;
 }
 
+.hist__sem-historico{
+    background-color: #E6E6E6;
+	padding: 10px; 
+	text-align:center;
+}
+
 .caixa{
     background-color: white;
     margin: auto;
@@ -26,7 +32,7 @@
 .caixa__conteudo{
     line-height: 2em;
     font-size: .95em;
-    padding: 16px 52px 52px 52px;
+    padding: 16px 48px 48px 48px;
 	width: 100%;
     max-width: 900px;
 }

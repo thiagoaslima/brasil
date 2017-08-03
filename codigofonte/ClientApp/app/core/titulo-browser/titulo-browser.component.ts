@@ -28,16 +28,20 @@ export class TituloBrowserComponent implements OnInit {
         this._routerParamsService.params$.subscribe(({ params, queryParams }) => {
             if (isBrowser && window) {
                 let titulo = 'IBGE | Brasil em Síntese | ';
-                let localidade = params.municipio
+                let localidade =params.municipio
                     ? this._localidadeService.getMunicipioBySlug(params.uf, params.municipio)
-                    : this._localidadeService.getUfBySigla(params.uf);
+                    : params.uf
+                        ? this._localidadeService.getUfBySigla(params.uf)
+                        : undefined;
 
-                if (localidade.tipo === 'municipio') {
-                    // concatena nome da uf e do município
-                    titulo += localidade.parent.nome + ' | ' + localidade.nome;
-                } else {
-                    // concatena nome da uf ou 'Brasil'
-                    titulo += localidade.nome;
+                if (localidade) {
+                    if (localidade.tipo === 'municipio') {
+                        // concatena nome da uf e do município
+                        titulo += localidade.parent.nome + ' | ' + localidade.nome;
+                    } else {
+                        // concatena nome da uf ou 'Brasil'
+                        titulo += localidade.nome;
+                    }
                 }
 
                 let url = window.location.href;

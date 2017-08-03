@@ -19,10 +19,16 @@
         <div id="localidade">
             <div id='local'>
                 <ul>
-                    <template ngFor let-local [ngForOf]="locais" let-last="last">
-                        <li *ngIf="!last">
-                            <!--<a [routerLink]="local.link">-->{{local.nome}}<!--</a>-->
+                    <template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
+                        <!--Brasil-->
+                        <li *ngIf="first">
+                            {{local.nome}}
                         </li>
+                        <!--Estado-->
+                        <li *ngIf="!first && !last">
+                            <a [routerLink]="local.link">{{local.nome}}</a>
+                        </li>
+                        <!--Município-->
                         <li *ngIf="last">
                             <div class="h1__mobile__completo">
                                 {{local.nome}}

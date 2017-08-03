@@ -202,6 +202,17 @@ export class SinteseService {
 
         let codigo: string = codigoLocalidade.toString().substr(0, 6);
 
+        //estados tem código de 2 dígitos
+        if(codigo.length <= 2){
+            //implemetar chamada que retorna histórido dos estados, assim que estiverem cadastrados
+            return Observable.of({
+                historico: undefined,
+                fonte: undefined,
+                formacaoAdministrativa: undefined
+            });
+        }
+
+        //municípios
         return this._http.get(`https://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
             .map((res) => {
 

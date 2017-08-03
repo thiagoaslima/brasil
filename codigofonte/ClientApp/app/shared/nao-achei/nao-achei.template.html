@@ -1,8 +1,10 @@
 <div class="nao-achei" [class.nao-achei__escondido]="esconde">
-    <p class="nao-achei__aba">
-        <span class="nao-achei__label" *ngIf="!enviado" (click)="aberto = true;">Não encontrou o que procurava?</span>
+    <p class="nao-achei__aba" (click)="clique();">
+        <span class="nao-achei__label" *ngIf="!enviado">Não encontrou o que procurava?</span>
         <span class="nao-achei__label" *ngIf="enviado">Obrigado! Seu email foi enviado com sucesso.</span>
-        <i class="fa fa-times nao-achei__fechar" aria-hidden="true" (click)="esconde = true;"></i>
+        
+        <i class="fa nao-achei__icone" *ngIf="!enviado" [class.fa-caret-up]="!aberto" [class.fa-caret-down]="aberto" aria-hidden="true"></i>
+        <i class="fa fa-times nao-achei__icone" *ngIf="enviado" aria-hidden="true"></i>
     </p>
     <form class="nao-achei__form" [class.nao-achei__form--aberto]="aberto" #form="ngForm" (ngSubmit)="enviar(email.value, assunto.value, mensagem.value)">
         <input type="email" name="email" #email placeholder="Seu email" required class="nao-achei__item">

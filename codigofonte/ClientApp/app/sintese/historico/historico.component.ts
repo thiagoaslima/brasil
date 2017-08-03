@@ -26,7 +26,7 @@ export class HistoricoComponent implements OnInit {
     ngOnInit() {
 
         this._appState.observable$
-            .filter(state => Boolean(state.localidade) && state.tipo == 'municipio')
+            .filter(state => Boolean(state.localidade) /*&& state.tipo == 'municipio'*/)
             .map(state => state.localidade)
             .flatMap(localidade => {
                 this.isCarregando = true;

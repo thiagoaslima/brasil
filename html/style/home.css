@@ -10,6 +10,7 @@ html, body {
     position: absolute;
     min-height: 100%;
     padding-bottom: 60px;
+    width: 100%;
 }
 
 h2 {
@@ -20,6 +21,7 @@ h2 {
     background-color: transparent;
     border: 1px solid #fff;
     border-radius: 21px;
+    /* color: #fbb03b; */
     font-size: 1em;
     margin: 4% 0%;
     padding: 5px 10px;
@@ -67,9 +69,20 @@ header {
 .banner__container {
     position: relative;
     background-color: lightgray;
+    /*
     height: 0;
-    padding-top: 42.50%;
+    padding-top: 42.50%; */
     overflow: hidden;
+    height: 70vh;
+    min-height: 520px;
+    max-height: 650px;
+}
+
+.banner__content .button__action {
+    color: #fbb03b;
+    border-color: #fbb03b;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 .banner__item {
@@ -77,23 +90,32 @@ header {
     width: 100%;
     height: 100%;
     top: 0;
+    background-image: url('../img/saopaulo.jpg');
+    background-size: 170% auto;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .banner__content {
     position: absolute;
     width: 40%;
     top: 10%;
-    left: 8%;
+    left: 40px;
+    top: 20%;
 }
 
 .banner__title {
-    font-size: 24px;
-    width: 70%;
-    margin-bottom: 1em;
+    font-size: 45px;
+    width: 100%;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: normal;
+    line-height: 47px;
 }
 
 .banner__text {
-    font-size: 14px;
+    font-size: 1.2em;
+    color: #fff;
 }
 
 
@@ -108,10 +130,14 @@ header {
     font-size: 14px;
     width: 50%;
     padding: 20px 40px;
+    padding-top: 45px;
 }
 
 .destaques__item__title {
     margin-bottom: 2em;
+    border-top: 1px solid #00789d;
+    color: #00789d;
+    padding-top: 9px;
 }
 
 .destaques__item__text {
@@ -121,8 +147,9 @@ header {
 .destaques__item__link {
     position: absolute;
     bottom: 10px;
-    color: blue;
-    text-decoration: underline;
+    color: #00789d;
+    text-align: right;
+    width: calc(100% - 100px);
 }
 
 .mais-acessados {
@@ -171,30 +198,31 @@ header {
 
 footer {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background-color: lightslategray;
-    height: 50px;
-    padding: 10px 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e6e6e6;
+    height: 70px;
+    padding: 21px 40px;
 }
 
 .footer__text {
     float: left;
-    width: 40%;
+    width: 100%;
     line-height: 30px;
-}
-
-.footer__options {
-    float: left;
-    width: 60%;
-    text-align: justify;
+    font-weight: normal;
+    font-size: 1.4em;
+    text-align: center;
+    font-size: 1.3em;
 }
 
 .footer__button {
     margin: 0;
-}
-
-footer .search__field {
-    width: 68%;
+    color: #00789d;
+    border-color: #00789d;
+    margin-right: 10px;
+    font-size: .8em;
+    margin-left: 20px;
 }
 
 /** UTILS **/
@@ -211,4 +239,78 @@ footer .search__field {
   content: "";
   display: inline-block;
   width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1120px){
+    .banner__item{
+        background-size: 250% auto;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    .banner__content{
+        width: 60%;
+    }
+}
+
+
+@media screen and (min-width: 1300px){
+    .banner__content{
+        width: 447px;
+        left: calc(50% - 207px);
+        top: calc(50% - 198px);
+    }
+
+    .banner__title{
+        width: 100%;
+        text-align: center;
+        
+    }
+
+    .banner__content .button__action{
+        margin-left: calc(50% - 95px);
+        margin-top: 50px;
+    }
+
+    .destaques__container {
+        margin-left: calc(50% - 650px);
+        width: 1300px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .banner__item{
+        background-size: auto 100%;
+    }
+
+    .banner__content {
+        width: 93%;
+        left: 12px;
+        top: 4%;
+    }
+
+    .banner__title{
+        font-size: 37px;
+        line-height: 40px;
+    }
+
+    .destaques__item{
+        display: inline-block;
+        width: 100%;
+        padding: 20px 14px;
+    }
+
+    .destaques__item__link{
+        width: 100%;
+        padding: 0px 37px;
+    }
+
+    footer{
+        height: auto;
+        padding: 20px;
+    }
+
+    .footer__button{
+        margin-top: 10px;
+    }
 }
