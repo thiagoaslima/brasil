@@ -15,7 +15,7 @@ import { converterObjArrayEmHash } from "../../utils2";
     templateUrl: './panorama-temas.template.html',
     styleUrls: ['./panorama-temas.style.css']
 })
-export class PanoramaTemasComponent implements OnInit, OnChanges {
+export class PanoramaTemasComponent implements OnChanges {
     @Input() configuracao: ItemConfiguracao[] = [];
     @Input() localidade: Localidade = null;
     @Input() temaSelecionado: String = '';
@@ -32,10 +32,6 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
         private _panoramaService: Panorama2Service,
         private pageScrollService: PageScrollService
     ) { }
-
-    ngOnInit() {
-        
-    }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         if (

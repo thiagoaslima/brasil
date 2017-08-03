@@ -55,7 +55,7 @@ export class Pesquisa {
     public readonly contexto: Contexto
     public readonly periodos: Periodo[]
 
-    private _indicadores: Observable<Indicador[]> 
+    private _indicadores: Observable<Indicador[]>
     get indicadores() {
         if (!this._indicadores) {
             this._indicadores = Indicador.getFilhos(this.id, '0')
@@ -156,13 +156,13 @@ export class Contexto {
     }
 
     private _contextos = [
-            'pais',
-            'macrorregiao',
-            'uf',
-            'ufSub',
-            'municipio',
-            'municipioSub'
-        ];
+        'pais',
+        'macrorregiao',
+        'uf',
+        'ufSub',
+        'municipio',
+        'municipioSub'
+    ];
 
     pais
     macrorregiao

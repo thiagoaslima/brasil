@@ -87,13 +87,18 @@ export const PANORAMA: {
             ]
         },
 
+
+        // ----------------------------
+        // UF
+        // ----------------------------
+
         [niveisTerritoriais.uf.label]: {
             temas: [
                 TEMAS.nenhum.label,
                 TEMAS.populacao.label,
+                TEMAS.educacao.label,
                 TEMAS.trabalho.label,
                 TEMAS.frota.label,
-                TEMAS.educacao.label,
                 TEMAS.economia.label,
                 TEMAS.saude.label,
                 TEMAS.meioAmbiente.label
@@ -166,30 +171,30 @@ export const PANORAMA: {
                     periodo: '2010',
                     titulo: 'População no último censo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'População residente por grupos de idade',
-                        tipo: TiposGrafico.coluna,
-                        dados: [{
-                            pesquisaId: 23,
-                            indicadorId: 25181
-                        }, {
-                            pesquisaId: 23,
-                            indicadorId: 25182
-                        }, {
-                            pesquisaId: 23,
-                            indicadorId: 25183
-                        }, {
-                            pesquisaId: 23,
-                            indicadorId: 25184
-                        }, {
-                            pesquisaId: 23,
-                            indicadorId: 25185
-                        }, {
-                            pesquisaId: 23,
-                            indicadorId: 25186
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.painel
+                    // grafico: {
+                    //     titulo: 'População residente por grupos de idade',
+                    //     tipo: TiposGrafico.coluna,
+                    //     dados: [{
+                    //         pesquisaId: 23,
+                    //         indicadorId: 25181
+                    //     }, {
+                    //         pesquisaId: 23,
+                    //         indicadorId: 25182
+                    //     }, {
+                    //         pesquisaId: 23,
+                    //         indicadorId: 25183
+                    //     }, {
+                    //         pesquisaId: 23,
+                    //         indicadorId: 25184
+                    //     }, {
+                    //         pesquisaId: 23,
+                    //         indicadorId: 25185
+                    //     }, {
+                    //         pesquisaId: 23,
+                    //         indicadorId: 25186
+                    //     }]
+                    // }
                 },
                 {
                     pesquisaId: 48,
@@ -199,40 +204,89 @@ export const PANORAMA: {
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
+
+                // {
+                //     pesquisaId: 20,
+                //     indicadorId: 29788,
+                //     periodo: '2015',
+                //     titulo: 'Óbitos ocorridos no estado',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
+
+                // --- Trabalho
                 {
-                    pesquisaId: 20,
-                    indicadorId: 29782,
-                    periodo: '2015',
-                    titulo: 'Nascimentos vivos registrados',
-                    tema: TEMAS.populacao.label,
+                    pesquisaId: 48,
+                    indicadorId: 48986,
+                    periodo: '2016',
+                    titulo: 'Rendimento nominal mensal domiciliar per capita',
+                    tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
                 {
-                    pesquisaId: 20,
-                    indicadorId: 29788,
+                    pesquisaId: 45,
+                    indicadorId: 62585,
+                    periodo: '2016',
+                    titulo: 'Pessoas de 16 anos ou mais ocupadas na semana de referência',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 62590,
+                    periodo: '2016',
+                    titulo: 'Proporção de pessoas de 16 anos ou mais em trabalho formal, considerando apenas as ocupadas na semana de referência',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 19,
+                    indicadorId: 59935,
                     periodo: '2015',
-                    titulo: 'Óbitos ocorridos no estado',
-                    tema: TEMAS.populacao.label,
+                    titulo: 'Pessoal ocupado na Administração pública, defesa e seguridade social',
+                    tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
 
-                // --- Trabalho
+                // --- EDUCAÇÃO
                 // {
-                //     pesquisaId: 19,
-                //     indicadorId: 29765,
+                //     pesquisaId: 40,
+                //     indicadorId: 30277,
                 //     periodo: '2015',
-                //     titulo: 'Salário médio mensal dos trabalhadores formais',
-                //     tema: TEMAS.trabalho.label,
+                //     titulo: 'IDEB – Anos iniciais do ensino fundamental',
+                //     tema: TEMAS.educacao.label,
                 //     visualizacao: PanoramaVisualizacao.painel
                 // },
-                // {
-                //     pesquisaId: 19,
-                //     indicadorId: 29763,
-                //     periodo: '2015',
-                //     titulo: 'Pessoal ocupado',
-                //     tema: TEMAS.trabalho.label,
-                //     visualizacao: PanoramaVisualizacao.painel
-                // },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5908,
+                    periodo: '2015',
+                    titulo: 'Matrículas no ensino fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    // pesquisaId: 13,
+                    // indicadorId: 5908,
+                    periodo: '2015',
+                    // titulo: 'Matrículas no ensino fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Matrículas',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 13,
+                            indicadorId: 5903,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5908,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5913,
+                        }]
+                    }
+                },
 
                 // --- FROTA
                 {
@@ -245,10 +299,10 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 22,
-                    indicadorId: 28122,
-                    periodo: '2016',
-                    titulo: 'Total de automóveis',
+                    // pesquisaId: 22,
+                    // indicadorId: 28122,
+                    // periodo: '2016',
+                    // titulo: 'Total de automóveis',
                     tema: TEMAS.frota.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
@@ -276,6 +330,15 @@ export const PANORAMA: {
                 },
 
                 // --- ECONOMIA
+                 {
+                    pesquisaId: 37,
+                    indicadorId: 30255,
+                    periodo: '2010',
+                    titulo: 'Índice de Desenvolvimento Humano (IDH)',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+
                 {
                     pesquisaId: 21,
                     indicadorId: 28141,
@@ -291,32 +354,70 @@ export const PANORAMA: {
                     titulo: 'Despesas orçamentárias empenhadas',
                     periodo: '2014',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Despesas orçamentárias por natureza',
-                        tipo: TiposGrafico.linha,
-                        dados: [
-                            {
-                                pesquisaId: 21,
-                                indicadorId: 28136
-                            },
-                            {
-                                pesquisaId: 21,
-                                indicadorId: 28137
-                            },
-                            {
-                                pesquisaId: 21,
-                                indicadorId: 28138
-                            },
-                            {
-                                pesquisaId: 21,
-                                indicadorId: 28140
-                            }
-                        ]
-                    }
+                    visualizacao: PanoramaVisualizacao.painel,
+                    // grafico: {
+                    //     titulo: 'Despesas orçamentárias por natureza',
+                    //     tipo: TiposGrafico.coluna,
+                    //     dados: [
+                    //         {
+                    //             pesquisaId: 21,
+                    //             indicadorId: 28136
+                    //         },
+                    //         {
+                    //             pesquisaId: 21,
+                    //             indicadorId: 28137
+                    //         },
+                    //         {
+                    //             pesquisaId: 21,
+                    //             indicadorId: 28138
+                    //         },
+                    //         {
+                    //             pesquisaId: 21,
+                    //             indicadorId: 28140
+                    //         }
+                    //     ]
+                    // }
+                },
+
+                 // --- Ambiente
+                {
+                    pesquisaId: 48,
+                    indicadorId: 48980,
+                    periodo: '2016',
+                    titulo: 'Área da unidade territorial',
+                    tema: TEMAS.meioAmbiente.label,
+                    visualizacao: PanoramaVisualizacao.painel
                 }
+                // {
+                //     pesquisaId: 10058,
+                //     indicadorId: 60030,
+                //     periodo: '2010',
+                //     titulo: 'Esgotamento sanitário adequado',
+                //     tema: TEMAS.meioAmbiente.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
+                // {
+                //     pesquisaId: 10058,
+                //     indicadorId: 60029,
+                //     periodo: '2010',
+                //     titulo: 'Arborização de vias públicas',
+                //     tema: TEMAS.meioAmbiente.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
+                // {
+                //     pesquisaId: 10058,
+                //     indicadorId: 60031,
+                //     periodo: '2010',
+                //     titulo: 'Urbanização de vias públicas',
+                //     tema: TEMAS.meioAmbiente.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
             ]
         },
+
+        // ------------------------------------
+        // MUNICIPIO
+        // ------------------------------------
 
         [niveisTerritoriais.municipio.label]: {
             temas: [
@@ -570,6 +671,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 37,
                     indicadorId: 30255,
+                    periodo: '2010',
                     titulo: 'Índice de Desenvolvimento Humano Municipal (IDHM)',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
