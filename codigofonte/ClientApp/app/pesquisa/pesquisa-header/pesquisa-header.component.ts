@@ -149,9 +149,17 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     setaTipo(tipo){
-        
-        if(this.isNivelEstadual || this.isNivelNacional || (this.isNivelMunicipal && tipo == 'grafico' && this.listaPeriodos.length <= 1) ){
+
+        if(this.isNivelNacional){
             return;
+        }
+        
+        if(this.isNivelEstadual && tipo != 'ranking' ){
+            return;
+        }
+        
+        if(this.isNivelMunicipal && tipo == 'grafico' && this.listaPeriodos.length <= 1){
+            return
         }
             
         this.navegarPara(null, null, tipo);

@@ -241,14 +241,14 @@ export class IndicadorService2 {
     }
 
 
-    public getRankingIndicador(indicadorId: number, periodo: string, contexto: string[], localidade: number){
+    public getRankingIndicador(indicadorId: number, periodo: string, contexto: string[], localidade: number, natureza: number = 4){
 
         const _contexto = contexto.join(',');
 
-        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}`;
+        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}&natureza=${natureza}`;
 
         return this._rankingRequest(url).map(res => {
-            
+
             let listaRankingLocalidade: RankingLocalidade[] = [];
             for(let i = 0; i < contexto.length; i++){
 
@@ -259,6 +259,17 @@ export class IndicadorService2 {
 
             return listaRankingLocalidade;
         });
+    }
+
+    private _obterLocalidade(id: number){
+
+        // Se o código for de uma UF
+        if(String(id).length == 2){
+
+            return this._localidadeService.getUfByCodigo(id);
+        }
+
+        return this._localidadeService.getMunicipioByCodigo(id);
     }
 
     private _rankingRequest(url){
@@ -276,7 +287,7 @@ export class IndicadorService2 {
                     rankings.res.map(ranking => {
 
                         let item = new ItemRanking(
-                            this._localidadeService.getMunicipioByCodigo(parseInt(ranking['localidade'], 10)),
+                            this._obterLocalidade(parseInt(ranking['localidade'], 10)),
                             ranking['#'],
                             ranking['res']);
 

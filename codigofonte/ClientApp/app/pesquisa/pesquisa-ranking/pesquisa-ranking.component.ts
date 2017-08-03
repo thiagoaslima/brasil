@@ -112,7 +112,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
             if(!!id && id > 0){
 
-                let localidade = this._localidadeService.getMunicipioByCodigo(id);
+                let localidade = this._obterLocalidade(id);
                 
                 if(!!contextos[localidade.parent.codigo]){
 
@@ -179,15 +179,24 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
             }
             
             let localidade: Localidade = this._obterLocalidade(id);
-            let contextos: string[] = ['br', localidade.parent.codigo.toString()];
+            let contextos: string[] = ['br']
+            if(!!localidade && !!localidade.parent && !!localidade.parent.codigo){
+                contextos.push(localidade.parent.codigo.toString());
+            }
 
-            requests.push( this._indicadorService.getRankingIndicador(idIndicador, periodo, contextos, localidade.codigo) );
+            requests.push( this._indicadorService.getRankingIndicador(idIndicador, periodo, contextos, localidade.codigo, contextos.length == 1? 3 : 4) );
         });
 
         return Observable.zip(...requests);
     }
 
     private _obterLocalidade(id: number){
+
+        // Se o código for de uma UF
+        if(String(id).length == 2){
+
+            return this._localidadeService.getUfByCodigo(id);
+        }
 
         return this._localidadeService.getMunicipioByCodigo(id);
     }
