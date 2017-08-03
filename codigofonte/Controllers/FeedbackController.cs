@@ -122,14 +122,9 @@ namespace Brasil.Controllers
                          **/
                         SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
-<<<<<<< HEAD
-                    SMTP.Send(message);
-                    SMTP.Disconnect(true);
-=======
                         SMTP.Send(message);
                         SMTP.Disconnect(true);
                     }
->>>>>>> Tratamento para envio assincrono de email.
                 }
                 catch (Exception e)
                 {
