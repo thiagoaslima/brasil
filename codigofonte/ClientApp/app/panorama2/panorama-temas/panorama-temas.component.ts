@@ -48,7 +48,21 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
                 this.resultados = resp.resultados;
                 this.rankings = resp.rankings;
                 this.atualizaTextos();
-            })
+
+                /*inverte os dados dos graficos de linhas, pois estavam vindo do maior para o menor ano*/
+                for(let i = 0; i < this.temas.length; i++){
+                    let graficos = this.temas[i].graficos;
+                    for(let j = 0; graficos && j < graficos.length; j++){
+                        if(graficos[j].tipo == "linha"){
+                            let grafico = graficos[j];
+                            grafico.eixoX.reverse(); /*inverte labels*/
+                            for(let k = 0; grafico.dados && k < grafico.dados.length; k++)
+                                grafico.dados[k].data.reverse(); /*inverte dados*/
+                        }
+                    }
+                }
+                /*--------------*/
+            });
         }
 
         if (this.isBrowser) {
