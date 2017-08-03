@@ -39,7 +39,7 @@ export class PanoramaCardComponent implements OnChanges {
         const numeroClasses = 1 + (3.322 * Math.log10(numeroElementos));
 
         let amplitudeClasse = numeroElementos / numeroClasses;
-        let classe = Math.round(posicao / amplitudeClasse);
+        let classe = Math.floor(posicao / amplitudeClasse);
         let percentual = Math.round(100 - (classe * (100 / numeroClasses)));
 
 
