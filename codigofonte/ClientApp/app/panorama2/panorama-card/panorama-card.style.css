@@ -56,6 +56,11 @@
     transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
 }
 
+.sem-valor.selecionado .comparacoes{
+    opacity: 0.2;
+    filter: alpha(opacity=40)
+}
+
 .comparacoes_titulo{
     font-weight: bold;
     font-size: 0.84em;
@@ -120,6 +125,10 @@
     width: 50px;
 }
 
+.sem-valor.selecionado .comparacao__regiao__regua__posicao__valor{
+    display: none;
+}
+
 .comparacao__regiao__regua__posicao__traco{
     width: 0px;
     height: 14px;
@@ -134,6 +143,10 @@
 
     /* -webkit-transition-delay: 100ms;
     transition-delay: 100ms; */
+}
+
+.sem-valor.selecionado .comparacao__regiao__regua__posicao__traco{
+    display: none;
 }
 
 .painel__grafico{
