@@ -17,7 +17,7 @@
 .indicador{
     padding: 20px;
     padding-left: 18px;
-    padding-right: 18px;
+    padding-right: 25px;
     border-bottom: 2px solid #b3b3b3;
     background-color: #f9f8f8;
     cursor: pointer;
@@ -42,6 +42,18 @@
     font-size: .7em;
 }
 
+.indicador__seta-veja_mais{
+    top: 50%;
+    right: 8px;
+    color: #999999;
+    position: absolute;
+
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
 
 .comparacoes{
     margin-top: 0px;
@@ -177,6 +189,10 @@
 .selecionado .comparacao__regiao{
     margin-top: 20px;
     margin-bottom: 23px;
+}
+
+.selecionado .indicador__seta-veja_mais{
+    opacity: 0;
 }
 
 /* 
