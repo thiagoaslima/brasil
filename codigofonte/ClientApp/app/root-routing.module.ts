@@ -54,8 +54,13 @@ const children = [
       },
       {
         path: 'v4',
-        component: HomeComponent,
-        pathMatch: 'full'
+        component: ShellComponent,
+        pathMatch: 'full',
+        children: [{
+          path: '',
+          pathMatch: 'full',
+          component: HomeComponent
+        }]
       },
       {
         path: 'v4/pesquisas',

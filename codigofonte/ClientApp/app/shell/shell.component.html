@@ -15,10 +15,10 @@
 
     <seletor-localidade #seletor="seletor-localidade" (isSeletorAberto)=handleSeletorAberto($event)></seletor-localidade>
 
-    <aside class='aside--municipio' [class.localidade--static]="isHeaderStatic | async">
+    <aside class='aside--municipio' [class.aside_recolhido]="isHome" [class.localidade--static]="isHeaderStatic | async">
         <div id="localidade">
             <div id='local'>
-                <ul>
+                <ul *ngIf="!isHome">
                     <template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
                         <!--Brasil-->
                         <li *ngIf="first">
@@ -39,6 +39,7 @@
                         </li>
                     </template>
                 </ul>
+                <p *ngIf="isHome" style="margin-bottom:30px">Para ter acesso às informações, clique no botão 'Selecionar local' e escolha um estado ou município ou no ícone para acessar a cidade em que você se encontra.</p>
             </div>
 
             <button (click)="seletor.abrirSeletor()">Selecionar local</button>
@@ -46,7 +47,7 @@
             <geolocation (location)="navegarPara($event)"></geolocation>
         </div>
 
-        <nav id="menu" [class.aberto]="menuGlobalAberto" role="navigation">
+        <nav *ngIf="!isHome" id="menu" [class.aberto]="menuGlobalAberto" role="navigation">
             <ul>
                 <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'panorama'">
                     <a style="display:block" [routerLink]="getLink('panorama')">Panorama</a>
@@ -63,7 +64,7 @@
             </ul>
         </nav>
         
-        <a id='versaoAnterior' href='http://cidades.ibge.gov.br/xtras/home.php '>
+        <a *ngIf="!isHome" id='versaoAnterior' href='http://cidades.ibge.gov.br/xtras/home.php '>
             Acesse a versão anterior do Cidades
         </a>
 
@@ -75,7 +76,7 @@
     </div>
 
     <div style="width:100%;" [class.position_fixed]="abrirMenuPesquisa || seletor.aberto">
-        <router-outlet></router-outlet>
+        <router-outlet #routerOutlet></router-outlet>
     </div>
     
     <nao-achei></nao-achei>
