@@ -16,7 +16,7 @@
 .cabecalho .select-ano-container {
     font-weight: bold;
     font-size: small;
-    margin-top: 79px;
+    margin-top: 25px;
     float: left;
 }
 
@@ -51,7 +51,7 @@
     font-size: small;
     padding: 2px 5px;
     float: right;
-    margin-top: 79px;
+    margin-top: 25px;
     margin-right: 4px;
     background: #ccc;
 }
@@ -88,22 +88,12 @@
 }
 	
 .titulo-pesquisa {
-	font-weight: bold;
-    font-size: 1.3em;
-    margin: 0;
-    padding: 0;
-    height: 50px;
-    overflow: hidden;
-    background-color: #e6e6e6;
-    position: absolute;
-    width: 32%;
+	font-weight:bold;
+	font-size: 1.3em;
+	margin:0;
+    padding:0;
 }
 
-.titulo-pesquisa:hover {
-    height: auto;
-    position: absolute;
-    padding-bottom: 10px;
-}
 
 .cabecalho__nome-pesquisa{
     float: left;
@@ -472,6 +462,18 @@
         width: 1%;
     }
 
+@media screen and (max-width: 1200px) {
+    .titulo-pesquisa{
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .titulo-pesquisa{
+        font-size: 1em;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .select__sub-menu__botao{
         width: 31px;
@@ -525,10 +527,9 @@
          /*display: block*/
     }
 
-    .titulo-pesquisa{
-        width: 100%;
+    .titulo-pesquisa {
+        font-size: 1.2em;
     }
- 
 
     .por-estado__selecionar-municipio{
         min-width: 207px;
