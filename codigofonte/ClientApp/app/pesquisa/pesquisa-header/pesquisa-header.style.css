@@ -16,7 +16,7 @@
 .cabecalho .select-ano-container {
     font-weight: bold;
     font-size: small;
-    margin-top: 25px;
+    margin-top: 79px;
     float: left;
 }
 
@@ -51,7 +51,7 @@
     font-size: small;
     padding: 2px 5px;
     float: right;
-    margin-top: 25px;
+    margin-top: 79px;
     margin-right: 4px;
     background: #ccc;
 }
@@ -88,12 +88,22 @@
 }
 	
 .titulo-pesquisa {
-	font-weight:bold;
-	font-size: 1.3em;
-	margin:0;
-	padding:0;
+	font-weight: bold;
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    overflow: hidden;
+    background-color: #e6e6e6;
+    position: absolute;
+    width: 32%;
 }
 
+.titulo-pesquisa:hover {
+    height: auto;
+    position: absolute;
+    padding-bottom: 10px;
+}
 
 .cabecalho__nome-pesquisa{
     float: left;
@@ -515,6 +525,9 @@
          /*display: block*/
     }
 
+    .titulo-pesquisa{
+        width: 100%;
+    }
  
 
     .por-estado__selecionar-municipio{

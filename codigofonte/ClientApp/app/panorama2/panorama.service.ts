@@ -29,53 +29,55 @@ export class Panorama2Service {
     getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
         return this._getResultadosIndicadores(configuracao, localidade)
             .map(resultados => {
-                return configuracao.map(item => {
-                    const periodo = item.periodo
-                        || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
-                        || '-';
+                return configuracao
+                    .filter(item => Boolean(item.indicadorId))
+                    .map(item => {
+                        const periodo = item.periodo
+                            || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
+                            || '-';
 
-                    const titulo = item.titulo
-                        || (
+                        const titulo = item.titulo
+                            || (
+                                resultados[item.indicadorId] &&
+                                resultados[item.indicadorId].indicador &&
+                                resultados[item.indicadorId].indicador.nome
+                            );
+
+                        const valor = (
                             resultados[item.indicadorId] &&
                             resultados[item.indicadorId].indicador &&
-                            resultados[item.indicadorId].indicador.nome
-                        );
-
-                    const valor = (
-                        resultados[item.indicadorId] &&
-                        resultados[item.indicadorId].indicador &&
-                        resultados[item.indicadorId].getValor(periodo)
-                    ) || '-';
+                            resultados[item.indicadorId].getValor(periodo)
+                        ) || '-';
 
 
-                    const unidade = (
-                        resultados[item.indicadorId] &&
-                        resultados[item.indicadorId].indicador &&
-                        resultados[item.indicadorId].indicador.unidade.toString()
-                    ) || '';
+                        const unidade = (
+                            resultados[item.indicadorId] &&
+                            resultados[item.indicadorId].indicador &&
+                            resultados[item.indicadorId].indicador.unidade.toString()
+                        ) || '';
 
-                    const notas = (
-                        resultados[item.indicadorId] &&
-                        resultados[item.indicadorId].indicador &&
-                        resultados[item.indicadorId].indicador.notas
-                    ) || [];
+                        const notas = (
+                            resultados[item.indicadorId] &&
+                            resultados[item.indicadorId].indicador &&
+                            resultados[item.indicadorId].indicador.notas
+                        ) || [];
 
-                    const fontes = (
-                        resultados[item.indicadorId] &&
-                        resultados[item.indicadorId].indicador &&
-                        resultados[item.indicadorId].indicador.fontes
-                    ) || [];
+                        const fontes = (
+                            resultados[item.indicadorId] &&
+                            resultados[item.indicadorId].indicador &&
+                            resultados[item.indicadorId].indicador.fontes
+                        ) || [];
 
-                    return {
-                        tema: item.tema,
-                        titulo,
-                        periodo,
-                        valor,
-                        unidade,
-                        notas,
-                        fontes
-                    };
-                });
+                        return {
+                            tema: item.tema,
+                            titulo,
+                            periodo,
+                            valor,
+                            unidade,
+                            notas,
+                            fontes
+                        };
+                    });
             });
     }
 
@@ -105,7 +107,9 @@ export class Panorama2Service {
         localidade: Localidade
     ): Observable<{ [indicadorId: number]: Resultado }> {
         const indicadoresId = configuracao.reduce((arr, item) => {
-            arr.push(item.indicadorId);
+            if (item.indicadorId) {
+                arr.push(item.indicadorId);
+            }
 
             if (item.grafico) {
                 item.grafico.dados.forEach(obj => {
@@ -118,10 +122,7 @@ export class Panorama2Service {
 
         return this._resultadoService
             .getResultadosCompletos(indicadoresId, localidade.codigo)
-            .map(resultados => {
-
-                return converterObjArrayEmHash(resultados, 'indicador.id');;
-            });
+            .map(resultados => converterObjArrayEmHash(resultados, 'indicador.id'));
     }
 
     private _getPosicaoRankings(

@@ -1,19 +1,17 @@
 import {
-    ChangeDetectionStrategy,
     Component,
     EventEmitter,
     HostListener,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Output,
-    SimpleChange
+    SimpleChange,
 } from '@angular/core';
 
 import { TEMAS } from '../../panorama2/configuration';
-import { converterObjArrayEmHash } from '../../utils2';
 import { Panorama2Service } from '../panorama.service';
-import { Resultado } from '../../shared3/models'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +22,7 @@ import 'rxjs/add/operator/debounceTime';
     templateUrl: './panorama-resumo.template.html',
     styleUrls: ['./panorama-resumo.style.css']
 })
-export class PanoramaResumoComponent implements OnInit, OnChanges {
+export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() configuracao = [];
     @Input() localidade = null;
@@ -36,13 +34,13 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
     public notas = [];
     public fontes = [];
     public isHeaderStatic: Observable<boolean>;
+    public exibirFontesENotas = false;
+    public IsMobileService
 
-    private _valores = {};
     private _scrollTop$ = new BehaviorSubject(0);
 
     private nota;
-    exibirFontesENotas = false;
-    
+
     @Output() temaSelecionado = new EventEmitter();
     temaAtual = '#po';
 
@@ -76,19 +74,30 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
                 let temas = resp.slice(0);
                 let cabecalho = [];
                 let i = 0;
-                while (temas[i].tema === "") {
+                while (temas[i].tema === '') {
                     cabecalho.push(temas.shift());
                 }
 
                 this.cabecalho = cabecalho;
                 this.temas = temas;
 
-                this.notas = resp.filter(resultado => resultado.notas.length > 0 && (resultado.notas[0]['periodo'] == resultado.periodo || resultado.notas[0]['periodo'] == "-"))
-                                 .map(resultado => `${resultado.titulo}: ${resultado.notas[0]['notas']}`);
+                this.notas = resp.filter(resultado => {
+                    return resultado.notas.length > 0
+                        && (
+                            resultado.notas[0]['periodo'] === resultado.periodo
+                            || resultado.notas[0]['periodo'] === '-'
+                        );
+                }).map(resultado => `${resultado.titulo}: ${resultado.notas[0]['notas']}`);
 
-                this.fontes = resp.filter(resultado => !!resultado.fontes && resultado.fontes.length > 0 && (resultado.fontes[0]['periodo'] == resultado.periodo || resultado.fontes[0]['periodo'] == "-"))
-                                  .map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
-            })
+                this.fontes = resp.filter(resultado => {
+                    return !!resultado.fontes
+                        && resultado.fontes.length > 0
+                        && (
+                            resultado.fontes[0]['periodo'] === resultado.periodo
+                            || resultado.fontes[0]['periodo'] === '-'
+                        );
+                }).map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
+            });
         }
     }
 
@@ -101,14 +110,13 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
         if (this.temaAtual == tema) {
             this.temaSelecionado.emit(tema + '-alt');
             this.temaAtual = '';
-        }
-        else {
+        } else {
             this.temaSelecionado.emit(tema);
             this.temaAtual = tema;
         }
     }
 
-    getNotaEspecial(idLocalidade, idIndicador){
+    getNotaEspecial(idLocalidade, idIndicador) {
 
         return this._panoramaService.getNotaEspecial(idLocalidade, idIndicador);
     }
@@ -117,7 +125,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges {
         Object.keys(TEMAS).forEach(key => {
             let { label, icon } = TEMAS[key];
             this.icones[label] = `./img/ico/${icon}`;
-        })
+        });
     }
 
 }

@@ -1,5 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
+import { ResultadoPipe } from '../../shared2/resultado.pipe';
+
+
 @Component({
     selector: 'panorama-card',
     templateUrl: './panorama-card.template.html',
@@ -15,8 +18,33 @@ export class PanoramaCardComponent implements OnChanges {
 
     public textoComparacao: string;
     public cssRanking: any = {};
+    _resultadoPipe: ResultadoPipe;
+
+
+    constructor(){
+        this._resultadoPipe = new ResultadoPipe();
+    }
+
 
     ngOnChanges(changes: any) {
+
+        if(this._resultadoPipe.transform(this.valor) == 'Ignorado' || 
+            this._resultadoPipe.transform(this.valor) == 'Não disponível' || 
+            this._resultadoPipe.transform(this.valor) == 'Não informado' || 
+            this._resultadoPipe.transform(this.valor) == 'Não existente' || 
+            this._resultadoPipe.transform(this.valor) == '*' || 
+            this._resultadoPipe.transform(this.valor) == '-'){
+
+            this.ranking.BR.hasValor = false;
+
+        } else {
+
+            this.ranking.BR.hasValor = true;
+
+        }
+
+        
+
         if (this.ranking && this.ranking.BR) {
             this.cssRanking.BR = 'p' + this.calcularPercentualRanking(this.ranking.BR.posicao,  this.ranking.BR.itens);
         }
@@ -39,7 +67,7 @@ export class PanoramaCardComponent implements OnChanges {
         const numeroClasses = 1 + (3.322 * Math.log10(numeroElementos));
 
         let amplitudeClasse = numeroElementos / numeroClasses;
-        let classe = Math.round(posicao / amplitudeClasse);
+        let classe = Math.floor(posicao / amplitudeClasse);
         let percentual = Math.round(100 - (classe * (100 / numeroClasses)));
 
 

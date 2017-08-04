@@ -8,7 +8,7 @@ export const PanoramaVisualizacao = {
 }
 
 export interface ItemConfiguracao {
-    indicadorId: number
+    indicadorId?: number
     pesquisaId?: number
     periodo?: string
     fontes?: string[]

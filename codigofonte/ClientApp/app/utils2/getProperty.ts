@@ -1,4 +1,4 @@
-import { curry } from "./curry";
+import { curry } from './curry';
 
 export const getProperty = curry(
     function _getProperty(keyPath: string, item: Object): any {

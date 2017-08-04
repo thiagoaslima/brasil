@@ -9,5 +9,6 @@
        background: -o-linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
        background: -moz-linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
        background: linear-gradient( to right, #e6e6e6 calc(36% - 3px), #fff calc(36% - 3px), #fff );
+
 }
 

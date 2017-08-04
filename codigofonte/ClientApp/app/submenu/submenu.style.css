@@ -43,6 +43,10 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
+/** Área necessária para o 'Não achei' **/
+li.submenu__item:last-child {
+    padding-bottom: 25px;
+}
 
 .submenu__item--selecionado{
     background-color: #333333 !important;

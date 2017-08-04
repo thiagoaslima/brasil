@@ -559,14 +559,15 @@ ANIMAÇÃO
         background-color: #333333;
 
         border-top: 2px solid #252525;
-        display: none;
+        /* display: none; */
     }
 
      #selecionar-localidade #segunda-coluna ul li{
         padding: 0px 6%;
     }
 
-    .seletor-localidade__localidade-item, #selecionar-localidade #segunda-coluna ul li div{
+    .seletor-localidade__localidade-item, 
+    #selecionar-localidade #segunda-coluna ul li div{
         border-bottom: 1px solid #4D4D4D;
     }
 
@@ -590,6 +591,9 @@ ANIMAÇÃO
 
         height: auto;
         min-height: 150vh;
+    }
+    #selecionar-localidade #segunda-coluna.aberto {
+        display: block;
     }
     #segunda-coluna.aberto + #terceira-coluna {
         left: 100%;
