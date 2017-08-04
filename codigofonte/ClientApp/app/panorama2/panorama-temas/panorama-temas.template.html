@@ -9,7 +9,7 @@
             <h2 class="cabecalho__titulo">{{item.tema}}</h2>
         </div>
 
-        <div class="cabecalho__celula-direita cabecalho__celula-direita--fader" [class.cabecalho__descricao__aberto]="textoAberto"
+        <div *ngIf="textos[item.tema]" class="cabecalho__celula-direita cabecalho__celula-direita--fader" [class.cabecalho__descricao__aberto]="textoAberto"
             (click)="textoAberto=!textoAberto">
             <!--Inserir CLICK na div toda, adicionando/removendo a classe "cabecalho__descricao__aberto"-->
             <p class="cabecalho__descricao">

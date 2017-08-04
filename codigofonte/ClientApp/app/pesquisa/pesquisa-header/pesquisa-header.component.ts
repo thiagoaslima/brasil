@@ -53,8 +53,6 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
 
-        
-
         this.subs$$ = this._routerParamsService.params$.subscribe((params) => {
             this._pesquisaService.getPesquisa(params.params.pesquisa).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
@@ -73,7 +71,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 this.isNivelNacional = !params.params.uf && !params.params.municipio;
 
                 this.indicador = params.params.indicador;
-                this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
+                if (params.params.municipio) {
+                    this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
+                } else if (params.params.uf) {
+                    this.localidade = this._localidadeService.getUfBySigla(params.params.uf);
+                }
+                
                 this.localidade1 = this.obterLocalidade(params.queryParams.localidade1);
                 this.localidade2 = this.obterLocalidade(params.queryParams.localidade2);
                 this.tipo = params.queryParams.tipo ? params.queryParams.tipo : '';
