@@ -35,6 +35,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     public fontes = [];
     public isHeaderStatic: Observable<boolean>;
     public exibirFontesENotas = false;
+    public IsMobileService
 
     private _scrollTop$ = new BehaviorSubject(0);
 
