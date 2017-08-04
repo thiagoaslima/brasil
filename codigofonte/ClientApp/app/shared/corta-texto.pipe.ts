@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'corta-texto'
+    name: 'cortaTexto'
 })
 export class CortaTextoPipe implements PipeTransform {
 

@@ -12,6 +12,7 @@ import { PesquisaConfiguration } from './pesquisa/pesquisa.configuration';
 
 import { GeolocationDirective } from './geolocation.directive';
 import { ResultadoPipe } from './resultado.pipe';
+import { CortaTextoPipe } from './corta-texto.pipe';
 
 import {ShareModule} from 'ng2share/share.module'; //social share module
 
@@ -30,7 +31,8 @@ const MODULES = [
 ];
 
 const PIPES = [
-    ResultadoPipe
+    ResultadoPipe,
+    CortaTextoPipe
 ];
 
 const COMPONENTS = [
