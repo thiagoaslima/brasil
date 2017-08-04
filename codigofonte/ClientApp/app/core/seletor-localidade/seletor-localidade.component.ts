@@ -37,7 +37,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     private _ufSelecionada = null;
 
-    private hist = null; //guarda a referência para o objeto 'history' do browser
+    private hist = null; // guarda a referência para o objeto 'history' do browser
 
     public isBrowser = isBrowser;
 
@@ -211,7 +211,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         }
 
         this.aberto = true;
-        this.setState('estados');
+        // this.setState('estados');
         this.isSeletorAberto.emit(true);
     }
 
