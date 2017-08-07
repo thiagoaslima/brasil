@@ -65,7 +65,7 @@ namespace Brasil.Controllers
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
             message.To.Add(new MailboxAddress("", feedback.Email));
-            message.Subject = feedback.Assunto;
+            message.Subject = "Manifestação de usuário no Cidades: " + feedback.Assunto;
 
             var builder = new BodyBuilder();
             builder.HtmlBody = $@"
@@ -123,8 +123,8 @@ namespace Brasil.Controllers
                      **/
                     SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                    await SMTP.SendAsync(message);
-                    await SMTP.DisconnectAsync(true);
+                    SMTP.Send(message);
+                    SMTP.Disconnect(true);
                 }
             }
             catch (Exception e)

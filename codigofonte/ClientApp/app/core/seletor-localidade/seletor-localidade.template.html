@@ -53,7 +53,7 @@
             <template [ngIf]="states.estados">
                 <li *ngFor="let uf of ufs">
                     <div>
-                        <a style="display:block" [routerLink]="uf?.link">
+                        <a style="display:block" [routerLink]="uf?.link + URLEnd">
                             {{uf.nome}}
                             <!-- <i class="fa fa-chevron-right" aria-hidden="true"></i> -->
                         </a>

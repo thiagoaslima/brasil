@@ -27,14 +27,18 @@ export class MetatagBrowserComponent implements OnInit {
         this._routerParamsService.params$.subscribe(({ params }) => {
             if (isBrowser && window) {
                 let local = '';
-                let localidade = params.municipio
+                let localidade =params.municipio
                     ? this._localidadeService.getMunicipioBySlug(params.uf, params.municipio)
-                    : this._localidadeService.getUfBySigla(params.uf);
+                    : params.uf
+                        ? this._localidadeService.getUfBySigla(params.uf)
+                        : undefined;
 
-                if (localidade.tipo == 'municipio') {
-                    local += 'cidade: ' + localidade.nome + ' | estado: ' + localidade.parent.nome; // concatena nome da uf e do município
-                } else {
-                    local += localidade.nome; // concatena nome da uf ou 'Brasil'
+                if (localidade) {
+                    if (localidade.tipo == 'municipio') {
+                        local += 'cidade: ' + localidade.nome + ' | estado: ' + localidade.parent.nome; // concatena nome da uf e do município
+                    } else {
+                        local += localidade.nome; // concatena nome da uf ou 'Brasil'
+                    }
                 }
 
                 let url = window.location.href;

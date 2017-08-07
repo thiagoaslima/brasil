@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { isBrowser } from 'angular2-universal';
 
@@ -21,10 +21,19 @@ import 'rxjs/add/operator/debounceTime';
     .position_fixed {
       position: fixed;
     }
+    .aside_recolhido {
+        transform: translateX(-200px);
+        transition: transform 1s;
+    }
+    .aside_recolhido:hover {
+        transform: translateX(0);
+        transition: transform 1s;
+    }
   `]
 })
 export class ShellComponent implements OnInit, OnDestroy {
     @ViewChild('abreMenuGlobal') button: ElementRef;
+    @ViewChild(RouterOutlet) routerOutlet: RouterOutlet;
 
     public locais = [];
     public localidadeSelecionada = null;
@@ -33,6 +42,7 @@ export class ShellComponent implements OnInit, OnDestroy {
     public menuAberto = false;
     public abrirMenuPesquisa = false;
     public itemSelecionado;
+    public isHome = false;
 
     public versao = require('../version.json');
 
@@ -40,7 +50,6 @@ export class ShellComponent implements OnInit, OnDestroy {
 
     private _localidade$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
-
 
     @HostListener('window:scroll', ['$event'])
     onScroll({ target }) {
@@ -87,17 +96,23 @@ export class ShellComponent implements OnInit, OnDestroy {
         this._routerParams.params$.subscribe(({ params, queryParams }) => {
             // seta o item do menu selecionado
             if (isBrowser) {
-                let url = window.location.href;
+                let url = this.router.url;
                 if (url.indexOf('panorama') >= 0) {
                     this.itemSelecionado = 'panorama';
+                    this.isHome = false;
                 } else if (url.indexOf('historico') >= 0) {
                     this.itemSelecionado = 'historico';
-                } else if (url.indexOf('pesquisa') >= 0) {
+                    this.isHome = false;
+                } else if (url.indexOf('pesquisa') >= 0 && params.uf) {
                     this.itemSelecionado = 'pesquisa';
+                    this.isHome = false;
+                } else {
+                    this.itemSelecionado = '';
+                    this.isHome = true;
                 }
             }
 
-            this.menuAberto = queryParams['detalhes'] == 'true';
+            this.menuAberto = queryParams['detalhes'] === 'true';
         });
 
         this.router.events.subscribe((evt) => {
@@ -117,6 +132,7 @@ export class ShellComponent implements OnInit, OnDestroy {
                 // }, 16); // how fast to scroll (this equals roughly 60 fps)
             }
         });
+
     }
 
     ngOnDestroy() {

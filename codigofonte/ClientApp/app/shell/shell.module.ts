@@ -22,6 +22,8 @@ import { VisaoHistoricaModule } from '../visao-historica/visao-historica.module'
 import { BASES, PESQUISAS } from '../global-config';
 
 import { SubmenuComponent } from '../submenu/submenu.component';
+import { PesquisaHomeComponent } from '../home/pesquisa-home.component';
+import { HomeComponent } from '../home/home.component';
 
 // import { BasicCacheModule } from '../cache/basic-cache.module';
 
@@ -48,11 +50,14 @@ import { IBGECartogramaModule } from '../infografia/ibge-cartograma/ibge-cartogr
         // RootComponent,
         ShellComponent,
         SubmenuComponent,
+        PesquisaHomeComponent,
+        HomeComponent,
         // EmptyComponent,
         // BarraGov
     ],
     exports: [
-        ShellComponent
+        ShellComponent,
+        PesquisaHomeComponent
     ],
     providers: [
         // ValidParametersGuard,

@@ -50,6 +50,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         totalAtual: 0,
 
         build(array, termo = '') {
+
             termo = slugify(termo);
 
             let hash = array.reduce((agg, municipio) => {
@@ -140,6 +141,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
         // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
         this._router.events.filter(event => event instanceof NavigationEnd).subscribe(route => {
+
             if (route.url.indexOf('/panorama') >= 0) {
                 this.URLEnd = '/panorama';
             } else if (route.url.indexOf('/historico') >= 0) {
@@ -158,6 +160,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
         this.selecaoLocalidadesAtual = this._appState.observable$
             .map(({ localidade }) => {
+
                 const locais = [localidade];
                 if (localidade) { locais.push(localidade.parent); }
                 if (localidade && localidade.parent) { locais.push(localidade.parent.parent); }
