@@ -99,6 +99,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
 
     public states = {
+        '': true,
         'estados': false,
         'municipios': false,
         'municipiosTodos': false,
@@ -141,6 +142,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _seletorService: SeletorLocalidadeService
     ) {
         this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto);
+
+        this._seletorService.state$.subscribe(states => this.states = states);
 
         // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
         // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
@@ -219,7 +222,6 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
         this._seletorService.abrirSeletor();
         this.aberto = true;
-        // this.setState('estados');
         this.isSeletorAberto.emit(true);
     }
 
