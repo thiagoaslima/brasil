@@ -64,7 +64,7 @@ namespace Brasil.Controllers
              **/
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
-            message.To.Add(new MailboxAddress("", feedback.Email));
+            message.To.Add(new MailboxAddress("", "ibge@ibge.gov.br"));
             message.Subject = "Manifestação de usuário no Cidades: " + feedback.Assunto;
 
             var builder = new BodyBuilder();
