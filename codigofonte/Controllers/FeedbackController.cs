@@ -64,7 +64,7 @@ namespace Brasil.Controllers
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
             message.To.Add(new MailboxAddress("", "ibge@ibge.gov.br"));
-            message.Subject = "Manifestação de usuário no Cidades: " + feedback.Assunto;
+            message.Subject = feedback.Assunto;
 
             var builder = new BodyBuilder();
             builder.HtmlBody = $@"
@@ -106,40 +106,48 @@ namespace Brasil.Controllers
 
             message.Body = builder.ToMessageBody();
 
-            try
+            await Task.Run(() =>
             {
-                using (var SMTP = new SmtpClient())
+                try
                 {
-                    /**
-                     * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
-                     **/
-                    // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                    using (var SMTP = new SmtpClient())
+                    {
+                        /**
+                         * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
+                         **/
+                        // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                    await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
+                        SMTP.Connect("mailrelay.ibge.gov.br", 25, false);
 
-                    /**
-                     * XOAUTH2 authentication disabled - Não é usado no IBGE
-                     **/
-                    SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
+                        /**
+                         * XOAUTH2 authentication disabled - Não é usado no IBGE
+                         **/
+                        SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
 
+<<<<<<< HEAD
                     SMTP.Send(message);
                     SMTP.Disconnect(true);
+=======
+                        SMTP.Send(message);
+                        SMTP.Disconnect(true);
+                    }
+>>>>>>> Tratamento para envio assincrono de email.
                 }
-            }
-            catch (Exception e)
-            {
-                using (var conn = new MySqlConnection(CONNECTION))
+                catch (Exception e)
                 {
-                    conn.Open();
-
-                    using (var dbTransaction = conn.BeginTransaction())
+                    using (var conn = new MySqlConnection(CONNECTION))
                     {
-                        conn.Execute(@"UPDATE feedback SET flag = 0 WHERE id = @id", new { id = id }, dbTransaction);
+                        conn.Open();
 
-                        dbTransaction.Commit();
+                        using (var dbTransaction = conn.BeginTransaction())
+                        {
+                            conn.Execute(@"UPDATE feedback SET flag = 0 WHERE id = @id", new { id = id }, dbTransaction);
+
+                            dbTransaction.Commit();
+                        }
                     }
                 }
-            }
+            });
 
             return Ok();
         }
