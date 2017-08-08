@@ -48,8 +48,9 @@ const children = [
     RouterModule.forRoot([
       {
         path: '',
-        canActivate: [EmptyLocationGuard],
-        component: EmptyComponent,
+        redirectTo: 'v4',
+        // canActivate: [EmptyLocationGuard],
+        // component: EmptyComponent,
         pathMatch: 'full'
       },
       {

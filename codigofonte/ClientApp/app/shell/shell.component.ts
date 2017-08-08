@@ -29,6 +29,9 @@ import 'rxjs/add/operator/debounceTime';
         transform: translateX(0);
         transition: transform 1s;
     }
+    .aside_recolhido #localidade {
+        padding-right: 50px;
+    }
   `]
 })
 export class ShellComponent implements OnInit, OnDestroy {
