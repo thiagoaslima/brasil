@@ -35,6 +35,8 @@ export class PesquisaCartogramaComponent implements OnChanges {
     public tituloCartograma;
     public listaPeriodos;
 
+    vazio = false;
+
     constructor(
         private _localidadeServ: LocalidadeService2,
         private _resultadoServ: ResultadoService3,
@@ -80,8 +82,14 @@ export class PesquisaCartogramaComponent implements OnChanges {
         
         Observable.zip(...resultadosCartograma$)
             .subscribe(resultados => {
+                //verifica se o resultado é vazio
+                this.vazio = true;
+                for(let item in resultados[0]){
+                    this.vazio = false;
+                    break;
+                }
+                //---------
                 let mapas = [];
-
                 for(let i=0; i<resultados.length; i++) {
                     mapas.push({
                         localidade: mapaLocalidades[i],
@@ -90,7 +98,6 @@ export class PesquisaCartogramaComponent implements OnChanges {
                         titulo: this.indicador && this.indicador.nome
                     });
                 }
-
                 this.mapas = mapas;
             });
 

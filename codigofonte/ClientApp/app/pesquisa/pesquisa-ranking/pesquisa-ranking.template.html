@@ -1,18 +1,16 @@
 <div class="container">
-
-    <div class="mensagem-vazio" *ngIf="!hasDados()">
-        Nenhum valor para exibir.
-    </div>
-
-    <div *ngIf="hasDados()">
-
+    <div>
         <mensagem-setas></mensagem-setas>
 
         <breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
 
         <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
 
-        <div class="content__grupos">
+        <div class="mensagem-vazio" *ngIf="!hasDados()">
+            Nenhum valor para exibir.
+        </div>
+
+        <div class="content__grupos" *ngIf="hasDados()">
             <div class="grupo" *ngFor="let contexto of rankings">
                 <div class="grupo__titulo">{{getTitulo(contexto.contexto)}}</div>
                 

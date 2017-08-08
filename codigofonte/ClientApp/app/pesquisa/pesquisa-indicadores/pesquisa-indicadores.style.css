@@ -488,7 +488,7 @@ td.compara-blank {
 }
 
 .mensagem-vazio{
-    margin-left: 38%;
+    /*margin-left: 38%;*/
     font-weight: bold;
     font-size: 1em;
     text-align: center;
