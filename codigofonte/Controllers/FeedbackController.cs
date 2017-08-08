@@ -7,7 +7,6 @@ using MailKit.Net.Smtp;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
-using System.Text;
 
 namespace Brasil.Controllers
 {
