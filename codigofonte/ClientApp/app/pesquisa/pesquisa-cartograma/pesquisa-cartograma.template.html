@@ -6,7 +6,11 @@
     
     <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
     
-    <div [class.mapas--variosMapas]="mapas.length > 1">
+    <div class="mensagem-vazio" *ngIf="vazio">
+        Nenhum cartograma para exibir.
+    </div>
+
+    <div [class.mapas--variosMapas]="mapas.length > 1" *ngIf="!vazio">
         
         <div class="mapas__mapa" *ngFor="let mapa of mapas">
             <h4>Municípios {{getPreposicaoUF(mapa.localidade.nome)}} {{mapa.localidade.nome}}</h4>

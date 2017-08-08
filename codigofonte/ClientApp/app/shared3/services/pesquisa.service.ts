@@ -39,7 +39,7 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
 
-   @RxSimpleCache({
+    @RxSimpleCache({
         cache: PesquisaService3.cache
     })
     getPesquisasPorAbrangenciaTerritorial(nivelTerritorial: string): Observable<Pesquisa[]> {
@@ -53,7 +53,7 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err));
     }
 
-   @RxSimpleCache({
+    @RxSimpleCache({
         cache: PesquisaService3.cache
     })
     getPesquisas(pesquisasId: number[]): Observable<Pesquisa[]> {
@@ -65,7 +65,7 @@ export class PesquisaService3 {
             .catch(err => this._handleError(err));
     }
 
-   @RxSimpleCache({
+    @RxSimpleCache({
         cache: PesquisaService3.cache
     })
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
@@ -109,12 +109,12 @@ export class PesquisaService3 {
     private _filterPesquisas(hash, pesquisasId) {
         const obj = pesquisasId.reduce((acc, id) => {
             if (hash[id]) {
-                acc.pesquisas.push(hash[id])
+                acc.pesquisas.push(hash[id]);
             } else {
                 acc.errors.push(id);
             }
             return acc;
-        }, { pesquisas: [] as Pesquisa[], errors: [] as number[] })
+        }, { pesquisas: [] as Pesquisa[], errors: [] as number[] });
 
         if (obj.errors.length > 0) {
             throw new Error(`Não foram encontradas todas as pesquisas solicitadas. [ids: ${obj.errors.join(', ')}]`)

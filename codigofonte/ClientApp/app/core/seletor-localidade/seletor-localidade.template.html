@@ -23,13 +23,11 @@
 
         <nav>
             <ul>                
-                <!--
                 <li id='menu__brasil'>
                     <a class="seletor-localidade__link" routerLink="/brasil" routerLinkActive="active">
                         Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
                 </li>
-                -->
                 <li id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
                     Estados <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
@@ -56,7 +54,8 @@
                 <li *ngFor="let uf of ufs">
                     <div>
                         <a style="display:block" [routerLink]="uf?.link + URLEnd">
-                            {{uf.nome}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            {{uf.nome}}
+                            <!-- <i class="fa fa-chevron-right" aria-hidden="true"></i> -->
                         </a>
                     </div>
                 </li>

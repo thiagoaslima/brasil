@@ -218,6 +218,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         }
 
         this._seletorService.abrirSeletor();
+        this.aberto = true;
+        // this.setState('estados');
         this.isSeletorAberto.emit(true);
     }
 

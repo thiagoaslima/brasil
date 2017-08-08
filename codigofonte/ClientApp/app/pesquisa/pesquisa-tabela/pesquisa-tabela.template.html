@@ -23,6 +23,6 @@
     </template>
     
     <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
-        Nenhum valor para exibir.
+        Nenhum valor para exibir <span *ngIf="exclusiva">(pesquisa exclusiva para estados)</span>.
     </div>
 </table>

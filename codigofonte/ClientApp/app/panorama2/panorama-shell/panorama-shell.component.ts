@@ -4,7 +4,7 @@ import { AppState } from '../../shared2/app-state';
 import { PANORAMA, ItemConfiguracao } from '../configuration';
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { SyncCache } from '../../cache/decorators';
-import { converterObjArrayEmHash, getProperty } from '../../utils2';
+import { converterObjArrayEmHash } from '../../utils2';
 import { LocalidadeService3, ResultadoService3 } from '../../shared3/services';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -39,7 +39,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
 
     /*
      * TO DO
-     * retirar localidade service quando o AppState servir a Localidade do SharedModule3 
+     * retirar localidade service quando o AppState servir a Localidade do SharedModule3
     */
     constructor(
         private _appState: AppState,
@@ -55,7 +55,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
             .mergeMap(localidade => {
                 const _localidade = this._localidadeService.getByCodigo(localidade.codigo, 'proprio')[0];
                 let configuracao = PanoramaShellComponent.getConfiguracao(localidade.tipo);
-                let indicadoresId = <number[]>configuracao.map(item => getProperty('indicadorId', item));
+                let indicadoresId = configuracao.map(item => item.indicadorId).filter(Boolean);
                 return this._resultadoService
                     .getResultadosCompletos(indicadoresId, localidade.codigo)
                     .map(resultados => ({

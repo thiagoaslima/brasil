@@ -4,7 +4,7 @@ import { enableProdMode } from '@angular/core';
 import { platformNodeDynamic } from 'angular2-universal';
 import { AppModule } from './app.module';
 
-enableProdMode();
+// enableProdMode();
 const platform = platformNodeDynamic();
 
 export default function (params: any) : Promise<{ html: string, globals?: any }> {

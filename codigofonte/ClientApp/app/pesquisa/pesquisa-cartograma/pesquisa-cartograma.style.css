@@ -36,7 +36,15 @@ h4{
 {
 	width: 90%;
 	margin-top: -15px;
-	}
+}
+
+.mensagem-vazio{
+    /*margin-left: 38%;*/
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    padding: 20px;
+}
 
 @media screen and (max-width: 1460px) {
     .mapas--variosMapas .mapas__mapa{

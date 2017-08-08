@@ -3,6 +3,10 @@ export const TEMAS = {
         label: '',
         icon: ''
     },
+    agricultura: {
+        label: 'Agricultura',
+        icon: 'agricultura.svg'
+    },
     agropecuaria: {
         label: 'Agropecuária',
         icon: 'ico-agricultura.svg'

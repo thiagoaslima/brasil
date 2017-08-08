@@ -15,7 +15,7 @@ import { converterObjArrayEmHash } from "../../utils2";
     templateUrl: './panorama-temas.template.html',
     styleUrls: ['./panorama-temas.style.css']
 })
-export class PanoramaTemasComponent implements OnInit, OnChanges {
+export class PanoramaTemasComponent implements OnChanges {
     @Input() configuracao: ItemConfiguracao[] = [];
     @Input() localidade: Localidade = null;
     @Input() temaSelecionado: String = '';
@@ -33,10 +33,6 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
         private pageScrollService: PageScrollService
     ) { }
 
-    ngOnInit() {
-        
-    }
-
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         if (
             changes.hasOwnProperty('configuracao') && changes.configuracao.currentValue && changes.configuracao.currentValue.length > 0 ||
@@ -48,7 +44,21 @@ export class PanoramaTemasComponent implements OnInit, OnChanges {
                 this.resultados = resp.resultados;
                 this.rankings = resp.rankings;
                 this.atualizaTextos();
-            })
+
+                /*inverte os dados dos graficos de linhas, pois estavam vindo do maior para o menor ano*/
+                for(let i = 0; i < this.temas.length; i++){
+                    let graficos = this.temas[i].graficos;
+                    for(let j = 0; graficos && j < graficos.length; j++){
+                        if(graficos[j].tipo == "linha"){
+                            let grafico = graficos[j];
+                            grafico.eixoX.reverse(); /*inverte labels*/
+                            for(let k = 0; grafico.dados && k < grafico.dados.length; k++)
+                                grafico.dados[k].data.reverse(); /*inverte dados*/
+                        }
+                    }
+                }
+                /*--------------*/
+            });
         }
 
         if (this.isBrowser) {

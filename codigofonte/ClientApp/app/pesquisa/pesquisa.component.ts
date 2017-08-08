@@ -26,7 +26,7 @@ import { flatTree } from '../utils/flatFunctions';
 export class PesquisaComponent implements OnInit, OnDestroy {
     @ViewChild('dados') dados: ElementRef;
 
-    posicaoIndicador: string = "2";
+    posicaoIndicador = '2';
     localidades: string[];
     periodo: string;
     tipo: string;

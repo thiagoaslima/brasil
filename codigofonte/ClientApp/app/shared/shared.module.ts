@@ -9,6 +9,7 @@ import { TopoJson, TOPOJSON } from './topojson.v2';
 import { RouterParamsService } from './router-params.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
+import { CortaTextoPipe } from './corta-texto.pipe';
 import { IsMobileService } from './is-mobile.service';
 import { QRCodeComponent } from './qrcode/qrcode.component';
 import { Breadcrumb } from './breadcrumb/breadcrumb.component';
@@ -27,7 +28,8 @@ const MODULES = [
 
 const PIPES = [
     // put pipes here
-    ResultadoPipe
+    ResultadoPipe,
+    CortaTextoPipe
 ];
 
 const COMPONENTS = [

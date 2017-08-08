@@ -34,6 +34,10 @@
     width: calc(96% - 171px);
 }
 
+.comBandeira .topo__celula-esquerda{
+    margin-top: 0px;
+}
+
 .topo__celula-linha {
     width: 100%;
     float: left;
@@ -104,7 +108,7 @@
 }
 
 .lista__icone .ico{   
-    width: 30px;
+    width: 44px;
     height: 16px;
     /*background-repeat: no-repeat;
     background-position: center;*/
@@ -423,5 +427,7 @@
         margin-left: inherit;
     }
     
-    
+    .fontes-e-nota-geral {
+        display: none;
+    }
 }
