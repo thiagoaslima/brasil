@@ -14,7 +14,9 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
 })
 export class BuscaHeaderComponent implements OnInit {
 
+    @Input() localidadePrincipal: Localidade;
     @Input() localidadeAtual: Localidade;
+    @Input() localidadeIrma: Localidade;
     // 'estadual' ou 'municipal'
     @Input() nivelRegional: string = 'municipal';
     @Output() onLocalidade = new EventEmitter();
@@ -22,7 +24,6 @@ export class BuscaHeaderComponent implements OnInit {
     mostrarMenu = false;
     localidades: Localidade[];
     capitais: Localidade[];
-
 
     constructor(
         private _localidadeService: LocalidadeService2
@@ -52,8 +53,11 @@ export class BuscaHeaderComponent implements OnInit {
     }
 
     onClickItem(localidade: Localidade){
-
         this.mostrarMenu = false;
+
+        /*impede comparação com a mesma localide*/
+        if(localidade && (localidade == this.localidadePrincipal || localidade == this.localidadeIrma))
+            return;
 
         this.onLocalidade.emit(localidade);
     }

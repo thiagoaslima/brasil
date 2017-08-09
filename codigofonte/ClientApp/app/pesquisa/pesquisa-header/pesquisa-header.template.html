@@ -168,8 +168,8 @@
             <div class="cabecalho__visualizacao-dados__item__label">{{ localidade?.nome }}</div>
         </div>
 
-        <busca-header [nivelRegional]="isNivelEstadual ? 'estadual': 'municipal'" [localidadeAtual]="localidade1" (onLocalidade)="setaLocalidade1($event);"></busca-header>
-        <busca-header [nivelRegional]="isNivelEstadual ? 'estadual': 'municipal'" [localidadeAtual]="localidade2" (onLocalidade)="setaLocalidade2($event);"></busca-header>
+        <busca-header [nivelRegional]="isNivelEstadual ? 'estadual': 'municipal'" [localidadePrincipal]="localidade" [localidadeAtual]="localidade1" [localidadeIrma]="localidade2" (onLocalidade)="setaLocalidade1($event);"></busca-header>
+        <busca-header [nivelRegional]="isNivelEstadual ? 'estadual': 'municipal'" [localidadePrincipal]="localidade" [localidadeAtual]="localidade2" [localidadeIrma]="localidade1" (onLocalidade)="setaLocalidade2($event);"></busca-header>
 
         <div class="cabecalho__visualizacao-dados__item cabecalho__visualizacao-dados__item--compartilhar">
             <div class="area-click" [class.area-click--visivel]="mostrarOpcoes" (click)="mostrarOpcoes=false"></div>
