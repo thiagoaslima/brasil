@@ -47,6 +47,12 @@
     cursor: auto !important;
 }
 
+.desabilitado:hover{
+    color: #727272 !important;
+    fill: #727272 !important;
+    border-bottom-color: #CCC !important;
+}
+
 .notas {
     font-size: small;
     padding: 2px 5px;
