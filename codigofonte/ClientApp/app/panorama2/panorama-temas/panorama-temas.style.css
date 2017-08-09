@@ -80,19 +80,23 @@
 
 .grafico__detalhes{
     overflow: hidden;
+    margin-left: -15px;
 }
 
 .grafico__legenda{
     float: right;
-    width: 70%;
+    width: 100%;
     overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .grafico__legenda-item{
-    width: 24%;
+    width: calc(24% - 15px);
     float: left;
     padding-left: 15px;
     min-width: 100px;
+    height: 47px;
 }
 
 .grafico__legenda-cor{
@@ -119,6 +123,8 @@
 .grafico__legenda-texto{
     padding-top: 5px;
     font-size: 0.8em;
+    margin-bottom: 10px;
+    height: 48px;
 }
 
 .grafico__texto-eixo-x{
