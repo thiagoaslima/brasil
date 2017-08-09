@@ -45,7 +45,7 @@ export class NaoAcheiComponent implements OnInit {
     }
 
     enviar(email, assunto, mensagem){
-        this._http.post("https://brasil.homolog.ibge.gov.br/feedback", {
+        this._http.post("/feedback", {
             email: email,
             assunto: assunto,
             mensagem: mensagem

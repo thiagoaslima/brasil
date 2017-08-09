@@ -249,7 +249,6 @@ aside #menu ul li:hover {
     float: left;
     width: calc(100% - 250px);
     min-height: 100vw;
-    border-left: 10px solid #333;
     margin-left: 21%;
 }
 
