@@ -154,6 +154,7 @@ aside{
 
 aside.aside--municipio{
     background-color: #1B779B;
+    border-right: 10px solid rgb(51, 51, 51);
     /*margin-top: 32px;*/
 }
 
@@ -251,7 +252,6 @@ aside #menu ul li:hover {
     float: left;
     width: calc(100% - 250px);
     min-height: 100vw;
-    border-left: 10px solid #333;
     margin-left: 21%;
 }
 
@@ -303,7 +303,6 @@ sintese>dados
     width: 79%;
     min-height: 100%;
     margin-left: 21%;
-    border-left: 10px solid #333;
 	height: auto;
 	min-height:100%;
 	position:absolute;
