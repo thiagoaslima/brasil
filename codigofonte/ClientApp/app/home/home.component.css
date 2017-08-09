@@ -34,6 +34,13 @@ h2 {
     transition: background 200ms ease, color 200ms ease;
 }
 
+.button__link {
+    color: #00789d;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
 .search__field {
     font-size: 15px;
     line-height: 30px;

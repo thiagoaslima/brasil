@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { isBrowser } from 'angular2-universal';
-import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
+import { SeletorLocalidadeService } from './seletor-localidade.service';
 import { AppState } from '../../shared2/app-state';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import { PageScrollService } from 'ng2-page-scroll';
 
 import { IsMobileService } from '../../shared/is-mobile.service';
 
@@ -37,7 +38,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     private _ufSelecionada = null;
 
-    private hist = null; // guarda a referência para o objeto 'history' do browser
+    // guarda a referência para o objeto 'history' do browser
+    private hist = null;
 
     public isBrowser = isBrowser;
 
@@ -69,12 +71,12 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 return agg;
             }, {});
 
-            this.atual = Object.keys(hash).sort().map(letter => {
-                return {
+            this.atual = Object.keys(hash).sort().map(letter => (
+                {
                     letter,
                     municipios: hash[letter]
                 }
-            });
+            ));
 
             this.totalAtual = this.atual.reduce((sum, obj) => !!obj.municipios && (sum + obj.municipios) ? obj.municipios.length : 0, 0);
         }
@@ -97,11 +99,11 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
 
     public states = {
-        "estados": false,
-        "municipios": false,
-        "municipiosTodos": false,
-        "municipiosEstados": false,
-        "municipiosMunicipios": false
+        'estados': false,
+        'municipios': false,
+        'municipiosTodos': false,
+        'municipiosEstados': false,
+        'municipiosMunicipios': false
     };
 
     private _stateSelecionado = '';
@@ -135,8 +137,10 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _localidadeService: LocalidadeService2,
         private pageScrollService: PageScrollService,
         private _isMobileService: IsMobileService,
-        private _router: Router
+        private _router: Router,
+        private _seletorService: SeletorLocalidadeService
     ) {
+        this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto);
 
         // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
         // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
@@ -180,7 +184,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 this.fecharSeletor();
             });
 
-        this._buscaInput$$ = Observable.fromEvent<KeyboardEvent>(this.buscaInput.nativeElement, "keyup")
+        this._buscaInput$$ = Observable.fromEvent<KeyboardEvent>(this.buscaInput.nativeElement, 'keyup')
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
@@ -202,7 +206,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     @HostListener('window:mousedown', ['$event'])
     onMouseDown(event) {
-        //guarda a referência da Window do browser (melhorar a forma de pegar essa referência???)
+        // guarda a referência da Window do browser (melhorar a forma de pegar essa referência???)
         this.hist = event.view && event.view.history ? event.view.history : null;
     }
 
@@ -213,6 +217,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             this.hist.pushState({ seletor_localidade: true }, '', '');
         }
 
+        this._seletorService.abrirSeletor();
         this.aberto = true;
         // this.setState('estados');
         this.isSeletorAberto.emit(true);
@@ -220,7 +225,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     fecharSeletor() {
         this.setState('');
-        this.aberto = false;
+        this._seletorService.fecharSeletor();
         this.isSeletorAberto.emit(false);
         this.clearSearch();
         this.selecionarLocalidade.nativeElement.scrollTop = '0';
@@ -230,13 +235,13 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         this.stateSelecionado = stateName;
         this.ufSelecionada = uf;
         this.search(this.buscaInput.nativeElement.value);
-        //this.clearSearch();
+        // this.clearSearch();
 
 
         if (this.isBrowser) {
-            //scroll to top ao selecionar uf
+            // scroll to top ao selecionar uf
             this.pageScrollService.stopAll();
-            var pos = window.pageYOffset;
+            const pos = window.pageYOffset;
             if (pos > 0) {
                 window.scrollTo(0, -pos);
             }
@@ -250,15 +255,23 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         }
 
         if (this.ufSelecionada) {
-            if (termo.length >= 3) //mostra o resultado da busca
+            if (termo.length >= 3) {
+                // mostra o resultado da busca
                 return this.listaMunicipios.build(this.ufSelecionada.children, termo);
-            if (termo.length == 0) //mostra a lista inicial
+            }
+            if (termo.length === 0) {
+                // mostra a lista inicial
                 return this.listaMunicipios.build(this.ufSelecionada.children);
+            }
         } else {
-            if (termo.length >= 3) //mostra o resultado da busca
+            if (termo.length >= 3) {
+                // mostra o resultado da busca
                 return this.listaMunicipios.build(this.listaMunicipios.base, termo);
-            if (termo.length == 0) //mostra a lista inicial
+            }
+            if (termo.length === 0) {
+                // mostra a lista inicial
                 return this.listaMunicipios.build(this.listaMunicipios.base);
+            }
         }
     }
 
@@ -267,11 +280,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
 
     voltarMobile() {
-        if (this.states.municipios || this.states.estados) {
-            this.setState('');
-        } else {
-            this.fecharSeletor();
-        }
+        this.fecharSeletor();
     }
 
     focusBuscaInputMobile() {
