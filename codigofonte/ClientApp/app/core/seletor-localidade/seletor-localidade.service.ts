@@ -1,8 +1,9 @@
-import { listaNiveisTerritoriais } from '../../shared3/values/niveis-territoriais.values';
-import { niveisTerritoriais } from '../../shared3/values';
 import { Injectable } from '@angular/core';
 
+import { niveisTerritoriais } from '../../shared3/values';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class SeletorLocalidadeService {
@@ -18,14 +19,18 @@ export class SeletorLocalidadeService {
     };
     private _state = new BehaviorSubject<any>(this._states);
 
-    private _niveisTerritoriais = {
-        [niveisTerritoriais.pais.label]: false,
+    private _niveisTerritoriais = new BehaviorSubject({
+        [niveisTerritoriais.pais.label]: true,
         [niveisTerritoriais.uf.label]: true,
         [niveisTerritoriais.municipio.label]: true
-    };
+    });
+
+    private _forceURL = new Subject<string>();
 
     public isAberto$ = this._isOpen.asObservable();
     public state$ = this._state.asObservable();
+    public niveisTerrioriais$ = this._niveisTerritoriais.asObservable();
+    public forceURL$ = this._forceURL.asObservable();
 
     abrirSeletor(state?: string) {
         this._isOpen.next(true);
@@ -37,6 +42,7 @@ export class SeletorLocalidadeService {
 
     fecharSeletor() {
         this._isOpen.next(false);
+        this.resetNiveisTerritoriais();
     }
 
     setState(state: string) {
@@ -60,13 +66,26 @@ export class SeletorLocalidadeService {
         this._state.next(this._states);
     }
 
-    bloquearNiveisTerritoriais(niveis: Array<string>): void {
-        niveis.forEach(nivel => {
-            this._niveisTerritoriais[nivel] = false;
+    bloquearNiveisTerritoriais(niveis: string|Array<string>): void {
+        let _niveis = Array.isArray(niveis) ? niveis : [niveis];
+        let value = this._niveisTerritoriais.getValue();
+
+        _niveis.forEach(nivel => {
+            value[nivel] = false;
+        });
+
+        this._niveisTerritoriais.next(value);
+    }
+
+    resetNiveisTerritoriais(): void {
+        this._niveisTerritoriais.next({
+            [niveisTerritoriais.pais.label]: true,
+            [niveisTerritoriais.uf.label]: true,
+            [niveisTerritoriais.municipio.label]: true
         });
     }
 
-    isNivelTerritorialAcessivel(nivelTerritorial: string): boolean {
-        return this._niveisTerritoriais[nivelTerritorial];
+    forcePage(url: string) {
+        this._forceURL.next(url);
     }
 }

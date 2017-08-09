@@ -27,7 +27,7 @@ const children = [
   //   component: PanoramaComponent
   // },
 
-   {
+  {
     path: 'panorama',
     component: PanoramaShellComponent
   },
@@ -56,16 +56,16 @@ const children = [
       {
         path: 'v4',
         component: ShellComponent,
-        pathMatch: 'full',
+        // pathMatch: 'full',
         children: [{
           path: '',
           pathMatch: 'full',
           component: HomeComponent
+        },
+        {
+          path: 'pesquisas',
+          component: PesquisaHomeComponent
         }]
-      },
-      {
-        path: 'v4/pesquisas',
-        component: PesquisaHomeComponent
       },
       {
         path: 'v4/brasil/sandbox',

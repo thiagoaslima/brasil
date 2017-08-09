@@ -23,15 +23,15 @@
 
         <nav>
             <ul>                
-                <li id='menu__brasil'>
+                <li *ngIf="niveisTerritoriais.pais" id='menu__brasil'>
                     <a class="seletor-localidade__link" routerLink="/brasil" routerLinkActive="active">
                         Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
                 </li>
-                <li id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
+                <li *ngIf="niveisTerritoriais.uf" id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
                     Estados <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
-                <li id='menu__municipio' (click)="setState('municipiosTodos')" [class.selecionado]="states.municipios">
+                <li *ngIf="niveisTerritoriais.municipio" id='menu__municipio' (click)="setState('municipiosTodos')" [class.selecionado]="states.municipios">
                     Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
             </ul>
