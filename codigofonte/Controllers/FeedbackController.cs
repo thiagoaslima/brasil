@@ -64,7 +64,7 @@ namespace Brasil.Controllers
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
             message.To.Add(new MailboxAddress("", "ibge@ibge.gov.br"));
-            message.Subject = feedback.Assunto;
+            message.Subject = "Solicitação de usuário do cidades@";
 
             var builder = new BodyBuilder();
             builder.HtmlBody = $@"
@@ -98,8 +98,6 @@ namespace Brasil.Controllers
 
                             <h3>Mensagem</h3>
                             <p>{feedback.Mensagem}</p>
-
-                            <p class='footer'>Esta é uma mensagem automática. Favor não responder.</p>
                         </body>
                     </html>
             ";
