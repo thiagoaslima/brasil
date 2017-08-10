@@ -193,14 +193,14 @@ ANIMAÇÃO
 }
 
 #selecionar-localidade nav ul li:nth-child(2){
-    border-color: #148C99;
+    border-color: #1B779B;
     transition: background-color 0.3s;
 }
 
 #selecionar-localidade nav ul li:nth-child(2):hover,
 #selecionar-localidade nav ul li:nth-child(2).selecionado
 {
-    background-color: #148C99;
+    background-color: #1B779B;
     transition: background-color 0.3s;
 }
 

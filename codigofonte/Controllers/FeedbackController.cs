@@ -64,8 +64,8 @@ namespace Brasil.Controllers
              **/
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", "geonline@ibge.gov.br"));
-            message.To.Add(new MailboxAddress("", feedback.Email));
-            message.Subject = feedback.Assunto;
+            message.To.Add(new MailboxAddress("", "ibge@ibge.gov.br"));
+            message.Subject = "Solicitação de usuário do cidades@";
 
             var builder = new BodyBuilder();
             builder.HtmlBody = $@"
@@ -99,48 +99,49 @@ namespace Brasil.Controllers
 
                             <h3>Mensagem</h3>
                             <p>{feedback.Mensagem}</p>
-
-                            <p class='footer'>Esta é uma mensagem automática. Favor não responder.</p>
                         </body>
                     </html>
             ";
 
             message.Body = builder.ToMessageBody();
 
-            try
+            await Task.Run(() =>
             {
-                using (var SMTP = new SmtpClient())
+                try
                 {
-                    /**
-                     * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
-                     **/
-                    // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
-
-                    await SMTP.ConnectAsync("mailrelay.ibge.gov.br", 25, false);
-
-                    /**
-                     * XOAUTH2 authentication disabled - Não é usado no IBGE
-                     **/
-                    SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
-
-                    await SMTP.SendAsync(message);
-                    await SMTP.DisconnectAsync(true);
-                }
-            }
-            catch (Exception e)
-            {
-                using (var conn = new MySqlConnection(CONNECTION))
-                {
-                    conn.Open();
-
-                    using (var dbTransaction = conn.BeginTransaction())
+                    using (var SMTP = new SmtpClient())
                     {
-                        conn.Execute(@"UPDATE feedback SET flag = 0 WHERE id = @id", new { id = id }, dbTransaction);
+                        /**
+                         * For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
+                         **/
+                        // SMTP.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                        dbTransaction.Commit();
+                        SMTP.Connect("mailrelay.ibge.gov.br", 25, false);
+
+                        /**
+                         * XOAUTH2 authentication disabled - Não é usado no IBGE
+                         **/
+                        SMTP.AuthenticationMechanisms.Remove("XOAUTH2");
+
+                        SMTP.Send(message);
+                        SMTP.Disconnect(true);
                     }
                 }
-            }
+                catch (Exception e)
+                {
+                    using (var conn = new MySqlConnection(CONNECTION))
+                    {
+                        conn.Open();
+
+                        using (var dbTransaction = conn.BeginTransaction())
+                        {
+                            conn.Execute(@"UPDATE feedback SET flag = 0 WHERE id = @id", new { id = id }, dbTransaction);
+
+                            dbTransaction.Commit();
+                        }
+                    }
+                }
+            });
 
             return Ok();
         }

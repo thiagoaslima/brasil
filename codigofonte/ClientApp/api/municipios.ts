@@ -12707,8 +12707,8 @@ export const municipios = [
   {
     "codigoUf": 35,
     "codigo": 3516101,
-    "nome": "Florínia",
-    "slug": "florinia",
+    "nome": "Florínea",
+    "slug": "florinea",
     "microrregiao": 35039
   },
   {
