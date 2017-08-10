@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, Input, OnChanges, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
 import { EscopoIndicadores } from '../../shared2/indicador/indicador.model';
@@ -28,7 +28,9 @@ export class PesquisaTabelaComponent implements OnChanges {
     @Input() posicaoIndicador: string;
     @Input() periodo: string;
     @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
-   
+    
+    @Output() onEmpty = new EventEmitter();
+
     private indicadores;
     private isVazio;
     private exclusiva;
@@ -65,6 +67,12 @@ export class PesquisaTabelaComponent implements OnChanges {
                     indicador.isVazio = !this.hasAnyValue(indicador, this.periodo);
                     if(!indicador.isVazio) //tem algo para mostrar
                         this.isVazio = false;
+                }
+                //emite o evento para notificar que não existem valores para exibir
+                if(this.isVazio && this.isOcultarValoresVazios){
+                    this.onEmpty.emit(true);
+                }else{
+                    this.onEmpty.emit(false);
                 }
                 subscription$$.unsubscribe();
             });

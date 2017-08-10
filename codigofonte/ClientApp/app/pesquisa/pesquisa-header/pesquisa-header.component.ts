@@ -35,6 +35,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     baseURL = '';
     listaPeriodos = [];
     tipo = '';
+    isVazio = false;
 
     isNivelMunicipal;
     isNivelEstadual;
@@ -202,5 +203,9 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         }
 
         return this._localidadeService.getMunicipioByCodigo(codigoLocalidade);
+    }
+
+    vazio(isVazio){
+        this.isVazio = isVazio;
     }
 }

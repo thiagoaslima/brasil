@@ -8,6 +8,7 @@
         [localidades]="localidades"
         [periodo]="periodo"
         [ocultarValoresVazios]="isOcultarValoresVazios"
+        (onEmpty)="header.vazio($event)"
     ></pesquisa-tabela>
     
     <div *ngIf="tipo == 'grafico'">
