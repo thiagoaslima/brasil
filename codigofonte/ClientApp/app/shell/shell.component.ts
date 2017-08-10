@@ -22,7 +22,7 @@ import 'rxjs/add/operator/debounceTime';
       position: fixed;
     }
     .aside_recolhido {
-        transform: translateX(-189px);
+        transform: translateX(-185px);
         transition: transform 1s;
     }
     .aside_recolhido:hover {
