@@ -38,12 +38,12 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     private _ufSelecionada = null;
 
-    // guarda a referência para o objeto 'history' do browser
-    private hist = null;
+    private hist = null; // guarda a referência para o objeto 'history' do browser
 
     public isBrowser = isBrowser;
 
     public URLEnd = '';
+    private _forced = false;
 
     public listaMunicipios = {
         maisVistos: <Localidade[]>[],
@@ -99,6 +99,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
 
     public states = {
+        '': true,
         'estados': false,
         'municipios': false,
         'municipiosTodos': false,
@@ -106,7 +107,11 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         'municipiosMunicipios': false
     };
 
+    public niveisTerritoriais = {};
+
     private _stateSelecionado = '';
+    private _subscriptions = [];
+
     set stateSelecionado(stateName) {
         if (this._stateSelecionado) {
             this.states[this._stateSelecionado] = false;
@@ -140,11 +145,14 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _seletorService: SeletorLocalidadeService
     ) {
-        this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto);
+        let sub1 = this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto);
+        let sub2 = this._seletorService.state$.subscribe(states => this.states = states);
+        let sub3 = this._seletorService.niveisTerrioriais$.subscribe(niveis => this.niveisTerritoriais = niveis);
+        let sub4 = this._seletorService.forceURL$.subscribe(urlEnd => this.URLEnd = urlEnd );
 
         // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
         // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
-        this._router.events.filter(event => event instanceof NavigationEnd).subscribe(route => {
+        let sub5 = this._router.events.filter(event => event instanceof NavigationEnd).subscribe(route => {
 
             if (route.url.indexOf('/panorama') >= 0) {
                 this.URLEnd = '/panorama';
@@ -160,6 +168,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                     this.URLEnd = '/pesquisa/' + arr[0] + '/' + arr[1].split('?')[0];
                 }
             }
+
         });
 
         this.selecaoLocalidadesAtual = this._appState.observable$
@@ -174,6 +183,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
         this.ufs = this._localidadeService.getUfs().sort((a, b) => a.nome < b.nome ? -1 : 1);
         this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);
+
+        this._subscriptions.push(sub1, sub2, sub3, sub4, sub5);
     }
 
 
@@ -195,6 +206,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this._selecionada$$.unsubscribe();
         this._buscaInput$$.unsubscribe();
+        this._subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     // 'popstate' é o evento gerado ao usar o botão de voltar do browser
@@ -217,9 +229,9 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             this.hist.pushState({ seletor_localidade: true }, '', '');
         }
 
-        this._seletorService.abrirSeletor();
         this.aberto = true;
         // this.setState('estados');
+        this._seletorService.abrirSeletor();
         this.isSeletorAberto.emit(true);
     }
 

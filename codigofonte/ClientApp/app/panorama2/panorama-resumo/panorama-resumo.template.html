@@ -16,19 +16,21 @@
 
 
 <!-- Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo -->
-<template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
-    <div *ngIf="first || temas[idx-1].tema !== item.tema" [ngClass]="'resumo__icons__'+idx" [ngClass]="{'resumo-fixo': isHeaderStatic | async}">
+<div class='container-temas'>
+    <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
+            <div *ngIf="first || temas[idx-1].tema !== item.tema" [ngClass]="'resumo__icons__'+idx" [ngClass]="{'resumo-fixo': isHeaderStatic | async}">
 
-        <div class="mobile__exclusive temas__horizontais ">
-            <div class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())">
-                <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
-                    Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
-                    e se recalcular as margens de todas as anteriores-->
-                <img class="ico" [src]="icones[item.tema]" />
+                <div class="mobile__exclusive temas__horizontais ">
+                    <div class="lista__icone--mobile" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())">
+                        <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
+                            Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
+                            e se recalcular as margens de todas as anteriores-->
+                        <img class="ico" [src]="icones[item.tema]" />
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</template>
+    </template>
+</div>
 
 <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
     <table class="lista"  [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">

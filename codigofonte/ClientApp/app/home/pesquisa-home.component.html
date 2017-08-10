@@ -1,7 +1,98 @@
-<h1>Pesquisa Home</h1>
-<h1>Pesquisa Home</h1>
-<h1>Pesquisa Home</h1>
-<h1>Pesquisa Home</h1>
-<h1>Pesquisa Home</h1>
-<h1>Pesquisa Home</h1>
-<h1>Pesquisa Home</h1>
+<div id="wrapper">
+
+        <div class="header container">
+            <div class="header__voltar">
+                <a [routerLink]="['..']">&lt; Página Inicial</a>
+            </div>
+            <div class="header__descricao">
+                <h2>Pesquisas</h2>
+                <p>As diversas pesquisas do IBGE abrangem temas como Educação, Trabalho, Economia, População, Saúde e Território, não só sobre o Brasil mas também sobre seus estados e municípios. <br>Abaixo você encontra uma lista das pesquisas disponíveis no Brasil em Síntese, clique em uma pesquisa para saber mais.</p>
+            </div>
+        </div>
+
+        <nav class='pesquisas container'>
+            <ul>
+                <li><button type='button' (click)='selectPesquisa(19, ["pais"])'>Cadastro Central de Empresas</button></li>
+                <li><button type='button' (click)='selectPesquisa(23, [])'>Censo</button></li>
+                <!-- <li><button type='button' (click)='selectPesquisa(43, ["pais","uf","municipio"])'>Censo - Séries históricas</button></li> -->
+                <li><button type='button' (click)='selectPesquisa(24, [])'>Censo agropecuário</button></li>
+                <li><button type='button' (click)='selectPesquisa(10060, [])'>Contas regionais do Brasil</button></li>
+                <li><button type='button' (click)='selectPesquisa(13, ["pais"])'>Ensino - matrículas, docentes e rede escolar</button></li>
+                <li><button type='button' (click)='selectPesquisa(10066, [])'>Entidades de assistência social privadas sem fins lucrativos</button></li>
+                <li><button type='button' (click)='selectPesquisa(16, ["pais"])'>Extração vegetal e Silvicultura</button></li>
+                <li><button type='button' (click)='selectPesquisa(21, ["pais"])'>Finanças públicas</button></li>
+                <li><button type='button' (click)='selectPesquisa(22, ["pais"])'>Frota</button></li>
+                <li><button type='button' (click)='selectPesquisa(35, ["pais"])'>Fundações privadas e associações sem fins lucrativos</button></li>
+                <li><button type='button' (click)='selectPesquisa(10055, [])'>Indicadores sociodemográficos e de saúde no Brasil</button></li>
+                <li><button type='button' (click)='selectPesquisa(40, [])'>Índice de Desenvolvimento da Educação Básica</button></li>
+                <li><button type='button' (click)='selectPesquisa(37, [])'>Índice de Desenvolvimento Humano</button></li>
+                <li><button type='button' (click)='selectPesquisa(29, ["pais"])'>Instituições financeiras</button></li>
+                <li><button type='button' (click)='selectPesquisa(36, ["pais"])'>Mapa de pobreza e desigualdade</button></li>
+                <li><button type='button' (click)='selectPesquisa(10053, [])'>Migrações</button></li>
+                <li><button type='button' (click)='selectPesquisa(17, ["pais"])'>Morbidade hospitalar</button></li>
+                <li><button type='button' (click)='selectPesquisa(42, ["pais","uf"])'>Notificações de dengue registradas</button></li>
+                <li><button type='button' (click)='selectPesquisa(18, ["pais"])'>Pecuária</button></li>
+                <li><button type='button' (click)='selectPesquisa(49, [])'>Pesquisa Anual da Indústria da Construção</button></li>
+                <li><button type='button' (click)='selectPesquisa(50, [])'>Pesquisa Anual de Comércio</button></li>
+                <li><button type='button' (click)='selectPesquisa(52, [])'>Pesquisa Anual de Serviços</button></li>
+                <li><button type='button' (click)='selectPesquisa(10064, [])'>Pesquisa de inovação</button></li>
+                <li><button type='button' (click)='selectPesquisa(34, [])'>Pesquisa de serviços de hospedagem</button></li>
+                <li><button type='button' (click)='selectPesquisa(51, [])'>Pesquisa Industrial Anual - Empresa</button></li>
+                <li><button type='button' (click)='selectPesquisa(10061, [])'>Pesquisa Industrial Anual - Produto</button></li>
+                <li><button type='button' (click)='selectPesquisa(30, [])'>Pesquisa nacional de saneamento básico</button></li>
+                <li><button type='button' (click)='selectPesquisa(47, [])'>Pesquisa Nacional de Saúde</button></li>
+                <li><button type='button' (click)='selectPesquisa(10056, [])'>Pesquisa Nacional de Saúde do Escolar</button></li>
+                <li><button type='button' (click)='selectPesquisa(44, [])'>PNAD - Pesquisa Nacional por Amostra de Domicílios</button></li>
+                <li><button type='button' (click)='selectPesquisa(46, [])'>POF - Pesquisa de Orçamentos Familiares</button></li>
+                <li><button type='button' (click)='selectPesquisa(31, ["pais"])'>Produção agrícola - Cereais, leguminosas e oleaginosas</button></li>
+                <li><button type='button' (click)='selectPesquisa(15, ["pais"])'>Produção Agrícola - Lavoura Permanente</button></li>
+                <li><button type='button' (click)='selectPesquisa(14, ["pais"])'>Produção Agrícola - Lavoura Temporária</button></li>
+                <li><button type='button' (click)='selectPesquisa(38, ["pais","uf"])'>Produto Interno Bruto dos Municípios</button></li>
+                <li><button type='button' (click)='selectPesquisa(53, [])'>Projeção da população</button></li>
+                <li><button type='button' (click)='selectPesquisa(20, ["pais"])'>Registro civil</button></li>
+                <li><button type='button' (click)='selectPesquisa(10057, [])'>Relações entre as alterações históricas na dinâmica demográfica brasileira e impactos decorrentes do processo de envelhecimento da população</button></li>
+                <li><button type='button' (click)='selectPesquisa(10063, [])'>Série estudos e pesquisas: demografia das empresas</button></li>
+                <li><button type='button' (click)='selectPesquisa(10062, [])'>Série estudos e pesquisas: estatísticas de empreendedorismo</button></li>
+                <li><button type='button' (click)='selectPesquisa(32, ["pais"])'>Serviços de saúde</button></li>
+                <li><button type='button' (click)='selectPesquisa(45, [])'>Síntese de Indicadores Sociais</button></li>
+                <li><button type='button' (click)='selectPesquisa(10054, [])'>Tábuas abreviadas de mortalidade por sexo e idade</button></li>
+                <li><button type='button' (click)='selectPesquisa(39, [])'>Taxa de mortalidade infantil</button></li>
+
+                <!-- <li>Cadastro Central de Empresas</li>
+                <li>Censo</li>
+                <li>Censo Agropecuário</li>
+                <li>Ensio</li>
+                <li>Extração vegetal e silvicultura</li>
+                <li>Finanças Públicas</li>
+                <li>Frota</li>
+                <li>Fundações privadas</li>
+                <li>Índice de Desenvolvimento da Educação Básica</li>
+                <li>Indice de Desenvolvimento Humano</li>
+                <li>Instituições Financeiras</li>
+                <li>Mapa de pobreza e desigualdade</li>
+                <li>Morbidade hospitalar</li>
+                <li>Notificação de dengue registrada</li>
+                <li>Cadastro Central de Empresas</li>
+                <li>Censo</li>
+                <li>Censo Agropecuário</li>
+                <li>Ensio</li>
+                <li>Extração vegetal e silvicultura</li>
+                <li>Finanças Públicas</li>
+                <li>Frota</li>
+                <li>Fundações privadas</li>
+                <li>Índice de Desenvolvimento da Educação Básica</li>
+                <li>Indice de Desenvolvimento Humano</li>
+                <li>Instituições Financeiras</li>
+                <li>Mapa de pobreza e desigualdade</li>
+                <li>Morbidade hospitalar</li>
+                <li>Notificação de dengue registrada</li> -->
+            </ul>
+        </nav>
+
+        <footer class="clearfix">
+            <h3 class="footer__text">
+                Não sabe por onde começar?
+                <button class="button__action footer__button" type="button">Selecionar local</button>
+            </h3>
+        </footer>
+    </div>
