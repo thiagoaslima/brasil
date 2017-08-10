@@ -151,7 +151,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                         });
                         data.reverse();
 
-                        let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
+                        let localidade = this._localidadeServ.getByCodigo(resultado.codigoLocalidade, "proprio")[0];
                         this.localidades.push({'nome': localidade.nome, 'posicao': this.codigosLocalidades.indexOf(localidade.codigo.toString())});
                         
                         //faz o sort para manter a legenda na mesma ordem da comparação
