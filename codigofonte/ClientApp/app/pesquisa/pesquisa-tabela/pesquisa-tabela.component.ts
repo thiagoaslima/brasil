@@ -168,6 +168,15 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     public downloadCSV(){
 
+        debugger;
+
+        this._sintese.getPesquisaCompleta(24, [140010,330455]).subscribe(
+            res => {
+                debugger;
+                console.log(res);
+            }
+        );
+
         let ind = this.indicadores;
         let localidadeA = this.getLocalidade(String(this.localidades[0])).nome;
         let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this.getLocalidade(String(this.localidades[1])).nome : '';
@@ -198,9 +207,22 @@ export class PesquisaTabelaComponent implements OnChanges {
                 }
             }
         }
+
         //baixa o arquivo
-        let blob = new Blob([csv], { type: 'text/csv' });
-        FileSaver.saveAs(blob, this.pesquisa['nome'] + '(' + this.periodo + ').csv');
+        // let blob = new Blob([csv], { type: 'text/csv' });
+        // FileSaver.saveAs(blob, this.pesquisa['nome'] + '(' + this.periodo + ').csv');
+
+        this.downloadCSVFile(csv, `${this.pesquisa['nome']}(${this.periodo})`);
+    }
+
+    private indicadoresToCSV(){
+
+    }
+
+    private downloadCSVFile(content: string, name: string){
+
+        let blob = new Blob([content], { type: 'text/csv' });
+        FileSaver.saveAs(blob, `${name}.csv`);
     }
 
     private getLocalidade(codigoLocalidade: string): Localidade{

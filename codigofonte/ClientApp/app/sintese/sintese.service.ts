@@ -29,7 +29,19 @@ export class SinteseService {
 
     
 
-    
+    public getPesquisaCompleta(pesquisaId: number, codigosLocalidade: number[]){
+
+        // Obter Informações sobre a pesquisa
+        let infoPesquisa$ = this.getInfoPesquisa(pesquisaId.toString());
+
+        // Obter os indicadores
+        let indicadoresPesquisa$ = this.getIndicadoresPesquisa(pesquisaId, '0');
+
+        // Obter os resultados para as localidades
+
+
+        return indicadoresPesquisa$;
+    }
 
 
    
@@ -50,8 +62,9 @@ export class SinteseService {
                 }
 
             });
-
     }
+
+
 
 
     public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
@@ -61,12 +74,14 @@ export class SinteseService {
         return this._http.get(serviceEndpoint).map((res => res.json()));
     }
 
-    public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
+    public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string[], escopo = EscopoIndicadores.proprio) {
 
-        if(codigoLocalidade == "0"){
+        if(codigoLocalidade[0] == "0"){
 
             return Observable.of({});
         }
+
+        //codigoLocalidade.join('|')
 
         const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}`;
 
@@ -182,9 +197,9 @@ export class SinteseService {
 
         return Observable.zip(
             this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo)
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, [codigoLocalidadeA.toString()], escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, [codigoLocalidadeB.toString()], escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, [codigoLocalidadeC.toString()], escopo)
             )
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 
