@@ -1,4 +1,3 @@
-import { niveisTerritoriais } from '../../shared3/values';
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { isBrowser } from 'angular2-universal';
