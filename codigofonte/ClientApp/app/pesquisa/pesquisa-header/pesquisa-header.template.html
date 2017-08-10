@@ -92,7 +92,7 @@
             </div>
             Tabela
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')" [class.desabilitado]="listaPeriodos.length <= 1 || isNivelEstadual">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="setaTipo('grafico')" [class.desabilitado]="listaPeriodos.length <= 1">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -110,7 +110,7 @@
             </div>
             Série Histórica
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="setaTipo('cartograma')" [class.desabilitado]="isNivelEstadual">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="setaTipo('cartograma')">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">

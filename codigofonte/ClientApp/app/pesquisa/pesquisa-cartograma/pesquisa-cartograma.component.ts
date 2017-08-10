@@ -1,12 +1,10 @@
-import { IndicadorService3 } from '../../shared3/services';
+import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
 import { Observable } from 'rxjs/Rx';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { LinhaTempo } from '../../infografia/linha-tempo/linha-tempo.component';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.component';
 
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { ResultadoService3 } from '../../shared3/services/resultado.service';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
@@ -38,7 +36,7 @@ export class PesquisaCartogramaComponent implements OnChanges {
     vazio = false;
 
     constructor(
-        private _localidadeServ: LocalidadeService2,
+        private _localidadeServ: LocalidadeService3,
         private _resultadoServ: ResultadoService3,
         private _pesquisaService: PesquisaService2,
         private _indicadorServ: IndicadorService3,
@@ -67,9 +65,9 @@ export class PesquisaCartogramaComponent implements OnChanges {
                 this.indicador = indicadores[0];
             });
 
-        (<Localidade[]>this.localidades)
-            .map((localidade) => this._localidadeServ.getMunicipioByCodigo(localidade))
-            .filter(mun => mun !== undefined)
+        (<any[]>this.localidades)
+            .filter(localidade => localidade !== undefined)
+            .map((localidade) => this._localidadeServ.getByCodigo(localidade)[0])
             .forEach((mun) => {
                 if(mun.parent.codigo === 53) { return; }
                 if(!mapaLocalidadesMarcadas[mun.parent.codigo]) {
@@ -119,7 +117,7 @@ export class PesquisaCartogramaComponent implements OnChanges {
         
     }
 
-    private getPreposicaoUF(nomeUf: string): string{
+    public getPreposicaoUF(nomeUf: string): string{
 
         return this._localidadeServ.getPreprosisaoTituloUF(nomeUf);
     }

@@ -28,8 +28,6 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
     
     public indicador;
 
-    public mapas: {mun, resultados}[] = [];
-
     public mun;
 
     public resultados;
@@ -100,7 +98,6 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
         });
 
         if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
-            this.mapas = [];
             this.atualizaGraficos();
         }
     }
@@ -154,7 +151,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                         });
                         data.reverse();
 
-                        let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
+                        let localidade = this._localidadeServ.getLocalidadesByCodigo([resultado.codigoLocalidade])[0];
                         this.localidades.push({'nome': localidade.nome, 'posicao': this.codigosLocalidades.indexOf(localidade.codigo.toString()), 'faixa': this.localidades.length});
                         //faz o sort para manter a legenda na mesma ordem da comparação
                         this.localidades.sort((a, b) => {

@@ -163,7 +163,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             return;
         }
         
-        if(this.isNivelEstadual && tipo != 'ranking' ){
+        if(this.isNivelEstadual && tipo == 'grafico' && this.listaPeriodos.length <= 1){
             return;
         }
         
