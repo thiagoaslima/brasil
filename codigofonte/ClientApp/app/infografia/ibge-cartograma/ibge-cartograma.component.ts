@@ -89,7 +89,7 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     get marcadores() {
         let [minX, minY, width, height] = this.malha.viewBox.split(" ").map(parseFloat);
-        let marcadorSize = Math.max(width, height)/15;
+        let marcadorSize = Math.round(Math.max(width, height)/15);
 
         let marcadores = this.localidadesMarcadas.map((localidade) => {
 
