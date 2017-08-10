@@ -155,22 +155,16 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                         data.reverse();
 
                         let localidade = this._localidadeServ.getMunicipioByCodigo(resultado.codigoLocalidade);
-                        this.localidades.push({'nome': localidade.nome, 'posicao': this.codigosLocalidades.indexOf(localidade.codigo.toString()), 'faixa': this.localidades.length});
+                        this.localidades.push({'nome': localidade.nome, 'posicao': this.codigosLocalidades.indexOf(localidade.codigo.toString())});
                         //faz o sort para manter a legenda na mesma ordem da comparação
-                        this.localidades.sort((a, b) => {
-                            if(a.posicao > b.posicao)
-                                return 1;
-                            else if(b.posicao > a.posicao)
-                                return -1;
-                            else
-                                return 0;
-                        });
+                        this.localidades.sort((a, b) => a.posicao - b.posicao);
                         //-------------------
                         return {
                             data: data,
-                            label: localidade.nome
+                            label: localidade.nome,
+                            posicao: this.codigosLocalidades.indexOf(localidade.codigo.toString())
                         }
-                    });
+                    }).sort((a, b) => a.posicao - b.posicao);
             });
 
     }
