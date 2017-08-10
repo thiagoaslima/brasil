@@ -168,14 +168,14 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     public downloadCSV(){
 
-        debugger;
+        // debugger;
 
-        this._sintese.getPesquisaCompleta(24, [140010,330455]).subscribe(
-            res => {
-                debugger;
-                console.log(res);
-            }
-        );
+        // this._sintese.getPesquisaCompleta(24, [140010,330455]).subscribe(
+        //     res => {
+        //         debugger;
+        //         console.log(res);
+        //     }
+        // );
 
         let ind = this.indicadores;
         let localidadeA = this.getLocalidade(String(this.localidades[0])).nome;
