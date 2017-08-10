@@ -32,6 +32,20 @@ import 'rxjs/add/operator/debounceTime';
     .aside_recolhido #localidade {
         padding-right: 50px;
     }
+    @media screen and (min-width: 768px) and (max-width: 1120px){
+        .aside_recolhido {
+            transform: translateX(-85%);
+            transition: transform 1s;
+        }
+        .aside_recolhido #localidade {
+            padding-right: 20px;
+        }
+    }
+    @media screen and (max-width: 768px){
+        .aside_recolhido {
+            display: none;
+        }
+    }
   `]
 })
 export class ShellComponent implements OnInit, OnDestroy {

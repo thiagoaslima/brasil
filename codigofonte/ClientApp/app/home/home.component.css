@@ -253,6 +253,11 @@ footer {
     .banner__item{
         background-size: 250% auto;
     }
+    
+    #wrapper {
+        padding-left: 20px;
+    }
+
 }
 
 @media screen and (max-width: 1100px){
@@ -286,7 +291,12 @@ footer {
     }
 }
 
+
 @media screen and (max-width: 768px){
+    #wrapper {
+       padding-left: 0;
+    }
+
     .banner__item{
         background-size: auto 100%;
     }
