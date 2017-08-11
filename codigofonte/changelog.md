@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.1.15.2] - 2017-08-11
+### Changed
+- Desabilitada a opção de envio de feedback.
+
+
 ## [v4.1.15.1] - 2017-08-11
 ### Added
 - Panorama de estados.
