@@ -9,6 +9,9 @@ import { ResultadoPipe } from '../../shared2/resultado.pipe';
     styleUrls: ['./panorama-card.style.css']
 })
 export class PanoramaCardComponent implements OnChanges {
+    @Input() mostrarLinkRanking: boolean;
+    @Input() indicadorId: number;
+    @Input() pesquisaId: number;
     @Input() titulo = '';
     @Input() valor = '';
     @Input() unidade = '';
@@ -20,20 +23,19 @@ export class PanoramaCardComponent implements OnChanges {
     public cssRanking: any = {};
     _resultadoPipe: ResultadoPipe;
 
-
-    constructor(){
+    constructor() {
         this._resultadoPipe = new ResultadoPipe();
     }
 
 
     ngOnChanges(changes: any) {
 
-        if(this._resultadoPipe.transform(this.valor) == 'Ignorado' || 
-            this._resultadoPipe.transform(this.valor) == 'Não disponível' || 
-            this._resultadoPipe.transform(this.valor) == 'Não informado' || 
-            this._resultadoPipe.transform(this.valor) == 'Não existente' || 
-            this._resultadoPipe.transform(this.valor) == '*' || 
-            this._resultadoPipe.transform(this.valor) == '-'){
+        if (this._resultadoPipe.transform(this.valor) === 'Ignorado' ||
+            this._resultadoPipe.transform(this.valor) === 'Não disponível' ||
+            this._resultadoPipe.transform(this.valor) === 'Não informado' ||
+            this._resultadoPipe.transform(this.valor) === 'Não existente' ||
+            this._resultadoPipe.transform(this.valor) === '*' ||
+            this._resultadoPipe.transform(this.valor) === '-') {
 
             this.ranking.BR.hasValor = false;
 
@@ -42,8 +44,6 @@ export class PanoramaCardComponent implements OnChanges {
             this.ranking.BR.hasValor = true;
 
         }
-
-        
 
         if (this.ranking && this.ranking.BR) {
             this.cssRanking.BR = 'p' + this.calcularPercentualRanking(this.ranking.BR.posicao,  this.ranking.BR.itens);

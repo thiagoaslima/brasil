@@ -5,6 +5,9 @@
         <panorama-card
             *ngFor="let painel of dados; let i = index"
             (click)="selectPainel(i)"
+            [mostrarLinkRanking]="painel.mostrarLinkRanking"
+            [indicadorId]="painel.indicadorId"
+            [pesquisaId]="painel.pesquisaId"
             [titulo]="painel.titulo"
             [valor]="painel.valor"
             [unidade]="painel.unidade"

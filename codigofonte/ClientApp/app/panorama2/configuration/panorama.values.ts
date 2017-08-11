@@ -42,6 +42,8 @@ export interface dadosGrafico {
 }
 
 export interface dadosPainel {
+    mostrarLinkRanking: boolean
+    pesquisaId: number
     indicadorId: number
     titulo: string
     valor: string
