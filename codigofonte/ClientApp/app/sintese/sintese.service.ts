@@ -27,14 +27,13 @@ export class SinteseService {
     ) { }
 
 
-    
-
-    
 
 
-   
 
-    /**
+
+
+
+   /**
      * Obtém notas e fontes da pesquisa solicitada.
      */
     public getInfoPesquisa(pesquisa: string) {
