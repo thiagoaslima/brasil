@@ -82,6 +82,8 @@
             </div>
 
         </div>
+
+        <a *ngIf="mostrarLinkRanking" class="comparacoes__link-ranking" [routerLink]="['..', 'pesquisa', pesquisaId, indicadorId]" [queryParams]="{tipo: 'ranking'}" >Acessar página de ranking</a>
     </div> 
 
 </div>

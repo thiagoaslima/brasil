@@ -68,6 +68,15 @@
     transition: max-height 500ms ease, opacity 150ms ease, margin-top 500ms ease, margin-bottom 500ms ease;
 }
 
+.comparacoes__link-ranking {
+    margin-top: 10px;
+    display: block;
+    font-size: 0.85em;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #29ABE2;
+}
+
 .sem-valor.selecionado .comparacoes{
     opacity: 0.2;
     filter: alpha(opacity=40)

@@ -79,10 +79,12 @@
         <router-outlet #routerOutlet></router-outlet>
     </div>
     
-    <nao-achei></nao-achei>
+    <!-- Desabilitado
+        <nao-achei></nao-achei>
+    -->
     <questionario></questionario>
     
-    <footer class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</footer>
+    <footer *ngIf="!isHome" class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</footer>
     
     <div class="share_Button" *ngIf="isBrowser">
     <share-container

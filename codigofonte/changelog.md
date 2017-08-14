@@ -1,5 +1,29 @@
 # Change log
 
+## [v4.1.15.2] - 2017-08-11
+### Changed
+- Desabilitada a opção de envio de feedback.
+
+
+## [v4.1.15.1] - 2017-08-11
+### Added
+- Panorama de estados.
+- Pesquisa de estados.
+- Fotos de estados.
+- Opção de envio de feedback.
+
+### Changed
+- Desabilitado o prerender, devido a problema no servidor.
+- Alteração no card do panorama para melhor visualização dos dados.
+
+### Fixed
+- Correção do nome do município de Florínea/SP.
+- Ajuste na legenda dos gráficos.
+- Tratamento de nomes longos de pesquisas.
+- Mudança de cor no seletor de localidade (estados).
+- Ajuste na exibição mobile.
+
+
 ## [v4.1.14] - 2017-07-05
 ### Fixed
 - Correção na visualização dos dados na tabela das pesquisas.

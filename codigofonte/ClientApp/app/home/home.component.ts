@@ -9,6 +9,8 @@ import { SeletorLocalidadeService } from '../core/seletor-localidade/seletor-loc
 })
 
 export class HomeComponent implements OnInit {
+    public versao = require('../version.json');
+
     constructor(
         private _seletorLocalidadeService: SeletorLocalidadeService
     ) { }

@@ -1,9 +1,10 @@
-import { LocalidadeService3 } from '../shared3/services/localidade.service';
-import { RankingService3 } from '../shared3/services/ranking.service';
-import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { Injectable } from '@angular/core';
 
 import { ItemConfiguracao, PanoramaVisualizacao } from './configuration';
+import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
+import { PesquisaConfiguration } from '../shared2/pesquisa/pesquisa.configuration';
+import { LocalidadeService3 } from '../shared3/services/localidade.service';
+import { RankingService3 } from '../shared3/services/ranking.service';
 import { ResultadoService3 } from '../shared3/services';
 import { Localidade, Resultado } from '../shared3/models';
 import { converterObjArrayEmHash } from '../utils2';
@@ -20,7 +21,8 @@ export class Panorama2Service {
     constructor(
         private _resultadoService: ResultadoService3,
         private _localidadeService: LocalidadeService3,
-        private _rankingService3: RankingService3
+        private _rankingService3: RankingService3,
+        private _pesquisasConfiguration: PesquisaConfiguration
     ) {
         this._totalUfs = this._localidadeService.getRoot().children.length;
         this._totalMunicipios = this._localidadeService.getRoot().children.reduce((sum, uf) => sum + uf.children.length, 0);
@@ -221,6 +223,8 @@ export class Panorama2Service {
         const resultado = resultados[item.indicadorId];
 
         return {
+            mostrarLinkRanking: this._pesquisasConfiguration.isValida(item.pesquisaId),
+            pesquisaId: item.pesquisaId,
             indicadorId: item.indicadorId,
             titulo: item.titulo,
             valor: resultado && resultado.valorValidoMaisRecente,
@@ -265,9 +269,9 @@ export class Panorama2Service {
     }
 
     private converterParaNumero(valor: string): number {
-        if (valor == '99999999999999' || valor == '99999999999998' || valor == '99999999999997' ||
-            valor == '99999999999996' || valor == '99999999999995' || valor == '99999999999992' ||
-            valor == '99999999999991') {
+        if (valor === '99999999999999' || valor === '99999999999998' || valor === '99999999999997' ||
+            valor === '99999999999996' || valor === '99999999999995' || valor === '99999999999992' ||
+            valor === '99999999999991') {
 
             valor = '0';
         }

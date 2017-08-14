@@ -42,6 +42,7 @@ export class SeletorLocalidadeService {
 
     fecharSeletor() {
         this._isOpen.next(false);
+        this.setState('');
         this.resetNiveisTerritoriais();
     }
 
