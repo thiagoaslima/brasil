@@ -97,6 +97,11 @@ export class BuscaComponent implements OnInit {
             let destaque = '';
             let link = '';
 
+            if (localidade.tipo == 'pais') {
+                tipo = 'País';
+                link = '/brasil';
+            }
+            
             if (localidade.tipo == 'uf') {
 
                 tipo = 'Estado';
