@@ -114,6 +114,16 @@ export class LocalidadeService2 {
         return this.getUfByCodigo(identificador);
     }
 
+    public getLocalidadeById(codigoLocalidade: number): Localidade{
+
+        if(codigoLocalidade.toString().length == 2){
+
+            return this.getUfByCodigo(codigoLocalidade);
+        }
+
+        return this.getMunicipioByCodigo(codigoLocalidade);
+    }
+
     public getUfByCodigo(ufCodigo: number) {
         if (!ufCodigo) return;
         return this._ufs.buscarPorCodigo(ufCodigo);

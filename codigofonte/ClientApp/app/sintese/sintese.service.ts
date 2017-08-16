@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
-import { EscopoIndicadores } from '../shared2/indicador/indicador.model'
-import { SINTESE, SinteseConfigItem } from './sintese-config';
-import { flatTree } from '../utils/flatFunctions';
-
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/zip';
 import 'rxjs/add/operator/switchMap';
-import { ufs } from '../../api/ufs';
 
+import { EscopoIndicadores } from '../shared2/indicador/indicador.model'
+import { SINTESE, SinteseConfigItem } from './sintese-config';
+import { flatTree } from '../utils/flatFunctions';
+import { ufs } from '../../api/ufs';
+import { LocalidadeService3 } from '../shared3/services';
+
+
+const headers = new Headers({ 'accept': '*/*' });
+const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 /**
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
@@ -23,15 +26,9 @@ export class SinteseService {
 
     constructor(
         private _http: Http,
-        private _sinteseConfig: SINTESE
+        private _sinteseConfig: SINTESE,
+        private _localidadeService: LocalidadeService3
     ) { }
-
-
-
-
-
-
-
 
    /**
      * Obtém notas e fontes da pesquisa solicitada.
@@ -49,15 +46,13 @@ export class SinteseService {
                 }
 
             });
-
     }
-
 
     public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
 
         const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=${escopo}`;
 
-        return this._http.get(serviceEndpoint).map((res => res.json()));
+        return this._http.get(serviceEndpoint, options).map((res => res.json()));
     }
 
     public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
@@ -91,6 +86,27 @@ export class SinteseService {
         });
     }
 
+    public getResultadoPesquisa2(pesquisaId: number, posicaoIndicador: string, codigoUF: number, escopo = EscopoIndicadores.arvore) {
+
+        let codigoCoringaTodosMunucipiosUF = codigoUF == 0 ? 'xx' : `${codigoUF}xxxx`;
+
+        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}`;
+
+        const dadosPesquisa$ = this._http.get(serviceEndpoint, options)
+            .map((res => res.json()))
+            .map(this._excludeNullYearsFromResultados);
+
+        return dadosPesquisa$.map((dados) => {
+
+            let indicadores = [];
+            dados.map((dado: any) => {
+
+                return indicadores[dado.id] = dado.res;
+            });
+
+            return indicadores;
+        });
+    }
 
     /**
      * Recupera apenas os dados da pesquisa, ignorando os rótulos dos indicadores.
@@ -140,7 +156,7 @@ export class SinteseService {
         }
 
         const nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores`, options
         ).map((res => res.json()));
 
         return nomesPesquisa$
@@ -192,6 +208,51 @@ export class SinteseService {
                 return nomes;
             });
     }
+
+
+    public getPesquisaCompletaLocalidades(pesquisaId: number, codigoUF: number, posicaoIndicador: string, escopo = EscopoIndicadores.arvore) {
+
+        return Observable.zip( 
+                    this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo), 
+                    this.getResultadoPesquisa2(pesquisaId, posicaoIndicador, codigoUF, escopo) 
+                )
+                .map(([nomes, dados]) => {
+
+                    return this.percorrerSubIndicadores(nomes, dados);
+                });
+    }
+
+    private percorrerSubIndicadores(listaIndicador, dados): any[]{
+
+        let indicadores = [];
+
+        listaIndicador.forEach(indicador => {
+
+            indicadores.push( {
+                id: indicador.id,
+                nome: indicador.indicador,
+                posicao: indicador.posicao,
+                unidade: indicador.unidade ? indicador.unidade.id : '',
+                multiplicador: indicador.unidade ? indicador.unidade.multiplicador : '',
+                notas: indicador.nota,
+                resultado: dados[indicador.id] ? dados[indicador.id].map(res => {
+
+                    res.nomeLocalidade = this._localidadeService.getByCodigo(res.localidade)[0].nome;
+
+                    return res;
+                }) : ''
+            } );
+
+            if(!!indicador.children && indicador.children.length > 0){
+
+                indicadores = indicadores.concat( this.percorrerSubIndicadores(indicador.children, dados) );
+            }
+
+        })
+
+        return indicadores;
+    }
+
 
     /**
      * Obtém o histórico de um munucípio, dado seu código.
