@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 
 import { AppState } from '../../shared2/app-state';
 import { BuscaService } from './busca.service';
@@ -14,6 +14,8 @@ import { Observable } from 'rxjs/Observable';
 export class BuscaComponent implements OnInit {
 
     @ViewChild('campoBusca') campoBusca: ElementRef;
+
+    @Input() URLEnd = '';
 
     modoDigitacao = false;
     menuAberto = false;
@@ -95,6 +97,11 @@ export class BuscaComponent implements OnInit {
             let destaque = '';
             let link = '';
 
+            if (localidade.tipo == 'pais') {
+                tipo = 'País';
+                link = '/brasil';
+            }
+            
             if (localidade.tipo == 'uf') {
 
                 tipo = 'Estado';

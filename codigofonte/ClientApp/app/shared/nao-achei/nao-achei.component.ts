@@ -29,6 +29,7 @@ export class NaoAcheiComponent implements OnInit {
     aberto = false;
     esconde = true; //setar para false assim que tiver que entrar em produção (quando todos os serviços estiverem implementados).
     enviado = false;
+    url = '';
 
     constructor(
         private _routerParamsServ: RouterParamsService,
@@ -45,10 +46,13 @@ export class NaoAcheiComponent implements OnInit {
     }
 
     enviar(email, assunto, mensagem){
+        if(isBrowser){
+            this.url = '\n\nPágina de origem: ' + window.location.href;
+        }
         this._http.post("/feedback", {
             email: email,
             assunto: assunto,
-            mensagem: mensagem
+            mensagem: mensagem + this.url
         }, options)
         .subscribe(res => {
             //console.log("ok", res);

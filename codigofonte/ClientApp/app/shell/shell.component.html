@@ -6,7 +6,7 @@
         </a>
     </div>
     
-    <busca (buscaAberta)="seletor.fecharSeletor()"></busca>
+    <busca (buscaAberta)="seletor.fecharSeletor()" [URLEnd]="seletor?.URLEnd"></busca>
     <aniversario></aniversario>
 
 </header>
@@ -22,11 +22,11 @@
                     <template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
                         <!--Brasil-->
                         <li *ngIf="first">
-                            <a [routerLink]="local.link">{{local.nome}}</a>
+                            <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a>
                         </li>
                         <!--Estado-->
                         <li *ngIf="!first && !last">
-                            <a [routerLink]="local.link">{{local.nome}}</a>
+                            <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a>
                         </li>
                         <!--Município-->
                         <li *ngIf="last">
