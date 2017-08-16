@@ -68,6 +68,8 @@ export class ShellComponent implements OnInit, OnDestroy {
     private _localidade$$: Subscription;
     private _scrollTop$ = new BehaviorSubject(0);
 
+    historicoHabilitado = true;
+
     @HostListener('window:scroll', ['$event'])
     onScroll({ target }) {
         if (target) {
@@ -127,6 +129,15 @@ export class ShellComponent implements OnInit, OnDestroy {
                     this.itemSelecionado = '';
                     this.isHome = true;
                 }
+
+                //desabilita o botão de 'histórico e fotos' no 'brasil'
+                //verifica se depois do 'brasil', na url, vem a sigla de um estado (duas letras), senão, significa que está no 'brasil' e desabilita o historico
+                if(url[url.indexOf('brasil') + 1].length > 2){
+                    this.historicoHabilitado = false;
+                }else{
+                    this.historicoHabilitado = true;
+                }
+                //-----
             }
 
             this.menuAberto = queryParams['detalhes'] === 'true';
