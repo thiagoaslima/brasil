@@ -64,6 +64,7 @@ namespace Brasil.Controllers
                     foreach (var resposta in questionario.respostas)
                     {
                         conn.Execute(@"
+                            SET NAMES UTF8;
                             INSERT INTO resposta(id_questionario, num_questao, _resposta, observacao)
                                 VALUES (@questionario, @questao, @resposta, @observacao)", new { questionario = id, questao = resposta.questao, resposta = resposta.value, observacao = resposta.observacao }, dbTransaction);
                     }
