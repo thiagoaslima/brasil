@@ -27,11 +27,9 @@ export class MetatagBrowserComponent implements OnInit {
         this._routerParamsService.params$.subscribe(({ params }) => {
             if (isBrowser && window) {
                 let local = '';
-                let localidade =params.municipio
-                    ? this._localidadeService.getMunicipioBySlug(params.uf, params.municipio)
-                    : params.uf
-                        ? this._localidadeService.getUfBySigla(params.uf)
-                        : undefined;
+                let localidade = params.municipio ? this._localidadeService.getMunicipioBySlug(params.uf, params.municipio) : 
+                                 params.uf ? this._localidadeService.getUfBySigla(params.uf) 
+                                 : this._localidadeService.getRoot();
 
                 if (localidade) {
                     if (localidade.tipo == 'municipio') {
