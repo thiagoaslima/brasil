@@ -13,16 +13,16 @@ export const PANORAMA: {
 } = {
         [niveisTerritoriais.pais.label]: {
             temas: [
-                TEMAS.nenhum.label,
+                // TEMAS.nenhum.label,
                 TEMAS.territorio.label,
                 TEMAS.populacao.label,
-                TEMAS.educacao.label,
-                TEMAS.trabalho.label,
-                TEMAS.agropecuaria.label,
-                TEMAS.industria.label,
-                TEMAS.comercio.label,
-                TEMAS.servicos.label,
-                TEMAS.economia.label
+                // TEMAS.educacao.label,
+                // TEMAS.trabalho.label,
+                // TEMAS.agropecuaria.label,
+                // TEMAS.industria.label,
+                // TEMAS.comercio.label,
+                // TEMAS.servicos.label,
+                // TEMAS.economia.label
             ],
 
             indicadores: [
@@ -32,7 +32,7 @@ export const PANORAMA: {
                     periodo: '2017',
                     titulo: 'Área territorial',
                     tema: TEMAS.territorio.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
+                    visualizacao: PanoramaVisualizacao.numerico,
                     grafico: {
                         titulo: 'Área por bioma',
                         tipo: TiposGrafico.coluna,
@@ -77,7 +77,7 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
                         titulo: 'Total de habitantes',
-                        tipo: TiposGrafico.coluna,
+                        tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 10065,
                             indicadorId: 60410,

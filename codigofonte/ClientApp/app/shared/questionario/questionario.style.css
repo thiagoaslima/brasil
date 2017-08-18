@@ -13,8 +13,7 @@
     display: inline-block;
     position: relative;
     padding: 15px 30px;
-    max-width: 550px;
-    width: 40%;
+    width: 550px;
 }
 
 .questionario__aba{
@@ -110,4 +109,8 @@
 
 .questionario__direita{
     text-align: right;
+}
+
+.questionario__escondido{
+    display: none;
 }

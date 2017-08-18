@@ -57,7 +57,7 @@
                     <a style="display:block" (click)="abrirMenuPesquisa = !abrirMenuPesquisa">Pesquisas</a>
                 </li>
 
-                <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'historico'">
+                <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'historico'" *ngIf="historicoHabilitado">
                     <a style="display:block" [routerLink]="getLink('historico')">História & Fotos</a>
                 </li>
 

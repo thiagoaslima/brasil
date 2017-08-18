@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <panorama-painel [dados]="item.painel" [localidade]="localidade"></panorama-painel>
+    <panorama-painel *ngIf="item.painel.length > 0" [dados]="item.painel" [localidade]="localidade"></panorama-painel>
 
     
     <div class="grafico" *ngFor="let obj of item.graficos; let i = index">

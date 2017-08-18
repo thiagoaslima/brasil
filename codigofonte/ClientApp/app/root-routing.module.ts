@@ -1,6 +1,5 @@
 import { V3RouterGuard } from './v3-router.guard';
 import { EmptyComponent } from './empty.component';
-import { EmptyLocationGuard } from './empty-location.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -49,8 +48,6 @@ const children = [
       {
         path: '',
         redirectTo: 'v4',
-        // canActivate: [EmptyLocationGuard],
-        // component: EmptyComponent,
         pathMatch: 'full'
       },
       {
@@ -68,27 +65,58 @@ const children = [
         }]
       },
       {
-        path: 'v4/brasil/sandbox',
-        component: SandboxComponent
-      },
-      {
         path: 'brasil/sandbox',
         redirectTo: 'v4/brasil/sandbox',
       },
       {
+        path: 'v4/brasil/sandbox',
+        component: SandboxComponent
+      },
+      {
+        path: 'brasil',
+        redirectTo: 'v4/brasil',
+      },
+      {
+        path: 'brasil',
+        redirectTo: 'v4/brasil',
+      },
+      {
         path: 'v4/brasil',
-        redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
-        pathMatch: 'full'
-        // children
+        // redirectTo: 'v4',
+        // pathMatch: 'full'
+        canActivate: [ValidParametersGuard],
+        component: ShellComponent,
+        children
       },
       {
         path: 'brasil/:uf',
         redirectTo: 'v4/brasil/:uf',
       },
       {
+        path: 'v4/brasil/panorama',
+        component: ShellComponent,
+        children: [
+          { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
+        ]
+      },
+      {
+        path: 'v4/brasil/pesquisa',
+        component: ShellComponent,
+        children: [
+          { path: '', component: PesquisaComponent, pathMatch: 'full' },
+          { path: ':pesquisa', component: PesquisaComponent },
+          { path: ':pesquisa/:indicador', component: PesquisaComponent }
+        ]
+      },    
+      {
+        path: 'v4/brasil/historico',
+        component: ShellComponent,
+        children: [
+          { path: '', component: VisaoHistoricaComponent, pathMatch: 'full' },
+        ]
+      },    
+      {
         path: 'v4/brasil/:uf',
-        // redirectTo: 'v4/brasil/rj/rio-de-janeiro/panorama',
-        // pathMatch: 'full'
         canActivate: [ValidParametersGuard],
         component: ShellComponent,
         children
