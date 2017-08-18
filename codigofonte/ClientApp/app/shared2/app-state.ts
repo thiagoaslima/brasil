@@ -74,7 +74,7 @@ export class AppState {
                 }
 
                 return {
-                    localidade: 'BR',
+                    localidade: _localidadeService.getRoot(),
                     tipo: NiveisTerritoriais.pais.label
                 };
             });

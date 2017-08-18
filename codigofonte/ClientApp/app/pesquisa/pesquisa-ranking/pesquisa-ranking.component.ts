@@ -28,7 +28,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     @Output() onAno = new EventEmitter;
 
     public rankings;
-    public listaPeriodos
+    public listaPeriodos;
 
     private localidadeByContexto;
 
@@ -145,7 +145,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
             return;
         }
 
-        return `${this.localidadeByContexto[contexto].join(', ')} NO ESTADO ${this._localidadeService.getPreprosisaoTituloUF(this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome).toUpperCase()} ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
+        return `${this.localidadeByContexto[contexto].join(', ')} NO ESTADO ${this._localidadeService.getPreprosicaoTituloUF(this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome).toUpperCase()} ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
     }
 
     public getRotulo(valor, unidade, multiplicador){

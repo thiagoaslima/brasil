@@ -12,7 +12,6 @@ export class V3RouterGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let cidadeSelecionada = this._localidadeServ.getMunicipioByCodigo(route.params['codmun']);
 
-
         let ufSlug = cidadeSelecionada.parent.sigla.toLocaleLowerCase();
         let munSlug = cidadeSelecionada.slug;
 

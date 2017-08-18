@@ -79,7 +79,7 @@ export class ResultadoService3 {
     })
     getResultadosCompletos(indicadoresId: number | number[], codigolocalidades: number | number[]) {
         const _indicadoresId = forceArray(indicadoresId);
-        const _codigoLocalidades = forceArray(codigolocalidades).filter(Boolean);
+        const _codigoLocalidades = forceArray(codigolocalidades).filter(codigo => Boolean(codigo) || codigo === 0);
 
         const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${_codigoLocalidades.join(', ')}]`
@@ -92,7 +92,7 @@ export class ResultadoService3 {
             .map(([json, indicadores, localidades]: [ResultadoDTO, Indicador[], Localidade[]]) => {
                 return Resultado.convertDTOintoParameters(json).map(parameter => {
                     const indicador = indicadores.find(_indicador => _indicador.id === parameter.id);
-                    const localidade = localidades.find(_localidade => _localidade.codigo === parameter.localidade);
+                    const localidade = localidades.find(_localidade => _localidade.codigo.toString(10) === parameter.codigoLocalidade.toString());
                     return Resultado.criar(Object.assign({}, parameter, { indicador, localidade }));
                 })
             })

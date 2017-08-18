@@ -1,6 +1,5 @@
 import { V3RouterGuard } from './v3-router.guard';
 import { EmptyComponent } from './empty.component';
-import { EmptyLocationGuard } from './empty-location.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -49,8 +48,6 @@ const children = [
       {
         path: '',
         redirectTo: 'v4',
-        // canActivate: [EmptyLocationGuard],
-        // component: EmptyComponent,
         pathMatch: 'full'
       },
       {
@@ -80,8 +77,16 @@ const children = [
         redirectTo: 'v4/brasil',
       },
       {
+        path: 'brasil',
+        redirectTo: 'v4/brasil',
+      },
+      {
         path: 'v4/brasil',
-        component: ShellComponent
+        // redirectTo: 'v4',
+        // pathMatch: 'full'
+        canActivate: [ValidParametersGuard],
+        component: ShellComponent,
+        children
       },
       {
         path: 'brasil/:uf',

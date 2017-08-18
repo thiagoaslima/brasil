@@ -198,7 +198,7 @@ export class LocalidadeService2 {
     /**
      * Retorna a preposição (do, da ou de) mais adequada ao nome da UF.
      */
-    public getPreprosisaoTituloUF(nomeUF: string): string {
+    public getPreprosicaoTituloUF(nomeUF: string): string {
 
         let ufsComPreposicaoDo = ['acre', 'amapá', 'amazonas', 'ceará', 'distrito federal', 'mato grosso', 'mato grosso do sul', 'maranhão', 'paraná', 'pará', 'piauí', 'rio grande do norte', 'rio grande do sul', 'rio de janeiro'];
         let ufsComPreposicaoDa = ['bahia', 'paraíba'];

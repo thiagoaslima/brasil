@@ -13,8 +13,8 @@ import { RouterParamsService } from '../../shared/router-params.service';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
-var FileSaver = require('file-saver');
-var json2csv = require('json2csv');
+const FileSaver = require('file-saver');
+const json2csv = require('json2csv');
 
 @Component({
     selector: 'pesquisa-tabela',

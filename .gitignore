@@ -1,6 +1,7 @@
 .idea
 .DS_Store
 morgan.log
+**/package-lock.json
 
 # Built #
 **/__build__/
