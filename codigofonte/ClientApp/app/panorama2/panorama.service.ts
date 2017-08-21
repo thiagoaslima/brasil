@@ -99,7 +99,7 @@ export class Panorama2Service {
 
     getNotaEspecial(idLocalidade, idIndicador): string {
 
-        let notaEspecial = notasEspeciais.filter(nota => nota.localidade === idLocalidade && nota.indicador === idIndicador);
+        let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
 
         return notaEspecial.length > 0 ? notaEspecial[0]['nota'] : '';
     }
