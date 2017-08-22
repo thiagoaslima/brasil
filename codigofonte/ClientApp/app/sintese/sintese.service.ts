@@ -57,7 +57,7 @@ export class SinteseService {
 
     public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
 
-        if(codigoLocalidade == "0"){
+        if(codigoLocalidade == undefined){
 
             return Observable.of({});
         }
@@ -193,13 +193,13 @@ export class SinteseService {
             });
     }
 
-    public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA: number = 0, codigoLocalidadeB: number = 0, codigoLocalidadeC: number = 0, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
+    public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA, codigoLocalidadeB, codigoLocalidadeC, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
 
         return Observable.zip(
             this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA.toString(), escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB.toString(), escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC.toString(), escopo)
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA, escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB, escopo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC, escopo)
             )
             .map(([nomes, dadosA, dadosB, dadosC]) => {
 

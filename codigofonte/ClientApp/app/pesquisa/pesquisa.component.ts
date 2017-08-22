@@ -73,7 +73,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                     // Nacional
                     if(!urlParams.params['uf']){
 
-                        // TODO: Incluir o nível nacional
+                        this.localidades[0] = this._localidadeService2.getRoot().codigo.toString();
                     }
 
                     // Obter localidades de comparação
