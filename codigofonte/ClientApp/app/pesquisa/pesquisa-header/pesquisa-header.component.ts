@@ -119,7 +119,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
         let url = [];
         url.push('brasil');
-        url.push(this.objetoURL.uf);
+
+        if (!!this.objetoURL.uf) {
+
+            url.push(this.objetoURL.uf);
+        }
+
 
         if (!!this.objetoURL.municipio) {
 

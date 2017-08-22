@@ -49,6 +49,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     ) {  }
 
     ngOnChanges() {
+
         if(this.pesquisa && this.localidades && this.localidades.length > 0){
             //verifica se a pesquisa é exclusiva para estados (código dos estados vai de 0 a 99, maior que isso é um município)
             if(this.localidades.length > 0 && this.localidades[0] > 99 && 
@@ -57,7 +58,12 @@ export class PesquisaTabelaComponent implements OnChanges {
             }
 
             this.indicadores = null;
-            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+
+            let localidade2: string = !this.localidades[1] ? undefined : this.localidades[1].toString();
+            let localidade3: string = !this.localidades[2] ? undefined : this.localidades[2].toString();
+
+            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+
                 this.indicadores = this.flat(indicadores);
                 this.isVazio = true;
                 //cria algumas propriedades nos indicadores para contralor sua exibição/interação
