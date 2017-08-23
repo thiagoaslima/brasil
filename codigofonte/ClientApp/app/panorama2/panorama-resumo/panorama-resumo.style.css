@@ -24,7 +24,6 @@
 .topo__celula-direita{
     width: 49%;
     float: right;
-    text-transform: uppercase;
 }
 
 .comBandeira .topo__celula-esquerda, .comBandeira .topo__celula-direita{
