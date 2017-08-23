@@ -9,6 +9,7 @@ import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localid
 import { SeletorLocalidadeService } from './seletor-localidade/seletor-localidade.service';
 import { BuscaComponent } from './busca/busca.component';
 import { BuscaService } from './busca/busca.service';
+import { BuscaCompletaService } from './busca/busca-completa.service';
 import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
 import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.component';
@@ -38,6 +39,7 @@ import { Page404Component } from './page404/page404.component';
   ],
   providers: [
     BuscaService,
+    BuscaCompletaService,
     SeletorLocalidadeService
   ]
 })

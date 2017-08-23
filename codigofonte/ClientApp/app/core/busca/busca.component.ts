@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitte
 
 import { AppState } from '../../shared2/app-state';
 import { BuscaService } from './busca.service';
+import { BuscaCompletaService } from './busca-completa.service';
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 
@@ -40,6 +41,7 @@ export class BuscaComponent implements OnInit {
     constructor(
         private _renderer: Renderer,
         private _buscaService: BuscaService,
+        private _buscaCompletaService: BuscaCompletaService,
         private _appState: AppState
     ) { }
 
@@ -53,12 +55,14 @@ export class BuscaComponent implements OnInit {
             .distinctUntilChanged()
             .map(e => e.target['value'])
             .filter(value => value.length >= this._qtdMinimaCaracteres)
-            .flatMap(termo => {
+            .flatMap(texto => {
 
                 this.menuAberto = true;
                 this.carregando = true;
 
-                return this._buscaService.search(termo);
+                this._buscaCompletaService.search(texto);
+
+                return this._buscaService.search(texto);
             })
             .subscribe(resultados => this.list(resultados));
 
