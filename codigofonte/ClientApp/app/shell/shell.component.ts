@@ -18,6 +18,9 @@ import 'rxjs/add/operator/debounceTime';
     selector: 'shell',
     templateUrl: './shell.component.html',
     styles: [`
+    .bt-home {
+        
+    }
     .position_fixed {
       position: fixed;
     }
@@ -122,7 +125,7 @@ export class ShellComponent implements OnInit, OnDestroy {
                 } else if (url.indexOf('historico') >= 0) {
                     this.itemSelecionado = 'historico';
                     this.isHome = false;
-                } else if (url.indexOf('pesquisa') >= 0 && params.uf) {
+                } else if (url.indexOf('pesquisa') >= 0 && url.indexOf('brasil') >= 0) {
                     this.itemSelecionado = 'pesquisa';
                     this.isHome = false;
                 } else {
@@ -130,14 +133,15 @@ export class ShellComponent implements OnInit, OnDestroy {
                     this.isHome = true;
                 }
 
-                //desabilita o botão de 'histórico e fotos' no 'brasil'
-                //verifica se depois do 'brasil', na url, vem a sigla de um estado (duas letras), senão, significa que está no 'brasil' e desabilita o historico
-                if(url[url.indexOf('brasil') + 1].length > 2){
+                // desabilita o botão de 'histórico e fotos' no 'brasil'
+                // verifica se depois do 'brasil', na url, vem a sigla de um estado (duas letras),
+                // se não, significa que está no 'brasil' e desabilita o historico
+                if (url[url.indexOf('brasil') + 1].length > 2) {
                     this.historicoHabilitado = false;
-                }else{
+                } else {
                     this.historicoHabilitado = true;
                 }
-                //-----
+                // -----
             }
 
             this.menuAberto = queryParams['detalhes'] === 'true';

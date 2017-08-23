@@ -99,7 +99,7 @@ export class Panorama2Service {
 
     getNotaEspecial(idLocalidade, idIndicador): string {
 
-        let notaEspecial = notasEspeciais.filter(nota => nota.localidade === idLocalidade && nota.indicador === idIndicador);
+        let notaEspecial = notasEspeciais.filter(nota => nota.localidade == idLocalidade && nota.indicador == idIndicador);
 
         return notaEspecial.length > 0 ? notaEspecial[0]['nota'] : '';
     }
@@ -135,10 +135,13 @@ export class Panorama2Service {
             .filter(item => item.visualizacao === PanoramaVisualizacao.painel)
             .map(item => ({ indicadorId: item.indicadorId, periodo: item.periodo }));
 
+        if (indicadores.length === 0) {
+            return Observable.of({});
+        }
 
         let contextos = ['BR'];
         if (localidade.parent && localidade.parent.codigo) { contextos.push(localidade.parent.codigo.toString()); }
-        if (localidade.microrregiao) { contextos.push(localidade.microrregiao.toString()) }
+        if (localidade.microrregiao) { contextos.push(localidade.microrregiao.toString()); }
 
         return this._rankingService3.getRankingsIndicador(indicadores, contextos, localidade.codigo)
             .map(response => {
@@ -173,7 +176,6 @@ export class Panorama2Service {
                     return agg;
                 }, {});
             });
-
 
     }
 

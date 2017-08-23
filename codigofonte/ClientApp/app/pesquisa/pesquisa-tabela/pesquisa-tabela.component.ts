@@ -13,7 +13,8 @@ import { RouterParamsService } from '../../shared/router-params.service';
 
 // Biblioteca usada no download de arquivos.
 // Possui um arquivo de definição de tipos file-saver.d.ts do typings.
-var FileSaver = require('file-saver');
+const FileSaver = require('file-saver');
+const json2csv = require('json2csv');
 
 @Component({
     selector: 'pesquisa-tabela',
@@ -48,6 +49,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     ) {  }
 
     ngOnChanges() {
+
         if(this.pesquisa && this.localidades && this.localidades.length > 0){
             //verifica se a pesquisa é exclusiva para estados (código dos estados vai de 0 a 99, maior que isso é um município)
             if(this.localidades.length > 0 && this.localidades[0] > 99 && 
@@ -56,7 +58,12 @@ export class PesquisaTabelaComponent implements OnChanges {
             }
 
             this.indicadores = null;
-            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0], this.localidades[1], this.localidades[2], this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+
+            let localidade2: string = !this.localidades[1] ? undefined : this.localidades[1].toString();
+            let localidade3: string = !this.localidades[2] ? undefined : this.localidades[2].toString();
+
+            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+
                 this.indicadores = this.flat(indicadores);
                 this.isVazio = true;
                 //cria algumas propriedades nos indicadores para contralor sua exibição/interação
@@ -174,21 +181,18 @@ export class PesquisaTabelaComponent implements OnChanges {
         return "nivel-" + this.getNivelIndicador(posicaoIndicador);
     }
 
-    public downloadCSV(){
 
-        // debugger;
+    public download(){
 
-        // this._sintese.getPesquisaCompleta(24, [140010,330455]).subscribe(
-        //     res => {
-        //         debugger;
-        //         console.log(res);
-        //     }
-        // );
+        this.downloadCSVCompleto();
+    }
+
+    public downloadCSVTela(){
 
         let ind = this.indicadores;
-        let localidadeA = this.getLocalidade(String(this.localidades[0])).nome;
-        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this.getLocalidade(String(this.localidades[1])).nome : '';
-        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this.getLocalidade(String(this.localidades[2])).nome : '';
+        let localidadeA = this._localidadeService2.getLocalidadeById(this.localidades[0]).nome;
+        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidadeService2.getLocalidadeById(this.localidades[1]).nome : '';
+        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidadeService2.getLocalidadeById(this.localidades[2]).nome : '';
         let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
         //valores dos indicadores
         for(let i = 0; i < ind.length; i++){
@@ -198,6 +202,42 @@ export class PesquisaTabelaComponent implements OnChanges {
             csv += (ind[i].localidadeC && ind[i].localidadeC[this.periodo] ? ind[i].localidadeC[this.periodo] : "") + ';';
             csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
         }
+
+        //fontes e notas
+        csv = csv + this.obterFontesENotasPesquisaEmCSV();
+
+        this.downloadCSVFile(csv, `${this.pesquisa['nome']}(${this.periodo})`);
+    }
+
+    public downloadCSVCompleto(){
+
+        let localidadeSelecionada = this._localidadeService2.getLocalidadeById(this.localidades[0]);
+        let posicaoIndicadorSelecionado = this.indicadores[0].posicao;
+        
+        // Recupera os indicadores e seus resultados
+        this._sintese.getPesquisaCompletaLocalidades(this.pesquisa.id, !!localidadeSelecionada.parent ? localidadeSelecionada.parent.codigo : localidadeSelecionada.codigo, posicaoIndicadorSelecionado).subscribe(res => {
+
+            this._sintese.getInfoPesquisa(this.pesquisa.id.toString()).subscribe(pesquisa => {
+
+                let periodosDisponiveis = pesquisa.periodos.map(info => info.periodo );
+
+                var fields = ['posicao', 'nome', 'resultado.nomeLocalidade', ...periodosDisponiveis.map(periodo => `resultado.res.${periodo}`), 'unidade', 'multiplicador'];
+                var fieldNames = ['Posição', 'Nome', 'Localidade', ...periodosDisponiveis, 'Unidade', 'Multiplicador'];
+                var csv = json2csv({data: res , fields, fieldNames: fieldNames, unwindPath: ['resultado', 'resultado.res']});
+                
+                //fontes e notas
+                csv = csv + this.obterFontesENotasPesquisaEmCSV();
+
+                this.downloadCSVFile(csv, `${this.pesquisa['nome']}`);
+            });
+        });
+
+    }
+
+    private obterFontesENotasPesquisaEmCSV(){
+
+        let csv = '\n';
+
         //fontes e notas
         for(let i = 0; i < this.pesquisa['periodos'].length; i++){
             if(this.pesquisa['periodos'][i].nome == this.periodo){
@@ -216,30 +256,12 @@ export class PesquisaTabelaComponent implements OnChanges {
             }
         }
 
-        //baixa o arquivo
-        // let blob = new Blob([csv], { type: 'text/csv' });
-        // FileSaver.saveAs(blob, this.pesquisa['nome'] + '(' + this.periodo + ').csv');
-
-        this.downloadCSVFile(csv, `${this.pesquisa['nome']}(${this.periodo})`);
-    }
-
-    private indicadoresToCSV(){
-
+        return csv;
     }
 
     private downloadCSVFile(content: string, name: string){
 
         let blob = new Blob([content], { type: 'text/csv' });
         FileSaver.saveAs(blob, `${name}.csv`);
-    }
-
-    private getLocalidade(codigoLocalidade: string): Localidade{
-
-        if(codigoLocalidade.length == 2){
-
-            return this._localidade.getUfByCodigo(Number(codigoLocalidade));
-        }
-
-        return this._localidade.getMunicipioByCodigo(codigoLocalidade);
     }
 }

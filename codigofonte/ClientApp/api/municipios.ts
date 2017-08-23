@@ -21793,8 +21793,8 @@ export const municipios = [
   {
     "codigoUf": 35,
     "codigo": 3530805,
-    "nome": "Moji Mirim",
-    "slug": "moji-mirim",
+    "nome": "Mogi Mirim",
+    "slug": "mogi-mirim",
     "microrregiao": 35031
   },
   {

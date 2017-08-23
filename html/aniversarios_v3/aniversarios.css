@@ -176,64 +176,66 @@ h2{
     margin-left: 5px;
 }
 
+#filtroMes .seletorMesMobile {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
-    h2{
-        font-size: 1.6em;
-    }
-
-    .container{
-        width: 80%;
-        margin-left: 10%;
-        left: 0px;
-        top: calc(50% - 220px);
-    }
-
-    .calendario{
-        display: none;
-    }
-
-    .aniversariantes{
+   .container{
         width: 90%;
-        float: none;
-        padding-left: 5%;
-        padding-right: 5%;
-    }
+        left: 5%;
+        margin-left: 0;
+        height: 90vh;
+        background-color: rebeccapurple;
+        top: 5vh;
+   }
 
-    .aniversariantes_municipios{
-        margin-top: 9px;
-        font-size: .9em;
-    }
+   .aniversariantes {
+    margin-left: 47px;
+    margin-top: 15px;
+    height: calc(100% - 83px);
+    /* height: 90%; */
+   }
+   .aniversario__content{
+        height: calc(100% - 94px);
+   }
 
-    .aniversariantes_numero{
-        width: 11%;
-    }
-    
-    .aniversariantes_municipios{
-        width: 84%
-    }
-    
-    .aniversario__header select{
-        float: left;
-        width: 50%;
-        margin-top: 6px;
-       
-    }
+   #filtroDia{
+    display: none;
+   }
+   
+   #filtroMes ul{
+       padding-bottom: 9px;
+   }
 
-    .aniversario__header .selecionar-data{
-        background-color: transparent;
-        border: 1px solid #fff;
-        border-radius: 21px;
-        margin-top: 4px;
-        padding: 4px 8px;
-        cursor: pointer;
-        color: #fff;
-        float: right;
-        display: block;
-    }
-    .aniversariantes_municipios{
-        width: 100%;
-    }
-    .aniversariantes_numero{
+   #filtroMes ul li{
         display: none;
+    }
+
+    #filtroMes ul li:nth-child(1), #filtroMes ul li:nth-child(2), #filtroMes .seletorMesMobile {
+        display: inline
+    }
+
+    #filtroMes .seletorMesMobile {
+        text-transform: uppercase;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: inline;
+    }
+
+    #filtroMes .seletorMesMobile select{
+        border: 1px solid #000;
+        font-size: .8em;
+    }
+
+    .aniversariantes_municipios{
+        margin-top: 8px;
+        columns: 1;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .aniversariantes__municipios__municipio{
+        min-height: 0px;
     }
 }

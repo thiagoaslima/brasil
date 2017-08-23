@@ -119,7 +119,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
         let url = [];
         url.push('brasil');
-        url.push(this.objetoURL.uf);
+
+        if (!!this.objetoURL.uf) {
+
+            url.push(this.objetoURL.uf);
+        }
+
 
         if (!!this.objetoURL.municipio) {
 
@@ -160,7 +165,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     setaTipo(tipo){
 
-        if(this.isNivelNacional){
+        if(this.isNivelNacional && (tipo == 'ranking' || tipo == 'cartograma')){
+            return;
+        }
+
+        if(this.isNivelNacional && tipo == 'grafico' &&  this.listaPeriodos.length <= 1){
             return;
         }
         

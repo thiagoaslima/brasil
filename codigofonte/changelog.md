@@ -1,5 +1,16 @@
 # Change log
 
+## [v4.1.15.5] - 2017-08-23
+### Changed
+- Texto dos gentílicos das UFs e municípios em minúsculo no panorama.
+
+
+## [v4.1.15.4] - 2017-08-21
+### Fixed
+- Nome do município de Mogi Mirim.
+- Exibição de notas especiais.
+
+
 ## [v4.1.15.2] - 2017-08-11
 ### Changed
 - Desabilitada a opção de envio de feedback.

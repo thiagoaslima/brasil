@@ -1,3 +1,9 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
 .aniversarios{
     position: fixed;
     top: 0px;
@@ -20,9 +26,6 @@
     position: absolute;
     margin-left: 50%;
     left: -431px;
-    height: 404px;
-    top: 50vh;
-    margin-top: -215px;
 }
 
 i.fa-times{
@@ -39,7 +42,7 @@ h2{
 .aniversario__header{
     padding: 12px 25px;
     background-color: #1b779b;
-    height: 105px;
+    height: 70px;
 }
 .aniversario__header nav{
     width: 837px;
@@ -81,155 +84,86 @@ h2{
     padding: 12px 0px;
     /* display: table; */
     padding-top: 0px;
-    height: 370px;
+    height: 333px;
     /* overflow-y: scroll; */
 }
-
-.bt-aniversarios{
-    border: #1B779B 1px solid;
-    float: left;
-    border-radius: 10px;
-    padding: 5px 9px;
-    font-size: .9em;
-    margin-top: 10px;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    position: absolute;
-    right: 31px;
-    border-radius: 21px;
+#filtroMes ul{
+    padding-top: 14px;
+    border-bottom: 5px solid #CCCCCC;
+    padding-bottom: 10px;
 }
 
-.bt-aniversarios i{
+#filtroMes ul li{
+    display: inline;
+    padding: 0 0.5% 10px;
+    margin: 0px;
+    list-style: none;
+    border-bottom: 5px solid #CCCCCC;
+}
+
+#filtroMes ul li:nth-child(1), #filtroMes ul li:nth-child(2){
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#filtroMes ul li.selecionado{
+    border-color: #F7931E;
+}
+
+#filtroDia ul{ 
+    margin-left: 41px;
+    margin-top: 10px;
     color: #1B779B;
-    margin-right: 10px;
-}
-
-/***
-CALENDÁRIO
-***/
-
-.calendario{
-    width: 270px;
-    display: table;
-    margin-left: 20px;
-    border: 1px solid #dadada;
-    padding: 13px;
-    float: left;
-    margin-top: 30px;
-    margin-left: 67px;
-}
-
-.calendario__header{
-    display: table;
-    border-bottom: 1px solid #e2dcdc;
-    padding-bottom: 14px;
-}
-
-.calendario__body, .calendario__header{
-    width: 100%;
-}
-.calendario__header__mes-anterior{
-    float: left;
-}
-.calendario__header__mes-atual{
-    float: left;
-    width: 238px;
-    text-align: center;
-}
-.calendario__header__mes-proximo{
-    float: left;
-}
-.calendario__dia-semana{
-    float: left;
-    width: 38px;
-    text-align: center;
     font-size: .8em;
-    margin-top: 11px;
-    margin-bottom: 8px;
 }
 
-
-.calendario__dia{
-    font-size: .8em;
-    float: left;
-    width: 38px;
-    text-align: center;
-    height: 27px;
-    line-height: 26px;
+#filtroDia ul li{ 
+    display: inline;
+    width: 35px;
+    padding: 1px 5px;
 }
 
-.calendario__dia.selecionado{
-    background-color: #4d4d4d;
-    border-radius: 30px;
+#filtroDia ul li.selecionado{ 
     color: #fff;
-}
-
-.calendario__btns{
-    margin-left: 20px;
-    font-size: 1em;
-    width: 297px;
-    /*background-color: red;*/
-    display: table;
-    margin-top: 10px;
-}
-
-.calendario__btn{
-    float: left;
-    font-size: .8em;
-    width: 97px;
-    text-align: center;
+    background-color: #1B779B;
+    border-radius: 48px;
+    width: 100px;
+    height: 100px;
 }
 
 .aniversariantes{
-    float: right;
-    width: 395px;
+    /* width: 395px; */
     overflow-y: scroll;
-    height: 310px;
-    padding-top: 30px;
-    padding-bottom: 40px;
-}
-
-.mascara-topo{
-    width: 44%;
-    background-color: #fff;
-    height: 41px;
-    position: absolute;
-    margin-top: -40px;
-}
-
-.mascara-rodape{
-    width: 44%;
-    background-color: #fff;
-    height: 31px;
-    position: absolute;
-    margin-top: 262px;
+    height: 233px;
+    /* padding-top: 40px; */
+    /* padding-bottom: 40px; */
+    margin-left: 47px;
+    margin-top: 15px;
+    width: 91%;
 }
 
 .aniversariantes_dia{
-    display: table;
     margin-bottom: 37px;
+    width: 100%;
 }
 
 .aniversariantes_numero{
-    float: left;
-}
-
-.aniversariantes_numero{
-    float: left;
     font-size: 1.6em;
     font-weight: bold;
+    color: #1C7293;
 }
 
 .aniversariantes_municipios{
-    float: left;
-    margin-left: 10px;
     margin-top: 8px;
+    columns: 2;
+    width: calc(100% - 200px);
+    padding: 0px 100px;
 }
 
 .aniversariantes__municipios__municipio{
     margin-bottom: 12px;
     font-size: .95em;
+    min-height: 36px;
 }
 
 .aniversariantes__municipios__municipio span{
@@ -242,76 +176,66 @@ CALENDÁRIO
     margin-left: 5px;
 }
 
-.mesSelecionado{
-    /* position: fixed; */
-    text-align: center;
-    width: 94%;
-    font-size: 1.3em;
-    padding-top: 22px;
+#filtroMes .seletorMesMobile {
+    display: none;
 }
 
 @media screen and (max-width: 768px) {
-    h2{
-        font-size: 1.6em;
-    }
-
-    .container{
-        width: 80%;
-        margin-left: 10%;
-        left: 0px;
-        top: calc(50% - 220px);
-    }
-
-    .calendario{
-        display: none;
-    }
-
-    .aniversariantes{
+   .container{
         width: 90%;
-        float: none;
-        padding-left: 5%;
-        padding-right: 5%;
+        left: 5%;
+        margin-left: 0;
+        height: 90vh;
+        background-color: rebeccapurple;
+        top: 5vh;
+   }
+
+   .aniversariantes {
+    margin-left: 47px;
+    margin-top: 15px;
+    height: calc(100% - 83px);
+    /* height: 90%; */
+   }
+   .aniversario__content{
+        height: calc(100% - 94px);
+   }
+
+   #filtroDia{
+    display: none;
+   }
+   
+   #filtroMes ul{
+       padding-bottom: 9px;
+   }
+
+   #filtroMes ul li{
+        display: none;
+    }
+
+    #filtroMes ul li:nth-child(1), #filtroMes ul li:nth-child(2), #filtroMes .seletorMesMobile {
+        display: inline
+    }
+
+    #filtroMes .seletorMesMobile {
+        text-transform: uppercase;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: inline;
+    }
+
+    #filtroMes .seletorMesMobile select{
+        border: 1px solid #000;
+        font-size: .8em;
     }
 
     .aniversariantes_municipios{
-        margin-top: 9px;
-        font-size: .9em;
-    }
-
-    .aniversariantes_numero{
-        width: 11%;
-    }
-    
-    .aniversariantes_municipios{
-        width: 84%
-    }
-    
-    .aniversario__header select{
-        float: left;
-        width: 50%;
-        margin-top: 6px;
-       
-    }
-
-    .aniversario__header .selecionar-data{
-        background-color: transparent;
-        border: 1px solid #fff;
-        border-radius: 21px;
-        margin-top: 4px;
-        padding: 4px 8px;
-        cursor: pointer;
-        color: #fff;
-        float: right;
-        display: block;
-    }
-    .aniversariantes_municipios{
+        margin-top: 8px;
+        columns: 1;
         width: 100%;
-    }
-    .aniversariantes_numero{
-        display: none;
+        padding: 0px;
     }
 
-    .bt-aniversarios{
-        display: none;
+    .aniversariantes__municipios__municipio{
+        min-height: 0px;
     }
 }
