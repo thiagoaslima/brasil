@@ -18,6 +18,9 @@ import 'rxjs/add/operator/debounceTime';
     selector: 'shell',
     templateUrl: './shell.component.html',
     styles: [`
+    .bt-home {
+        
+    }
     .position_fixed {
       position: fixed;
     }
