@@ -215,7 +215,7 @@ export class PesquisaTabelaComponent implements OnChanges {
         let posicaoIndicadorSelecionado = this.indicadores[0].posicao;
         
         // Recupera os indicadores e seus resultados
-        this._sintese.getPesquisaCompletaLocalidades(this.pesquisa.id, localidadeSelecionada.parent.codigo, posicaoIndicadorSelecionado).subscribe(res => {
+        this._sintese.getPesquisaCompletaLocalidades(this.pesquisa.id, !!localidadeSelecionada.parent ? localidadeSelecionada.parent.codigo : localidadeSelecionada.codigo, posicaoIndicadorSelecionado).subscribe(res => {
 
             this._sintese.getInfoPesquisa(this.pesquisa.id.toString()).subscribe(pesquisa => {
 

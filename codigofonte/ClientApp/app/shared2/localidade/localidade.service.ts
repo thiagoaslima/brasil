@@ -116,6 +116,11 @@ export class LocalidadeService2 {
 
     public getLocalidadeById(codigoLocalidade: number): Localidade{
 
+        if(codigoLocalidade == 0){
+
+            return this.getRoot();
+        }
+
         if(codigoLocalidade.toString().length == 2){
 
             return this.getUfByCodigo(codigoLocalidade);
