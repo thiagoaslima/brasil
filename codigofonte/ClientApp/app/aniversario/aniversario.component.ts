@@ -1,7 +1,5 @@
-import { IMyDate, IMyMarkedDate, IMyMarkedDates } from 'mydatepicker/dist';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Component, ElementRef, Inject, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 import { PageScrollInstance, PageScrollService, PageScrollConfig } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -26,17 +24,7 @@ export class AniversarioComponent implements OnInit {
     codigoUFSelecionada: string;
     diaSelecionado;
     mesSelecionado;
-    mesExtenso: string[] = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-    myDatePickerOptions: IMyDpOptions = {
-        dateFormat: 'dd/mm/yyyy',
-        inline: true,
-        showWeekNumbers: true,
-        selectorHeight: '232px',
-        selectorWidth: '252px'
-    };
-
-    model: Object = {};
 
     isVisible = false;
 
@@ -51,7 +39,7 @@ export class AniversarioComponent implements OnInit {
         @Inject(DOCUMENT) private document: any
     ) { 
 
-        PageScrollConfig.defaultScrollOffset = 150;
+        PageScrollConfig.defaultScrollOffset = 160;
      }
 
 
@@ -60,7 +48,6 @@ export class AniversarioComponent implements OnInit {
         this.codigoUFSelecionada = '0';
         this.diaSelecionado = new Date().getDate();
         this.mesSelecionado = new Date().getMonth() + 1;
-        this.model = { date: { year: new Date().getFullYear(), month: this.mesSelecionado, day: this.diaSelecionado } };
     }
 
     ngOnDestroy(){
@@ -75,11 +62,31 @@ export class AniversarioComponent implements OnInit {
         this.getAniversariantes();
     }
 
-    onDateChanged(event: IMyDateModel) {
+    setDia(dia: number){
 
-        this.diaSelecionado = event.date.day;
-        this.mesSelecionado = event.date.month;
+        this.diaSelecionado = dia;
+        this.goToDay(this.diaSelecionado.toString());
+    }
+
+    setMes(mes: number){
+           
+        this.mesSelecionado = mes;        
         this.getAniversariantes();
+    }
+
+    setHoje(){
+
+            if(this.mesSelecionado != new Date().getMonth() + 1){
+                
+                this.diaSelecionado = new Date().getDate();
+                this.setMes(new Date().getMonth() + 1);
+
+            } else {
+
+                this.setDia(new Date().getDate());
+            }
+
+            
     }
 
     public goToDay(day: string):void {

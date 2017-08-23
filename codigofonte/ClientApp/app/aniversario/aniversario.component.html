@@ -7,8 +7,9 @@
             <i class="fa fa-times" aria-hidden="true" (click)="toggleVisible()"></i>
 
             <h2>Aniversários</h2>
-
+            
                         <select name="estado" (change)="onUFChange($event)"> 
+                            <option value="estado">Selecione o Estado</option> 
                             <option value="0">Todos os estados</option> 
                             <option value="12">Acre</option> 
                             <option value="27">Alagoas</option> 
@@ -38,35 +39,105 @@
                             <option value="35">São Paulo</option> 
                             <option value="17">Tocantins</option> 
                         </select>
+                        <!--<button class='selecionar-data'>07 Dez</button>-->
         </div>
 
         <div class="aniversario__content">
+            <nav id='filtroMes'>
+                <ul>
+                    <li (click)="setHoje()">HOJE</li>
+                    <li>&nbsp;</li>
+                    <li (click)="setMes(1)" [class.selecionado]="mesSelecionado == 1">JAN</li>
+                    <li (click)="setMes(2)" [class.selecionado]="mesSelecionado == 2">FEV</li>
+                    <li (click)="setMes(3)" [class.selecionado]="mesSelecionado == 3">MAR</li>
+                    <li (click)="setMes(4)" [class.selecionado]="mesSelecionado == 4">ABR</li>
+                    <li (click)="setMes(5)" [class.selecionado]="mesSelecionado == 5">MAI</li>
+                    <li (click)="setMes(6)" [class.selecionado]="mesSelecionado == 6">JUN</li>
+                    <li (click)="setMes(7)" [class.selecionado]="mesSelecionado == 7">JUL</li>
+                    <li (click)="setMes(8)" [class.selecionado]="mesSelecionado == 8">AGO</li>
+                    <li (click)="setMes(9)" [class.selecionado]="mesSelecionado == 9">SET</li>
+                    <li (click)="setMes(10)" [class.selecionado]="mesSelecionado == 10">OUT</li>
+                    <li (click)="setMes(11)" [class.selecionado]="mesSelecionado == 11">NOV</li>
+                    <li (click)="setMes(12)" [class.selecionado]="mesSelecionado == 12">DEZ</li>
 
-            <div class="mesSelecionado">
-                    {{ mesExtenso[mesSelecionado - 1] }}
-                    
-            </div>
+                    <!--<li class='seletorMesMobile selecionado'>
+                        <select name="mes"> 
+                            <option value="estado">MÊS</option> 
+                            <option value="1">JAN</option> 
+                            <option value="2">FAV</option> 
+                            <option value="3">MAR</option> 
+                            <option value="4">ABR</option> 
+                            <option value="5">MAI</option> 
+                            <option value="6">JUN</option> 
+                            <option value="7">JUL</option> 
+                            <option value="8">AGO</option> 
+                            <option value="9">SET</option> 
+                            <option value="10">OUT</option> 
+                            <option value="11">NOV</option> 
+                            <option value="12">DEZ</option> 
+                        </select>
+                    </li>-->
+                </ul>
+            </nav>
 
-            <div class="calendario">
-                <my-date-picker name="mydate" locale="pt-br" [options]="myDatePickerOptions" [(ngModel)]="model" (dateChanged)="onDateChanged($event)" required></my-date-picker>
-            </div>
-
+            <nav id="filtroDia">
+                <ul>
+                    <li *ngIf="!!aniversariantes[1]" (click)="setDia(1)" [class.selecionado]="diaSelecionado == 1">1</li>
+                    <li *ngIf="!!aniversariantes[2]" (click)="setDia(2)" [class.selecionado]="diaSelecionado == 2">2</li>
+                    <li *ngIf="!!aniversariantes[3]" (click)="setDia(3)" [class.selecionado]="diaSelecionado == 3">3</li>
+                    <li *ngIf="!!aniversariantes[4]" (click)="setDia(4)" [class.selecionado]="diaSelecionado == 4">4</li>
+                    <li *ngIf="!!aniversariantes[5]" (click)="setDia(5)" [class.selecionado]="diaSelecionado == 5">5</li>
+                    <li *ngIf="!!aniversariantes[6]" (click)="setDia(6)" [class.selecionado]="diaSelecionado == 6">6</li>
+                    <li *ngIf="!!aniversariantes[7]" (click)="setDia(7)" [class.selecionado]="diaSelecionado == 7">7</li>
+                    <li *ngIf="!!aniversariantes[8]" (click)="setDia(8)" [class.selecionado]="diaSelecionado == 8">8</li>
+                    <li *ngIf="!!aniversariantes[9]" (click)="setDia(9)" [class.selecionado]="diaSelecionado == 9">9</li>
+                    <li *ngIf="!!aniversariantes[10]" (click)="setDia(10)" [class.selecionado]="diaSelecionado == 10">10</li>
+                    <li *ngIf="!!aniversariantes[11]" (click)="setDia(11)" [class.selecionado]="diaSelecionado == 11">11</li>
+                    <li *ngIf="!!aniversariantes[12]" (click)="setDia(12)" [class.selecionado]="diaSelecionado == 12">12</li>
+                    <li *ngIf="!!aniversariantes[13]" (click)="setDia(13)" [class.selecionado]="diaSelecionado == 13">13</li>
+                    <li *ngIf="!!aniversariantes[14]" (click)="setDia(14)" [class.selecionado]="diaSelecionado == 14">14</li>
+                    <li *ngIf="!!aniversariantes[15]" (click)="setDia(15)" [class.selecionado]="diaSelecionado == 15">15</li>
+                    <li *ngIf="!!aniversariantes[16]" (click)="setDia(16)" [class.selecionado]="diaSelecionado == 16">16</li>
+                    <li *ngIf="!!aniversariantes[17]" (click)="setDia(17)" [class.selecionado]="diaSelecionado == 17">17</li>
+                    <li *ngIf="!!aniversariantes[18]" (click)="setDia(18)" [class.selecionado]="diaSelecionado == 18">18</li>
+                    <li *ngIf="!!aniversariantes[19]" (click)="setDia(19)" [class.selecionado]="diaSelecionado == 19">19</li>
+                    <li *ngIf="!!aniversariantes[20]" (click)="setDia(20)" [class.selecionado]="diaSelecionado == 20">20</li>
+                    <li *ngIf="!!aniversariantes[21]" (click)="setDia(21)" [class.selecionado]="diaSelecionado == 21">21</li>
+                    <li *ngIf="!!aniversariantes[22]" (click)="setDia(22)" [class.selecionado]="diaSelecionado == 22">22</li>
+                    <li *ngIf="!!aniversariantes[23]" (click)="setDia(23)" [class.selecionado]="diaSelecionado == 23">23</li>
+                    <li *ngIf="!!aniversariantes[24]" (click)="setDia(24)" [class.selecionado]="diaSelecionado == 24">24</li>
+                    <li *ngIf="!!aniversariantes[25]" (click)="setDia(25)" [class.selecionado]="diaSelecionado == 25">25</li>
+                    <li *ngIf="!!aniversariantes[26]" (click)="setDia(26)" [class.selecionado]="diaSelecionado == 26">26</li>
+                    <li *ngIf="!!aniversariantes[27]" (click)="setDia(27)" [class.selecionado]="diaSelecionado == 27">27</li>
+                    <li *ngIf="!!aniversariantes[28]" (click)="setDia(28)" [class.selecionado]="diaSelecionado == 28">28</li>
+                    <li *ngIf="!!aniversariantes[29]" (click)="setDia(29)" [class.selecionado]="diaSelecionado == 29">29</li>
+                    <li *ngIf="!!aniversariantes[30]" (click)="setDia(30)" [class.selecionado]="diaSelecionado == 30">30</li>
+                    <li *ngIf="!!aniversariantes[31]" (click)="setDia(31)" [class.selecionado]="diaSelecionado == 31">31</li>
+                </ul>
+            </nav>
             <div class="aniversariantes" #container>
-                <div class='mascara-topo'></div>
-                <div class='mascara-rodape'></div>
-
+                <!--
+                    **
+                    REPETIÇÃO DO DIA COMEÇA 
+                    **
+                -->
                 <div class="aniversariantes_dia" *ngFor="let aniversariantesKey of aniversariantes | keys">
                     <div class="aniversariantes_numero" [id]="aniversariantesKey">
-                        
-                        {{ aniversariantesKey }}
+                        {{ aniversariantesKey + "/" + mesSelecionado}}
                     </div>
                     <div class="aniversariantes_municipios">
-                        <div class="aniversariantes__municipios__municipio" *ngFor="let aniversariante of aniversariantes[aniversariantesKey]">{{aniversariante.localidade.nome}}<span>{{aniversariante.localidade.parent.sigla}}</span>| {{aniversariante.localidade.codigo}}</div>
+                        <div class="aniversariantes__municipios__municipio" *ngFor="let aniversariante of aniversariantes[aniversariantesKey]">
+                            {{aniversariante.localidade.nome}}<span>{{aniversariante.localidade.parent.sigla}}</span>| {{aniversariante.localidade.codigo}}
+                        </div>
                     </div>
                 </div>
+                <!--
+                    **
+                    REPETIÇÃO DO DIA TERMINA 
+                    **
+                -->
 
             </div>
         </div>
     </div>
 </div>
-
