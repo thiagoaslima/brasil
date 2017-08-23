@@ -165,7 +165,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     setaTipo(tipo){
 
-        if(this.isNivelNacional && (tipo == 'cartograma' || tipo == 'ranking') &&  this.listaPeriodos.length <= 1){
+        if(this.isNivelNacional && (tipo == 'ranking' || tipo == 'cartograma')){
+            return;
+        }
+
+        if(this.isNivelNacional && tipo == 'grafico' &&  this.listaPeriodos.length <= 1){
             return;
         }
         
