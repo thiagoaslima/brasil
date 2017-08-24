@@ -9,7 +9,14 @@ import { links } from '../../../api/links';
 @Injectable()
 export class BuscaCompletaService {
 
-    constructor() { }
+    constructor(){
+        //transform keywords
+        for(var i = 0; i < links.length; i++){
+            for(var k = 0; k < links[i].keywords.length; k++){
+                links[i].keywords[k] = this.transformText(links[i].keywords[k]);
+            }
+        }
+    }
 
     private transformText(text){
         var a = "áàãâä";
@@ -44,7 +51,7 @@ export class BuscaCompletaService {
         for(i = 0; i < places.length; i++){
             if(placesFound.indexOf(places[i]) >= 0) continue; //dont push twice
             var index = transformedText.indexOf(places[i].slug);
-            if((index == 0 || transformedText.charAt(index - 1) == '-'))
+            if(index == 0 || transformedText.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
                 placesFound.push(places[i]);
         }
         //suggest a place (pick last 4, 3, 2 or 1 words and try to match to a place)
@@ -66,6 +73,7 @@ export class BuscaCompletaService {
             else if(words1 && places[i].slug.indexOf(words1) == 0)
                 sug1.push(places[i]);
         }
+        //pick suggetions that matches the biggest names only (the best matches)
         if(sug4.length) placesFound = placesFound.concat(sug4);
         else if(sug3.length) placesFound = placesFound.concat(sug3);
         else if(sug2.length) placesFound = placesFound.concat(sug2);
@@ -89,21 +97,21 @@ export class BuscaCompletaService {
             places = places.concat(this.findPlaces(text, municipios));
         //find keywords
         for(i = 0; i < links.length; i++){
-            links[i].points = 0;
+            links[i]['points'] = 0; //reset points
             var keywords = links[i].keywords;
             for(var k = 0; k < keywords.length; k++){
                 var index = text.indexOf(keywords[k]);
-                if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word
-                    links[i].points += 1;
+                if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
+                    links[i]['points'] += 1; //give a point to the link every time it matches a keyword
             }
         }
-        links.sort(function(a, b){return b.points - a.points}); //sort by points
+        links.sort(function(a, b){return b['points'] - a['points']}); //sort by points
         //find year
         var textWords = text.split('-');
         for(i = 0; i < textWords.length; i++){
             if(textWords[i].length == 4 && !isNaN(textWords[i])){
                 year = parseInt(textWords[i]);
-                if(year < 1900 && year > 2999)
+                if(year < 1900 || year > 2999)
                     year = undefined;
             }
         }
