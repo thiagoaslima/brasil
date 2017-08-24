@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { ResultadoDTO } from "../dto";
+import { ResultadoDTO } from '../dto';
 import { Indicador, Localidade, Resultado } from '../models';
-import { ServicoDados as servidor, niveisTerritoriais } from '../values';
-import { IndicadorService3, LocalidadeService3 } from ".";
+import { ServicoDados as servidor } from '../values';
+import { IndicadorService3, LocalidadeService3 } from '.';
 import { forceArray } from '../../utils2';
-import { CacheFactory } from "../../cache/cacheFactory.service";
-import { RxSimpleCache } from "../../cache/decorators";
+import { CacheFactory } from '../../cache/cacheFactory.service';
+import { RxSimpleCache } from '../../cache/decorators';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';

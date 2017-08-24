@@ -441,8 +441,8 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 33,
-                    indicadorId: 60409,
+                    // pesquisaId: 33,
+                    // indicadorId: 60409,
                     titulo: 'Gentílico',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',

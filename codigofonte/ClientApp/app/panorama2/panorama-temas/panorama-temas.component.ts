@@ -46,14 +46,15 @@ export class PanoramaTemasComponent implements OnChanges {
                 this.atualizaTextos();
 
                 /*inverte os dados dos graficos de linhas, pois estavam vindo do maior para o menor ano*/
-                for(let i = 0; i < this.temas.length; i++){
+                for (let i = 0; i < this.temas.length; i++) {
                     let graficos = this.temas[i].graficos;
-                    for(let j = 0; graficos && j < graficos.length; j++){
-                        if(graficos[j].tipo == "linha"){
+                    for (let j = 0; graficos && j < graficos.length; j++) {
+                        if (graficos[j].tipo == "linha") {
                             let grafico = graficos[j];
                             grafico.eixoX.reverse(); /*inverte labels*/
-                            for(let k = 0; grafico.dados && k < grafico.dados.length; k++)
+                            for (let k = 0; grafico.dados && k < grafico.dados.length; k++) {
                                 grafico.dados[k].data.reverse(); /*inverte dados*/
+                            }
                         }
                     }
                 }
@@ -64,7 +65,7 @@ export class PanoramaTemasComponent implements OnChanges {
         if (this.isBrowser) {
             this.goToTema();
         }
-    } 
+    }
 
     public goToTema(): void {
         if (this.isBrowser) {
@@ -73,8 +74,8 @@ export class PanoramaTemasComponent implements OnChanges {
         }
     };
 
-   private atualizaTextos(): void {
-        this.temas.forEach(({tema}) => this.textos[tema] = this._textos[tema]() || '');
+    private atualizaTextos(): void {
+        this.temas.forEach(({ tema }) => this.textos[tema] = this._textos[tema] ? this._textos[tema]() : '');
     }
 
     private _extrairDadosIndicador(indicadorId) {
@@ -88,18 +89,18 @@ export class PanoramaTemasComponent implements OnChanges {
 
     private _isDadosIndicadorValidos(indicadorId) {
         return this.resultados[indicadorId]
-                && this.resultados[indicadorId].periodoValidoMaisRecente
-                && this.resultados[indicadorId].valorValidoMaisRecente
-                && this.rankings[indicadorId]['local']['posicao']
-                && this.rankings[indicadorId]['BR']['posicao'];
+            && this.resultados[indicadorId].periodoValidoMaisRecente
+            && this.resultados[indicadorId].valorValidoMaisRecente
+            && this.rankings[indicadorId]['local']['posicao']
+            && this.rankings[indicadorId]['BR']['posicao'];
     }
 
     private _textos = {
         [TEMAS.trabalho.label]: () => {
-            const universoLocal = this.localidade.parent.children.length;
+            const universoLocal = this.localidade.parent ? this.localidade.parent.children.length : 0;
             const universoGeral = 5570;
 
-            if( !(this._isDadosIndicadorValidos(29765)
+            if (!(this._isDadosIndicadorValidos(29765)
                 && this._isDadosIndicadorValidos(60036)
                 && this._isDadosIndicadorValidos(60037))
             ) {
@@ -120,10 +121,10 @@ export class PanoramaTemasComponent implements OnChanges {
         },
 
         [TEMAS.populacao.label]: () => {
-            const universoLocal = this.localidade.parent.children.length;
+            const universoLocal = this.localidade.parent ? this.localidade.parent.children.length : 0;
             const universoGeral = 5570;
 
-            if( !(this._isDadosIndicadorValidos(29166)
+            if (!(this._isDadosIndicadorValidos(29166)
                 && this._isDadosIndicadorValidos(29168))
             ) {
                 return '';
@@ -142,10 +143,10 @@ export class PanoramaTemasComponent implements OnChanges {
         },
 
         [TEMAS.meioAmbiente.label]: () => {
-            const universoLocal = this.localidade.parent.children.length;
+            const universoLocal = this.localidade.parent ? this.localidade.parent.children.length : 0;
             const universoGeral = 5570;
 
-            if( !(this._isDadosIndicadorValidos(60030)
+            if (!(this._isDadosIndicadorValidos(60030)
                 && this._isDadosIndicadorValidos(60029)
                 && this._isDadosIndicadorValidos(60031))
             ) {
@@ -164,10 +165,10 @@ export class PanoramaTemasComponent implements OnChanges {
         },
 
         [TEMAS.economia.label]: () => {
-            const universoLocal = this.localidade.parent.children.length;
+            const universoLocal = this.localidade.parent ? this.localidade.parent.children.length : 0;
             const universoGeral = 5570;
 
-            if( !(this._isDadosIndicadorValidos(60047)
+            if (!(this._isDadosIndicadorValidos(60047)
                 && this._isDadosIndicadorValidos(60048))
             ) {
                 return '';
@@ -186,10 +187,10 @@ export class PanoramaTemasComponent implements OnChanges {
         },
 
         [TEMAS.saude.label]: () => {
-            const universoLocal = this.localidade.parent.children.length;
+            const universoLocal = this.localidade.parent ? this.localidade.parent.children.length : 0;
             const universoGeral = 5570;
 
-            if( !(this._isDadosIndicadorValidos(30279)
+            if (!(this._isDadosIndicadorValidos(30279)
                 && this._isDadosIndicadorValidos(60032))
             ) {
                 return '';
@@ -207,10 +208,10 @@ export class PanoramaTemasComponent implements OnChanges {
         },
 
         [TEMAS.educacao.label]: () => {
-            const universoLocal = this.localidade.parent.children.length;
+            const universoLocal = this.localidade.parent ? this.localidade.parent.children.length : 0;
             const universoGeral = 5570;
 
-            if( !(this._isDadosIndicadorValidos(60041)
+            if (!(this._isDadosIndicadorValidos(60041)
                 && this._isDadosIndicadorValidos(60042)
                 && this._isDadosIndicadorValidos(60045))
             ) {
