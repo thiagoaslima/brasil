@@ -1,3 +1,4 @@
+export { BibliotecaService } from './biblioteca.service';
 export { IndicadorService3 } from './indicador.service';
 export { LocalidadeService3 } from './localidade.service';
 export { PesquisaService3 } from './pesquisa.service';

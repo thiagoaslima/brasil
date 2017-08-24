@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ItemConfiguracao, PanoramaVisualizacao } from './configuration';
 import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { PesquisaConfiguration } from '../shared2/pesquisa/pesquisa.configuration';
+import { BibliotecaService } from '../shared3/services/biblioteca.service';
 import { LocalidadeService3 } from '../shared3/services/localidade.service';
 import { RankingService3 } from '../shared3/services/ranking.service';
 import { ResultadoService3 } from '../shared3/services';
@@ -22,6 +23,7 @@ export class Panorama2Service {
         private _resultadoService: ResultadoService3,
         private _localidadeService: LocalidadeService3,
         private _rankingService3: RankingService3,
+        private _bibliotecaService: BibliotecaService,
         private _pesquisasConfiguration: PesquisaConfiguration
     ) {
         this._totalUfs = this._localidadeService.getRoot().children.length;
@@ -29,58 +31,60 @@ export class Panorama2Service {
     }
 
     getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
-        return this._getResultadosIndicadores(configuracao, localidade)
-            .map(resultados => {
-                return configuracao
-                    .filter(item => Boolean(item.indicadorId))
-                    .map(item => {
-                        const periodo = item.periodo
-                            || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
-                            || '-';
+        return Observable.zip(
+            this._getResultadosIndicadores(configuracao, localidade),
+            localidade.tipo === 'municipio' ? this._bibliotecaService.getValues(localidade.codigo) : Observable.of({})
+        ).map(([resultados, valoresBiblioteca]) => {
+            return configuracao
+                .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
+                .map(item => {
+                    const periodo = item.periodo
+                        || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
+                        || '-';
 
-                        const titulo = item.titulo
-                            || (
-                                resultados[item.indicadorId] &&
-                                resultados[item.indicadorId].indicador &&
-                                resultados[item.indicadorId].indicador.nome
-                            );
-
-                        const valor = (
+                    const titulo = item.titulo
+                        || (
                             resultados[item.indicadorId] &&
                             resultados[item.indicadorId].indicador &&
-                            resultados[item.indicadorId].getValor(periodo)
-                        ) || '-';
+                            resultados[item.indicadorId].indicador.nome
+                        );
+
+                    const valor = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].getValor(periodo)
+                    ) || (item.titulo === 'Gentílico' ? valoresBiblioteca.GENTILICO : '-');
 
 
-                        const unidade = (
-                            resultados[item.indicadorId] &&
-                            resultados[item.indicadorId].indicador &&
-                            resultados[item.indicadorId].indicador.unidade.toString()
-                        ) || '';
+                    const unidade = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.toString()
+                    ) || '';
 
-                        const notas = (
-                            resultados[item.indicadorId] &&
-                            resultados[item.indicadorId].indicador &&
-                            resultados[item.indicadorId].indicador.notas
-                        ) || [];
+                    const notas = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.notas
+                    ) || [];
 
-                        const fontes = (
-                            resultados[item.indicadorId] &&
-                            resultados[item.indicadorId].indicador &&
-                            resultados[item.indicadorId].indicador.fontes
-                        ) || [];
+                    const fontes = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.fontes
+                    ) || [];
 
-                        return {
-                            tema: item.tema,
-                            titulo,
-                            periodo,
-                            valor,
-                            unidade,
-                            notas,
-                            fontes
-                        };
-                    });
-            });
+                    return {
+                        tema: item.tema,
+                        titulo,
+                        periodo,
+                        valor,
+                        unidade,
+                        notas,
+                        fontes
+                    };
+                });
+        });
     }
 
     getTemas(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
