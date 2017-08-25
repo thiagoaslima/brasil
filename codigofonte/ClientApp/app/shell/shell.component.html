@@ -7,13 +7,13 @@
     </div>
 
     <div class="bt-home"><a routerLink="/v4"><i class="fa fa-home" aria-hidden="true"></i>Página Inicial</a></div>
-
-    <busca (buscaAberta)="seletor.fecharSeletor()" [URLEnd]="seletor?.URLEnd"></busca>
     <aniversario></aniversario>
+    <busca (buscaAberta)="seletor.fecharSeletor()" [URLEnd]="seletor?.URLEnd"></busca>
+    
 
 </header>
 
-<div id='container' [class.no__scroll--mobile]="menuAberto">
+<div id='container' [class.no__scroll--mobile]="menuAberto"> 
 
     <seletor-localidade #seletor="seletor-localidade" (isSeletorAberto)=handleSeletorAberto($event)></seletor-localidade>
 
@@ -81,9 +81,9 @@
         <router-outlet #routerOutlet></router-outlet>
     </div>
     
-    <!-- Desabilitado
+    
         <nao-achei></nao-achei>
-    -->
+    
     <questionario></questionario>
     
     <footer *ngIf="!isHome" class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</footer>

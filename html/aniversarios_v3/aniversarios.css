@@ -26,6 +26,7 @@
     position: absolute;
     margin-left: 50%;
     left: -431px;
+    top: 50px;
 }
 
 i.fa-times{
@@ -99,6 +100,7 @@ h2{
     margin: 0px;
     list-style: none;
     border-bottom: 5px solid #CCCCCC;
+    cursor: pointer;
 }
 
 #filtroMes ul li:nth-child(1), #filtroMes ul li:nth-child(2){
@@ -121,6 +123,7 @@ h2{
     display: inline;
     width: 35px;
     padding: 1px 5px;
+    cursor: pointer;
 }
 
 #filtroDia ul li.selecionado{ 
