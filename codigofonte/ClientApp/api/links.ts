@@ -709,7 +709,6 @@ export const links = [
                     "ENTREVISTA",
                     "OCUPADO",
                     "RECENSEADO",
-                    "POPULAÇÃO",
                     "RESIDENTE",
                     "MASCULINO",
                     "IDADE",
