@@ -3,8 +3,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { ServicoDados as servidor } from '../values';
 
-import { Observable } from 'rxjs/Observable';
-
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
@@ -35,10 +33,6 @@ export class BibliotecaService {
                 return res.json();
             })
             .share();
-    }
-
-    private _handleError(error: Error, customError?: Error): Observable<any> {
-        return Observable.throw(error.message ? error : customError);
     }
 
 }

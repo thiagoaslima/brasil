@@ -4,13 +4,13 @@ import { isBrowser, isNode } from 'angular2-universal/browser';
 import { brasil } from '../../../api/brasil';
 import { ufs } from '../../../api/ufs';
 import { municipios } from '../../../api/municipios';
-import { links } from '../../../api/links';
+import { links } from '../../../api/links'; //links metadata
 
 @Injectable()
 export class BuscaCompletaService {
 
     constructor(){
-        //transform keywords
+        //transform link's keywords
         for(var i = 0; i < links.length; i++){
             for(var k = 0; k < links[i].keywords.length; k++){
                 links[i].keywords[k] = this.transformText(links[i].keywords[k]);
@@ -54,7 +54,9 @@ export class BuscaCompletaService {
             if(index == 0 || transformedText.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
                 placesFound.push(places[i]);
         }
-        //suggest a place (pick last 4, 3, 2 or 1 words and try to match to a place)
+        //big matches first
+        placesFound.sort(function(a, b){return (b.slug.split('-').length * b.slug.length) - (a.slug.split('-').length * a.slug.length)});
+        //suggest a place (pick last 4, 3, 2 and 1 words and try to match to a place)
         var textWords = transformedText.split('-');
         var words4, words3, words2, words1;
         var sug4 = [], sug3 = [], sug2 = [], sug1 = [];
@@ -95,17 +97,19 @@ export class BuscaCompletaService {
         //find city
         if(text.indexOf("estado") < 0)
             places = places.concat(this.findPlaces(text, municipios));
+        //pick only first results
+        places = places.slice(0, 6);
         //find keywords
         for(i = 0; i < links.length; i++){
-            links[i]['points'] = 0; //reset points
+            links[i]["points"] = 0; //reset points
             var keywords = links[i].keywords;
             for(var k = 0; k < keywords.length; k++){
                 var index = text.indexOf(keywords[k]);
                 if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
-                    links[i]['points'] += 1; //give a point to the link every time it matches a keyword
+                    links[i]["points"] += 1; //give a point to the link every time it matches a keyword
             }
         }
-        links.sort(function(a, b){return b['points'] - a['points']}); //sort by points
+        links.sort(function(a, b){return b["points"] - a["points"]}); //sort links by points
         //find year
         var textWords = text.split('-');
         for(i = 0; i < textWords.length; i++){
@@ -115,8 +119,58 @@ export class BuscaCompletaService {
                     year = undefined;
             }
         }
-        //result
-        console.log(places, links[0], year);
+        //result-----------------------------------------------------
+        var result = [];
+        //places only
+        if(places.length > 0){
+            for(i = 0; i < places.length; i++){
+                var type = places[i].codigo == 0 ? "pais" : ((places[i].codigo >= 10 && places[i].codigo) <= 99 ? "uf" : "municipio");
+                var parent;
+                if(type == "municipio"){
+                    for(var k = 0; k < ufs.length; k++){
+                        if(ufs[k].codigo == places[i].codigoUf)
+                            parent = ufs[k];
+                    }
+                }
+                var link;
+                if(type == "municipio")
+                    link = "/brasil/" + parent.sigla.toLowerCase() + '/' + places[i].slug;
+                else if(type == "uf")
+                    link = "/brasil/" + places[i].sigla.toLowerCase();
+                else if(type == "pais")
+                    link = "/brasil";
+                result.push({
+                    type: type,
+                    name: places[i].nome,
+                    parent: parent ? parent.sigla : null,
+                    id: places[i].codigo,
+                    link: link
+                });
+            }
+        }
+        //complete result
+        if(places.length > 0 && links[0]["points"] > 0){
+            for(i = 0; i < result.length; i++){
+                result[i].type = "pesquisa";
+                result[i].name = links[0].name + ((year && links[0].tipo == "pesquisa") ? (" (" + year + ")") : '') + " - " + result[i].name;
+                result[i].link = result[i].link + links[0].link + ((year && links[0].tipo == "pesquisa") ? ("/0?ano=" + year) : '');
+            }
+        }
+        //ask for a place
+        if(places.length == 0 && links[0]["points"] > 0){
+            result.push({
+                type: "mensagem",
+                name: "De onde?",
+            });
+        }
+        //nothing found
+        if(places.length == 0 && links[0]["points"] == 0){
+            result.push({
+                type: "mensagem",
+                name: "Nenhum resultado foi encontrado!",
+            });
+        }
+        return result;
     }
 
 }
