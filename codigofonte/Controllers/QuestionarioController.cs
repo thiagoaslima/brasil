@@ -10,6 +10,9 @@ namespace Brasil.Controllers
 {
     public class Questionario
     {
+        [StringLength(255)]
+        public string email { get; set; }
+
         public Questionario()
         {
             this.respostas = new List<Resposta>();
@@ -59,7 +62,7 @@ namespace Brasil.Controllers
                     id = conn.Query<int>(@"
                         SET NAMES UTF8;
                         INSERT INTO
-                            questionario() VALUES();SELECT LAST_INSERT_ID()", dbTransaction).Single();
+                            questionario(email) VALUES(@email);SELECT LAST_INSERT_ID()", new { email = questionario.email }, dbTransaction).Single();
 
                     foreach (var resposta in questionario.respostas)
                     {
