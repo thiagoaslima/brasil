@@ -77,7 +77,7 @@ const children = [
         path: 'v4/brasil/panorama',
         component: ShellComponent,
         children: [
-          { path: '', component: PanoramaBrasilComponent, pathMatch: 'full' },
+          { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
         ]
       },
       {

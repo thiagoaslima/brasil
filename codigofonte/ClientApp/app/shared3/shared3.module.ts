@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { CacheFactory } from '../cache/cacheFactory.service';
 import {
     BibliotecaService,
+    ConjunturaisService,
     IndicadorService3,
     LocalidadeService3,
     PesquisaService3,
     RankingService3,
-    ResultadoService3
+    ResultadoService3,
 } from './services';
 
 const MODULES = [
@@ -29,6 +30,7 @@ const COMPONENTS = [
 
 const PROVIDERS = [
     BibliotecaService,
+    ConjunturaisService,
     PesquisaService3,
     LocalidadeService3,
     RankingService3,

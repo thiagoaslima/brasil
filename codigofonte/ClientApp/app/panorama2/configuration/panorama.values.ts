@@ -1,16 +1,19 @@
 import { Indicador, Localidade, Resultado } from '../../shared3/models';
 
 export const PanoramaVisualizacao = {
-    grafico: "grafico",
-    mapa: "cartograma",
-    numerico: "numero",
-    painel: "painel"
+    grafico: 'grafico',
+    mapa: 'cartograma',
+    numerico: 'numero',
+    painel: 'painel'
 }
 
 export interface ItemConfiguracao {
     indicadorId?: number
     pesquisaId?: number
+    categoria?: string
+    servico?: 'conjunturais'
     periodo?: string
+    quantidadePeriodos?: number
     fontes?: string[]
 
     titulo?: string
@@ -25,6 +28,9 @@ export interface ItemConfiguracao {
         dados: Array<{
             indicadorId: number
             pesquisaId?: number
+            categoria?: string
+            servico?: 'conjunturais'
+            quantidadePeriodos?: number
         }>
     }
 
