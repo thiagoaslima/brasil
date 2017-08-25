@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.1.15.6] - 2017-08-25
+### Fixed
+- Nome do município de São Vicente de Sevidó.
+
+
 ## [v4.1.15.5] - 2017-08-23
 ### Changed
 - Texto dos gentílicos das UFs e municípios em minúsculo no panorama.
