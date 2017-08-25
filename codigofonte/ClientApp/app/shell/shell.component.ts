@@ -19,8 +19,46 @@ import 'rxjs/add/operator/debounceTime';
     templateUrl: './shell.component.html',
     styles: [`
     .bt-home {
-        
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 21px;
+        font-size: 1em;
+        padding: 5px 10px;
+        cursor: pointer;
+        float: left;
+        border-color: #1b779b;
+        margin-top: 12px;
+        margin-left: 12px;
+        font-size: 0.9em;
+
+        -webkit-transition: background 200ms ease, color 200ms ease;
+        -moz-transition: background 200ms ease, color 200ms ease;
+        -ms-transition: background 200ms ease, color 200ms ease;
+        -o-transition: background 200ms ease, color 200ms ease;
+        transition: background 200ms ease, color 200ms ease;
     }
+
+    .bt-home i{
+        color: #1b779b;
+        margin-right:10px;
+        font-size: 1.1em;
+
+        -webkit-transition: color 200ms ease;
+        -moz-transition: color 200ms ease;
+        -ms-transition: color 200ms ease;
+        -o-transition: color 200ms ease;
+        transition: color 200ms ease;
+    }
+
+    .bt-home:hover {
+        background-color: #1b779b;
+        color: #fff;
+    }
+
+    .bt-home:hover i{
+        color:#fff;
+    }
+
     .position_fixed {
       position: fixed;
     }
@@ -47,6 +85,10 @@ import 'rxjs/add/operator/debounceTime';
     @media screen and (max-width: 768px){
         .aside_recolhido {
             display: none;
+        }
+
+        .bt-home {
+            display:none;
         }
     }
   `]

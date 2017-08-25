@@ -51,7 +51,9 @@ export class BuscaCompletaService {
         for(i = 0; i < places.length; i++){
             if(placesFound.indexOf(places[i]) >= 0) continue; //dont push twice
             var index = transformedText.indexOf(places[i].slug);
-            if(index == 0 || transformedText.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
+            var length = places[i].slug.length;
+            if((index == 0 || transformedText.charAt(index - 1) == '-') && 
+                (index + length == transformedText.length || transformedText.charAt(index + length) == '-')) //match whole word
                 placesFound.push(places[i]);
         }
         //big matches first
@@ -104,7 +106,19 @@ export class BuscaCompletaService {
             links[i]["points"] = 0; //reset points
             var keywords = links[i].keywords;
             for(var k = 0; k < keywords.length; k++){
-                var index = text.indexOf(keywords[k]);
+                var index;
+                var keywordInPlaceName = false;
+                //jump keywords in place name
+                for(var j = 0; j < places.length; j++){
+                    index = places[j].slug.indexOf(keywords[k]);
+                    if((index == 0 || places[j].slug.charAt(index - 1) == '-') && text.indexOf(keywords[k]) == text.lastIndexOf(keywords[k])){
+                        keywordInPlaceName = true;
+                        break;
+                    }
+                }
+                if(keywordInPlaceName) continue;
+                //---
+                index = text.indexOf(keywords[k]);
                 if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
                     links[i]["points"] += 1; //give a point to the link every time it matches a keyword
             }
@@ -153,7 +167,8 @@ export class BuscaCompletaService {
             for(i = 0; i < result.length; i++){
                 result[i].type = "pesquisa";
                 result[i].name = links[0].name + ((year && links[0].tipo == "pesquisa") ? (" (" + year + ")") : '') + " - " + result[i].name;
-                result[i].link = result[i].link + links[0].link + ((year && links[0].tipo == "pesquisa") ? ("/0?ano=" + year) : '');
+                result[i].link = result[i].link + links[0].link;
+                result[i].year = (year && links[0].tipo == "pesquisa") ? year : undefined;
             }
         }
         //ask for a place

@@ -62,6 +62,7 @@
     position: absolute;
     margin-left: 50%;
     left: -431px;
+    top: 50px;
 }
 
 i.fa-times{
@@ -78,11 +79,16 @@ h2{
 .aniversario__header{
     padding: 12px 25px;
     background-color: #1b779b;
-    height: 70px;
+    height: 84px;
 }
 .aniversario__header nav{
     width: 837px;
 }
+
+.aniversario__header select{
+    font-size: 0.7em;
+}
+
 .aniversario__header nav ul{
     display: inline;
 }
@@ -120,7 +126,7 @@ h2{
     padding: 12px 0px;
     /* display: table; */
     padding-top: 0px;
-    height: 333px;
+    height: 380px;
     /* overflow-y: scroll; */
 }
 #filtroMes ul{
@@ -135,6 +141,7 @@ h2{
     margin: 0px;
     list-style: none;
     border-bottom: 5px solid #CCCCCC;
+    cursor: pointer;
 }
 
 #filtroMes ul li:nth-child(1), #filtroMes ul li:nth-child(2){
@@ -157,6 +164,7 @@ h2{
     display: inline;
     width: 35px;
     padding: 1px 5px;
+    cursor: pointer;
 }
 
 #filtroDia ul li.selecionado{ 
@@ -170,7 +178,7 @@ h2{
 .aniversariantes{
     /* width: 395px; */
     overflow-y: scroll;
-    height: 233px;
+    height: 293px;
     /* padding-top: 40px; */
     /* padding-bottom: 40px; */
     margin-left: 47px;
@@ -191,15 +199,23 @@ h2{
 
 .aniversariantes_municipios{
     margin-top: 8px;
-    columns: 2;
-    width: calc(100% - 200px);
+    -moz-column-count: 2;
+    width: calc(100%);
     padding: 0px 100px;
+    display: table;
 }
 
 .aniversariantes__municipios__municipio{
     margin-bottom: 12px;
     font-size: .95em;
     min-height: 36px;
+    width: 48%;
+    float: left;
+}
+
+.aniversariantes__municipios__municipio:nth-child(odd){
+    text-align: right;
+    margin-right: 4%;
 }
 
 .aniversariantes__municipios__municipio span{
