@@ -4,40 +4,22 @@
     <input #campoBusca type="text" class='busca__input' placeholder="Procure por município ou pesquisa" [(ngModel)]="termo" (click)="ativarBusca()">
     <i class="busca__icone fa" [class.fa-search]="!menuAberto" [class.fa-times]="menuAberto" aria-hidden="true" (click)="!menuAberto ? ativarBusca() : limparBusca()"></i>
     <div class="busca__auto-completar">
-        <!--div class="busca__auto-completar__menu">
-            <ul>
-                <li [class.selecionado]="categoria == 0" (click)="selecionarCategoria(0)">Todos <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--todos'>{{qtdPesquisas + qtdLocais}}</div></li>
-                <li [class.selecionado]="categoria == 1" (click)="selecionarCategoria(1)">Pesquisa <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--pesquisa'>{{qtdPesquisas}}</div></li>
-                <li [class.selecionado]="categoria == 2" (click)="selecionarCategoria(2)">Locais <div class='busca__auto-completar__menu__total-encontrado busca__auto-completar__menu__total-encontrado--locais'>{{qtdLocais}}</div></li>
-            </ul>
-        </div-->
         <div class="busca__auto-completar__resultado">
-            <div class='busca__auto-completar__resultado__item' *ngFor="let item of resultados">
-                <a *ngIf="item['type'] != 'mensagem'" class='busca__auto-completar__resultado__item__nome' [routerLink]="[item['link']] + URLEnd" (click)="limparBusca()">
-                    {{item['name']}}
+            <div *ngFor="let item of resultados">
+                <a *ngIf="item['type'] != 'mensagem'" class='busca__auto-completar__resultado__item' [routerLink]="[item['link']]" [queryParams]="(item['year'] ? {'ano': item['year']} : undefined)" (click)="limparBusca()">
+                    <span class='busca__auto-completar__resultado__item__nome'>{{item['name']}}</span>
                     <small class="busca__codigo" *ngIf="item['id']">{{ '[' + item['id'] + ']' }}</small>
                     <span class='busca__sigla' *ngIf="item['parent']">{{item['parent']}}</span>
+                    
+                    <span class='busca__tipo' *ngIf="item['type'] == 'pais'">País</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'uf'">Estado</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'municipio'">Município</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'pesquisa'">Pesquisa</span>
                 </a>
-                <div *ngIf="item['type'] == 'mensagem'" class='busca__resposta--sem-resultado'>
+                <div *ngIf="item['type'] == 'mensagem'" class='busca__mensagem'>
                     {{item['name']}}
                 </div>
-                <!--a [routerLink]="[item['link']] + URLEnd" (click)="limparBusca()">
-                    <div class='busca__auto-completar__resultado__item__nome'>
-                      {{item['nome']}} <small *ngIf="item['codigo']" class="busca__codigo">{{ '[' + item['codigo'] + ']' }}</small> <span *ngIf="!!item['destaque'] && item['destaque'] != ''">{{item['destaque']}}</span>
-                    </div>
-                    <div class='busca__auto-completar__resultado__item__tipo--municipio'>
-                        {{item['tipo']}}
-                    </div>
-                </a-->
             </div>
         </div>
-        <!--div class='busca__respostas' [class.load]="!!carregando" [class.sem-resultado]="resultadoBusca.length == 0 && !carregando">
-            <div class='busca__resposta--sem-resultado'>
-                Nenhum resultado foi encontrado! 
-            </div>
-            <div class='busca__resposta--load'>
-                <img src="img/load.gif" alt=""> 
-            </div>
-        </div-->
     </div>
 </div>

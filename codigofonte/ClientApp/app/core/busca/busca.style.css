@@ -110,17 +110,30 @@
     font-size: 1.2em;
     border-bottom: 1px solid #4D4D4D;
     padding: 12px 25px;
+    display: block;
 }
 
 .busca__auto-completar__resultado__item:hover{
     background-color: #4D4D4D;
 }
 
-.busca__auto-completar__resultado__item__nome span{
+.busca__sigla{
     background-color: #4D4D4D;
     font-size: .6em;
     padding: 4px 6px;
     border-radius: 48px;
+}
+
+.busca__tipo{
+    display: block;
+    color: #ccc;
+    font-size: .7em;
+}
+
+.busca__mensagem{
+    padding: 30px;
+    text-align: center;
+    font-style: italic;
 }
 
 .busca__auto-completar__resultado__item__tipo{

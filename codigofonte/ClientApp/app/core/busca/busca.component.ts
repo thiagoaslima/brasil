@@ -64,94 +64,6 @@ export class BuscaComponent implements OnInit {
             });
     }
 
-
-    list(resultado) {
-
-        this.resultadoBusca = [];
-        this.resultadoPesquisas = [];
-        this.resultadoLocais = [];
-        this.resultadoTodos = [];
-
-        let pesquisas: Pesquisa[] = resultado.pesquisas;
-        let localidades: Localidade[] = resultado.localidades;
-
-        this.qtdPesquisas = pesquisas.length;
-        pesquisas.map(pesquisa => {
-
-            let itemResultado: ItemResultado = {
-
-                nome: pesquisa.nome,
-                tipo: pesquisa.descricao,
-                categoria: 1,
-                destaque: '',
-                link: this._localidadeAtual.localidade.link + '/pesquisa/' + pesquisa.id
-            };
-
-            this.resultadoPesquisas.push(itemResultado);
-        });
-
-        this.qtdLocais = localidades.length;
-        localidades.map(localidade => {
-
-            let tipo = '';
-            let destaque = '';
-            let link = '';
-
-            if (localidade.tipo == 'pais') {
-                tipo = 'País';
-                link = '/brasil';
-            }
-            
-            if (localidade.tipo == 'uf') {
-
-                tipo = 'Estado';
-                link = '/brasil/' + localidade.sigla.toLowerCase();
-            }
-
-            if (localidade.tipo == 'municipio') {
-
-                tipo = 'Município';
-                destaque = localidade.parent.sigla;
-                link = '/brasil/' + localidade.parent.sigla.toLowerCase() + '/' + localidade.identificador;
-            }
-
-            let itemResultado: ItemResultado = {
-
-                codigo: localidade.codigo,
-                nome: localidade.nome,
-                tipo: tipo,
-                categoria: 2,
-                destaque: destaque,
-                link: link
-            };
-            
-            this.resultadoLocais.push(itemResultado);
-        });
-
-        this.resultadoTodos = this.resultadoPesquisas.concat(this.resultadoLocais);
-
-        this.selecionarCategoria(this.categoria);
-        this.carregando = false;
-    }
-
-    selecionarCategoria(categoria) {
-
-        this.categoria = categoria;
-
-        switch (categoria) {
-
-            case 1:
-                this.resultadoBusca = this.resultadoPesquisas;
-                break;
-            case 2:
-                this.resultadoBusca = this.resultadoLocais;
-                break;
-            default:
-                this.resultadoBusca = this.resultadoTodos;
-                break;
-        }
-    }
-
     ativarBusca() {
 
         this.modoDigitacao = true;
@@ -181,8 +93,6 @@ export class BuscaComponent implements OnInit {
         this.termo = ''
     }
 }
-
-
 
 interface ItemResultado {
 
