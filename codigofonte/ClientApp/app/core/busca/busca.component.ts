@@ -33,6 +33,9 @@ export class BuscaComponent implements OnInit {
     categoria: number = 0;
     carregando = false;
 
+    resultados = [];
+    numResultados = 0;
+
     private _qtdMinimaCaracteres = 3;
     private _localidadeAtual;
 
@@ -45,8 +48,7 @@ export class BuscaComponent implements OnInit {
         private _appState: AppState
     ) { }
 
-    ngOnInit() {
-
+    ngOnInit(){
         this._appState.observable$
             .subscribe(localidade => this._localidadeAtual = localidade);
 
@@ -55,17 +57,11 @@ export class BuscaComponent implements OnInit {
             .distinctUntilChanged()
             .map(e => e.target['value'])
             .filter(value => value.length >= this._qtdMinimaCaracteres)
-            .flatMap(texto => {
-
+            .subscribe(texto => {
                 this.menuAberto = true;
-                this.carregando = true;
-
-                this._buscaCompletaService.search(texto);
-
-                return this._buscaService.search(texto);
-            })
-            .subscribe(resultados => this.list(resultados));
-
+                this.resultados = this._buscaCompletaService.search(texto);
+                this.numResultados = (this.resultados.length > 0 && this.resultados[0].type == "mensagem") ? 0 : this.resultados.length;
+            });
     }
 
 
