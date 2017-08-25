@@ -106,7 +106,19 @@ export class BuscaCompletaService {
             links[i]["points"] = 0; //reset points
             var keywords = links[i].keywords;
             for(var k = 0; k < keywords.length; k++){
-                var index = text.indexOf(keywords[k]);
+                var index;
+                var keywordInPlaceName = false;
+                //jump keywords in place name
+                for(var j = 0; j < places.length; j++){
+                    index = places[j].slug.indexOf(keywords[k]);
+                    if((index == 0 || places[j].slug.charAt(index - 1) == '-') && text.indexOf(keywords[k]) == text.lastIndexOf(keywords[k])){
+                        keywordInPlaceName = true;
+                        break;
+                    }
+                }
+                if(keywordInPlaceName) continue;
+                //---
+                index = text.indexOf(keywords[k]);
                 if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
                     links[i]["points"] += 1; //give a point to the link every time it matches a keyword
             }
