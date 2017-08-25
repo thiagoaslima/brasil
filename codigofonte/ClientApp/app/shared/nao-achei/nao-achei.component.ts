@@ -41,11 +41,12 @@ export class NaoAcheiComponent implements OnInit {
     ngOnInit() {
         if(isBrowser){
             if(NaoAcheiComponent.timer == undefined)
-                NaoAcheiComponent.timer = setTimeout(()=>this.esconde = false, 10000);
+                NaoAcheiComponent.timer = setTimeout(()=>this.esconde = false, 1);
         }
     }
 
-    enviar(email, assunto, mensagem){
+    enviar(mensagem){
+/*    enviar(email, assunto, mensagem){
         if(isBrowser){
             this.url = '\n\nPágina de origem: ' + window.location.href;
         }
@@ -57,7 +58,7 @@ export class NaoAcheiComponent implements OnInit {
         .subscribe(res => {
             //console.log("ok", res);
         });
-
+*/
         this.enviado = true;
         this.aberto = false;
     }
