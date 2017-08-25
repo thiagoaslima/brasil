@@ -1,7 +1,7 @@
 <div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" >
     <div class="busca__hit" (click)="desativarBusca()">
     </div>
-    <input #campoBusca type="search" class='busca__input' placeholder="Procure por município ou pesquisa" [(ngModel)]="termo" (click)="ativarBusca()">
+    <input #campoBusca type="text" class='busca__input' placeholder="Procure por município ou pesquisa" [(ngModel)]="termo" (click)="ativarBusca()">
     <i class="busca__icone fa" [class.fa-search]="!menuAberto" [class.fa-times]="menuAberto" aria-hidden="true" (click)="!menuAberto ? ativarBusca() : limparBusca()"></i>
     <div class="busca__auto-completar">
         <!--div class="busca__auto-completar__menu">

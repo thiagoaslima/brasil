@@ -17,29 +17,25 @@ import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/compone
 
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
+import { PanoramaBrasilComponent } from './panorama2/panorama-brasil/panorama-brasil.component';
 
 const children = [
-  { path: '', redirectTo: 'panorama', pathMatch: 'full' },
-
-  // {
-  //   path: 'panorama',
-  //   component: PanoramaComponent
-  // },
-
+  {
+    path: '',
+    redirectTo: 'panorama',
+    pathMatch: 'full'
+  },
   {
     path: 'panorama',
     component: PanoramaShellComponent
   },
-
   {
     path: 'historico',
     component: VisaoHistoricaComponent
   },
-
   { path: 'pesquisa', component: PesquisaComponent },
   { path: 'pesquisa/:pesquisa', component: PesquisaComponent },
   { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent }
-
 ];
 
 @NgModule({
@@ -73,30 +69,15 @@ const children = [
         component: SandboxComponent
       },
       {
-        path: 'brasil',
-        redirectTo: 'v4/brasil',
-      },
-      {
-        path: 'brasil',
-        redirectTo: 'v4/brasil',
-      },
-      {
         path: 'v4/brasil',
-        // redirectTo: 'v4',
-        // pathMatch: 'full'
-        canActivate: [ValidParametersGuard],
-        component: ShellComponent,
-        children
-      },
-      {
-        path: 'brasil/:uf',
-        redirectTo: 'v4/brasil/:uf',
+        redirectTo: 'v4/brasil/panorama',
+        pathMatch: 'full'
       },
       {
         path: 'v4/brasil/panorama',
         component: ShellComponent,
         children: [
-          { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
+          { path: '', component: PanoramaBrasilComponent, pathMatch: 'full' },
         ]
       },
       {
@@ -107,14 +88,14 @@ const children = [
           { path: ':pesquisa', component: PesquisaComponent },
           { path: ':pesquisa/:indicador', component: PesquisaComponent }
         ]
-      },    
+      },
       {
         path: 'v4/brasil/historico',
         component: ShellComponent,
         children: [
           { path: '', component: VisaoHistoricaComponent, pathMatch: 'full' },
         ]
-      },    
+      },
       {
         path: 'v4/brasil/:uf',
         canActivate: [ValidParametersGuard],
@@ -126,10 +107,6 @@ const children = [
         canActivate: [ValidParametersGuard],
         component: ShellComponent,
         children
-      },
-      {
-        path: 'brasil/:uf/:municipio',
-        redirectTo: 'v4/brasil/:uf/:municipio',
       },
       {
         path: 'v4/municipio/:codmun',
@@ -146,11 +123,61 @@ const children = [
         ]
       },
 
+      /** ADIÇÃO DO V4 ANTES DAS URLS */
+      {
+        path: 'brasil',
+        redirectTo: 'v4/brasil/panorama',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/:uf',
+        redirectTo: 'v4/brasil/:uf/panorama',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/pesquisa',
+        redirectTo: 'v4/brasil/pesquisa'
+      },
+      {
+        path: 'brasil/:uf/panorama',
+        redirectTo: 'v4/brasil/:uf/panorama',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/:uf/historico',
+        redirectTo: 'v4/brasil/:uf/historico',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/:uf/pesquisa',
+        redirectTo: 'v4/brasil/:uf/pesquisa',
+      },
+      {
+        path: 'brasil/:uf/:municipio',
+        redirectTo: 'v4/brasil/:uf/:municipio/panorama',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/:uf/:municipio/panorama',
+        redirectTo: 'v4/brasil/:uf/:municipio/panorama',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/:uf/:municipio/historico',
+        redirectTo: 'v4/brasil/:uf/:municipio/historico',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/:uf/:municipio/pesquisa',
+        redirectTo: 'v4/brasil/:uf/:municipio/pesquisa'
+      },
+
+      /** PAGE 404 */
       {
         path: '**',
         component: Page404Component
       }
-    ])
+    ], { enableTracing: true })
   ]
 })
 export class RootRoutingModule { }

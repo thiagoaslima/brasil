@@ -4,7 +4,14 @@ import { Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { CacheFactory } from '../cache/cacheFactory.service';
-import { IndicadorService3, LocalidadeService3, PesquisaService3, RankingService3, ResultadoService3 } from './services'
+import {
+    BibliotecaService,
+    IndicadorService3,
+    LocalidadeService3,
+    PesquisaService3,
+    RankingService3,
+    ResultadoService3
+} from './services';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -17,10 +24,11 @@ const PIPES = [
 ];
 
 const COMPONENTS = [
-    
+
 ];
 
 const PROVIDERS = [
+    BibliotecaService,
     PesquisaService3,
     LocalidadeService3,
     RankingService3,
