@@ -117,8 +117,7 @@ export class BuscaCompletaService {
                 if(keywordInPlaceName) continue;
                 //---
                 index = text.indexOf(keywords[k]);
-                if((index == 0 || text.charAt(index - 1) == '-') && //must match with the start of a word (spaces are replaced by '-')
-                    (keywords[k].length <= 4 && text.charAt(keywords[k].length) == '-')) //must match whole word if keyword is too small
+                if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
                     links[i]["points"] += 1; //give a point to the link every time it matches a keyword
             }
         }
