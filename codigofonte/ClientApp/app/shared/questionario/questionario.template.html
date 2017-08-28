@@ -60,6 +60,10 @@
                 <textarea rows="5" placeholder="Mensagem" name="mensagem" class="questionario__textarea"></textarea>
             </div>
             <div [class.questionario__escondido]="pergunta != 6">
+                <p class="questionario__pergunta">Caso tenha interesse em colaborar ainda mais com o IBGE, deixe seu email abaixo e poderemos entrar em contato para mais perguntas.</p>
+                <input type="input" name="email" class="questionario__input" placeholder="e-mail (opcional)">
+            </div>
+            <div [class.questionario__escondido]="pergunta != 7">
                 <p class="questionario__pergunta">Obrigado pela sua colaboração!</p>
                 <p class="questionario__instrucao">
                     Suas respostas nos ajudam na missão de retratar o Brasil com
