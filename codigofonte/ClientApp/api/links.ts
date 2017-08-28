@@ -10,25 +10,17 @@ export const links = [
         target: ["pai", "estado", "cidade"], //se o link serve para pais/estado/cidade
         tipo: "pagina" //tipo: página/pesquisa
     },
-    {
-        name: "Panorama",
-        link: "/panorama", 
-        keywords: ["panorama", "resumo", "prefeito", "gentílico", "natural", "código", "população", "população estimada", "população censo", "pessoa", "densidade demográfica", "Salário médio", "Pessoal ocupado", "População ocupada", "População trabalhando",
-            "pessoal trabalhando", "escolarização", "IDEB", "Matrículas no ensino fundamental", "PIB per capita", "PIB", "IDHM", "Índice de Desenvolvimento Humano Municipal", "Mortalidade Infantil", "Internações por diarreia", "área", "Esgot", "Arborização", "Urbanização"],
-        target: ["pai", "estado", "cidade"],
-        tipo: "pagina"
-    },
+
 
     {
         name: "Cadastro Central de Empresa",
         link: "/pesquisa/19/0",
         keywords: ["CADASTRO CENTRAL DE EMPRESA", 
                     "EMPRESA",
-                    "ECONÔMICA",
-                    "ADMINISTRAÇÃO PÚBLICA",
-                    "SEGURIDADE SOCIAL",
+                    "ADMINISTRAÇÃO",
+                    "SEGURIDADE",
                     "DEFESA",
-                    "PRODUÇÃO FLORESTAL",
+                    "FLORESTAL",
                     "PESCA",
                     "AQUICULTURA",
                     "DESCONTAMINAÇÃO",
@@ -49,13 +41,12 @@ export const links = [
                     "CONSTRUÇÃO",
                     "INDÚSTRIA",
                     "COMUNICAÇÃO",
-                    "INFORMAÇÃO",
                     "INTERNACIONA",
                     "EXTRATERRITORIA",
                     "TRANSPORTE",
                     "ARMAZENAGEM",
                     "CORREIO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -65,7 +56,7 @@ export const links = [
         keywords: ["MORTALIDADE",
                     "INFANTIL",
                     "INFANTO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -84,7 +75,6 @@ export const links = [
                     "PSIQUIATRIA",
                     "TRAUMATO-ORTOPEDIA",
                     "CIRÚRGICA",
-                    "CATEGORIA",
                     "INTERNAÇÃO",
                     "ESPECIALIDADE",
                     "AMBULATORIAL",
@@ -96,20 +86,17 @@ export const links = [
                     "ODONTOLÓGIC",
                     "TERAPIA",
                     "SADT",
-                    "EQUIPAMENTO",
                     "ELETROCARDIÓGRAFO",
                     "ELETROENCEFALÓGRAFO",
                     "HEMODIÁLISE",
                     "MAMÓGRAFO",
-                    "COMANDO",
-                    "ESTÉREO",
                     "RAIO X",
                     "DENSITOMETRIA ÓSSEA",
                     "RESSONÂNCIA MAGNÉTICA",
                     "TOMÓGRAFO",
                     "ULTRASSOM",
                     "LEITO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -126,12 +113,12 @@ export const links = [
                     "REGISTRADO",
                     "ÓBITO",
                     "FALECIDO",
-                    "FETAI",
+                    "FETAL",
                     "SEPARAÇ",
                     "JUDICIAL",
                     "ESCRITURA",
                     "TABELIONATO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -140,9 +127,6 @@ export const links = [
         link: "/pesquisa/38/0",
         keywords: ["PRODUTO INTERNO BRUTO MUNICÍPIO",
                     "PIB",
-                    "PREÇO",
-                    "PER CAPITA",
-                    "VALOR",
                     "IMPOSTO",
                     "SUBSÍDIO",
                     "PRODUTO"],
@@ -156,9 +140,6 @@ export const links = [
         keywords: ["LAVOURA",
                     "TEMPORÁRIA",
                     "ABACAXI",
-                    "PRODUÇÃO",
-                    "PLANTA",
-                    "COLHIDA",
                     "ALGODÃO",
                     "HERBÁCEO",
                     "CAROÇO",
@@ -195,7 +176,7 @@ export const links = [
                     "TOMATE",
                     "TRIGO",
                     "TRITICALE"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -205,10 +186,8 @@ export const links = [
         keywords: ["LAVOURA PERMANENTE",
                     "ABACATE",
                     "ALGODÃO",
-                    "CAROÇO",
                     "AZEITONA",
                     "BANANA",
-                    "CACHO",
                     "BORRACHA",
                     "CACAU",
                     "AMÊNDOA",
@@ -246,7 +225,7 @@ export const links = [
                     "TUNGUE",
                     "URUCUM",
                     "UVA"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -254,7 +233,7 @@ export const links = [
         name: "Produção Agrícola - Cereais, Leguminosas e Oleaginosa",
         link: "/pesquisa/31/0",
         keywords: ["PRODUÇÃO AGRÍCOLA",
-                    "CEREAI",
+                    "CEREA",
                     "LEGUMINOSA",
                     "OLEAGINOSA",
                     "ALGODÃO",
@@ -276,7 +255,7 @@ export const links = [
                     "SORGO GRANÍFERO",
                     "TRIGO",
                     "TRITICALE"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -303,7 +282,7 @@ export const links = [
                     "ESGOT",
                     "PLUVIAI",
                     "HÍDRICO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -312,7 +291,7 @@ export const links = [
         name: "Serviços de Hospedagem",
         link: "/pesquisa/34/0",
         keywords: ["SERVIÇOS DE HOSPEDAGEM",
-                    "HABITACIONAI",
+                    "HABITACIONA",
                     "HOSPEDAGEM",
                     "ACOMODAÇÃO",
                     "APARTAMENTO",
@@ -326,7 +305,7 @@ export const links = [
                     "CHALÉ",
                     "QUARTO",
                     "SUÍTE"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -401,9 +380,8 @@ export const links = [
                     "OVINO",
                     "TOSQUIADO",
                     "LÃ",
-                    "SUÍNO",
-                    "MATRIZ"],
-        target: ["cidade"],
+                    "SUÍNO"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -463,7 +441,7 @@ export const links = [
                     "LABORATORI",
                     "TRANSTORNO",
                     "COMPORTAMENTA"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -475,7 +453,7 @@ export const links = [
                     "POBREZA",
                     "DESIGUALDADE",
                     "GINI"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -486,13 +464,10 @@ export const links = [
                     "INSTITUIÇÕES",
                     "FINANCEIR",
                     "DEPÓSITO",
-                    "PRAZO",
-                    "VISTA",
-                    "AGÊNCIA",
                     "RECEBIMENTO",
                     "CRÉDITO",
                     "POUPANÇA"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -502,7 +477,7 @@ export const links = [
         keywords: ["ÍNDICE DE DESENVOLVIMENTO HUMANO",
                     "HUMANO",
                     "IDH"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -512,7 +487,7 @@ export const links = [
         keywords: ["ÍNDICE DE DESENVOLVIMENTO DA EDUCAÇÃO BÁSICA",
                     "EDUCAÇÃO",
                     "IDEB"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -522,14 +497,14 @@ export const links = [
         keywords: ["FUNDAÇÕES PRIVADAS E ASSOCIAÇÕES SEM FINS LUCRATIVO",
                     "ENTIDADES",
                     "LUCRATIVO",
-                    "ASSOCIAÇ",
+                    "ASSOCIA",
                     "FUNDAÇ",
                     "PARTIDOS",
                     "POLÍTICOS", 
                     "SINDICATOS", 
                     "PATRONA", 
-                    "PROFISSIONAI"],
-        target: ["cidade"],
+                    "PROFISSIONA"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -550,7 +525,7 @@ export const links = [
                     "TRATOR DE RODA",
                     "UTILITÁRIO",
                     "CARRO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -566,7 +541,6 @@ export const links = [
                     "OBRAS",
                     "PESSOAL",
                     "ENCARGOS",
-                    "REALIZADA",
                     "RECEITAS",
                     "CONTRIBUIÇÃO",
                     "DÍVIDA",
@@ -575,7 +549,6 @@ export const links = [
                     "ISS",
                     "ITBI",
                     "PATRIMONIAL",
-                    "TAXA",
                     "TRANSFERÊNCIA",
                     "INTERGORVENAMENTAL",
                     "TRIBUTÁRIA",
@@ -585,7 +558,7 @@ export const links = [
                     "OURO",
                     "REPASSADO",
                     "ITR"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -659,7 +632,6 @@ export const links = [
                     "ANGICO",
                     "CASCA",
                     "BARBATIMÃO",
-                    "SILVICULTURA",
                     "EUCALIPTO",
                     "PINU",
                     "ACÁCIA-NEGRA",
@@ -667,7 +639,7 @@ export const links = [
                     "PAPEL",
                     "CELULOSE",
                     "RESINA"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -681,7 +653,7 @@ export const links = [
                     "DOCENTES",
                     "ESCOLA",
                     "ENSINO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -690,11 +662,12 @@ export const links = [
         link: "/pesquisa/24/0",
         keywords: ["CENSO AGROPECUÁRIO",
                     "AGROPECUÁRIO",
+                    "AGRÍCOLA",
                     "AGRO",
                     "TERRA",
                     "LAVOURA",
                     "GRÃO"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -705,8 +678,7 @@ export const links = [
                     "DOMICÍLIO",
                     "COLETIVO",
                     "MORADOR",
-                    "PARTICULARE",
-                    "ENTREVISTA",
+                    "PARTICULAR",
                     "OCUPADO",
                     "RECENSEADO",
                     "RESIDENTE",
@@ -719,7 +691,7 @@ export const links = [
                     "PESSOA",
                     "RURAL",
                     "MORADORE"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -754,16 +726,17 @@ export const links = [
                     "UNIÃO",
                     "COR",
                     "RAÇA",
-                    "AMARELA",
-                    "BRANCA",
+                    "AMAREL",
+                    "BRANC",
                     "INDÍGENA",
-                    "PARDA",
-                    "PRETA",
+                    "PARD",
+                    "PRET",
+                    "NEGR",
                     "CONJUGAL",
                     "CASAMENTO CIVIL",
                     "CASAMENTO RELIGIOSO",
                     "CONSENSUAL"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -778,7 +751,7 @@ export const links = [
                     "INTELECTUAL",
                     "MOTORA",
                     "VISUAL"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -789,9 +762,10 @@ export const links = [
                     "IGREJA",
                     "CATÓLICA APOSTÓLICA ROMANA",
                     "ESPÍRITA",
-                    "EVANGÉLICA",
+                    "EVANGÉLIC",
+                    "EVANGÉLIC",
                     "MISSIONÁRIA",
-                    "PENTECOSTAL",
+                    "PENTECOSTA",
                     "UMBANDA",
                     "CANDOMBLÉ",
                     "RELIGIOSIDADE",
@@ -825,7 +799,7 @@ export const links = [
                     "IGREJA MESSIÂNICA MUNDIAL",
                     "TESTEMUNHAS DE JEOVÁ",
                     "CRISTÃ"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -836,7 +810,7 @@ export const links = [
                     "SALÁRIO",
                     "PREVIDÊNCIA",
                     "CONTRIBUINTE"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -853,7 +827,7 @@ export const links = [
                     "EMPREGADORE",
                     "EMPREGADO",
                     "DOMÉSTIC"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -863,7 +837,7 @@ export const links = [
         keywords: ["TRABALHO INFANTIL",
                     "INFANTIL",
                     "CRIANÇA"],
-        target: ["cidade"],
+        target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
 
@@ -873,56 +847,182 @@ export const links = [
         keywords: ["AGLOMERADOS SUBNORMAIS",
                     "AGLOMERADOS",
                     "SUBNORMAIS",
-                    "FAVELA"],
+                    "FAVELA",
+                    "CARENTE",
+                    "COMUNDADE"],
         target: ["cidade"],
         tipo: "pesquisa"
     },
 
-    // {
-    //     name: "",
-    //     link: "/pesquisa/xxx/0",
-    //     keywords: [],
-    //     target: ["cidade"],
-    //     tipo: "pesquisa"
-    // },
+    {
+        name: "Síntese de indicadores sociais",
+        link: "/pesquisa/45/0",
+        keywords: ["INDICADORES SOCIA",
+                    "FECUNDIDADE",
+                    "PALMA"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
 
-    // {
-    //     name: "",
-    //     link: "/pesquisa/xxx/0",
-    //     keywords: [],
-    //     target: ["cidade"],
-    //     tipo: "pesquisa"
-    // },
+    {
+        name: "Contas regionais do Brasil",
+        link: "/pesquisa/10060/0",
+        keywords: ["CONTAS REGIONAIS",
+                    "CONTAS"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
 
-    // {
-    //     name: "",
-    //     link: "/pesquisa/xxx/0",
-    //     keywords: [],
-    //     target: ["cidade"],
-    //     tipo: "pesquisa"
-    // },
+    {
+        name: "Entidades de assistência social privadas sem fins lucrativos",
+        link: "/pesquisa/10066/0",
+        keywords: ["ASSISTÊNCIA SOCIAL", "SOCIAL"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
 
-    // {
-    //     name: "",
-    //     link: "/pesquisa/xxx/0",
-    //     keywords: [],
-    //     target: ["cidade"],
-    //     tipo: "pesquisa"
-    // },
+    {
+        name: "Indicadores sociodemográficos e de saúde no Brasil",
+        link: "/pesquisa/10055/0",
+        keywords: ["sociodemográficos",
+                    "PRÉ-NATAL"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
 
-    // {
-    //     name: "",
-    //     link: "/pesquisa/xxx/0",
-    //     keywords: [],
-    //     target: ["cidade"],
-    //     tipo: "pesquisa"
-    // },
+    {
+        name: "Migrações",
+        link: "/pesquisa/10053/0",
+        keywords: ["MIGRAC"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
 
-    // {
-    //     name: "",
-    //     link: "/pesquisa/xxx/0",
-    //     keywords: [],
-    //     target: ["cidade"],
-    //     tipo: "pesquisa"
-    // },    
+    {
+        name: "Pesquisa Anual da Indústria da Construção",
+        link: "/pesquisa/48/0",
+        keywords: ["Indústria da Construção", 
+                    "Construção"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Pesquisa Anual de Comércio",
+        link: "/pesquisa/50/0",
+        keywords: ["PESQUISA ANUAL DE COMERCIO",
+                    "COMERCIO",
+                    "PAC"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Pesquisa Anual de Serviços",
+        link: "/pesquisa/52/0",
+        keywords: ["PESQUISA ANUAL DE SERVIÇOS",
+                    "SERVIÇOS", 
+                    "PAS"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Pesquisa de inovação",
+        link: "/pesquisa/10064/0",
+        keywords: ["INOVAÇÃO"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Pesquisa Industrial Anual - Produto",
+        link: "/pesquisa/10061/0",
+        keywords: ["INDUSTRIAL"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Pesquisa Nacional de Saúde",
+        link: "/pesquisa/47/0",
+        keywords: ["Pesquisa Nacional de Saúde",
+                    "PNS"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "PNAD - Pesquisa Nacional por Amostra de Domicílios",
+        link: "/pesquisa/44/0",
+        keywords: ["Pesquisa Nacional por Amostra de Domicílios",
+                    "PNAD",
+                    "Amostra de Domicílios"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "POF - Pesquisa de Orçamentos Familiares",
+        link: "/pesquisa/46/0",
+        keywords: ["Pesquisa de Orçamentos Familiares",
+                    "POF",
+                    "Orçamentos Familiares"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Projeção da população",
+        link: "/pesquisa/53/0",
+        keywords: ["Projeção da população",
+                    "Projeção",
+                    "estimativa", 
+                    "estimada"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Série estudos e pesquisas: estatísticas de empreendedorismo",
+        link: "/pesquisa/10062/0",
+        keywords: ["empreendedorismo"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Série estudos e pesquisas: demografia das empresas",
+        link: "/pesquisa/10063/0",
+        keywords: ["demografia das empresas", "empresas"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Relações entre as alterações históricas na dinâmica demográfica brasileira e impactos decorrentes do processo de envelhecimento da população",
+        link: "/pesquisa/10057/0",
+        keywords: ["envelhecimento"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Pesquisa Nacional de Saúde do Escolar",
+        link: "/pesquisa/10056/0",
+        keywords: ["Saúde do Escolar, Saúde Escolar"],
+        target: ["estado"],
+        tipo: "pesquisa"
+    },
+
+    {
+        name: "Panorama",
+        link: "/panorama", 
+        keywords: ["panorama", "resumo", "prefeito", "gentílico", "natural", "código", "população", "população estimada", "população censo", "pessoa", "densidade demográfica", "Salário médio", "Pessoal ocupado", "População ocupada", "População trabalhando",
+            "pessoal trabalhando", "escolarização", "IDEB", "Matrículas no ensino fundamental", "PIB per capita", "PIB", "IDHM", "Índice de Desenvolvimento Humano Municipal", "Mortalidade Infantil", "Internações por diarreia", "área", "Esgot", "Arborização", "Urbanização"],
+        target: ["pai", "estado", "cidade"],
+        tipo: "pagina"
+    }
+
+
 ];
