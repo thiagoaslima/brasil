@@ -6,8 +6,8 @@ export const links = [
         name: "Histórico & Foto", //nome mostrado no resultado da busca
         link: "/historico", //link relativo
         //palavras chave (no caso das palavras que tem masculino/feminico/plural/partes em comum, incluir apenas o pedaço em comum entre elas)
-        keywords: ["histórico", "história", "foto", "imagem", "imagen", "criad", "criação", "formad", "formação", "formação administrativa"],
-        target: ["pai", "estado", "cidade"], //se o link serve para pais/estado/cidade
+        keywords: ["históri", "foto", "image", "criad", "criação", "formad", "formação", "formação administrativa"],
+        target: ["pais", "estado", "cidade"], //se o link serve para pais/estado/cidade
         tipo: "pagina" //tipo: página/pesquisa
     },
 
@@ -1023,7 +1023,7 @@ export const links = [
         link: "/panorama", 
         keywords: ["panorama", "resumo", "prefeito", "gentílico", "natural", "código", "população", "população estimada", "população censo", "pessoa", "densidade demográfica", "Salário médio", "Pessoal ocupado", "População ocupada", "População trabalhando",
             "pessoal trabalhando", "escolarização", "IDEB", "Matrículas no ensino fundamental", "PIB per capita", "PIB", "IDHM", "Índice de Desenvolvimento Humano Municipal", "Mortalidade Infantil", "Internações por diarreia", "área", "Esgot", "Arborização", "Urbanização"],
-        target: ["pai", "estado", "cidade"],
+        target: ["pais", "estado", "cidade"],
         tipo: "pagina"
     }
 
