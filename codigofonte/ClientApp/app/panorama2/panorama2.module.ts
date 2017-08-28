@@ -12,6 +12,7 @@ import { PanoramaPainelComponent } from './panorama-painel/panorama-painel.compo
 import { PanoramaCardComponent } from './panorama-card/panorama-card.component';
 import { SharedModule3 } from '../shared3/shared3.module';
 
+import { IndicadoresService } from './panorama-brasil/indicadores.service';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { SharedModule3 } from '../shared3/shared3.module';
         PanoramaCardComponent
     ],
     providers: [
-        Panorama2Service
+        Panorama2Service,
+        IndicadoresService
     ]
 })
 export class Panorama2Module { }
