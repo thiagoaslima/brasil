@@ -132,6 +132,9 @@ export class BuscaCompletaService {
                     i -= 1;
                 }
             }
+            //all places was invalid
+            if(places.length == 0)
+                links[0]["points"] = 0;
         }
         //pick only first results
         if(places.length > 6)
