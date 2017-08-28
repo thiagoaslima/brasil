@@ -796,6 +796,9 @@ export const links = [
                     "IGREJA DE JESUS CRISTO DOS SANTOS DOS ÚLTIMOS DIA",
                     "ISLAMISMO",
                     "JUDAÍSMO",
+                    "JUDEU",
+                    "PROTESTANTE",
+                    "CATÓLICO",
                     "IGREJA MESSIÂNICA MUNDIAL",
                     "TESTEMUNHAS DE JEOVÁ",
                     "CRISTÃ"],
@@ -849,7 +852,7 @@ export const links = [
                     "SUBNORMAIS",
                     "FAVELA",
                     "CARENTE",
-                    "COMUNDADE"],
+                    "COMUNIDADE"],
         target: ["cidade"],
         tipo: "pesquisa"
     },
