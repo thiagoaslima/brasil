@@ -285,7 +285,7 @@
 
 @media screen and (min-width: 1200px) {
     .busca{
-        width: calc(100% - 648px);
+        width: calc(100% - 666px);
     }
 
     .busca__auto-completar{
