@@ -6,7 +6,7 @@ import { PesquisaConfiguration } from '../shared2/pesquisa/pesquisa.configuratio
 import { BibliotecaService } from '../shared3/services/biblioteca.service';
 import { LocalidadeService3 } from '../shared3/services/localidade.service';
 import { RankingService3 } from '../shared3/services/ranking.service';
-import { ResultadoService3 } from '../shared3/services';
+import { ConjunturaisService, ResultadoService3 } from '../shared3/services';
 import { Localidade, Resultado } from '../shared3/models';
 import { converterObjArrayEmHash } from '../utils2';
 import { notasEspeciais } from '../../api/notas-demanda-legal';
@@ -24,10 +24,41 @@ export class Panorama2Service {
         private _localidadeService: LocalidadeService3,
         private _rankingService3: RankingService3,
         private _bibliotecaService: BibliotecaService,
+        private _conjunturaisService: ConjunturaisService,
         private _pesquisasConfiguration: PesquisaConfiguration
     ) {
         this._totalUfs = this._localidadeService.getRoot().children.length;
         this._totalMunicipios = this._localidadeService.getRoot().children.reduce((sum, uf) => sum + uf.children.length, 0);
+    }
+
+    getResultados(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
+        const itensPesquisas: ItemConfiguracao[] = [];
+        const itensConjunturais: ItemConfiguracao[] = [];
+
+        configuracao.forEach((item, idx) => {
+            item.__index = idx;
+
+            if (item.indicadorId && item.servico === 'conjunturais') {
+                itensConjunturais.push(item);
+            } else if (item.indicadorId) {
+                itensPesquisas.push(item);
+            }
+        });
+
+        const resPesquisas = this._resultadoService.getResultadosCompletos(itensPesquisas.map(item => item.indicadorId), localidade.codigo);
+        const resConjunturais = Observable.zip(...itensConjunturais.map(item => {
+            return this._conjunturaisService.getIndicadorAsResultado(item.pesquisaId, item.indicadorId, item.categoria);
+        }));
+
+        return Observable.zip(resConjunturais, resPesquisas)
+            .map(([conjunturais, pesquisas]) => {
+                return [].concat(conjunturais, pesquisas)
+                    .sort((a, b) => a.__index > b.__index ? -1 : 1)
+                    .map(item => {
+                        delete item.__index;
+                        return item;
+                    });
+            });
     }
 
     getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
@@ -85,6 +116,112 @@ export class Panorama2Service {
                     };
                 });
         });
+    }
+
+    getResumoBrasil(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
+        const itensPesquisas: ItemConfiguracao[] = [];
+        const itensConjunturais: ItemConfiguracao[] = [];
+
+        configuracao.forEach((item, idx) => {
+            item.__index = idx;
+
+            if (item.servico === 'conjunturais') {
+                itensConjunturais.push(item);
+            } else if (item.indicadorId) {
+                itensPesquisas.push(item);
+            }
+        });
+
+        const resPesquisas = this._getResultadosIndicadores(itensPesquisas, localidade)
+            .take(1)
+            .map(resultados => {
+                return itensPesquisas.map(item => {
+                    const periodo = item.periodo
+                        || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
+                        || '-';
+
+                    const titulo = item.titulo
+                        || (
+                            resultados[item.indicadorId] &&
+                            resultados[item.indicadorId].indicador &&
+                            resultados[item.indicadorId].indicador.nome
+                        );
+
+                    const valor = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].getValor(periodo)
+                    ) || '-';
+
+
+                    const unidade = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.toString()
+                    ) || '';
+
+                    const notas = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.notas
+                    ) || [];
+
+                    const fontes = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.fontes
+                    ) || [];
+
+                    return {
+                        __index: item.__index,
+                        tema: item.tema,
+                        titulo,
+                        periodo,
+                        valor,
+                        unidade,
+                        notas,
+                        fontes
+                    };
+                });
+            });
+
+        const resConjunturais = Observable.zip(
+            ...itensConjunturais
+                .map(item => {
+                    return this._conjunturaisService.getIndicador(item.pesquisaId, item.indicadorId, item.categoria)
+                        .take(1).map(json => {
+                            const obj = json[0];
+
+                            const periodo = item.periodo || obj.p || '-';
+                            const titulo = item.titulo || obj.var;
+                            const valor = obj.v || '-';
+                            const unidade = obj.um === 'Percentual' ? '%' : obj.um;
+                            const notas = [];
+                            const fontes = [];
+
+                            return {
+                                __index: item.__index,
+                                tema: item.tema,
+                                titulo,
+                                periodo,
+                                valor,
+                                unidade,
+                                notas,
+                                fontes
+                            };
+                        });
+                })
+        );
+
+        return Observable.zip(resConjunturais, resPesquisas)
+            .map(([conjunturais, pesquisas]) => {
+                return [].concat(conjunturais, pesquisas)
+                    .sort((a, b) => a.__index > b.__index ? -1 : 1)
+                    .map(item => {
+                        delete (item.__index);
+                        return item;
+                    });
+            });
     }
 
     getTemas(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {

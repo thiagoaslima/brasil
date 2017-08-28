@@ -1,3 +1,5 @@
+import { Panorama2Service } from '../panorama.service';
+import { niveisTerritoriais } from '../../shared3/values';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { AppState } from '../../shared2/app-state';
@@ -43,6 +45,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
     */
     constructor(
         private _appState: AppState,
+        private _panoramaService: Panorama2Service,
         private _resultadoService: ResultadoService3,
         private _localidadeService: LocalidadeService3
     ) { }
@@ -53,11 +56,15 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
             .filter(Boolean)
             .distinctUntilChanged()
             .mergeMap(localidade => {
+                debugger;
                 const _localidade = this._localidadeService.getByCodigo(localidade.codigo, 'proprio')[0];
                 let configuracao = PanoramaShellComponent.getConfiguracao(localidade.tipo);
-                let indicadoresId = configuracao.map(item => item.indicadorId).filter(Boolean);
-                return this._resultadoService
-                    .getResultadosCompletos(indicadoresId, localidade.codigo)
+                // let indicadoresId = configuracao.map(item => item.indicadorId).filter(Boolean);
+
+                // this._resultadoService
+                // .getResultadosCompletos(indicadoresId, localidade.codigo)
+                return this._panoramaService
+                    .getResultados(configuracao, _localidade)
                     .map(resultados => ({
                         configuracao: configuracao,
                         resultados: resultados,
@@ -73,7 +80,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this._configuracao$$.unsubscribe()
+        this._configuracao$$.unsubscribe();
     }
 
     handleTemaSelecionado(tema) {

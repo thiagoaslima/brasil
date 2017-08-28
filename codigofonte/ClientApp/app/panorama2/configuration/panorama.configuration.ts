@@ -15,6 +15,7 @@ export const PANORAMA: {
             temas: [
                 TEMAS.nenhum.label,
                 TEMAS.populacao.label,
+                TEMAS.economia.label,
                 TEMAS.territorio.label,
                 // TEMAS.educacao.label,
                 // TEMAS.trabalho.label,
@@ -22,7 +23,6 @@ export const PANORAMA: {
                 // TEMAS.industria.label,
                 // TEMAS.comercio.label,
                 // TEMAS.servicos.label,
-                // TEMAS.economia.label
             ],
 
             indicadores: [
@@ -57,18 +57,18 @@ export const PANORAMA: {
                     periodo: '2010',
                     titulo: 'População no último censo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'População residente por situação domiciliar (urbana/rural)',
-                        tipo: TiposGrafico.coluna,
-                        dados: [{
-                            pesquisaId: 23,
-                            indicadorId: 29521
-                        }, {
-                            pesquisaId: 23,
-                            indicadorId: 29522
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico,
+                    // grafico: {
+                    //     titulo: 'População residente por situação domiciliar (urbana/rural)',
+                    //     tipo: TiposGrafico.coluna,
+                    //     dados: [{
+                    //         pesquisaId: 23,
+                    //         indicadorId: 29521
+                    //     }, {
+                    //         pesquisaId: 23,
+                    //         indicadorId: 29522
+                    //     }]
+                    // }
                 },
 
 
@@ -82,8 +82,8 @@ export const PANORAMA: {
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
                     titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico,
                     grafico: {
                         titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
                         tipo: TiposGrafico.coluna,
@@ -92,7 +92,7 @@ export const PANORAMA: {
                             indicadorId: 355,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 1
+                            quantidadePeriodos: 12
                         }]
                     }
                 },

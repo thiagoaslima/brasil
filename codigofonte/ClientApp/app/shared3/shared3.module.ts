@@ -30,7 +30,6 @@ const COMPONENTS = [
 
 const PROVIDERS = [
     BibliotecaService,
-    ConjunturaisService,
     PesquisaService3,
     LocalidadeService3,
     RankingService3,
@@ -38,6 +37,11 @@ const PROVIDERS = [
         provide: IndicadorService3,
         deps: [Http, PesquisaService3],
         useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+    },
+    {
+        provide: ConjunturaisService,
+        deps: [Http, LocalidadeService3],
+        useFactory: (http, localidadeService) => new ConjunturaisService(http, localidadeService)
     },
     {
         provide: ResultadoService3,

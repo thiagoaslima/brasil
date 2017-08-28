@@ -2,11 +2,11 @@ import { ResultadoDTO } from '../dto';
 import { Indicador } from '.';
 
 export interface ResultadoParameters {
-    id: number
-    codigoLocalidade: string
-    res?: { [periodo: string]: string }
-    indicador?: Indicador,
-    localidade?: any
+    id: number;
+    codigoLocalidade: string;
+    res?: { [periodo: string]: string };
+    indicador?: Indicador;
+    localidade?: any;
 }
 export class Resultado {
     static criar(dados: ResultadoParameters) {
@@ -25,12 +25,12 @@ export class Resultado {
         }, []);
     }
 
-    public readonly indicadorId?: number
-    public readonly indicador?: Indicador
-    public readonly codigoLocalidade: number
-    public readonly localidade?
-    public readonly periodos: string[]
-    public readonly valores: string[]
+    public readonly indicadorId?: number;
+    public readonly indicador?: Indicador;
+    public readonly codigoLocalidade: number;
+    public readonly localidade?;
+    public readonly periodos: string[];
+    public readonly valores: string[];
 
     constructor({ id, codigoLocalidade, res = [], indicador, localidade } = {} as ResultadoParameters) {
 

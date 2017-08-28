@@ -16,13 +16,13 @@ export interface IndicadorParameters extends IndicadorDTO {
     metadado?: {
         descricao: string
         calculo: string
-    }
+    };
     unidade?: {
         id: string
         classe: string
         multiplicador: number
-    },
-    resultados?: Resultado[]
+    };
+    resultados?: Resultado[];
 }
 
 
@@ -80,7 +80,7 @@ export class Indicador {
                 nome: dados.unidade.id,
                 classe: dados.unidade.classe,
                 multiplicador: dados.unidade.multiplicador
-            })
+            });
         } else {
             this.unidade = new Unidade({});
         }
