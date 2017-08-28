@@ -46,19 +46,16 @@ export class NaoAcheiComponent implements OnInit {
     }
 
     enviar(mensagem){
-/*    enviar(email, assunto, mensagem){
         if(isBrowser){
             this.url = '\n\nPágina de origem: ' + window.location.href;
         }
         this._http.post("/feedback", {
-            email: email,
-            assunto: assunto,
             mensagem: mensagem + this.url
         }, options)
         .subscribe(res => {
             //console.log("ok", res);
         });
-*/
+
         this.enviado = true;
         this.aberto = false;
     }
