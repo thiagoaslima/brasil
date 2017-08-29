@@ -56,7 +56,6 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
             .filter(Boolean)
             .distinctUntilChanged()
             .mergeMap(localidade => {
-                debugger;
                 const _localidade = this._localidadeService.getByCodigo(localidade.codigo, 'proprio')[0];
                 let configuracao = PanoramaShellComponent.getConfiguracao(localidade.tipo);
                 // let indicadoresId = configuracao.map(item => item.indicadorId).filter(Boolean);

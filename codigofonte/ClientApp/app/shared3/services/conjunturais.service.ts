@@ -22,14 +22,14 @@ export class ConjunturaisService {
         private _localidadeService: LocalidadeService3
     ) { }
 
-    getIndicador(pesquisaId: number, indicadorId: number, categoria?: string): Observable<ConjunturalDTO[]> {
+    getIndicador(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<ConjunturalDTO[]> {
         const params = categoria ? `?categoria=${categoria}` : '';
-        const url = servidor.setUrl(`conjunturais/${pesquisaId}/indicadores/${indicadorId}${params}`, 2);
+        const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, 2);
         return this._request(url).catch(err => this._handleError(err));
     }
 
-    getIndicadorAsResultado(pesquisaId: number, indicadorId: number, categoria?: string): Observable<Resultado[]> {
-        return this.getIndicador(pesquisaId, indicadorId, categoria)
+    getIndicadorAsResultado(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<Resultado[]> {
+        return this.getIndicador(pesquisaId, indicadorId, qtdePeriodos, categoria)
             .map(array => this._convertConjunturalIntoResultado(pesquisaId, array));
     }
 
@@ -37,22 +37,23 @@ export class ConjunturaisService {
         if (conjunturais.length === 0) { return []; }
 
         const brasil = this._localidadeService.getRoot();
-        const conjunturaisKeyValue: {[cod: string]: ConjunturalDTO[]} = 
-            converterObjArrayEmHash(conjunturais, 'geral_grupo_subgrupo_item_e_subitem_cod', true);
+        const conjunturaisKeyValue: {[cod: string]: ConjunturalDTO[]} =
+            conjunturais[0].geral_grupo_subgrupo_item_e_subitem_cod
+            ? converterObjArrayEmHash(conjunturais, 'geral_grupo_subgrupo_item_e_subitem_cod', true)
+            : converterObjArrayEmHash(conjunturais, 'setores_e_subsetores_cod', true);
 
         return Object.keys(conjunturaisKeyValue)
             .map(key => {
                 const itens = conjunturaisKeyValue[key];
 
                 const conjuntural = itens[0];
-                const [posicao, nome] = conjuntural.geral_grupo_subgrupo_item_e_subitem.indexOf('. ') >= 0 
-                    ? conjuntural.geral_grupo_subgrupo_item_e_subitem.split('. ')
-                    : [0, conjuntural.geral_grupo_subgrupo_item_e_subitem];
-
+                const posicao = conjuntural.geral_grupo_subgrupo_item_e_subitem &&
+                    conjuntural.geral_grupo_subgrupo_item_e_subitem.indexOf('. ') >= 0
+                    ? conjuntural.geral_grupo_subgrupo_item_e_subitem.split('. ') : 0;
 
                 const indicadorParams = {
-                    id: parseInt(conjuntural.geral_grupo_subgrupo_item_e_subitem_cod, 10),
-                    nome: nome,
+                    id: parseInt(conjuntural.var_cod, 10),
+                    nome: conjuntural.var,
                     posicao: posicao,
                     classe: null,
                     pesquisaId: pesquisaId,
@@ -69,7 +70,7 @@ export class ConjunturaisService {
                 }, {});
 
                 const resultadoParams = {
-                    id: parseInt(conjuntural.geral_grupo_subgrupo_item_e_subitem_cod, 10),
+                    id: parseInt(conjuntural.var_cod, 10),
                     codigoLocalidade: '0',
                     res: res,
                     indicador: indicador,

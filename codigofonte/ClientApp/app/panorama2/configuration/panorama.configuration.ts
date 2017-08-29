@@ -83,7 +83,7 @@ export const PANORAMA: {
                     quantidadePeriodos: 1,
                     titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico,
+                    visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
                         titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
                         tipo: TiposGrafico.coluna,
@@ -93,6 +93,28 @@ export const PANORAMA: {
                             categoria: '315[7169]',
                             servico: 'conjunturais',
                             quantidadePeriodos: 12
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 5932,
+                    indicadorId: 6564,
+                    categoria: '11255[90707]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'PIB - Variação em relação ao trimestre anterior',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PIB - Taxa acumulada em 12 meses',
+                        tipo: TiposGrafico.coluna,
+                        dados: [{
+                            pesquisaId: 5932,
+                            indicadorId: 6562,
+                            categoria: '11255[90707]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
                         }]
                     }
                 },

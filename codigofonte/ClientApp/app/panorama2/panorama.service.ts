@@ -34,34 +34,45 @@ export class Panorama2Service {
     getResultados(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
         const itensPesquisas: ItemConfiguracao[] = [];
         const itensConjunturais: ItemConfiguracao[] = [];
+        const order: { [indicadorId: number]: number } = {};
 
         configuracao.forEach((item, idx) => {
-            item.__index = idx;
+            if (!item.indicadorId) { return; }
 
-            if (item.indicadorId && item.servico === 'conjunturais') {
-                itensConjunturais.push(item);
-            } else if (item.indicadorId) {
-                itensPesquisas.push(item);
+            switch (item.servico) {
+                case 'conjunturais':
+                    itensConjunturais.push(item);
+                    break;
+
+                default:
+                    itensPesquisas.push(item);
+                    break;
             }
+
+            order[item.indicadorId] = idx;
         });
 
         const resPesquisas = this._resultadoService.getResultadosCompletos(itensPesquisas.map(item => item.indicadorId), localidade.codigo);
         const resConjunturais = Observable.zip(...itensConjunturais.map(item => {
-            return this._conjunturaisService.getIndicadorAsResultado(item.pesquisaId, item.indicadorId, item.categoria);
+            return this._conjunturaisService.getIndicadorAsResultado(item.pesquisaId, item.indicadorId, item.quantidadePeriodos, item.categoria);
         }));
 
         return Observable.zip(resConjunturais, resPesquisas)
             .map(([conjunturais, pesquisas]) => {
-                return [].concat(conjunturais, pesquisas)
-                    .sort((a, b) => a.__index > b.__index ? -1 : 1)
-                    .map(item => {
-                        delete item.__index;
-                        return item;
-                    });
+                return pesquisas
+                    .concat(...conjunturais)
+                    .reduce((arr, item) => {
+                        const idx = order[item.indicadorId];
+                        arr[idx] = item;
+                        return arr;
+                    }, []);
             });
     }
 
     getResumo(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
+        if (localidade.codigo === 0) {
+            return this.getResumoBrasil(configuracao, localidade);
+        }
         return Observable.zip(
             this._getResultadosIndicadores(configuracao, localidade),
             localidade.tipo === 'municipio' ? this._bibliotecaService.getValues(localidade.codigo) : Observable.of({})
@@ -121,15 +132,22 @@ export class Panorama2Service {
     getResumoBrasil(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
         const itensPesquisas: ItemConfiguracao[] = [];
         const itensConjunturais: ItemConfiguracao[] = [];
+        const order: { [indicadorId: number]: number } = {};
 
         configuracao.forEach((item, idx) => {
-            item.__index = idx;
+            if (!item.indicadorId) { return; }
 
-            if (item.servico === 'conjunturais') {
-                itensConjunturais.push(item);
-            } else if (item.indicadorId) {
-                itensPesquisas.push(item);
+            switch (item.servico) {
+                case 'conjunturais':
+                    itensConjunturais.push(item);
+                    break;
+
+                default:
+                    itensPesquisas.push(item);
+                    break;
             }
+
+            order[item.titulo] = idx;
         });
 
         const resPesquisas = this._getResultadosIndicadores(itensPesquisas, localidade)
@@ -173,7 +191,6 @@ export class Panorama2Service {
                     ) || [];
 
                     return {
-                        __index: item.__index,
                         tema: item.tema,
                         titulo,
                         periodo,
@@ -188,8 +205,9 @@ export class Panorama2Service {
         const resConjunturais = Observable.zip(
             ...itensConjunturais
                 .map(item => {
-                    return this._conjunturaisService.getIndicador(item.pesquisaId, item.indicadorId, item.categoria)
-                        .take(1).map(json => {
+                    return this._conjunturaisService.getIndicador(
+                            item.pesquisaId, item.indicadorId, item.quantidadePeriodos, item.categoria
+                        ).take(1).map(json => {
                             const obj = json[0];
 
                             const periodo = item.periodo || obj.p || '-';
@@ -200,7 +218,6 @@ export class Panorama2Service {
                             const fontes = [];
 
                             return {
-                                __index: item.__index,
                                 tema: item.tema,
                                 titulo,
                                 periodo,
@@ -215,12 +232,13 @@ export class Panorama2Service {
 
         return Observable.zip(resConjunturais, resPesquisas)
             .map(([conjunturais, pesquisas]) => {
-                return [].concat(conjunturais, pesquisas)
-                    .sort((a, b) => a.__index > b.__index ? -1 : 1)
-                    .map(item => {
-                        delete (item.__index);
-                        return item;
-                    });
+                return pesquisas
+                    .concat(...conjunturais)
+                    .reduce((arr, item) => {
+                        const idx = order[item.titulo];
+                        arr[idx] = item;
+                        return arr;
+                    }, []);
             });
     }
 
