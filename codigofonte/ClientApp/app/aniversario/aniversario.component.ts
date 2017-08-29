@@ -39,7 +39,7 @@ export class AniversarioComponent implements OnInit {
         @Inject(DOCUMENT) private document: any
     ) { 
 
-        PageScrollConfig.defaultScrollOffset = 165;
+        PageScrollConfig.defaultScrollOffset = 175;
      }
 
 
@@ -94,6 +94,18 @@ export class AniversarioComponent implements OnInit {
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, `#${day}`, this.container.nativeElement);
 
         this.pageScrollService.start(pageScrollInstance);
+    }
+
+    public pad(value: number, size: number) {
+
+        var stringValue: string = value.toString();
+
+        while (stringValue.length < size) {
+
+            stringValue = "0" + stringValue;
+        }
+
+        return stringValue;
     }
 
     toggleVisible(){

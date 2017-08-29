@@ -12,11 +12,9 @@ namespace Brasil.Controllers
 {
     public class Feedback
     {
-        [Required]
         [StringLength(100)]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
         [StringLength(100)]
         public string Assunto { get; set; }
         [Required]

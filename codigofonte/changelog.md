@@ -1,5 +1,31 @@
 # Change log
 
+## [v4.2] - 2017-08-30
+### Added
+- Questionário de avaliação da experiência do usuário.
+- Busca completa.
+- Página inicial.
+- Página de tratamento de erro 404.
+- Download de CSV completo da pesquisa.
+
+### Changed
+- Envio de feedbacks.
+- Aniversários de municípios.
+- Notas jurídicas sobre população estimada de alguns municípios.
+- Estimativa da população para UFs e municípios no panorama para o ano de 2017.
+- Origêm do gentílico municial como serviço da biblioteca.
+
+### Fixed
+- Problemas de exibição e usabilidade.
+- Problemas de desempenho.
+- Melhoria na indexação de páginas pelo google.
+
+
+## [v4.1.15.6] - 2017-08-25
+### Fixed
+- Nome do município de São Vicente de Sevidó.
+
+
 ## [v4.1.15.5] - 2017-08-23
 ### Changed
 - Texto dos gentílicos das UFs e municípios em minúsculo no panorama.

@@ -252,7 +252,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 48,
                     indicadorId: 48985,
-                    periodo: '2016',
+                    periodo: '2017',
                     titulo: 'População estimada',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -566,6 +566,7 @@ export const PANORAMA: {
                     pesquisaId: 33,
                     indicadorId: 29171,
                     titulo: 'População estimada',
+                    periodo: '2017',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
