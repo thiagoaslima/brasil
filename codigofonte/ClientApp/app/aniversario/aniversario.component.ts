@@ -39,7 +39,7 @@ export class AniversarioComponent implements OnInit {
         @Inject(DOCUMENT) private document: any
     ) { 
 
-        PageScrollConfig.defaultScrollOffset = 165;
+        PageScrollConfig.defaultScrollOffset = 175;
      }
 
 
