@@ -99,8 +99,6 @@ export class BuscaCompletaService {
         //find city
         if(text.indexOf("estado") < 0)
             places = places.concat(this.findPlaces(text, municipios));
-        //pick only first results
-        places = places.slice(0, 6);
         //find keywords
         for(i = 0; i < links.length; i++){
             links[i]["points"] = 0; //reset points
@@ -124,6 +122,23 @@ export class BuscaCompletaService {
             }
         }
         links.sort(function(a, b){return b["points"] - a["points"]}); //sort links by points
+        //remove invalid places
+        if(places.length > 0 && links[0]["points"] > 0){
+            for(i = 0; i < places.length; i++){
+                if((places[i].codigoUf != undefined && links[0].target.indexOf('cidade') < 0) || //dont exist for 'cidades'
+                    (places[i].sigla != undefined && links[0].target.indexOf('estado') < 0) || //dont exist for 'estados'
+                    (places[i].codigo == 0 && links[0].target.indexOf('pais') < 0)){ //dont exist for 'pais'
+                    places.splice(i, 1);
+                    i -= 1;
+                }
+            }
+            //all places was invalid
+            if(places.length == 0)
+                links[0]["points"] = 0;
+        }
+        //pick only first results
+        if(places.length > 6)
+            places = places.slice(0, 6);
         //find year
         var textWords = text.split('-');
         for(i = 0; i < textWords.length; i++){

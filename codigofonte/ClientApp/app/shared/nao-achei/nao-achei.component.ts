@@ -45,8 +45,7 @@ export class NaoAcheiComponent implements OnInit {
         }
     }
 
-    enviar(mensagem){
-/*    enviar(email, assunto, mensagem){
+    enviar(email, assunto, mensagem){
         if(isBrowser){
             this.url = '\n\nPágina de origem: ' + window.location.href;
         }
@@ -58,7 +57,7 @@ export class NaoAcheiComponent implements OnInit {
         .subscribe(res => {
             //console.log("ok", res);
         });
-*/
+
         this.enviado = true;
         this.aberto = false;
     }

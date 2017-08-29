@@ -21,7 +21,7 @@ export class PanoramaBrasilComponent implements OnInit {
         });
 
         Observable.zip(...indicadores).subscribe(indicadores => {
-            debugger;
+            
             this.dados.indicadores = indicadores;
         });
 
