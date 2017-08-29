@@ -6,7 +6,7 @@
         <i class="fa nao-achei__icone" *ngIf="!enviado" [class.fa-caret-up]="!aberto" [class.fa-caret-down]="aberto" aria-hidden="true"></i>
         <i class="fa fa-times nao-achei__icone" *ngIf="enviado" aria-hidden="true"></i>
     </p>
-    <form class="nao-achei__form" [class.nao-achei__form--aberto]="aberto" #form="ngForm" (ngSubmit)="enviar(mensagem.value)">
+    <form class="nao-achei__form" [class.nao-achei__form--aberto]="aberto" #form="ngForm" (ngSubmit)="enviar('','',mensagem.value)">
         <!-- <input type="email" name="email" #email placeholder="Seu email" required class="nao-achei__item">
         <input type="text" name="assunto" #assunto placeholder="Assunto" required class="nao-achei__item"> -->
         <p class='nao-achei__descricao'>Ajude-nos a manter o site com informações relevates.</p>
