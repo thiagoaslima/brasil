@@ -96,6 +96,18 @@ export class AniversarioComponent implements OnInit {
         this.pageScrollService.start(pageScrollInstance);
     }
 
+    public pad(value: number, size: number) {
+
+        var stringValue: string = value.toString();
+
+        while (stringValue.length < size) {
+
+            stringValue = "0" + stringValue;
+        }
+
+        return stringValue;
+    }
+
     toggleVisible(){
 
         this.isVisible = !this.isVisible;
