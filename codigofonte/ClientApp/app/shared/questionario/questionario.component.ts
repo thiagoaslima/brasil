@@ -6,8 +6,6 @@ import { isBrowser } from 'angular2-universal';
 import { RouterParamsService } from '../router-params.service';
 
 
-
-
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
@@ -34,21 +32,10 @@ export class QuestionarioComponent implements OnInit {
 
     ngOnInit() {
 
-        let isQuestionarioJaRespondido = false;
-        if(isBrowser){
-
-            isQuestionarioJaRespondido = !!this.getCookie("questionario.respondido");
-        }        
-
-        if(isQuestionarioJaRespondido){
-
-            this.esconde = true;
-
-        } else {
+        if(!this.getCookie("questionario.respondido") && isBrowser){
 
             setTimeout(() => { this.esconde = false }, 1 * 60 *  1000);
-        }
-        
+        }        
     }
 
     avancar(formulario){
@@ -108,6 +95,10 @@ export class QuestionarioComponent implements OnInit {
 
     private setCookie(cname, cvalue, exdays) {
 
+        if(!isBrowser){
+            return;
+        }
+
         let d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         let expires = "expires="+ d.toUTCString();
@@ -115,6 +106,10 @@ export class QuestionarioComponent implements OnInit {
     }
 
     private getCookie(cname) {
+
+        if(!isBrowser){
+            return "";
+        }
 
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
