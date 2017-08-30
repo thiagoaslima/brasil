@@ -82,12 +82,32 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
                 this.temas = temas;
 
                 this.notas = resp.filter(resultado => {
-                    return resultado.notas.length > 0
-                        && (
-                            resultado.notas[0]['periodo'] === resultado.periodo
-                            || resultado.notas[0]['periodo'] === '-'
-                        );
-                }).map(resultado => `${resultado.titulo}: ${resultado.notas[0]['notas']}`);
+
+                    if(resultado.notas.length == 0){
+
+                        return false;
+                    }
+
+                    for(let i = 0; i < resultado.notas.length; i++){
+
+                        if(resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-'){
+
+                            return true;
+                        }
+                    }
+
+                    return false;
+
+                }).map(resultado => {
+
+                    for(let i = 0; i < resultado.notas.length; i++){
+
+                        if(resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-'){
+
+                            return `${resultado.titulo}: ${resultado.notas[i]['notas']}`;
+                        }
+                    }                    
+                });
 
                 this.fontes = resp.filter(resultado => {
                     return !!resultado.fontes
