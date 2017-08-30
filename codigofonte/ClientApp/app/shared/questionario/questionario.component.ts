@@ -24,6 +24,8 @@ export class QuestionarioComponent implements OnInit {
     pergunta = 1;
     ultimaPergunta = 7;
 
+    public isBrowser = isBrowser;
+
     constructor(
         private _routerParamsServ: RouterParamsService,
         private _http: Http,
