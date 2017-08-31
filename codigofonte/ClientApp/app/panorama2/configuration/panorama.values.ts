@@ -8,8 +8,6 @@ export const PanoramaVisualizacao = {
 }
 
 export interface ItemConfiguracao {
-    __index?: number
-    
     indicadorId?: number
     pesquisaId?: number
     categoria?: string

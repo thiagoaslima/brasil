@@ -1,7 +1,7 @@
 import { ResultadoDTO } from '../dto/resultado.interface';
 import { IndicadorDTO } from '../dto';
-import { Pesquisa, Resultado, Unidade } from './'
-import { escopoIndicadores } from '../values'
+import { Pesquisa, Resultado, Unidade } from '.';
+import { escopoIndicadores } from '../values';
 
 export interface IndicadorParameters extends IndicadorDTO {
     id: number;

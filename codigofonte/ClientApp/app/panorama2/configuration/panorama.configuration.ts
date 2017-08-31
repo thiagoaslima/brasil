@@ -53,22 +53,19 @@ export const PANORAMA: {
                 // ------------------------
                 {
                     pesquisaId: 23,
-                    indicadorId: 25207,
+                    indicadorId: 47428,
                     periodo: '2010',
                     titulo: 'População no último censo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico,
-                    // grafico: {
-                    //     titulo: 'População residente por situação domiciliar (urbana/rural)',
-                    //     tipo: TiposGrafico.coluna,
-                    //     dados: [{
-                    //         pesquisaId: 23,
-                    //         indicadorId: 29521
-                    //     }, {
-                    //         pesquisaId: 23,
-                    //         indicadorId: 29522
-                    //     }]
-                    // }
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'População no último censo',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 23,
+                            indicadorId: 47428
+                        }]
+                    }
                 },
 
 
@@ -80,13 +77,13 @@ export const PANORAMA: {
                     indicadorId: 355,
                     categoria: '315[7169]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 1,
+                    quantidadePeriodos: 12,
                     titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
                         titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
-                        tipo: TiposGrafico.coluna,
+                        tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 1705,
                             indicadorId: 355,
@@ -102,7 +99,7 @@ export const PANORAMA: {
                     indicadorId: 6564,
                     categoria: '11255[90707]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 1,
+                    quantidadePeriodos: 12,
                     titulo: 'PIB - Variação em relação ao trimestre anterior',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
