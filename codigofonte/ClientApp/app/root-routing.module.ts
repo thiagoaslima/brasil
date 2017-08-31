@@ -14,10 +14,9 @@ import { HomeComponent } from './home/home.component';
 
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
-
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
-import { PanoramaBrasilComponent } from './panorama2/panorama-brasil/panorama-brasil.component';
+
 
 const children = [
   {
@@ -177,7 +176,7 @@ const children = [
         path: '**',
         component: Page404Component
       }
-    ], { enableTracing: true })
+    ], { enableTracing: false })
   ]
 })
 export class RootRoutingModule { }

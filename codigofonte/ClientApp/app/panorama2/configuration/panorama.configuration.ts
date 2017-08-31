@@ -105,7 +105,7 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
                         titulo: 'PIB - Taxa acumulada em 12 meses',
-                        tipo: TiposGrafico.coluna,
+                        tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 5932,
                             indicadorId: 6562,
