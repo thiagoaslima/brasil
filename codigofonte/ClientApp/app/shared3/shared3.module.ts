@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { CacheFactory } from '../cache/cacheFactory.service';
 import {
     BibliotecaService,
+    ConjunturaisService,
     IndicadorService3,
     LocalidadeService3,
     PesquisaService3,
     RankingService3,
-    ResultadoService3
+    ResultadoService3,
 } from './services';
 
 const MODULES = [
@@ -36,6 +37,11 @@ const PROVIDERS = [
         provide: IndicadorService3,
         deps: [Http, PesquisaService3],
         useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+    },
+    {
+        provide: ConjunturaisService,
+        deps: [Http, LocalidadeService3],
+        useFactory: (http, localidadeService) => new ConjunturaisService(http, localidadeService)
     },
     {
         provide: ResultadoService3,

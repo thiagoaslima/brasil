@@ -1,10 +1,10 @@
-const urlBase = 'https://servicodados.ibge.gov.br/api/v1';
+const urlBase = 'https://servicodados.ibge.gov.br/api/v';
 
 export const ServicoDados = {
-    setUrl(path) {
+    setUrl(path, version = 1) {
         if (path.indexOf('/') === 0) {
             path = path.substring(1);
         }
-        return `${urlBase}/${path}`;
+        return `${urlBase}${version}/${path}`;
     }
 }

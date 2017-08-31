@@ -143,7 +143,7 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                     .filter(Boolean)
                     .map(resultado => {
                         let data = resultado.valores.slice().map((valor) => {
-                            if (valor >= 99999999999990) {
+                            if (parseInt(valor, 10) >= 99999999999990) {
                                 return undefined;
                             }
 

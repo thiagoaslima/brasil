@@ -2,12 +2,18 @@ import { ResultadoDTO } from '../dto';
 import { Indicador } from '.';
 
 export interface ResultadoParameters {
-    id: number
-    codigoLocalidade: string
-    res?: { [periodo: string]: string }
-    indicador?: Indicador,
-    localidade?: any
+    id: number;
+    codigoLocalidade: string;
+    res?: { [periodo: string]: string };
+    indicador?: Indicador;
+    localidade?: any;
+    periodos?: string[];
 }
+
+/*
+ * TODO
+ * Resultado receber os períodos já ordenados 
+*/
 export class Resultado {
     static criar(dados: ResultadoParameters) {
         return new Resultado(dados);
@@ -20,26 +26,25 @@ export class Resultado {
                 id: dados.id,
                 codigoLocalidade: item.localidade,
                 res: item.res
-            }))
+            }));
             return acc.concat(arr);
         }, []);
     }
 
-    public readonly indicadorId?: number
-    public readonly indicador?: Indicador
-    public readonly codigoLocalidade: number
-    public readonly localidade?
-    public readonly periodos: string[]
-    public readonly valores: string[]
+    public readonly indicadorId?: number;
+    public readonly indicador?: Indicador;
+    public readonly codigoLocalidade: number;
+    public readonly localidade?;
+    public readonly periodos: string[];
+    public readonly valores: string[];
 
-    constructor({ id, codigoLocalidade, res = [], indicador, localidade } = {} as ResultadoParameters) {
+    constructor({ id, codigoLocalidade, res = [], indicador, localidade, periodos } = {} as ResultadoParameters) {
 
         this.indicadorId = id;
         this.codigoLocalidade = Number.parseInt(codigoLocalidade, 10);
 
-        const periodos = Object.keys(res).sort().reverse();
-        this.periodos = periodos;
-        this.valores = periodos.map(periodo => res[periodo]);
+        this.periodos = periodos || Object.keys(res).sort().reverse();
+        this.valores = this.periodos.map(periodo => res[periodo]);
 
         if (indicador) {
             this.indicador = indicador;
@@ -86,4 +91,9 @@ export class Resultado {
     private _isValorValido(valor) {
         return valor !== null && valor !== undefined;
     }
+}
+
+
+function customSort(a, b) {
+
 }

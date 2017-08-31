@@ -13,19 +13,112 @@ export const PANORAMA: {
 } = {
         [niveisTerritoriais.pais.label]: {
             temas: [
-                // TEMAS.nenhum.label,
-                TEMAS.territorio.label,
+                TEMAS.nenhum.label,
                 TEMAS.populacao.label,
+                TEMAS.economia.label,
+                TEMAS.territorio.label,
                 // TEMAS.educacao.label,
                 // TEMAS.trabalho.label,
                 // TEMAS.agropecuaria.label,
                 // TEMAS.industria.label,
                 // TEMAS.comercio.label,
                 // TEMAS.servicos.label,
-                // TEMAS.economia.label
             ],
 
             indicadores: [
+                // ----------------------------
+                // NENHUM
+                // ----------------------------
+                {
+                    indicadorId: 60053,
+                    pesquisaId: 10059,
+                    periodo: '2010',
+                    titulo: 'Capital',
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    indicadorId: 60280,
+                    pesquisaId: 10065,
+                    periodo: '2016',
+                    titulo: 'Número de municípios',
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+
+                // ------------------------
+                // POPULAÇÃO
+                // ------------------------
+                {
+                    pesquisaId: 23,
+                    indicadorId: 47428,
+                    periodo: '2010',
+                    titulo: 'População no último censo',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'População no último censo',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 23,
+                            indicadorId: 47428
+                        }]
+                    }
+                },
+
+
+                // ----------------------------
+                // ECONOMIA
+                // ----------------------------
+                {
+                    pesquisaId: 1705,
+                    indicadorId: 355,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 12,
+                    titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 1705,
+                            indicadorId: 355,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 5932,
+                    indicadorId: 6564,
+                    categoria: '11255[90707]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 12,
+                    titulo: 'PIB - Variação em relação ao trimestre anterior',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PIB - Taxa acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 5932,
+                            indicadorId: 6562,
+                            categoria: '11255[90707]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        }]
+                    }
+                },
+
+                // ----------------------------
+                // TERRITORIO
+                // ----------------------------
                 {
                     indicadorId: 60272,
                     pesquisaId: 10065,
@@ -58,32 +151,61 @@ export const PANORAMA: {
                     }
                 },
 
-                {
-                    indicadorId: 60272,
-                    pesquisaId: 10065,
-                    periodo: '2017',
-                    titulo: 'Número de municípios',
-                    tema: TEMAS.territorio.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
 
-
+                // ----------------------------
+                // SAÚDE
+                // ----------------------------
                 {
-                    indicadorId: 60410,
-                    pesquisaId: 10065,
-                    periodo: '2010',
-                    titulo: 'Total de habitantes',
-                    tema: TEMAS.populacao.label,
+                    pesquisaId: 10054,
+                    indicadorId: 59647,
+                    periodo: '2016',
+                    titulo: 'Esperança de vida ao nascer',
+                    tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Total de habitantes',
+                        titulo: 'Esperança de vida ao nascer',
                         tipo: TiposGrafico.linha,
                         dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60410,
+                            pesquisaId: 10054,
+                            indicadorId: 59647
+                        }]
+                    }
+                },
+
+                {
+                    indicadorId: 30279,
+                    pesquisaId: 39,
+                    periodo: '2014',
+                    titulo: 'Taxa de mortalidade infantil',
+                    tema: TEMAS.saude.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Taxa de mortalidade infantil',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 39,
+                            indicadorId: 30279
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 10055,
+                    indicadorId: 59745,
+                    periodo: '2014',
+                    titulo: 'Taxa de fecundidade total',
+                    tema: TEMAS.saude.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Taxa de fecundidade total',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10055,
+                            indicadorId: 59745
                         }]
                     }
                 }
+
             ]
         },
 

@@ -14,10 +14,9 @@ import { HomeComponent } from './home/home.component';
 
 import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
 
-
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
-import { PanoramaBrasilComponent } from './panorama2/panorama-brasil/panorama-brasil.component';
+
 
 const children = [
   {
@@ -77,7 +76,7 @@ const children = [
         path: 'v4/brasil/panorama',
         component: ShellComponent,
         children: [
-          { path: '', component: PanoramaBrasilComponent, pathMatch: 'full' },
+          { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
         ]
       },
       {
@@ -178,6 +177,7 @@ const children = [
         component: Page404Component
       }
     ])
+
   ]
 })
 export class RootRoutingModule { }

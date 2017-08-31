@@ -3,12 +3,11 @@ import { isBrowser, isNode } from 'angular2-universal';
 import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
 
 import { TiposGrafico } from '../../infografia/grafico-base/grafico.values';
-import { ItemConfiguracao, TEMAS, dadosGrafico, dadosPainel } from "../configuration";
+import { ItemConfiguracao, TEMAS, dadosGrafico, dadosPainel } from '../configuration';
 import { Panorama2Service } from '../panorama.service';
 import { ResultadoPipe } from '../../shared/resultado.pipe';
 import { Ranking } from '../../shared2/indicador/indicador.model';
-import { Localidade, Resultado } from "../../shared3/models";
-import { converterObjArrayEmHash } from "../../utils2";
+import { Localidade, Resultado } from '../../shared3/models';
 
 @Component({
     selector: 'panorama-temas',
@@ -49,7 +48,7 @@ export class PanoramaTemasComponent implements OnChanges {
                 for (let i = 0; i < this.temas.length; i++) {
                     let graficos = this.temas[i].graficos;
                     for (let j = 0; graficos && j < graficos.length; j++) {
-                        if (graficos[j].tipo == "linha") {
+                        if (graficos[j].tipo == 'linha') {
                             let grafico = graficos[j];
                             grafico.eixoX.reverse(); /*inverte labels*/
                             for (let k = 0; grafico.dados && k < grafico.dados.length; k++) {
@@ -69,7 +68,8 @@ export class PanoramaTemasComponent implements OnChanges {
 
     public goToTema(): void {
         if (this.isBrowser) {
-            let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(document, this.temaSelecionado && this.temaSelecionado.toString());
+            let pageScrollInstance: PageScrollInstance =
+                PageScrollInstance.simpleInstance(document, this.temaSelecionado && this.temaSelecionado.toString());
             this.pageScrollService.start(pageScrollInstance);
         }
     };
@@ -84,7 +84,7 @@ export class PanoramaTemasComponent implements OnChanges {
             res: this.resultados[indicadorId].valorValidoMaisRecente,
             rankingLocal: this.rankings[indicadorId]['local']['posicao'],
             rankingGeral: this.rankings[indicadorId]['BR']['posicao']
-        }
+        };
     }
 
     private _isDadosIndicadorValidos(indicadorId) {
