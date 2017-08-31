@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.2.1] - 2017-08-31
+### Fixed
+- Exibição de notas no panorama.
+
+
 ## [v4.2] - 2017-08-30
 ### Added
 - Questionário de avaliação da experiência do usuário.
