@@ -177,7 +177,7 @@ const children = [
         path: '**',
         component: Page404Component
       }
-    ], { enableTracing: true })
+    ])
   ]
 })
 export class RootRoutingModule { }
