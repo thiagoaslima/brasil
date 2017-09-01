@@ -214,7 +214,7 @@ h2{
 }
 
 .aniversariantes__municipios__municipio:nth-child(odd){
-    text-align: right;
+    text-align: left;
     margin-right: 4%;
 }
 
