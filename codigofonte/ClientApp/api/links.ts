@@ -690,7 +690,8 @@ export const links = [
                     "FEMININO",
                     "PESSOA",
                     "RURAL",
-                    "MORADORE"],
+                    "MORADORE",
+                    "CASAS"],
         target: ["estado", "cidade"],
         tipo: "pesquisa"
     },
