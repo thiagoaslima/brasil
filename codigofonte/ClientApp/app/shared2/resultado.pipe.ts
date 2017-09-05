@@ -63,6 +63,8 @@ export class ResultadoPipe implements PipeTransform {
                 return 'Ignorado';
             case '99999999999998':
                 return 'Não disponível';
+            case '...':
+                return 'Não disponível';
             case '99999999999997':
                 return 'Não informado';
             case '99999999999996':
