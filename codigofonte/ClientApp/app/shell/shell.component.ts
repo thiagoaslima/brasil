@@ -178,7 +178,8 @@ export class ShellComponent implements OnInit, OnDestroy {
                 // desabilita o botão de 'histórico e fotos' no 'brasil'
                 // verifica se depois do 'brasil', na url, vem a sigla de um estado (duas letras),
                 // se não, significa que está no 'brasil' e desabilita o historico
-                if (url[url.indexOf('brasil') + 1].length > 2) {
+                let url2 = url.split('/');
+                if (url2[url2.indexOf('brasil') + 1].length > 2) {
                     this.historicoHabilitado = false;
                 } else {
                     this.historicoHabilitado = true;
