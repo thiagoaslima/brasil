@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
 
-const headers = new Headers({ 'accept': '*/*'});
+const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
 @Injectable()
@@ -55,6 +55,14 @@ export class PesquisaService2 {
         }
         return this.getAllPesquisas()
             .map(pesquisas => pesquisas.filter(pesquisa => pesquisa.contexto[tipoLocalidade]))
+            .map(pesquisas => {
+                const pesquisasComDados = this._pesquisasConfig.comDados(tipoLocalidade).reduce( (agg, num) => {
+                    agg[num] = true;
+                    return agg;
+                }, {});
+
+                return pesquisas.filter(pesquisa => pesquisasComDados[pesquisa.id]);
+            })
             .do(pesquisas => this._byTipoCache[tipoLocalidade] = pesquisas);
     }
 
@@ -64,7 +72,7 @@ export class PesquisaService2 {
     }
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         let keyCache = this.getPesquisaKeyCache(pesquisaId);
-        if(!this._getPesquisaCache[keyCache]) {
+        if (!this._getPesquisaCache[keyCache]) {
             const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}`;
 
             this._getPesquisaCache[keyCache] = this._http.get(url, options)
