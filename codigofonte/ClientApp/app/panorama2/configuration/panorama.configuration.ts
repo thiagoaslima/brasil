@@ -236,6 +236,28 @@ export const PANORAMA: {
                     }
                 },
 
+                {
+                    pesquisaId: 6320,
+                    indicadorId: 4090,
+                    // categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 12,
+                    titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 6320,
+                            indicadorId: 4090,
+                            // categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12
+                        }]
+                    }
+                },
+
                 // ----------------------------
                 // TERRITORIO
                 // ----------------------------

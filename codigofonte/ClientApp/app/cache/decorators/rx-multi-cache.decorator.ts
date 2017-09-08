@@ -28,7 +28,7 @@ export function RxMultiCache({ cache, labelsFromArguments, labelsFromResponse }:
                 acc.caches.push(item);
                 return acc;
             }, { caches: [], notFound: false })
-            
+
             const data$ = Observable.combineLatest(...caches);
 
             // rodar a função original para recuperar os itens não presentes no cache
@@ -37,11 +37,11 @@ export function RxMultiCache({ cache, labelsFromArguments, labelsFromResponse }:
                     .subscribe(resp => {
                         let labels = labelsFromResponse(resp);
                         labels.forEach((label, idx) => cache.get(label).next(resp[idx]));
-                    })
+                    });
             }
 
             return data$;
-        }
+        };
 
         return descriptor;
     };

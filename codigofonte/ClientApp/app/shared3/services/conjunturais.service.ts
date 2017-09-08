@@ -68,6 +68,10 @@ export class ConjunturaisService {
                     return agg;
                 }, {});
 
+                const periodos = itens.sort( (a,b) => {
+                    return a.p_cod > b.p_cod ? -1 : 1;
+                }).map(item => item.p);
+
 
                 const resultadoParams = {
                     id: parseInt(conjuntural.var_cod, 10),
@@ -75,7 +79,7 @@ export class ConjunturaisService {
                     res: res,
                     indicador: indicador,
                     localidade: brasil,
-                    periodos: this._ordenarPeriodos(Object.keys(res))
+                    periodos: periodos
                 };
 
                 return Resultado.criar(resultadoParams);
@@ -104,86 +108,86 @@ export class ConjunturaisService {
         return Observable.throw(error.message ? error : customError);
     }
 
-    private _ordenarPeriodos(periodos: string[]) {
-        const _periodos = periodos.map(periodo => ({
-                original: periodo,
-                sortable: this._transformPeriodo(periodo)
-        }));
+    // private _ordenarPeriodos(periodos: string[]) {
+    //     const _periodos = periodos.map(periodo => ({
+    //             original: periodo,
+    //             sortable: this._transformPeriodo(periodo)
+    //     }));
 
-        return _periodos
-            .sort( (a, b) => a.sortable > b.sortable ? -1 : 1)
-            .map(obj => obj.original);
-    }
+    //     return _periodos
+    //         .sort( (a, b) => a.sortable > b.sortable ? -1 : 1)
+    //         .map(obj => obj.original);
+    // }
 
-    private _transformPeriodo(periodo: string) {
-        /**
-         * CASE 1: 1º trimestre 2015
-         */
-        if (/\d{1,2}\D+\d{2,4}/.test(periodo)) {
-            return periodo.split(' ').reverse();
-        }
+    // private _transformPeriodo(periodo: string) {
+    //     /**
+    //      * CASE 1: 1º trimestre 2015
+    //      */
+    //     if (/\d{1,2}\D+\d{2,4}/.test(periodo)) {
+    //         return periodo.split(' ').reverse();
+    //     }
 
-        /**
-         * CASE 2: agosto 2015
-         */
-        if (/\D+\d{2,4}/.test(periodo)) {
-            return periodo.split(' ').reverse().map(val => _substitutirMes(val));
-        }
-    }
+    //     /**
+    //      * CASE 2: agosto 2015
+    //      */
+    //     if (/\D+\d{2,4}/.test(periodo)) {
+    //         return periodo.split(' ').reverse().map(val => _substitutirMes(val));
+    //     }
+    // }
 }
 
-function _substitutirMes(value) {
-    switch (value) {
-        case 'jan':
-        case 'janeiro':
-            return '01';
+// function _substitutirMes(value) {
+//     switch (value) {
+//         case 'jan':
+//         case 'janeiro':
+//             return '01';
 
 
-        case 'fev':
-        case 'fevereiro':
-            return '02';
+//         case 'fev':
+//         case 'fevereiro':
+//             return '02';
 
-        case 'mar':
-        case 'março':
-            return '03';
+//         case 'mar':
+//         case 'março':
+//             return '03';
 
-        case 'abr':
-        case 'abril':
-            return '04';
+//         case 'abr':
+//         case 'abril':
+//             return '04';
 
-        case 'mai':
-        case 'maio':
-            return '05';
+//         case 'mai':
+//         case 'maio':
+//             return '05';
 
-        case 'jun':
-        case 'junho':
-            return '06';
+//         case 'jun':
+//         case 'junho':
+//             return '06';
 
-        case 'jul':
-        case 'julho':
-            return '07';
+//         case 'jul':
+//         case 'julho':
+//             return '07';
 
-        case 'ago':
-        case 'agosto':
-            return '08';
+//         case 'ago':
+//         case 'agosto':
+//             return '08';
 
-        case 'set':
-        case 'setembro':
-            return '09';
+//         case 'set':
+//         case 'setembro':
+//             return '09';
 
-        case 'out':
-        case 'outubro':
-            return '10';
+//         case 'out':
+//         case 'outubro':
+//             return '10';
 
-        case 'nov':
-        case 'novembro':
-            return '11';
+//         case 'nov':
+//         case 'novembro':
+//             return '11';
 
-        case 'dez':
-        case 'dezembro':
-            return '12';
+//         case 'dez':
+//         case 'dezembro':
+//             return '12';
 
-        default:
-            return value;
-    }
-}
+//         default:
+//             return value;
+//     }
+// }

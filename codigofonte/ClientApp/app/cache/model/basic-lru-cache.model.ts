@@ -44,7 +44,7 @@ export class BasicLRUCache {
     }
 
     erase(label) {
-        delete (this._cache[label]);
+        delete this._cache[this._normalizeKey(label)];
     }
 
     /**
