@@ -72,7 +72,7 @@ while (contents.length > 0) {
 }
 
 function generateIndex(len) {
-    let node = `\n\t<sitemap>\n\t\t<loc>https://cidades.ibge.gov.br/sitemap{{NUMERO}}.xml</loc>\n\t</sitemap>`;
+    let node = `\n\t<sitemap>\n\t\t<loc>https://cidades.ibge.gov.br/sitemap{{NUMERO}}.txt</loc>\n\t</sitemap>`;
     let tree = '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
     for (let i = 1; i < len; i++) {
         tree += node.replace('{{NUMERO}}', pad(i));

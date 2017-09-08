@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap1.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap01.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap2.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap02.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap3.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap03.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap4.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap04.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap5.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap05.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap6.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap06.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap7.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap07.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap8.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap08.xml</loc>
 	</sitemap>
 	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap9.xml</loc>
+		<loc>https://cidades.ibge.gov.br/sitemap09.xml</loc>
 	</sitemap>
 	<sitemap>
 		<loc>https://cidades.ibge.gov.br/sitemap10.xml</loc>
@@ -71,35 +71,5 @@
 	</sitemap>
 	<sitemap>
 		<loc>https://cidades.ibge.gov.br/sitemap24.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap25.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap26.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap27.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap28.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap29.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap30.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap31.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap32.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap33.xml</loc>
-	</sitemap>
-	<sitemap>
-		<loc>https://cidades.ibge.gov.br/sitemap34.xml</loc>
 	</sitemap>
 </sitemapindex>
