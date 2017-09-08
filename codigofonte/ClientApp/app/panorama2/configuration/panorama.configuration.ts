@@ -20,9 +20,9 @@ export const PANORAMA: {
                 // TEMAS.educacao.label,
                 // TEMAS.trabalho.label,
                 // TEMAS.agropecuaria.label,
-                // TEMAS.industria.label,
-                // TEMAS.comercio.label,
-                // TEMAS.servicos.label,
+                 TEMAS.industria.label,
+                 TEMAS.comercio.label,
+                 TEMAS.servicos.label,
             ],
 
             indicadores: [
@@ -66,6 +66,126 @@ export const PANORAMA: {
                             indicadorId: 47428
                         }]
                     }
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47097,
+                    periodo: '2015',
+                    titulo: 'Iluminação elétrica',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47090,
+                    periodo: '2015',
+                    titulo: 'Rede de coleta de esgoto',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47107,
+                    periodo: '2015',
+                    titulo: 'Domicílios com televisão',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Modalidade de recepção de sinal de televisão',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47251
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47252
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47253
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47108,
+                    periodo: '2015',
+                    titulo: 'Domicílios com microcomputador',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Bens duráveis existentes no domicílio',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47103
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47106
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47107
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47108
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47125,
+                    periodo: '2015',
+                    titulo: 'Domicílios com acesso à Internet',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Tipo de conexão à Internet',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47260
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47261
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47266,
+                    periodo: '2015',
+                    titulo: 'Posse de telefone móvel celular',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 46,
+                    indicadorId: 48662,
+                    periodo: '2008-2009',
+                    titulo: 'Consumo de carne',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 46,
+                    indicadorId: 60414,
+                    periodo: '2015',
+                    titulo: 'Prática de atividade física',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
 
@@ -150,6 +270,94 @@ export const PANORAMA: {
                         }]
                     }
                 },
+
+
+                // ----------------------------
+                // INDÚSTRIA
+                // ----------------------------
+                {
+                    indicadorId: 49634,
+                    pesquisaId: 51,
+                    periodo: '2015',
+                    titulo: 'Número de unidades locais',
+                    tema: TEMAS.industria.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Número de unidades locais',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 51,
+                            indicadorId: 49634
+                        }]
+                    }
+                },
+                {
+                    indicadorId: 49635,
+                    pesquisaId: 51,
+                    periodo: '2015',
+                    titulo: 'Pessoal ocupado em 31.12',
+                    tema: TEMAS.industria.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+
+                // ----------------------------
+                // COMÉRCIO
+                // ----------------------------
+                {
+                    indicadorId: 49243,
+                    pesquisaId: 50,
+                    periodo: '2015',
+                    titulo: 'Número de unidades locais com receita de revenda',
+                    tema: TEMAS.comercio.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Número de unidades locais com receita de revenda',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 50,
+                            indicadorId: 49243
+                        }]
+                    }
+                },
+                {
+                    indicadorId: 49244,
+                    pesquisaId: 50,
+                    periodo: '2015',
+                    titulo: 'Pessoal ocupado em 31/12 em empresas comerciais',
+                    tema: TEMAS.comercio.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+
+                // ----------------------------
+                // SERVIÇOS
+                // ----------------------------
+                {
+                    indicadorId: 49641,
+                    pesquisaId: 52,
+                    periodo: '2014',
+                    titulo: 'Número de empresas',
+                    tema: TEMAS.servicos.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Número de empresas',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 52,
+                            indicadorId: 49641
+                        }]
+                    }
+                },
+                {
+                    indicadorId: 49642,
+                    pesquisaId: 52,
+                    periodo: '2014',
+                    titulo: 'Pessoal ocupado em 31/12',
+                    tema: TEMAS.servicos.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
 
 
                 // ----------------------------
