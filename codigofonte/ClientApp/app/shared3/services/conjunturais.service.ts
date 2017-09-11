@@ -36,6 +36,9 @@ export class ConjunturaisService {
         if (conjunturais.length === 0) { return []; }
 
         const brasil = this._localidadeService.getRoot();
+
+        debugger;
+
         const conjunturaisKeyValue: {[cod: string]: ConjunturalDTO[]} =
             conjunturais[0].geral_grupo_subgrupo_item_e_subitem_cod
             ? converterObjArrayEmHash(conjunturais, 'geral_grupo_subgrupo_item_e_subitem_cod', true)

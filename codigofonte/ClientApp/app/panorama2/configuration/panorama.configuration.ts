@@ -236,27 +236,72 @@ export const PANORAMA: {
                     }
                 },
 
+
                 {
-                    pesquisaId: 6320,
-                    indicadorId: 4090,
-                    // categoria: '315[7169]',
+                    pesquisaId: 1100,
+                    indicadorId: 44,
+                    categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 12,
-                    titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
+                    titulo: 'INPC',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
+                        titulo: 'INPC',
                         tipo: TiposGrafico.linha,
                         dados: [{
-                            pesquisaId: 6320,
-                            indicadorId: 4090,
-                            // categoria: '315[7169]',
+                            pesquisaId: 1100,
+                            indicadorId: 44,
+                            categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12
+                            quantidadePeriodos: 12,
                         }]
                     }
                 },
+                
+                {
+                    pesquisaId: 1616,
+                    indicadorId: 4092,
+                    //categoria: '1965[40310]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 12,
+                    titulo: 'Pessoas desocupadas',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                // {
+                //     pesquisaId: 5796,
+                //     indicadorId: 1396,
+                //     categoria: '715[33611]',
+                //     servico: 'conjunturais',
+                //     quantidadePeriodos: 12,
+                //     titulo: 'IPP',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
+
+                // {
+                //     pesquisaId: 6320,
+                //     indicadorId: 4090,
+                //     categoria: '315[7169]',
+                //     servico: 'conjunturais',
+                //     quantidadePeriodos: 12,
+                //     titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 6320,
+                //             indicadorId: 4090,
+                //             categoria: '315[7169]',
+                //             servico: 'conjunturais',
+                //             quantidadePeriodos: 12
+                //         }]
+                //     }
+                // },
 
                 // ----------------------------
                 // TERRITORIO
