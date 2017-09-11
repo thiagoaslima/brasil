@@ -34911,8 +34911,8 @@ export const municipios = [
   {
     "codigoUf": 25,
     "codigo": 2515401,
-    "nome": "Seridó",
-    "slug": "serido",
+    "nome": "São Vicente do Seridó",
+    "slug": "sao-vicente-do-serido",
     "microrregiao": 25009
   },
   {
