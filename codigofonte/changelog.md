@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.2.3] - 2017-09-11
+### Fixed
+- Correção do nome do município de Seridó para São Vicente do Seridó em PB.
+
+
 ## [v4.2.2] - 2017-08-31
 ### Fixed
 - Pré-render.
