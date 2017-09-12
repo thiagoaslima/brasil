@@ -23,7 +23,7 @@
                 <ul *ngIf="!isHome">
                     <template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
                         <!--Brasil-->
-                        <li *ngIf="first">
+                        <li *ngIf="first && !last">
                             <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a>
                         </li>
                         <!--Estado-->
