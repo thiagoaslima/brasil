@@ -54,8 +54,8 @@ console.log(contents.length);
 var i = 1;
 while (contents.length > 0) {
     // Google limita o arquivo até 50 mil urls
-    // salvando arquivos com 45 mil endereços
-    var subgroup = contents.splice(0, 45000);
+    // salvando arquivos com 30 mil endereços
+    var subgroup = contents.splice(0, 30000);
     var content = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\t<url>\n\t\t<loc>${subgroup.join('</loc>\n\t</url>\n\t<url>\n\t\t<loc>')}</loc>\n\t</url>\n</urlset>`;
 
     (function(i) {
