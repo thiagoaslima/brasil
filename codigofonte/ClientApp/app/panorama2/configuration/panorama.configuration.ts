@@ -51,27 +51,25 @@ export const PANORAMA: {
                 // ------------------------
                 // POPULAÇÃO
                 // ------------------------
-                // {
-                //     pesquisaId: 136,
-                //     indicadorId: 93,
-                //     periodo: '2010',
-                //     categoria: '86[0]',
-                //     servico: 'conjunturais',
-                //     quantidadePeriodos: 1,
-                //     titulo: 'População no último censo',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'População no último censo',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 93,
-                //             indicadorId: 136,
-                //             categoria: '86[0]',
-                //             quantidadePeriodos: 12,
-                //         }]
-                //     }
-                // },
+                {
+                    pesquisaId: 10059,
+                    indicadorId: 60056,
+                    periodo: '2017',
+                    titulo: 'População estimada',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 3145,
+                    indicadorId: 93,
+                    categoria: '86[0]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'População no último censo',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico,
+                },
 
                 {
                     pesquisaId: 44,
@@ -89,31 +87,6 @@ export const PANORAMA: {
                     titulo: 'Domicílios com rede de coleta de esgoto',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
-                },
-
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47107,
-                    periodo: '2015',
-                    titulo: 'Domicílios com televisão',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Modalidade de recepção de sinal de televisão',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 44,
-                            indicadorId: 47251
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47252
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47253
-                        }]
-                    }
                 },
 
                 {
@@ -176,12 +149,28 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 46,
-                    indicadorId: 48662,
-                    periodo: '2008-2009',
-                    titulo: 'Consumo de carne',
+                    pesquisaId: 44,
+                    indicadorId: 47107,
+                    periodo: '2015',
+                    titulo: 'Domicílios com televisão',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Modalidade de recepção de sinal de televisão',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47251
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47252
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47253
+                        }]
+                    }
                 },
 
                 {
@@ -197,26 +186,16 @@ export const PANORAMA: {
                 // ----------------------------
                 // ECONOMIA
                 // ----------------------------
+
                 {
-                    pesquisaId: 1705,
-                    indicadorId: 355,
-                    categoria: '315[7169]',
+                    pesquisaId: 1616,
+                    indicadorId: 4092,
+                    categoria: '1965[40310]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                    titulo: 'Pessoas desocupadas',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 1705,
-                            indicadorId: 355,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
@@ -241,6 +220,27 @@ export const PANORAMA: {
                     }
                 },
 
+                {
+                    pesquisaId: 1705,
+                    indicadorId: 355,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 1705,
+                            indicadorId: 355,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12
+                        }]
+                    }
+                },
 
                 {
                     pesquisaId: 1100,
@@ -263,17 +263,19 @@ export const PANORAMA: {
                         }]
                     }
                 },
-                
-                {
-                    pesquisaId: 1616,
-                    indicadorId: 4092,
-                    categoria: '1965[40310]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'Pessoas desocupadas',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+            
+
+                // {
+                //     pesquisaId: 5796,
+                //     indicadorId: 1396,
+                //     categoria: '715[33611]',
+                //     servico: 'conjunturais',
+                //     quantidadePeriodos: 12,
+                //     titulo: 'IPP',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
+
 
 
                 // ----------------------------
@@ -286,29 +288,29 @@ export const PANORAMA: {
                     titulo: 'Área territorial',
                     tema: TEMAS.territorio.label,
                     visualizacao: PanoramaVisualizacao.numerico,
-                    grafico: {
-                        titulo: 'Área por bioma',
-                        tipo: TiposGrafico.coluna,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60273,
-                        }, {
-                            pesquisaId: 10065,
-                            indicadorId: 60274,
-                        }, {
-                            pesquisaId: 10065,
-                            indicadorId: 60275,
-                        }, {
-                            pesquisaId: 10065,
-                            indicadorId: 60276,
-                        }, {
-                            pesquisaId: 10065,
-                            indicadorId: 60277,
-                        }, {
-                            pesquisaId: 10065,
-                            indicadorId: 60278,
-                        }]
-                    }
+                    // grafico: {
+                    //     titulo: 'Área por bioma',
+                    //     tipo: TiposGrafico.coluna,
+                    //     dados: [{
+                    //         pesquisaId: 10065,
+                    //         indicadorId: 60273,
+                    //     }, {
+                    //         pesquisaId: 10065,
+                    //         indicadorId: 60274,
+                    //     }, {
+                    //         pesquisaId: 10065,
+                    //         indicadorId: 60275,
+                    //     }, {
+                    //         pesquisaId: 10065,
+                    //         indicadorId: 60276,
+                    //     }, {
+                    //         pesquisaId: 10065,
+                    //         indicadorId: 60277,
+                    //     }, {
+                    //         pesquisaId: 10065,
+                    //         indicadorId: 60278,
+                    //     }]
+                    // }
                 },
 
 
