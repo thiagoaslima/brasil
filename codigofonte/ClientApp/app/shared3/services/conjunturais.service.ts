@@ -32,6 +32,25 @@ export class ConjunturaisService {
             .map(array => this._convertConjunturalIntoResultado(pesquisaId, array));
     }
 
+    private _getProproedadesEspecificasResultado(object: Object): string[]{
+
+        let propriedadesGerais = ['p', 'p_cod', 'ug', 'ug_cod', 'um', 'um_cod', 'v', 'var', 'var_cod'];
+        let propriedadesEspecificas = [];
+
+        for (var property in object) {
+
+            if (object.hasOwnProperty(property)) {
+                
+                if(propriedadesGerais.indexOf(property) == -1){
+
+                    propriedadesEspecificas.push(property);
+                }
+            }
+        }
+
+        return propriedadesEspecificas;
+    }
+
     private _convertConjunturalIntoResultado(pesquisaId: number, conjunturais: ConjunturalDTO[] = []): Resultado[] {
         if (conjunturais.length === 0) { return []; }
 
@@ -39,19 +58,23 @@ export class ConjunturaisService {
 
         debugger;
 
-        const conjunturaisKeyValue: {[cod: string]: ConjunturalDTO[]} =
-            conjunturais[0].geral_grupo_subgrupo_item_e_subitem_cod
-            ? converterObjArrayEmHash(conjunturais, 'geral_grupo_subgrupo_item_e_subitem_cod', true)
-            : converterObjArrayEmHash(conjunturais, 'setores_e_subsetores_cod', true);
+        let propriedadesEspecificas = this._getProproedadesEspecificasResultado(conjunturais[0]);
+        let codigoPropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') >= 0 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
+        let nomePropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') == -1 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
+
+        const conjunturaisKeyValue: {[cod: string]: ConjunturalDTO[]} = converterObjArrayEmHash(conjunturais, codigoPropriedadeEspecifica, true);
+
 
         return Object.keys(conjunturaisKeyValue)
             .map(key => {
                 const itens = conjunturaisKeyValue[key];
 
+                debugger;
+
                 const conjuntural = itens[0];
-                const posicao = conjuntural.geral_grupo_subgrupo_item_e_subitem &&
-                    conjuntural.geral_grupo_subgrupo_item_e_subitem.indexOf('. ') >= 0
-                    ? conjuntural.geral_grupo_subgrupo_item_e_subitem.split('. ')[0] : '0';
+                const posicao = conjuntural[nomePropriedadeEspecifica] &&
+                    conjuntural[nomePropriedadeEspecifica].indexOf('. ') >= 0
+                    ? conjuntural[nomePropriedadeEspecifica].split('. ')[0] : '0';
 
                 const indicadorParams = {
                     id: parseInt(conjuntural.var_cod, 10),

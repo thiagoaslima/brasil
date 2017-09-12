@@ -51,28 +51,33 @@ export const PANORAMA: {
                 // ------------------------
                 // POPULAÇÃO
                 // ------------------------
-                {
-                    pesquisaId: 23,
-                    indicadorId: 47428,
-                    periodo: '2010',
-                    titulo: 'População no último censo',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'População no último censo',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 23,
-                            indicadorId: 47428
-                        }]
-                    }
-                },
+                // {
+                //     pesquisaId: 136,
+                //     indicadorId: 93,
+                //     periodo: '2010',
+                //     categoria: '86[0]',
+                //     servico: 'conjunturais',
+                //     quantidadePeriodos: 1,
+                //     titulo: 'População no último censo',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'População no último censo',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 93,
+                //             indicadorId: 136,
+                //             categoria: '86[0]',
+                //             quantidadePeriodos: 12,
+                //         }]
+                //     }
+                // },
 
                 {
                     pesquisaId: 44,
                     indicadorId: 47097,
                     periodo: '2015',
-                    titulo: 'Iluminação elétrica',
+                    titulo: 'Domicílios com iluminação elétrica',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -81,7 +86,7 @@ export const PANORAMA: {
                     pesquisaId: 44,
                     indicadorId: 47090,
                     periodo: '2015',
-                    titulo: 'Rede de coleta de esgoto',
+                    titulo: 'Domicílios com rede de coleta de esgoto',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -197,7 +202,7 @@ export const PANORAMA: {
                     indicadorId: 355,
                     categoria: '315[7169]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 12,
+                    quantidadePeriodos: 1,
                     titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -219,7 +224,7 @@ export const PANORAMA: {
                     indicadorId: 6564,
                     categoria: '11255[90707]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 12,
+                    quantidadePeriodos: 1,
                     titulo: 'PIB - Variação em relação ao trimestre anterior',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -242,7 +247,7 @@ export const PANORAMA: {
                     indicadorId: 44,
                     categoria: '315[7169]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 12,
+                    quantidadePeriodos: 1,
                     titulo: 'INPC',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -262,46 +267,14 @@ export const PANORAMA: {
                 {
                     pesquisaId: 1616,
                     indicadorId: 4092,
-                    //categoria: '1965[40310]',
+                    categoria: '1965[40310]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 12,
+                    quantidadePeriodos: 1,
                     titulo: 'Pessoas desocupadas',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
-                // {
-                //     pesquisaId: 5796,
-                //     indicadorId: 1396,
-                //     categoria: '715[33611]',
-                //     servico: 'conjunturais',
-                //     quantidadePeriodos: 12,
-                //     titulo: 'IPP',
-                //     tema: TEMAS.economia.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
-
-                // {
-                //     pesquisaId: 6320,
-                //     indicadorId: 4090,
-                //     categoria: '315[7169]',
-                //     servico: 'conjunturais',
-                //     quantidadePeriodos: 12,
-                //     titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
-                //     tema: TEMAS.economia.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'PNAD - Pessoas ocupadas de 14 ou mais anos',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 6320,
-                //             indicadorId: 4090,
-                //             categoria: '315[7169]',
-                //             servico: 'conjunturais',
-                //             quantidadePeriodos: 12
-                //         }]
-                //     }
-                // },
 
                 // ----------------------------
                 // TERRITORIO
