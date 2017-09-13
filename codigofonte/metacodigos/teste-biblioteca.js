@@ -3,6 +3,8 @@
 var municipios_1 = require('./municipios');
 var http = require('http');
 var fs = require('fs');
+const path = require('path');
+const folder = './listas/';
 var municipios = municipios_1.municipios.sort(function (a, b) { return a.codigo > b.codigo ? 1 : -1 });
 var request = getDados(municipios, 0, []);
 
@@ -43,7 +45,7 @@ var teste = request.then(function (responses) {
 
 
 teste.then(function (value) {
-    fs.writeFile('teste-biblioteca-gentilico.json', JSON.stringify(value), function (err) {
+    fs.writeFile(path.join(folder, 'teste-biblioteca-gentilico.json'), JSON.stringify(value), function (err) {
         if (err) { console.log('ERRO', err) }
         console.log('SALVO!')
     });
@@ -84,7 +86,6 @@ function getDados(municipios, idx, agg) {
             };
         })
         .then(function (obj) {
-
             console.log(idx, 'retrieved!');
             agg.push(obj);
             return getDados(municipios, idx+1, agg);

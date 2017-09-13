@@ -16,7 +16,7 @@ export const PANORAMA: {
                 TEMAS.nenhum.label,
                 TEMAS.populacao.label,
                 TEMAS.economia.label,
-                TEMAS.territorio.label,
+                // TEMAS.territorio.label,
                 // TEMAS.educacao.label,
                 // TEMAS.trabalho.label,
                 // TEMAS.agropecuaria.label,
@@ -286,7 +286,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     periodo: '2017',
                     titulo: 'Área territorial',
-                    tema: TEMAS.territorio.label,
+                    tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico,
                     // grafico: {
                     //     titulo: 'Área por bioma',

@@ -1,12 +1,15 @@
 var fs = require('fs');
+var path = require('path');
+var folderEntrada = './listas/';
+var folderDestino = '../wwwroot/';
 
-var pais = fs.readFileSync('lista-pais.txt', 'utf8').split('\n').filter(Boolean);
-var ufs = fs.readFileSync('lista-ufs.txt', 'utf8').split('\n').filter(Boolean);
-var municipios = fs.readFileSync('lista-municipios.txt', 'utf8').split('\n').filter(Boolean);
+var pais = fs.readFileSync(path.join(folderEntrada, 'lista-pais.txt'), 'utf8').split('\n').filter(Boolean);
+var ufs = fs.readFileSync(path.join(folderEntrada, 'lista-ufs.txt'), 'utf8').split('\n').filter(Boolean);
+var municipios = fs.readFileSync(path.join(folderEntrada, 'lista-municipios.txt'), 'utf8').split('\n').filter(Boolean);
 
-var pesquisasPais = fs.readFileSync('lista-ids-pesquisas-pais.txt', 'utf8').split('\n').filter(Boolean);
-var pesquisasUfs = fs.readFileSync('lista-ids-pesquisas-ufs.txt', 'utf8').split('\n').filter(Boolean);
-var pesquisasMun = fs.readFileSync('lista-ids-pesquisas-municipios.txt', 'utf8').split('\n').filter(Boolean);
+var pesquisasPais = fs.readFileSync(path.join(folderEntrada, 'lista-ids-pesquisas-pais.txt'), 'utf8').split('\n').filter(Boolean);
+var pesquisasUfs = fs.readFileSync(path.join(folderEntrada, 'lista-ids-pesquisas-ufs.txt'), 'utf8').split('\n').filter(Boolean);
+var pesquisasMun = fs.readFileSync(path.join(folderEntrada, 'lista-ids-pesquisas-municipios.txt'), 'utf8').split('\n').filter(Boolean);
 
 var contents = [];
 
@@ -51,6 +54,12 @@ ufs.forEach(munUf => {
 
 console.log(contents.length);
 
+fs.readdirSync(folderDestino).forEach(file => {
+    if (file.indexOf('sitemap') >= 0 && file.indexOf('.xml') > 0) {
+        fs.unlinkSync(path.join(folderDestino, file));
+    }
+})
+
 var i = 1;
 while (contents.length > 0) {
     // Google limita o arquivo até 50 mil urls
@@ -58,8 +67,8 @@ while (contents.length > 0) {
     var subgroup = contents.splice(0, 30000);
     var content = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\t<url>\n\t\t<loc>${subgroup.join('</loc>\n\t</url>\n\t<url>\n\t\t<loc>')}</loc>\n\t</url>\n</urlset>`;
 
-    (function(i) {
-        fs.writeFileSync(`sitemap${pad(i)}.xml`, content, function (err) {
+    (function (i) {
+        fs.writeFileSync(path.join(folderDestino, `sitemap${pad(i)}.xml`), content, function (err) {
             if (err) {
                 return console.log(err);
             }
@@ -80,16 +89,16 @@ function generateIndex(len) {
     return tree + '\n</sitemapindex>';
 }
 
-fs.writeFileSync(`sitemap-index.xml`, generateIndex(i), function (err) {
+fs.writeFileSync(path.join(folderDestino, `sitemap-index.xml`), generateIndex(i), function (err) {
     if (err) {
         return console.log(err);
     }
 
     console.log(`The file ${i} was saved!`);
-}); 
+});
 
 function pad(number, size) {
     var s = String(number);
-    while (s.length < (size || 2)) {s = "0" + s;}
+    while (s.length < (size || 2)) { s = "0" + s; }
     return s;
-  }
+}

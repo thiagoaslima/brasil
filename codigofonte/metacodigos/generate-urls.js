@@ -1,12 +1,14 @@
 var fs = require('fs');
+const path = require('path');
+const folder = './listas/';
 
-var pais = fs.readFileSync('lista-pais.txt', 'utf8').split('\n').filter(Boolean);
-var ufs = fs.readFileSync('lista-ufs.txt', 'utf8').split('\n').filter(Boolean);
-var municipios = fs.readFileSync('lista-municipios.txt', 'utf8').split('\n').filter(Boolean);
+var pais = fs.readFileSync(path.join(folder, 'lista-pais.txt'), 'utf8').split('\n').filter(Boolean);
+var ufs = fs.readFileSync(path.join(folder, 'lista-ufs.txt'), 'utf8').split('\n').filter(Boolean);
+var municipios = fs.readFileSync(path.join(folder, 'lista-municipios.txt'), 'utf8').split('\n').filter(Boolean);
 
-var pesquisasPais = fs.readFileSync('lista-ids-pesquisas-pais.txt', 'utf8').split('\n').filter(Boolean);
-var pesquisasUfs = fs.readFileSync('lista-ids-pesquisas-ufs.txt', 'utf8').split('\n').filter(Boolean);
-var pesquisasMun = fs.readFileSync('lista-ids-pesquisas-municipios.txt', 'utf8').split('\n').filter(Boolean);
+var pesquisasPais = fs.readFileSync(path.join(folder, 'lista-ids-pesquisas-pais.txt'), 'utf8').split('\n').filter(Boolean);
+var pesquisasUfs = fs.readFileSync(path.join(folder, 'lista-ids-pesquisas-ufs.txt'), 'utf8').split('\n').filter(Boolean);
+var pesquisasMun = fs.readFileSync(path.join(folder, 'lista-ids-pesquisas-municipios.txt'), 'utf8').split('\n').filter(Boolean);
 
 var contents = [];
 
@@ -51,7 +53,7 @@ ufs.forEach(munUf => {
 
 const fileContents = 'export const urls =' + JSON.stringify(contents) + ';\n'
 
-fs.writeFileSync(`lista-urls.ts`, fileContents , function (err) {
+fs.writeFileSync(path.join(folder, `lista-urls.ts`), fileContents , function (err) {
     if (err) {
         return console.log(err);
     }

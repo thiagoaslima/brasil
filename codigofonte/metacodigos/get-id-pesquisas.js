@@ -1,5 +1,7 @@
 var http = require('http');
 var fs = require('fs');
+const path = require('path');
+const folder = './listas/';
 
 var config = {
     pais: ['101010', '101000', '100000'], 
@@ -27,7 +29,7 @@ var urls = indicadores.then(arr => arr.reduce( (array, obj, idx) => {
 }, []))
 
 urls.then(urls => {
-    fs.writeFile('lista-ids-pesquisas-' + NIVEL_ATUAL + '.txt', urls.join('\n'), function(err) {
+    fs.writeFile(path.join(folder, 'lista-ids-pesquisas-' + NIVEL_ATUAL + '.txt'), urls.join('\n'), function(err) {
         if (err) { console.log('ERROR', err)}
         console.log('arquivo criado com sucesso');
     })

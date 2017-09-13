@@ -1,5 +1,5 @@
-import { municipios } from './municipios';
-import { ufs } from './ufs';
+import { municipios } from '../ClientApp/api/municipios';
+import { ufs } from '../ClientApp/api/ufs';
 
 const fs = require('fs');
 

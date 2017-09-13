@@ -2757,8 +2757,8 @@ pb/sao-mamede
 pb/sao-miguel-de-taipu
 pb/sao-sebastiao-de-lagoa-de-roca
 pb/sao-sebastiao-do-umbuzeiro
+pb/sao-vicente-do-serido
 pb/sape
-pb/serido
 pb/serra-branca
 pb/serra-da-raiz
 pb/serra-grande
