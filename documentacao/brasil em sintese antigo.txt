@@ -1,0 +1,97 @@
+Território
+    -área total
+    -coordenadas dos pontos extremos
+    -pontos mais altos
+    -número de municípios
+    -mapa da densidade demográfica
+    -mapa da divisão política
+    -mapa das unidades de conservação
+
+População
+    -série histórica da população total
+    -pirâmide etária da população dividida por sexo
+    -gráfico da distribuição da população por sexo ao longo do tempo
+    -gráfico da distribuição da população por grupo de idade ao longo do tempo
+    -série histórica da população urbana/rural
+    -série histórica da esperança de vida da população
+    -série histórica da taxa bruta de mortalidade
+    -série histórica da taxa bruta de natalidade
+    -série histórica da taxa de fecuntidade total
+    -série histórica da taxa de mortalidade infantil
+    -Distribuição da população por Sexo segundo Unidades da Federação
+    -Proporção de Migrantes segundo a informação de lugar de nascimento
+
+Educação
+    -gráfico da distribuição das pessoas de 25 anos ou mais de idade, por grupos de anos de estudo
+    -gráfico da distribuição das pessoas de 25 anos ou mais de idade, por sexo, segundo os grupos de anos de estudo
+    -gráfico da taxa de escolarização das pessoas de 6 a 14 anos por sexo
+    -gráfico da taxa de analfabetismo das pessoas de 10 a 14 anos por sexo
+    -gráfico da taxa de analfabetismo das pessoas de 10 anos ou mais de idade, por sexo
+    -gráfico da taxa de analfabetismo das pessoas de 15 anos ou mais de idade, por sexo
+
+Trabalho
+    -gráfico do percentual de pessoas em atividade agrícola
+    -gráfico das pessoas com mais de 10 anos, por categoria de emprego
+    -gráfico das pessoas com mais de 10 anos, por categoria de emprego e sexo
+    -gráfico das pessoas com mais de 10 anos, por horas trabalhadas
+    -gráfico das pessoas com mais de 10 anos, por atividade principal
+    -gráfico das pessoas com mais de 10 anos, por horas trabalhadas e sexo
+    -gráfico do nível de ocupação
+    -gráfico da posição na ocupação
+    -gráfico da posição na ocupação e sexo
+    -série histórica do rendimento de todos os trabalhos
+    -gráfico com a taxa de desocupação
+
+Habitação
+    -Gráfico com as características dos domicílios
+    -Gráfico da distribuição dos domicílios particulares permanentes, por condição de ocupação
+    -Gráfico dos domicílios particulares permanentes com telefone
+
+Agropecuária
+    -Série histórica da área dos estabelecimentos
+    -Gráfico da área por atividade econômica
+    -Gráfico do número de estabelecimentos por atividade econômica
+    -Gráfico da condição do produtor pela área
+    -Gráfico da condição do produtor pelo número de estabelecimentos
+    -Gráfico das máquinas e instrumentos
+    -Série histórica do número de estabelecimentos
+    -Gráfico máquinas e instrumentos
+    -Gráfico número de estabelecimentos
+    -Gráfico efetivos da pecuária
+    -Gráfico pessoal ocupado
+    -Gráfico pessoal ocupado de 14 anos e mais, por sexo
+    -Gráfico produção vegetal - área colhida - safra 2016
+    -Gráfico produção vegetal - quantidade produzida - safra 2016
+    -Gráfico produção vegetal - rendimento médio - safra 2016
+    -Gráfico utilização das terras - área
+    -Gráfico utilização das terras - informante
+
+Indústria
+    -grafico valor da folha de pagamento real
+    -grafico valor da folha de pagamento real média
+    -grafico número de horas pagas
+    -grafico pessoal ocupado assalariado
+    -grafico produtividade
+    -grafico produção industrial
+
+Comércio
+    -Gráfico número de empresas, por faixas de pessoal ocupado
+    -Gráfico número de empresas, por segmento do comércio
+    -Gráfico pessoal ocupado, por segmento do comércio
+    -Gráfico receita operacional líquida, por segmento do comércio
+    -Gráfico salários, por segmento do comércio
+    -Gráfico valor adicionado bruto, por segmento do comércio
+    -Gráfico variação anual média da produtividade do trabalho, por segmento do comércio
+
+Serviços
+    -Gráfico número de empresas, por segmento de serviço
+    -Gráfico pessoal ocupado, por segmento de serviço
+    -Gráfico receita, por segmento de serviço
+    -Gráfico salários, por segmento de serviço
+    -Gráfico valor adicionado bruto, por segmento do serviço
+    -Gráfico Variação percentual real receita operacional líquida, por segmento de serviço
+
+Contas nacionais
+    -Gráfico renda nacional bruta
+    -Gráfico renda nacional disponível bruta
+    -Gráfico poupança nacional bruta

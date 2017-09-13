@@ -32,7 +32,7 @@ export class TituloBrowserComponent implements OnInit {
                     ? this._localidadeService.getMunicipioBySlug(params.uf, params.municipio)
                     : params.uf
                         ? this._localidadeService.getUfBySigla(params.uf)
-                        : undefined;
+                        : this._localidadeService.getRoot();
 
                 if (localidade) {
                     if (localidade.tipo === 'municipio') {
