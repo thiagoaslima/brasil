@@ -1,0 +1,50 @@
+"nome", id, dado_municipio, dado_estado, dado_brasil
+"Ensino - matrículas, docentes e rede escolar", 13, X, X, 
+"Produção Agrícola Municipal - Lavoura Temporária", 14, X, X, 
+"Produção Agrícola Municipal - Lavoura Permanente", 15, X, X, 
+"Extração vegetal e Silvicultura", 16, X, X, 
+"Morbidade hospitalar", 17, X, X, 
+"Pecuária", 18, X, X, 
+"Cadastro Central de Empresas", 19, X, X, 
+"Registro civil", 20, X, X, 
+"Finanças públicas", 21, X, X, 
+"Frota", 22, X, X, 
+"Censo", 23, X, X, X
+"Censo agropecuário", 24, X, X, X
+"Instituições financeiras", 29, X, X, 
+"Pesquisa nacional de saneamento básico", 30, X, X, X
+"Produção agrícola municipal - Cereais, leguminosas e oleaginosas", 31, X, X, 
+"Serviços de saúde", 32, X, X, 
+"Sinopse municipal", 33, X, , 
+"Pesquisa de serviços de hospedagem", 34, X, X, X
+"Fundações privadas e associações sem fins lucrativos", 35, X, X, 
+"Mapa de pobreza e desigualdade", 36, X, X, 
+"Índice de Desenvolvimento Humano", 37, X, X, X
+"Produto Interno Bruto dos Municípios", 38, X, , 
+"Taxa de mortalidade infantil", 39, X, X, X
+"Índice de Desenvolvimento da Educação Básica", 40, X, X, X
+"Notificações de dengue registradas", 42, X, , 
+"PNAD - Pesquisa Nacional por Amostra de Domicílios", 44, , X, X
+"Síntese de Indicadores Sociais", 45, , X, 
+"POF - Pesquisa de Orçamentos Familiares", 46, , X, X
+"Pesquisa Nacional de Saúde", 47, , X, X
+"Sinopse estadual", 48, , X, 
+"Pesquisa Anual da Indústria da Construção", 49, , X, X
+"Pesquisa Anual de Comércio", 50, , X, X
+"Pesquisa Industrial Anual - Empresa", 51, , X, X
+"Pesquisa Anual de Serviços", 52, , X, X
+"Projeção da população", 53, , X, X
+"Migrações", 10053, , X, X
+"Tábuas abreviadas de mortalidade por sexo e idade", 10054, , X, X
+"Indicadores sociodemográficos e de saúde no Brasil", 10055, , X, X
+"Pesquisa Nacional de Saúde do Escolar", 10056, , X, X
+"Relações entre as alterações históricas na dinâmica demográfica brasileira e impactos decorrentes do processo de envelhecimento da população", 10057, , X, X
+"Panorama municipal", 10058, X, , 
+"Sinopse Brasil", 10059, , , X
+"Contas regionais do Brasil", 10060, , X, 
+"Pesquisa Industrial Anual - Produto", 10061, , X, 
+"Série estudos e pesquisas: estatísticas de empreendedorismo", 10062, , X, 
+"Série estudos e pesquisas: demografia das empresas", 10063, , X, 
+"Pesquisa de inovação", 10064, , X, 
+"Panorama Brasil", 10065, , , X
+"Entidades de assistência social privadas sem fins lucrativos", 10066, , X, X
