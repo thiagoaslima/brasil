@@ -41,12 +41,12 @@ const children = [
   imports: [
     RouterModule.forRoot([
       {
-        path: '',
-        redirectTo: 'v4',
+        path: 'v4',
+        redirectTo: '',
         pathMatch: 'full'
       },
       {
-        path: 'v4',
+        path: '',
         component: ShellComponent,
         // pathMatch: 'full',
         children: [{
@@ -60,27 +60,32 @@ const children = [
         }]
       },
       {
-        path: 'brasil/sandbox',
-        redirectTo: 'v4/brasil/sandbox',
+        path: 'v4/brasil/sandbox',
+        redirectTo: 'brasil/sandbox',
       },
       {
-        path: 'v4/brasil/sandbox',
+        path: 'brasil/sandbox',
         component: SandboxComponent
       },
       {
         path: 'v4/brasil',
-        redirectTo: 'v4/brasil/panorama',
+        redirectTo: 'brasil/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'v4/brasil/panorama',
+        path: 'brasil',
+        redirectTo: 'brasil/panorama',
+        pathMatch: 'full'
+      },
+      {
+        path: 'brasil/panorama',
         component: ShellComponent,
         children: [
           { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
         ]
       },
       {
-        path: 'v4/brasil/pesquisa',
+        path: 'brasil/pesquisa',
         component: ShellComponent,
         children: [
           { path: '', component: PesquisaComponent, pathMatch: 'full' },
@@ -89,26 +94,26 @@ const children = [
         ]
       },
       {
-        path: 'v4/brasil/historico',
+        path: 'brasil/historico',
         component: ShellComponent,
         children: [
           { path: '', component: VisaoHistoricaComponent, pathMatch: 'full' },
         ]
       },
       {
-        path: 'v4/brasil/:uf',
+        path: 'brasil/:uf',
         canActivate: [ValidParametersGuard],
         component: ShellComponent,
         children
       },
       {
-        path: 'v4/brasil/:uf/:municipio',
+        path: 'brasil/:uf/:municipio',
         canActivate: [ValidParametersGuard],
         component: ShellComponent,
         children
       },
       {
-        path: 'v4/municipio/:codmun',
+        path: 'municipio/:codmun',
         canActivate: [V3RouterGuard],
         component: EmptyComponent
       },
@@ -122,53 +127,53 @@ const children = [
         ]
       },
 
-      /** ADIÇÃO DO V4 ANTES DAS URLS */
+      /** REMOÇÃO DO V4 ANTES DAS URLS */
       {
-        path: 'brasil',
-        redirectTo: 'v4/brasil/panorama',
+        path: 'v4/brasil',
+        redirectTo: 'brasil/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/:uf',
-        redirectTo: 'v4/brasil/:uf/panorama',
+        path: 'v4/brasil/:uf',
+        redirectTo: 'brasil/:uf/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/pesquisa',
-        redirectTo: 'v4/brasil/pesquisa'
+        path: 'v4/brasil/pesquisa',
+        redirectTo: 'brasil/pesquisa'
       },
       {
-        path: 'brasil/:uf/panorama',
-        redirectTo: 'v4/brasil/:uf/panorama',
+        path: 'v4/brasil/:uf/panorama',
+        redirectTo: 'brasil/:uf/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/:uf/historico',
-        redirectTo: 'v4/brasil/:uf/historico',
+        path: 'v4/brasil/:uf/historico',
+        redirectTo: 'brasil/:uf/historico',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/:uf/pesquisa',
-        redirectTo: 'v4/brasil/:uf/pesquisa',
+        path: 'v4/brasil/:uf/pesquisa',
+        redirectTo: 'brasil/:uf/pesquisa',
       },
       {
-        path: 'brasil/:uf/:municipio',
-        redirectTo: 'v4/brasil/:uf/:municipio/panorama',
+        path: 'v4/brasil/:uf/:municipio',
+        redirectTo: 'brasil/:uf/:municipio/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/:uf/:municipio/panorama',
-        redirectTo: 'v4/brasil/:uf/:municipio/panorama',
+        path: 'v4/brasil/:uf/:municipio/panorama',
+        redirectTo: 'brasil/:uf/:municipio/panorama',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/:uf/:municipio/historico',
-        redirectTo: 'v4/brasil/:uf/:municipio/historico',
+        path: 'v4/brasil/:uf/:municipio/historico',
+        redirectTo: 'brasil/:uf/:municipio/historico',
         pathMatch: 'full'
       },
       {
-        path: 'brasil/:uf/:municipio/pesquisa',
-        redirectTo: 'v4/brasil/:uf/:municipio/pesquisa'
+        path: 'v4/brasil/:uf/:municipio/pesquisa',
+        redirectTo: 'brasil/:uf/:municipio/pesquisa'
       },
 
       /** PAGE 404 */
