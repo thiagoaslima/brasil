@@ -32,8 +32,9 @@
     </template>
 </div>
 
+<!-- <table class="lista"  [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()"> -->
+<table class="lista">
 <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
-    <table class="lista"  [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
 
         <tr *ngIf="first || item.tema !== temas[idx-1].tema" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" class="lista__cabecalho">
             <th class="lista__icone">
@@ -45,7 +46,7 @@
         </tr>
 
 
-        <tr class="lista__indicador">
+        <tr class="lista__indicador" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <td></td>
             <td class="lista__nome">
                 {{ item.titulo }}
@@ -68,20 +69,20 @@
 
             </td>
         </tr>
-        <tr *ngIf="!last" class="lista__separador">
+        <tr *ngIf="!last" class="lista__separador" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <td colspan="4">
                 <div class="lista__linha"></div>
             </td>
         </tr>
 
-    </table>
-</template>
+    </template>
+</table>
 
 <div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas & Fontes
 </div>
 
-<div class="lista__nota__content__geral" *ngIf="exibirFontesENotas">
+<div class="lista__nota__content__geral" [ngClass]="{'exibir': exibirFontesENotas}">
     <h1>Notas:</h1>
     <ol>
         <li *ngFor="let nota of notas">

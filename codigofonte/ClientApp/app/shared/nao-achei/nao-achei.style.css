@@ -82,3 +82,11 @@
 .nao-achei__escondido{
     display: none;
 }
+
+
+
+@media print { 
+    .nao-achei{
+        display: none;
+    }
+}

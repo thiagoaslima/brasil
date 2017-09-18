@@ -114,3 +114,11 @@
 .questionario__escondido{
     display: none;
 }
+
+
+
+@media print { 
+    .questionario{
+        display: none;
+    }
+}
