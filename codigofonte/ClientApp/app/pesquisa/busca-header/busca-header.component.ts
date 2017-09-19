@@ -35,8 +35,8 @@ export class BuscaHeaderComponent implements OnInit {
     }
 
     onChangeInput(event){
-
-        let texto = event.srcElement.value;
+        
+        let texto = event.target.value;
 
         if(texto.length >= 2){
 
