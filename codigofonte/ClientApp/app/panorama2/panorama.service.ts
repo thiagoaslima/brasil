@@ -431,10 +431,20 @@ export class Panorama2Service {
         return {
             tipo: item.grafico.tipo,
             titulo: item.grafico.titulo,
+            unidade: this.getUnidade(item, resultados),
             eixoX: this.getEixoX(item, resultados),
             dados: this.getDados(item, resultados),
             fontes: this.getFontes(item, resultados)
         };
+    }
+
+    private getUnidade(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {
+        const indicadorId = item.grafico.dados[0].indicadorId;
+        var res:any = resultados[indicadorId];
+        if(res.indicador && res.indicador.unidade){
+            return res.indicador.unidade;
+        }
+        return null;
     }
 
     private getEixoX(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {

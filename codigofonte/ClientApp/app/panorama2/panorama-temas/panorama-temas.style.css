@@ -136,6 +136,12 @@
     color: #B3B3B3;
 }
 
+.grafico__unidade{
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+
 .mobile-exclusive{
     display: none;
 }
