@@ -36,7 +36,7 @@
                             <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
                         </svg:g>
                     </svg:g>
-                    <svg:use xlink:href="img/marcador.svg#marcador" *ngFor="let marcador of marcadores"
+                    <svg:use href="#marcador" xlink:href="img/marcador.svg#marcador" *ngFor="let marcador of marcadores"
                         [attr.x]="marcador.x"
                         [attr.y]="marcador.y"
                         [attr.width]="marcador.width"
