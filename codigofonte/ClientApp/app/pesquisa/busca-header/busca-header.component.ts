@@ -40,11 +40,13 @@ export class BuscaHeaderComponent implements OnInit {
 
         if(texto.length >= 2){
 
-            this.localidades = this._localidadeService.buscar(texto)
-                .filter((item) => {
+            this.localidades = this._localidadeService.buscar(texto);
 
-                    return item.tipo == (this.nivelRegional == 'municipal' ? 'municipio' : 'uf');
-                });
+            // this.localidades = this._localidadeService.buscar(texto)
+            //     .filter((item) => {
+
+            //         return item.tipo == (this.nivelRegional == 'municipal' ? 'municipio' : 'uf');
+            //     });
 
         }else{
 

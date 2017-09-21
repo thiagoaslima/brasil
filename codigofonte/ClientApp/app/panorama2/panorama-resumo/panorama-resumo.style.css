@@ -77,7 +77,7 @@
 }
 
 
-.lista:not(.hide-content) .lista__cabecalho {
+.lista__cabecalho:not(.recolhido){
     background: #d0d0d0;
 }
 
@@ -309,7 +309,7 @@
     transition: margin-right 0.3s;
 }
 
-.lista:hover .lista__seta i{
+.lista__cabecalho:hover .lista__seta i{
     margin-right: -5px
 }
 

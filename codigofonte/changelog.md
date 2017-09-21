@@ -1,5 +1,15 @@
 # Change log
 
+## [v4.2.4] - 2017-09-19
+### Changed
+- Removido o v4 das URLs.
+
+### Fixed
+- Correção do panorara panorama resumo.
+- Correção do nome do município de Parati para Paraty no RJ.
+- Correção do integrity key na importação do inc_GA_portal.js (analytics) na página index.cshtml.
+
+
 ## [v4.2.3] - 2017-09-11
 ### Fixed
 - Correção do nome do município de Seridó para São Vicente do Seridó em PB.

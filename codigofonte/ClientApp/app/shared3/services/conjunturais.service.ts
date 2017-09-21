@@ -56,8 +56,6 @@ export class ConjunturaisService {
 
         const brasil = this._localidadeService.getRoot();
 
-        debugger;
-
         let propriedadesEspecificas = this._getProproedadesEspecificasResultado(conjunturais[0]);
         let codigoPropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') >= 0 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
         let nomePropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') == -1 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
@@ -68,8 +66,6 @@ export class ConjunturaisService {
         return Object.keys(conjunturaisKeyValue)
             .map(key => {
                 const itens = conjunturaisKeyValue[key];
-
-                debugger;
 
                 const conjuntural = itens[0];
                 const posicao = conjuntural[nomePropriedadeEspecifica] &&

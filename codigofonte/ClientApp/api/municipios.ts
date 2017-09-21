@@ -25230,8 +25230,8 @@ export const municipios = [
   {
     "codigoUf": 33,
     "codigo": 3303807,
-    "nome": "Parati",
-    "slug": "parati",
+    "nome": "Paraty",
+    "slug": "paraty",
     "microrregiao": 33013
   },
   {
