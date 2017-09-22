@@ -434,7 +434,8 @@ export class Panorama2Service {
             unidade: this.getUnidade(item, resultados),
             eixoX: this.getEixoX(item, resultados),
             dados: this.getDados(item, resultados),
-            fontes: this.getFontes(item, resultados)
+            fontes: this.getFontes(item, resultados),
+            link: item.grafico.link
         };
     }
 

@@ -74,7 +74,8 @@
 
 .grafico__info{
     padding-left: 5px;
-    color: #1B779B;
+    /*color: #1B779B;*/
+    color: #4D4D4D;
     cursor: pointer;
 }
 
