@@ -238,27 +238,35 @@ export const PANORAMA: {
                     }
                 },
 
-                // {
-                //     pesquisaId: 1419,
-                //     indicadorId: 63,
-                //     categoria: '315 [7169]',
-                //     servico: 'conjunturais',
-                //     quantidadePeriodos: 1,
-                //     titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
-                //     tema: TEMAS.economia.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'IPCA - Variação acumulada em 12 meses',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 1419,
-                //             indicadorId: 2265,
-                //             categoria: '315[7169]',
-                //             servico: 'conjunturais',
-                //             quantidadePeriodos: 12
-                //         }]
-                //     }
-                // },
+                {
+                    pesquisaId: 1419,
+                    indicadorId: 63,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'IPCA - Variação mensal',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'IPCA x INPC - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
+                        dados: [{
+                            pesquisaId: 1419,
+                            indicadorId: 2265,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 1100,
+                            indicadorId: 2292,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        }]
+                    }
+                },
 
                 {
                     pesquisaId: 1100,
@@ -266,21 +274,9 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'INPC',
+                    titulo: 'INPC - Variação mensal',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'INPC',
-                        tipo: TiposGrafico.linha,
-                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
-                        dados: [{
-                            pesquisaId: 1100,
-                            indicadorId: 44,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
             
 
