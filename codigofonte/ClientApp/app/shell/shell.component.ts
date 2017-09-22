@@ -231,11 +231,7 @@ export class ShellComponent implements OnInit, OnDestroy {
 
     navegarPara(localidade: Localidade) {
 
-        let url = this.router.url.split('/');
-        url[3] = localidade.parent.sigla.toLowerCase();
-        url[4] = localidade.slug;
-
-        this.router.navigateByUrl(url.join('/'));
+        this.router.navigateByUrl(localidade.link);
     }
 
 }

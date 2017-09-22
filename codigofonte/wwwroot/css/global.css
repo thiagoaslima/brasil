@@ -742,3 +742,83 @@ sintese>dados
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media print {
+    seletor-localidade{
+        display: none;
+    }
+
+    aside{
+        display: none;
+    }
+
+    section#detalhes{
+        display: none;
+    }
+
+    header{
+        display: none;
+    }
+
+    #barraGoverno{
+        display: none;
+    }
+
+    #sintese{
+        margin-top: 0px;
+        top: 0px;
+        position: absolute;
+        left: 0px;
+        margin-left: 0px;
+        width: 100%;
+        background-color: #fff;
+        min-height: auto;
+    }
+
+    #sintese #dados{
+        width: 100%;
+        background-color: #fff;
+        position: relative;
+    }
+
+    .lista__icone{
+        display: none;
+    }
+    .lista__seta{
+        display: none;
+    }
+    .lista__indicador td:first-child{
+        display: none;
+    }
+    .share_Button{
+        display: none;
+    }
+
+    .rodape-copyright{
+        float: right;
+        width: calc(100% - 88px);
+        text-align: center;
+        margin-top: 90px;
+        margin-bottom: 10px;
+    }
+
+    qrcode{
+        float: left;
+    }
+}

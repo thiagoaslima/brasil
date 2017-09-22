@@ -17,7 +17,7 @@
             <div>
                 <ul>
                     <li *ngFor="let localidade of localidades" (click)="onClickItem(localidade)">
-                        <p> {{ localidade.nome }} <span *ngIf="nivelRegional == 'municipal'"> {{ localidade.parent.sigla }} </span></p>
+                        <p> {{ localidade.nome }} <span> {{ !!localidade.parent.sigla ? localidade.parent.sigla : "UF" }} </span></p>
                     </li>
                 </ul>
                 <div *ngIf="localidades == null && nivelRegional == 'municipal'">
