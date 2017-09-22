@@ -44,6 +44,22 @@ export class PanoramaTemasComponent implements OnChanges {
                 this.rankings = resp.rankings;
                 this.atualizaTextos();
 
+                /*normaliza os dados, diferentes pesquisas vem com períodos diferentes, esse código iguala todos os dados de acordo com seu ano*/
+                for (let i = 0; i < this.temas.length; i++) {
+                    let graficos = this.temas[i].graficos;
+                    for (let j = 0; graficos && j < graficos.length; j++) {
+                        let grafico = graficos[j];
+                        for (let k = 0; grafico.dados && k < grafico.dados.length; k++) {
+                            let dados = new Array(grafico.eixoX.length);
+                            let dado = grafico.dados[k] as any;
+                            for(let l = 0; l < dado.anos.length; l++)
+                                dados[grafico.eixoX.indexOf(dado.anos[l])] = dado.data[l];
+                            dado.data = dados;
+                        }
+                    }
+                }
+                /*------------------*/
+
                 /*inverte os dados dos graficos de linhas, pois estavam vindo do maior para o menor ano*/
                 for (let i = 0; i < this.temas.length; i++) {
                     let graficos = this.temas[i].graficos;
