@@ -37,7 +37,7 @@ export class ResultadoService3 {
         const _localidades = forceArray(codigolocalidades);
         const url = servidor.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${_localidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadores.join(', ')}, localidades: ${_localidades.join(', ')}]`
-
+      
         return this._request(url)
             .map(json => Resultado.convertDTOintoParameters(json).map(Resultado.criar))
             .catch(err => this._handleError(err, new Error(errorMessage)));

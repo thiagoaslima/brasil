@@ -53,6 +53,9 @@ describe('PesquisaService', () => {
             ]
         })
     })
+    afterEach(() => {
+            ResultadoService3.cache.clear();
+    })
 
     describe('getResultados', () => {
 
@@ -64,7 +67,7 @@ describe('PesquisaService', () => {
                 mockResponse = new Response(new ResponseOptions({ body: resultadoDTO, status: 200 }));
 
                 mockBackend.connections.subscribe(c => connection = c);
-                resultadoService.getResultados(5905, 330455).subscribe(resultados => serviceResponse = resultados)
+                resultadoService.getResultados(5905, 330455).subscribe(resultados => serviceResponse = resultados);
                 connection.mockRespond(mockResponse);
                 tick();
 
@@ -81,7 +84,7 @@ describe('PesquisaService', () => {
                 mockResponse = new Response(new ResponseOptions({ body: resultadoDTO, status: 200 }));
 
                 mockBackend.connections.subscribe(c => connection = c);
-                resultadoService.getResultados(5905, 330455).subscribe(resultados => serviceResponse = resultados)
+                resultadoService.getResultados(5905, 330455).subscribe(resultados => serviceResponse = resultados);
                 connection.mockRespond(mockResponse);
                 tick();
 
@@ -103,7 +106,7 @@ describe('PesquisaService', () => {
                 mockResponse = new Response(new ResponseOptions({ body: resultadoDTO, status: 200 }));
 
                 mockBackend.connections.subscribe(c => connection = c);
-                resultadoService.getResultados(5905, 330455).subscribe(resultados => serviceResponse = resultados)
+                resultadoService.getResultados(5905, 330455).subscribe(resultados => serviceResponse = resultados);
                 connection.mockRespond(mockResponse);
                 tick();
 

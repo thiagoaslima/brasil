@@ -8,7 +8,7 @@ import { escopoIndicadores, listaNiveisTerritoriais, ServicoDados as servidor } 
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { RxSimpleCache } from '../../cache/decorators';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -33,12 +33,11 @@ export class PesquisaService3 {
     getAllPesquisas(): Observable<Pesquisa[]> {
         const url = servidor.setUrl('pesquisas');
         const errorMessage = `Não foi possível recuperar as pesquisas`;
-
+        
         return this._request(url)
             .map(arr => arr.map(Pesquisa.criar))
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
-
     @RxSimpleCache({
         cache: PesquisaService3.cache
     })
@@ -71,7 +70,7 @@ export class PesquisaService3 {
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         const url = servidor.setUrl(`pesquisas/${pesquisaId}`);
         const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
-
+        
         return this._request(url)
             .map(Pesquisa.criar)
             .catch(err => this._handleError(err, new Error(errorMessage)));
@@ -103,7 +102,8 @@ export class PesquisaService3 {
     }
 
     private _isServerError(res) {
-        return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
+
+        return res && typeof res === 'object' && !Array.isArray(res) && res.hasOwnProperty.apply(res, 'message') &&  Object.keys(res).length === 1;
     }
 
     private _filterPesquisas(hash, pesquisasId) {
