@@ -47,6 +47,23 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
+                {
+                    indicadorId: 60272,
+                    pesquisaId: 10065,
+                    periodo: '2017',
+                    titulo: 'Área territorial',
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    indicadorId: 62887,
+                    pesquisaId: 10059,
+                    periodo: '2017',
+                    titulo: 'Presidente',
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // ------------------------
                 // POPULAÇÃO
@@ -220,27 +237,27 @@ export const PANORAMA: {
                     }
                 },
 
-                {
-                    pesquisaId: 1705,
-                    indicadorId: 355,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 1705,
-                            indicadorId: 355,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12
-                        }]
-                    }
-                },
+                // {
+                //     pesquisaId: 1419,
+                //     indicadorId: 63,
+                //     categoria: '315 [7169]',
+                //     servico: 'conjunturais',
+                //     quantidadePeriodos: 1,
+                //     titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'IPCA - Variação acumulada em 12 meses',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 1419,
+                //             indicadorId: 2265,
+                //             categoria: '315[7169]',
+                //             servico: 'conjunturais',
+                //             quantidadePeriodos: 12
+                //         }]
+                //     }
+                // },
 
                 {
                     pesquisaId: 1100,
@@ -281,37 +298,7 @@ export const PANORAMA: {
                 // ----------------------------
                 // TERRITORIO
                 // ----------------------------
-                {
-                    indicadorId: 60272,
-                    pesquisaId: 10065,
-                    periodo: '2017',
-                    titulo: 'Área territorial',
-                    tema: TEMAS.nenhum.label,
-                    visualizacao: PanoramaVisualizacao.numerico,
-                    // grafico: {
-                    //     titulo: 'Área por bioma',
-                    //     tipo: TiposGrafico.coluna,
-                    //     dados: [{
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60273,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60274,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60275,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60276,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60277,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60278,
-                    //     }]
-                    // }
-                },
+
 
 
                 // ----------------------------
