@@ -247,11 +247,18 @@ export const PANORAMA: {
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA - Variação acumulada em 12 meses',
+                        titulo: 'IPCA x INPC - Variação acumulada em 12 meses',
                         tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 1419,
                             indicadorId: 2265,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 1100,
+                            indicadorId: 2292,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
                             quantidadePeriodos: 12,
@@ -267,18 +274,7 @@ export const PANORAMA: {
                     quantidadePeriodos: 1,
                     titulo: 'INPC - Variação mensal',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'INPC - Variação acumulada em 12 meses',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 1100,
-                            indicadorId: 2292,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
             
 
