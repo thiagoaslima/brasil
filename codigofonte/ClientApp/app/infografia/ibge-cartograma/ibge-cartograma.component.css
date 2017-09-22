@@ -43,27 +43,6 @@
     padding: 0;
     /*border-bottom: 2px solid black;*/
 }
-.ic-mun-selecionado--circle-top {
-    fill: #ff1f76;
-    stroke: none;
-}
-.ic-mun-selecionado--path {
-    stroke: #ff1f76;
-    stroke-width: 1px;
-    }
-    /* Microsoft Edge Browser 12+ (All) - @supports method */
-    @supports (-ms-ime-align:auto) {
-        .ic-mun-selecionado--path {
-        stroke-width: 0.01px;
-        } 
-    }
-
-@media all and (-ms-high-contrast:none) {
-
-.ic-mun-selecionado--path {
-    stroke-width: 0.02px;
-}
-}
 
 #faixas{
     padding:0 0 7px 5%;
