@@ -47,6 +47,23 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
+                {
+                    indicadorId: 60272,
+                    pesquisaId: 10065,
+                    periodo: '2017',
+                    titulo: 'Área territorial',
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    indicadorId: 62887,
+                    pesquisaId: 10059,
+                    periodo: '2017',
+                    titulo: 'Presidente',
+                    tema: TEMAS.nenhum.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // ------------------------
                 // POPULAÇÃO
@@ -210,6 +227,7 @@ export const PANORAMA: {
                     grafico: {
                         titulo: 'PIB - Taxa acumulada em 12 meses',
                         tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/contas-nacionais/2036-np-produto-interno-bruto-dos-municipios/9088-produto-interno-bruto-dos-municipios.html',
                         dados: [{
                             pesquisaId: 5932,
                             indicadorId: 6562,
@@ -221,23 +239,31 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 1705,
-                    indicadorId: 355,
+                    pesquisaId: 1419,
+                    indicadorId: 63,
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                    titulo: 'IPCA - Variação mensal',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA - Índice Nacional de Preços ao Consumidor Amplo',
+                        titulo: 'IPCA x INPC - Variação acumulada em 12 meses',
                         tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
                         dados: [{
-                            pesquisaId: 1705,
-                            indicadorId: 355,
+                            pesquisaId: 1419,
+                            indicadorId: 2265,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 1100,
+                            indicadorId: 2292,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
                         }]
                     }
                 },
@@ -248,20 +274,9 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'INPC',
+                    titulo: 'INPC - Variação mensal',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'INPC',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 1100,
-                            indicadorId: 44,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
             
 
@@ -281,37 +296,7 @@ export const PANORAMA: {
                 // ----------------------------
                 // TERRITORIO
                 // ----------------------------
-                {
-                    indicadorId: 60272,
-                    pesquisaId: 10065,
-                    periodo: '2017',
-                    titulo: 'Área territorial',
-                    tema: TEMAS.nenhum.label,
-                    visualizacao: PanoramaVisualizacao.numerico,
-                    // grafico: {
-                    //     titulo: 'Área por bioma',
-                    //     tipo: TiposGrafico.coluna,
-                    //     dados: [{
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60273,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60274,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60275,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60276,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60277,
-                    //     }, {
-                    //         pesquisaId: 10065,
-                    //         indicadorId: 60278,
-                    //     }]
-                    // }
-                },
+
 
 
                 // ----------------------------

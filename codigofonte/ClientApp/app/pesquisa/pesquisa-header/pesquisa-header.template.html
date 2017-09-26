@@ -124,7 +124,7 @@
             </div>
             Cartogramas
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="!isVazio ? setaTipo('ranking') : 0" [class.desabilitado]="isVazio || isNivelNacional">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="!isVazio ? setaTipo('ranking') : 0" [class.desabilitado]="isVazio">
                 <div>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.449,7.235c1.131,0,2.262,0,3.393,0

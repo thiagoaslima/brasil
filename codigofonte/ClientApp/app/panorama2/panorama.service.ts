@@ -434,7 +434,8 @@ export class Panorama2Service {
             unidade: this.getUnidade(item, resultados),
             eixoX: this.getEixoX(item, resultados),
             dados: this.getDados(item, resultados),
-            fontes: this.getFontes(item, resultados)
+            fontes: this.getFontes(item, resultados),
+            link: item.grafico.link
         };
     }
 
@@ -452,14 +453,13 @@ export class Panorama2Service {
         return resultados[indicadorId].periodosValidos;
     }
 
-    private getDados(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): { data: number[], label: string }[] {
+    private getDados(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }) {
         return item.grafico.dados.map(item => {
             const indicadorId = item.indicadorId;
             const resultado = resultados[indicadorId];
             const valores = resultado.valoresValidos.map(valor => this.converterParaNumero(valor));
             const nome = resultado.indicador.nome;
-
-            return { data: valores, label: nome };
+            return { data: valores, anos: resultado.periodosValidos,  label: nome };
         });
     }
 

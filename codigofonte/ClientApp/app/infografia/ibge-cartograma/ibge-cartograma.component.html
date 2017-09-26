@@ -33,7 +33,7 @@
                             [attr.link]="item.link"
                             [attr.faixa]="getFaixaMunicipio(item.codigo)">
                             
-                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" />
+                            <polygon *ngFor="let poly of item.polys" [attr.points]="poly" [style.stroke-width.px]="strokeWidth" />
                         </svg:g>
                     </svg:g>
                     <svg:use href="#marcador" xlink:href="img/marcador.svg#marcador" *ngFor="let marcador of marcadores"

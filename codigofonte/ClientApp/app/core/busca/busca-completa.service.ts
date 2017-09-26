@@ -117,7 +117,9 @@ export class BuscaCompletaService {
                 if(keywordInPlaceName) continue;
                 //---
                 index = text.indexOf(keywords[k]);
-                if(index == 0 || text.charAt(index - 1) == '-') //must match with the start of a word (spaces are replaced by '-')
+                let length = keywords[k].length;
+                if((index == 0 || text.charAt(index - 1) == '-') && //must match with the start of a word (spaces are replaced by '-')
+                    (length > 3 || ((index + length == text.length) || (index + length < text.length && text.charAt(index + length) == '-')))) //match whole keyword if its smaller than 3 chars
                     links[i]["points"] += 1; //give a point to the link every time it matches a keyword
             }
         }
@@ -197,7 +199,7 @@ export class BuscaCompletaService {
         if(places.length == 0 && links[0]["points"] == 0){
             result.push({
                 type: "mensagem",
-                name: "Nenhum resultado foi encontrado!",
+                name: "Nada a exibir...",
             });
         }
         return result;

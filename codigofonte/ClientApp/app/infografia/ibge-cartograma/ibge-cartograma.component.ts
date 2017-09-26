@@ -23,6 +23,8 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     carregando;
 
+    strokeWidth = 0.001;
+
     constructor(
         private _mapaService: MapaService,
     ) { }
@@ -42,14 +44,12 @@ export class IBGECartograma implements OnInit, OnChanges {
             if (this.localidade.tipo === "pais") {
                 this._mapaService.getMalhaSubdivisao(undefined)
                     .subscribe((malha) => {
-                        this.malha = malha;
-                        this.carregando = false;
+                        this.setMalha(malha);
                     });
             } else {
                 this._mapaService.getMalhaSubdivisao(this.localidade.codigo)
                     .subscribe((malha) => {
-                        this.malha = malha;
-                        this.carregando = false;
+                        this.setMalha(malha);
                     });
             }
         }
@@ -87,9 +87,18 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     }
 
+    setMalha(malha) {
+        this.malha = malha;
+        let [minX, minY, width, height] = this.malha.viewBox.split(" ").map(parseFloat);
+
+        this.strokeWidth = Math.max(width, height)/1000;
+
+        this.carregando = false;
+    }
+
     get marcadores() {
         let [minX, minY, width, height] = this.malha.viewBox.split(" ").map(parseFloat);
-        let marcadorSize = Math.round(Math.max(width, height)/15);
+        let marcadorSize = (Math.max(width, height)/15);
 
         let marcadores = this.localidadesMarcadas.map((localidade) => {
 

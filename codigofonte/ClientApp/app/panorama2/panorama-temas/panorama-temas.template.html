@@ -29,7 +29,7 @@
     <div class="grafico" *ngFor="let obj of item.graficos; let i = index">
 
         <h2 class="grafico__titulo">{{obj.titulo}}
-            <span class="grafico__unidade" *ngIf="obj.unidade">
+            <span class="grafico__unidade" *ngIf="obj.unidade && obj.unidade.nome">
                 ( Unidade:
                     {{ obj.unidade.nome}}
                     <template [ngIf]="obj.unidade.multiplicador > 1">
@@ -37,7 +37,8 @@
                     </template>
                 )
             </span>
-            <!--<i class="fa fa-info-circle grafico__info" aria-hidden="true"></i>-->
+            
+            <a [href]="obj.link" *ngIf="obj.link"><i class="fa fa-info-circle grafico__info" aria-hidden="true"></i></a>
         </h2>
 
         <div class="grafico__detalhes">

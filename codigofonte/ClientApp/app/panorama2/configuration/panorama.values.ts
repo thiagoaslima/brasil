@@ -25,6 +25,7 @@ export interface ItemConfiguracao {
         titulo: string,
         tipo: string,
         fontes?: string[],
+        link?: string,
         dados: Array<{
             indicadorId: number
             pesquisaId?: number
