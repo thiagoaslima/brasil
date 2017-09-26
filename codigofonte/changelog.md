@@ -1,6 +1,6 @@
 # Change log
 
-## [v4.3.RC1] - 2017-09-25
+## [v4.3.0.RC1] - 2017-09-25
 ### Added
 - Panorama Brasil.
 - Pesquisas do Brasil com tabelas, série histórica e ranking.
