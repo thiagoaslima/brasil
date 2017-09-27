@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 // import { BarraGov } from './barra-gov/barra-gov';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
@@ -44,7 +45,8 @@ import { IBGECartogramaModule } from '../infografia/ibge-cartograma/ibge-cartogr
         SandboxModule,
         Ng2PageScrollModule.forRoot(),
         // BasicCacheModule,
-        IBGECartogramaModule.forRoot()
+        IBGECartogramaModule.forRoot(),
+        TraducaoModule.forRoot(),
     ],
     declarations: [
         // RootComponent,
