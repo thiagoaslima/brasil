@@ -144,7 +144,8 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     private setIcones(): void {
         Object.keys(TEMAS).forEach(key => {
             let { label, icon } = TEMAS[key];
-            this.icones[label] = `./img/ico/${icon}`;
+            // this.icones[label] = `./img/ico/${icon}`;
+            this.icones[label] = `${icon}`;
         });
     }
 

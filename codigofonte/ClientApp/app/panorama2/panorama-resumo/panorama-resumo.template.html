@@ -1,6 +1,7 @@
 <div class="topo" [ngClass]="{'comBandeira': localidade?.tipo == 'uf'}">    
     <!-- <div *ngIf="localidade?.tipo == 'uf'"> uf </div> -->
     <div class="topo__bandeira" *ngIf="localidade?.tipo == 'uf'">
+        <!-- <img src="../img/bandeiras/{{localidade?.sigla}}.gif" alt=""> -->
         <img src="../img/bandeiras/{{localidade?.sigla}}.gif" alt="">
     </div>
 
@@ -25,7 +26,7 @@
                         <!--Quando fixo, o menu de resumo precisa ter seus itens com margens esquerdas definidas individualmente.
                             Quando forem adicionados novos temas, deve-se criar novas classes "resumo__icos__X"
                             e se recalcular as margens de todas as anteriores-->
-                        <img class="ico" [src]="icones[item.tema]" />
+                        <!-- <img class="ico" [src]="icones[item.tema]" /> -->
                     </div>
                 </div>
             </div>
@@ -38,7 +39,8 @@
 
         <tr *ngIf="first || item.tema !== temas[idx-1].tema" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" class="lista__cabecalho" [class.recolhido]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <th class="lista__icone">
-                <img class="ico" [src]="icones[item.tema]" />
+                <!-- <img class="ico" [src]="icones[item.tema]" /> -->
+                <img class="ico {{icones[item.tema]}}" src=''/>
             </th>
 
             <th class="lista__titulo" colspan="2">{{item.tema}}</th>

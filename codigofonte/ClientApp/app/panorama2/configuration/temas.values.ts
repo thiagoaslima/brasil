@@ -5,27 +5,32 @@ export const TEMAS = {
     },
     agricultura: {
         label: 'Agricultura',
-        icon: 'agricultura.svg'
+        // icon: 'agricultura.svg'
+        icon: 'ico-agricultura'
     },
     agropecuaria: {
         label: 'Agropecuária',
-        icon: 'ico-agricultura.svg'
+        // icon: 'ico-agricultura.svg'
+        icon: 'ico-agricultura'
     },
     comercio: {
         label: 'Comércio',
-        icon: ''
+        icon: 'ico-comercio'
     },
     educacao: {
         label: 'Educação',
-        icon: 'ico-educacao.svg'
+        // icon: 'ico-educacao.svg'
+        icon: 'ico-educacao'
     },
     economia: {
         label: 'Economia',
-        icon: 'ico-economia.svg'
+        // icon: 'ico-economia.svg'
+        icon: 'ico-economia'
     },
     frota: {
         label: 'Frota de veículos',
-        icon: 'frota.svg'
+        // icon: 'frota.svg'
+        icon: 'ico-frota'
     },
     historico: {
         label: 'Histórico',
@@ -33,23 +38,26 @@ export const TEMAS = {
     },
     industria: {
         label: 'Indústria',
-        icon: ''
+        icon: 'ico-industria'
     },
     meioAmbiente: {
         label: 'Território e Ambiente',
-        icon: 'ico-ambiente.svg'
+        // icon: 'ico-ambiente.svg'
+        icon: 'ico-ambiente'
     },
     populacao: {
         label: 'População',
-        icon: 'ico-populacao.svg'
+        // icon: 'ico-populacao.svg'
+        icon: 'ico-populacao'
     },
     saude: {
         label: 'Saúde',
-        icon: 'ico-saude.svg'
+        // icon: 'ico-saude.svg'
+        icon: 'ico-saude'
     },
     servicos: {
         label: 'Serviços',
-        icon: ''
+        icon: 'ico-servicos'
     },
     territorio: {
         label: 'Território',
@@ -57,6 +65,7 @@ export const TEMAS = {
     },
     trabalho: {
         label: 'Trabalho e Rendimento',
-        icon: 'ico-trabalho.svg'
+        // icon: 'ico-trabalho.svg'
+        icon: 'ico-trabalho'
     }
 };

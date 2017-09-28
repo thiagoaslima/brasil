@@ -16,7 +16,7 @@ describe('Indicador Model', () => {
         };
 
         beforeEach(() => {
-            //indicador = Indicador.criar(indicadorParameters);
+            indicador = Indicador.criar(indicadorParameters);
         })
 
         it('deve conter o método estático criar', () => {
@@ -41,7 +41,7 @@ describe('Indicador Model', () => {
         };
 
         beforeEach(() => {
-            //indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa_id: pesquisaId }));
+            indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa_id: pesquisaId }));
         });
 
         it('deve ter um valor de id', () => {
@@ -163,7 +163,7 @@ describe('Indicador Model', () => {
         }
 
         beforeEach(() => {
-            //indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa_id: pesquisaId }));
+            indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa_id: pesquisaId }));
         });
 
         it('deve conter instâncias de Indicador na propriedade indicador', () => {
@@ -252,7 +252,7 @@ describe('Indicador Model', () => {
         })
 
         beforeEach(() => {
-            //indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa: pesquisa }));
+            indicador = Indicador.criar(Object.assign(indicadorParameters, { pesquisa: pesquisa }));
         });
 
         it('deve conter o objeto Pesquisa na propriedade pesquisa', () => {
@@ -272,7 +272,7 @@ describe('Indicador Model', () => {
         const indicadorDTO = {"id":5905,"pesquisa_id":13,"posicao":"1.1.2","indicador":"Escola pública estadual","classe":"I","unidade":{"id":"Matrículas","classe":"G","multiplicador":0},"children":[],"nota":[],"res":[{"localidade":"330010","res":{"2005":"44","2007":"68","2009":"8","2012":"7","2015":"0"}},{"localidade":"330455","res":{"2005":"959","2007":"615","2009":"394","2012":"203","2015":"191"}}]}
 
         beforeEach(() => {
-            //indicador = Indicador.criar(indicadorDTO);
+            indicador = Indicador.criar(indicadorDTO);
         })
 
         it('deve ter a propriedade resultados', () => {

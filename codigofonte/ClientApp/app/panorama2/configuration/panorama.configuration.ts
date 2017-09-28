@@ -522,6 +522,21 @@ export const PANORAMA: {
                         }]
                     }
                 },
+
+                {
+
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Projeção da População',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 53,
+                            indicadorId: 49645
+                        }]
+                    }
+                },
+
                 {
                     pesquisaId: 23,
                     indicadorId: 25207,
