@@ -12,6 +12,8 @@ import {
 import { CommonService } from '../../shared/common.service';
 import { dicionarioTiposGrafico, TiposGrafico } from './grafico.values';
 
+const FileSaver = require('file-saver');
+
 @Component({
     selector: 'grafico',
     templateUrl: 'grafico.template.html',
@@ -29,6 +31,8 @@ export class GraficoComponent implements OnInit, OnChanges {
     @Input('eixo') labelsEixoX: string[] = [];
     @Input() dados: Array<{ data: number[], label: string }> = [];
     // :  | Array<{ data: number[], label: string }>
+
+    @Input() link: string = null;
 
     /** CONFIGURAÇÃO **/
     @Input('mostrar-legenda') mostrarLegenda: boolean = false;
@@ -61,6 +65,8 @@ export class GraficoComponent implements OnInit, OnChanges {
             pointBorderColor: '#fff',
         }]
     }
+
+    imageData = "";
 
     public options = {
         legend: {
@@ -169,6 +175,36 @@ export class GraficoComponent implements OnInit, OnChanges {
                 return res;
             });
         }
+    }
+
+    public download(){
+        let blob;
+        let canvas = this.graficoRef.nativeElement;
+
+        //baixa a imagem
+        if(canvas.msToBlob){
+            //IE 11 hack
+            blob = canvas.msToBlob();
+            FileSaver.saveAs(blob, "grafico.png");
+        }else{
+            this.imageData = canvas.toDataURL('image/png');
+        }
+
+        //baixa o csv
+        let csv = '"Nome"';
+        for(let i = 0; i < this.labelsEixoX.length; i++){
+            csv += ',"' + this.labelsEixoX[i] + '"';
+        }
+        csv += "\r\n";
+        for(let i = 0; i < this.dados.length; i++){
+            csv += '"' + this.dados[i].label + '"';
+            for(let j = 0; j < this.dados[i].data.length; j++){
+                csv += "," + this.dados[i].data[j];
+            }
+            csv += "\r\n";
+        }
+        blob = new Blob([csv], { type: "text/csv" });
+        FileSaver.saveAs(blob, "grafico.csv");
     }
 
 }
