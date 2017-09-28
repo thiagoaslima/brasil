@@ -6,11 +6,11 @@ import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
 import { Resultado } from '../models';
-import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3 } from '.';
+import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3,RankingService3} from '.';
 
 import { arrayMatcher} from './jasmine.custom.matcher';
 
-describe('ResultadoServiceE2E', () => {
+describe('RankingServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
 
     beforeEach(() => {
@@ -21,42 +21,31 @@ describe('ResultadoServiceE2E', () => {
             imports:[HttpModule],
             providers: [
                 {
-                    provide: PesquisaService3,
+                    provide: RankingService3,
                     deps: [Http],
-                    useFactory: (http) => new PesquisaService3(http)
-                },
-                {
-                    provide: IndicadorService3,
-                    deps: [Http, PesquisaService3],
-                    useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
-                },
-                {
-                    provide: LocalidadeService3,
-                    deps: [Http, PesquisaService3],
-                    useFactory: (http, localidadeService) => new LocalidadeService3(http)
-                },
-                {
-                    provide: ResultadoService3,
-                    deps: [Http, IndicadorService3, LocalidadeService3],
-                    useFactory: (http, indicadorService, localidadeService) => new ResultadoService3(http, indicadorService, localidadeService)
+                    useFactory: (http) => new RankingService3(http)
                 }
             ]
         })
         jasmine.addMatchers(arrayMatcher);
     })
     afterEach(() => {
-            ResultadoService3.cache.clear();
+            //RankingService3.cache.clear();
     })
 
-    describe('Testes no serviço getResultados', () => {
+    describe('Testes no serviço getRankingsIndicador', () => {
 
        
-        it('retorna resultados de 1 indicador e 1 código de localidade passados por parâmetro', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
+        it('Testa retorno de rakings relacionado ao indicador passado por parâmetro', (done)=>{
+            inject([RankingService3], (rankingService: RankingService3) => {
                 
-                let idsIndicadores = 5905;
+                let idsIndicadores = [ { 
+                                            "indicadorId":5905,
+                                            "periodo":"0"
+                                        }
+                                      ];
                 let localidade = 330455;
-                resultadoService.getResultados(idsIndicadores,localidade).subscribe(resultados => {
+                rankingService.getRankingsIndicador(idsIndicadores,null,localidade).subscribe(resultados => {
     
                     try{
                         expect(resultados).toHaveLength(1);
@@ -137,11 +126,10 @@ describe('ResultadoServiceE2E', () => {
             inject([ResultadoService3], (resultadoService: ResultadoService3) => {
                 
                 let idIndicador = 5905;
-                let localidade = 13;
+                let localidade = 1;//330455;
                 resultadoService.getResultadosCartograma(idIndicador,localidade).subscribe(resultados => {
-
+    
                     try{
-                        
                         for(var ind in resultados){
                             
                             expect(resultados[ind] instanceof Resultado).toBeTruthy();
