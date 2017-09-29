@@ -1,8 +1,10 @@
 import { Indicador } from '../../shared3/models/indicador.model';
-import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, ViewChild, ElementRef } from '@angular/core';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 
 import { MapaService } from './mapa.service';
+
+const FileSaver = require('file-saver');
 
 @Component({
     selector: 'ibge-cartograma',
@@ -16,6 +18,8 @@ export class IBGECartograma implements OnInit, OnChanges {
     @Input() resultados;
     @Input() periodo;
     @Input() titulo;
+
+    @ViewChild("mapa") mapa: ElementRef;
 
     municSelected = '';
     valores;
@@ -167,6 +171,32 @@ export class IBGECartograma implements OnInit, OnChanges {
         return faixa;
     }
 
+    getFillMunicipio(codmun: number) {
+
+        let valor = this.getValorMunicipio(codmun);
+
+        let faixa;
+        const valorNumerico = Number.parseFloat(valor);
+        if (this.valores && this.valores.length == 0 || !this._isValorValido(valorNumerico) || Number.isNaN(valorNumerico)) {
+            return '#999';
+        }
+
+        if (valorNumerico < this.valores[0]) {
+            faixa = '#7fcdbb'
+        }
+        else if (valorNumerico < this.valores[1]) {
+            faixa = '#41b6c4'
+        }
+        else if (valorNumerico < this.valores[2]) {
+            faixa = '#308bc9'
+        }
+        else {
+            faixa = '#1b779b'
+        }
+
+        return faixa;
+    }
+
     public getCenter(geometries, codigo) {
         if (codigo) {
             let el = geometries.find(item => item.codigo.toString() == codigo.toString().substring(0, 6));
@@ -193,6 +223,19 @@ export class IBGECartograma implements OnInit, OnChanges {
         return left < right ? { left: left, right: 0, align: 'left', borderLeft: 3, borderRight: 0 } : { left: 0, right: right, align: 'right', borderLeft: 0, borderRight: 3 };
     }
 
+    download(){
+        //baixa o svg
+        let blob = new Blob([this.mapa.nativeElement.innerHTML], { type: "image/svg+xml" });
+        FileSaver.saveAs(blob, "mapa.svg");
 
+        //baixa o csv
+        let csv = '"Local", "' + this.titulo + '"\r\n';
+        for(let i = 0; i < this.malha.geometries.length; i++){
+            let item = this.malha.geometries[i];
+            csv += '"' + item.nome + '", ' + this.getValorMunicipio(item.codigo) +'\r\n';
+        }
+        blob = new Blob([csv], { type: "text/csv" });
+        FileSaver.saveAs(blob, "mapa.csv");
+    }
    
 }
