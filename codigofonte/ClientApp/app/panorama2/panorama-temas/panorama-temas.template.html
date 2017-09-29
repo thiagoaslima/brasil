@@ -25,6 +25,12 @@
 
     <panorama-painel *ngIf="item.painel.length > 0" [dados]="item.painel" [localidade]="localidade"></panorama-painel>
 
+    <!-- Pirâmide etária -->
+    
+    <div class="piramide-etaria" *ngIf="item.tema.toLowerCase() == 'população'">
+        <piramide-etaria [codmun]="localidade.codigo.toString()"></piramide-etaria>
+    </div>
+
     
     <div class="grafico" *ngFor="let obj of item.graficos; let i = index">
 
