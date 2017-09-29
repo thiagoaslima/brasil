@@ -15,7 +15,7 @@ export class BibliotecaService {
 
     public getValues(codigoLocalidade: number) {
         const url = servidor.setUrl(`biblioteca?aspas=3&codmun=${codigoLocalidade}`);
-        return this._request(url).map(res => res[Object.keys(res)[0]]);
+        return this._request(url).map(res => res[Object.keys(res)[0]] || null);
     }
 
     private _request(url: string) {

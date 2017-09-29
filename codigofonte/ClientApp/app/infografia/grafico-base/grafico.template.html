@@ -4,6 +4,11 @@
     </div>
 
     <div>
+        <div class="botao-container">
+            <a [href]="link" *ngIf="link" title="Informações sobre a pesquisa"><i class="fa fa-info-circle botao" aria-hidden="true"></i></a>
+            <a download="grafico.png" title="Baixar gráfico (imagem e dados)" target="_new" [href]="imageData" (click)="download()"><i class="fa fa-download botao" aria-hidden="true"></i></a>
+        </div>
+
         <!--<div *ngIf="datasets | async">-->
 
         <canvas *ngIf="isValid()" #grafico baseChart class="chart" width="510" height="220" [datasets]="dados" [labels]="labelsEixoX"

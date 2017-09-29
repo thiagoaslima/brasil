@@ -43,8 +43,6 @@
                     </template>
                 )
             </span>
-            
-            <a [href]="obj.link" *ngIf="obj.link"><i class="fa fa-info-circle grafico__info" aria-hidden="true"></i></a>
         </h2>
 
         <div class="grafico__detalhes">
@@ -56,7 +54,7 @@
             </div>
         </div>
 
-        <grafico *ngIf="!isPrerender" [eixo]="obj.eixoX" [dados]="obj.dados" [tipo]="obj.tipo"></grafico>
+        <grafico *ngIf="!isPrerender" [link]="obj.link" [eixo]="obj.eixoX" [dados]="obj.dados" [tipo]="obj.tipo"></grafico>
 
         <!--<div class="botao-container">
             <div class="botao" *ngIf="grafico.dados && grafico.dados.length && grafico.dados[0].indicador && grafico.dados[0].indicador.fontes && grafico.dados[0].indicador.fontes.length > 0">
