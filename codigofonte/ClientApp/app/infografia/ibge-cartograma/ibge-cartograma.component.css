@@ -147,6 +147,15 @@ g, .periodo-link {
     vertical-align: middle;
 }
 
+.icones__container{
+    text-align: right;
+    color: #999;
+}
+
+.botao{
+    cursor: pointer;
+}
+
 /*----------------------------------------*/
 
 /*barra de título*/
