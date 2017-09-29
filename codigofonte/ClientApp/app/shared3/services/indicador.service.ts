@@ -41,9 +41,9 @@ export class IndicadorService3 {
     @RxSimpleCache({
         cache: IndicadorService3.cache
     })
-    getIndicadoresFilhosByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresFilhosByPosicao(pesquisaId: number, posicao="0", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return this._request(url)
@@ -54,9 +54,9 @@ export class IndicadorService3 {
     @RxSimpleCache({
         cache: IndicadorService3.cache
     })
-    getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao: string, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao="0", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/0?scope=${escopo}&localidade=${localidades.join(',')}`);
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
@@ -89,7 +89,9 @@ export class IndicadorService3 {
                 return this._pesquisaService.getPesquisas(pesquisasId).map(pesquisas => [responseIndicadores, pesquisas]);
             })
             .map(([responseIndicadores, pesquisas]) => {
+
                 const hashPesquisas = converterObjArrayEmHash(pesquisas, 'id');
+               
                 return responseIndicadores.map(obj => Indicador.criar(Object.assign(obj, { pesquisa: hashPesquisas[obj.pesquisa_id] })))
             })
             .catch(err => this._handleError(err, new Error(errorMessage)));

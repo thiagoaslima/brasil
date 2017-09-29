@@ -89,9 +89,6 @@ export class PesquisaService3 {
                 }
 
                 const obj = res.json();
-                if (this._isServerError(obj)) {
-                    throw new Error();
-                }
 
                 return obj;
             });
@@ -99,11 +96,6 @@ export class PesquisaService3 {
 
     private _handleError(error: Error, customError?: Error): Observable<any> {
         return Observable.throw(error.message ? error : customError);
-    }
-
-    private _isServerError(res) {
-
-        return res && typeof res === 'object' && !Array.isArray(res) && res.hasOwnProperty.apply(res, 'message') &&  Object.keys(res).length === 1;
     }
 
     private _filterPesquisas(hash, pesquisasId) {

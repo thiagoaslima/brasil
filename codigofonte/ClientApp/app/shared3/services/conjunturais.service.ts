@@ -114,8 +114,6 @@ export class ConjunturaisService {
             .retry(3)
             .map(res => {
 
-                debugger;
-
                 if (res.status === 404) {
                     throw new Error(`Não foi encontrado o endereço solicitado. [url: ${url}]`);
                 }
