@@ -227,6 +227,7 @@ export const PANORAMA: {
                     grafico: {
                         titulo: 'PIB - Taxa acumulada em 12 meses',
                         tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/contas-nacionais/2036-np-produto-interno-bruto-dos-municipios/9088-produto-interno-bruto-dos-municipios.html',
                         dados: [{
                             pesquisaId: 5932,
                             indicadorId: 6562,
@@ -249,6 +250,7 @@ export const PANORAMA: {
                     grafico: {
                         titulo: 'IPCA x INPC - Variação acumulada em 12 meses',
                         tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
                         dados: [{
                             pesquisaId: 1419,
                             indicadorId: 2265,
@@ -520,6 +522,21 @@ export const PANORAMA: {
                         }]
                     }
                 },
+
+                {
+
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'Projeção da População',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 53,
+                            indicadorId: 49645
+                        }]
+                    }
+                },
+
                 {
                     pesquisaId: 23,
                     indicadorId: 25207,

@@ -1,5 +1,25 @@
 # Change log
 
+## [v4.3.0.RC1] - 2017-09-25
+### Added
+- Panorama Brasil.
+- Pesquisas do Brasil com tabelas, série histórica e ranking.
+- Versão do panorama para impressão
+
+### Changed
+ - Melhoria na identificação de palavras chave na busca completa.
+
+### Fixed
+ - Correção do bug dos gráficos, quando os dados vinham com períodos diferentes.
+ - Ajuste na largura dos contornos do cartograma.
+ - Pin de localidade no cartograma para funcionar no IE.
+ - Pin de localidade no cartograma para funcionar no FIREFOX.
+ - Seleção de localidade na comparação.
+ - Namespaces dos mapas svg.
+ - Geolocalização.
+ - Inclusão das unidades e fator multiplicador no título dos gráficos do temas.
+
+
 ## [v4.2.4] - 2017-09-19
 ### Changed
 - Removido o v4 das URLs.

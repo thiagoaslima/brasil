@@ -230,7 +230,6 @@ describe('IndicadorServiceE2E', () => {
                        
                         try {
                             
-                            console.log(indicadores);
                             expect(indicadores).toHaveLength(1);
                             let indicador = indicadores[0];
                             expect(indicador instanceof Indicador).toBeTruthy();

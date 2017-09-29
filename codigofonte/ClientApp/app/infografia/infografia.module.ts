@@ -7,6 +7,8 @@ import { GraficoComponent } from './grafico-base/grafico.component';
 // import { CartogramaComponent, LocalCartogramaComponent } from './cartograma/cartograma.component';
 // import { MapaService } from './cartograma/mapa.service';
 import { LinhaTempo } from './linha-tempo/linha-tempo.component';
+import { PiramideEtariaComponent } from './piramide-etaria/piramide-etaria.component';
+import { PiramideEtariaService } from './piramide-etaria/piramide-etaria.service';
 
 @NgModule({
 	imports: [
@@ -16,15 +18,17 @@ import { LinhaTempo } from './linha-tempo/linha-tempo.component';
 	],
 	declarations: [ 
 		GraficoComponent,
-		LinhaTempo
+		LinhaTempo,
+		PiramideEtariaComponent
 	],
 	exports: [
 		GraficoComponent,
 		LinhaTempo,
-		IBGECartogramaModule
+		IBGECartogramaModule,
+		PiramideEtariaComponent
 	],
 	providers: [
-		// MapaService
+		PiramideEtariaService
 	]
 })
 export class InfografiaModule {

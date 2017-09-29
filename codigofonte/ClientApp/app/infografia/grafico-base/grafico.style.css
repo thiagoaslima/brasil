@@ -58,14 +58,12 @@ button .fa{
 }
 
 .botao{
-    display: inline-block;
+    cursor: pointer;
+    padding: 0 0 5px 5px;
 }
 
-.botao button{
-    cursor: pointer;
-}
 
 .botao-container{
     text-align: right;
-    margin-top: 25px;
+    color: #999;
 }
