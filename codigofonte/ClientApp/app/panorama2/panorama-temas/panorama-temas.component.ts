@@ -44,8 +44,6 @@ export class PanoramaTemasComponent implements OnChanges {
                 this.rankings = resp.rankings;
                 this.atualizaTextos();
 
-                debugger;
-
                 /*normaliza os dados, diferentes pesquisas vem com períodos diferentes, esse código iguala todos os dados de acordo com seu ano*/
                 for (let i = 0; i < this.temas.length; i++) {
                     let graficos = this.temas[i].graficos;
