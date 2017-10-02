@@ -24,7 +24,7 @@ export class ConjunturaisService {
     getIndicador(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<ConjunturalDTO[]> {
         const params = categoria ? `?categoria=${categoria}` : '';
         const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, 2);
-        return this._request(url).catch(err => this._handleError(err));
+        return this._request(url).map(arr => arr.map(obj => this._removeDotFromPropertyName(obj))).catch(err => this._handleError(err));
     }
 
     getIndicadorAsResultado(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<Resultado[]> {
@@ -32,6 +32,16 @@ export class ConjunturaisService {
             .map(array => this._convertConjunturalIntoResultado(pesquisaId, array));
     }
 
+    private _removeDotFromPropertyName(object: ConjunturalDTO): ConjunturalDTO {
+        const o = {} as ConjunturalDTO;
+        for (let property in object) {
+            if (object.hasOwnProperty(property)) {
+                let prop = property.replace('.', '');
+                o[prop] = object[property];
+            }
+        }
+        return o;
+    }
     private _getPropriedadesEspecificasResultado(object: Object): string[] {
 
         let propriedadesGerais = ['p', 'p_cod', 'ug', 'ug_cod', 'um', 'um_cod', 'v', 'var', 'var_cod'];
@@ -43,7 +53,7 @@ export class ConjunturaisService {
 
                 if (propriedadesGerais.indexOf(property) === -1) {
 
-                    propriedadesEspecificas.push(property.replace('.', ''));
+                    propriedadesEspecificas.push(property);
                 }
             }
         }
