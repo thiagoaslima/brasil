@@ -83,14 +83,14 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
                 this.notas = resp.filter(resultado => {
 
-                    if(resultado.notas.length == 0){
+                    if (resultado.notas.length === 0) {
 
                         return false;
                     }
 
-                    for(let i = 0; i < resultado.notas.length; i++){
+                    for (let i = 0; i < resultado.notas.length; i++) {
 
-                        if(resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-'){
+                        if (resultado.notas[i]['periodo'] === resultado.periodo || resultado.notas[i]['periodo'] === '-') {
 
                             return true;
                         }
@@ -100,13 +100,13 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
                 }).map(resultado => {
 
-                    for(let i = 0; i < resultado.notas.length; i++){
+                    for (let i = 0; i < resultado.notas.length; i++) {
 
-                        if(resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-'){
+                        if (resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-') {
 
                             return `${resultado.titulo}: ${resultado.notas[i]['notas']}`;
                         }
-                    }                    
+                    }
                 });
 
                 this.fontes = resp.filter(resultado => {
