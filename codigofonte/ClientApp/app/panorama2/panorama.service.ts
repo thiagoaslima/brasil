@@ -208,15 +208,15 @@ export class Panorama2Service {
         const resConjunturais = Observable.zip(
             ...itensConjunturais
                 .map(item => {
-                    return this._conjunturaisService.getIndicador(
+                    return this._conjunturaisService.getIndicadorAsResultado(
                         item.pesquisaId, item.indicadorId, item.quantidadePeriodos, item.categoria
                     ).take(1).map(json => {
                         const obj = json[0];
-
-                        const periodo = item.periodo || obj.p || '-';
-                        const titulo = item.titulo || obj.var;
-                        const valor = obj.v || '-';
-                        const unidade = obj.um === 'Percentual' ? '%' : obj.um;
+debugger;
+                        const periodo = item.periodo || obj.periodoValidoMaisRecente || '-';
+                        const titulo = item.titulo || obj.indicador.nome;
+                        const valor = obj.getValor(periodo);
+                        const unidade = obj.indicador.unidade.nome === 'Percentual' ? '%' : obj.indicador.unidade.nome;
                         const notas = [];
                         const fontes = [];
 

@@ -90,7 +90,12 @@ export class ConjunturaisService {
                     children: [],
                     pesquisa_id: pesquisaId,
                     nota: [],
-                    fonte: []
+                    fonte: [],
+                    unidade: {
+                        id: conjuntural.um,
+                        classe: '',
+                        multiplicador: 1
+                    }
                 };
 
                 const indicador = Indicador.criar(indicadorParams);
