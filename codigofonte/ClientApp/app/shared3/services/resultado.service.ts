@@ -57,6 +57,8 @@ export class ResultadoService3 {
             case 2:
                 requisicaoLocalidade = `${codigoLocalidade}xxxx`;
                 break;
+            default:
+                throw new Error('Código de localidade deve ter 1 (país) ou 2 dígitos (uf)');
         }
 
         const url = servidor.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${requisicaoLocalidade}`);
