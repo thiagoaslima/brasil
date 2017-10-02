@@ -36,7 +36,7 @@ export class BuscaComponent implements OnInit {
     resultados = [];
     numResultados = 0;
 
-    private _qtdMinimaCaracteres = 3;
+    private _qtdMinimaCaracteres = 2;
     private _localidadeAtual;
 
     @Output() buscaAberta = new EventEmitter();
