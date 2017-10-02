@@ -62,7 +62,7 @@ namespace Brasil.Controllers
                     id = conn.Query<int>(@"
                         SET NAMES UTF8;
                         INSERT INTO
-                            questionario(email) VALUES(@email);SELECT LAST_INSERT_ID()", new { email = questionario.email }, dbTransaction).Single();
+                            questionario(email, id_aplicacao) VALUES(@email, 1);SELECT LAST_INSERT_ID()", new { email = questionario.email }, dbTransaction).Single();
 
                     foreach (var resposta in questionario.respostas)
                     {
