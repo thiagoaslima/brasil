@@ -2,7 +2,7 @@
   "name": "brasil",
   "version": "4.0.0",
   "scripts": {
-    "test": "jest",
+    "test": "node --inspect node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch",
     "prestart": "webpack --config webpack.config.vendor.js && webpack --config webpack.config.js",
     "start": "webpack-dev-server --content-base wwwroot/ --history-api-fallback",

@@ -1,25 +1,25 @@
-const arrayMatcher : jasmine.CustomMatcherFactories = {
-    contemPropriedades:  (util: jasmine.MatchersUtil, customEqualityTesters: Array<jasmine.CustomEqualityTester>)=> {
-        
+const arrayMatcher: jasmine.CustomMatcherFactories = {
+    contemPropriedades: (util: jasmine.MatchersUtil, customEqualityTesters: Array<jasmine.CustomEqualityTester>) => {
+
         return {
-            
-            compare: (objeto:any, propriedades:any) : jasmine.CustomMatcherResult=>{
-                var falha = [];
+
+            compare: (objeto: any, propriedades: any): jasmine.CustomMatcherResult => {
+                let falha = [];
                 let result: jasmine.CustomMatcherResult = {
                     pass: false,
                     message: ''
                 };
-                for (var i=0;i<propriedades.length;i++) {
-                    
+                for (let i = 0; i < propriedades.length; i++) {
+
                     if (!objeto.hasOwnProperty(propriedades[i])) {
                         falha.push(propriedades[i]);
-                        //break;
+                        // break;
                     }
                 }
 
-                if (falha.length>0) {
-                    result.message = function() {
-                        return 'O objeto não possue as seguintes propriedades obrigatórias: ['+ falha.join(',')+"]";
+                if (falha.length > 0) {
+                    result.message = function () {
+                        return 'O objeto não possue as seguintes propriedades obrigatórias: [' + falha.join(',') + "]";
                     };
                     return result;
                 }
@@ -27,9 +27,9 @@ const arrayMatcher : jasmine.CustomMatcherFactories = {
                 result.message = 'PASS';
                 return result;
             }
-       }
+        }
     }
 };
 
-export {arrayMatcher};
+export { arrayMatcher };
 
