@@ -205,23 +205,138 @@ export const PANORAMA: {
                 // ----------------------------
 
                 {
+                    pesquisaId: 1100,
+                    indicadorId: 44,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - INPC',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 1419,
+                    indicadorId: 63,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA mensal',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'IPCA x INPC x IPP - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
+                        dados: [{
+                            pesquisaId: 1419,
+                            indicadorId: 2265,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 1100,
+                            indicadorId: 2292,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 5796,
+                            indicadorId: 1394,
+                            categoria: '715[33611]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 1419,
+                    indicadorId: 2265,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA 12 meses',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 1705,
+                    indicadorId: 355,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA15',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 5796,
+                    indicadorId: 1396,
+                    categoria: '715[33611]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços Produtor - IPP',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 3653,
+                    indicadorId: 3139,
+                    categoria: '544[129314]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Indústria - PIM-PF',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 3416,
+                    indicadorId: 564,
+                    categoria: '11046[90668]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Comércio - PMC',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 6442,
+                    indicadorId: 8677,
+                    categoria: '11046[90668]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Serviços - PMS',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+
+                {
                     pesquisaId: 1616,
                     indicadorId: 4092,
                     categoria: '1965[40310]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Pessoas desocupadas',
+                    titulo: 'Desocupação - PNAD Contínua',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
                     pesquisaId: 5932,
-                    indicadorId: 6564,
+                    indicadorId: 6562,
                     categoria: '11255[90707]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'PIB - Variação em relação ao trimestre anterior',
+                    quantidadePeriodos: 12,
+                    periodo: '2º trimestre 2017',
+                    titulo: 'PIB - SCNT',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
@@ -238,59 +353,21 @@ export const PANORAMA: {
                     }
                 },
 
-                {
-                    pesquisaId: 1419,
-                    indicadorId: 63,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'IPCA - Variação mensal',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'IPCA x INPC - Variação acumulada em 12 meses',
-                        tipo: TiposGrafico.linha,
-                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
-                        dados: [{
-                            pesquisaId: 1419,
-                            indicadorId: 2265,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        },
-                        {
-                            pesquisaId: 1100,
-                            indicadorId: 2292,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        }]
-                    }
-                },
 
-                {
-                    pesquisaId: 1100,
-                    indicadorId: 44,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'INPC - Variação mensal',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
-            
 
+
+                // SINAPI COM PROBLEMA
                 // {
-                //     pesquisaId: 5796,
-                //     indicadorId: 1396,
-                //     categoria: '715[33611]',
+                //     pesquisaId: 2296,
+                //     indicadorId: 1196,
+                //     categoria: '',
                 //     servico: 'conjunturais',
-                //     quantidadePeriodos: 12,
-                //     titulo: 'IPP',
+                //     quantidadePeriodos: 1,
+                //     titulo: 'Construção - SINAPI',
                 //     tema: TEMAS.economia.label,
                 //     visualizacao: PanoramaVisualizacao.numerico
                 // },
-
+            
 
 
                 // ----------------------------
