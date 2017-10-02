@@ -13,25 +13,27 @@ namespace Brasil.Controllers
         [StringLength(255)]
         public string email { get; set; }
 
-        public Questionario()
-        {
-            this.respostas = new List<Resposta>();
-        }
+        public int id_aplicacao { get; set; }
 
         public List<Resposta> respostas { get; set; }
 
+        public Questionario()
+        {
+            this.respostas = new List<Resposta>();
+            id_aplicacao = 1;
+        }
+
     }
 
-    public class Resposta {
-
+    public class Resposta
+    {
         [Required]
-        [Range(1, 5)]
+        //[Range(1, 5)]
         public int questao { get; set; }
 
         /**
          * C# não permite compartilhar o mesmo nome da classe e propriedade :(
          **/
-        [Required]
         [StringLength(255)]
         public string value { get; set; }
 
@@ -48,6 +50,7 @@ namespace Brasil.Controllers
         {
             if (!ModelState.IsValid || questionario.respostas.Count != 5)
             {
+                //var errors = ModelState.Values.SelectMany(v => v.Errors);
                 return BadRequest();
             }
 
@@ -62,7 +65,7 @@ namespace Brasil.Controllers
                     id = conn.Query<int>(@"
                         SET NAMES UTF8;
                         INSERT INTO
-                            questionario(email, id_aplicacao) VALUES(@email, 1);SELECT LAST_INSERT_ID()", new { email = questionario.email }, dbTransaction).Single();
+                            questionario(email, id_aplicacao) VALUES(@email, @id_aplicacao);SELECT LAST_INSERT_ID()", new { email = questionario.email, id_aplicacao = questionario.id_aplicacao }, dbTransaction).Single();
 
                     foreach (var resposta in questionario.respostas)
                     {
