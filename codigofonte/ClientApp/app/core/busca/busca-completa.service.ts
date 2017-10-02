@@ -47,6 +47,18 @@ export class BuscaCompletaService {
     private findPlaces(transformedText, places){
         var i;
         var placesFound = [];
+        var textWords = transformedText.split('-');
+        //find by place code
+        for(i = 0; i < textWords.length; i++){
+            if(!isNaN(textWords[i])){
+                var num = parseInt(textWords[i]);
+                for(var j = 0; j < places.length; j++){
+                    if(places[j].codigo == num && placesFound.indexOf(places[j]) < 0){
+                        placesFound.push(places[j]);
+                    }
+                }
+            }
+        }
         //find exactly places
         for(i = 0; i < places.length; i++){
             if(placesFound.indexOf(places[i]) >= 0) continue; //dont push twice
@@ -59,7 +71,6 @@ export class BuscaCompletaService {
         //big matches first
         placesFound.sort(function(a, b){return (b.slug.split('-').length * b.slug.length) - (a.slug.split('-').length * a.slug.length)});
         //suggest a place (pick last 4, 3, 2 and 1 words and try to match to a place)
-        var textWords = transformedText.split('-');
         var words4, words3, words2, words1;
         var sug4 = [], sug3 = [], sug2 = [], sug1 = [];
         if(textWords.length >= 4) words4 = textWords[textWords.length - 4] + '-' + textWords[textWords.length - 3] + '-' + textWords[textWords.length - 2] + '-' + textWords[textWords.length - 1];
