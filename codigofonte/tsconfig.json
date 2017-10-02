@@ -10,6 +10,6 @@
     "lib": [ "es6", "dom" ],
     "types": [ "node", "jest" ]
   },
-  "exclude": [ "bin", "node_modules", "**/barra-gov", "**/api", "*/backend", "*/dist" ],
+  "exclude": [ "bin", "node_modules", "**/barra-gov", "**/api", "*/backend", "*/dist", "**/*.spec.ts" ],
   "atom": { "rewriteTsconfig": false }
 }

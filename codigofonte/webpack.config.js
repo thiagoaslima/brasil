@@ -12,7 +12,7 @@ var sharedConfig = {
     output: {
         filename: '[name].js',
         publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
-    },
+    },  
     module: {
         preLoaders: [
             { test: /\.json$/, loader: 'json'},
