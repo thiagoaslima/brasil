@@ -24,7 +24,7 @@ export class ConjunturaisService {
     getIndicador(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<ConjunturalDTO[]> {
         const params = categoria ? `?categoria=${categoria}` : '';
         const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, 2);
-        return this._request(url).catch(err => this._handleError(err));
+        return this._request(url).map(arr => arr.map(obj => this._removeDotFromPropertyName(obj))).catch(err => this._handleError(err));
     }
 
     getIndicadorAsResultado(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<Resultado[]> {
@@ -32,16 +32,26 @@ export class ConjunturaisService {
             .map(array => this._convertConjunturalIntoResultado(pesquisaId, array));
     }
 
-    private _getProproedadesEspecificasResultado(object: Object): string[]{
+    private _removeDotFromPropertyName(object: ConjunturalDTO): ConjunturalDTO {
+        const o = {} as ConjunturalDTO;
+        for (let property in object) {
+            if (object.hasOwnProperty(property)) {
+                let prop = property.replace('.', '');
+                o[prop] = object[property];
+            }
+        }
+        return o;
+    }
+    private _getPropriedadesEspecificasResultado(object: Object): string[] {
 
         let propriedadesGerais = ['p', 'p_cod', 'ug', 'ug_cod', 'um', 'um_cod', 'v', 'var', 'var_cod'];
         let propriedadesEspecificas = [];
 
-        for (var property in object) {
+        for (let property in object) {
 
             if (object.hasOwnProperty(property)) {
-                
-                if(propriedadesGerais.indexOf(property) == -1){
+
+                if (propriedadesGerais.indexOf(property) === -1) {
 
                     propriedadesEspecificas.push(property);
                 }
@@ -56,11 +66,11 @@ export class ConjunturaisService {
 
         const brasil = this._localidadeService.getRoot();
 
-        let propriedadesEspecificas = this._getProproedadesEspecificasResultado(conjunturais[0]);
+        let propriedadesEspecificas = this._getPropriedadesEspecificasResultado(conjunturais[0]);
         let codigoPropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') >= 0 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
         let nomePropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') == -1 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
 
-        const conjunturaisKeyValue: {[cod: string]: ConjunturalDTO[]} = converterObjArrayEmHash(conjunturais, codigoPropriedadeEspecifica, true);
+        const conjunturaisKeyValue: { [cod: string]: ConjunturalDTO[] } = converterObjArrayEmHash(conjunturais, codigoPropriedadeEspecifica, true);
 
 
         return Object.keys(conjunturaisKeyValue)
@@ -85,12 +95,12 @@ export class ConjunturaisService {
 
                 const indicador = Indicador.criar(indicadorParams);
 
-                const res = itens.reduce( (agg, item) => {
+                const res = itens.reduce((agg, item) => {
                     agg[item.p] = item.v;
                     return agg;
                 }, {});
 
-                const periodos = itens.sort( (a,b) => {
+                const periodos = itens.sort((a, b) => {
                     return a.p_cod > b.p_cod ? -1 : 1;
                 }).map(item => item.p);
 
@@ -131,86 +141,4 @@ export class ConjunturaisService {
         return Observable.throw(error.message ? error : customError);
     }
 
-    // private _ordenarPeriodos(periodos: string[]) {
-    //     const _periodos = periodos.map(periodo => ({
-    //             original: periodo,
-    //             sortable: this._transformPeriodo(periodo)
-    //     }));
-
-    //     return _periodos
-    //         .sort( (a, b) => a.sortable > b.sortable ? -1 : 1)
-    //         .map(obj => obj.original);
-    // }
-
-    // private _transformPeriodo(periodo: string) {
-    //     /**
-    //      * CASE 1: 1º trimestre 2015
-    //      */
-    //     if (/\d{1,2}\D+\d{2,4}/.test(periodo)) {
-    //         return periodo.split(' ').reverse();
-    //     }
-
-    //     /**
-    //      * CASE 2: agosto 2015
-    //      */
-    //     if (/\D+\d{2,4}/.test(periodo)) {
-    //         return periodo.split(' ').reverse().map(val => _substitutirMes(val));
-    //     }
-    // }
 }
-
-// function _substitutirMes(value) {
-//     switch (value) {
-//         case 'jan':
-//         case 'janeiro':
-//             return '01';
-
-
-//         case 'fev':
-//         case 'fevereiro':
-//             return '02';
-
-//         case 'mar':
-//         case 'março':
-//             return '03';
-
-//         case 'abr':
-//         case 'abril':
-//             return '04';
-
-//         case 'mai':
-//         case 'maio':
-//             return '05';
-
-//         case 'jun':
-//         case 'junho':
-//             return '06';
-
-//         case 'jul':
-//         case 'julho':
-//             return '07';
-
-//         case 'ago':
-//         case 'agosto':
-//             return '08';
-
-//         case 'set':
-//         case 'setembro':
-//             return '09';
-
-//         case 'out':
-//         case 'outubro':
-//             return '10';
-
-//         case 'nov':
-//         case 'novembro':
-//             return '11';
-
-//         case 'dez':
-//         case 'dezembro':
-//             return '12';
-
-//         default:
-//             return value;
-//     }
-// }
