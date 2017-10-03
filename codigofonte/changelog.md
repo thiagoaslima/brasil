@@ -1,5 +1,14 @@
 # Change log
 
+
+## [v4.2.7] - 2017-10-03
+### Changed
+ - Permitindo que se responda 1 ou mais questões.
+
+### Fixed
+ - Correção do seletor de localidade no IOS.
+
+
 ## [v4.2.6] - 2017-10-03
 ### Added
 - Inclusão de pirâmide da etária no panorama.
