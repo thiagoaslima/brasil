@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-/// <reference path="./jasmine.custom.matcher.d.ts"/>
+/// <reference path="./jest.custom.matcher.d.ts"/>
 
 import { Http,HttpModule,BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
@@ -9,7 +9,7 @@ import { Localidade } from '../models';
 import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3,RankingService3} from '.';
 
 
-import { arrayMatcher} from './jasmine.custom.matcher';
+import { arrayMatcher} from './jest.custom.matcher';
 
 describe('LocalidadeServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
@@ -28,15 +28,26 @@ describe('LocalidadeServiceE2E', () => {
                 }
             ]
         })
-        jasmine.addMatchers(arrayMatcher);
+        jest.addMatchers(arrayMatcher);
     })
     afterEach(() => {
             //RankingService3.cache.clear();
     })
-
+    
     describe('Testes no serviço getMunicipioByCoordinates', () => {
 
+        describe('validando instância do serviço de indicadores', () => {
+            it('deve ser instanciado',
+                inject([LocalidadeService3],
+                    (localidadeService: LocalidadeService3) => {
+                    
+                        expect(localidadeService).toBeDefined();
+                    })
+            )
+        })
        
+        /*
+        Teste de integração comentado,pois serviço não faz uso da api do cidades.
         it('Testa retorno de localidades relacionado as coordenadas passadas', (done)=>{
             inject([LocalidadeService3], (localidadeService: LocalidadeService3) => {
                 
@@ -57,7 +68,7 @@ describe('LocalidadeServiceE2E', () => {
                 });
                 
             })();
-        });
+        });*/
         
     })
     

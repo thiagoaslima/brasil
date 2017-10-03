@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-/// <reference path="./jasmine.custom.matcher.d.ts"/>
+/// <reference path="./jest.custom.matcher.d.ts"/>
 
 import { Http,HttpModule,BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
@@ -9,7 +9,7 @@ import { Ranking } from '../models';
 import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3,RankingService3} from '.';
 
 
-import { arrayMatcher} from './jasmine.custom.matcher';
+import { arrayMatcher} from './jest.custom.matcher';
 
 describe('RankingServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
@@ -28,7 +28,7 @@ describe('RankingServiceE2E', () => {
                 }
             ]
         })
-        jasmine.addMatchers(arrayMatcher);
+        jest.addMatchers(arrayMatcher);
     })
     afterEach(() => {
             //RankingService3.cache.clear();

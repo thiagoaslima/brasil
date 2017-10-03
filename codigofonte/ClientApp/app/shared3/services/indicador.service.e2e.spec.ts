@@ -9,7 +9,7 @@ import { Indicador, Pesquisa } from '../models';
 import { IndicadorService3, PesquisaService3 } from './';
 import { BasicLRUCache } from '../../cache/model';
 import { ServicoDados as servidor } from '../values';
-import { arrayMatcher} from './jasmine.custom.matcher';
+import { arrayMatcher} from './jest.custom.matcher';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -31,7 +31,7 @@ describe('IndicadorServiceE2E', () => {
         serviceResponse = null;
         connection = null;
 
-        jasmine.addMatchers(arrayMatcher);
+        jest.addMatchers(arrayMatcher);
         TestBed.configureTestingModule({
             imports:[HttpModule],
             providers: [
