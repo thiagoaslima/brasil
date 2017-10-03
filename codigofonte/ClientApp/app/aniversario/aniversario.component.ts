@@ -108,6 +108,17 @@ export class AniversarioComponent implements OnInit {
         return stringValue;
     }
 
+    goToCidade(localidade){
+        
+         location.href = '/brasil/'+localidade.parent.sigla.toLowerCase()+'/'+localidade.slug;
+    }  
+    goToEstado(localidade){
+        
+       location.href = '/brasil/'+localidade.parent.sigla.toLowerCase();
+
+    }  
+    
+
     toggleVisible(){
 
         this.isVisible = !this.isVisible;
