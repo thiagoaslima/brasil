@@ -127,7 +127,7 @@
                     </div>
                     <div class="aniversariantes_municipios">
                         <div class="aniversariantes__municipios__municipio" *ngFor="let aniversariante of aniversariantes[aniversariantesKey]">
-                            {{aniversariante.localidade.nome}}<span>{{aniversariante.localidade.parent.sigla}}</span>| {{aniversariante.localidade.codigo}}
+                           <a class="link-acao" (click)="goToCidade(aniversariante.localidade)"> {{aniversariante.localidade.nome}} </a> <a class="link-acao" (click)="goToEstado(aniversariante.localidade)"> <span>{{aniversariante.localidade.parent.sigla}}</span></a>| {{aniversariante.localidade.codigo}}
                         </div>
                     </div>
                 </div>

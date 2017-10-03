@@ -47,6 +47,9 @@
     width: 100vw;
     height: 100vh;
 }
+.link-acao{
+     cursor: pointer;
+}
 
 .bg{
     width: 100vw;

@@ -33,14 +33,12 @@ describe('ConjunturaisServiceE2E', () => {
 
             (inject([ConjunturaisService],
                 (conjunturaisService: ConjunturaisService) => {
-                    debugger;
 
                     conjunturaisService
                         .getIndicadorAsResultado(5796, 1396, 1, '715[33611]')
                         .subscribe(response => {
 
                             try {
-                                console.log(2, response);
                                 expect(response).toBeDefined();
                                 expect(typeof response).toBe('object');
                             } catch (err) {
