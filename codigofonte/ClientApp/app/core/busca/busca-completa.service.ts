@@ -203,7 +203,7 @@ export class BuscaCompletaService {
         if(places.length == 0 && links[0]["points"] > 0){
             result.push({
                 type: "mensagem",
-                name: "De onde?",
+                name: "De onde? " + this.placeDescription(links[0]),
             });
         }
         //nothing found
@@ -214,6 +214,30 @@ export class BuscaCompletaService {
             });
         }
         return result;
+    }
+
+    private placeDescription(link){
+        var comma = false;
+        var text = "";
+        if(link.target.length < 3){
+            text = "Pesquisa exclusiva para ";
+            if(link.target.indexOf("pais") >= 0){
+                text += "país";
+                comma = true;
+            }
+            if(link.target.indexOf("estado") >= 0){
+                if(comma) text += " e ";
+                text += "estados";
+                comma = true;
+            }
+            if(link.target.indexOf("cidade") >= 0){
+                if(comma) text += " e ";
+                text += "cidades";
+                comma = true;
+            }
+            text += '.';
+        }
+        return text;
     }
 
 }
