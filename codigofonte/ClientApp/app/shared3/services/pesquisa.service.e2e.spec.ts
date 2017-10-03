@@ -1,4 +1,5 @@
 /// <reference types="jest" />
+/// <reference path="jest.custom.matcher.d.ts"/>
 import { Http,HttpModule, BaseRequestOptions, Response, ResponseOptions, } from '@angular/http';
 import { async,fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
@@ -10,12 +11,13 @@ import { Pesquisa } from '../models';
 import { niveisTerritoriais } from '../values';
 
 import { PesquisaService3 } from './pesquisa.service';
+import { arrayMatcher} from './jest.custom.matcher';
 
 describe('PesquisaServiceE2E', () => {
     let connection, mockResponse, serviceResponse;
     let mockBackend: MockBackend;
     let pesquisaService: PesquisaService3;
-    
+    let propriedadesPesquisa = ['id','nome','descricao','periodos','contextos'];
 
     beforeEach(() => {
         
@@ -33,6 +35,7 @@ describe('PesquisaServiceE2E', () => {
             ]
             
         })
+        jest.addMatchers(arrayMatcher);
 
     });
 
@@ -55,7 +58,8 @@ describe('PesquisaServiceE2E', () => {
 
                                 let pesquisa = pesquisas[i];
                                 expect(pesquisa instanceof Pesquisa).toBeTruthy();
-                        }
+                                expect(pesquisa).contemPropriedades(propriedadesPesquisa);
+                        } 
                        
 
                     }catch(e){
@@ -103,7 +107,9 @@ describe('PesquisaServiceE2E', () => {
 
                              let pesquisa = pesquisas[i];
                              expect(pesquisa instanceof Pesquisa).toBeTruthy();
+                             expect(pesquisa).contemPropriedades(propriedadesPesquisa);
                              expect(pesquisa.id).toBe(idsPesquisa[i]);
+                             
                          }
 
                     }catch(e){
@@ -150,6 +156,8 @@ describe('PesquisaServiceE2E', () => {
                          for(let i=0;i<pesquisas.length;i++){
                               
                               let pesquisa = pesquisas[0];
+                              expect(pesquisa instanceof Pesquisa).toBeTruthy();
+                              expect(pesquisa).contemPropriedades(propriedadesPesquisa);
                               //expect(pesquisa.id).toBe(idsPesquisa[i]);
                          }
                         
@@ -213,7 +221,8 @@ describe('PesquisaServiceE2E', () => {
 
                             
                             try{
-                                 expect(pesquisa instanceof Pesquisa).toBeTruthy()
+                                 expect(pesquisa instanceof Pesquisa).toBeTruthy();
+                                 expect(pesquisa).contemPropriedades(propriedadesPesquisa);
                                  expect(pesquisa.id).toBe(idPesquisa);
                             }catch(e){
                                 fail(e);

@@ -38,13 +38,26 @@ export class GeolocationDirective {
      */
     @HostListener('click') getGeoLocation() {
 
+        let options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        };
+
         if (isBrowser) {
             this.isLoading = true;
             this.onLoading.emit(this.isLoading);
 
-            navigator.geolocation.getCurrentPosition(position => {
-                return this.getLocalidade(position);
-            });
+            navigator.geolocation.getCurrentPosition(
+                (position => {
+                    return this.getLocalidade(position);
+                }),
+                (err => {
+                    console.error('ERROR(' + err.code + '): ' + err.message);
+                }),
+                options
+            );
+            
         }
     }
 
