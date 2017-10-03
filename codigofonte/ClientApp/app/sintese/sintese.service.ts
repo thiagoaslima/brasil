@@ -194,7 +194,7 @@ export class SinteseService {
     }
 
     public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA, codigoLocalidadeB, codigoLocalidadeC, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
-
+        
         return Observable.zip(
             this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo),
             this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA, escopo),
@@ -202,7 +202,7 @@ export class SinteseService {
             this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC, escopo)
             )
             .map(([nomes, dadosA, dadosB, dadosC]) => {
-
+                
                 this.atribuirValorIndicadoresLocalidades('children', nomes, dadosA, dadosB, dadosC);
 
                 return nomes;
