@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-/// <reference path="./jasmine.custom.matcher.d.ts"/>
+/// <reference path="jest.custom.matcher.d.ts"/>
 import { Http,HttpModule, BaseRequestOptions, Response, ResponseOptions, } from '@angular/http';
 import { async,fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
@@ -11,7 +11,7 @@ import { Pesquisa } from '../models';
 import { niveisTerritoriais } from '../values';
 
 import { PesquisaService3 } from './pesquisa.service';
-import { arrayMatcher} from './jasmine.custom.matcher';
+import { arrayMatcher} from './jest.custom.matcher';
 
 describe('PesquisaServiceE2E', () => {
     let connection, mockResponse, serviceResponse;
@@ -35,7 +35,7 @@ describe('PesquisaServiceE2E', () => {
             ]
             
         })
-        jasmine.addMatchers(arrayMatcher);
+        jest.addMatchers(arrayMatcher);
 
     });
 
@@ -59,7 +59,7 @@ describe('PesquisaServiceE2E', () => {
                                 let pesquisa = pesquisas[i];
                                 expect(pesquisa instanceof Pesquisa).toBeTruthy();
                                 expect(pesquisa).contemPropriedades(propriedadesPesquisa);
-                        }
+                        } 
                        
 
                     }catch(e){
