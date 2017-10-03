@@ -88,116 +88,116 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.numerico,
                 },
 
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47097,
-                    periodo: '2015',
-                    titulo: 'Domicílios com iluminação elétrica',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     pesquisaId: 44,
+                //     indicadorId: 47097,
+                //     periodo: '2015',
+                //     titulo: 'Domicílios com iluminação elétrica',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47090,
-                    periodo: '2015',
-                    titulo: 'Domicílios com rede de coleta de esgoto',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     pesquisaId: 44,
+                //     indicadorId: 47090,
+                //     periodo: '2015',
+                //     titulo: 'Domicílios com rede de coleta de esgoto',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47108,
-                    periodo: '2015',
-                    titulo: 'Domicílios com microcomputador',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Bens duráveis existentes no domicílio',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 44,
-                            indicadorId: 47103
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47106
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47107
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47108
-                        }]
-                    }
-                },
+                // {
+                //     pesquisaId: 44,
+                //     indicadorId: 47108,
+                //     periodo: '2015',
+                //     titulo: 'Domicílios com microcomputador',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Bens duráveis existentes no domicílio',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 44,
+                //             indicadorId: 47103
+                //         },
+                //         {
+                //             pesquisaId: 44,
+                //             indicadorId: 47106
+                //         },
+                //         {
+                //             pesquisaId: 44,
+                //             indicadorId: 47107
+                //         },
+                //         {
+                //             pesquisaId: 44,
+                //             indicadorId: 47108
+                //         }]
+                //     }
+                // },
 
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47125,
-                    periodo: '2015',
-                    titulo: 'Domicílios com acesso à Internet',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Tipo de conexão à Internet',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 44,
-                            indicadorId: 47260
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47261
-                        }]
-                    }
-                },
+                // {
+                //     pesquisaId: 44,
+                //     indicadorId: 47125,
+                //     periodo: '2015',
+                //     titulo: 'Domicílios com acesso à Internet',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Tipo de conexão à Internet',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 44,
+                //             indicadorId: 47260
+                //         },
+                //         {
+                //             pesquisaId: 44,
+                //             indicadorId: 47261
+                //         }]
+                //     }
+                // },
 
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47266,
-                    periodo: '2015',
-                    titulo: 'Posse de telefone móvel celular',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     pesquisaId: 44,
+                //     indicadorId: 47266,
+                //     periodo: '2015',
+                //     titulo: 'Posse de telefone móvel celular',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
-                {
-                    pesquisaId: 44,
-                    indicadorId: 47107,
-                    periodo: '2015',
-                    titulo: 'Domicílios com televisão',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Modalidade de recepção de sinal de televisão',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 44,
-                            indicadorId: 47251
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47252
-                        },
-                        {
-                            pesquisaId: 44,
-                            indicadorId: 47253
-                        }]
-                    }
-                },
+                // {
+                //     pesquisaId: 44,
+                //     indicadorId: 47107,
+                //     periodo: '2015',
+                //     titulo: 'Domicílios com televisão',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Modalidade de recepção de sinal de televisão',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 44,
+                //             indicadorId: 47251
+                //         },
+                //         {
+                //             pesquisaId: 44,
+                //             indicadorId: 47252
+                //         },
+                //         {
+                //             pesquisaId: 44,
+                //             indicadorId: 47253
+                //         }]
+                //     }
+                // },
 
-                {
-                    pesquisaId: 46,
-                    indicadorId: 60414,
-                    periodo: '2015',
-                    titulo: 'Prática de atividade física',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     pesquisaId: 46,
+                //     indicadorId: 60414,
+                //     periodo: '2015',
+                //     titulo: 'Prática de atividade física',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
 
                 // ----------------------------
@@ -205,23 +205,138 @@ export const PANORAMA: {
                 // ----------------------------
 
                 {
+                    pesquisaId: 1100,
+                    indicadorId: 44,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - INPC',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 1419,
+                    indicadorId: 63,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA mensal',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'IPCA x INPC x IPP - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
+                        dados: [{
+                            pesquisaId: 1419,
+                            indicadorId: 2265,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 1100,
+                            indicadorId: 2292,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        },
+                        {
+                            pesquisaId: 5796,
+                            indicadorId: 1394,
+                            categoria: '715[33611]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 12,
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 1419,
+                    indicadorId: 2265,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA 12 meses',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 1705,
+                    indicadorId: 355,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA15',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 5796,
+                    indicadorId: 1396,
+                    categoria: '715[33611]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços Produtor - IPP',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 3653,
+                    indicadorId: 3139,
+                    categoria: '544[129314]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Indústria - PIM-PF',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 3416,
+                    indicadorId: 564,
+                    categoria: '11046[90668]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Comércio - PMC',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 6442,
+                    indicadorId: 8677,
+                    categoria: '11046[90668]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Serviços - PMS',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+
+                {
                     pesquisaId: 1616,
                     indicadorId: 4092,
                     categoria: '1965[40310]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Pessoas desocupadas',
+                    titulo: 'Desocupação - PNAD Contínua',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
                     pesquisaId: 5932,
-                    indicadorId: 6564,
+                    indicadorId: 6562,
                     categoria: '11255[90707]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'PIB - Variação em relação ao trimestre anterior',
+                    quantidadePeriodos: 12,
+                    periodo: '2º trimestre 2017',
+                    titulo: 'PIB - SCNT',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
@@ -238,59 +353,21 @@ export const PANORAMA: {
                     }
                 },
 
-                {
-                    pesquisaId: 1419,
-                    indicadorId: 63,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'IPCA - Variação mensal',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'IPCA x INPC - Variação acumulada em 12 meses',
-                        tipo: TiposGrafico.linha,
-                        link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
-                        dados: [{
-                            pesquisaId: 1419,
-                            indicadorId: 2265,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        },
-                        {
-                            pesquisaId: 1100,
-                            indicadorId: 2292,
-                            categoria: '315[7169]',
-                            servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        }]
-                    }
-                },
 
-                {
-                    pesquisaId: 1100,
-                    indicadorId: 44,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'INPC - Variação mensal',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
-            
 
+
+                // SINAPI COM PROBLEMA
                 // {
-                //     pesquisaId: 5796,
-                //     indicadorId: 1396,
-                //     categoria: '715[33611]',
+                //     pesquisaId: 2296,
+                //     indicadorId: 1196,
+                //     categoria: '',
                 //     servico: 'conjunturais',
-                //     quantidadePeriodos: 12,
-                //     titulo: 'IPP',
+                //     quantidadePeriodos: 1,
+                //     titulo: 'Construção - SINAPI',
                 //     tema: TEMAS.economia.label,
                 //     visualizacao: PanoramaVisualizacao.numerico
                 // },
-
+            
 
 
                 // ----------------------------
@@ -302,144 +379,144 @@ export const PANORAMA: {
                 // ----------------------------
                 // INDÚSTRIA
                 // ----------------------------
-                {
-                    indicadorId: 49634,
-                    pesquisaId: 51,
-                    periodo: '2015',
-                    titulo: 'Número de unidades locais',
-                    tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Número de unidades locais',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 51,
-                            indicadorId: 49634
-                        }]
-                    }
-                },
-                {
-                    indicadorId: 49635,
-                    pesquisaId: 51,
-                    periodo: '2015',
-                    titulo: 'Pessoal ocupado em 31.12',
-                    tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     indicadorId: 49634,
+                //     pesquisaId: 51,
+                //     periodo: '2015',
+                //     titulo: 'Número de unidades locais',
+                //     tema: TEMAS.industria.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Número de unidades locais',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 51,
+                //             indicadorId: 49634
+                //         }]
+                //     }
+                // },
+                // {
+                //     indicadorId: 49635,
+                //     pesquisaId: 51,
+                //     periodo: '2015',
+                //     titulo: 'Pessoal ocupado em 31.12',
+                //     tema: TEMAS.industria.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
 
                 // ----------------------------
                 // COMÉRCIO
                 // ----------------------------
-                {
-                    indicadorId: 49243,
-                    pesquisaId: 50,
-                    periodo: '2015',
-                    titulo: 'Número de unidades locais com receita de revenda',
-                    tema: TEMAS.comercio.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Número de unidades locais com receita de revenda',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 50,
-                            indicadorId: 49243
-                        }]
-                    }
-                },
-                {
-                    indicadorId: 49244,
-                    pesquisaId: 50,
-                    periodo: '2015',
-                    titulo: 'Pessoal ocupado em 31/12 em empresas comerciais',
-                    tema: TEMAS.comercio.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     indicadorId: 49243,
+                //     pesquisaId: 50,
+                //     periodo: '2015',
+                //     titulo: 'Número de unidades locais com receita de revenda',
+                //     tema: TEMAS.comercio.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Número de unidades locais com receita de revenda',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 50,
+                //             indicadorId: 49243
+                //         }]
+                //     }
+                // },
+                // {
+                //     indicadorId: 49244,
+                //     pesquisaId: 50,
+                //     periodo: '2015',
+                //     titulo: 'Pessoal ocupado em 31/12 em empresas comerciais',
+                //     tema: TEMAS.comercio.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
 
                 // ----------------------------
                 // SERVIÇOS
                 // ----------------------------
-                {
-                    indicadorId: 49641,
-                    pesquisaId: 52,
-                    periodo: '2014',
-                    titulo: 'Número de empresas',
-                    tema: TEMAS.servicos.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Número de empresas',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 52,
-                            indicadorId: 49641
-                        }]
-                    }
-                },
-                {
-                    indicadorId: 49642,
-                    pesquisaId: 52,
-                    periodo: '2014',
-                    titulo: 'Pessoal ocupado em 31/12',
-                    tema: TEMAS.servicos.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     indicadorId: 49641,
+                //     pesquisaId: 52,
+                //     periodo: '2014',
+                //     titulo: 'Número de empresas',
+                //     tema: TEMAS.servicos.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Número de empresas',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 52,
+                //             indicadorId: 49641
+                //         }]
+                //     }
+                // },
+                // {
+                //     indicadorId: 49642,
+                //     pesquisaId: 52,
+                //     periodo: '2014',
+                //     titulo: 'Pessoal ocupado em 31/12',
+                //     tema: TEMAS.servicos.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
 
 
                 // ----------------------------
                 // SAÚDE
                 // ----------------------------
-                {
-                    pesquisaId: 10054,
-                    indicadorId: 59647,
-                    periodo: '2016',
-                    titulo: 'Esperança de vida ao nascer',
-                    tema: TEMAS.saude.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Esperança de vida ao nascer',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10054,
-                            indicadorId: 59647
-                        }]
-                    }
-                },
+                // {
+                //     pesquisaId: 10054,
+                //     indicadorId: 59647,
+                //     periodo: '2016',
+                //     titulo: 'Esperança de vida ao nascer',
+                //     tema: TEMAS.saude.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Esperança de vida ao nascer',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 10054,
+                //             indicadorId: 59647
+                //         }]
+                //     }
+                // },
 
-                {
-                    indicadorId: 30279,
-                    pesquisaId: 39,
-                    periodo: '2014',
-                    titulo: 'Taxa de mortalidade infantil',
-                    tema: TEMAS.saude.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Taxa de mortalidade infantil',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 39,
-                            indicadorId: 30279
-                        }]
-                    }
-                },
+                // {
+                //     indicadorId: 30279,
+                //     pesquisaId: 39,
+                //     periodo: '2014',
+                //     titulo: 'Taxa de mortalidade infantil',
+                //     tema: TEMAS.saude.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Taxa de mortalidade infantil',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 39,
+                //             indicadorId: 30279
+                //         }]
+                //     }
+                // },
 
-                {
-                    pesquisaId: 10055,
-                    indicadorId: 59745,
-                    periodo: '2014',
-                    titulo: 'Taxa de fecundidade total',
-                    tema: TEMAS.saude.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Taxa de fecundidade total',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10055,
-                            indicadorId: 59745
-                        }]
-                    }
-                }
+                // {
+                //     pesquisaId: 10055,
+                //     indicadorId: 59745,
+                //     periodo: '2014',
+                //     titulo: 'Taxa de fecundidade total',
+                //     tema: TEMAS.saude.label,
+                //     visualizacao: PanoramaVisualizacao.grafico,
+                //     grafico: {
+                //         titulo: 'Taxa de fecundidade total',
+                //         tipo: TiposGrafico.linha,
+                //         dados: [{
+                //             pesquisaId: 10055,
+                //             indicadorId: 59745
+                //         }]
+                //     }
+                // }
 
             ]
         },
