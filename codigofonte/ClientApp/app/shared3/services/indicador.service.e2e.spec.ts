@@ -82,7 +82,6 @@ describe('IndicadorServiceE2E', () => {
 
                      indicadorService.getIndicadoresById([5905]).subscribe(indicadores =>{
                         
-                        console.log(indicadores);
                         try {
                             
 

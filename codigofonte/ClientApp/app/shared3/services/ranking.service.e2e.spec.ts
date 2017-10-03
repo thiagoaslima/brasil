@@ -5,14 +5,15 @@ import { Http,HttpModule,BaseRequestOptions, Response, ResponseOptions } from '@
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
-import { Resultado } from '../models';
+import { Ranking } from '../models';
 import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3,RankingService3} from '.';
+
 
 import { arrayMatcher} from './jasmine.custom.matcher';
 
 describe('RankingServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
-
+    let propriedadesRanking = ['indicadorId','periodo','contexto','unidade'];
     beforeEach(() => {
         connection = null;
         serviceResponse = null;
@@ -36,20 +37,25 @@ describe('RankingServiceE2E', () => {
     describe('Testes no serviço getRankingsIndicador', () => {
 
        
-        it('Testa retorno de rakings relacionado ao indicador passado por parâmetro', (done)=>{
+        it('Testa retorno de rankings relacionado ao indicador passado por parâmetro', (done)=>{
             inject([RankingService3], (rankingService: RankingService3) => {
                 
                 let idsIndicadores = [ { 
-                                            "indicadorId":5905,
-                                            "periodo":"0"
+                                            "indicadorId":25207,
+                                            "periodo":"2000"
                                         }
                                       ];
                 let localidade = 330455;
-                rankingService.getRankingsIndicador(idsIndicadores,null,localidade).subscribe(resultados => {
-    
+                let contexto = ["BR"];
+                rankingService.getRankingsIndicador(idsIndicadores,contexto,localidade).subscribe(rankings => {
+                   
                     try{
-                        expect(resultados).toHaveLength(1);
-                        expect(resultados[0] instanceof Resultado).toBeTruthy();
+                        for(let i=0;i<rankings.length;i++){
+                            let ranking = rankings[i];
+                            expect(ranking instanceof Ranking).toBeTruthy();
+                            expect(ranking).contemPropriedades(propriedadesRanking);
+                        }
+                        
                     }catch(e){
                         fail(e);
                     }
@@ -61,52 +67,31 @@ describe('RankingServiceE2E', () => {
                 
             })();
         });
-
-        
-        it('retorna resultados de um array de indicadores e 1 código de localidade passados por parâmetro', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-
-                let idsIndicadores = [5905, 5906, 28135, 28136];
+        it('Testa retorno de rankings relacionado a mais de um indicador passado por parâmetro', (done)=>{
+            inject([RankingService3], (rankingService: RankingService3) => {
+                
+                let idsIndicadores = [ { 
+                                            "indicadorId":25207,
+                                            "periodo":"2010"
+                                        },
+                                        { 
+                                            "indicadorId":25206,
+                                            "periodo":"2010"
+                                        },
+                                        
+                                      ];
                 let localidade = 330455;
-                resultadoService.getResultados(idsIndicadores, localidade).subscribe(resultados => {
-                    serviceResponse = resultados;
+                let contexto = ["BR"];
+                rankingService.getRankingsIndicador(idsIndicadores,contexto,localidade).subscribe(rankings => {
+                   
                     try{
-                        expect(resultados).toHaveLength(4);
-                        for(let i=0;i<resultados.length;i++){
+                        for(let i=0;i<rankings.length;i++){
 
-                                let resultado = resultados[i];
-                                expect(resultado instanceof Resultado).toBeTruthy();
-
-                                expect(resultado.indicadorId).toBe(idsIndicadores[i]);
-                                expect(resultado.codigoLocalidade).toBe(localidade);
+                            let ranking = rankings[i];
+                            expect(ranking instanceof Ranking).toBeTruthy();
+                            expect(ranking).contemPropriedades(propriedadesRanking);
                         }
-                
-                    }catch(e){
-                        fail(e);
-                    }
-                    done();
-           
-                },err=>{
-                    fail(err);
-                    done();
-                });
-               
-            })();
-        });
-
-        it('retorna resultados para cada para  arrays de  indicadores e localidades', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-                
-                let idsIndicadores = [5905, 5906, 28135, 28136];
-                let localidade =  [330010,330455];
-                resultadoService.getResultados(idsIndicadores, localidade).subscribe(resultados => {
-                    serviceResponse = resultados;
-                    try{
-                        for(let i=0;i<resultados.length;i++){
-
-                                let resultado = resultados[i];
-                                expect(resultado instanceof Resultado).toBeTruthy();  
-                        }
+                        
                     }catch(e){
                         fail(e);
                     }
@@ -117,143 +102,7 @@ describe('RankingServiceE2E', () => {
                 });
                 
             })();
-        });
+        });  
     })
-
-    describe('Testes no serviço getResultadosCartograma', () => {
-
-        it('retorna resultados de 1 indicador e 1 código de localidade de 1 dígito passados por parâmetro', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-                
-                let idIndicador = 5905;
-                let localidade = 1;//330455;
-                resultadoService.getResultadosCartograma(idIndicador,localidade).subscribe(resultados => {
     
-                    try{
-                        for(var ind in resultados){
-                            
-                            expect(resultados[ind] instanceof Resultado).toBeTruthy();
-                            expect(resultados[ind].indicadorId).toBe(idIndicador)
-                        }
-                      
-                      
-                    }catch(e){
-                        fail(e);
-                    }
-                    done();
-                },err=>{
-                    fail(err);
-                    done();
-                });
-                
-            })();
-        });
-        it('retorna resultados de 1 indicador e 1 código de localidade de 2 dígitos passados por parâmetro', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-                
-                let idIndicador = 5905;
-                let localidade = 12;//330455;
-                resultadoService.getResultadosCartograma(idIndicador,localidade).subscribe(resultados => {
-    
-                    try{
-                        for(var ind in resultados){
-                            
-                            expect(resultados[ind] instanceof Resultado).toBeTruthy();
-                            expect(resultados[ind].indicadorId).toBe(idIndicador);
-                        }
-                      
-                    }catch(e){
-                        fail(e);
-                    }
-                    done();
-                },err=>{
-                    fail(err);
-                    done();
-                });
-                
-            })();
-        });
-    
-    })
-    describe('Testes no serviço getResultadosCompletos', () => {
-
-        it('retorna resultados de 1 indicador e 1 código de localidade passados por parâmetro', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-                
-                let idsIndicadores = 5905;
-                let localidade = 330455;
-                resultadoService.getResultadosCompletos(idsIndicadores,localidade).subscribe(resultados => {
-    
-                    try{
-                        expect(resultados).toHaveLength(1);
-                        expect(resultados[0] instanceof Resultado).toBeTruthy();
-                    }catch(e){
-                        fail(e);
-                    }
-                    done();
-                },err=>{
-                    fail(err);
-                    done();
-                });
-                
-            })();
-        });
-
-        
-        it('retorna resultados de um array de indicadores e 1 código de localidade passados por parâmetro', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-
-                let idsIndicadores = [5905, 5906, 28135, 28136];
-                let localidade = 330455;
-                resultadoService.getResultadosCompletos(idsIndicadores, localidade).subscribe(resultados => {
-                    serviceResponse = resultados;
-                    try{
-                        expect(resultados).toHaveLength(4);
-                        for(let i=0;i<resultados.length;i++){
-
-                                let resultado = resultados[i];
-                                expect(resultado instanceof Resultado).toBeTruthy();
-
-                                expect(resultado.indicadorId).toBe(idsIndicadores[i]);
-                                expect(resultado.codigoLocalidade).toBe(localidade);
-                        }
-                
-                    }catch(e){
-                        fail(e);
-                    }
-                    done();
-           
-                },err=>{
-                    fail(err);
-                    done();
-                });
-               
-            })();
-        });
-
-        it('retorna resultados para cada para  arrays de  indicadores e localidades', (done)=>{
-            inject([ResultadoService3], (resultadoService: ResultadoService3) => {
-                
-                let idsIndicadores = [5905, 5906, 28135, 28136];
-                let localidade =  [330010,330455];
-                resultadoService.getResultadosCompletos(idsIndicadores, localidade).subscribe(resultados => {
-                    serviceResponse = resultados;
-                    try{
-                        for(let i=0;i<resultados.length;i++){
-
-                                let resultado = resultados[i];
-                                expect(resultado instanceof Resultado).toBeTruthy();  
-                        }
-                    }catch(e){
-                        fail(e);
-                    }
-                    done();
-                },err=>{
-                    fail(err);
-                    done();
-                });
-                
-            })();
-        });
-    })
 })

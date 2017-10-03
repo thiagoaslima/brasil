@@ -12,7 +12,7 @@ import { arrayMatcher} from './jasmine.custom.matcher';
 
 describe('ResultadoServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
-
+    let propriedadesResultado = ['indicadorId','codigoLocalidade','periodos','valores'];
     beforeEach(() => {
         connection = null;
         serviceResponse = null;
@@ -60,7 +60,9 @@ describe('ResultadoServiceE2E', () => {
     
                     try{
                         expect(resultados).toHaveLength(1);
+                        
                         expect(resultados[0] instanceof Resultado).toBeTruthy();
+                        expect(resultados[0]).contemPropriedades(propriedadesResultado);
                     }catch(e){
                         fail(e);
                     }
@@ -87,7 +89,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 let resultado = resultados[i];
                                 expect(resultado instanceof Resultado).toBeTruthy();
-
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                                 expect(resultado.indicadorId).toBe(idsIndicadores[i]);
                                 expect(resultado.codigoLocalidade).toBe(localidade);
                         }
@@ -117,6 +119,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 let resultado = resultados[i];
                                 expect(resultado instanceof Resultado).toBeTruthy();  
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                         }
                     }catch(e){
                         fail(e);
@@ -145,7 +148,8 @@ describe('ResultadoServiceE2E', () => {
                         for(var ind in resultados){
                             
                             expect(resultados[ind] instanceof Resultado).toBeTruthy();
-                            expect(resultados[ind].indicadorId).toBe(idIndicador)
+                            expect(resultados[ind]).contemPropriedades(propriedadesResultado);
+                            expect(resultados[ind].indicadorId).toBe(idIndicador);
                         }
                       
                       
@@ -171,6 +175,7 @@ describe('ResultadoServiceE2E', () => {
                         for(var ind in resultados){
                             
                             expect(resultados[ind] instanceof Resultado).toBeTruthy();
+                            expect(resultados[ind]).contemPropriedades(propriedadesResultado);
                             expect(resultados[ind].indicadorId).toBe(idIndicador);
                         }
                       
@@ -199,6 +204,7 @@ describe('ResultadoServiceE2E', () => {
                     try{
                         expect(resultados).toHaveLength(1);
                         expect(resultados[0] instanceof Resultado).toBeTruthy();
+                        expect(resultados[0]).contemPropriedades(propriedadesResultado);
                     }catch(e){
                         fail(e);
                     }
@@ -228,6 +234,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 expect(resultado.indicadorId).toBe(idsIndicadores[i]);
                                 expect(resultado.codigoLocalidade).toBe(localidade);
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                         }
                 
                     }catch(e){
@@ -255,6 +262,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 let resultado = resultados[i];
                                 expect(resultado instanceof Resultado).toBeTruthy();  
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                         }
                     }catch(e){
                         fail(e);
