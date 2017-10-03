@@ -212,7 +212,7 @@ export class Panorama2Service {
                         item.pesquisaId, item.indicadorId, item.quantidadePeriodos, item.categoria
                     ).take(1).map(json => {
                         const obj = json[0];
-debugger;
+
                         const periodo = item.periodo || obj.periodoValidoMaisRecente || '-';
                         const titulo = item.titulo || obj.indicador.nome;
                         const valor = obj.getValor(periodo);
