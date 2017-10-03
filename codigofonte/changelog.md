@@ -1,13 +1,29 @@
 # Change log
 
-## [v4.3.0.RC1] - 2017-09-25
+
+## [v4.2.7] - 2017-10-03
+### Changed
+ - Permitindo que se responda 1 ou mais questões.
+
+### Fixed
+ - Correção do seletor de localidade no IOS.
+
+
+## [v4.2.6] - 2017-10-03
 ### Added
-- Panorama Brasil.
-- Pesquisas do Brasil com tabelas, série histórica e ranking.
-- Versão do panorama para impressão
+- Inclusão de pirâmide da etária no panorama.
+- Projeção da população para as UFs no panorama.
+- Versão do panorama para impressão.
+- Donwload do svg e do csv dos cartogramas.
+- Testes automatizados.
 
 ### Changed
  - Melhoria na identificação de palavras chave na busca completa.
+ - Inclusão de pirâmide da etária no panorama.
+ - Melhoria na busca.
+ - Busca pelo código da localidade.
+ - Melhoria em Aniversários.
+ - Apontamento para novo servidor Redis.
 
 ### Fixed
  - Correção do bug dos gráficos, quando os dados vinham com períodos diferentes.

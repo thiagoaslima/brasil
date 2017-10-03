@@ -48,7 +48,8 @@ namespace Brasil.Controllers
         [HttpPost]
         public async Task<IActionResult> Index([FromBody] Questionario questionario)
         {
-            if (!ModelState.IsValid || questionario.respostas.Count != 5)
+            //if (!ModelState.IsValid || questionario.respostas.Count != 5)
+            if (!ModelState.IsValid || questionario.respostas.Count <= 0)
             {
                 //var errors = ModelState.Values.SelectMany(v => v.Errors);
                 return BadRequest();

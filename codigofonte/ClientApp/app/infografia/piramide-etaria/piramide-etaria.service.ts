@@ -169,7 +169,7 @@ export class PiramideEtariaService{
 
 
         dadosPesquisa$ = this._http.get(
-            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}`
         )
         .map((res => res.json()))
 
@@ -195,7 +195,7 @@ export class PiramideEtariaService{
         let nomesPesquisa$;
 
         nomesPesquisa$ = this._http.get(
-            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores`
         )
         .map((res => res.json()))
   
@@ -257,7 +257,7 @@ export class PiramideEtariaService{
     public getPeriodosDisponiveisPesquisa(codpes: string) {
 
         return this._http.get(
-            `http://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}`
         )
             .map((res) => res.json())
             .map((pesquisa) => {

@@ -24,7 +24,11 @@ export class RouterParamsService {
             .do((params) => {
 
                 if (isBrowser && params && params.params && params.params.uf && params.params.municipio) {
-                    localStorage.setItem('lastParams', JSON.stringify(params));
+                    try {
+                        localStorage.setItem('lastParams', JSON.stringify(params));
+                    } catch(err) {
+                        // ignore
+                    }
                 }
 
             });
