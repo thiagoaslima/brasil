@@ -27,7 +27,7 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class NaoAcheiComponent implements OnInit {
     
     aberto = false;
-    esconde = true; //setar para false assim que tiver que entrar em produção (quando todos os serviços estiverem implementados).
+    esconde = true;
     enviado = false;
     url = '';
 
@@ -62,11 +62,11 @@ export class NaoAcheiComponent implements OnInit {
         this.aberto = false;
     }
 
-    clique(){
-        if(this.enviado){
-            this.esconde = true;
-        }else{
-            this.aberto = !this.aberto;
-        }
+    esconder(){
+        this.esconde = true;
+    }
+
+    abreFecha(){
+        this.aberto = !this.aberto;
     }
 }

@@ -27,8 +27,10 @@
                     <div class="grupo__item">
                         <div class="grupo__item__posicao">{{localidade.posicao}}&ordm;</div>
                         <div class="grupo__item__nome" [class.grupo__item__nome--selecionado]="isSelecionado(localidade.localidade.codigo)">
-                            {{localidade.localidade.nome}}
-                            <span class="grupo__item__sigla" *ngIf="contexto.contexto == 'br' && localidade.localidade.parent.sigla"> - {{localidade.localidade?.parent.sigla}}</span>
+                            <a [routerLink]="localidade.localidade.link">
+                                {{localidade.localidade.nome}}
+                                <span class="grupo__item__sigla" *ngIf="contexto.contexto == 'br' && localidade.localidade.parent.sigla"> - {{localidade.localidade?.parent.sigla}}</span>
+                            </a>
                         </div>
                         <div style="font-size:0.7em; margin-bottom: -4px; margin-top: 2px;">{{getRotulo(localidade.valor)}}</div>
                         <div class="grupo__item__barra" [title]="getRotulo(localidade.valor, localidade.unidadeMedida, localidade.fatorMultiplicativo)">
