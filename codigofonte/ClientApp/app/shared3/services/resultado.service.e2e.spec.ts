@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-/// <reference path="./jasmine.custom.matcher.d.ts"/>
+/// <reference path="./jest.custom.matcher.d.ts"/>
 
 import { Http,HttpModule,BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
@@ -8,11 +8,11 @@ import { MockBackend } from '@angular/http/testing';
 import { Resultado } from '../models';
 import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3 } from '.';
 
-import { arrayMatcher} from './jasmine.custom.matcher';
+import { arrayMatcher} from './jest.custom.matcher';
 
 describe('ResultadoServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
-
+    let propriedadesResultado = ['indicadorId','codigoLocalidade','periodos','valores'];
     beforeEach(() => {
         connection = null;
         serviceResponse = null;
@@ -42,7 +42,7 @@ describe('ResultadoServiceE2E', () => {
                 }
             ]
         })
-        jasmine.addMatchers(arrayMatcher);
+        jest.addMatchers(arrayMatcher);
     })
     afterEach(() => {
             ResultadoService3.cache.clear();
@@ -60,7 +60,9 @@ describe('ResultadoServiceE2E', () => {
     
                     try{
                         expect(resultados).toHaveLength(1);
+                        
                         expect(resultados[0] instanceof Resultado).toBeTruthy();
+                        expect(resultados[0]).contemPropriedades(propriedadesResultado);
                     }catch(e){
                         fail(e);
                     }
@@ -87,7 +89,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 let resultado = resultados[i];
                                 expect(resultado instanceof Resultado).toBeTruthy();
-
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                                 expect(resultado.indicadorId).toBe(idsIndicadores[i]);
                                 expect(resultado.codigoLocalidade).toBe(localidade);
                         }
@@ -117,6 +119,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 let resultado = resultados[i];
                                 expect(resultado instanceof Resultado).toBeTruthy();  
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                         }
                     }catch(e){
                         fail(e);
@@ -145,7 +148,8 @@ describe('ResultadoServiceE2E', () => {
                         for(var ind in resultados){
                             
                             expect(resultados[ind] instanceof Resultado).toBeTruthy();
-                            expect(resultados[ind].indicadorId).toBe(idIndicador)
+                            expect(resultados[ind]).contemPropriedades(propriedadesResultado);
+                            expect(resultados[ind].indicadorId).toBe(idIndicador);
                         }
                       
                       
@@ -171,6 +175,7 @@ describe('ResultadoServiceE2E', () => {
                         for(var ind in resultados){
                             
                             expect(resultados[ind] instanceof Resultado).toBeTruthy();
+                            expect(resultados[ind]).contemPropriedades(propriedadesResultado);
                             expect(resultados[ind].indicadorId).toBe(idIndicador);
                         }
                       
@@ -199,6 +204,7 @@ describe('ResultadoServiceE2E', () => {
                     try{
                         expect(resultados).toHaveLength(1);
                         expect(resultados[0] instanceof Resultado).toBeTruthy();
+                        expect(resultados[0]).contemPropriedades(propriedadesResultado);
                     }catch(e){
                         fail(e);
                     }
@@ -228,6 +234,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 expect(resultado.indicadorId).toBe(idsIndicadores[i]);
                                 expect(resultado.codigoLocalidade).toBe(localidade);
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                         }
                 
                     }catch(e){
@@ -255,6 +262,7 @@ describe('ResultadoServiceE2E', () => {
 
                                 let resultado = resultados[i];
                                 expect(resultado instanceof Resultado).toBeTruthy();  
+                                expect(resultado).contemPropriedades(propriedadesResultado);
                         }
                     }catch(e){
                         fail(e);

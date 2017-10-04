@@ -20,16 +20,21 @@ export class EmptyLocationGuard implements CanActivate {
             return true;
         }
 
-        if(isBrowser){
-            params = JSON.parse(localStorage.getItem('lastParams'));
+        if (isBrowser) {
+            try {
+                let last = localStorage.getItem('lastParams')
+                params = JSON.parse(last);
+            } catch (err) {
+                // ignore
+            }
         }
 
-        if(params && params.params && params.params.uf && params.params.municipio) {
+        if (params && params.params && params.params.uf && params.params.municipio) {
             this._router.navigateByUrl(`/v4/brasil/${params.params.uf}/${params.params.municipio}/panorama`);
         } else {
             let allCapitais: Localidade[] = this._localidadeServ.getAllCapitais();
 
-            let indexCapital = Math.round(Math.random()*(allCapitais.length+1));
+            let indexCapital = Math.round(Math.random() * (allCapitais.length + 1));
 
             let capitalSelecionada = allCapitais[indexCapital];
 

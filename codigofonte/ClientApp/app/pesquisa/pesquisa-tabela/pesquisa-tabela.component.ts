@@ -23,13 +23,13 @@ const json2csv = require('json2csv');
 })
 
 export class PesquisaTabelaComponent implements OnChanges {
-   
+
     @Input() localidades: number[];
     @Input() pesquisa: Pesquisa;
     @Input() posicaoIndicador: string;
     @Input() periodo: string;
-    @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true; 
-    
+    @Input('ocultarValoresVazios') isOcultarValoresVazios: boolean = true;
+
     @Output() onEmpty = new EventEmitter();
 
     private indicadores;
@@ -38,11 +38,10 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
-        private _sintese:SinteseService,
-        private _localidade:LocalidadeService2,
+        private _sintese: SinteseService,
         private _routerParamsService: RouterParamsService,
         private _indicadorService: IndicadorService2,
-        private _localidadeService2: LocalidadeService2,
+        private _localidadeService: LocalidadeService2,
         private _router: Router,
         private _route: ActivatedRoute,
         private _pesquisaService: PesquisaService2
@@ -51,8 +50,9 @@ export class PesquisaTabelaComponent implements OnChanges {
     ngOnChanges() {
 
         if(this.pesquisa && this.localidades && this.localidades.length > 0){
-            //verifica se a pesquisa é exclusiva para estados (código dos estados vai de 0 a 99, maior que isso é um município)
-            if(this.localidades.length > 0 && this.localidades[0] > 99 && 
+
+            // verifica se a pesquisa é exclusiva para estados (código dos estados vai de 0 a 99, maior que isso é um município)
+            if(this.localidades.length > 0 && this.localidades[0] > 99 &&
                 this.pesquisa['contexto'].municipio == false){
                 this.exclusiva = true;
             }
@@ -190,9 +190,9 @@ export class PesquisaTabelaComponent implements OnChanges {
     public downloadCSVTela(){
 
         let ind = this.indicadores;
-        let localidadeA = this._localidadeService2.getLocalidadeById(this.localidades[0]).nome;
-        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidadeService2.getLocalidadeById(this.localidades[1]).nome : '';
-        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidadeService2.getLocalidadeById(this.localidades[2]).nome : '';
+        let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
+        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidadeService.getLocalidadeById(this.localidades[1]).nome : '';
+        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidadeService.getLocalidadeById(this.localidades[2]).nome : '';
         let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
         //valores dos indicadores
         for(let i = 0; i < ind.length; i++){
@@ -211,7 +211,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     public downloadCSVCompleto(){
 
-        let localidadeSelecionada = this._localidadeService2.getLocalidadeById(this.localidades[0]);
+        let localidadeSelecionada = this._localidadeService.getLocalidadeById(this.localidades[0]);
         let posicaoIndicadorSelecionado = this.indicadores[0].posicao;
         
         // Recupera os indicadores e seus resultados
