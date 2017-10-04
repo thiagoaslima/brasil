@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 import { isBrowser } from 'angular2-universal';
 
@@ -105,6 +106,8 @@ export class ShellComponent implements OnInit, OnDestroy {
     public abrirMenuPesquisa = false;
     public itemSelecionado;
     public isHome = false;
+    //Indicará às redes sociais propriedades da página a ser compartilhada
+    public propriedadesCompartilhamento = <any>{};
 
     public versao = require('../version.json');
 
@@ -139,7 +142,8 @@ export class ShellComponent implements OnInit, OnDestroy {
         private _appState: AppState,
         private _routerParams: RouterParamsService,
         private router: Router,
-        private pageScrollService: PageScrollService
+        private pageScrollService: PageScrollService,
+        private _title:Title
     ) { }
 
     ngOnInit() {
@@ -156,11 +160,20 @@ export class ShellComponent implements OnInit, OnDestroy {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
 
         // marca a opção no menu, baseado na rota
-
+        let view = this;
         this._routerParams.params$.subscribe(({ params, queryParams }) => {
             // seta o item do menu selecionado
             if (isBrowser) {
                 let url = this.router.url;
+                
+                let titulo = view._title.getTitle();
+                console.log(titulo);
+                if(titulo!=null){
+
+                        view.propriedadesCompartilhamento = JSON.stringify({title:titulo});
+                }
+                console.log(view.propriedadesCompartilhamento);
+                
                 if (url.indexOf('panorama') >= 0) {
                     this.itemSelecionado = 'panorama';
                     this.isHome = false;
