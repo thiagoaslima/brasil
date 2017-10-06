@@ -87,7 +87,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
 
                     // Obtém o tipo de resultado a ser exibido
                     this.tipo = !!urlParams.queryParams['tipo'] ? urlParams.queryParams['tipo'] : 'tabela';
-                    
+
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     let periodos = pesquisa['periodos'];
                     if(urlParams.queryParams['ano'])

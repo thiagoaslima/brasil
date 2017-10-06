@@ -1,6 +1,5 @@
-import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import {Title} from '@angular/platform-browser';
 
 import { isBrowser } from 'angular2-universal';
 
@@ -143,7 +142,6 @@ export class ShellComponent implements OnInit, OnDestroy {
         private _routerParams: RouterParamsService,
         private router: Router,
         private pageScrollService: PageScrollService,
-        private _title:Title
     ) { }
 
     ngOnInit() {
@@ -166,7 +164,7 @@ export class ShellComponent implements OnInit, OnDestroy {
             if (isBrowser) {
                 let url = this.router.url;
                 
-                let titulo = view._title.getTitle();
+                let titulo = document.title;
                 console.log(titulo);
                 if(titulo!=null){
 
