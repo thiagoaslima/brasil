@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, style } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { isBrowser, isNode } from 'angular2-universal';
 
-import { IsMobileService } from "../../shared/is-mobile.service";
+import { AnalyticsService } from '../../shared/analytics.service';
+import { IsMobileService } from '../../shared/is-mobile.service';
 import { dadosPainel } from '../configuration/panorama.values';
 import { Localidade } from '../../shared3/models';
-import { ResultadoService3, IndicadorService3 } from "../../shared3/services";
+import { ResultadoService3, IndicadorService3 } from '../../shared3/services';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -38,7 +39,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         private element: ElementRef,
         private _isMobileServ: IsMobileService,
         private _resultadoServ: ResultadoService3,
-        private _indicadorServ: IndicadorService3
+        private _indicadorServ: IndicadorService3,
+        private _analytics: AnalyticsService
     ) { }
 
     isMobile() {
@@ -64,12 +66,12 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         if (
-            changes.hasOwnProperty('dados') && 
-            changes.dados.currentValue && 
+            changes.hasOwnProperty('dados') &&
+            changes.dados.currentValue &&
             changes.dados.currentValue.length > 0
         ) {
             this._novosDados = true;
-            this.selectPainel(0);
+            this.selectPainel(0, changes.dados.isFirstChange());
         }
     }
 
@@ -82,7 +84,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public evaluateIsOnScreen(viewWindow) {
         if (
             !this.element.nativeElement ||
-            typeof this.element.nativeElement.getBoundingClientRect !== "function"
+            typeof this.element.nativeElement.getBoundingClientRect !== 'function'
         ) {
             return false;
         }
@@ -113,7 +115,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         }
     }
 
-    public selectPainel(idx: number): void {
+    public selectPainel(idx: number, firstTime: Boolean): void {
         let total = Object.keys(this.dados).length;
 
         if (idx >= 0 && idx < total) {
@@ -125,6 +127,13 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
                 .subscribe((indicador) => {
                     this.indicador = indicador[0];
                 });
+            if (!firstTime) {
+                this._analytics.enviarEvento({
+                    objetoInteracao: 'Panorama Painel',
+                    tipoInteracao: 'Painel selecionado',
+                    label: this.cardSelecionado.titulo
+                });
+            }
         }
     }
 

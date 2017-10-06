@@ -11,10 +11,10 @@ import { RouterParamsService } from '../router-params.service';
 })
 
 export class QRCodeComponent implements OnInit {
-    public isBrowser = isBrowser;
-
     static readonly servicoMin = 'https://cod.ibge.gov.br/min?u=';
     static readonly servicoQR = 'https://cod.ibge.gov.br/qr?d=';
+
+    public isBrowser = isBrowser;
 
     qrURL = '';
 
@@ -24,7 +24,7 @@ export class QRCodeComponent implements OnInit {
 
     ngOnInit() {
         this._routerParamsServ.params$.subscribe(params => {
-            if(this.isBrowser) {
+            if (this.isBrowser) {
                 this.qrURL = `${QRCodeComponent.servicoQR}${encodeURIComponent(window.location.href)}`;
             }
         });
