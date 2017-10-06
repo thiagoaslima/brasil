@@ -63,6 +63,8 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     private _carregarRanking(params){
 
+        debugger;
+
         if(this.pesquisa && this.localidades && this.localidades.length > 0) {
             this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
                 return periodo.nome;
