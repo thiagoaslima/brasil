@@ -107,12 +107,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         else if (tipo != null)
             this.objetoURL.queryParams.tipo = tipo;
 
-        if (localidade1 == 0)
+        if (localidade1 == -1)
             delete this.objetoURL.queryParams.localidade1;
         else if (localidade1 != null)
             this.objetoURL.queryParams.localidade1 = localidade1;
 
-        if (localidade2 == 0)
+        if (localidade2 == -1)
             delete this.objetoURL.queryParams.localidade2;
         else if (localidade2 != null)
             this.objetoURL.queryParams.localidade2 = localidade2;
@@ -140,12 +140,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     setaLocalidade1(localidade) {
 
-        this.navegarPara(null, null, null, localidade ? localidade.codigo : 0);
+        this.navegarPara(null, null, null, localidade ? localidade.codigo : -1);
     }
 
     setaLocalidade2(localidade) {
 
-        this.navegarPara(null, null, null, null, localidade ? localidade.codigo : 0);
+        this.navegarPara(null, null, null, null, localidade ? localidade.codigo : -1);
     }
 
     mudaIndicador(event) {
@@ -206,9 +206,14 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             return null;
         }
 
-        if (codigoLocalidade.length == 2) {
+        if(codigoLocalidade == "0") { //Brasil
 
-            return this._localidadeService.getUfByCodigo(Number(codigoLocalidade))
+            return this._localidadeService.getRoot();
+        }
+
+        if (codigoLocalidade.length == 2) { //estado
+
+            return this._localidadeService.getUfByCodigo(Number(codigoLocalidade));
         }
 
         return this._localidadeService.getMunicipioByCodigo(codigoLocalidade);
