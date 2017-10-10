@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { isBrowser } from 'angular2-universal';
 
 import { RouterParamsService } from '../router-params.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 const headers = new Headers({ 'accept': '*/*' });
@@ -29,7 +30,8 @@ export class QuestionarioComponent implements OnInit {
     constructor(
         private _routerParamsServ: RouterParamsService,
         private _http: Http,
-        @Inject(DOCUMENT) private document: any
+        @Inject(DOCUMENT) private document: any,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -91,7 +93,8 @@ export class QuestionarioComponent implements OnInit {
             .subscribe(res => {
                 //console.log("ok", res);
                 //this.setCookie("questionario.respondido", "true", 365)
-            });
+            },
+            error => this.modalErrorService.showError());
         }
     }
 

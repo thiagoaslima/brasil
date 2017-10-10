@@ -9,6 +9,7 @@ import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { ItemRanking, RankingLocalidade } from './ranking.model';
 import { ResultadoPipe } from '../../shared/resultado.pipe';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 @Component({
@@ -42,7 +43,8 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         private _activatedRoute: ActivatedRoute,
         private _indicadorService: IndicadorService2,
         private _localidadeService: LocalidadeService2,
-        private _pesquisaService: PesquisaService2
+        private _pesquisaService: PesquisaService2,
+        private modalErrorService: ModalErrorService
     ) {
         this._resultadoPipe = new ResultadoPipe();
     }
@@ -80,7 +82,8 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                     this.unidade = this.rankings[0].listaGrupos[0].unidadeMedida;
                     this.multiplicador = this.rankings[0].listaGrupos[0].fatorMultiplicativo;
                 }
-            });
+            },
+            error => this.modalErrorService.showError());
         }
     }
 

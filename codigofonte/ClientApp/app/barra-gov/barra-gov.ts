@@ -1,6 +1,9 @@
-import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { isBrowser } from 'angular2-universal';
+
+import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'barra-gov',
@@ -19,7 +22,10 @@ export class BarraGov implements OnInit {
 
     desktop = false;
 
-    constructor(private _http: Http) {
+    constructor(
+        private _http: Http,
+        private modalErrorService: ModalErrorService
+    ) {
         this.desktop = !this.isMobile.any();
     }
 
@@ -76,6 +82,9 @@ export class BarraGov implements OnInit {
                     }, 1000);`;
                     place.parentNode.insertBefore(script2, place);
 
+                },
+                error => {
+                    this.modalErrorService.showError();
                 });
         }
 

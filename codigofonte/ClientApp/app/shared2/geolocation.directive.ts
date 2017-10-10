@@ -3,6 +3,7 @@ import { isBrowser } from 'angular2-universal';
 
 import { Localidade } from './localidade/localidade.model';
 import { LocalidadeService2 } from './localidade/localidade.service';
+import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
 
 
 /**
@@ -29,7 +30,10 @@ export class GeolocationDirective {
 
     @HostBinding('attr.teste') teste = 'ok';
 
-    constructor(private _localidadeService: LocalidadeService2) { }
+    constructor(
+        private _localidadeService: LocalidadeService2,
+        private modalErrorService: ModalErrorService
+    ) { }
 
     /**
      * Obtém as coordenadas a posição atual do usuário.
@@ -53,7 +57,8 @@ export class GeolocationDirective {
                     return this.getLocalidade(position);
                 }),
                 (err => {
-                    console.error('ERROR(' + err.code + '): ' + err.message);
+                    console.error(`ERROR (${err.code}): ${err.message} `);
+                    this.modalErrorService.showError();
                 }),
                 options
             );
@@ -76,6 +81,7 @@ export class GeolocationDirective {
             this.onLoading.emit(this.isLoading);
 
             this.onGetLocation.emit(municipio);
-        });
+        },
+        error => this.modalErrorService.showError());
     }
 }

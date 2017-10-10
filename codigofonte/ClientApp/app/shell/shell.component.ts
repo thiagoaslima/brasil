@@ -167,12 +167,10 @@ export class ShellComponent implements OnInit, OnDestroy {
                 let url = this.router.url;
                 
                 let titulo = document.title;
-                console.log(titulo);
                 if(titulo!=null){
 
                         view.propriedadesCompartilhamento = JSON.stringify({title:titulo});
                 }
-                console.log(view.propriedadesCompartilhamento);
                 
                 if (url.indexOf('panorama') >= 0) {
                     this.itemSelecionado = 'panorama';

@@ -9,6 +9,7 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 // Biblioteca usada no download de arquivos.
@@ -45,7 +46,8 @@ export class PesquisaTabelaComponent implements OnChanges {
         private _localidadeService: LocalidadeService2,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _pesquisaService: PesquisaService2
+        private _pesquisaService: PesquisaService2,
+        private modalErrorService: ModalErrorService
     ) {  }
 
     ngOnChanges() {
@@ -91,7 +93,8 @@ export class PesquisaTabelaComponent implements OnChanges {
                     this.onEmpty.emit(false);
                 }
                 subscription$$.unsubscribe();
-            });
+            },
+            error => this.modalErrorService.showError());
         }
     }
 
@@ -292,7 +295,8 @@ export class PesquisaTabelaComponent implements OnChanges {
 
                 this.downloadCSVFile(csv, `${this.pesquisa['nome']}`);
             });
-        });
+        },
+        error => this.modalErrorService.showError());
 
     }
 

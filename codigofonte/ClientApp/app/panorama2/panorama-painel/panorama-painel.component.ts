@@ -1,14 +1,15 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { isBrowser, isNode } from 'angular2-universal';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { AnalyticsService } from '../../shared/analytics.service';
 import { IsMobileService } from '../../shared/is-mobile.service';
 import { dadosPainel } from '../configuration/panorama.values';
 import { Localidade } from '../../shared3/models';
 import { ResultadoService3, IndicadorService3 } from '../../shared3/services';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
     selector: 'panorama-painel',
@@ -40,7 +41,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         private _isMobileServ: IsMobileService,
         private _resultadoServ: ResultadoService3,
         private _indicadorServ: IndicadorService3,
-        private _analytics: AnalyticsService
+        private _analytics: AnalyticsService,
+        private modalErrorService: ModalErrorService
     ) { }
 
     isMobile() {
@@ -126,7 +128,8 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
             this._indicadorServ.getIndicadoresById([this.cardSelecionado.indicadorId])
                 .subscribe((indicador) => {
                     this.indicador = indicador[0];
-                });
+                }, 
+                error => this.modalErrorService.showError());
             if (!firstTime) {
                 this._analytics.enviarEvento({
                     objetoInteracao: 'Panorama Painel',
@@ -144,6 +147,6 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     getResultadosCartograma(indicadorId: number): void {
         this._resultadoServ
             .getResultadosCartograma(indicadorId, this.localidade.parent.codigo)
-            .subscribe((resultados) => { this.resultadosCartograma = resultados; });
+            .subscribe((resultados) => { this.resultadosCartograma = resultados; }, error => this.modalErrorService.showError());
     }
 };
