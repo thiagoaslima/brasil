@@ -1,5 +1,24 @@
+<!-- 
 <div *ngIf="desktop">
     <div id='barra_governo'>
         <iframe name="barragov" id="" src="https://www.ibge.gov.br/barragov/barragov.htm?BGCOLOR=3&amp;WIDTH=940" frameborder="0" width="100%" height="28" style="margin-bottom:-4px;" marginheight="0" marginwidth="0" noresize=""></iframe>
+    </div>
+</div> 
+-->
+
+<!-- 	Script fornecido pelo Governo Federal, através do link: 
+            http://epwg.governoeletronico.gov.br/barra/	-->
+<div *ngIf="desktop">
+    <div id='barraGoverno'>
+
+        <div id="barraBody" style="margin-bottom:-4px;" width="100%">
+            <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+                <ul id="menu-barra-temp" style="list-style:none;">
+                    <li style="display:inline; padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED"><a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a></li>
+                    <li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="https://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 </div>

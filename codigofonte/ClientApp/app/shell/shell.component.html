@@ -9,9 +9,12 @@
     <div class="bt-home"><a routerLink="/v4"><i class="fa fa-home" aria-hidden="true"></i>Página Inicial</a></div>
     <aniversario></aniversario>
     <busca (buscaAberta)="seletor.fecharSeletor()" [URLEnd]="seletor?.URLEnd"></busca>
-    
+
+    <modal-erro></modal-erro>       
 
 </header>
+
+
 
 <div id='container' [class.no__scroll--mobile]="menuAberto"> 
 
@@ -66,7 +69,7 @@
             </ul>
         </nav>
         
-        <a *ngIf="!isHome" id='versaoAnterior' href='http://cidades.ibge.gov.br/xtras/home.php '>
+        <a *ngIf="!isHome" id='versaoAnterior' (click)="registrarClick()" href='http://cidades.ibge.gov.br/xtras/home.php '>
             Acesse a versão anterior do Cidades
         </a>
 
@@ -81,9 +84,7 @@
         <router-outlet #routerOutlet></router-outlet>
     </div>
     
-    
-        <nao-achei></nao-achei>
-    
+    <nao-achei></nao-achei>
     <questionario></questionario>
     
     <footer *ngIf="!isHome" class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</footer>

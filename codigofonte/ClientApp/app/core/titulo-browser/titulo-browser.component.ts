@@ -5,6 +5,7 @@ import { isBrowser } from 'angular2-universal';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 /*
 seta o título da página de acordo com a rota
@@ -21,7 +22,8 @@ export class TituloBrowserComponent implements OnInit {
         private _pesquisaService: PesquisaService2,
         private _routerParamsService: RouterParamsService,
         private _localidadeService: LocalidadeService2,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -72,11 +74,17 @@ export class TituloBrowserComponent implements OnInit {
                                 }
 
                                 document.title = titulo; // titulo pesquisa
-                            });
+                            },
+                            this.exibirError);
                         });
                     }
                 }
             }
-        });
+        },
+        this.exibirError);
+    }
+
+    private exibirError(){
+        this.modalErrorService.showError();
     }
 }

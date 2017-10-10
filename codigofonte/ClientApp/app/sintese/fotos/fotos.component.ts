@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, Renderer } from '@angular/core';
 import { Http } from '@angular/http';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../../shared2/app-state';
 import { SinteseService } from '../sintese.service';
 import { ScrollDirective } from '../../shared/window-events/scroll.directive';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
-
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'fotos',
@@ -55,7 +55,8 @@ export class FotosComponent implements OnInit, OnDestroy {
         private renderer: Renderer,
         private _sinteseService: SinteseService,
         private _appState: AppState,
-        private http: Http
+        private http: Http,
+        private modalErrorService: ModalErrorService
     ) {
 
     }
@@ -122,7 +123,8 @@ export class FotosComponent implements OnInit, OnDestroy {
                     this.preview3 = '';
                     this.alt_preview1 = fotos[0].TITULO + ' - ' + fotos[0].ANO;
                 }
-            });
+            },
+            error => this.modalErrorService.showError());
     }
 
     ngOnDestroy(){

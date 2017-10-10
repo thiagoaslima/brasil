@@ -5,6 +5,7 @@ import { isBrowser } from 'angular2-universal';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 /*
 seta as metatags da página de acordo com a rota
@@ -20,7 +21,8 @@ export class MetatagBrowserComponent implements OnInit {
         private _pesquisaService: PesquisaService2,
         private _routerParamsService: RouterParamsService,
         private _localidadeService: LocalidadeService2,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -61,11 +63,13 @@ export class MetatagBrowserComponent implements OnInit {
                             this.setaMetatag('description', 'Veja tabelas e gráficos com as pesquisas do IBGE sobre todas as cidades do país. Além disso você pode comparar municípios, ver rankings e séries históricas (pesquisa: ' + pesquisa['nome'] + ' | ' + local + ').');
                             // seta a metatag keywords
                             this.setaMetatag('keywords', 'IBGE,dados,geografia,estatística,cidade,município,país,estado,PIB,IDH,IDEB,população,mapa,censo,pesquisa,ranking,comparar,' + localidade.nome + (localidade.parent ? ',' + localidade.parent.nome : ''));
-                        });
+                        },
+                        this.exibirError);
                     }
                 }
             }
-        });
+        },
+        this.exibirError);
     }
 
     // seta a metatag, criando-a caso necessário
@@ -83,4 +87,7 @@ export class MetatagBrowserComponent implements OnInit {
         document.getElementsByTagName('head')[0].appendChild(metatag);
     }
 
+    private exibirError(){
+        this.modalErrorService.showError();
+    }
 }
