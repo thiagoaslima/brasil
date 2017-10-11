@@ -1,0 +1,43 @@
+.modal_erro{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bg{
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    position: fixed;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.container{
+    width: 862px;
+    position: absolute;
+    margin-left: 50%;
+    left: -431px;
+    top: 50px;
+}
+
+
+h2{
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2em;
+}
+
+.header{
+    padding: 12px 25px;
+    background-color: #1b779b;
+}
+
+.content{
+    width: 100%;
+    background-color: #fff;
+    padding: 30px 5%;
+    text-align: center;
+}

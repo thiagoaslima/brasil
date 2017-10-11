@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { isBrowser } from 'angular2-universal';
-import { RouterParamsService } from '../router-params.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-
+import { isBrowser } from 'angular2-universal';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -11,6 +9,10 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
+
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { RouterParamsService } from '../router-params.service';
+
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -33,7 +35,8 @@ export class NaoAcheiComponent implements OnInit {
 
     constructor(
         private _routerParamsServ: RouterParamsService,
-        private _http: Http
+        private _http: Http,
+        private modalErrorService: ModalErrorService
     ) {}
 
     static timer;
@@ -56,6 +59,10 @@ export class NaoAcheiComponent implements OnInit {
         }, options)
         .subscribe(res => {
             //console.log("ok", res);
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
 
         this.enviado = true;

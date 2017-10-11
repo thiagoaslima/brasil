@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { ResultadoPipe } from '../../shared2/resultado.pipe';
+import { AnalyticsService } from '../../shared/analytics.service';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class PanoramaCardComponent implements OnChanges {
     public cssRanking: any = {};
     _resultadoPipe: ResultadoPipe;
 
-    constructor() {
+    constructor(
+        private _analytics: AnalyticsService
+    ) {
         this._resultadoPipe = new ResultadoPipe();
     }
 
@@ -72,5 +75,9 @@ export class PanoramaCardComponent implements OnChanges {
 
 
         return percentual;
+    }
+
+    saveInteraction() {
+        this._analytics.log();
     }
 };

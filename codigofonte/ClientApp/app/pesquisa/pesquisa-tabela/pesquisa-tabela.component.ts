@@ -9,6 +9,7 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 // Biblioteca usada no download de arquivos.
@@ -35,6 +36,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     private indicadores;
     private isVazio;
     private exclusiva;
+    private periodosValidos: string[];
 
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
@@ -44,7 +46,8 @@ export class PesquisaTabelaComponent implements OnChanges {
         private _localidadeService: LocalidadeService2,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _pesquisaService: PesquisaService2
+        private _pesquisaService: PesquisaService2,
+        private modalErrorService: ModalErrorService
     ) {  }
 
     ngOnChanges() {
@@ -65,6 +68,14 @@ export class PesquisaTabelaComponent implements OnChanges {
             let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
 
                 this.indicadores = this.flat(indicadores);
+
+                this.periodosValidos = this.getPeriodosValidos(this.indicadores);
+
+                if(!this.isPeriodoSelecionadoValido()){
+
+                    this.selecionarPeriodoValidoMaisRecente();
+                }
+
                 this.isVazio = true;
                 //cria algumas propriedades nos indicadores para contralor sua exibição/interação
                 for(let i = 0; i < this.indicadores.length; i++){
@@ -82,12 +93,69 @@ export class PesquisaTabelaComponent implements OnChanges {
                     this.onEmpty.emit(false);
                 }
                 subscription$$.unsubscribe();
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
         }
     }
 
     private isFolha(indicador){
+
         return !indicador.children || indicador.children.length == 0 || (this.isOcultarValoresVazios && !this.childrenHasValue(indicador));
+    }
+
+    private isPeriodoSelecionadoValido(): boolean{
+
+        return this.periodosValidos.indexOf(this.periodo) > -1;
+    }
+
+    private selecionarPeriodoValidoMaisRecente(){
+
+        let periodoMaisRecente = this.periodosValidos[this.periodosValidos.length -1];
+
+        this._router.navigateByUrl(`${this._router.url}?ano=${periodoMaisRecente}`)
+    }
+
+
+    private getPeriodosValidos(indicadores: any[]): string[]{
+
+        let periodosValidos: string[] = [];
+
+        for(var indicador of indicadores){
+
+            for(var periodo in indicador.localidadeA){
+
+                if(this.isValorValido(indicador.localidadeA[periodo]) && periodosValidos.indexOf(periodo) == -1){
+
+                    periodosValidos.push(periodo);
+                }
+            }
+        }
+
+        return periodosValidos.sort();
+    }
+
+    private isValorValido(valor: string){
+
+        switch (valor) {
+            case '':
+            case ' ':
+            case '99999999999999':
+            case '99999999999998':
+            case '...':
+            case '99999999999997':
+            case '99999999999996':
+            case '99999999999995':
+            case '99999999999992':
+            case '99999999999991':
+            case '-':
+            case null:
+                return false;
+            default: 
+                return true;
+        }
     }
 
     private hasValue(indicador, periodo){
@@ -230,6 +298,10 @@ export class PesquisaTabelaComponent implements OnChanges {
 
                 this.downloadCSVFile(csv, `${this.pesquisa['nome']}`);
             });
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
 
     }

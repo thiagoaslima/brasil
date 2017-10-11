@@ -14,13 +14,15 @@ import { TituloBrowserComponent } from './titulo-browser/titulo-browser.componen
 import { GeolocationComponent } from './geolocation/geolocation.component';
 import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.component';
 import { Page404Component } from './page404/page404.component';
+import { ModalErroComponent } from './modal-erro/modal-erro.component';
+import { ModalErrorService } from './modal-erro/modal-erro.service';
 
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    SharedModule2
+    SharedModule2,
   ],
   declarations: [
     SeletorLocalidadeComponent,
@@ -28,19 +30,22 @@ import { Page404Component } from './page404/page404.component';
     TituloBrowserComponent,
     GeolocationComponent,
     MetatagBrowserComponent,
-    Page404Component
+    Page404Component,
+    ModalErroComponent
   ],
   exports: [
     SeletorLocalidadeComponent,
     BuscaComponent,
     TituloBrowserComponent,
     GeolocationComponent,
-    MetatagBrowserComponent
+    MetatagBrowserComponent,
+    ModalErroComponent
   ],
   providers: [
     BuscaService,
     BuscaCompletaService,
-    SeletorLocalidadeService
+    SeletorLocalidadeService,
+    ModalErrorService
   ]
 })
 export class CoreModule {

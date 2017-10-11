@@ -2,6 +2,7 @@ import { Component, OnChanges, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PiramideEtariaService } from './piramide-etaria.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class PiramideEtariaComponent implements OnChanges {
     carregando = false;
 
     constructor(
-        private _piramideEtariaService: PiramideEtariaService
+        private _piramideEtariaService: PiramideEtariaService,
+        private modalErrorService: ModalErrorService
     ) {  }
 
     ngOnChanges() {
@@ -151,7 +153,10 @@ export class PiramideEtariaComponent implements OnChanges {
             this.data.py = 100 / this.data.piramide.length;
 
             }
-        );
+        , error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
 
     }
 

@@ -1,11 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { WindowEventsModule } from './window-events/window-events.module';
 import { TopoJson, TOPOJSON } from './topojson.v2';
 
+import { AnalyticsService } from './analytics.service';
 import { RouterParamsService } from './router-params.service';
 import { CommonService } from './common.service';
 import { ResultadoPipe } from './resultado.pipe';
@@ -45,6 +46,13 @@ const PROVIDERS = [
     RouterParamsService,
     CommonService,
     IsMobileService,
+    {
+        provide: AnalyticsService,
+        deps: [Router],
+        useFactory: (router: Router) => {
+            return new AnalyticsService('UA-285486-1', router);
+        }
+    },
     { provide: TOPOJSON, useValue: TopoJson }
 ]
 

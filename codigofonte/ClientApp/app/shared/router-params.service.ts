@@ -33,15 +33,15 @@ export class RouterParamsService {
 
             });
 
-        this._router.events
-            .filter(e => e instanceof NavigationEnd)
-            .distinctUntilChanged()
-            .subscribe(e => {
-                if (isBrowser && (<any>window).ga) {
-                    (<any>window).ga('set', 'page', e.url);
-                    (<any>window).ga('send', 'pageview');
-                }
-            })
+        // this._router.events
+        //     .filter(e => e instanceof NavigationEnd)
+        //     .distinctUntilChanged()
+        //     .subscribe(e => {
+        //         if (isBrowser && (<any>window).ga) {
+        //             (<any>window).ga('set', 'page', e.url);
+        //             (<any>window).ga('send', 'pageview');
+        //         }
+        //     })
     }
 
 

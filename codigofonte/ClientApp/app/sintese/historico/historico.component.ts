@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 import { AppState } from '../../shared2/app-state';
 import { SinteseService } from '../sintese.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'historico',
@@ -20,7 +22,8 @@ export class HistoricoComponent implements OnInit {
 
     constructor(
         private _appState: AppState,
-        private _sinteseService: SinteseService
+        private _sinteseService: SinteseService,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -38,6 +41,10 @@ export class HistoricoComponent implements OnInit {
                     historico.formacaoAdministrativa = historico.formacaoAdministrativa.replace(/\n/g, '<br>');
                 this.historico = historico;
                 this.isCarregando = false;
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
 
     }

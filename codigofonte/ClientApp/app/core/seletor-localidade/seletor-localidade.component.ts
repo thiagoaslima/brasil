@@ -1,14 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
-
 import { isBrowser } from 'angular2-universal';
 import { NavigationEnd, Router } from '@angular/router';
-
-import { SeletorLocalidadeService } from './seletor-localidade.service';
-import { AppState } from '../../shared2/app-state';
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
-import { slugify } from '../../utils/slug';
-
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -16,7 +8,14 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { PageScrollService } from 'ng2-page-scroll';
 
+import { SeletorLocalidadeService } from './seletor-localidade.service';
+import { AppState } from '../../shared2/app-state';
+import { Localidade } from '../../shared2/localidade/localidade.model';
+import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import { slugify } from '../../utils/slug';
 import { IsMobileService } from '../../shared/is-mobile.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'seletor-localidade',
@@ -143,12 +142,13 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private pageScrollService: PageScrollService,
         private _isMobileService: IsMobileService,
         private _router: Router,
-        private _seletorService: SeletorLocalidadeService
+        private _seletorService: SeletorLocalidadeService,
+        private modalErrorService: ModalErrorService
     ) {
-        let sub1 = this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto);
-        let sub2 = this._seletorService.state$.subscribe(states => this.states = states);
-        let sub3 = this._seletorService.niveisTerrioriais$.subscribe(niveis => this.niveisTerritoriais = niveis);
-        let sub4 = this._seletorService.forceURL$.subscribe(urlEnd => this.URLEnd = urlEnd );
+        let sub1 = this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto, this.exibirError);
+        let sub2 = this._seletorService.state$.subscribe(states => this.states = states, this.exibirError);
+        let sub3 = this._seletorService.niveisTerrioriais$.subscribe(niveis => this.niveisTerritoriais = niveis, this.exibirError);
+        let sub4 = this._seletorService.forceURL$.subscribe(urlEnd => this.URLEnd = urlEnd, this.exibirError);
 
         // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
         // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
@@ -169,7 +169,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 }
             }
 
-        });
+        },
+        this.exibirError);
 
         this.selecaoLocalidadesAtual = this._appState.observable$
             .map(({ localidade }) => {
@@ -193,14 +194,15 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
             .distinctUntilChanged()
             .subscribe(_ => {
                 this.fecharSeletor();
-            });
+            },
+            this.exibirError);
 
         this._buscaInput$$ = Observable.fromEvent<KeyboardEvent>(this.buscaInput.nativeElement, 'keyup')
             .debounceTime(400)
             .distinctUntilChanged()
             .map(e => e.target['value'])
             .filter((termo: string) => !!termo && termo.length >= 3)
-            .subscribe(termo => this.search(termo));
+            .subscribe(termo => this.search(termo), this.exibirError);
     }
 
     ngOnDestroy() {
@@ -299,5 +301,9 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         if (this._isMobileService.any()) {
             this.selecionarLocalidade.nativeElement.scrollTop = '246';
         }
+    }
+
+    private exibirError(){
+        this.modalErrorService.showError();
     }
 }

@@ -1,15 +1,16 @@
-import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
-import { Observable } from 'rxjs/Rx';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 import { isNode } from 'angular2-universal';
+import { Observable } from 'rxjs/Rx';
 
 import { LinhaTempo } from '../../infografia/linha-tempo/linha-tempo.component';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.component';
-
 import { ResultadoService3 } from '../../shared3/services/resultado.service';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
+
 
 @Component({
     selector: 'pesquisa-cartograma',
@@ -45,7 +46,8 @@ export class PesquisaCartogramaComponent implements OnChanges {
         private _resultadoServ: ResultadoService3,
         private _pesquisaService: PesquisaService2,
         private _indicadorServ: IndicadorService3,
-        private _routerParamsService: RouterParamsService
+        private _routerParamsService: RouterParamsService,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -68,6 +70,10 @@ export class PesquisaCartogramaComponent implements OnChanges {
         this._indicadorServ.getIndicadoresById([this.indicadorSelecionado])
             .subscribe((indicadores) => {
                 this.indicador = indicadores[0];
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
 
         (<any[]>this.localidades)
@@ -102,6 +108,10 @@ export class PesquisaCartogramaComponent implements OnChanges {
                     });
                 }
                 this.mapas = mapas;
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
 
         // this.localidades.forEach(localidade => {

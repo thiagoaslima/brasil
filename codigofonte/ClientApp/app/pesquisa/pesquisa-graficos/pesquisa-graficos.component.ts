@@ -1,14 +1,15 @@
-import { Localidade } from '../../shared3/models';
 import { Component, EventEmitter, Input, OnChanges, OnInit, OnDestroy, Output, SimpleChanges } from '@angular/core';
-import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
 import { Observable, Subscription } from 'rxjs/Rx';
 
+import { Localidade } from '../../shared3/models';
+import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
 import { LinhaTempo } from '../../infografia/linha-tempo/linha-tempo.component';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.component';
-
 import { ResultadoService3 } from '../../shared3/services/resultado.service';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'pesquisa-graficos',
@@ -73,7 +74,8 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
         private _resultadoServ: ResultadoService3,
         private _pesquisaService: PesquisaService2,
         private _indicadorServ: IndicadorService3,
-        private _routerParamsService: RouterParamsService
+        private _routerParamsService: RouterParamsService,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -94,7 +96,15 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                     this.anoSelecionado = Number(this.pesquisa.periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(this.pesquisa.periodos.length - 1)].nome);
                 }
 
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
 
         if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
@@ -164,6 +174,10 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                             posicao: this.codigosLocalidades.indexOf(localidade.codigo.toString())
                         }
                     }).sort((a, b) => a.posicao - b.posicao); //faz o sort igual ao anterior para manter a legenda na mesma ordem da comparação
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
 
     }

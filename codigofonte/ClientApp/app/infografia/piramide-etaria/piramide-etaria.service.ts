@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Injectable()
 export class PiramideEtariaService{
@@ -9,11 +11,13 @@ export class PiramideEtariaService{
     idioma:string;
     constructor(
         private _http: Http,
+        private modalErrorService: ModalErrorService
         
     ) { 
 
         this.idioma = 'PT';
     }
+
     
 
     public get(codMunicipio){
@@ -150,6 +154,10 @@ export class PiramideEtariaService{
             // calcula a altura dos retãngulos
             data.py = 100 / data.piramide.length;
 
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
     }
 
@@ -170,7 +178,6 @@ export class PiramideEtariaService{
 
         let dadosPesquisa$;
 
-        
         dadosPesquisa$ = this._http.get(
             `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
         )

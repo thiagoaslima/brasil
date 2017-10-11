@@ -1,14 +1,6 @@
-import { log } from 'util';
-import { Localidade } from '../localidade/localidade.model';
-import { ItemRanking, RankingLocalidade } from '../../pesquisa/pesquisa-ranking/ranking.model';
-import { discardPeriodicTasks } from '@angular/core/testing';
-import { LocalidadeService2 } from '../localidade/localidade.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
-import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador, Ranking } from './indicador.model';
-import { flatTree } from '../../utils/flatFunctions';
-
+import { discardPeriodicTasks } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/zip';
@@ -20,6 +12,15 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
 
+import { log } from 'util';
+import { Localidade } from '../localidade/localidade.model';
+import { ItemRanking, RankingLocalidade } from '../../pesquisa/pesquisa-ranking/ranking.model';
+import { LocalidadeService2 } from '../localidade/localidade.service';
+import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador, Ranking } from './indicador.model';
+import { flatTree } from '../../utils/flatFunctions';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
+
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
 
@@ -29,7 +30,8 @@ export class IndicadorService2 {
     idioma:string;
     constructor(
         private _http: Http,
-        private _localidadeService: LocalidadeService2
+        private _localidadeService: LocalidadeService2,
+        private modalErrorService: ModalErrorService
     ) {
         Indicador.setIndicadoresStrategy({
             retrieve: this.getIndicadoresByPosicao.bind(this)
@@ -88,6 +90,10 @@ export class IndicadorService2 {
                             indicadores[i].fontes = fontes;
                             indicadores[i].notas = notas;
                         }
+                    }, 
+                    error => {
+                        console.error(error);
+                        this.modalErrorService.showError();
                     });
                 }
                 // console.log(`getIndicadorById`, indicadores);
@@ -149,6 +155,10 @@ export class IndicadorService2 {
                                 let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
                                 indicadores[i].fontes = fontes;
                                 indicadores[i].notas = notas;
+                            },
+                            error => {
+                                console.error(error);
+                                this.modalErrorService.showError();
                             });
                         }
                     }

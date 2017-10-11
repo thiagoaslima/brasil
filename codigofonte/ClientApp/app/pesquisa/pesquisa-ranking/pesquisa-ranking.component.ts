@@ -9,6 +9,7 @@ import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 import { ItemRanking, RankingLocalidade } from './ranking.model';
 import { ResultadoPipe } from '../../shared/resultado.pipe';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 @Component({
@@ -38,12 +39,13 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     public multiplicador;
 
     constructor(
-        private _routerParams:RouterParamsService,
+        private _routerParams: RouterParamsService,
         private _activatedRoute: ActivatedRoute,
         private _indicadorService: IndicadorService2,
         private _localidadeService: LocalidadeService2,
-        private _pesquisaService: PesquisaService2
-    ) { 
+        private _pesquisaService: PesquisaService2,
+        private modalErrorService: ModalErrorService
+    ) {
         this._resultadoPipe = new ResultadoPipe();
     }
 
@@ -54,16 +56,16 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         this._carregarRanking(this._activatedRoute.snapshot);
     }
 
-    ngOnChanges(){
+    ngOnChanges() {
 
         this.localidadeByContexto = this.getLocalidadesByContexto(this.localidades);
 
         this._carregarRanking(this._activatedRoute.snapshot);
     }
 
-    private _carregarRanking(params){
+    private _carregarRanking(params) {
 
-        if(this.pesquisa && this.localidades && this.localidades.length > 0) {
+        if (this.pesquisa && this.localidades && this.localidades.length > 0) {
             this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
                 return periodo.nome;
             });
@@ -75,26 +77,30 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                 this.rankings = this._mergeRankingsByContext(ranking);
 
 
-                if(!!this.rankings && !!this.rankings[0] && !!this.rankings[0].listaGrupos && !!this.rankings[0].listaGrupos[0]){
+                if (!!this.rankings && !!this.rankings[0] && !!this.rankings[0].listaGrupos && !!this.rankings[0].listaGrupos[0]) {
 
                     this.unidade = this.rankings[0].listaGrupos[0].unidadeMedida;
                     this.multiplicador = this.rankings[0].listaGrupos[0].fatorMultiplicativo;
                 }
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
         }
     }
 
-    public hasDados(): boolean{
+    public hasDados(): boolean {
 
-        if(!this.rankings){
+        if (!this.rankings) {
             return false;
         }
 
         let hasDados = false;
 
-        for(let ranking of this.rankings){
+        for (let ranking of this.rankings) {
 
-            if(!!ranking.listaGrupos && ranking.listaGrupos.length > 0){
+            if (!!ranking.listaGrupos && ranking.listaGrupos.length > 0) {
 
                 hasDados = true;
                 break;
@@ -104,96 +110,96 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         return hasDados;
     }
 
-    private getLocalidadesByContexto(idLocalidade: number[]): Object{
+    private getLocalidadesByContexto(idLocalidade: number[]): Object {
 
         let contextos = {};
 
         idLocalidade.forEach(id => {
 
-            if(!!id && id > 0){
+            if (!!id && id > 0) {
 
                 let localidade = this._obterLocalidade(id);
-                
-                if(!!contextos[localidade.parent.codigo]){
+
+                if (!!contextos[localidade.parent.codigo]) {
 
                     contextos[localidade.parent.codigo].push(localidade.nome.toUpperCase());
-                } 
+                }
                 else {
 
                     contextos[localidade.parent.codigo] = [localidade.nome.toUpperCase()];
 
                 }
 
-            }            
+            }
         });
 
         return contextos;
     }
 
-    public mudaAno(ano){
+    public mudaAno(ano) {
         this.onAno.emit(ano);
     }
 
-    public getTitulo(contexto){
+    public getTitulo(contexto) {
 
-       if(contexto.toUpperCase() == 'BR'){
+        if (contexto.toUpperCase() == 'BR') {
 
             return 'NO BRASIL';
         }
 
-        if(!this.localidadeByContexto[contexto]){
+        if (!this.localidadeByContexto[contexto]) {
             return;
         }
 
         return `${this.localidadeByContexto[contexto].join(', ')} NO ESTADO ${this._localidadeService.getPreprosicaoTituloUF(this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome).toUpperCase()} ${this._localidadeService.getUfByCodigo(parseInt(contexto, 10)).nome}`;
     }
 
-    public getRotulo(valor, unidade, multiplicador){
+    public getRotulo(valor, unidade, multiplicador) {
 
         valor = this._resultadoPipe.transform(valor, unidade);
         return `${valor}${!!multiplicador && multiplicador > 1 ? ' x' + multiplicador : ''} ${!!unidade ? unidade : ''}`;
     }
 
-    public isSelecionado(idLocalidade): boolean{
+    public isSelecionado(idLocalidade): boolean {
 
         let isSelecionado = false;
 
         this.localidades.forEach(id => {
 
-            if(id ==  idLocalidade){
+            if (id == idLocalidade) {
                 isSelecionado = true;
-            }            
+            }
         });
 
         return isSelecionado;
     }
 
-    private _obterRanking(idIndicador: number, periodo: string, idLocalidades: number[]){
+    private _obterRanking(idIndicador: number, periodo: string, idLocalidades: number[]) {
 
-        let requests: Observable<RankingLocalidade[]>[] = []; 
+        let requests: Observable<RankingLocalidade[]>[] = [];
 
         idLocalidades.forEach(id => {
 
-            if(!id || id == 0){
+            if (!id || id == 0) {
                 return;
             }
-            
+
             let localidade: Localidade = this._obterLocalidade(id);
             let contextos: string[] = ['br']
-            if(!!localidade && !!localidade.parent && !!localidade.parent.codigo){
+            if (!!localidade && !!localidade.parent && !!localidade.parent.codigo) {
                 contextos.push(localidade.parent.codigo.toString());
             }
 
-            requests.push( this._indicadorService.getRankingIndicador(idIndicador, periodo, contextos, localidade.codigo, contextos.length == 1? 3 : 4) );
+            requests.push(this._indicadorService.getRankingIndicador(idIndicador, periodo, contextos, localidade.codigo, contextos.length == 1 ? 3 : 4));
         });
 
         return Observable.zip(...requests);
     }
 
-    private _obterLocalidade(id: number){
+    private _obterLocalidade(id: number) {
 
         // Se o código for de uma UF
-        if(String(id).length == 2){
+        if (String(id).length == 2) {
 
             return this._localidadeService.getUfByCodigo(id);
         }
@@ -201,22 +207,22 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
         return this._localidadeService.getMunicipioByCodigo(id);
     }
 
-    private _calcularProporcaoValor(maiorValor: number, valor: number){
+    private _calcularProporcaoValor(maiorValor: number, valor: number) {
 
         return (valor * 100) / maiorValor;
     }
 
-    private _mergeRankingsByContext(listaRankingLocalidade: RankingLocalidade[][]){
+    private _mergeRankingsByContext(listaRankingLocalidade: RankingLocalidade[][]) {
 
         let mergedRanking = {};
 
-        for(let i = 0; i < listaRankingLocalidade.length; i++){
+        for (let i = 0; i < listaRankingLocalidade.length; i++) {
 
-            for(let j = 0; j < listaRankingLocalidade[i].length; j++){
+            for (let j = 0; j < listaRankingLocalidade[i].length; j++) {
 
                 let contexto = listaRankingLocalidade[i][j].contexto;
 
-                if( !mergedRanking[contexto] ){
+                if (!mergedRanking[contexto]) {
 
                     mergedRanking[contexto] = listaRankingLocalidade[i][j];
 
@@ -225,13 +231,13 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                     mergedRanking[contexto].listaGrupos = this._mergeLista(mergedRanking[contexto].listaGrupos, listaRankingLocalidade[i][j].listaGrupos);
                 }
 
-                if(!listaRankingLocalidade[i][j].listaGrupos){
+                if (!listaRankingLocalidade[i][j].listaGrupos) {
                     return;
                 }
 
 
                 // Calcula a proporção para exibição do grafico
-                for(let itemRanking of listaRankingLocalidade[i][j].listaGrupos){
+                for (let itemRanking of listaRankingLocalidade[i][j].listaGrupos) {
 
                     itemRanking['proporcao'] = this._calcularProporcaoValor(Number(listaRankingLocalidade[i][j].listaGrupos[0].valor), Number(itemRanking.valor));
                 }
@@ -255,13 +261,13 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     /**
      * Une as duas listas de ItemRanking, removendo itens duplicados.
      */
-    private _mergeLista(listaPrincipal: ItemRanking[], listaApartada: ItemRanking[]){
+    private _mergeLista(listaPrincipal: ItemRanking[], listaApartada: ItemRanking[]) {
 
         let indice = this._contruirIndiceRanking(listaPrincipal);
 
-        for(let infoLocalidade of listaApartada){
+        for (let infoLocalidade of listaApartada) {
 
-            if(!this._hasLocalidade(indice, infoLocalidade)){
+            if (!this._hasLocalidade(indice, infoLocalidade)) {
 
                 listaPrincipal.push(infoLocalidade);
             }
@@ -273,12 +279,12 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     /**
      * Controi um indice que serve para verificar se uma localidade do ranking ja foi processada.
      */
-    private _contruirIndiceRanking(lista: ItemRanking[]): Object{
+    private _contruirIndiceRanking(lista: ItemRanking[]): Object {
 
         let indice = {};
-        for(let infoLocalidade of lista){
+        for (let infoLocalidade of lista) {
 
-            if(!indice[infoLocalidade.localidade.codigo]){
+            if (!indice[infoLocalidade.localidade.codigo]) {
 
                 indice[infoLocalidade.localidade.codigo] = true;
             }
@@ -290,7 +296,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
     /**
      * Verifica se existe a informação da ranking da localidade no indice.
      */
-    private _hasLocalidade(indice: {}, infoLocalidade: ItemRanking): boolean{
+    private _hasLocalidade(indice: {}, infoLocalidade: ItemRanking): boolean {
 
         return indice[infoLocalidade.localidade.codigo];
     }

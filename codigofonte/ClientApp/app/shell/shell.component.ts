@@ -1,6 +1,6 @@
-import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AnalyticsService } from '../shared/analytics.service';
+import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import {Title} from '@angular/platform-browser';
 
 import { isBrowser } from 'angular2-universal';
 
@@ -143,7 +143,7 @@ export class ShellComponent implements OnInit, OnDestroy {
         private _routerParams: RouterParamsService,
         private router: Router,
         private pageScrollService: PageScrollService,
-        private _title:Title
+        private _analytics: AnalyticsService
     ) { }
 
     ngOnInit() {
@@ -166,13 +166,11 @@ export class ShellComponent implements OnInit, OnDestroy {
             if (isBrowser) {
                 let url = this.router.url;
                 
-                let titulo = view._title.getTitle();
-                console.log(titulo);
+                let titulo = document.title;
                 if(titulo!=null){
 
                         view.propriedadesCompartilhamento = JSON.stringify({title:titulo});
                 }
-                console.log(view.propriedadesCompartilhamento);
                 
                 if (url.indexOf('panorama') >= 0) {
                     this.itemSelecionado = 'panorama';
@@ -245,6 +243,14 @@ export class ShellComponent implements OnInit, OnDestroy {
     navegarPara(localidade: Localidade) {
 
         this.router.navigateByUrl(localidade.link);
+    }
+
+    registrarClick() {
+        this._analytics.enviarEvento({
+            objetoInteracao: 'Cidades Antigo',
+            tipoInteracao: 'click',
+            label: 'Ir para site antigo'
+        });
     }
 
 }
