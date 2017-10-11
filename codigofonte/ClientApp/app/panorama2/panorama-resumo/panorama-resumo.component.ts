@@ -120,7 +120,10 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
                         );
                 }).map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         }
     }
 

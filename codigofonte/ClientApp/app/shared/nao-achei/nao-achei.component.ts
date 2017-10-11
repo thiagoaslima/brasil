@@ -60,7 +60,10 @@ export class NaoAcheiComponent implements OnInit {
         .subscribe(res => {
             //console.log("ok", res);
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
 
         this.enviado = true;
         this.aberto = false;

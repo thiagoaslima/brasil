@@ -96,7 +96,10 @@ export class PesquisaIndicadoresComponent implements OnChanges {
                 if(this.getIndicadorComparacao() == 0)
                     this.onIndicador.emit(this.indicadorComparacao);
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         }
     }
 

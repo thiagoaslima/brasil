@@ -78,7 +78,10 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
                 this.resultados = resultados;
                 this.localidade = localidade;
                 this.temaSelecionado = '';
-            }, error => this.modalErrorService.showError());
+            }, error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
     }
 
     ngOnDestroy() {

@@ -142,6 +142,7 @@ export class AniversarioComponent implements OnInit {
                 }   
             },
             error => {
+                console.error(error);
                 this.modalErrorService.showError();
             });
     }

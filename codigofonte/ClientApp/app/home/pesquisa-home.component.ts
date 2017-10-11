@@ -31,7 +31,10 @@ export class PesquisaHomeComponent implements OnInit {
                 const indicadorId = indicadores.find(ind => ind.posicao === '1').id;
                 this._seletorLocalidadeService.forcePage('/pesquisa/' + id.toString(10) + '/' + indicadorId.toString(10));
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);;
+                this.modalErrorService.showError();
+            });
         }
 
         this._seletorLocalidadeService.abrirSeletor(niveis.length === 2 ? 'municipios' : '');

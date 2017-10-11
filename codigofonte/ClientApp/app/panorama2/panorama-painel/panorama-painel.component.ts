@@ -129,7 +129,10 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
                 .subscribe((indicador) => {
                     this.indicador = indicador[0];
                 }, 
-                error => this.modalErrorService.showError());
+                error => {
+                    console.error(error);
+                    this.modalErrorService.showError();
+                });
             if (!firstTime) {
                 this._analytics.enviarEvento({
                     objetoInteracao: 'Panorama Painel',
@@ -147,6 +150,11 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     getResultadosCartograma(indicadorId: number): void {
         this._resultadoServ
             .getResultadosCartograma(indicadorId, this.localidade.parent.codigo)
-            .subscribe((resultados) => { this.resultadosCartograma = resultados; }, error => this.modalErrorService.showError());
+            .subscribe((resultados) => { 
+                this.resultadosCartograma = resultados; 
+            }, error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
     }
 };

@@ -149,7 +149,10 @@ export class PiramideEtariaService{
             data.py = 100 / data.piramide.length;
 
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
     }
 
     private getIndicador = (res, id) => {

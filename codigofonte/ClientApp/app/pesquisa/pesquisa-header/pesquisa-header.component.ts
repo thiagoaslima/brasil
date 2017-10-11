@@ -90,7 +90,10 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 this.objetoURL.indicador = params.params.indicador ? params.params.indicador : 0;
                 this.objetoURL.queryParams = params.queryParams ? params.queryParams : {};
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         });
     }
 

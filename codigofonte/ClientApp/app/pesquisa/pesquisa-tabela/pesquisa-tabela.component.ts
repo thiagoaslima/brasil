@@ -94,7 +94,10 @@ export class PesquisaTabelaComponent implements OnChanges {
                 }
                 subscription$$.unsubscribe();
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         }
     }
 
@@ -296,7 +299,10 @@ export class PesquisaTabelaComponent implements OnChanges {
                 this.downloadCSVFile(csv, `${this.pesquisa['nome']}`);
             });
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
 
     }
 

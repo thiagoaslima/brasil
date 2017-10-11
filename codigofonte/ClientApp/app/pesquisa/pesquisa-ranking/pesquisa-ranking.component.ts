@@ -83,7 +83,10 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                     this.multiplicador = this.rankings[0].listaGrupos[0].fatorMultiplicativo;
                 }
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         }
     }
 

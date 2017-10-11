@@ -124,7 +124,10 @@ export class FotosComponent implements OnInit, OnDestroy {
                     this.alt_preview1 = fotos[0].TITULO + ' - ' + fotos[0].ANO;
                 }
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
     }
 
     ngOnDestroy(){

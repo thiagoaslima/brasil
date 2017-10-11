@@ -86,7 +86,10 @@ export class IndicadorService2 {
                             indicadores[i].notas = notas;
                         }
                     }, 
-                    error => this.modalErrorService.showError());
+                    error => {
+                        console.error(error);
+                        this.modalErrorService.showError();
+                    });
                 }
                 // console.log(`getIndicadorById`, indicadores);
             })
@@ -148,7 +151,10 @@ export class IndicadorService2 {
                                 indicadores[i].fontes = fontes;
                                 indicadores[i].notas = notas;
                             },
-                            error => this.modalErrorService.showError());
+                            error => {
+                                console.error(error);
+                                this.modalErrorService.showError();
+                            });
                         }
                     }
                 })

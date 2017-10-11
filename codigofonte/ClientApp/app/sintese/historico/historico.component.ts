@@ -42,7 +42,10 @@ export class HistoricoComponent implements OnInit {
                 this.historico = historico;
                 this.isCarregando = false;
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
     }
 

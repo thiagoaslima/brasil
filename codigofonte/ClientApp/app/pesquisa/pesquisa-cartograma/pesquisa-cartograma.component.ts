@@ -71,7 +71,10 @@ export class PesquisaCartogramaComponent implements OnChanges {
             .subscribe((indicadores) => {
                 this.indicador = indicadores[0];
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
         (<any[]>this.localidades)
             .filter(localidade => localidade !== undefined)
@@ -106,7 +109,10 @@ export class PesquisaCartogramaComponent implements OnChanges {
                 }
                 this.mapas = mapas;
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
         // this.localidades.forEach(localidade => {
         //     let mun = this._localidadeServ.getMunicipioByCodigo(localidade)

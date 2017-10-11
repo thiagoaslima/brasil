@@ -153,7 +153,10 @@ export class PiramideEtariaComponent implements OnChanges {
             this.data.py = 100 / this.data.piramide.length;
 
             }
-        , error => this.modalErrorService.showError());
+        , error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
 
     }
 

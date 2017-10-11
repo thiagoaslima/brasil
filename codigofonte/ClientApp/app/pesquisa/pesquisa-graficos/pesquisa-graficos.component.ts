@@ -97,9 +97,15 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                 }
 
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
 
         if(this.codigosLocalidades && this.codigosLocalidades.length > 0) {
             this.atualizaGraficos();
@@ -169,7 +175,10 @@ export class PesquisaGraficosComponent implements OnInit, OnChanges, OnDestroy {
                         }
                     }).sort((a, b) => a.posicao - b.posicao); //faz o sort igual ao anterior para manter a legenda na mesma ordem da comparação
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
     }
 
