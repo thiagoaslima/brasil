@@ -9,13 +9,24 @@
                 <p>As diversas pesquisas do IBGE abrangem temas como Educação, Trabalho, Economia, População, Saúde e Território, não só sobre o Brasil mas também sobre seus estados e municípios. <br>Abaixo você encontra uma lista das pesquisas disponíveis no Brasil em Síntese, clique em uma pesquisa para saber mais.</p>
             </div>
         </div>
-
         <nav class='pesquisas container'>
+              <ul>
+             
+                <li *ngFor="let pesquisa of pesquisas">
+                   
+                        <button type='button' (click)='selectPesquisa(pesquisa.id,pesquisa.niveis)'>{{pesquisa.nome}}</button>
+                        <div class="pesquisa_descricao">  {{pesquisa.descricao}} </div>
+                        <a target="_blank" [href]="pesquisa.url" *ngIf="pesquisa.descricao.length>0">Continuar lendo</a>
+                   
+                </li>
+              </ul>
+        </nav>
+        <!--<nav class='pesquisas container'>
             <ul>
                 <li><button type='button' (click)='selectPesquisa(19, ["pais"])'>Cadastro Central de Empresas</button></li>
-                <li><button type='button' (click)='selectPesquisa(23, [])'>Censo</button></li>
+                <li><button type='button' (click)='selectPesquisa(23, [])'>Censo</button></li>-->
                 <!-- <li><button type='button' (click)='selectPesquisa(43, ["pais","uf","municipio"])'>Censo - Séries históricas</button></li> -->
-                <li><button type='button' (click)='selectPesquisa(24, [])'>Censo agropecuário</button></li>
+         <!--       <li><button type='button' (click)='selectPesquisa(24, [])'>Censo agropecuário</button></li>
                 <li><button type='button' (click)='selectPesquisa(10060, [])'>Contas regionais do Brasil</button></li>
                 <li><button type='button' (click)='selectPesquisa(13, ["pais"])'>Ensino - matrículas, docentes e rede escolar</button></li>
                 <li><button type='button' (click)='selectPesquisa(10066, [])'>Entidades de assistência social privadas sem fins lucrativos</button></li>
@@ -56,7 +67,7 @@
                 <li><button type='button' (click)='selectPesquisa(32, ["pais"])'>Serviços de saúde</button></li>
                 <li><button type='button' (click)='selectPesquisa(45, [])'>Síntese de Indicadores Sociais</button></li>
                 <li><button type='button' (click)='selectPesquisa(10054, [])'>Tábuas abreviadas de mortalidade por sexo e idade</button></li>
-                <li><button type='button' (click)='selectPesquisa(39, [])'>Taxa de mortalidade infantil</button></li>
+                <li><button type='button' (click)='selectPesquisa(39, [])'>Taxa de mortalidade infantil</button></li>-->
 
                 <!-- <li>Cadastro Central de Empresas</li>
                 <li>Censo</li>
@@ -86,8 +97,8 @@
                 <li>Mapa de pobreza e desigualdade</li>
                 <li>Morbidade hospitalar</li>
                 <li>Notificação de dengue registrada</li> -->
-            </ul>
-        </nav>
+           <!-- </ul>
+        </nav>-->
 
         <footer class="clearfix">
             <h3 class="footer__text">

@@ -10,7 +10,7 @@ import { IndicadorService3 } from '../shared3/services';
 })
 export class PesquisaHomeComponent implements OnInit {
     public versao = require('../version.json');
-
+    public  pesquisas = require('./pesquisas.json');
     constructor(
         private _seletorLocalidadeService: SeletorLocalidadeService,
         private _indicadorService: IndicadorService3
