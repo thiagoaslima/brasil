@@ -124,6 +124,7 @@ g, .periodo-link {
 .local-atual{
     font-weight: bold;
     color: #0d4768;
+    position: relative;
 }
 .local-selecionado{
     font-size: small;
@@ -154,6 +155,7 @@ g, .periodo-link {
 
 .botao{
     cursor: pointer;
+    padding-left: 5px;
 }
 
 /*----------------------------------------*/
@@ -335,6 +337,46 @@ g, .periodo-link {
     fill: #C7E9B4;
 }*/
 
+.overlay{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+}
+
+.area-click{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 101;
+    top: 0;
+}
+
+.galeria{
+    background-color: white;
+    margin: auto;
+    border-radius: 5px;
+    z-index: 102;
+    padding: 15px;
+    width: 75vw;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.galeria__close-icon{
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 1.3em;
+    cursor: pointer;
+}
 
 @media screen and (max-width: 1200px) {
 

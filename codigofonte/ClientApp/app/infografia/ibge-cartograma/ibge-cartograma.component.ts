@@ -29,6 +29,8 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     strokeWidth = 0.001;
 
+    ampliado = false;
+
     constructor(
         private _mapaService: MapaService,
     ) { }
