@@ -6,10 +6,14 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class PiramideEtariaService{
 
+    idioma:string;
     constructor(
         private _http: Http,
         
-    ) { }
+    ) { 
+
+        this.idioma = 'PT';
+    }
     
 
     public get(codMunicipio){
@@ -166,10 +170,9 @@ export class PiramideEtariaService{
 
         let dadosPesquisa$;
 
-
-
+        
         dadosPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
         )
         .map((res => res.json()))
 
@@ -195,7 +198,7 @@ export class PiramideEtariaService{
         let nomesPesquisa$;
 
         nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores?lang=${this.idioma}`
         )
         .map((res => res.json()))
   
@@ -257,7 +260,7 @@ export class PiramideEtariaService{
     public getPeriodosDisponiveisPesquisa(codpes: string) {
 
         return this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}?lang=${this.idioma}`
         )
             .map((res) => res.json())
             .map((pesquisa) => {
