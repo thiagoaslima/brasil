@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -25,8 +26,13 @@ export class BuscaHeaderComponent implements OnInit {
     localidades: Localidade[];
     capitais: Localidade[];
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
-        private _localidadeService: LocalidadeService2
+        private _localidadeService: LocalidadeService2,
+        private _traducaoServ: TraducaoService
     ) { }
 
 

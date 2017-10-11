@@ -23,6 +23,6 @@
     </template>
     
     <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
-        Nenhum valor para exibir <span *ngIf="exclusiva">(pesquisa exclusiva para estados)</span>.
+        {{ 'pesquisa_tabela__nenhum_valor_para_exibir' | l10n:lang }} <span *ngIf="exclusiva">{{ 'pesquisa_tabela__pesquisa_exclusiva_para_estados' | l10n:lang }}</span>.
     </div>
 </table>

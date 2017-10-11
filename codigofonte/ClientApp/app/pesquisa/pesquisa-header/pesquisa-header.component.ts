@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -45,13 +46,18 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     private subs$$;
     private isOcultarValoresVazios = true;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _pesquisaService: PesquisaService2,
         private _localidadeService: LocalidadeService2,
         private _routerParamsService: RouterParamsService,
         private _route: ActivatedRoute,
         private _router: Router,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {

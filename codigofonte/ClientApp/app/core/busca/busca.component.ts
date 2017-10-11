@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -43,12 +44,17 @@ export class BuscaComponent implements OnInit {
 
     @Output() buscaAberta = new EventEmitter();
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _renderer: Renderer,
         private _buscaService: BuscaService,
         private _buscaCompletaService: BuscaCompletaService,
         private _appState: AppState,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit(){

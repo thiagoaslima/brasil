@@ -7,7 +7,7 @@
 
     <div class="comp__conteudo" *ngIf="isHistoricoVazio()">
         <div class="caixa__conteudo">
-            <p class="hist__sem-historico">Nenhum histórico encontrado.</p>
+            <p class="hist__sem-historico">{{ 'historico__nenhum_historico' | l10n:lang }}</p>
         </div>
     </div>
     
@@ -17,16 +17,16 @@
         <div class="caixa">
             
             <div class="caixa__conteudo">
-                <h2 class="hist__titulo">História</h2>
+                <h2 class="hist__titulo">{{ 'historico__historia' | l10n:lang }}</h2>
                 <div class="hist__texto" [innerHTML]="historico?.historico"></div>
 
                 <div *ngIf="!!historico?.formacaoAdministrativa">
-                    <h2 class="hist__titulo">Formação Administrativa</h2>
+                    <h2 class="hist__titulo">{{ 'historico__formacao_administrativa' | l10n:lang }}</h2>
                     <div class="hist__texto" [innerHTML]="historico?.formacaoAdministrativa"></div>
                 </div>
 
                 <div *ngIf="!!historico?.fonte">
-                    <h2 class="hist__titulo">Fonte</h2>
+                    <h2 class="hist__titulo">{{ 'historico__fonte' | l10n:lang }}</h2>
                     <div class="hist__texto"> {{ historico?.fonte }} </div>
                 </div>
             </div>

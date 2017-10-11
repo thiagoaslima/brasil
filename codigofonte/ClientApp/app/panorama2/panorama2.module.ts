@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,7 +19,8 @@ import { SharedModule3 } from '../shared3/shared3.module';
         CommonModule,
         InfografiaModule,
         SharedModule,
-        SharedModule3
+        SharedModule3,
+        TraducaoModule
     ],
     exports: [],
     declarations: [

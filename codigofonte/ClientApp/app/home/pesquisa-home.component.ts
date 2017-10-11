@@ -1,3 +1,4 @@
+import { TraducaoService } from '../traducao/traducao.service';
 import { Component, OnInit } from '@angular/core';
 
 import { SeletorLocalidadeService } from '../core/seletor-localidade/seletor-localidade.service';
@@ -12,10 +13,16 @@ import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
 export class PesquisaHomeComponent implements OnInit {
     public versao = require('../version.json');
     public  pesquisas = require('./pesquisas.json');
+
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _seletorLocalidadeService: SeletorLocalidadeService,
         private _indicadorService: IndicadorService3,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() { }

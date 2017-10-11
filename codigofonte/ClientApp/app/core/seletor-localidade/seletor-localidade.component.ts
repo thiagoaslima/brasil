@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 import { NavigationEnd, Router } from '@angular/router';
@@ -135,7 +136,9 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         return this._stateSelecionado;
     }
 
-
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
     constructor(
         private _appState: AppState,
         private _localidadeService: LocalidadeService2,
@@ -143,7 +146,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _isMobileService: IsMobileService,
         private _router: Router,
         private _seletorService: SeletorLocalidadeService,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {
         let sub1 = this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto, this.exibirError);
         let sub2 = this._seletorService.state$.subscribe(states => this.states = states, this.exibirError);

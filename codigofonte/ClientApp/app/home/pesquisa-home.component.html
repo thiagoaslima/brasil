@@ -2,11 +2,11 @@
 
         <div class="header container">
             <div class="header__voltar">
-                <a [routerLink]="['..']">&lt; Página Inicial</a>
+                <a [routerLink]="['..']">&lt; {{ 'pesquisa__header__voltar' | l10n:lang }}</a>
             </div>
             <div class="header__descricao">
-                <h2>Pesquisas</h2>
-                <p>As diversas pesquisas do IBGE abrangem temas como Educação, Trabalho, Economia, População, Saúde e Território, não só sobre o Brasil mas também sobre seus estados e municípios. <br>Abaixo você encontra uma lista das pesquisas disponíveis no Brasil em Síntese, clique em uma pesquisa para saber mais.</p>
+                <h2>{{ 'pesquisa__header__descricao_titulo' | l10n:lang }}</h2>
+                <p>{{ 'pesquisa__header__descricao_texto1' | l10n:lang }} <br>{{ 'pesquisa__header__descricao_texto2' | l10n:lang }}</p>
             </div>
         </div>
         <nav class='pesquisas container'>
@@ -102,8 +102,8 @@
 
         <footer class="clearfix">
             <h3 class="footer__text">
-                Não sabe por onde começar?
-                <button class="button__action footer__button" type="button">Selecionar local</button>
+                {{ 'nao_sabe_por_onde_comecar' | l10n:lang }}
+                <button class="button__action footer__button" type="button">{{ 'selecionar_local' | l10n:lang }}</button>
             </h3>
 
             <p class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</p>

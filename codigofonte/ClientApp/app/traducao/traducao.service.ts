@@ -22,14 +22,8 @@ export class TraducaoService {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    constructor(
-        @Optional() @Inject(ORIGIN_URL) originUrl: string,
-        @Optional() @Inject(REQUEST_URL) requestUrl: string,
-    ) {
-        const prerenderURL: string = originUrl;
-
-        console.log(originUrl);
-        console.log(requestUrl);
+    constructor() {
+        const prerenderURL: string = Zone.current.get('originUrl');
 
         const queryLanguage = this.getParameterByName('lang', prerenderURL ? prerenderURL : undefined);
         const navigatorLanguage = navigator.language;

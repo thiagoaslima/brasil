@@ -13,36 +13,34 @@
         <div class="banner__container">
             <div class="banner__item">
                 <div class="banner__content">
-                    <h2 class="banner__title">CONHEÇA <br/> <strong>CIDADES E ESTADOS</strong> <br> DO BRASIL</h2>
+                    <h2 class="banner__title">{{ 'home__banner__conheca' | l10n:lang }} <br/> <strong>{{ 'home__banner__cidades_e_estados' | l10n:lang }}</strong> <br> {{ 'home__banner__do_brasil' | l10n:lang }}</h2>
                     <p class="banner__text">
-                        O Brasil em Síntese é o sistema agregador de informações do IBGE sobre os municípios e estados do Brasil. Aqui você pode
-                        encontrar as pesquisas do IBGE, infográficos e mapas. Além disso pode comparar os indicadores entre
-                        municípios e estados.
+                        {{ 'home__banner__texto' | l10n:lang }}
                     </p>
-                    <button class="button__action" type="button" (click)="abrirSeletorLocalidade()">Comece a usar</button>
+                    <button class="button__action" type="button" (click)="abrirSeletorLocalidade()">{{ 'home__botao__comece_a_usar' | l10n:lang }}</button>
                 </div>
             </div>
         </div>
 
         <div class="destaques__container">
             <div class="destaques__item">
-                <h2 class="destaques__item__title">Pesquisas</h2>
+                <h2 class="destaques__item__title">{{ 'home__container__pesquisa__title' | l10n:lang }}</h2>
                 <p class="destaques__item__text">
-                    Veja tabelas e gráficos com as pesquisas do IBGE sobre todas as cidades e estados do país. Além disso você pode comparar
-                    municípios, ver rankings e séries históricas sobre diversos temas, como trabalho, educação, gênero, saúde,
-                    entre outros. Você pode encontrar dados do PIB, IPCA, IDH, Censo e de diversas outras pesquisas.
+                    {{ 'home__container__pesquisa__text' | l10n:lang }}
                 </p>
+<<<<<<< Updated upstream
                 <a class="destaques__item__link" routerLink="/pesquisas">Acesse a lista completa das pesquisas</a>
+=======
+                <a class="destaques__item__link" routerLink="/pesquisas">{{ 'home__container__pesquisa__link' | l10n:lang }}</a>
+>>>>>>> Stashed changes
             </div>
 
             <div class="destaques__item">
-                <h2 class="destaques__item__title">História & Fotos</h2>
+                <h2 class="destaques__item__title">{{ 'home__container__historia_e_fotos__title' | l10n:lang }}</h2>
                 <p class="destaques__item__text">
-                    Conheça a história da sua cidade e veja fotos do local. Há desde fotos históricas, de pontos turísticos e até mesmo de locais
-                    menos conhecidos dos municípios. As fotos disponíveis pertencem ao Acervo Fotográfico da biblioteca do
-                    IBGE.
+                    {{ 'home__container__historia_e_fotos__text' | l10n:lang }}
                 </p>
-                <button class="button__link destaques__item__link" type="button" (click)="abrirSeletorLocalidade()">Escolha um município</button>
+                <button class="button__link destaques__item__link" type="button" (click)="abrirSeletorLocalidade()">{{ 'home__container__historia_e_fotos__link' | l10n:lang }}</button>
             </div>
         </div>
 <!-- 
@@ -136,8 +134,8 @@
 
         <footer class="clearfix">
             <h3 class="footer__text">
-                Não sabe por onde começar?
-                <button class="button__action footer__button" type="button" (click)="abrirSeletorLocalidade()">Selecionar local</button>
+                {{ 'nao_sabe_por_onde_comecar' | l10n:lang }}
+                <button class="button__action footer__button" type="button" (click)="abrirSeletorLocalidade()">{{ 'selecionar_local' | l10n:lang }}</button>
             </h3>
             
             <p class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</p>

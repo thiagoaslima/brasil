@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -20,10 +21,15 @@ export class HistoricoComponent implements OnInit {
     };
     isCarregando = false;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _appState: AppState,
         private _sinteseService: SinteseService,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {

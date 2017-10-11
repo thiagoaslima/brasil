@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../../traducao/traducao.module';
 import { IBGECartogramaModule } from '../../infografia/ibge-cartograma';
 import { InfografiaModule } from '../../infografia/infografia.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -8,7 +9,7 @@ import { PesquisaRankingComponent } from './pesquisa-ranking.component';
 
 
 @NgModule({
-    imports: [SharedModule2, SharedModule, InfografiaModule, IBGECartogramaModule],
+    imports: [SharedModule2, SharedModule, InfografiaModule, IBGECartogramaModule, TraducaoModule],
     exports: [PesquisaRankingComponent],
     declarations: [PesquisaRankingComponent],
     providers: [],

@@ -12,8 +12,6 @@ import { Page404Component } from './core/page404/page404.component';
 import { PesquisaHomeComponent } from './home/pesquisa-home.component';
 import { HomeComponent } from './home/home.component';
 
-import { PesquisaCacheComponent, IndicadorCacheComponent } from './cache/components';
-
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
@@ -116,15 +114,6 @@ const children = [
         path: 'municipio/:codmun',
         canActivate: [V3RouterGuard],
         component: EmptyComponent
-      },
-      {
-        path: 'cache',
-        component: ShellComponent,
-        children: [
-          { path: '', redirectTo: 'pesquisas', pathMatch: 'full' },
-          { path: 'pesquisas', component: PesquisaCacheComponent },
-          { path: 'indicadores', component: IndicadorCacheComponent }
-        ]
       },
 
       /** REMOÇÃO DO V4 ANTES DAS URLS */

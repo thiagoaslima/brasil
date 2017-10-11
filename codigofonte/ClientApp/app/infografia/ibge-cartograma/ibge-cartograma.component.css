@@ -288,6 +288,10 @@ g, .periodo-link {
     /* margin-top: -3px; */
     /* line-height: 12px; */
 }
+.legenda__item .legenda__texto{
+    float: right;
+}
+
 .legenda__texto{
 	font-size: 0.8em;
 }

@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, Output, Input, OnChanges, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
@@ -38,6 +39,10 @@ export class PesquisaTabelaComponent implements OnChanges {
     private exclusiva;
     private periodosValidos: string[];
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese: SinteseService,
@@ -47,7 +52,8 @@ export class PesquisaTabelaComponent implements OnChanges {
         private _router: Router,
         private _route: ActivatedRoute,
         private _pesquisaService: PesquisaService2,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {  }
 
     ngOnChanges() {

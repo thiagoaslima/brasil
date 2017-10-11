@@ -1,3 +1,4 @@
+import { TraducaoService } from '../traducao/traducao.service';
 import { Component, ElementRef, Inject, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { isBrowser, isNode } from 'angular2-universal';
@@ -32,10 +33,15 @@ export class AniversarioComponent implements OnInit {
     @ViewChild('container')
     private container: ElementRef;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private aniversarioService: AniversarioService,
         private pageScrollService: PageScrollService,
         private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService,
         @Inject(DOCUMENT) private document: any
     ) { 
 

@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import {
     Component,
     EventEmitter,
@@ -52,9 +53,14 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _panoramaService: Panorama2Service,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {
         this.setIcones();
     }

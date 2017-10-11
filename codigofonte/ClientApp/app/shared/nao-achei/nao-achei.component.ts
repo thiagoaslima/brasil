@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { isBrowser } from 'angular2-universal';
@@ -33,10 +34,15 @@ export class NaoAcheiComponent implements OnInit {
     enviado = false;
     url = '';
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _routerParamsServ: RouterParamsService,
         private _http: Http,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {}
 
     static timer;

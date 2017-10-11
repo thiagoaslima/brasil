@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -23,6 +24,7 @@ import { ModalErrorService } from './modal-erro/modal-erro.service';
     CommonModule,
     SharedModule,
     SharedModule2,
+    TraducaoModule
   ],
   declarations: [
     SeletorLocalidadeComponent,

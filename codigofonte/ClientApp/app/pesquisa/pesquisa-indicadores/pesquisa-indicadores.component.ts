@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnChanges, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { isBrowser } from 'angular2-universal';
@@ -37,6 +38,10 @@ export class PesquisaIndicadoresComponent implements OnChanges {
     private isVazio;
     private indicadorComparacao;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese:SinteseService,
@@ -45,7 +50,8 @@ export class PesquisaIndicadoresComponent implements OnChanges {
         private _routerParamsService: RouterParamsService,
         private _route: ActivatedRoute,
         private _router: Router,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {  }
 
     ngOnChanges() {

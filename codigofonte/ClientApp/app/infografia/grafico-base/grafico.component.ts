@@ -75,16 +75,22 @@ export class GraficoComponent implements OnInit, OnChanges {
         },
         tooltips: {
             enabled: true,
-            mode: 'single',
+            mode: 'label',
             callbacks: {
                 label: function(tooltipItems, data) { 
+                    let label;
                     if(parseInt(tooltipItems.yLabel) >= 1000){
-                        return tooltipItems.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                        label = tooltipItems.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     } else {
-                        return tooltipItems.yLabel;
+                        label = tooltipItems.yLabel;
                     }
+
+                    return data.datasets[tooltipItems.datasetIndex].label +': ' + label;
                 }
             }
+        },
+        hover: {
+            mode: 'label'
         },
         scales: {
             yAxes: [{
