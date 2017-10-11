@@ -260,4 +260,8 @@ export class ShellComponent implements OnInit, OnDestroy {
         });
     }
 
+    mudarIdioma(lang: string) {
+        this._traducaoServ.lang = lang;
+    }
+
 }

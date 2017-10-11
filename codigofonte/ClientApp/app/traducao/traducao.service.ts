@@ -30,14 +30,15 @@ export class TraducaoService {
         const sessionLanguage = sessionStorage.getItem('lang');
 
         if (queryLanguage) {
-            this._lang = queryLanguage;
+            this.lang = queryLanguage;
         } else if(sessionLanguage) {
-            this._lang = sessionLanguage;
+            this.lang = sessionLanguage;
         } else if(navigatorLanguage) {
-            this._lang = navigatorLanguage;
+            this.lang = navigatorLanguage;
         } else {
-            this._lang = 'pt';
+            this.lang = 'pt';
         }
+
     }
 
     public L10N(lang: string) {
@@ -46,6 +47,11 @@ export class TraducaoService {
 
     public get lang(): string {
         return this._lang ? this._lang.slice(0,2) : 'pt';
+    }
+
+    public set lang(lang: string) {
+        this._lang = lang;
+        sessionStorage.setItem('lang', this._lang);
     }
 
 }

@@ -1,6 +1,4 @@
 import { TraducaoService } from '../../traducao/traducao.service';
-import { IndicadorService3, LocalidadeService3 } from '../../shared3/services';
-import { Observable } from 'rxjs/Rx';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 import { isNode } from 'angular2-universal';
