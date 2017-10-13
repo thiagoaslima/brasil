@@ -224,7 +224,7 @@ export const PANORAMA: {
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA x INPC x IPP - Variação acumulada em 12 meses',
+                        titulo: 'IPCA x INPC x IPP x IPCA15 - Variação acumulada em 12 meses',
                         tipo: TiposGrafico.linha,
                         link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
                         dados: [{
@@ -232,28 +232,36 @@ export const PANORAMA: {
                             indicadorId: 2265,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36,
                         },
                         {
                             pesquisaId: 1100,
                             indicadorId: 2292,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36,
                         },
                         {
                             pesquisaId: 5796,
                             indicadorId: 1394,
                             categoria: '715[33611]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
-                        }]
+                            quantidadePeriodos: 36
+                        }
+                        // ,{
+                        //     pesquisaId: 1705,
+                        //     indicadorId: 355,
+                        //     categoria: '315[7169]',
+                        //     servico: 'conjunturais',
+                        //     quantidadePeriodos: 36,
+                        // }
+                        ]
                     }
                 },
 
                 {
                     pesquisaId: 1419,
-                    indicadorId: 2265,
+                    indicadorId: 1120,
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
@@ -348,7 +356,7 @@ export const PANORAMA: {
                             indicadorId: 6562,
                             categoria: '11255[90707]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36,
                         }]
                     }
                 },

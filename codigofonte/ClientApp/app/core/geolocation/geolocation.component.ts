@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Localidade } from '../../shared2/localidade/localidade.model';
 
@@ -9,6 +10,14 @@ import { Localidade } from '../../shared2/localidade/localidade.model';
 export class GeolocationComponent {
 
     @Output() location: EventEmitter<Localidade> = new EventEmitter<Localidade>();
+
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
+    constructor(
+        private _traducaoServ: TraducaoService
+    ) {}
 
     public isLoading = false;
 

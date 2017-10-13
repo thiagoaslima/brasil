@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import {
     Component,
     EventEmitter,
@@ -9,13 +10,14 @@ import {
     Output,
     SimpleChange,
 } from '@angular/core';
-
-import { TEMAS } from '../../panorama2/configuration';
-import { Panorama2Service } from '../panorama.service';
-
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
+
+import { TEMAS } from '../../panorama2/configuration';
+import { Panorama2Service } from '../panorama.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'panorama-resumo',
@@ -51,8 +53,14 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
-        private _panoramaService: Panorama2Service
+        private _panoramaService: Panorama2Service,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {
         this.setIcones();
     }
@@ -117,6 +125,10 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
                             || resultado.fontes[0]['periodo'] === '-'
                         );
                 }).map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
         }
     }

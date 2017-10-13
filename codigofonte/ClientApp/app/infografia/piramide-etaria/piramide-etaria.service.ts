@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Injectable()
 export class PiramideEtariaService{
 
+    idioma:string;
     constructor(
         private _http: Http,
+        private modalErrorService: ModalErrorService
         
-    ) { }
+    ) { 
+
+        this.idioma = 'PT';
+    }
+
     
 
     public get(codMunicipio){
@@ -146,6 +154,10 @@ export class PiramideEtariaService{
             // calcula a altura dos retãngulos
             data.py = 100 / data.piramide.length;
 
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
     }
 
@@ -166,10 +178,8 @@ export class PiramideEtariaService{
 
         let dadosPesquisa$;
 
-
-
         dadosPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
         )
         .map((res => res.json()))
 
@@ -195,7 +205,7 @@ export class PiramideEtariaService{
         let nomesPesquisa$;
 
         nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores?lang=${this.idioma}`
         )
         .map((res => res.json()))
   
@@ -257,7 +267,7 @@ export class PiramideEtariaService{
     public getPeriodosDisponiveisPesquisa(codpes: string) {
 
         return this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}?lang=${this.idioma}`
         )
             .map((res) => res.json())
             .map((pesquisa) => {

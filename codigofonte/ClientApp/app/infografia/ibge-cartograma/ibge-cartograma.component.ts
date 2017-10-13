@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Indicador } from '../../shared3/models/indicador.model';
 import { Component, Input, OnChanges, OnInit, SimpleChange, ViewChild, ElementRef } from '@angular/core';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -29,8 +30,15 @@ export class IBGECartograma implements OnInit, OnChanges {
 
     strokeWidth = 0.001;
 
+    ampliado = false;
+    
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _mapaService: MapaService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {

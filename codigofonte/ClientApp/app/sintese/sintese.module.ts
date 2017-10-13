@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule } from '@angular/core';
 
 import { SINTESE } from './sintese-config';
@@ -15,7 +16,8 @@ import { RootRoutingModule } from '../root-routing.module';
     imports: [
         SharedModule,
         ChartsModule,
-        RootRoutingModule
+        RootRoutingModule,
+        TraducaoModule
     ],
     exports: [
         HistoricoComponent,

@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,8 @@ import { KeysPipe } from '../utils/keys.pipe';
     imports: [
         CommonModule,
         FormsModule,
-        MyDatePickerModule
+        MyDatePickerModule,
+        TraducaoModule,
     ],
     exports: [AniversarioComponent],
     declarations: [

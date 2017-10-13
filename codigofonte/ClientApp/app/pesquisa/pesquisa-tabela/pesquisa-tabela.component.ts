@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, Output, Input, OnChanges, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
@@ -9,6 +10,7 @@ import { LocalidadeService2 } from '../../shared2/localidade/localidade.service'
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { RouterParamsService } from '../../shared/router-params.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 // Biblioteca usada no download de arquivos.
@@ -37,6 +39,10 @@ export class PesquisaTabelaComponent implements OnChanges {
     private exclusiva;
     private periodosValidos: string[];
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese: SinteseService,
@@ -45,7 +51,9 @@ export class PesquisaTabelaComponent implements OnChanges {
         private _localidadeService: LocalidadeService2,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _pesquisaService: PesquisaService2
+        private _pesquisaService: PesquisaService2,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {  }
 
     ngOnChanges() {
@@ -91,6 +99,10 @@ export class PesquisaTabelaComponent implements OnChanges {
                     this.onEmpty.emit(false);
                 }
                 subscription$$.unsubscribe();
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
         }
     }
@@ -292,6 +304,10 @@ export class PesquisaTabelaComponent implements OnChanges {
 
                 this.downloadCSVFile(csv, `${this.pesquisa['nome']}`);
             });
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
 
     }

@@ -1,7 +1,7 @@
 <div class="component">
     <div class="comp__conteudo">
 		<div   *ngIf="preview1 == '' && preview2 == '' && preview3 == ''" class="sem_fotos">
-            Não há fotos para este município
+            {{ 'fotos__nao_ha_fotos' | l10n:lang }}
 		</div>
         
         <div class="preview" (click)="mostrar()"  *ngIf="preview1 != '' && preview2 == '' && preview3 == ''">
@@ -36,14 +36,14 @@
             </div>
         </div>
 
-        <p class="preview__observacao" *ngIf="localidade?.tipo=='uf'">Fotos da capital {{localidade?.capital?.nome}}</p>
+        <p class="preview__observacao" *ngIf="localidade?.tipo=='uf'">{{ 'fotos__fotos_da_capital' | l10n:lang }} {{localidade?.capital?.nome}}</p>
 
         <!--galeria-->
         <div class="overlay" *ngIf="mostraGaleria">
             <div class="area-click-1" (click)="esconder()"></div>
             <div class="galeria">
                 <div class="galeria__cabecalho">
-                    <h3 class="galeria__titulo">Fotos</h3>
+                    <h3 class="galeria__titulo">{{ 'fotos__fotos' | l10n:lang }}</h3>
                     <i class="fa fa-times galeria__close-icon" aria-hidden="true" (click)="esconder()"></i>
                 </div>
                 <div class="galeria__conteudo" scroll #scroll$="scrollDirective">
@@ -77,9 +77,9 @@
                 <div class="foto__rodape">
                     <h3 class="foto__titulo">{{titulo}}</h3>
                     <h4 class="foto__titulo">
-                        <a [href]="detalhes" target="_blank" class="foto__link">Detalhes</a>
+                        <a [href]="detalhes" target="_blank" class="foto__link">{{ 'fotos__detalhes' | l10n:lang }}</a>
                         <span class="foto__link">|</span>
-                        <a [href]="downloadLink" [download]="downloadNome" class="foto__link">Download</a>
+                        <a [href]="downloadLink" [download]="downloadNome" class="foto__link">{{ 'download' | l10n:lang }}</a>
                     </h4>
                 </div>
             </div>

@@ -36,7 +36,7 @@
 
         <h2 class="grafico__titulo">{{obj.titulo}}
             <span class="grafico__unidade" *ngIf="obj.unidade && obj.unidade.nome">
-                ( Unidade:
+                ( {{ 'unidade' | l10n:lang }}:
                     {{ obj.unidade.nome}}
                     <template [ngIf]="obj.unidade.multiplicador > 1">
                         x{{ obj.unidade.multiplicador}}

@@ -1,7 +1,7 @@
 <div class="nao-achei" [class.nao-achei__escondido]="esconde">
     <p class="nao-achei__aba">
-        <span class="nao-achei__label" *ngIf="!enviado" (click)="abreFecha();">Não encontrou o que procurava?</span>
-        <span class="nao-achei__label" *ngIf="enviado">Obrigado! Sua sugestão foi enviado com sucesso.</span>
+        <span class="nao-achei__label" *ngIf="!enviado" (click)="abreFecha();">{{ 'nao_achei__nao_encontrou_o_que_procurava' | l10n:lang }}</span>
+        <span class="nao-achei__label" *ngIf="enviado">{{ 'nao_achei__obrigado' | l10n:lang }}</span>
         
         <!--<i class="fa nao-achei__icone" *ngIf="!enviado" [class.fa-caret-up]="!aberto" [class.fa-caret-down]="aberto" aria-hidden="true"></i>-->
         <i class="fa fa-times nao-achei__icone" aria-hidden="true" (click)="esconder()"></i>
@@ -9,10 +9,10 @@
     <form class="nao-achei__form" [class.nao-achei__form--aberto]="aberto" #form="ngForm" (ngSubmit)="enviar('','',mensagem.value)">
         <!-- <input type="email" name="email" #email placeholder="Seu email" required class="nao-achei__item">
         <input type="text" name="assunto" #assunto placeholder="Assunto" required class="nao-achei__item"> -->
-        <p class='nao-achei__descricao'>Ajude-nos a manter o site com informações relevates.</p>
-        <textarea rows="5" name="mensagem" #mensagem placeholder="O que você não encontrou e gostaria de ver aqui ?" required class="nao-achei__item"></textarea>
+        <p class='nao-achei__descricao'>{{ 'nao_achei__ajude_nos' | l10n:lang }}</p>
+        <textarea rows="5" name="mensagem" #mensagem [placeholder]="'nao_achei_mensagem_placeholder' | l10n:lang" required class="nao-achei__item"></textarea>
         <div class="nao-achei__botao-container">
-            <input type="submit" class="nao-achei__botao" value="Enviar">
+            <input type="submit" class="nao-achei__botao" [value]="'nao_achei__eviar' | l10n:lang">
         </div>
     </form>
 </div>

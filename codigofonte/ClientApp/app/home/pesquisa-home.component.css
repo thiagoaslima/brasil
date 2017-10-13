@@ -18,7 +18,7 @@
 .container{
     width: 100%;
     max-width: 1100px;
-    margin: auto
+    margin: auto;
 }
 
 .header{
@@ -44,18 +44,28 @@ nav.pesquisas{
 
 nav ul{
     -moz-column-count: 2;
-    -moz-column-gap: 2.5em;
+    -moz-column-gap: 3.5em;
     -webkit-column-count: 2;
-    -webkit-column-gap: 2.5em;
+    -webkit-column-gap: 3.5em;
      column-count: 2;
-     column-gap: 2.5em;
+     column-gap: 3.5em;
+   
 }
 
 nav ul li{
     list-style-type: none;
     /* float: left; */
     font-size: 1.4em;
-    margin-bottom: 12px;
+    /*margin-bottom: 12px;*/
+    /*display: inline-block;*/
+}
+nav ul li a{
+
+    color:deepskyblue;
+    font-size:.6em;
+    position:relative;
+    top:-.5em;
+    margin:0;
 }
 
 nav ul li:nth-child(even){
@@ -157,4 +167,39 @@ footer {
     .footer__button{
         margin-top: 10px;
     }
+}
+.pesquisa_descricao{
+
+  
+  font-size: .6em;
+ 
+  overflow: hidden;
+  position: relative; 
+  line-height: 1.2em;
+  padding-top:1em;
+  max-height: 4.6em; 
+  text-align: justify;  
+  margin-right: -1em;
+  padding-right: 1em;
+
+}
+
+.pesquisa_descricao:before {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding:0;
+  margin-right:.2em;
+}
+
+.pesquisa_descricao:after {
+ 
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  background: white;
 }

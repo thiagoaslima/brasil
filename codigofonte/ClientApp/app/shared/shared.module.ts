@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
@@ -24,7 +25,8 @@ const MODULES = [
     RouterModule,
     FormsModule,
     WindowEventsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TraducaoModule
 ];
 
 const PIPES = [

@@ -29,7 +29,7 @@
             <div class="notas" *ngIf="periodo.nome == ano && periodo.fontes.length > 0">
                 <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
                 <div class="notas__botao" (click)="mostrarFontes=true">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i> Fonte
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'pesquisa_header__fonte' | l10n:lang }}
                 </div>
                 <div class="notas__lista-container" *ngIf="mostrarFontes">
                     <ol>
@@ -43,7 +43,7 @@
             <div class="notas" *ngIf="periodo.nome == ano && periodo.notas.length > 0">
                 <div class="area-click" [class.area-click--visivel]="mostrarNotas" (click)="mostrarNotas=false"></div>
                 <div class="notas__botao" (click)="mostrarNotas=true">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'pesquisa_header__notas' | l10n:lang }}
                 </div>
                 <div class="notas__lista-container" *ngIf="mostrarNotas">
                     <ol>
@@ -90,7 +90,7 @@
                         C12.324,10.264,11.97,10.262,11.615,10.262z"/>
                 </svg>
             </div>
-            Tabela
+            {{ 'pesquisa_header__tabela' | l10n:lang }}
         </div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="!isVazio ? setaTipo('grafico') : 0" [class.desabilitado]="isVazio || this.listaPeriodos.length <= 1">
             <div>
@@ -108,7 +108,7 @@
                             c-4.605,0-9.213,0-13.839,0c0-3.454,0-6.911,0-10.379c0.272,0,0.536,0,0.832,0C2.188,6.646,2.188,9.814,2.188,13.012z"/>
                 </svg>
             </div>
-            Série Histórica
+            {{ 'pesquisa_header__serie_historica' | l10n:lang }}
         </div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="!isVazio ? setaTipo('cartograma') : 0" [class.desabilitado]="isVazio || isNivelNacional">
             <div>
@@ -122,7 +122,7 @@
                             l-2.376,1.088"/>
                 </svg>
             </div>
-            Cartogramas
+            {{ 'pesquisa_header__cartograma' | l10n:lang }}
         </div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="!isVazio ? setaTipo('ranking') : 0" [class.desabilitado]="isVazio">
                 <div>
@@ -160,7 +160,7 @@
                                 c0.003,0.643,0.003,1.285,0.003,1.929C4.369,5.007,4.369,5.075,4.369,5.178z"/>
                     </svg>
                 </div>
-            Ranking
+            {{ 'pesquisa_header__ranking' | l10n:lang }}
         </div>
     </div>
     <div class="cabecalho__visualizacao-dados">
@@ -182,7 +182,7 @@
                 
 
                 <div class="select__submenu-aberto" *ngIf="mostrarOpcoes">
-                    <div (click)="fazerDownload();"><span><i class="fa fa-download fa-lg" aria-hidden="true"></i></span> Download</div>
+                    <div (click)="fazerDownload();"><span><i class="fa fa-download fa-lg" aria-hidden="true"></i></span> {{ 'download' | l10n:lang }}</div>
                     <!--<div (click)="compartilhar();"><span><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i></span> Compartilhar</div>-->
                 </div>
             </div>

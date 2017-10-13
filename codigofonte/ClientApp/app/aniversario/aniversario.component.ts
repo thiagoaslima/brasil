@@ -1,13 +1,13 @@
-import { Observable, Subscription } from 'rxjs/Rx';
+import { TraducaoService } from '../traducao/traducao.service';
 import { Component, ElementRef, Inject, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { PageScrollInstance, PageScrollService, PageScrollConfig } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
-
 import { isBrowser, isNode } from 'angular2-universal';
+import { Observable, Subscription } from 'rxjs/Rx';
+import { PageScrollInstance, PageScrollService, PageScrollConfig } from 'ng2-page-scroll';
 
 import { Aniversario } from './aniversario';
 import { AniversarioService } from './aniversario.service';
-
+import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
 
 @Component({
     selector: 'aniversario',
@@ -33,9 +33,15 @@ export class AniversarioComponent implements OnInit {
     @ViewChild('container')
     private container: ElementRef;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private aniversarioService: AniversarioService,
         private pageScrollService: PageScrollService,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService,
         @Inject(DOCUMENT) private document: any
     ) { 
 
@@ -140,6 +146,10 @@ export class AniversarioComponent implements OnInit {
 
                     this.goToDay(this.diaSelecionado);
                 }   
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
     }
 

@@ -1,3 +1,4 @@
+import { TraducaoService } from '../traducao/traducao.service';
 import { Component, OnInit } from '@angular/core';
 
 import { SeletorLocalidadeService } from '../core/seletor-localidade/seletor-localidade.service';
@@ -11,8 +12,13 @@ import { SeletorLocalidadeService } from '../core/seletor-localidade/seletor-loc
 export class HomeComponent implements OnInit {
     public versao = require('../version.json');
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
-        private _seletorLocalidadeService: SeletorLocalidadeService
+        private _seletorLocalidadeService: SeletorLocalidadeService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() { }

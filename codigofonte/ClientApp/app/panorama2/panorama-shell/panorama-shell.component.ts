@@ -1,7 +1,13 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
+
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 import { Panorama2Service } from '../panorama.service';
 import { niveisTerritoriais } from '../../shared3/values';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-
 import { AppState } from '../../shared2/app-state';
 import { PANORAMA, ItemConfiguracao } from '../configuration';
 import { CacheFactory } from '../../cache/cacheFactory.service';
@@ -9,13 +15,9 @@ import { SyncCache } from '../../cache/decorators';
 import { converterObjArrayEmHash } from '../../utils2';
 import { LocalidadeService3, ResultadoService3 } from '../../shared3/services';
 
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
 
 const cache = CacheFactory.createCache('configuracao', 3);
+
 @Component({
     selector: 'panorama-shell',
     templateUrl: './panorama-shell.template.html',
@@ -47,7 +49,8 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
         private _appState: AppState,
         private _panoramaService: Panorama2Service,
         private _resultadoService: ResultadoService3,
-        private _localidadeService: LocalidadeService3
+        private _localidadeService: LocalidadeService3,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -75,6 +78,9 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
                 this.resultados = resultados;
                 this.localidade = localidade;
                 this.temaSelecionado = '';
+            }, error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
     }
 

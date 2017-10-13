@@ -1,4 +1,4 @@
-<div class="bt-aniversarios" (click)="toggleVisible()"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Aniversários dos Municípios</div>
+<div class="bt-aniversarios" (click)="toggleVisible()"><i class="fa fa-birthday-cake" aria-hidden="true"></i>{{ 'aniversario__aniversario_dos_municipios' | l10n:lang }}</div>
 
 <div class="aniversarios" *ngIf="isVisible">
     <div class="bg"></div>
@@ -6,11 +6,11 @@
         <div class="aniversario__header">
             <i class="fa fa-times" aria-hidden="true" (click)="toggleVisible()"></i>
 
-            <h2>Aniversários</h2>
+            <h2>{{ 'aniversario__aniversarios' | l10n:lang }}</h2>
             
                         <select name="estado" (change)="onUFChange($event)"> 
-                            <option value="estado">Selecione o Estado</option> 
-                            <option value="0">Todos os estados</option> 
+                            <option value="estado">{{ 'aniversario__selecione_o_estado' | l10n:lang }}</option> 
+                            <option value="0">{{ 'aniversario__todos_os_estados' | l10n:lang }}</option> 
                             <option value="12">Acre</option> 
                             <option value="27">Alagoas</option> 
                             <option value="13">Amazonas</option> 
@@ -45,20 +45,20 @@
         <div class="aniversario__content">
             <nav id='filtroMes'>
                 <ul>
-                    <li (click)="setHoje()">HOJE</li>
+                    <li (click)="setHoje()">{{ 'aniversario__HOJE' | l10n:lang }}</li>
                     <li>&nbsp;</li>
-                    <li (click)="setMes(1)" [class.selecionado]="mesSelecionado == 1">JAN</li>
-                    <li (click)="setMes(2)" [class.selecionado]="mesSelecionado == 2">FEV</li>
-                    <li (click)="setMes(3)" [class.selecionado]="mesSelecionado == 3">MAR</li>
-                    <li (click)="setMes(4)" [class.selecionado]="mesSelecionado == 4">ABR</li>
-                    <li (click)="setMes(5)" [class.selecionado]="mesSelecionado == 5">MAI</li>
-                    <li (click)="setMes(6)" [class.selecionado]="mesSelecionado == 6">JUN</li>
-                    <li (click)="setMes(7)" [class.selecionado]="mesSelecionado == 7">JUL</li>
-                    <li (click)="setMes(8)" [class.selecionado]="mesSelecionado == 8">AGO</li>
-                    <li (click)="setMes(9)" [class.selecionado]="mesSelecionado == 9">SET</li>
-                    <li (click)="setMes(10)" [class.selecionado]="mesSelecionado == 10">OUT</li>
-                    <li (click)="setMes(11)" [class.selecionado]="mesSelecionado == 11">NOV</li>
-                    <li (click)="setMes(12)" [class.selecionado]="mesSelecionado == 12">DEZ</li>
+                    <li (click)="setMes(1)" [class.selecionado]="mesSelecionado == 1">{{ 'aniversario__JAN' | l10n:lang }}</li>
+                    <li (click)="setMes(2)" [class.selecionado]="mesSelecionado == 2">{{ 'aniversario__FEV' | l10n:lang }}</li>
+                    <li (click)="setMes(3)" [class.selecionado]="mesSelecionado == 3">{{ 'aniversario__MAR' | l10n:lang }}</li>
+                    <li (click)="setMes(4)" [class.selecionado]="mesSelecionado == 4">{{ 'aniversario__ABR' | l10n:lang }}</li>
+                    <li (click)="setMes(5)" [class.selecionado]="mesSelecionado == 5">{{ 'aniversario__MAI' | l10n:lang }}</li>
+                    <li (click)="setMes(6)" [class.selecionado]="mesSelecionado == 6">{{ 'aniversario__JUN' | l10n:lang }}</li>
+                    <li (click)="setMes(7)" [class.selecionado]="mesSelecionado == 7">{{ 'aniversario__JUL' | l10n:lang }}</li>
+                    <li (click)="setMes(8)" [class.selecionado]="mesSelecionado == 8">{{ 'aniversario__AGO' | l10n:lang }}</li>
+                    <li (click)="setMes(9)" [class.selecionado]="mesSelecionado == 9">{{ 'aniversario__SET' | l10n:lang }}</li>
+                    <li (click)="setMes(10)" [class.selecionado]="mesSelecionado == 10">{{ 'aniversario__OUT' | l10n:lang }}</li>
+                    <li (click)="setMes(11)" [class.selecionado]="mesSelecionado == 11">{{ 'aniversario__NOV' | l10n:lang }}</li>
+                    <li (click)="setMes(12)" [class.selecionado]="mesSelecionado == 12">{{ 'aniversario__DEZ' | l10n:lang }}</li>
 
                     <!--<li class='seletorMesMobile selecionado'>
                         <select name="mes"> 

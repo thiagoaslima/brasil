@@ -1,12 +1,15 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../../shared2/app-state';
 import { BuscaService } from './busca.service';
 import { BuscaCompletaService } from './busca-completa.service';
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
-import { Observable } from 'rxjs/Observable';
+
 @Component({
     selector: 'busca',
     templateUrl: 'busca.template.html',
@@ -41,16 +44,22 @@ export class BuscaComponent implements OnInit {
 
     @Output() buscaAberta = new EventEmitter();
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _renderer: Renderer,
         private _buscaService: BuscaService,
         private _buscaCompletaService: BuscaCompletaService,
-        private _appState: AppState
+        private _appState: AppState,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit(){
         this._appState.observable$
-            .subscribe(localidade => this._localidadeAtual = localidade);
+            .subscribe(localidade => this._localidadeAtual = localidade, this.exibirError);
 
         Observable.fromEvent<KeyboardEvent>(this.campoBusca.nativeElement, "keyup")
             .debounceTime(400)
@@ -61,7 +70,7 @@ export class BuscaComponent implements OnInit {
                 this.menuAberto = true;
                 this.resultados = this._buscaCompletaService.search(texto);
                 this.numResultados = (this.resultados.length > 0 && this.resultados[0].type == "mensagem") ? 0 : this.resultados.length;
-            });
+            }, this.exibirError);
     }
 
     ativarBusca() {
@@ -91,6 +100,10 @@ export class BuscaComponent implements OnInit {
         this.menuAberto = false;
         this.resultadoBusca = [];
         this.termo = ''
+    }
+
+    private exibirError(){
+        this.modalErrorService.showError();
     }
 }
 

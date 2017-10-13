@@ -1,21 +1,18 @@
-
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Rx';
 
 import { SinteseService } from '../sintese/sintese.service';
-
 import { Localidade } from '../shared2/localidade/localidade.model';
 import { Pesquisa } from '../shared2/pesquisa/pesquisa.model';
 import { EscopoIndicadores, Indicador } from '../shared2/indicador/indicador.model'
-
 import { RouterParamsService } from '../shared/router-params.service';
 import { LocalidadeService2 } from '../shared2/localidade/localidade.service';
 import { PesquisaService2 } from '../shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from '../shared2/indicador/indicador.service';
-
 import { flatTree } from '../utils/flatFunctions';
+import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'pesquisa',
@@ -45,7 +42,8 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         private _localidadeService2: LocalidadeService2,
         private _pesquisaService: PesquisaService2,
         private _sintese: SinteseService,
-        private _indicadorService: IndicadorService2
+        private _indicadorService: IndicadorService2,
+        private modalErrorService: ModalErrorService
     ) { }
 
     ngOnInit() {
@@ -101,8 +99,20 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                         this.posicaoIndicador = indicadores[0]['posicao'];
                     else
                         this.posicaoIndicador = '2';
+                },
+                error => {
+                    console.error(error);
+                    this.modalErrorService.showError();
                 });
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
+        },
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
         });
     }
 

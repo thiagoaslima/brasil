@@ -51,9 +51,9 @@ export class BuscaCompletaService {
         //find by place code
         for(i = 0; i < textWords.length; i++){
             if(!isNaN(textWords[i])){
-                var num = parseInt(textWords[i]);
+                var num = textWords[i];
                 for(var j = 0; j < places.length; j++){
-                    if(places[j].codigo == num && placesFound.indexOf(places[j]) < 0){
+                    if(places[j].codigo.toString().indexOf(num) == 0 && placesFound.indexOf(places[j]) < 0){
                         placesFound.push(places[j]);
                     }
                 }

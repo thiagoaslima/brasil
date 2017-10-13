@@ -1,4 +1,7 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnChanges, Input, EventEmitter, Output } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { isBrowser } from 'angular2-universal';
 
 import { EscopoIndicadores } from '../../shared2/indicador/indicador.model';
 import { Localidade } from '../../shared2/localidade/localidade.model';
@@ -7,8 +10,7 @@ import { SinteseService } from '../../sintese/sintese.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { isBrowser } from 'angular2-universal';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
 
 // Biblioteca usada no download de arquivos.
@@ -36,6 +38,10 @@ export class PesquisaIndicadoresComponent implements OnChanges {
     private isVazio;
     private indicadorComparacao;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         // TODO: Retirar SinteseService e usar PesquisaService e/ou IndicadrService
         private _sintese:SinteseService,
@@ -43,7 +49,9 @@ export class PesquisaIndicadoresComponent implements OnChanges {
         private _pesquisaService: PesquisaService2,
         private _routerParamsService: RouterParamsService,
         private _route: ActivatedRoute,
-        private _router: Router
+        private _router: Router,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {  }
 
     ngOnChanges() {
@@ -93,6 +101,10 @@ export class PesquisaIndicadoresComponent implements OnChanges {
                 //emite evento com o indicador de comparação
                 if(this.getIndicadorComparacao() == 0)
                     this.onIndicador.emit(this.indicadorComparacao);
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
         }
     }

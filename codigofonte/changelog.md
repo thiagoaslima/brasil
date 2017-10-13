@@ -1,5 +1,24 @@
 # Change log
 
+## [v4.2.8] - 2017-10-13
+### Added
+ - Autocompletar dos códigos do local.
+ - Exibição de mensagem de erro nas situações de exceção.
+ - Analytics: clicks no link para o site antigo.
+ - Inclusão nos elementos da pasquisa ranking um link para seus respectivos panoramas.
+
+### Changed
+ - Ampliação do cartograma.
+ - Dasabilitado o questionário.
+ - Tabela de pesquisa exibindo inicialmente o período mais recente que possua dados.
+ - Componente de compartilhamento em redes sociais para carregar título do compartilhamento de acordo com a página visitada.
+ - Adição do botão de fechar no não achei.
+
+### Fixed
+- Adicionar comparação na tabela de pesquisas.
+- Erro na pesquisa.
+- Submenu redirecionava para pesquisa com Brasil como comparação.
+
 
 ## [v4.2.7] - 2017-10-03
 ### Changed

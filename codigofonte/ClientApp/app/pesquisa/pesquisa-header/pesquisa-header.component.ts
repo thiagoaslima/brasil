@@ -1,4 +1,6 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
@@ -6,8 +8,8 @@ import { Localidade } from '../../shared2/localidade/localidade.model';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'pesquisa-header',
@@ -44,12 +46,18 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     private subs$$;
     private isOcultarValoresVazios = true;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _pesquisaService: PesquisaService2,
         private _localidadeService: LocalidadeService2,
         private _routerParamsService: RouterParamsService,
         private _route: ActivatedRoute,
-        private _router: Router
+        private _router: Router,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {
@@ -87,6 +95,10 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 this.objetoURL.pesquisa = params.params.pesquisa;
                 this.objetoURL.indicador = params.params.indicador ? params.params.indicador : 0;
                 this.objetoURL.queryParams = params.queryParams ? params.queryParams : {};
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
         });
     }

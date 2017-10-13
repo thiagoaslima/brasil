@@ -1,8 +1,11 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AppState } from '../../shared2/app-state';
 import { SinteseService } from '../sintese.service';
+import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
 
 @Component({
     selector: 'historico',
@@ -18,9 +21,15 @@ export class HistoricoComponent implements OnInit {
     };
     isCarregando = false;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _appState: AppState,
-        private _sinteseService: SinteseService
+        private _sinteseService: SinteseService,
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {
@@ -38,6 +47,10 @@ export class HistoricoComponent implements OnInit {
                     historico.formacaoAdministrativa = historico.formacaoAdministrativa.replace(/\n/g, '<br>');
                 this.historico = historico;
                 this.isCarregando = false;
+            },
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
             });
 
     }

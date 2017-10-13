@@ -11,10 +11,10 @@
                     <small class="busca__codigo" *ngIf="item['id']">{{ '[' + item['id'] + ']' }}</small>
                     <span class='busca__sigla' *ngIf="item['parent']">{{item['parent']}}</span>
                     
-                    <span class='busca__tipo' *ngIf="item['type'] == 'pais'">País</span>
-                    <span class='busca__tipo' *ngIf="item['type'] == 'uf'">Estado</span>
-                    <span class='busca__tipo' *ngIf="item['type'] == 'municipio'">Município</span>
-                    <span class='busca__tipo' *ngIf="item['type'] == 'pesquisa'">Pesquisa</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'pais'">{{ 'pais' | l10n:lang }}</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'uf'">{{ 'estado' | l10n:lang }}</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'municipio'">{{ 'municipio' | l10n:lang }}</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'pesquisa'">{{ 'pesquisa' | l10n:lang }}</span>
                 </a>
                 <div *ngIf="item['type'] == 'mensagem'" class='busca__mensagem'>
                     {{item['name']}}
