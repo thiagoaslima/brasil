@@ -19,7 +19,7 @@ import { LocalidadeService2 } from '../localidade/localidade.service';
 import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador, Ranking } from './indicador.model';
 import { flatTree } from '../../utils/flatFunctions';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
-
+import {TraducaoService} from '../../traducao/traducao.service';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -31,12 +31,13 @@ export class IndicadorService2 {
     constructor(
         private _http: Http,
         private _localidadeService: LocalidadeService2,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoService:TraducaoService
     ) {
         Indicador.setIndicadoresStrategy({
             retrieve: this.getIndicadoresByPosicao.bind(this)
         })
-        this.idioma = 'PT';
+        this.idioma = this._traducaoService.lang;
       
     }
 

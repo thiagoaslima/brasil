@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
+import {TraducaoService} from '../../traducao/traducao.service';
 
 @Injectable()
 export class PiramideEtariaService{
@@ -11,11 +12,12 @@ export class PiramideEtariaService{
     idioma:string;
     constructor(
         private _http: Http,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoService:TraducaoService
         
     ) { 
 
-        this.idioma = 'PT';
+        this.idioma = this._traducaoService.lang;
     }
 
     
