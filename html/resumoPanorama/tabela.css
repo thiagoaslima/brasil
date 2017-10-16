@@ -1,0 +1,59 @@
+body {
+    background-color: #EEE;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+#conteudo {
+    margin: 25px auto;
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    padding: 25px;
+    text-align: left;
+    width: 800px;
+}
+
+.logo{
+    float: right;
+}
+
+h1 {
+    margin: 50 0 10px 0;
+    padding: 0;
+}
+ul#info {
+    margin: 0 0 25px 0;
+    padding: 0;
+    font-size: 12px;
+    list-style-position: outside;
+    list-style-type: none;
+}
+div#mapa {
+    margin: 0 0 25px 0;
+    text-align: center;
+}
+
+table#municipios  {
+    font-size: 12px;
+}
+table#municipios thead tr  {
+    background-color: #ddd;
+}
+table#municipios thead tr th  {
+    text-align: center;
+    padding: 5px;
+}
+table#municipios tbody tr td  {
+    text-align: right;
+    padding: 5px;
+}
+table#municipios thead tr th.nome, table#municipios tbody tr td.nome, table#municipios tbody tr td.gentilico {
+    text-align: left;
+}
+
+table#municipios tbody tr.impar  {
+    background-color: #EEE;
+}
+table#municipios tfoot tr td {
+    font-weight: bold;
+    padding-top: 15px;
+}
