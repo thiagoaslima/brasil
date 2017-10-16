@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, OnDestroy, Renderer } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subscription } from 'rxjs';
@@ -51,12 +52,17 @@ export class FotosComponent implements OnInit, OnDestroy {
 
     localidade;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private renderer: Renderer,
         private _sinteseService: SinteseService,
         private _appState: AppState,
         private http: Http,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) {
 
     }
@@ -124,7 +130,10 @@ export class FotosComponent implements OnInit, OnDestroy {
                     this.alt_preview1 = fotos[0].TITULO + ' - ' + fotos[0].ANO;
                 }
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
     }
 
     ngOnDestroy(){

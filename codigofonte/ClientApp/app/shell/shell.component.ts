@@ -1,5 +1,7 @@
+
 import { AnalyticsService } from '../shared/analytics.service';
 import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
+import { TraducaoService } from '../traducao/traducao.service';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { isBrowser } from 'angular2-universal';
@@ -137,13 +139,18 @@ export class ShellComponent implements OnInit, OnDestroy {
         }
     }
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _route: ActivatedRoute,
         private _appState: AppState,
         private _routerParams: RouterParamsService,
         private router: Router,
         private pageScrollService: PageScrollService,
-        private _analytics: AnalyticsService
+        private _analytics: AnalyticsService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {
@@ -251,6 +258,10 @@ export class ShellComponent implements OnInit, OnDestroy {
             tipoInteracao: 'click',
             label: 'Ir para site antigo'
         });
+    }
+
+    mudarIdioma(lang: string) {
+        this._traducaoServ.lang = lang;
     }
 
 }

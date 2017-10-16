@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { isBrowser, isNode } from 'angular2-universal';
 import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
@@ -27,9 +28,14 @@ export class PanoramaTemasComponent implements OnChanges {
     public isPrerender = isNode;
     public isBrowser = isBrowser;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _panoramaService: Panorama2Service,
-        private pageScrollService: PageScrollService
+        private pageScrollService: PageScrollService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {

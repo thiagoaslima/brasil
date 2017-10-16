@@ -232,36 +232,37 @@ export const PANORAMA: {
                             indicadorId: 2265,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36
                         },
                         {
                             pesquisaId: 1100,
                             indicadorId: 2292,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36
                         },
                         {
                             pesquisaId: 5796,
                             indicadorId: 1394,
                             categoria: '715[33611]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36
                         }]
                     }
                 },
 
-                {
-                    pesquisaId: 1419,
-                    indicadorId: 2265,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA 12 meses',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // {
+                //     pesquisaId: 1419,
+                //     indicadorId: 1120,
+                //     categoria: '315[7169]',
+                //     servico: 'conjunturais',
+                //     quantidadePeriodos: 1,
+                //     titulo: 'Preços - IPCA 12 meses',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
+                // TODO: CORRIGIR GRAFICO
                 {
                     pesquisaId: 1705,
                     indicadorId: 355,
@@ -270,7 +271,19 @@ export const PANORAMA: {
                     quantidadePeriodos: 1,
                     titulo: 'Preços - IPCA15',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'IPCA15 - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: '',
+                        dados: [{
+                            pesquisaId: 1705,
+                            indicadorId: 1120,
+                            categoria: '315[7169]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 36
+                        }]
+                    }
                 },
 
                 {
@@ -292,9 +305,22 @@ export const PANORAMA: {
                     quantidadePeriodos: 1,
                     titulo: 'Indústria - PIM-PF',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PIM-PF - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: '',
+                        dados: [{
+                            pesquisaId: 3653,
+                            indicadorId: 3141,
+                            categoria: '544[129314]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 36
+                        }]
+                    }
                 },
 
+                // TODO: INCLUIR GRAFICO
                 {
                     pesquisaId: 3416,
                     indicadorId: 564,
@@ -303,9 +329,22 @@ export const PANORAMA: {
                     quantidadePeriodos: 1,
                     titulo: 'Comércio - PMC',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PMC - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: '',
+                        dados: [{
+                            pesquisaId: 3416,
+                            indicadorId: 564,
+                            categoria: '11046[90670]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 36
+                        }]
+                    }
                 },
 
+                // TODO: INCLUIR GRAFICO
                 {
                     pesquisaId: 6442,
                     indicadorId: 8677,
@@ -314,20 +353,33 @@ export const PANORAMA: {
                     quantidadePeriodos: 1,
                     titulo: 'Serviços - PMS',
                     tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PMS - Variação acumulada em 12 meses',
+                        tipo: TiposGrafico.linha,
+                        link: '',
+                        dados: [{
+                            pesquisaId: 6442,
+                            indicadorId: 8677,
+                            categoria: '11046[90670]',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 36
+                        }]
+                    }
                 },
 
 
-                {
-                    pesquisaId: 1616,
-                    indicadorId: 4092,
-                    categoria: '1965[40310]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'Desocupação - PNAD Contínua',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
+                // Taxa de desocupação COM PROBLEMA
+                // {
+                //     pesquisaId: 6381,
+                //     indicadorId: 4099,
+                //     servico: 'conjunturais',
+                //     categoria: '',
+                //     quantidadePeriodos: 1,
+                //     titulo: 'Taxa de desocupação - PNAD Contínua',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
 
                 {
                     pesquisaId: 5932,
@@ -348,7 +400,7 @@ export const PANORAMA: {
                             indicadorId: 6562,
                             categoria: '11255[90707]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 12,
+                            quantidadePeriodos: 36,
                         }]
                     }
                 },

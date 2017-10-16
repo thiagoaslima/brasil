@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule } from '@angular/core';
 
 import { SharedModule2 } from '../shared2/shared.module';
@@ -15,7 +16,8 @@ import { PesquisaRankingModule } from './pesquisa-ranking/pesquisa-ranking.modul
         SharedModule2,
         PesquisaRankingModule,
         PesquisaGraficosModule,
-        PesquisaCartogramaModule
+        PesquisaCartogramaModule,
+        TraducaoModule
     ],
     declarations: [
         PesquisaTabelaComponent,

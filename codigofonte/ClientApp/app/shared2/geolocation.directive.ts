@@ -82,6 +82,9 @@ export class GeolocationDirective {
 
             this.onGetLocation.emit(municipio);
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
     }
 }

@@ -22,10 +22,14 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class PesquisaService3 {
 
     static readonly cache = CacheFactory.createCache('pesquisaCache', 10);
+    idioma:string;
 
     constructor(
         private _http: Http
-    ) { }
+    ) { 
+
+        this.idioma = 'PT';
+    }
 
     @RxSimpleCache({
         cache: PesquisaService3.cache
@@ -77,6 +81,16 @@ export class PesquisaService3 {
     }
 
     private _request(url: string): Observable<any> {
+
+        if(this.idioma!=null){
+            if(url.indexOf('?')>0){
+
+                 url+='&lang='+this.idioma;
+            }else{
+
+                 url+='?lang='+this.idioma;
+            }
+        }
         return this._http.get(url, options)
             .retry(3)
             .map(res => {

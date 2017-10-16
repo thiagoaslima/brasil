@@ -1,7 +1,7 @@
 <div id='selecionar-localidade' #selecionarLocalidade [class.aberto]="aberto" [class.estado]="states.estados" [class.municipio]="states.municipios">
 
     <div id="primeira-coluna" [class.aberto]="aberto">
-        <div class="selecionar-localidade__voltar" (click)="fecharSeletor()">&lt; Voltar </div>
+        <div class="selecionar-localidade__voltar" (click)="fecharSeletor()">&lt; {{ 'seletor_localidade__voltar' | l10n:lang }} </div>
 
         <div class="selecionar-localidade__fechar--mobile" (click)="fecharSeletor()">
             <i class="fa fa-times" aria-hidden="true"></i>
@@ -16,23 +16,23 @@
         </div>
 
         <div class="selecionar-localidade__titulo">
-            Selecionar local
+            {{ 'selecionar_local' | l10n:lang }}
         </div>
 
-        <button class='selecionar-localidade__voltar--mobile' (click)="voltarMobile()">&lt; &nbsp; Voltar</button>
+        <button class='selecionar-localidade__voltar--mobile' (click)="voltarMobile()">&lt; &nbsp; {{ 'seletor_localidade__voltar' | l10n:lang }}</button>
 
         <nav>
             <ul>                
                 <li *ngIf="niveisTerritoriais.pais" id='menu__brasil'>
                     <a class="seletor-localidade__link" routerLink="/brasil" routerLinkActive="active">
-                        Brasil <i class="fa fa-chevron-right" aria-hidden="true"></i> 
+                        {{ 'seletor_localidade__brasil' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
                 </li>
                 <li *ngIf="niveisTerritoriais.uf" id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
-                    Estados <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    {{ 'seletor_localidade__estados' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
                 <li *ngIf="niveisTerritoriais.municipio" id='menu__municipio' (click)="setState('municipiosTodos')" [class.selecionado]="states.municipios">
-                    Municípios <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    {{ 'seletor_localidade__municipios' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
             </ul>
         </nav>
@@ -40,13 +40,13 @@
 
     <div id="segunda-coluna" class='cor-fundo' [class.aberto]="states.estados || states.municipios">
         <div class="segunda-coluna__titulo">
-            Estados
+            {{ 'seletor_localidade__estados' | l10n:lang }}
         </div>
 
         <ul>
             <li [class.selecionado]="!ufSelecionada" *ngIf="states.municipios" (click)="setState('municipiosTodos')">
                 <div>
-                    Todos <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    {{ 'seletor_localidade__todos' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </div>
             </li>
 
@@ -80,17 +80,17 @@
     }">
 
         <div class="terceira-coluna__titulo">
-            Municípios
+            {{ 'seletor_localidade__municipios' | l10n:lang }}
         </div>
 
         <div class="terceira-coluna__menu--mobile">
-            <div class="terceira-coluna__menu__todos" [class.selecionado]="states.municipiosTodos" (click)="setState('municipiosTodos')">Todos</div>
-            <div class="terceira-coluna__menu__estado" [class.selecionado]="states.municipiosEstados || states.municipiosMunicipios" (click)="setState('municipiosEstados')">Por estado</div>
+            <div class="terceira-coluna__menu__todos" [class.selecionado]="states.municipiosTodos" (click)="setState('municipiosTodos')">{{ 'seletor_localidade__todos' | l10n:lang }}</div>
+            <div class="terceira-coluna__menu__estado" [class.selecionado]="states.municipiosEstados || states.municipiosMunicipios" (click)="setState('municipiosEstados')">{{ 'seletor_localidade__por_estado' | l10n:lang }}</div>
         </div>
 
         <div class="por-estado__selecionar-estado">
             <div class="selecione">
-                Selecione o estado:
+                {{ 'seletor_localidade__selecione_o_estado' | l10n:lang }}
             </div>
             <ul>
                 <li *ngFor="let uf of ufs" (click)="setState('municipiosMunicipios', uf)">
@@ -101,15 +101,15 @@
 
         <div class="por-estado__selecionar-municipio">
             <div class="estado-selecionado" *ngIf="states.municipiosMunicipios">
-                <span>Municípios de </span>{{ufSelecionada?.nome}} 
+                <span>{{ 'seletor_localidade__municipios_de' | l10n:lang }} </span>{{ufSelecionada?.nome}} 
                 <i class="fa fa-times" aria-hidden="true" (click)="setState('municipiosEstados'); clearSearch()"></i>
             </div>
             <div class="estado-selecionado" *ngIf="states.municipiosTodos">
-                <span>Todos os municípios</span>
+                <span>{{ 'seletor_localidade__todos_os_municipios' | l10n:lang }}</span>
                 <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
             </div>
             <i class="fa fa-times" aria-hidden="true" (click)="fecharSeletor()"></i>
-            <div class='total-encontrado'><span *ngIf="buscaInput.value && listaMunicipios.totalAtual >= 0">{{listaMunicipios.totalAtual}} de </span>{{listaMunicipios.base.length}} municípios</div>
+            <div class='total-encontrado'><span *ngIf="buscaInput.value && listaMunicipios.totalAtual >= 0">{{listaMunicipios.totalAtual}} {{ 'seletor_localidade__de' | l10n:lang }} </span>{{listaMunicipios.base.length}} {{ 'seletor_localidade__municipios_lower' | l10n:lang }}</div>
             <br/>
             <input type="text" #buscaInput id='busca' placeholder="Qual município você procura?" (focus)="focusBuscaInputMobile()">
             <!--<button *ngIf="ufSelecionada"><a style="display: block">Acessar a UF {{ufSelecionada?.nome}}</a></button>-->
@@ -124,7 +124,7 @@
                     </a>
                 </div>
                 
-                <p class="selecionar-localidade__mensagem" *ngIf="!!listaMunicipios.atual && listaMunicipios.atual.length == 0"> Nenhum município encontrado. </p>
+                <p class="selecionar-localidade__mensagem" *ngIf="!!listaMunicipios.atual && listaMunicipios.atual.length == 0"> {{ 'seletor_localidade__nenhum_municipio_encontrado' | l10n:lang }} </p>
 
                 <div class="conjunto" *ngFor="let item of listaMunicipios.atual">
                     <div class="letra">
@@ -146,7 +146,7 @@
 
             <div id="todos-municipios">
                 <div class="todos-municipios__titulo" *ngIf="!buscaInput.value || buscaInput.value.length < 3">
-                    Mais acessados:
+                    {{ 'seletor_localidade__mais_acessados' | l10n:lang }}
                 </div>
 
                 <ul *ngIf="!buscaInput.value || buscaInput.value.length < 3 ">
@@ -158,7 +158,7 @@
                 </ul>
 
                 <template [ngIf]="!!buscaInput.value && buscaInput.value.length>=3">
-                    <p class="selecionar-localidade__mensagem" *ngIf="!!listaMunicipios.atual && listaMunicipios.atual.length == 0"> Nenhum município encontrado. </p>
+                    <p class="selecionar-localidade__mensagem" *ngIf="!!listaMunicipios.atual && listaMunicipios.atual.length == 0"> {{ 'seletor_localidade__nenhum_municipio_encontrado' | l10n:lang }} </p>
                     <div class="conjunto"  *ngFor="let item of listaMunicipios.atual">
                         <div class="letra">
                             <div class="selecionar-localidade__letra">

@@ -5,6 +5,8 @@ import { PesquisaConfiguration } from './pesquisa.configuration';
 import { Pesquisa } from './pesquisa.model';
 import { slugify } from '../../utils/slug';
 
+import {TraducaoService} from '../../traducao/traducao.service';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -20,18 +22,22 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 @Injectable()
 export class PesquisaService2 {
 
+    idioma:string;
     constructor(
         private _http: Http,
-        private _pesquisasConfig: PesquisaConfiguration
+        private _pesquisasConfig: PesquisaConfiguration,
+        private _traducaoService:TraducaoService
     ) {
         Pesquisa.setPesquisaStrategy({
             retrieve: (pesquisaId: number) => this.getPesquisa(pesquisaId)
         });
+        this.idioma = this._traducaoService.lang;
+     
     }
 
     private _allPesquisasCache: Array<Pesquisa>;
     getAllPesquisas(): Observable<Pesquisa[]> {
-        const url = 'https://servicodados.ibge.gov.br/api/v1/pesquisas';
+        const url = 'https://servicodados.ibge.gov.br/api/v1/pesquisas/?lang='+this.idioma;
 
         if (this._allPesquisasCache) {
             return Observable.of(this._allPesquisasCache);
@@ -73,7 +79,7 @@ export class PesquisaService2 {
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
         let keyCache = this.getPesquisaKeyCache(pesquisaId);
         if (!this._getPesquisaCache[keyCache]) {
-            const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}`;
+            const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}?lang=`+this.idioma;
 
             this._getPesquisaCache[keyCache] = this._http.get(url, options)
                 .retry(3)

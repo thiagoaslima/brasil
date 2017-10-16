@@ -7,12 +7,17 @@
         <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
 
         <div class="mensagem-vazio" *ngIf="!hasDados()">
-            Nenhum valor para exibir.
+            {{ 'pesquisa_ranking__nenhum_valor_para_exibir' | l10n:lang}}
         </div>
 
         <div class="content__grupos" *ngIf="hasDados()">
             <div class="grupo" *ngFor="let contexto of rankings">
-                <div class="grupo__titulo">{{getTitulo(contexto.contexto)}}</div>
+                <div class="grupo__titulo">
+                    {{ getPreTitulo(contexto.contexto) }}
+                    {{ getNoContext(contexto.contexto) | l10n:lang }}
+                    {{ getPreposicao(contexto.contexto) | l10n:lang }}
+                    {{ getPosTitulo(contexto.contexto) }}
+                </div>
                 
                 <div *ngFor="let localidade of contexto.listaGrupos; let i = index;">
                     

@@ -1,0 +1,90 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.resumo{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bg{
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    position: fixed;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.container{
+    width: 862px;
+    position: absolute;
+    margin-left: 50%;
+    left: -431px;
+    top: 50px;
+}
+
+
+h2{
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2em;
+}
+
+.header{
+    padding: 12px 25px;
+    background-color: #1b779b;
+}
+
+.header  .fa-times{
+    float: right;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.header p{
+    color: #fff;
+}
+
+.content{
+    width: 90%;
+    background-color: #fff;
+    padding: 30px 5%;
+    max-height: 62vh;
+    overflow-x: scroll;
+}
+
+.wrapTema{
+    margin-bottom: 30px;
+}
+
+.tema{
+    color: #1b779b;
+    font-weight: bold;
+}
+
+.indicador{
+    text-indent: 20px;
+    font-size: .9em;
+    padding: 5px;
+}
+
+button{
+    background-color: transparent;
+    border: 1px solid #1d779a;
+    border-radius: 21px;
+    font-size: 1em;
+    padding: 5px 10px;
+    cursor: pointer;
+    -webkit-transition: background 200ms ease, color 200ms ease;
+    -moz-transition: background 200ms ease, color 200ms ease;
+    -ms-transition: background 200ms ease, color 200ms ease;
+    -o-transition: background 200ms ease, color 200ms ease;
+    transition: background 200ms ease, color 200ms ease;
+}

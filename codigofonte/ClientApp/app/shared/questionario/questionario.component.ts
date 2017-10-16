@@ -94,7 +94,10 @@ export class QuestionarioComponent implements OnInit {
                 //console.log("ok", res);
                 //this.setCookie("questionario.respondido", "true", 365)
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         }
     }
 

@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../../traducao/traducao.module';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
@@ -9,7 +10,8 @@ import { MapaService } from './mapa.service';
 @NgModule({
     imports: [
         SharedModule,
-        SharedModule2
+        SharedModule2,
+        TraducaoModule
     ],
     declarations: [
         IBGECartograma

@@ -22,6 +22,6 @@
     </template>
     
     <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
-        Nenhum indicador para exibir.
+        {{ 'pesquisa_indicador__nenhum_indicador_para_exibir' | l10n:lang }}
     </div>
 </table>

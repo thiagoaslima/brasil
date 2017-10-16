@@ -81,11 +81,11 @@
 </table>
 
 <div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Notas & Fontes
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'panorama_resumo__notas_e_fontes' | l10n:lang }}
 </div>
 
 <div class="lista__nota__content__geral" [ngClass]="{'exibir': exibirFontesENotas}">
-    <h1>Notas:</h1>
+    <h1>{{ 'panorama_resumo__notas' | l10n:lang }}</h1>
     <ol>
         <li *ngFor="let nota of notas">
             {{ nota }}
@@ -94,7 +94,7 @@
 
     <br>
 
-    <h1>Fontes:</h1>
+    <h1>{{ 'panorama_resumo__fontes' | l10n:lang }}</h1>
     <ol>
         <li *ngFor="let fonte of fontes">
             {{ fonte }}

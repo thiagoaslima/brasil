@@ -84,6 +84,7 @@ export class BarraGov implements OnInit {
 
                 },
                 error => {
+                    console.error(error);
                     this.modalErrorService.showError();
                 });
         }

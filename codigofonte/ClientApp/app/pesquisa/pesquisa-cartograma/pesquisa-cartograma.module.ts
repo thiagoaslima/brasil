@@ -1,3 +1,4 @@
+import { TraducaoModule } from '../../traducao/traducao.module';
 import { NgModule } from '@angular/core';
 
 import { SharedModule2 } from '../../shared2/shared.module';
@@ -9,7 +10,7 @@ import { IBGECartogramaModule } from '../../infografia/ibge-cartograma/ibge-cart
 
 
 @NgModule({
-    imports: [SharedModule2, SharedModule, InfografiaModule, IBGECartogramaModule],
+    imports: [SharedModule2, SharedModule, InfografiaModule, IBGECartogramaModule, TraducaoModule],
     exports: [PesquisaCartogramaComponent],
     declarations: [PesquisaCartogramaComponent],
     providers: [],

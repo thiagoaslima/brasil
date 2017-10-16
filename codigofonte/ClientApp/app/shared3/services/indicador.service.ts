@@ -24,11 +24,15 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 @Injectable()
 export class IndicadorService3 {
     static readonly cache = CacheFactory.createCache('indicadoresService', 10);
+    idioma:string;
 
     constructor(
         private _http: Http,
         private _pesquisaService: PesquisaService3
-    ) { }
+    ) { 
+
+        this.idioma = 'PT';
+    }
 
     @RxSimpleCache({
         cache: IndicadorService3.cache
@@ -99,6 +103,16 @@ export class IndicadorService3 {
 
 
     private _request(url: string) {
+    
+        if(this.idioma!=null){
+            if(url.indexOf('?')>0){
+
+                 url+='&lang='+this.idioma;
+            }else{
+
+                 url+='?lang='+this.idioma;
+            }
+        }
         return this._http.get(url, options)
             .retry(3)
             .map(res => {

@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { ResultadoPipe } from '../../shared2/resultado.pipe';
@@ -24,8 +25,13 @@ export class PanoramaCardComponent implements OnChanges {
     public cssRanking: any = {};
     _resultadoPipe: ResultadoPipe;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
-        private _analytics: AnalyticsService
+        private _analytics: AnalyticsService,
+        private _traducaoServ: TraducaoService
     ) {
         this._resultadoPipe = new ResultadoPipe();
     }

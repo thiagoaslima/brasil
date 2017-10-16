@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,6 +9,12 @@ import { Component } from '@angular/core';
 
 export class MensagemSetasComponent {
 
-    constructor() { }
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
+    constructor(
+        private _traducaoServ: TraducaoService
+    ) { }
 
 }

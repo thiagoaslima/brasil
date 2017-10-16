@@ -4,14 +4,22 @@ import { Observable } from 'rxjs';
 
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
+import {TraducaoService} from '../../traducao/traducao.service';
 
 @Injectable()
 export class PiramideEtariaService{
 
+    idioma:string;
     constructor(
         private _http: Http,
-        private modalErrorService: ModalErrorService
-    ) { }
+        private modalErrorService: ModalErrorService,
+        private _traducaoService:TraducaoService
+        
+    ) { 
+
+        this.idioma = this._traducaoService.lang;
+    }
+
     
 
     public get(codMunicipio){
@@ -149,7 +157,10 @@ export class PiramideEtariaService{
             data.py = 100 / data.piramide.length;
 
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
     }
 
     private getIndicador = (res, id) => {
@@ -170,7 +181,7 @@ export class PiramideEtariaService{
         let dadosPesquisa$;
 
         dadosPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
         )
         .map((res => res.json()))
 
@@ -196,7 +207,7 @@ export class PiramideEtariaService{
         let nomesPesquisa$;
 
         nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores?lang=${this.idioma}`
         )
         .map((res => res.json()))
   
@@ -258,7 +269,7 @@ export class PiramideEtariaService{
     public getPeriodosDisponiveisPesquisa(codpes: string) {
 
         return this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}`
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}?lang=${this.idioma}`
         )
             .map((res) => res.json())
             .map((pesquisa) => {

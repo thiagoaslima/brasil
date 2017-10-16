@@ -100,11 +100,20 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                     else
                         this.posicaoIndicador = '2';
                 },
-                error => this.modalErrorService.showError());
+                error => {
+                    console.error(error);
+                    this.modalErrorService.showError();
+                });
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
         },
-        error => this.modalErrorService.showError());
+        error => {
+            console.error(error);
+            this.modalErrorService.showError();
+        });
     }
 
 

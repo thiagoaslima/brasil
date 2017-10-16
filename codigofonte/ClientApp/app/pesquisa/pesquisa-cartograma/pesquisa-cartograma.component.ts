@@ -1,3 +1,4 @@
+import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 import { isNode } from 'angular2-universal';
@@ -30,7 +31,7 @@ export class PesquisaCartogramaComponent implements OnChanges {
     @Output() onAno = new EventEmitter;
 
     public indicador;
-    public mapas: {mun, resultados}[] = [];
+    public mapas: {mun, resultados, localidade, localidadesMarcadas}[] = [];
     public mun;
     public resultados;
     public tituloCartograma;
@@ -41,13 +42,18 @@ export class PesquisaCartogramaComponent implements OnChanges {
 
     public vazio = false;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private _localidadeServ: LocalidadeService3,
         private _resultadoServ: ResultadoService3,
         private _pesquisaService: PesquisaService2,
         private _indicadorServ: IndicadorService3,
         private _routerParamsService: RouterParamsService,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -71,7 +77,10 @@ export class PesquisaCartogramaComponent implements OnChanges {
             .subscribe((indicadores) => {
                 this.indicador = indicadores[0];
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
         (<any[]>this.localidades)
             .filter(localidade => localidade !== undefined)
@@ -106,7 +115,10 @@ export class PesquisaCartogramaComponent implements OnChanges {
                 }
                 this.mapas = mapas;
             },
-            error => this.modalErrorService.showError());
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
         // this.localidades.forEach(localidade => {
         //     let mun = this._localidadeServ.getMunicipioByCodigo(localidade)
