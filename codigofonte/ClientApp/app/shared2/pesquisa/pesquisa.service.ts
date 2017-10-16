@@ -5,6 +5,8 @@ import { PesquisaConfiguration } from './pesquisa.configuration';
 import { Pesquisa } from './pesquisa.model';
 import { slugify } from '../../utils/slug';
 
+import {TraducaoService} from '../../traducao/traducao.service';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -23,12 +25,14 @@ export class PesquisaService2 {
     idioma:string;
     constructor(
         private _http: Http,
-        private _pesquisasConfig: PesquisaConfiguration
+        private _pesquisasConfig: PesquisaConfiguration,
+        private _traducaoService:TraducaoService
     ) {
         Pesquisa.setPesquisaStrategy({
             retrieve: (pesquisaId: number) => this.getPesquisa(pesquisaId)
         });
-        this.idioma = 'PT';
+        this.idioma = this._traducaoService.lang;
+     
     }
 
     private _allPesquisasCache: Array<Pesquisa>;

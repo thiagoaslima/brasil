@@ -10,10 +10,11 @@ import { SINTESE, SinteseConfigItem } from './sintese-config';
 import { flatTree } from '../utils/flatFunctions';
 import { ufs } from '../../api/ufs';
 import { LocalidadeService3 } from '../shared3/services';
-
+import {TraducaoService} from '../traducao/traducao.service';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
+
 
 /**
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
@@ -28,10 +29,11 @@ export class SinteseService {
     constructor(
         private _http: Http,
         private _sinteseConfig: SINTESE,
-        private _localidadeService: LocalidadeService3
+        private _localidadeService: LocalidadeService3,
+        private _traducaoService:TraducaoService
     ) { 
 
-        this.idioma = 'PT';
+        this.idioma = this._traducaoService.lang;
     }
 
    /**
