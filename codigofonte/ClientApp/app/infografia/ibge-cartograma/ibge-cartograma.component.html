@@ -9,8 +9,8 @@
 
         <div [class.galeria]="ampliado">
 
-            <div class="local-atual" *ngIf="titulo">
-                {{titulo}}
+            <div class="local-atual">
+                <span *ngIf="titulo">{{titulo}}</span>
                 <i class="fa fa-times galeria__close-icon" aria-hidden="true" (click)="ampliado = false" *ngIf="ampliado"></i>
             </div>
 
