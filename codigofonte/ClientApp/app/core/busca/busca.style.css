@@ -1,6 +1,6 @@
 .busca{
     /*background-color: yellow;*/
-    width: calc(100% - 648px);
+    width: calc(100% - 780px);
     float: left;
     margin-left: 14px;
 }
@@ -50,7 +50,7 @@
     float: left;
     margin: 10px 1%;
     height: 30px;
-    width: calc(95%);
+    width: calc(100% - 20px);
     padding: 0px 40px 0px 10px;
 }
 
@@ -285,7 +285,7 @@
 
 @media screen and (min-width: 1200px) {
     .busca{
-        width: calc(100% - 666px);
+        width: calc(100% - 780px);
     }
 
     .busca__auto-completar{
