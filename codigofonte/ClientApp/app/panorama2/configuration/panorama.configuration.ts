@@ -23,6 +23,7 @@ export const PANORAMA: {
                  TEMAS.industria.label,
                  TEMAS.comercio.label,
                  TEMAS.servicos.label,
+                 TEMAS.saude.label
             ],
 
             indicadores: [
@@ -88,23 +89,23 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.numerico,
                 },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47097,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com iluminação elétrica',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47097,
+                    periodo: '2015',
+                    titulo: 'Domicílios com iluminação elétrica',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47090,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com rede de coleta de esgoto',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47090,
+                    periodo: '2015',
+                    titulo: 'Domicílios com rede de coleta de esgoto',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // {
                 //     pesquisaId: 44,
@@ -205,16 +206,6 @@ export const PANORAMA: {
                 // ----------------------------
 
                 {
-                    pesquisaId: 1100,
-                    indicadorId: 44,
-                    categoria: '315[7169]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
-                    titulo: 'Preços - INPC',
-                    tema: TEMAS.economia.label,
-                    visualizacao: PanoramaVisualizacao.numerico
-                },
-                {
                     pesquisaId: 1419,
                     indicadorId: 63,
                     categoria: '315[7169]',
@@ -251,6 +242,17 @@ export const PANORAMA: {
                     }
                 },
 
+                {
+                    pesquisaId: 1100,
+                    indicadorId: 44,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - INPC',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
                 // {
                 //     pesquisaId: 1419,
                 //     indicadorId: 1120,
@@ -262,7 +264,6 @@ export const PANORAMA: {
                 //     visualizacao: PanoramaVisualizacao.numerico
                 // },
 
-                // TODO: CORRIGIR GRAFICO
                 {
                     pesquisaId: 1705,
                     indicadorId: 355,
@@ -298,6 +299,17 @@ export const PANORAMA: {
                 },
 
                 {
+                    pesquisaId: 1419,
+                    indicadorId: 2265,
+                    categoria: '315[7169]',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 1,
+                    titulo: 'Preços - IPCA 12 meses',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
                     pesquisaId: 3653,
                     indicadorId: 3139,
                     categoria: '544[129314]',
@@ -320,13 +332,12 @@ export const PANORAMA: {
                     }
                 },
 
-                // TODO: INCLUIR GRAFICO
                 {
                     pesquisaId: 3416,
                     indicadorId: 564,
                     categoria: '11046[90668]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 1,
+                    quantidadePeriodos: 36,
                     titulo: 'Comércio - PMC',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -344,13 +355,12 @@ export const PANORAMA: {
                     }
                 },
 
-                // TODO: INCLUIR GRAFICO
                 {
                     pesquisaId: 6442,
                     indicadorId: 8677,
                     categoria: '11046[90668]',
                     servico: 'conjunturais',
-                    quantidadePeriodos: 1,
+                    quantidadePeriodos: 36,
                     titulo: 'Serviços - PMS',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -408,7 +418,7 @@ export const PANORAMA: {
 
 
 
-                // SINAPI COM PROBLEMA
+                // // SINAPI COM PROBLEMA
                 // {
                 //     pesquisaId: 2296,
                 //     indicadorId: 1196,

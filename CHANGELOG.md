@@ -1,5 +1,76 @@
 # Change log
 
+## [v4.2.9] - 2017-10-17
+### Added
+ - Autocompletar dos códigos do local.
+ - Exibição de mensagem de erro nas situações de exceção.
+ - Analytics: clicks no link para o site antigo.
+ - Inclusão nos elementos da pasquisa ranking um link para seus respectivos panoramas.
+ - Inclução da pesquisa PNADC para estado.
+
+### Changed
+ - Ampliação do cartograma.
+ - Dasabilitado o questionário.
+ - Tabela de pesquisa exibindo inicialmente o período mais recente que possua dados.
+ - Componente de compartilhamento em redes sociais para carregar título do compartilhamento de acordo com a página visitada.
+ - Adição do botão de fechar no não achei.
+
+### Fixed
+- Adicionar comparação na tabela de pesquisas.
+- Erro na pesquisa.
+- Submenu redirecionava para pesquisa com Brasil como comparação.
+
+
+## [v4.2.7] - 2017-10-03
+### Changed
+ - Permitindo que se responda 1 ou mais questões.
+
+### Fixed
+ - Correção do seletor de localidade no IOS.
+
+
+## [v4.2.6] - 2017-10-03
+### Added
+- Inclusão de pirâmide da etária no panorama.
+- Projeção da população para as UFs no panorama.
+- Versão do panorama para impressão.
+- Donwload do svg e do csv dos cartogramas.
+- Testes automatizados.
+
+### Changed
+ - Melhoria na identificação de palavras chave na busca completa.
+ - Inclusão de pirâmide da etária no panorama.
+ - Melhoria na busca.
+ - Busca pelo código da localidade.
+ - Melhoria em Aniversários.
+ - Apontamento para novo servidor Redis.
+
+### Fixed
+ - Correção do bug dos gráficos, quando os dados vinham com períodos diferentes.
+ - Ajuste na largura dos contornos do cartograma.
+ - Pin de localidade no cartograma para funcionar no IE.
+ - Pin de localidade no cartograma para funcionar no FIREFOX.
+ - Seleção de localidade na comparação.
+ - Namespaces dos mapas svg.
+ - Geolocalização.
+ - Inclusão das unidades e fator multiplicador no título dos gráficos do temas.
+
+
+## [v4.2.4] - 2017-09-19
+### Changed
+- Removido o v4 das URLs.
+
+### Fixed
+- Correção do panorara panorama resumo.
+- Correção do nome do município de Parati para Paraty no RJ.
+- Correção do integrity key na importação do inc_GA_portal.js (analytics) na página index.cshtml.
+
+
+## [v4.2.3] - 2017-09-11
+### Fixed
+- Correção do nome do município de Seridó para São Vicente do Seridó em PB.
+
+
 ## [v4.2.2] - 2017-08-31
 ### Fixed
 - Pré-render.

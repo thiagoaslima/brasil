@@ -23,11 +23,11 @@
 
         <nav>
             <ul>                
-                <li *ngIf="niveisTerritoriais.pais" id='menu__brasil'>
+                <!--<li *ngIf="niveisTerritoriais.pais" id='menu__brasil'>
                     <a class="seletor-localidade__link" routerLink="/brasil" routerLinkActive="active">
                         {{ 'seletor_localidade__brasil' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
-                </li>
+                </li>-->
                 <li *ngIf="niveisTerritoriais.uf" id='menu__estado' (click)="setState('estados')" [class.selecionado]="states.estados">
                     {{ 'seletor_localidade__estados' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </li>
