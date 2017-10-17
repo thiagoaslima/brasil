@@ -1,11 +1,12 @@
 # Change log
 
-## [v4.2.8] - 2017-10-13
+## [v4.2.9] - 2017-10-17
 ### Added
  - Autocompletar dos códigos do local.
  - Exibição de mensagem de erro nas situações de exceção.
  - Analytics: clicks no link para o site antigo.
  - Inclusão nos elementos da pasquisa ranking um link para seus respectivos panoramas.
+ - Inclução da pesquisa PNADC para estado.
 
 ### Changed
  - Ampliação do cartograma.
