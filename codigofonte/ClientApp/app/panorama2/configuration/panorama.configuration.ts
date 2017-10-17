@@ -668,6 +668,7 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
                         titulo: 'Projeção da População',
+                        link: "https://www.ibge.gov.br/estatisticas-novoportal/sociais/populacao/9103-estimativas-de-populacao.html",
                         tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 53,

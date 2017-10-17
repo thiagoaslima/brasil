@@ -9,17 +9,17 @@
 
         <div [class.galeria]="ampliado">
 
-        <div class="local-atual" *ngIf="titulo">
-            {{titulo}}
-            <i class="fa fa-times galeria__close-icon" aria-hidden="true" (click)="ampliado = false" *ngIf="ampliado"></i>
-        </div>
-        
-        <div class="mapa" *ngIf="malha?.viewBox">
-            <div class="alturafixa_legenda">
-            <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
-                    <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> &nbsp; {{municSelected[1] | resultado:indicador?.unidade?.nome }} {{indicador?.unidade?.nome}}</span></p>
-                </div>
+            <div class="local-atual">
+                <span *ngIf="titulo">{{titulo}}</span>
+                <i class="fa fa-times galeria__close-icon" aria-hidden="true" (click)="ampliado = false" *ngIf="ampliado"></i>
             </div>
+
+            <div class="mapa" *ngIf="malha?.viewBox">
+                <div class="alturafixa_legenda">
+                    <div class="legenda__item" *ngIf="!!municSelected && municSelected != ''">
+                        <p class="legenda__municipio">{{municSelected[0]}}:<span style="font-weight:normal; font-style:italic;"> &nbsp; {{municSelected[1] | resultado:dado?.unidade?.id }} {{indicador?.unidade?.nome}}</span></p>
+                    </div>
+                </div>
 
                 <!--ícone de download-->
                 <div class="icones__container">
@@ -64,25 +64,27 @@
                 </div>
             </div>
 
-        <div class="legenda" *ngIf="valores">
-            <p class="legenda__texto">{{ 'cartograma__legenda' | l10n:lang }} <span *ngIf="indicador?.unidade?.multiplicador > 1">(fator multiplicador: x{{ indicador?.unidade?.multiplicador }})</span></p>
-            <div class="legenda__cores" *ngIf="valores.length > 0">
-                <div class="legenda__item" *ngFor="let valor of valores; let i = index">
-                    <div class="legenda__cor faixa{{i+1}}"></div>
-                    <p class="legenda__texto">{{ 'cartograma__ate' | l10n:lang }} {{ valores[i] | resultado: indicador?.unidade?.nome }} {{ indicador?.unidade?.nome }}</p>
+            <div class="legenda" *ngIf="valores">
+                <p class="legenda__texto">{{ 'cartograma__legenda' | l10n:lang }} <span *ngIf="indicador?.unidade?.multiplicador > 1">(fator multiplicador: x{{ indicador?.unidade?.multiplicador }})</span></p>
+                <div class="legenda__cores" *ngIf="valores.length > 0">
+                    <div class="legenda__item" *ngFor="let valor of valores; let i = index">
+                        <div class="legenda__cor faixa{{i+1}}"></div>
+                        <p class="legenda__texto">{{ 'cartograma__ate' | l10n:lang }} {{ valores[i] | resultado: indicador?.unidade?.nome }} {{ indicador?.unidade?.nome }}</p>
+                    </div>
+                    <div class="legenda__item">
+                        <div class="legenda__cor faixa{{valores.length + 1}}"></div>
+                        <p class="legenda__texto">{{ 'cartograma__mais_que' | l10n:lang }} {{ valores[valores.length - 1] | resultado: indicador?.unidade?.nome }} {{indicador?.unidade?.nome}}</p>
+                    </div>
                 </div>
-                <div class="legenda__item">
-                    <div class="legenda__cor faixa{{valores.length + 1}}"></div>
-                    <p class="legenda__texto">{{ 'cartograma__mais_que' | l10n:lang }} {{ valores[valores.length - 1] | resultado: indicador?.unidade?.nome }} {{indicador?.unidade?.nome}}</p>
+                <div class="legenda__item legenda__item--sem-informacao">
+                    <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
+                    <p class="legenda__texto">{{ 'cartograma__sem_informacao' | l10n:lang }}</p>
+                </div>
+                <div class="legenda__item legenda__item--municipio">
+                    <p class="legenda__texto"><img src="img/marcador.svg"> {{ 'cartograma__local_selecionado' | l10n:lang }}</p>
                 </div>
             </div>
-            <div class="legenda__item legenda__item--sem-informacao">
-                <div class="legenda__cor" style="background: #ccc; fill: #ccc;"></div>
-                <p class="legenda__texto">{{ 'cartograma__sem_informacao' | l10n:lang }}</p>
-            </div>
-            <div class="legenda__item legenda__item--municipio">
-                <p class="legenda__texto"><img src="img/marcador.svg"> {{ 'cartograma__local_selecionado' | l10n:lang }}</p>
-            </div>
+
         </div>
 
     </div>
