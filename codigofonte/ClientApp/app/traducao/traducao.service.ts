@@ -26,23 +26,30 @@ export class TraducaoService {
         const prerenderURL: string = Zone.current.get('originUrl');
 
         const queryLanguage = this.getParameterByName('lang', prerenderURL ? prerenderURL : undefined);
-        let navigatorLanguage = 'pt';
+
 
         if (isBrowser) {
-            navigatorLanguage = navigator.language;
-        }
-        
-        const sessionLanguage = sessionStorage.getItem('lang');
+            
+            const navigatorLanguage = navigator.language;
+            const sessionLanguage = sessionStorage.getItem('lang');
 
-        if (queryLanguage) {
-            this.lang = queryLanguage;
-        } else if(sessionLanguage) {
-            this.lang = sessionLanguage;
-        } else if(navigatorLanguage) {
-            this.lang = navigatorLanguage;
+            if (queryLanguage) {
+                this.lang = queryLanguage;
+            } else if(sessionLanguage) {
+                this.lang = sessionLanguage;
+            } else if(navigatorLanguage) {
+                this.lang = navigatorLanguage;
+            } else {
+                this.lang = 'pt';
+            }
+
         } else {
             this.lang = 'pt';
         }
+
+        
+
+
 
     }
 
