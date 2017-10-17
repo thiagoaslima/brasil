@@ -29,7 +29,7 @@ export class TraducaoService {
 
 
         if (isBrowser) {
-            
+
             const navigatorLanguage = navigator.language;
             const sessionLanguage = sessionStorage.getItem('lang');
 
@@ -63,7 +63,10 @@ export class TraducaoService {
 
     public set lang(lang: string) {
         this._lang = lang;
-        sessionStorage.setItem('lang', this._lang);
+
+        if (isBrowser) {
+            sessionStorage.setItem('lang', this._lang);
+        }
     }
 
 }
