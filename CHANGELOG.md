@@ -1,5 +1,13 @@
 # Change log
 
+## [v4.2.10] - 2017-10-19
+### Added
+ - Tradução para inglês.
+
+### Changed
+ - Alteração do nome do município de Iguaraci para Iguaracy em Pernambuco.
+ 
+
 ## [v4.2.9] - 2017-10-17
 ### Added
  - Autocompletar dos códigos do local.
