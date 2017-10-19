@@ -83,6 +83,38 @@
 <div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'panorama_resumo__notas_e_fontes' | l10n:lang }}
 </div>
+<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='uf'">
+    <i class="fa fa-list" aria-hidden="true"></i> {{ 'panorama_gerar_resumo' | l10n:lang }}
+</div>
+
+<div class="modal_resumo_filtro" [ngClass]="{'exibir': exibirFiltroResumo}">
+        <div class="modal_resumo_filtro_bg"></div>
+        <div class="modal_resumo_filtro_bg_container">
+            <div class="modal_resumo_titulo_header">
+                <i class="fa fa-times botao_fechar" aria-hidden="true" (click)="exibirFiltroResumo = !exibirFiltroResumo"></i>
+                <h2 class="modal_resumo_titulo">Resumo</h2>
+                <p>Selecione até 6 indicadores para compor seu resumo.</p>
+            </div>
+
+            <div class="modal_resumo_content">
+                <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temasModalFiltroPanorama">
+                    <div class="modal_resumo_wrapTema">
+                        <div class="modal_resumo__tema" *ngIf="first || (item.tema && item.tema) !== temasModalFiltroPanorama[idx-1].tema">
+                            {{item.tema}}
+                        </div>
+                        <div class="modal_resumo_indicador">
+                            <label>
+                                <input type="checkbox" value="{{item.indicadorId}}"  (change)="selecionaIndicadoresFiltro(item,idx,$event)" />  {{ item.titulo }} <small>{{ '[' + item.periodo + ']' }}</small>
+                            </label>
+                        </div>
+                   
+                     </div>
+                </template>
+                <button class="gerar_relatorio" (click)="gerarSinteseEstado()">Gerar Relatório</button>
+                
+            </div>
+    </div>
+</div>
 
 <div class="lista__nota__content__geral" [ngClass]="{'exibir': exibirFontesENotas}">
     <h1>{{ 'panorama_resumo__notas' | l10n:lang }}</h1>

@@ -1,0 +1,29 @@
+<div class="estado-sintese">
+    <div id="conteudo">
+            <img src='/img/logo.png' class='logo'>
+            <h1 class="estado">{{estado?.nome}}</h1>
+            <table id="municipios">
+                <thead>
+                    <tr>
+                        <th>Municípios</th>
+                        <th>Gentílico</th>
+                        <th *ngFor="let indicador of indicadores">{{indicador.titulo}}</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let r of resumo;let i=index">
+                        <tr class="3300100 par">
+                            <td class="nome">{{r.municipio}}</td>
+                            <td class="gentilico">{{r.gentilico}}</td>
+                            <td  *ngFor="let indicador of r.indicadores" >{{indicador.valor}}</td>
+                        </tr>                
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td [attr.colspan]="indicadores && (indicadores.length+2)">
+                        Fonte: IBGE, em parceria com os Órgãos Estaduais de Estatística, Secretarias Estaduais de Governo e Superintendência da Zona Franca de Manaus - SUFRAMA.<br>NOTA 1: Os dados de 2014 estarão sujeitos a revisão na próxima divulgação.
+                        <br>NOTA 2: Os dados da série revisada (2010 a 2014) têm como referência o ano de 2010, seguindo a nova referência das Contas Nacionais.<br>                    </td>
+                    </tr>
+                </tfoot>
+            </table>
+    </div>
+</div>   

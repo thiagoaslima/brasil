@@ -1,7 +1,7 @@
 import { niveisTerritoriais } from '../shared3/values';
 import { Injectable } from '@angular/core';
 
-import { ItemConfiguracao, PanoramaVisualizacao } from './configuration';
+import { PANORAMA,ItemConfiguracao, PanoramaVisualizacao } from './configuration';
 import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { PesquisaConfiguration } from '../shared2/pesquisa/pesquisa.configuration';
 import { BibliotecaService } from '../shared3/services/biblioteca.service';
@@ -11,6 +11,7 @@ import { ConjunturaisService, ResultadoService3 } from '../shared3/services';
 import { Localidade, Resultado } from '../shared3/models';
 import { arrayUniqueValues, converterObjArrayEmHash } from '../utils2';
 import { notasEspeciais } from '../../api/notas-demanda-legal';
+
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -30,6 +31,12 @@ export class Panorama2Service {
     ) {
         this._totalUfs = this._localidadeService.getRoot().children.length;
         this._totalMunicipios = this._localidadeService.getRoot().children.reduce((sum, uf) => sum + uf.children.length, 0);
+    }
+    getConfiguracao(tipo){
+
+        const { temas, indicadores } = PANORAMA[tipo] || { temas: [], indicadores: [] };
+        const hash = converterObjArrayEmHash(indicadores, 'tema', true);
+        return temas.reduce((agg, tema) => agg.concat(hash[tema]), [] as ItemConfiguracao[]).filter(Boolean);
     }
 
     getResultados(configuracao: Array<ItemConfiguracao>, localidade: Localidade) {
@@ -81,6 +88,7 @@ export class Panorama2Service {
             this._getResultadosIndicadores(configuracao, localidade),
             localidade.tipo === 'municipio' ? this._bibliotecaService.getValues(localidade.codigo) : Observable.of({})
         ).map(([resultados, valoresBiblioteca]) => {
+           
             return configuracao
                 .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
                 .map(item => {
@@ -127,7 +135,8 @@ export class Panorama2Service {
                         valor,
                         unidade,
                         notas,
-                        fontes
+                        fontes,
+                        id:item.indicadorId
                     };
                 });
         });

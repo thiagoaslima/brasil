@@ -11,6 +11,7 @@ import { Page404Component } from './core/page404/page404.component';
 
 import { PesquisaHomeComponent } from './home/pesquisa-home.component';
 import { HomeComponent } from './home/home.component';
+import { EstadoSinteseComponent } from './estado-sintese/estado-sintese.component';
 
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
@@ -56,6 +57,10 @@ const children = [
           path: 'pesquisas',
           component: PesquisaHomeComponent
         }]
+      },
+      {
+        path: 'brasil/sintese/:uf',
+        component: EstadoSinteseComponent
       },
       {
         path: 'v4/brasil/sandbox',
@@ -164,12 +169,13 @@ const children = [
         path: 'v4/brasil/:uf/:municipio/pesquisa',
         redirectTo: 'brasil/:uf/:municipio/pesquisa'
       },
-
       /** PAGE 404 */
       {
         path: '**',
         component: Page404Component
-      }
+      },
+      
+
     ])
 
   ]

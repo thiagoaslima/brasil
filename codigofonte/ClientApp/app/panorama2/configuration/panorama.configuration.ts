@@ -1008,6 +1008,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29167,
+                    periodo:'2016',
                     titulo: 'Área da unidade territorial',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1067,6 +1068,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 13,
                     indicadorId: 5908,
+                    periodo:'2015',
                     titulo: 'Matrículas no ensino fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -1146,6 +1148,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 32,
                     indicadorId: 28242,
+                    periodo: '2009',
                     titulo: 'Estabelecimentos de Saúde SUS',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.numerico

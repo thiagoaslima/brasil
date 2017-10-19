@@ -12,6 +12,8 @@ import { Panorama2Module } from '../panorama2/panorama2.module'
 import { PesquisaModule2 } from '../pesquisa/pesquisa.module';
 import { AniversarioModule } from '../aniversario/aniversario.module';
 import { SandboxModule } from '../sandbox/sandbox.module';
+import { EstadoSinteseComponent } from '../estado-sintese/estado-sintese.component';
+import { EstadoSinteseService } from '../estado-sintese/estado-sintese.service';
 // import { RootComponent } from '../root.component';
 // import { EmptyComponent } from '../empty.component';
 import { VisaoHistoricaModule } from '../visao-historica/visao-historica.module';
@@ -54,19 +56,22 @@ import { IBGECartogramaModule } from '../infografia/ibge-cartograma/ibge-cartogr
         SubmenuComponent,
         PesquisaHomeComponent,
         HomeComponent,
+        EstadoSinteseComponent
         // EmptyComponent,
         // BarraGov
     ],
     exports: [
         ShellComponent,
-        PesquisaHomeComponent
+        PesquisaHomeComponent,
+        EstadoSinteseComponent
     ],
     providers: [
         // ValidParametersGuard,
         // EmptyLocationGuard,
         // V3RouterGuard,
         PESQUISAS,
-        BASES
+        BASES,
+        EstadoSinteseService
     ]
 })
 export class ShellModule {

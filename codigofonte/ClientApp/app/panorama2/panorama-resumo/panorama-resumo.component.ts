@@ -9,6 +9,7 @@ import {
     OnInit,
     Output,
     SimpleChange,
+    ViewChild
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +18,6 @@ import 'rxjs/add/operator/debounceTime';
 import { TEMAS } from '../../panorama2/configuration';
 import { Panorama2Service } from '../panorama.service';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
-
 
 @Component({
     selector: 'panorama-resumo',
@@ -30,15 +30,19 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     @Input() localidade = null;
     @Input() resultados = [];
 
+    public static NUM_MAXIMO_INDICADORES_FILTRO = 6;
     public icones: { [tema: string]: string } = {};
     public cabecalho = [];
     public temas = [];
     public notas = [];
     public fontes = [];
+    public opcoesIndicadores = [];
     public isHeaderStatic: Observable<boolean>;
     public exibirFontesENotas = false;
     public IsMobileService: boolean;
-
+    public exibirFiltroResumo = false;
+    public sinteseEstadoUrl;
+    public temasModalFiltroPanorama;
     private _scrollTop$ = new BehaviorSubject(0);
 
     private nota;
@@ -60,13 +64,40 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private _panoramaService: Panorama2Service,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService
+        private _traducaoServ: TraducaoService,
+
     ) {
         this.setIcones();
+        
     }
 
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
+        this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind=>ind.tema && ind.tema!="");
+        console.log(this.temasModalFiltroPanorama);
+        
+         
+    }
+    
+    selecionaIndicadoresFiltro(item,idx,event){
+        
+             if(this.opcoesIndicadores && this.opcoesIndicadores.length<PanoramaResumoComponent.NUM_MAXIMO_INDICADORES_FILTRO){
+                 
+                 if(event.target.checked){
+                     this.opcoesIndicadores.push(item.indicadorId);
+                 }
+             }else if(event.target.checked){
+                 event.target.checked = false;
+                 event.stopPropagation();  
+                 alert('Número máximo de indicadores selecionados atingido');
+             } 
+             if(!event.target.checked){
+                this.opcoesIndicadores = this.opcoesIndicadores.filter(ind=> { 
+                     if(item.indicadorId!=ind) return ind;
+                })
+             }
+          
+            
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
@@ -77,6 +108,8 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
             changes.hasOwnProperty('localidade') && changes.localidade.currentValue &&
             this.localidade && this.configuracao && this.configuracao.length > 0
         ) {
+            
+           
             this._panoramaService.getResumo(this.configuracao, this.localidade).subscribe(resp => {
 
                 let temas = resp.slice(0);
@@ -88,7 +121,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
                 this.cabecalho = cabecalho;
                 this.temas = temas;
-
+                console.log(temas);
                 this.notas = resp.filter(resultado => {
 
                     if (resultado.notas.length === 0) {
@@ -116,7 +149,6 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
                         }
                     }
                 });
-
                 this.fontes = resp.filter(resultado => {
                     return !!resultado.fontes
                         && resultado.fontes.length > 0
@@ -131,6 +163,14 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
                 this.modalErrorService.showError();
             });
         }
+    }
+    gerarSinteseEstado(){
+        let indicadores = this.getIndicadoresSelecionados();
+        this.sinteseEstadoUrl = '/brasil/sintese/'+this.localidade.sigla.toLowerCase()+'?indicadores='+indicadores.join(',');
+        window.open(this.sinteseEstadoUrl, '_blank');
+    }
+    getIndicadoresSelecionados(){
+        return this.opcoesIndicadores.filter(res=>res!==false);
     }
 
     ngOnDestroy() {
