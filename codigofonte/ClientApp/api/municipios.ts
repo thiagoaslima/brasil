@@ -15101,8 +15101,8 @@ export const municipios = [
   {
     "codigoUf": 26,
     "codigo": 2606903,
-    "nome": "Iguaraci",
-    "slug": "iguaraci",
+    "nome": "Iguaracy",
+    "slug": "iguaracy",
     "microrregiao": 26003
   },
   {

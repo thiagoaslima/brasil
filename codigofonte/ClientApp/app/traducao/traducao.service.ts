@@ -1,6 +1,6 @@
 import { Injectable, Optional, Inject } from '@angular/core';
 import 'zone.js';
-
+import { isBrowser } from 'angular2-universal';
 import { ORIGIN_URL, REQUEST_URL } from 'angular2-universal';
 
 @Injectable()
@@ -26,18 +26,30 @@ export class TraducaoService {
         const prerenderURL: string = Zone.current.get('originUrl');
 
         const queryLanguage = this.getParameterByName('lang', prerenderURL ? prerenderURL : undefined);
-        const navigatorLanguage = navigator.language;
-        const sessionLanguage = sessionStorage.getItem('lang');
 
-        if (queryLanguage) {
-            this.lang = queryLanguage;
-        } else if(sessionLanguage) {
-            this.lang = sessionLanguage;
-        } else if(navigatorLanguage) {
-            this.lang = navigatorLanguage;
+
+        if (isBrowser) {
+
+            const navigatorLanguage = navigator.language;
+            const sessionLanguage = sessionStorage.getItem('lang');
+
+            if (queryLanguage) {
+                this.lang = queryLanguage;
+            } else if(sessionLanguage) {
+                this.lang = sessionLanguage;
+            } else if(navigatorLanguage) {
+                this.lang = navigatorLanguage;
+            } else {
+                this.lang = 'pt';
+            }
+
         } else {
             this.lang = 'pt';
         }
+
+        
+
+
 
     }
 
@@ -51,7 +63,10 @@ export class TraducaoService {
 
     public set lang(lang: string) {
         this._lang = lang;
-        sessionStorage.setItem('lang', this._lang);
+
+        if (isBrowser) {
+            sessionStorage.setItem('lang', this._lang);
+        }
     }
 
 }
