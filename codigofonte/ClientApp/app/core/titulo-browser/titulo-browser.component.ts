@@ -5,7 +5,7 @@ import { isBrowser } from 'angular2-universal';
 import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
-import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { ModalErrorService } from '../modal-erro/modal-erro.service';
 
 /*
 seta o título da página de acordo com a rota
@@ -75,16 +75,12 @@ export class TituloBrowserComponent implements OnInit {
 
                                 document.title = titulo; // titulo pesquisa
                             },
-                            this.exibirError);
+                            error => this.modalErrorService.showError());
                         });
                     }
                 }
             }
         },
-        this.exibirError);
-    }
-
-    private exibirError(){
-        this.modalErrorService.showError();
+        error => this.modalErrorService.showError());
     }
 }
