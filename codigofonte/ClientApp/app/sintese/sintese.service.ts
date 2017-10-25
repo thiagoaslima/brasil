@@ -54,20 +54,20 @@ export class SinteseService {
             });
     }
 
-    public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
+    public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio, periodo: string = 'all') {
 
-        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}?scope=${escopo}&lang=${this.idioma}`;
+        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}?scope=${escopo}&lang=${this.idioma}`;
         return this._http.get(serviceEndpoint, options).map((res => res.json()));
     }
 
-    public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio) {
+    public getResultadoPesquisa(pesquisaId: number, posicaoIndicador: string, codigoLocalidade: string, escopo = EscopoIndicadores.proprio, periodo: string = 'all') {
 
         if(codigoLocalidade == undefined){
 
             return Observable.of({});
         }
 
-        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}&${this.idioma}`;
+        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}&${this.idioma}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint)
             .map((res => res.json()))
@@ -91,11 +91,11 @@ export class SinteseService {
         });
     }
 
-    public getResultadoPesquisa2(pesquisaId: number, posicaoIndicador: string, codigoUF: number, escopo = EscopoIndicadores.arvore) {
+    public getResultadoPesquisa2(pesquisaId: number, posicaoIndicador: string, codigoUF: number, escopo = EscopoIndicadores.arvore, periodo: string = 'all') {
 
         let codigoCoringaTodosMunucipiosUF = codigoUF == 0 ? 'xx' : `${codigoUF}xxxx`;
 
-        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
+        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint, options)
             .map((res => res.json()))
@@ -120,13 +120,13 @@ export class SinteseService {
      * @local: string - código da localidade.
      * @indicadores: string[] - lista de indicadores a serem recuperados.
      */
-    public getDadosPesquisa(pesquisa: string, local: string, indicadores: string[] = []) {
+    public getDadosPesquisa(pesquisa: string, local: string, indicadores: string[] = [], periodo: string = 'all') {
 
         const codigoLocal = local.substr(0, 6);
 
         const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
 
-        const dadosPesquisa$ = this._http.get(`https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/resultados?localidade=${codigoLocal}&${codigoIndicadores}&${this.idioma}`)
+        const dadosPesquisa$ = this._http.get(`https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/${periodo}}/resultados?localidade=${codigoLocal}&${codigoIndicadores}&${this.idioma}`)
             .map((res => res.json()))
             .map(this._excludeNullYearsFromResultados);
 
@@ -155,13 +155,13 @@ export class SinteseService {
      * @pesquisa: string - código da pesquisa.
      * @indicadores: string[] - lista de indicadores a serem recuperados. Se não informado, obtém todos os indicadores da pesquisa.
      */
-    public getNomesPesquisa(pesquisa: string, indicadores: string[] = []) {
+    public getNomesPesquisa(pesquisa: string, indicadores: string[] = [], periodo: string = 'all') {
         if (!pesquisa) {
             
         }
        
         const nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/all/indicadores?lang=${this.idioma}`, options
+            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/${periodo}/indicadores?lang=${this.idioma}`, options
         ).map((res => res.json()));
 
         return nomesPesquisa$
@@ -198,13 +198,13 @@ export class SinteseService {
             });
     }
 
-    public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA, codigoLocalidadeB, codigoLocalidadeC, posicaoIndicador: string, escopo = EscopoIndicadores.proprio) {
+    public getPesquisaLocalidades(pesquisaId: number, codigoLocalidadeA, codigoLocalidadeB, codigoLocalidadeC, posicaoIndicador: string, escopo = EscopoIndicadores.proprio, periodo: string = 'all') {
         
         return Observable.zip(
-            this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA, escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB, escopo),
-            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC, escopo)
+            this.getIndicadoresPesquisa(pesquisaId, posicaoIndicador, escopo, periodo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeA, escopo, periodo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeB, escopo, periodo),
+            this.getResultadoPesquisa(pesquisaId, posicaoIndicador, codigoLocalidadeC, escopo, periodo)
             )
             .map(([nomes, dadosA, dadosB, dadosC]) => {
                 

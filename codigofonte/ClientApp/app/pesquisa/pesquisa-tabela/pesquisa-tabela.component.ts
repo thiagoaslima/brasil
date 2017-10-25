@@ -71,7 +71,7 @@ export class PesquisaTabelaComponent implements OnChanges {
             let localidade2: string = !this.localidades[1] ? undefined : this.localidades[1].toString();
             let localidade3: string = !this.localidades[2] ? undefined : this.localidades[2].toString();
 
-            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, EscopoIndicadores.arvore).subscribe((indicadores) => {
+            let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, EscopoIndicadores.arvore, this.periodo).subscribe((indicadores) => {
 
                 this.indicadores = this.flat(indicadores);
 

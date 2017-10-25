@@ -77,6 +77,7 @@ export class PesquisaService2 {
         return `${pesquisaId}`;
     }
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
+
         let keyCache = this.getPesquisaKeyCache(pesquisaId);
         if (!this._getPesquisaCache[keyCache]) {
             const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}?lang=`+this.idioma;

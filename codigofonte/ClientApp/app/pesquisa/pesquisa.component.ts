@@ -50,7 +50,15 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         
         this.subscription = this._routerParams.params$.subscribe(urlParams => {
             this._pesquisaService.getPesquisa(urlParams.params['pesquisa']).subscribe((pesquisa) => {
-                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos).subscribe((indicadores) => {
+
+                // Caso seja a pequisa MUNIC, é necessário informar um período para obter os indicadores, pois os indicadores variam por período.
+                let periodoMaisrecente = null;
+                if (pesquisa.id === 1) {
+
+                    periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0];
+                }                
+
+                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos, null, false, periodoMaisrecente.nome).subscribe((indicadores) => {
                     this.pesquisa = pesquisa;
                     this.localidades = new Array(3);
 

@@ -52,26 +52,26 @@ indicadorValidador.resgitrarTestes([
 export class Indicador {
 
     static indicadoresStrategy = null;
-    static get(pesquisaId: number, posicao: string): Observable<Indicador> {
+    static get(pesquisaId: number, posicao: string, periodo?: string): Observable<Indicador> {
         if (!Indicador.indicadoresStrategy) {
             throw new ReferenceError('indicadoresStrategy não foi definida em Indicador')
         }
-        return Indicador.indicadoresStrategy.retrieve(pesquisaId, posicao, EscopoIndicadores.proprio)
+        return Indicador.indicadoresStrategy.retrieve(pesquisaId, posicao, EscopoIndicadores.proprio, periodo)
             .map(indicadores => indicadores[0]);
     }
 
-    static getFilhos(pesquisaId: number, posicao: string): Observable<Indicador[]> {
+    static getFilhos(pesquisaId: number, posicao: string, periodo?: string): Observable<Indicador[]> {
         if (!Indicador.indicadoresStrategy) {
             throw new ReferenceError('indicadoresStrategy não foi definida em Indicador')
         }
-        return Indicador.indicadoresStrategy.retrieve(pesquisaId, posicao, EscopoIndicadores.filhos)
+        return Indicador.indicadoresStrategy.retrieve(pesquisaId, posicao, EscopoIndicadores.filhos, periodo)
     }
 
-    static getArvore(pesquisaId: number, posicao: string): Observable<Indicador[]> {
+    static getArvore(pesquisaId: number, posicao: string, periodo?: string): Observable<Indicador[]> {
         if (!Indicador.indicadoresStrategy) {
             throw new ReferenceError('indicadoresStrategy não foi definida em Indicador')
         }
-        return Indicador.indicadoresStrategy.retrieve(pesquisaId, posicao, EscopoIndicadores.arvore)
+        return Indicador.indicadoresStrategy.retrieve(pesquisaId, posicao, EscopoIndicadores.arvore, periodo)
     }
 
     static converter(data) {

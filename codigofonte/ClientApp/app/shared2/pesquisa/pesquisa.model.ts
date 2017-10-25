@@ -56,9 +56,10 @@ export class Pesquisa {
     public readonly periodos: Periodo[]
 
     private _indicadores: Observable<Indicador[]>
-    get indicadores() {
+    getIndicadores(periodo?: string) {
+
         if (!this._indicadores) {
-            this._indicadores = Indicador.getFilhos(this.id, '0')
+            this._indicadores = Indicador.getFilhos(this.id, '0', periodo)
                 .do(indicadores => this._indicadores = Observable.of(indicadores))
                 .share();
         }

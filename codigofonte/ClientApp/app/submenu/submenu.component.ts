@@ -69,14 +69,23 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
 
         if (pesquisa.id === 23) {
             // CENSO
-            pesquisa.indicadores.toPromise().then(indicadores => {
+            pesquisa.getIndicadores().toPromise().then(indicadores => {
                 indicadores = indicadores.slice().sort((a, b) => a.nome > b.nome ? 1 : -1);
                 const sinopseIndex = indicadores.findIndex(indicador => indicador.nome.toLowerCase() === 'sinopse');
                 const sinopse = indicadores.splice(sinopseIndex, 1);
                 this.indicadores = sinopse.concat(indicadores);
             });
         } else {
-            pesquisa.indicadores.take(1).subscribe(indicadores => {
+
+            // Caso seja a pequisa MUNIC, é necessário informar um período para obter os indicadores, pois os indicadores variam por período.
+            let periodoMaisrecente = null;
+            if (pesquisa.id === 1) {
+
+                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0];
+            }
+
+            pesquisa.getIndicadores(periodoMaisrecente.nome).take(1).subscribe(indicadores => {
+
                 // if (indicadores.length === 1 || pesquisa.id !== 23) { //pesquisa 23 é o censo
                 this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id]);
                 this.closeMenu.emit();

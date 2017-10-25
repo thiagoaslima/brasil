@@ -41,9 +41,9 @@ export class IndicadorService2 {
       
     }
 
-    getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string): Observable<Indicador[]> {
+    getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string, periodo: string = 'all'): Observable<Indicador[]> {
 
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}&lang=${this.idioma}`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&lang=${this.idioma}`;
 
         return this._http.get(url, options)
             .retry(3)
@@ -65,11 +65,12 @@ export class IndicadorService2 {
             .map(array => array.map(Indicador.criar));
     }
 
-    getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false): Observable<Indicador[]> {
+    getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false, periodo: string = 'all'): Observable<Indicador[]> {
+
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
-        const queryLocalidade = localidade === undefined ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
+        const queryLocalidade = localidade === undefined || null ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
         
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/all/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`;
+        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`;
 
         return this._http.get(url, options)
             .retry(3)

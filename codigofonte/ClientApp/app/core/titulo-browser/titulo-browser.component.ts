@@ -59,7 +59,15 @@ export class TituloBrowserComponent implements OnInit {
 
                     if (params.pesquisa) {
                         this._pesquisaService.getPesquisa(params.pesquisa).subscribe((pesquisa) => {
-                            pesquisa.indicadores.subscribe((indicadores) => {
+
+                            // Caso seja a pequisa MUNIC, é necessário informar um período para obter os indicadores, pois os indicadores variam por período.
+                            let periodoMaisrecente = null;
+                            if (pesquisa.id === 1) {
+
+                                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0];
+                            }
+
+                            pesquisa.getIndicadores(periodoMaisrecente.nome).subscribe((indicadores) => {
                                 let indicadorNome = indicadores.length > 0 ? indicadores[0].nome : '';
 
                                 for (let i = 0; i < indicadores.length; i++) {
