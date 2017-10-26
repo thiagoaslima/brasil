@@ -192,6 +192,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         if(this.isNivelMunicipal && tipo == 'grafico' && this.listaPeriodos.length <= 1){
             return
         }
+
+        if(!!this.pesquisa && this.pesquisa.id == 1 && (tipo == 'grafico' || tipo == 'ranking' || tipo ==  'cartograma')){
+
+            return;
+        }
         
         this.navegarPara(null, null, tipo);
     }
