@@ -56,7 +56,9 @@ export class Pesquisa {
     public readonly periodos: Periodo[]
 
     private _indicadores: Observable<Indicador[]>
-    getIndicadores(periodo?: string) {
+    getIndicadores(periodo: string = 'all') {
+
+        periodo = !periodo ? 'all' : periodo;
 
         if (!this._indicadores) {
             this._indicadores = Indicador.getFilhos(this.id, '0', periodo)

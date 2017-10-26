@@ -55,10 +55,10 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                 let periodoMaisrecente = null;
                 if (pesquisa.id === 1) {
 
-                    periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0];
+                    periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
                 }                
 
-                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos, null, false, periodoMaisrecente.nome).subscribe((indicadores) => {
+                this._indicadorService.getIndicadoresById(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), EscopoIndicadores.filhos, null, false, periodoMaisrecente).subscribe((indicadores) => {
                     this.pesquisa = pesquisa;
                     this.localidades = new Array(3);
 

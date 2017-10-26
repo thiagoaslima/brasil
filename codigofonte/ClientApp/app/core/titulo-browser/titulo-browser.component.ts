@@ -64,10 +64,10 @@ export class TituloBrowserComponent implements OnInit {
                             let periodoMaisrecente = null;
                             if (pesquisa.id === 1) {
 
-                                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0];
+                                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
                             }
 
-                            pesquisa.getIndicadores(periodoMaisrecente.nome).subscribe((indicadores) => {
+                            pesquisa.getIndicadores(periodoMaisrecente).subscribe((indicadores) => {
                                 let indicadorNome = indicadores.length > 0 ? indicadores[0].nome : '';
 
                                 for (let i = 0; i < indicadores.length; i++) {

@@ -81,10 +81,10 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
             let periodoMaisrecente = null;
             if (pesquisa.id === 1) {
 
-                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0];
+                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
             }
 
-            pesquisa.getIndicadores(periodoMaisrecente.nome).take(1).subscribe(indicadores => {
+            pesquisa.getIndicadores(periodoMaisrecente).take(1).subscribe(indicadores => {
 
                 // if (indicadores.length === 1 || pesquisa.id !== 23) { //pesquisa 23 é o censo
                 this.router.navigate([this.localidade.link + '/pesquisa/' + this.pesquisas[index].id + '/' + indicadores[0].id]);

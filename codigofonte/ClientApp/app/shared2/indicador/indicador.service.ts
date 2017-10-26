@@ -67,6 +67,8 @@ export class IndicadorService2 {
 
     getIndicadoresById(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false, periodo: string = 'all'): Observable<Indicador[]> {
 
+        periodo = !periodo ? 'all' : periodo;
+
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
         const queryLocalidade = localidade === undefined || null ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
         
@@ -112,6 +114,7 @@ export class IndicadorService2 {
         return [indicadorIdString, localidadeString, fontesNotasString].join(';');
     }
     getVariosIndicadoresById(indicadorMapPesquisa, indicadorId: number | number[], localidade?, fontesNotas = false): Observable<Indicador[]> {
+
         let keyCache = this.getVariosIndicadoresByIdKeyCache(indicadorMapPesquisa, indicadorId, localidade, fontesNotas);
 
         if (!this._getVariosIndicadoresByIdCache[keyCache]) {
