@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-/// <reference path="./jasmine.custom.matcher.d.ts"/>
+/// <reference path="./jest.custom.matcher.d.ts"/>
 
 import { Http,HttpModule,BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { fakeAsync,async, inject, TestBed, tick } from '@angular/core/testing';
@@ -14,7 +14,7 @@ import { arrayMatcher} from './jest.custom.matcher';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 describe('IndicadorServiceE2E', () => {
     let connection, mockResponse, serviceResponse, serverResponse;
@@ -36,14 +36,18 @@ describe('IndicadorServiceE2E', () => {
             imports:[HttpModule],
             providers: [
                 {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                },
+                {
                     provide: PesquisaService3,
-                    deps: [Http],
-                    useFactory: (http) => new PesquisaService3(http)
+                    deps: [Http,TraducaoService],
+                    useFactory: (http,traducaoService) => new PesquisaService3(http,traducaoService)
                 },
                 {
                     provide: IndicadorService3,
-                    deps: [Http, PesquisaService3],
-                    useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+                    deps: [Http, PesquisaService3,TraducaoService],
+                    useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
                 },
             
             ]

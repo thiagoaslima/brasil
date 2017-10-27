@@ -10,6 +10,7 @@ import { ServicoDados as servidor } from '../values'
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 describe('IndicadorService', () => {
     let connection, mockResponse, serviceResponse, serverResponse;
@@ -43,8 +44,8 @@ describe('IndicadorService', () => {
             connection = null;
 
             class PesquisaServiceStub extends PesquisaService3 {
-                constructor(http: Http) {
-                    super(http);
+                constructor(http: Http,traducaoService:TraducaoService) {
+                    super(http,traducaoService);
                 }
 
                 getPesquisas(ids) {
@@ -56,14 +57,18 @@ describe('IndicadorService', () => {
             TestBed.configureTestingModule({
                 providers: [
                     {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                    },
+                    {
                         provide: PesquisaService3,
-                        deps: [Http],
-                        useFactory: (http) => new PesquisaServiceStub(http)
+                        deps: [Http,TraducaoService],
+                        useFactory: (http,traducaoService) => new PesquisaServiceStub(http,traducaoService)
                     },
                     {
                         provide: IndicadorService3,
-                        deps: [Http, PesquisaService3],
-                        useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+                        deps: [Http, PesquisaService3,TraducaoService],
+                        useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
                     },
                     MockBackend,
                     BaseRequestOptions,
@@ -191,8 +196,8 @@ describe('IndicadorService', () => {
                 connection = null;
 
                 class PesquisaServiceStub extends PesquisaService3 {
-                    constructor(http: Http) {
-                        super(http);
+                    constructor(http: Http,traducaoService:TraducaoService) {
+                        super(http,traducaoService);
                     }
 
                     getPesquisas(ids) {
@@ -205,13 +210,13 @@ describe('IndicadorService', () => {
                     providers: [
                         {
                             provide: PesquisaService3,
-                            deps: [Http],
-                            useFactory: (http) => new PesquisaServiceStub(http)
+                            deps: [Http,TraducaoService],
+                            useFactory: (http,traducaoService) => new PesquisaServiceStub(http,traducaoService)
                         },
                         {
                             provide: IndicadorService3,
-                            deps: [Http, PesquisaService3],
-                            useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+                            deps: [Http, PesquisaService3,TraducaoService],
+                            useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
                         },
                         MockBackend,
                         BaseRequestOptions,
@@ -282,8 +287,8 @@ describe('IndicadorService', () => {
             connection = null;
 
             class PesquisaServiceStub extends PesquisaService3 {
-                constructor(http: Http) {
-                    super(http);
+                constructor(http: Http,traducaoService:TraducaoService) {
+                    super(http,traducaoService);
                 }
 
                 getPesquisas(ids) {
@@ -296,13 +301,13 @@ describe('IndicadorService', () => {
                 providers: [
                     {
                         provide: PesquisaService3,
-                        deps: [Http],
-                        useFactory: (http) => new PesquisaServiceStub(http)
+                        deps: [Http,TraducaoService],
+                        useFactory: (http,traducaoService) => new PesquisaServiceStub(http,traducaoService)
                     },
                     {
                         provide: IndicadorService3,
                         deps: [Http, PesquisaService3],
-                        useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+                        useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
                     },
                     MockBackend,
                     BaseRequestOptions,

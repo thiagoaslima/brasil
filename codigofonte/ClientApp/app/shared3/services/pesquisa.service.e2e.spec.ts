@@ -12,6 +12,7 @@ import { niveisTerritoriais } from '../values';
 
 import { PesquisaService3 } from './pesquisa.service';
 import { arrayMatcher} from './jest.custom.matcher';
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 describe('PesquisaServiceE2E', () => {
     let connection, mockResponse, serviceResponse;
@@ -28,9 +29,13 @@ describe('PesquisaServiceE2E', () => {
             imports: [HttpModule],
             providers: [
                 {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                },
+                {
                     provide: PesquisaService3,
-                    deps: [Http],
-                    useFactory: (http) => new PesquisaService3(http)
+                    deps: [Http,TraducaoService],
+                    useFactory: (http,traducaoService) => new PesquisaService3(http,traducaoService)
                 }
             ]
             

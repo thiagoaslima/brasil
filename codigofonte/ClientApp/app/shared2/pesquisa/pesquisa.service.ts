@@ -33,8 +33,8 @@ export class PesquisaService2 {
         Pesquisa.setPesquisaStrategy({
             retrieve: (pesquisaId: number) => this.getPesquisa(pesquisaId)
         });
-        this.idioma = this._traducaoService.lang;
-     
+        //this.idioma = this._traducaoService.lang;
+        this.idioma = 'PT';
     }
 
     private _allPesquisasCache: Array<Pesquisa>;

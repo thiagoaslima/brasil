@@ -4,6 +4,9 @@ import { Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { CacheFactory } from '../cache/cacheFactory.service';
+
+import {TraducaoService}  from '../traducao/traducao.service';
+
 import {
     BibliotecaService,
     ConjunturaisService,
@@ -35,8 +38,8 @@ const PROVIDERS = [
     RankingService3,
     {
         provide: IndicadorService3,
-        deps: [Http, PesquisaService3],
-        useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+        deps: [Http, PesquisaService3,TraducaoService],
+        useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
     },
     {
         provide: ConjunturaisService,

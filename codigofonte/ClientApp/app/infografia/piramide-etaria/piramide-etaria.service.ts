@@ -181,7 +181,7 @@ export class PiramideEtariaService{
         let dadosPesquisa$;
 
         dadosPesquisa$ = this._http.get(
-            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&lang=${this.idioma}`
         )
         .map((res => res.json()))
 

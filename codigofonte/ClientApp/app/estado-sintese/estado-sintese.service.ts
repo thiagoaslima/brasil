@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AppState } from '../shared2/app-state';
 import { converterObjArrayEmHash } from '../utils2';
 import { PANORAMA, ItemConfiguracao } from '../panorama2/configuration';
+import { TraducaoService } from '../traducao/traducao.service';
 
 @Injectable()
 export class EstadoSinteseService {
@@ -16,12 +17,16 @@ export class EstadoSinteseService {
     private _totalUfs: number;
     private _localidade$$: Subscription;
     private resumo;
+    private idioma;
     constructor(
         private _panoramaService: Panorama2Service,
         private _localidadeService: LocalidadeService2,
         private _appState: AppState,
         private _routerParams: RouterParamsService,
+        private _traducaoService: TraducaoService,
     ) {
+
+        this.idioma = this._traducaoService.lang;
         
     }
     getResumoMunicipios(estado,indicadores){

@@ -17,6 +17,7 @@ import 'rxjs/add/operator/retry';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 @Injectable()
 export class PesquisaService3 {
@@ -25,10 +26,15 @@ export class PesquisaService3 {
     idioma:string;
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private _traducaoService:TraducaoService,
     ) { 
 
-        this.idioma = 'PT';
+        if(this._traducaoService.lang!=null){
+            this.idioma = this._traducaoService.lang;
+        }else{
+            this.idioma = 'PT';
+        }
     }
 
     @RxSimpleCache({
