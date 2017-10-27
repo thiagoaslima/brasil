@@ -41,7 +41,7 @@ export class EstadoSinteseService {
                                   resumo.gentilico = res.valor;
                               }
                               return res;
-                         }).filter(res=>res.valor!='-' && res.titulo!='Gentílico' && indicadores.includes(res.id+"") );
+                         }).filter(res=> res.titulo!='Gentílico' && indicadores.includes(res.id+"") );
                          
                          resumo.indicadores = res;
                          return resumo;

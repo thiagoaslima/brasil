@@ -14,7 +14,7 @@
                         <tr class="3300100 par">
                             <td class="nome">{{r.municipio}}</td>
                             <td class="gentilico">{{r.gentilico}}</td>
-                            <td  *ngFor="let indicador of r.indicadores" >{{indicador.valor}} {{indicador.unidade}}</td>
+                            <td  *ngFor="let indicador of r.indicadores" >{{indicador.valor}} <span *ngIf="indicador.valor!='-'">{{indicador.unidade}}</span></td>
                         </tr>                
                 </tbody>
                 <tfoot>
