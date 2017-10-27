@@ -14,14 +14,19 @@
                         <tr class="3300100 par">
                             <td class="nome">{{r.municipio}}</td>
                             <td class="gentilico">{{r.gentilico}}</td>
-                            <td  *ngFor="let indicador of r.indicadores" >{{indicador.valor}}</td>
+                            <td  *ngFor="let indicador of r.indicadores" >{{indicador.valor}} <span *ngIf="indicador.valor!='-'">{{indicador.unidade}}</span></td>
                         </tr>                
                 </tbody>
                 <tfoot>
                     <tr>
                         <td [attr.colspan]="indicadores && (indicadores.length+2)">
-                        Fonte: IBGE, em parceria com os Órgãos Estaduais de Estatística, Secretarias Estaduais de Governo e Superintendência da Zona Franca de Manaus - SUFRAMA.<br>NOTA 1: Os dados de 2014 estarão sujeitos a revisão na próxima divulgação.
-                        <br>NOTA 2: Os dados da série revisada (2010 a 2014) têm como referência o ano de 2010, seguindo a nova referência das Contas Nacionais.<br>                    </td>
+                             <div *ngFor="let fonte of fontes;let i=index">
+                                 <br/>Fonte {{i+1}} - {{fonte.indicador}}: {{fonte.descricao}} 
+                             </div>   
+                            <div *ngFor="let nota of notas;let i=index">
+                                <br/>Nota {{i+1}} - {{nota.indicador}}: {{nota.descricao}}
+                            </div>
+                        </td>
                     </tr>
                 </tfoot>
             </table>

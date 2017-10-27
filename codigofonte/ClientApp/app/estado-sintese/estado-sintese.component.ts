@@ -38,6 +38,8 @@ export class EstadoSinteseComponent implements OnInit {
     enviado = false;
     url = '';
     private _localidade$$: Subscription;
+    private notas = [];
+    private fontes = [];
     public get lang() {
         return this._traducaoServ.lang;
     }
@@ -80,7 +82,10 @@ export class EstadoSinteseComponent implements OnInit {
                                  console.log(this.resumo);
                                 if(this.resumo!=null && this.resumo.length>0){
                                     this.indicadores = this.resumo[0].indicadores;
-                                }
+                                    this.notas  = this._estadoSinteseService.getNotasResumo(resumo[0]);
+                                    this.fontes =    this._estadoSinteseService.getFontesResumo(resumo[0]);
+                                    console.log(this.fontes);
+                                 }  
                                 
                             });
                         }

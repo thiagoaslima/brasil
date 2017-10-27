@@ -41,7 +41,8 @@ export class EstadoSinteseService {
                                   resumo.gentilico = res.valor;
                               }
                               return res;
-                         }).filter(res=>res.valor!='-' && res.titulo!='Gentílico' && indicadores.includes(res.id+"") );
+                         }).filter(res=> res.titulo!='Gentílico' && indicadores.includes(res.id+"") );
+                         
                          resumo.indicadores = res;
                          return resumo;
                      });       
@@ -49,6 +50,49 @@ export class EstadoSinteseService {
              }
              return Observable.forkJoin(resultObservables); 
              
+    }
+    getNotasResumo(resumo){
+            let notas = [];
+            resumo.indicadores.filter(resultado=>{
+
+                console.log(resultado);
+                if (resultado.notas.length === 0) {
+
+                    return false;
+                }
+
+                for (let i = 0; i < resultado.notas.length; i++) {
+
+                    if (resultado.notas[i]['periodo'] === resultado.periodo || resultado.notas[i]['periodo'] === '-') {
+                        let nota = <any>{};
+                        nota.descricao =  resultado.notas[i]['notas'][0];
+                        nota.indicador = resultado.titulo;
+                        notas.push(nota);
+                        return true;
+                    }
+                }
+
+                return false;
+                
+            });
+            return notas;
+    }
+    getFontesResumo(resumo){
+            let fontes = [];
+            resumo.indicadores.filter(resultado => {
+                    return !!resultado.fontes
+                        && resultado.fontes.length > 0
+                        && (
+                            resultado.fontes[0]['periodo'] === resultado.periodo
+                            || resultado.fontes[0]['periodo'] === '-'
+                        );
+                }).map(resultado =>{
+                        let fonte = <any>{};
+                        fonte.descricao = resultado.fontes[0]['fontes'];
+                        fonte.indicador = resultado.titulo;
+                        fontes.push(fonte);
+                });
+            return fontes;
     }
     getResumoEstado(localidade,indicadores){
 
