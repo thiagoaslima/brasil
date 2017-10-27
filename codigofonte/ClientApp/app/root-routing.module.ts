@@ -17,6 +17,8 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
 
+import { LoginComponent } from './core/login/login.component';
+
 const children = [
   {
     path: '',
@@ -69,6 +71,10 @@ const children = [
       {
         path: 'brasil/sandbox',
         component: SandboxComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       },
       {
         path: 'v4/brasil',

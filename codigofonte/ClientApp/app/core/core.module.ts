@@ -17,6 +17,7 @@ import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.compo
 import { Page404Component } from './page404/page404.component';
 import { ModalErroComponent } from './modal-erro/modal-erro.component';
 import { ModalErrorService } from './modal-erro/modal-erro.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ModalErrorService } from './modal-erro/modal-erro.service';
     GeolocationComponent,
     MetatagBrowserComponent,
     Page404Component,
-    ModalErroComponent
+    ModalErroComponent,
+    LoginComponent
   ],
   exports: [
     SeletorLocalidadeComponent,
@@ -41,7 +43,8 @@ import { ModalErrorService } from './modal-erro/modal-erro.service';
     TituloBrowserComponent,
     GeolocationComponent,
     MetatagBrowserComponent,
-    ModalErroComponent
+    ModalErroComponent,
+    LoginComponent
   ],
   providers: [
     BuscaService,
