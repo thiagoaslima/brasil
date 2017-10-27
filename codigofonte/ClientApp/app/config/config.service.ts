@@ -9,6 +9,7 @@ export class ConfigService {
 
     private hmlConfigurations = {
 
+        URL_APLICACAO_ALTERNATIVA: 'brasil.homolog.ibge.gov.br',
         URL_APLICACAO: 'brasilhomolog.ibge.gov.br',
         ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api/interno'
     };
@@ -30,8 +31,7 @@ export class ConfigService {
             console.log('------------ AMBIENTE DE HOMOLOGAÇÃO ------------')
             console.log('-------------------------------------------------')
 
-            // TODO: DESCOMENTAR QUANDO O BACKEND ESTIVER PRONTO
-            //return this.hmlConfigurations[name];
+            return this.hmlConfigurations[name];
         } 
 
         return this.prdConfigurations[name];
@@ -39,7 +39,7 @@ export class ConfigService {
 
     public isHML(){
 
-        if(isBrowser && this.hmlConfigurations.URL_APLICACAO == document.location.hostname){
+        if(isBrowser && (this.hmlConfigurations.URL_APLICACAO == document.location.hostname || this.hmlConfigurations.URL_APLICACAO_ALTERNATIVA == document.location.hostname)){
 
             return true;
         }
