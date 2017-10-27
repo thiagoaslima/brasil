@@ -26,7 +26,12 @@ export class ConfigService {
 
         if(this.isHML()){
 
-            return this.hmlConfigurations[name];
+            console.log('-------------------------------------------------')
+            console.log('------------ AMBIENTE DE HOMOLOGAÇÃO ------------')
+            console.log('-------------------------------------------------')
+
+            // TODO: DESCOMENTAR QUANDO O BACKEND ESTIVER PRONTO
+            //return this.hmlConfigurations[name];
         } 
 
         return this.prdConfigurations[name];
