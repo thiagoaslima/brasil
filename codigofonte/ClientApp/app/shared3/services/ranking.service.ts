@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Ranking } from '../models/ranking.model';
 import { niveisTerritoriais } from '../values';
+import { ConfigService } from '../../config/config.service';
 
-import { Observable } from 'rxjs/Observable';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -12,7 +13,8 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class RankingService3 {
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private configService: ConfigService
     ) { }
 
     public getRankingsIndicador(indicadores: Array<{ indicadorId: number, periodo: string }>, contextos: string[], codigoLocalidade: number) {
@@ -22,7 +24,7 @@ export class RankingService3 {
         const tipo = this._getTipoLocalidade(codigoLocalidade);
         const naturezaParams = tipo === 'uf' ? 3 : 4;
 
-        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${_indicadores}?localidade=${codigoLocalidade}&contexto=${_contexto}&upper=0&lower=0&natureza=${naturezaParams}`;
+        const url = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/indicadores/ranking/${_indicadores}?localidade=${codigoLocalidade}&contexto=${_contexto}&upper=0&lower=0&natureza=${naturezaParams}`;
 
         return this._request(url).map(response => response.map(item => new Ranking(item)));
     }

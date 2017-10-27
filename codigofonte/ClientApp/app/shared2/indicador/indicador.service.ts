@@ -19,7 +19,8 @@ import { LocalidadeService2 } from '../localidade/localidade.service';
 import { Indicador, EscopoIndicadores, Metadado, UnidadeIndicador, Ranking } from './indicador.model';
 import { flatTree } from '../../utils/flatFunctions';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
-import {TraducaoService} from '../../traducao/traducao.service';
+import { TraducaoService } from '../../traducao/traducao.service';
+import { ConfigService } from '../../config/config.service';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -27,23 +28,27 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 @Injectable()
 export class IndicadorService2 {
 
-    idioma:string;
+    idioma: string;
+    private ENDPOINT_SERVICO_DADOS: string;
+
     constructor(
         private _http: Http,
         private _localidadeService: LocalidadeService2,
         private modalErrorService: ModalErrorService,
-        private _traducaoService:TraducaoService
+        private _traducaoService: TraducaoService,
+        private configService: ConfigService
     ) {
+
         Indicador.setIndicadoresStrategy({
             retrieve: this.getIndicadoresByPosicao.bind(this)
-        })
+        });
         this.idioma = this._traducaoService.lang;
-      
+        this.ENDPOINT_SERVICO_DADOS = this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS') + '/v1';
     }
 
     getIndicadoresByPosicao(pesquisaId: number, posicao: string, escopo: string, periodo: string = 'all'): Observable<Indicador[]> {
 
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&lang=${this.idioma}`;
+        let url = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&lang=${this.idioma}`;
 
         return this._http.get(url, options)
             .retry(3)
@@ -58,7 +63,7 @@ export class IndicadorService2 {
 
     getIndicadorById(indicadorId: number, localidade: number | string): Observable<Indicador[]> {
 
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/${indicadorId}?localidade=${localidade}}&lang=${this.idioma}`;
+        let url = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/indicadores/${indicadorId}?localidade=${localidade}}&lang=${this.idioma}`;
 
         return this._http.get(url, options)
             .map(res => res.json())
@@ -72,7 +77,7 @@ export class IndicadorService2 {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
         const queryLocalidade = localidade === undefined || null ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
         
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`;
+        let url = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`;
 
         return this._http.get(url, options)
             .retry(3)
@@ -121,8 +126,8 @@ export class IndicadorService2 {
             const queryIndicadores = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
             const queryLocalidades = localidade === undefined ? '' : `&localidades=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
 
-            let urlValores = `https://servicodados.ibge.gov.br/api/v1/pesquisas/valores?indicadores=${queryIndicadores}${queryLocalidades}&lang=${this.idioma}`;
-            let urlIndicadores = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores?indicadores=${queryIndicadores}&lang=${this.idioma}`;
+            let urlValores = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/valores?indicadores=${queryIndicadores}${queryLocalidades}&lang=${this.idioma}`;
+            let urlIndicadores = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/indicadores?indicadores=${queryIndicadores}&lang=${this.idioma}`;
 
             let fallBackError = err => Observable.of({ json: () => ({}) });
 
@@ -177,7 +182,7 @@ export class IndicadorService2 {
 
     getPosicaoRelativa(pesquisaId: number, indicadorId: number, periodo: string, codigoLocalidade: number, contexto = 'BR'): Observable<Ranking> {
 
-        let url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0&lang=${this.idioma}`;   
+        let url = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${indicadorId}/ranking?contexto=${contexto}&localidade=${codigoLocalidade}&lower=0&lang=${this.idioma}`;   
 
         return this._http.get(url, options)
             .retry(3)
@@ -266,7 +271,7 @@ export class IndicadorService2 {
 
         const _contexto = contexto.join(',');
 
-        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}&natureza=${natureza}&lang=${this.idioma}`;
+        const url = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?appCidades=1&localidade=${localidade}&contexto=${_contexto}&natureza=${natureza}&lang=${this.idioma}`;
 
         return this._rankingRequest(url).map(res => {
 
@@ -333,7 +338,7 @@ export class IndicadorService2 {
     private _getRankingsRequest(indicadoresId: number[], periodos: string[], codigoLocalidade: number, contexto: string[]): Observable<Ranking[]> {
         const query = indicadoresId.map((id, index) => `${id}(${periodos[index]})`).join('|');
         const _contexto = contexto.join(',')
-        const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/ranking/${query}?lower=0&contexto=${_contexto}&localidade=${codigoLocalidade}&lang=${this.idioma}`;
+        const url = `${this.ENDPOINT_SERVICO_DADOS}/pesquisas/indicadores/ranking/${query}?lower=0&contexto=${_contexto}&localidade=${codigoLocalidade}&lang=${this.idioma}`;
 
         return this._http.get(url, options)
             .retry(3)

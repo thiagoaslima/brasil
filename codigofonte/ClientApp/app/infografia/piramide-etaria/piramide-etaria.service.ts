@@ -3,8 +3,9 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { TraducaoService } from '../../traducao/traducao.service';
+import { ConfigService } from '../../config/config.service';
 
-import {TraducaoService} from '../../traducao/traducao.service';
 
 @Injectable()
 export class PiramideEtariaService{
@@ -13,10 +14,9 @@ export class PiramideEtariaService{
     constructor(
         private _http: Http,
         private modalErrorService: ModalErrorService,
-        private _traducaoService:TraducaoService
-        
+        private _traducaoService:TraducaoService,
+        private configService: ConfigService        
     ) { 
-
         this.idioma = this._traducaoService.lang;
     }
 
@@ -181,7 +181,7 @@ export class PiramideEtariaService{
         let dadosPesquisa$;
 
         dadosPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${codpes}/periodos/all/resultados?localidade=${codmun}${indicadores}&${this.idioma}`
         )
         .map((res => res.json()))
 
@@ -207,7 +207,7 @@ export class PiramideEtariaService{
         let nomesPesquisa$;
 
         nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}/periodos/all/indicadores?lang=${this.idioma}`
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${codpes}/periodos/all/indicadores?lang=${this.idioma}`
         )
         .map((res => res.json()))
   
@@ -269,7 +269,7 @@ export class PiramideEtariaService{
     public getPeriodosDisponiveisPesquisa(codpes: string) {
 
         return this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${codpes}?lang=${this.idioma}`
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${codpes}?lang=${this.idioma}`
         )
             .map((res) => res.json())
             .map((pesquisa) => {

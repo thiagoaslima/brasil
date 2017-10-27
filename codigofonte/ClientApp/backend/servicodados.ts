@@ -1,10 +1,11 @@
+import { ConfigService } from '../app/config/config.service';
 var http = require('http');
 var { Router } = require('express');
 
 import { fakeDemoRedisCache as cache } from './cache';
 
 const URL = {
-    _prefix: 'https://servicodados.ibge.gov.br/api/v1',
+    _prefix: new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_DADOS') + '/v1',
 
     set: function (url) {
         return this._prefix + url;

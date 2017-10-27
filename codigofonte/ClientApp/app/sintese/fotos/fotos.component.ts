@@ -1,4 +1,3 @@
-import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, OnDestroy, Renderer } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subscription } from 'rxjs';
@@ -8,6 +7,8 @@ import { AppState } from '../../shared2/app-state';
 import { SinteseService } from '../sintese.service';
 import { ScrollDirective } from '../../shared/window-events/scroll.directive';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { ConfigService } from '../../config/config.service';
+import { TraducaoService } from '../../traducao/traducao.service';
 
 
 @Component({
@@ -17,10 +18,10 @@ import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 })
 export class FotosComponent implements OnInit, OnDestroy {
    
-    private servicoImagem = "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private servicoThumbs = "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-    private urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
-    private urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
+    private servicoImagem: string;
+    private servicoThumbs: string;
+    private urlDetalhes: string;
+    private urlDownload: string;
 
     private mostraGaleria = false;
     private mostraDetalhe = false;
@@ -62,24 +63,17 @@ export class FotosComponent implements OnInit, OnDestroy {
         private _appState: AppState,
         private http: Http,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService
+        private _traducaoServ: TraducaoService,
+        private configService: ConfigService
     ) {
 
+        this.servicoImagem = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/`;
+        this.servicoThumbs = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/`;
+        this.urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
+        this.urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
     }
 
     ngOnInit() {
-
-        // this.http
-        //     .get('https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/RJ15339.jpg')
-        //     .map(res => {
-        //         // If request fails, return false
-        //         // console.log(res.status);
-        //        return (res.status < 200 || res.status >= 300) ? false : true;
-        //     })
-        //     .subscribe( (retornaServico) => {
-        //         this.servicoImagem = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-        //         this.servicoThumbs = retornaServico ? "https://servicodados.ibge.gov.br/api/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/" : "https://www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
-        //      }); // Reach true if res.status >= 200 && <= 299 // Reach false if fails
 
         this._subscription = this._appState.observable$
             .filter( ({localidade}) => Boolean(localidade))

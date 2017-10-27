@@ -1,8 +1,5 @@
-import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { throwIfAlreadyLoaded } from './core.guard';
 
 import { SharedModule } from '../shared/shared.module';
 import { SharedModule2 } from '../shared2/shared.module';
@@ -17,7 +14,10 @@ import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.compo
 import { Page404Component } from './page404/page404.component';
 import { ModalErroComponent } from './modal-erro/modal-erro.component';
 import { ModalErrorService } from './modal-erro/modal-erro.service';
+import { throwIfAlreadyLoaded } from './core.guard';
+import { TraducaoModule } from '../traducao/traducao.module';
 import { LoginComponent } from './login/login.component';
+
 
 
 @NgModule({
