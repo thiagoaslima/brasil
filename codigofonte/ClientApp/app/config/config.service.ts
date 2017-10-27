@@ -9,7 +9,7 @@ export class ConfigService {
 
     private hmlConfigurations = {
 
-        URL_APLICACAO: 'brasil.homolog.ibge.gov.br',
+        URL_APLICACAO: 'brasilhomolog.ibge.gov.br',
         ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api/interno'
     };
 
