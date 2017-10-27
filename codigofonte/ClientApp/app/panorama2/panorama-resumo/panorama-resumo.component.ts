@@ -74,7 +74,6 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
         this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind=>ind.tema && ind.tema!="");
-        console.log(this.temasModalFiltroPanorama);
         
          
     }
@@ -121,7 +120,6 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
                 this.cabecalho = cabecalho;
                 this.temas = temas;
-                console.log(temas);
                 this.notas = resp.filter(resultado => {
 
                     if (resultado.notas.length === 0) {
