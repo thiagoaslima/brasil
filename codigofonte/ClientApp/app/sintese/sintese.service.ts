@@ -10,11 +10,12 @@ import { SINTESE, SinteseConfigItem } from './sintese-config';
 import { flatTree } from '../utils/flatFunctions';
 import { ufs } from '../../api/ufs';
 import { LocalidadeService3 } from '../shared3/services';
-import {TraducaoService} from '../traducao/traducao.service';
+import { TraducaoService } from '../traducao/traducao.service';
+import { ConfigService } from '../config/config.service';
+
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
-
 
 /**
  * Serviço responsável por recuperar as informações de sínteses e pesquisas.
@@ -30,7 +31,8 @@ export class SinteseService {
         private _http: Http,
         private _sinteseConfig: SINTESE,
         private _localidadeService: LocalidadeService3,
-        private _traducaoService:TraducaoService
+        private _traducaoService:TraducaoService,
+        private configService: ConfigService
     ) { 
 
         this.idioma = this._traducaoService.lang;
@@ -41,7 +43,7 @@ export class SinteseService {
      */
     public getInfoPesquisa(pesquisa: string) {
         
-        return this._http.get(`https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}?lang=${this.idioma}`)
+        return this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisa}?lang=${this.idioma}`)
             .map((res) => res.json())
             .map((pesquisa) => {
 
@@ -56,7 +58,7 @@ export class SinteseService {
 
     public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio, periodo: string = 'all') {
 
-        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}?scope=${escopo}&lang=${this.idioma}`;
+        const serviceEndpoint = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}?scope=${escopo}&lang=${this.idioma}`;
         return this._http.get(serviceEndpoint, options).map((res => res.json()));
     }
 
@@ -67,7 +69,7 @@ export class SinteseService {
             return Observable.of({});
         }
 
-        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}&${this.idioma}`;
+        const serviceEndpoint = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}&${this.idioma}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint)
             .map((res => res.json()))
@@ -95,7 +97,7 @@ export class SinteseService {
 
         let codigoCoringaTodosMunucipiosUF = codigoUF == 0 ? 'xx' : `${codigoUF}xxxx`;
 
-        const serviceEndpoint = `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
+        const serviceEndpoint = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint, options)
             .map((res => res.json()))
@@ -126,7 +128,7 @@ export class SinteseService {
 
         const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
 
-        const dadosPesquisa$ = this._http.get(`https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/${periodo}}/resultados?localidade=${codigoLocal}&${codigoIndicadores}&${this.idioma}`)
+        const dadosPesquisa$ = this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisa}/periodos/${periodo}}/resultados?localidade=${codigoLocal}&${codigoIndicadores}&${this.idioma}`)
             .map((res => res.json()))
             .map(this._excludeNullYearsFromResultados);
 
@@ -161,7 +163,7 @@ export class SinteseService {
         }
        
         const nomesPesquisa$ = this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/pesquisas/${pesquisa}/periodos/${periodo}/indicadores?lang=${this.idioma}`, options
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisa}/periodos/${periodo}/indicadores?lang=${this.idioma}`, options
         ).map((res => res.json()));
 
         return nomesPesquisa$
@@ -278,7 +280,7 @@ export class SinteseService {
         }
 
         //municípios
-        return this._http.get(`https://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
+        return this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/biblioteca?aspas=3&codmun=${codigo}`)
             .map((res) => {
 
                 return res.json();
@@ -307,7 +309,7 @@ export class SinteseService {
         let codigo = codigoMunicipio.toString().substr(0, 6);
 
         return this._http.get(
-            `https://servicodados.ibge.gov.br/api/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
         )
             .map(res => res.json())
             .map((res) => {

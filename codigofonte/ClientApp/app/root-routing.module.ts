@@ -1,5 +1,3 @@
-import { V3RouterGuard } from './v3-router.guard';
-import { EmptyComponent } from './empty.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -16,8 +14,11 @@ import { EstadoSinteseComponent } from './estado-sintese/estado-sintese.componen
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { ValidParametersGuard } from './valid-parameters.guard';
 
-
 import { LoginComponent } from './core/login/login.component';
+
+import { AuthorizationGuard } from './authorization.guard';
+import { V3RouterGuard } from './v3-router.guard';
+import { EmptyComponent } from './empty.component';
 
 const children = [
   {
@@ -53,15 +54,18 @@ const children = [
         children: [{
           path: '',
           pathMatch: 'full',
+          canActivate: [AuthorizationGuard],
           component: HomeComponent
         },
         {
           path: 'pesquisas',
-          component: PesquisaHomeComponent
+          canActivate: [AuthorizationGuard],
+          component: PesquisaHomeComponent,
         }]
       },
       {
         path: 'brasil/sintese/:uf',
+        canActivate: [AuthorizationGuard],
         component: EstadoSinteseComponent
       },
       {
@@ -89,6 +93,7 @@ const children = [
       {
         path: 'brasil/panorama',
         component: ShellComponent,
+        canActivate: [AuthorizationGuard],
         children: [
           { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
         ]
@@ -96,6 +101,7 @@ const children = [
       {
         path: 'brasil/pesquisa',
         component: ShellComponent,
+        canActivate: [AuthorizationGuard],
         children: [
           { path: '', component: PesquisaComponent, pathMatch: 'full' },
           { path: ':pesquisa', component: PesquisaComponent },
@@ -105,25 +111,26 @@ const children = [
       {
         path: 'brasil/historico',
         component: ShellComponent,
+        canActivate: [AuthorizationGuard],
         children: [
           { path: '', component: VisaoHistoricaComponent, pathMatch: 'full' },
         ]
       },
       {
         path: 'brasil/:uf',
-        canActivate: [ValidParametersGuard],
+        canActivate: [ValidParametersGuard, AuthorizationGuard],
         component: ShellComponent,
         children
       },
       {
         path: 'brasil/:uf/:municipio',
-        canActivate: [ValidParametersGuard],
+        canActivate: [ValidParametersGuard, AuthorizationGuard],
         component: ShellComponent,
         children
       },
       {
         path: 'municipio/:codmun',
-        canActivate: [V3RouterGuard],
+        canActivate: [V3RouterGuard, AuthorizationGuard],
         component: EmptyComponent
       },
 

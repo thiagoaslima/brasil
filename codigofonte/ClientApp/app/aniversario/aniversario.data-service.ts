@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
+import { ConfigService } from '../config/config.service';
+
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -9,11 +11,14 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 @Injectable()
 export class AniversarioDataService {
 
-    constructor(private http:Http) { }
+    constructor(
+        private http:Http,
+        private configService: ConfigService
+    ) { }
 
     public getAniversario(siglaUF: string = '', diaInicioPeriodo: string = '0', mesInicioPeriodo: string = '0', diaFimPeriodo: string = '0', mesFimPeriodo: string = '0'){
 
-        let url = `https://servicodados.ibge.gov.br/api/v1/localidades/aniversarios/${siglaUF}?diade=${diaInicioPeriodo}&mesde=${mesInicioPeriodo}&diaate=${diaFimPeriodo}&mesate=${mesFimPeriodo}`;
+        let url = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/localidades/aniversarios/${siglaUF}?diade=${diaInicioPeriodo}&mesde=${mesInicioPeriodo}&diaate=${diaFimPeriodo}&mesate=${mesFimPeriodo}`;
 
         return this.http.get(url, options)
                         .retry(3)

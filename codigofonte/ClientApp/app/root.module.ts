@@ -25,6 +25,10 @@ import { V3RouterGuard } from './v3-router.guard';
 
 import { ShellModule } from './shell/shell.module'
 import { BasicCacheModule } from './cache/basic-cache.module';
+import { AuthorizationGuard } from './authorization.guard';
+import { LoginService } from './core/login/login.service';
+import { ConfigService } from './config/config.service';
+
 
 // import { IBGECartogramaModule } from './infografia/ibge-cartograma/ibge-cartograma.module';
 
@@ -60,9 +64,12 @@ import { BasicCacheModule } from './cache/basic-cache.module';
         RootComponent
     ],
     providers: [
+        LoginService,
         ValidParametersGuard,
         EmptyLocationGuard,
         V3RouterGuard,
+        AuthorizationGuard,
+        ConfigService
         // PESQUISAS,
         // BASES
     ]
