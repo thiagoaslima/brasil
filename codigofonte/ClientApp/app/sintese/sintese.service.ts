@@ -280,7 +280,7 @@ export class SinteseService {
         }
 
         //municípios
-        return this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/biblioteca?aspas=3&codmun=${codigo}`)
+        return this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&codmun=${codigo}`)
             .map((res) => {
 
                 return res.json();
@@ -309,7 +309,7 @@ export class SinteseService {
         let codigo = codigoMunicipio.toString().substr(0, 6);
 
         return this._http.get(
-            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
+            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
         )
             .map(res => res.json())
             .map((res) => {
