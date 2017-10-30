@@ -7,17 +7,29 @@ export class ConfigService {
 
     private isBrowser = isBrowser;
 
+
+    // CONFIGURAÇÕES PARA O AMBIENTE DE HOMOLOGAÇÃO
     private hmlConfigurations = {
 
-        URL_APLICACAO_ALTERNATIVA: 'brasil.homolog.ibge.gov.br',
         URL_APLICACAO: 'brasilhomolog.ibge.gov.br',
-        ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api/interno'
+        URL_APLICACAO_ALTERNATIVA: 'brasil.homolog.ibge.gov.br',
+        URL_BIBLIOTECA: 'https://www.biblioteca.ibge.gov.br',
+
+        ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api/interno',
+        ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api',
+        ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api'
     };
 
+
+    // CONFIGURAÇÕES PARA O AMBIENTE DE PRODUÇÃO
     private prdConfigurations = {
 
         URL_APLICACAO: 'cidades.ibge.gov.br',
-        ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api'
+        URL_BIBLIOTECA: 'https://www.biblioteca.ibge.gov.br',
+
+        ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api',
+        ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api',
+        ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api'
     };
 
     constructor() { }
