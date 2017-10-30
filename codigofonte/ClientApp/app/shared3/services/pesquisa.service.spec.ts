@@ -9,6 +9,7 @@ import { Pesquisa } from '../models';
 import { niveisTerritoriais } from '../values';
 
 import { PesquisaService3 } from './pesquisa.service';
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 describe('PesquisaService', () => {
     let connection, mockResponse, serviceResponse;
@@ -28,14 +29,18 @@ describe('PesquisaService', () => {
                 MockBackend,
                 BaseRequestOptions,
                 {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                },
+                {
                     provide: Http,
                     deps: [MockBackend, BaseRequestOptions],
                     useFactory: (backend, options) => new Http(backend, options)
                 },
                 {
                     provide: PesquisaService3,
-                    deps: [Http],
-                    useFactory: (http) => new PesquisaService3(http)
+                    deps: [Http,TraducaoService],
+                    useFactory: (http,traducaoService) => new PesquisaService3(http,traducaoService)
                 }
             ]
         })

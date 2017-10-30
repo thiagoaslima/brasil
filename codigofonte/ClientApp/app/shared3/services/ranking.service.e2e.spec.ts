@@ -21,11 +21,7 @@ describe('RankingServiceE2E', () => {
         TestBed.configureTestingModule({
             imports:[HttpModule],
             providers: [
-                {
-                    provide: RankingService3,
-                    deps: [Http],
-                    useFactory: (http) => new RankingService3(http)
-                }
+               
             ]
         })
         jest.addMatchers(arrayMatcher);

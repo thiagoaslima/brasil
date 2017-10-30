@@ -9,6 +9,7 @@ import { Resultado } from '../models';
 import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3 } from '.';
 
 import { arrayMatcher} from './jest.custom.matcher';
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 describe('ResultadoServiceE2E', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
@@ -22,13 +23,13 @@ describe('ResultadoServiceE2E', () => {
             providers: [
                 {
                     provide: PesquisaService3,
-                    deps: [Http],
-                    useFactory: (http) => new PesquisaService3(http)
+                    deps: [Http,TraducaoService],
+                    useFactory: (http,traducaoService) => new PesquisaService3(http,traducaoService)
                 },
                 {
                     provide: IndicadorService3,
-                    deps: [Http, PesquisaService3],
-                    useFactory: (http, pesquisaService) => new IndicadorService3(http, pesquisaService)
+                    deps: [Http, PesquisaService3,TraducaoService],
+                    useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
                 },
                 {
                     provide: LocalidadeService3,

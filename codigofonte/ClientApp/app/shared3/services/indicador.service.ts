@@ -7,6 +7,7 @@ import { CacheFactory } from '../../cache/cacheFactory.service';
 import { RxSimpleCache } from '../../cache/decorators';
 import { escopoIndicadores, ServicoDados as servidor } from '../values';
 import { arrayUniqueValues, converterObjArrayEmHash, curry, getProperty } from '../../utils2';
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -28,10 +29,15 @@ export class IndicadorService3 {
 
     constructor(
         private _http: Http,
-        private _pesquisaService: PesquisaService3
+        private _pesquisaService: PesquisaService3,
+        private _traducaoService:TraducaoService,
     ) { 
-
-        this.idioma = 'PT';
+        if(this._traducaoService.lang!=null){
+            this.idioma = this._traducaoService.lang;
+        }else{
+            this.idioma = 'PT';
+        }
+       
     }
 
     @RxSimpleCache({
