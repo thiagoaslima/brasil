@@ -27,6 +27,6 @@ export const notasEspeciais = [
     {
         "localidade": 2107506,
         "indicador": 'População estimada',
-        "nota": "População judicial do município de Paço do Lumiar - MA: superior a 156.216 habitantes. Processo Judicial nº13916-98.2017.4.01.3700 - Seção Judiciária do Maranhão - MA."
+        "nota": "População judicial do município de Paço do Lumiar - MA: superior a 156.216 habitantes. Processo Judicial nº 13916-98.2017.4.01.3700 - Seção Judiciária do Maranhão - MA."
     }
 ]
