@@ -24,13 +24,13 @@ export class BASES {
 
     get historico() {
         return {
-            base: (codigoLocalidade) => `${this.ENDPOINT_SERVICO_DADOS}/biblioteca?aspas=3&codmun=${codigoLocalidade}`
+            base: (codigoLocalidade) => `${new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/biblioteca?aspas=3&codmun=${codigoLocalidade}`
         }
     }
 
     get fotos() {
         return {
-            lista: (codigoLocalidade) => `${this.ENDPOINT_SERVICO_DADOS}/biblioteca?codmun=${codigoLocalidade}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`,
+            lista: (codigoLocalidade) => `${new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/biblioteca?codmun=${codigoLocalidade}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`,
             bruta: (linkFoto) => `${new ConfigService().getConfigurationValue('URL_BIBLIOTECA')}/visualizacao/fotografias/GEBIS%20-%20RJ/${linkFoto}`,
             redimensionada: (linkFoto: string, width = 600, height = 600) => `${this.ENDPOINT_SERVICO_DADOS}/resize/image?maxwidth=${width}&maxheight=${height}&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/${linkFoto}`,
             detalhes: (idFoto) => `${new ConfigService().getConfigurationValue('URL_BIBLIOTECA')}/index.php/biblioteca-catalogo?view=detalhes&id=${idFoto}`,
