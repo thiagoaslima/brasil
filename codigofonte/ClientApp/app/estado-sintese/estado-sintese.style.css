@@ -67,3 +67,10 @@ table#municipios tfoot tr td {
     font-weight: bold;
     padding-top: 15px;
 }
+
+
+@media print {
+    #conteudo{
+        width: 100%;
+    }
+}
