@@ -4,6 +4,8 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var merge = require('webpack-merge');
 var CompressionPlugin = require("compression-webpack-plugin");
+var DashboardPlugin = require('webpack-dashboard/plugin');
+
 var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
 
 // Configuration in common to both client-side and server-side bundles
@@ -41,6 +43,7 @@ var clientBundleConfig = merge(sharedConfig, {
         new webpack.DefinePlugin({
                 'process.env.NODE_ENV': '"production"'
         }),
+        new DashboardPlugin()
     ].concat(isDevBuild ? [
         // Plugins that apply in development builds only
         new webpack.SourceMapDevToolPlugin({
