@@ -61,10 +61,10 @@ export class EstadoSinteseComponent implements OnInit {
     static timer;
 
     ngOnInit() {
+        
         if(isBrowser){
-            
-        }
-        this._routerParams.params$.subscribe(({ params, queryParams }) => {
+
+            this._routerParams.params$.subscribe(({ params, queryParams }) => {
 
                if(params.uf!=null){
 
@@ -79,19 +79,19 @@ export class EstadoSinteseComponent implements OnInit {
             
                             this._estadoSinteseService.getResumoMunicipios(localidade,indicadores).subscribe((resumo)=>{
                                 this.resumo = resumo;
-                                 console.log(this.resumo);
+                                 
                                 if(this.resumo!=null && this.resumo.length>0){
                                     this.indicadores = this.resumo[0].indicadores;
                                     this.notas  = this._estadoSinteseService.getNotasResumo(resumo[0]);
                                     this.fontes =    this._estadoSinteseService.getFontesResumo(resumo[0]);
-                                    console.log(this.fontes);
                                  }  
                                 
                             });
                         }
 
               })
-        });
+            });
+        }
     }
 
 }

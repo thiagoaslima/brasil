@@ -320,8 +320,15 @@ footer {
     }
 
     .destaques__item__link{
-        width: 100%;
+        width: calc(100% - 37px);
         padding: 0px 37px;
+        text-align: right;
+        padding-right: 0px;
+    }
+
+    .banner__container{
+        height: 100vh;
+        max-height: 100vh;
     }
 
     footer{
