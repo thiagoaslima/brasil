@@ -379,17 +379,29 @@ export const PANORAMA: {
                 },
 
 
-                // Taxa de desocupação COM PROBLEMA
-                // {
-                //     pesquisaId: 6381,
-                //     indicadorId: 4099,
-                //     servico: 'conjunturais',
-                //     categoria: '',
-                //     quantidadePeriodos: 1,
-                //     titulo: 'Taxa de desocupação - PNAD Contínua',
-                //     tema: TEMAS.economia.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                // Taxa de desocupação
+                {
+                    pesquisaId: 6381,
+                    indicadorId: 4099,
+                    servico: 'conjunturais',
+                    categoria: '',
+                    quantidadePeriodos: 36,
+                    titulo: 'Taxa de desocupação - PNAD Contínua',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'PNAD Contínua - Taxa de desocupação',
+                        tipo: TiposGrafico.linha,
+                        link: '',
+                        dados: [{
+                            pesquisaId: 6381,
+                            indicadorId: 4099,
+                            categoria: '',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 36
+                        }]
+                    }
+                },
 
                 {
                     pesquisaId: 5932,
@@ -418,17 +430,29 @@ export const PANORAMA: {
 
 
 
-                // // SINAPI COM PROBLEMA
-                // {
-                //     pesquisaId: 2296,
-                //     indicadorId: 1196,
-                //     categoria: '',
-                //     servico: 'conjunturais',
-                //     quantidadePeriodos: 1,
-                //     titulo: 'Construção - SINAPI',
-                //     tema: TEMAS.economia.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                // SINAPI
+                {
+                    pesquisaId: 2296,
+                    indicadorId: 1196,
+                    categoria: '',
+                    servico: 'conjunturais',
+                    quantidadePeriodos: 36,
+                    titulo: 'Construção - SINAPI',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'SINAPI - Construção',
+                        tipo: TiposGrafico.linha,
+                        link: '',
+                        dados: [{
+                            pesquisaId: 2296,
+                            indicadorId: 1196,
+                            categoria: '',
+                            servico: 'conjunturais',
+                            quantidadePeriodos: 36
+                        }]
+                    }
+                },
             
 
 
