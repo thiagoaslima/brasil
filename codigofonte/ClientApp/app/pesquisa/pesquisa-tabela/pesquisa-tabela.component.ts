@@ -11,6 +11,7 @@ import { PesquisaService2 } from '../../shared2/pesquisa/pesquisa.service';
 import { IndicadorService2 } from '../../shared2/indicador/indicador.service';
 import { RouterParamsService } from '../../shared/router-params.service';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { AnalyticsService } from "../../shared/analytics.service";
 
 
 // Biblioteca usada no download de arquivos.
@@ -53,7 +54,8 @@ export class PesquisaTabelaComponent implements OnChanges {
         private _route: ActivatedRoute,
         private _pesquisaService: PesquisaService2,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService
+        private _traducaoServ: TraducaoService,
+        private _analyticsService: AnalyticsService
     ) {  }
 
     ngOnChanges() {
@@ -261,6 +263,17 @@ export class PesquisaTabelaComponent implements OnChanges {
     public download(){
 
         this.downloadCSVCompleto();
+
+        // Analytics
+        let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
+        let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidadeService.getLocalidadeById(this.localidades[1]).nome : '';
+        let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidadeService.getLocalidadeById(this.localidades[2]).nome : '';
+
+        this._analyticsService.enviarEvento({
+            objetoInteracao: 'Download',
+            tipoInteracao: 'csv',
+            label: `${this.pesquisa['nome']}(${this.periodo}) - ${localidadeA}, ${localidadeB}, ${localidadeC}`
+        })
     }
 
     public downloadCSVTela(){
