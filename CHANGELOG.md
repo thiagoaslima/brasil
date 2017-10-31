@@ -1,5 +1,20 @@
 # Change log
 
+## [v4.2.11] - 2017-10-31
+### Added
+ - Inclusão de nota de demanda legal para o município Paço do Lumiar - MA.
+ - Pesquisa MUNIC.
+ - Tabela de resumo do estado.
+ - Analytics no Download do CSV da tela de Pesquisa.
+ - Traducao service nos serviços de indicadores e pesquisa.
+ - Parametrização das urls de consumo de serviço para utilizarem serviços de homologação, caso a aplicação esteja em hml.
+ - Autorização de acesso ao ambiente de homologação.
+
+### Changed
+ - Formatação das nota de demanda legal.
+ - Ajuste no componente estado-sintese para impressão.
+
+
 ## [v4.2.10] - 2017-10-19
 ### Added
  - Tradução para inglês.
