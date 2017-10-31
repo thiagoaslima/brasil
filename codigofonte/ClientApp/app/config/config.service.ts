@@ -16,8 +16,8 @@ export class ConfigService {
         URL_BIBLIOTECA: 'https://www.biblioteca.ibge.gov.br',
 
         ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api/interno',
-        ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api',
-        ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api'
+        ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api',
+        ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api'
     };
 
 
@@ -28,8 +28,8 @@ export class ConfigService {
         URL_BIBLIOTECA: 'https://www.biblioteca.ibge.gov.br',
 
         ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api',
-        ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api',
-        ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api'
+        ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api',
+        ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api'
     };
 
     constructor() { }

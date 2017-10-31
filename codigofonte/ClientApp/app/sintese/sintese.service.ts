@@ -27,6 +27,10 @@ export class SinteseService {
     private idPesquisasValidas: number[] = [11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43];
     idioma:string;
 
+    private ENDPOINT_SERVICO_DADOS: string;
+    private ENDPOINT_SERVICO_BIBLIOTECA: string;
+    private ENDPOINT_SERVICO_MAPAS: string;
+
     constructor(
         private _http: Http,
         private _sinteseConfig: SINTESE,
@@ -36,6 +40,9 @@ export class SinteseService {
     ) { 
 
         this.idioma = this._traducaoService.lang;
+        this.ENDPOINT_SERVICO_DADOS = this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS');
+        this.ENDPOINT_SERVICO_BIBLIOTECA = this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA');
+        this.ENDPOINT_SERVICO_MAPAS = this.configService.getConfigurationValue('ENDPOINT_SERVICO_MAPAS');
     }
 
    /**
@@ -43,7 +50,7 @@ export class SinteseService {
      */
     public getInfoPesquisa(pesquisa: string) {
         
-        return this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisa}?lang=${this.idioma}`)
+        return this._http.get(`${this.ENDPOINT_SERVICO_DADOS}/v1/pesquisas/${pesquisa}?lang=${this.idioma}`)
             .map((res) => res.json())
             .map((pesquisa) => {
 
@@ -58,7 +65,7 @@ export class SinteseService {
 
     public getIndicadoresPesquisa(pesquisaId: number, posicaoIndicador: string, escopo = EscopoIndicadores.proprio, periodo: string = 'all') {
 
-        const serviceEndpoint = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}?scope=${escopo}&lang=${this.idioma}`;
+        const serviceEndpoint = `${this.ENDPOINT_SERVICO_DADOS}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}?scope=${escopo}&lang=${this.idioma}`;
         return this._http.get(serviceEndpoint, options).map((res => res.json()));
     }
 
@@ -69,7 +76,7 @@ export class SinteseService {
             return Observable.of({});
         }
 
-        const serviceEndpoint = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}&${this.idioma}`;
+        const serviceEndpoint = `${this.ENDPOINT_SERVICO_DADOS}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoLocalidade}?scope=${escopo}&${this.idioma}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint)
             .map((res => res.json()))
@@ -97,7 +104,7 @@ export class SinteseService {
 
         let codigoCoringaTodosMunucipiosUF = codigoUF == 0 ? 'xx' : `${codigoUF}xxxx`;
 
-        const serviceEndpoint = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
+        const serviceEndpoint = `${this.ENDPOINT_SERVICO_DADOS}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
 
         const dadosPesquisa$ = this._http.get(serviceEndpoint, options)
             .map((res => res.json()))
@@ -128,7 +135,7 @@ export class SinteseService {
 
         const codigoIndicadores = indicadores.length > 0 ? "indicadores=" + indicadores.join(',') : "";
 
-        const dadosPesquisa$ = this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/${pesquisa}/periodos/${periodo}}/resultados?localidade=${codigoLocal}&${codigoIndicadores}&${this.idioma}`)
+        const dadosPesquisa$ = this._http.get(`${this.ENDPOINT_SERVICO_DADOS}/v1/pesquisas/${pesquisa}/periodos/${periodo}}/resultados?localidade=${codigoLocal}&${codigoIndicadores}&${this.idioma}`)
             .map((res => res.json()))
             .map(this._excludeNullYearsFromResultados);
 
@@ -280,7 +287,7 @@ export class SinteseService {
         }
 
         //municípios
-        return this._http.get(`${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&codmun=${codigo}`)
+        return this._http.get(`${this.ENDPOINT_SERVICO_BIBLIOTECA}/v1/biblioteca?aspas=3&codmun=${codigo}`)
             .map((res) => {
 
                 return res.json();
@@ -309,7 +316,7 @@ export class SinteseService {
         let codigo = codigoMunicipio.toString().substr(0, 6);
 
         return this._http.get(
-            `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
+            `${this.ENDPOINT_SERVICO_BIBLIOTECA}/v1/biblioteca?codmun=${codigo}&aspas=3&fotografias=1&serie=Acervo%20dos%20Trabalhos%20Geogr%C3%A1ficos%20de%20Campo|Acervo%20dos%20Munic%C3%ADpios%20brasileiros`
         )
             .map(res => res.json())
             .map((res) => {
@@ -474,7 +481,7 @@ export class SinteseService {
         }
 
         return this._http.get(
-            `https://servicomapas.ibge.gov.br/api/mapas/${codigo}/${nivel}`
+            `${this.ENDPOINT_SERVICO_MAPAS}/mapas/${codigo}/${nivel}`
         ).map((res) => {
             let data = res.json();
             return convertTarsus2TopoJson(data.Tarsus);

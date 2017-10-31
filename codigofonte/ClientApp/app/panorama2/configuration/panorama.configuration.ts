@@ -1101,6 +1101,15 @@ export const PANORAMA: {
                     }
                 },
 
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5913,
+                    periodo:'2015',
+                    titulo: 'Matrículas no ensino médio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
 
                 // --- Trabalho
                 {

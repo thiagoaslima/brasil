@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { ServicoDados as servidor } from '../values';
+import { ConfigService } from '../../config/config.service';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -14,7 +15,8 @@ export class BibliotecaService {
     ) { }
 
     public getValues(codigoLocalidade: number) {
-        const url = servidor.setUrl(`biblioteca?aspas=3&codmun=${codigoLocalidade}`);
+
+        const url = `${new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&codmun=${codigoLocalidade}`;
         return this._request(url).map(res => res[Object.keys(res)[0]] || null);
     }
 
