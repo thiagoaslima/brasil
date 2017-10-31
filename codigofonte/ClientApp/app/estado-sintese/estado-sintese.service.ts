@@ -60,7 +60,6 @@ export class EstadoSinteseService {
             let notas = [];
             resumo.indicadores.filter(resultado=>{
 
-                console.log(resultado);
                 if (resultado.notas.length === 0) {
 
                     return false;

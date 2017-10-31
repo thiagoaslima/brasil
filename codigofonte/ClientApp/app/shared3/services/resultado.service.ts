@@ -84,7 +84,6 @@ export class ResultadoService3 {
         const _codigoLocalidades = forceArray(codigolocalidades).filter(codigo => Boolean(codigo) || codigo === 0);
 
         const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
-        console.log(url);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${_codigoLocalidades.join(', ')}]`
 
         return Observable.zip(
