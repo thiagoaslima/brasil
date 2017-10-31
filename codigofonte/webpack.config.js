@@ -43,7 +43,7 @@ var clientBundleConfig = merge(sharedConfig, {
         new webpack.DefinePlugin({
                 'process.env.NODE_ENV': '"production"'
         }),
-        new DashboardPlugin()
+        // new DashboardPlugin()
     ].concat(isDevBuild ? [
         // Plugins that apply in development builds only
         new webpack.SourceMapDevToolPlugin({
