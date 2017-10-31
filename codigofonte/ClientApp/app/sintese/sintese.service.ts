@@ -29,6 +29,7 @@ export class SinteseService {
 
     private ENDPOINT_SERVICO_DADOS: string;
     private ENDPOINT_SERVICO_BIBLIOTECA: string;
+    private ENDPOINT_SERVICO_MAPAS: string;
 
     constructor(
         private _http: Http,
@@ -41,6 +42,7 @@ export class SinteseService {
         this.idioma = this._traducaoService.lang;
         this.ENDPOINT_SERVICO_DADOS = this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS');
         this.ENDPOINT_SERVICO_BIBLIOTECA = this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA');
+        this.ENDPOINT_SERVICO_MAPAS = this.configService.getConfigurationValue('ENDPOINT_SERVICO_MAPAS');
     }
 
    /**
@@ -285,8 +287,7 @@ export class SinteseService {
         }
 
         //municípios
-
-        return this._http.get(`https://servicodados.ibge.gov.br/api/v1/biblioteca?aspas=3&codmun=${codigo}`)
+        return this._http.get(`${this.ENDPOINT_SERVICO_BIBLIOTECA}/v1/biblioteca?aspas=3&codmun=${codigo}`)
             .map((res) => {
 
                 return res.json();
@@ -480,7 +481,7 @@ export class SinteseService {
         }
 
         return this._http.get(
-            `https://servicomapas.ibge.gov.br/api/mapas/${codigo}/${nivel}`
+            `${this.ENDPOINT_SERVICO_MAPAS}/mapas/${codigo}/${nivel}`
         ).map((res) => {
             let data = res.json();
             return convertTarsus2TopoJson(data.Tarsus);

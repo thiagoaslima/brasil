@@ -67,9 +67,9 @@ export class FotosComponent implements OnInit, OnDestroy {
         private configService: ConfigService
     ) {
 
-        this.servicoImagem = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/`;
-        this.servicoThumbs = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/`;
-        this.urlDetalhes = "http://www.biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&id=4";
+        this.servicoImagem = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/resize/image?maxwidth=600&maxheight=600&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/`;
+        this.servicoThumbs = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/resize/image?maxwidth=200&maxheight=200&caminho=www.biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/`;
+        this.urlDetalhes = `${this.configService.getConfigurationValue('URL_BIBLIOTECA')}/index.php/biblioteca-catalogo?view=detalhes&id=4`;
         this.urlDownload = "https://servicodados.ibge.gov.br/Download/Download.ashx?http=1&u=biblioteca.ibge.gov.br/visualizacao/fotografias/GEBIS%20-%20RJ/";
     }
 
