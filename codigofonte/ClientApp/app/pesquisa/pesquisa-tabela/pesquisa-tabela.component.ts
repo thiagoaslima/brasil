@@ -81,7 +81,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
                 this.periodosValidos = this.getPeriodosValidos(this.indicadores);
 
-                if(!this.isPeriodoSelecionadoValido()){
+                if(!this.isPeriodoSelecionadoValido() && this.periodosValidos.length > 0){
 
                     this.selecionarPeriodoValidoMaisRecente();
                 }
