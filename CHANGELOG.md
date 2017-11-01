@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.2.12] - 2017-11-01
+### Fixed
+- Correção do bug que gerava múltiplas requisições na pesquisa.
+
+
 ## [v4.2.11] - 2017-10-31
 ### Added
  - Inclusão de nota de demanda legal para o município Paço do Lumiar - MA.
