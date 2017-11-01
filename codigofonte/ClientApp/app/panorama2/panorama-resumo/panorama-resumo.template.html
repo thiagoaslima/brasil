@@ -83,9 +83,9 @@
 <div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'panorama_resumo__notas_e_fontes' | l10n:lang }}
 </div>
-<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='uf'">
+<!--<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='uf'">
     <i class="fa fa-list" aria-hidden="true"></i> {{ 'panorama_gerar_resumo' | l10n:lang }}
-</div>
+</div>-->
 
 <div class="modal_resumo_filtro" [ngClass]="{'exibir': exibirFiltroResumo}">
         <div class="modal_resumo_filtro_bg"></div>
