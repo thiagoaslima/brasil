@@ -17,7 +17,7 @@ export const PANORAMA: {
                 TEMAS.populacao.label,
                 TEMAS.economia.label,
                 // TEMAS.territorio.label,
-                // TEMAS.educacao.label,
+                TEMAS.educacao.label,
                 // TEMAS.trabalho.label,
                 // TEMAS.agropecuaria.label,
                  TEMAS.industria.label,
@@ -90,8 +90,26 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 44,
-                    indicadorId: 47097,
+                    pesquisaId: 10065,
+                    indicadorId: 60284,
+                    periodo: '2015',
+                    titulo: 'Taxa de fecundidade',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60282,
+                    periodo: '2015',
+                    titulo: 'Taxa de mortalidade infantil',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60404,
                     periodo: '2015',
                     titulo: 'Domicílios com iluminação elétrica',
                     tema: TEMAS.populacao.label,
@@ -99,10 +117,37 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 44,
-                    indicadorId: 47090,
+                    pesquisaId: 10065,
+                    indicadorId: 60406,
                     periodo: '2015',
-                    titulo: 'Domicílios com rede de coleta de esgoto',
+                    titulo: 'Domicílios com coleta de lixo',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60407,
+                    periodo: '2015',
+                    titulo: 'Domicílios com rede geral de abastecimento de água',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60408,
+                    periodo: '2015',
+                    titulo: 'Domicílios com esgotamento sanitário adequado (Rede coletora ou fossa séptica)',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60234,
+                    periodo: '2015',
+                    titulo: 'PIB per capita',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -200,6 +245,26 @@ export const PANORAMA: {
                 //     visualizacao: PanoramaVisualizacao.numerico
                 // },
 
+                // ------------------------
+                // EDUCAÇÃO
+                // ------------------------
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60229,
+                    periodo: '2015',
+                    titulo: 'Taxa de analfabetismo 10 anos ou mais de idade',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60232,
+                    periodo: '2015',
+                    titulo: 'Taxa de escolarização de 6 a 14 anos de idade',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // ----------------------------
                 // ECONOMIA
@@ -465,30 +530,32 @@ export const PANORAMA: {
                 // ----------------------------
                 // INDÚSTRIA
                 // ----------------------------
-                // {
-                //     indicadorId: 49634,
-                //     pesquisaId: 51,
-                //     periodo: '2015',
-                //     titulo: 'Número de unidades locais',
-                //     tema: TEMAS.industria.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Número de unidades locais',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 51,
-                //             indicadorId: 49634
-                //         }]
-                //     }
-                // },
-                // {
-                //     indicadorId: 49635,
-                //     pesquisaId: 51,
-                //     periodo: '2015',
-                //     titulo: 'Pessoal ocupado em 31.12',
-                //     tema: TEMAS.industria.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60367,
+                    periodo: '2015',
+                    titulo: 'Pessoal ocupado assalariado - Índice acumulado em relação ao mesmo período do ano anterior',
+                    tema: TEMAS.industria.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60368,
+                    periodo: '2015',
+                    titulo: 'Produção industrial - Índice acumulado em relação ao mesmo período do ano anterior',
+                    tema: TEMAS.industria.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60371,
+                    periodo: '2015',
+                    titulo: 'Produtividade - Índice acumulado em relação ao mesmo período do ano anterior',
+                    tema: TEMAS.industria.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
 
                 // ----------------------------
