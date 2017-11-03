@@ -162,7 +162,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 this.URLEnd = '/panorama';
             } else if (route.url.indexOf('/historico') >= 0) {
                 this.URLEnd = '/historico';
-            } else if (route.url.indexOf('/pesquisa') >= 0) {
+            } else if (route.url.indexOf('/pesquisa/') >= 0) {
                 let arr = route.url.split('/');
                 arr = arr.slice(arr.indexOf('pesquisa') + 1);
                 if (arr.length === 1) {
