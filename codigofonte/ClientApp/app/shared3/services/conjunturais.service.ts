@@ -22,12 +22,14 @@ export class ConjunturaisService {
     ) { }
 
     getIndicador(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<ConjunturalDTO[]> {
+
         const params = categoria ? `?categoria=${categoria}` : '';
         const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, 2);
         return this._request(url).map(arr => arr.map(obj => this._removeDotFromPropertyName(obj))).catch(err => this._handleError(err));
     }
 
     getIndicadorAsResultado(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<Resultado[]> {
+
         return this.getIndicador(pesquisaId, indicadorId, qtdePeriodos, categoria)
             .map(array => this._convertConjunturalIntoResultado(pesquisaId, array));
     }
@@ -62,13 +64,27 @@ export class ConjunturaisService {
     }
 
     private _convertConjunturalIntoResultado(pesquisaId: number, conjunturais: ConjunturalDTO[] = []): Resultado[] {
+
         if (conjunturais.length === 0) { return []; }
 
         const brasil = this._localidadeService.getRoot();
 
         let propriedadesEspecificas = this._getPropriedadesEspecificasResultado(conjunturais[0]);
-        let codigoPropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') >= 0 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
-        let nomePropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') == -1 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
+
+        let codigoPropriedadeEspecifica;
+        let nomePropriedadeEspecifica;
+
+        if(!propriedadesEspecificas || propriedadesEspecificas.length == 0){
+
+            codigoPropriedadeEspecifica = 'var_cod';
+            nomePropriedadeEspecifica = 'var';
+
+        } else {
+
+            codigoPropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') >= 0 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
+            nomePropriedadeEspecifica = propriedadesEspecificas[0].indexOf('_cod') == -1 ? propriedadesEspecificas[0] : propriedadesEspecificas[1];
+        }
+
 
         const conjunturaisKeyValue: { [cod: string]: ConjunturalDTO[] } = converterObjArrayEmHash(conjunturais, codigoPropriedadeEspecifica, true);
 

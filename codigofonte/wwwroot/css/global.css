@@ -447,7 +447,7 @@ sintese>dados
         border-bottom: none;
         z-index: 6;
         top:0;
-        margin-top: 26px;
+        margin-top: 0px;
     }
 
     header .logo {

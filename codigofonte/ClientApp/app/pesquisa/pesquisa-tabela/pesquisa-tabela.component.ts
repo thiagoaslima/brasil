@@ -81,7 +81,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
                 this.periodosValidos = this.getPeriodosValidos(this.indicadores);
 
-                if(!this.isPeriodoSelecionadoValido()){
+                if(!this.isPeriodoSelecionadoValido() && this.periodosValidos.length > 0){
 
                     this.selecionarPeriodoValidoMaisRecente();
                 }
@@ -262,7 +262,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     public download(){
 
-        this.downloadCSVCompleto();
+        this.downloadCSVTelaTodosPeriodos();
 
         // Analytics
         let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
@@ -296,6 +296,28 @@ export class PesquisaTabelaComponent implements OnChanges {
         csv = csv + this.obterFontesENotasPesquisaEmCSV();
 
         this.downloadCSVFile(csv, `${this.pesquisa['nome']}(${this.periodo})`);
+    }
+
+    public downloadCSVTelaTodosPeriodos(){
+
+        let ind = this.indicadores;
+        let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
+        let csv = "Nível;Indicador;" + this.periodosValidos.join(';') + ';Unidade\n';
+        //valores dos indicadores
+        for(let i = 0; i < ind.length; i++){
+            csv += ind[i].posicao + ';' + ind[i].indicador + ';';
+
+            this.periodosValidos.forEach(periodo => {
+                csv += (ind[i].localidadeA && ind[i].localidadeA[periodo] && this.isValor(ind[i].localidadeA[periodo]) ? ind[i].localidadeA[periodo] : "") + ';';
+            });
+            
+            csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
+        }
+
+        //fontes e notas
+        csv = csv + this.obterFontesENotasPesquisaEmCSV();
+
+        this.downloadCSVFile(csv, `${this.pesquisa['nome']} - ${localidadeA}`);
     }
 
     public downloadCSVCompleto(){
