@@ -9,6 +9,8 @@ import { AppState } from '../shared2/app-state';
 import { converterObjArrayEmHash } from '../utils2';
 import { PANORAMA, ItemConfiguracao } from '../panorama2/configuration';
 import { TraducaoService } from '../traducao/traducao.service';
+import { BibliotecaService } from '../shared3/services/biblioteca.service';
+import { ResultadoService3 } from '../shared3/services/resultado.service';
 
 @Injectable()
 export class EstadoSinteseService {
@@ -24,6 +26,8 @@ export class EstadoSinteseService {
         private _appState: AppState,
         private _routerParams: RouterParamsService,
         private _traducaoService: TraducaoService,
+        private _bibliotecaService: BibliotecaService,
+        private _resultadoService:ResultadoService3
     ) {
 
         this.idioma = this._traducaoService.lang;
@@ -100,8 +104,92 @@ export class EstadoSinteseService {
     }
     getResumoEstado(localidade,indicadores){
 
-        let configuracao = this.getConfiguracao(localidade.tipo);      
-        return this._panoramaService.getResumo(configuracao,localidade);
+        let configuracao = this.getConfiguracao('municipio'); 
+        let resumo = <any>{};
+        resumo.municipios = <any>[];
+        for(let municipio of localidade.children){
+            
+        
+            resumo.municipios.push({codigo:municipio.codigo,nome:municipio.nome});
+           
+        }   
+        
+        return Observable.zip(
+            this._resultadoService.getResultadosCompletosSubLocalidade(indicadores, localidade.codigo).map(resultados=>converterObjArrayEmHash(resultados, 'codigoLocalidade',true)),
+            this._bibliotecaService.getValuesEstado(localidade.codigo)
+        )
+        .map(([resultados, valoresBiblioteca]) => {
+            
+             resumo.municipios.map(municipio=>{
+                    
+                    municipio.indicadores =  resultados[municipio.codigo].map(resultado=>{
+                    
+                                let codigoLocalidade = Object.keys(valoresBiblioteca).filter(valor=>valor.substring(0,6)==resultado.codigoLocalidade+"").shift();
+                                let valorBiblioteca = valoresBiblioteca[codigoLocalidade];
+                                let configuracao = this.getConfiguracao('municipio'); 
+                                return configuracao
+                                            .filter(item => Boolean(item.indicadorId) && resultado.indicador.id==item.indicadorId )
+                                            .map(item => {
+                                                
+                                                municipio.gentilico = valorBiblioteca.GENTILICO;
+                                                const periodo = item.periodo
+                                                    || resultado && resultado.periodoValidoMaisRecente
+                                                    || '-';
+
+                                                const titulo = item.titulo
+                                                    || (
+                                                        resultado &&
+                                                        resultado.indicador &&
+                                                        resultado.indicador.nome
+                                                    );
+
+                                                const valor = (
+                                                    resultado &&
+                                                    resultado.valorMaisRecente
+                                                )
+                                                
+                                                
+                                                const unidade = (
+                                                    resultado &&
+                                                    resultado.indicador &&
+                                                    resultado.indicador.unidade.toString()
+                                                ) || '';
+
+                                                const notas = (
+                                                    resultado &&
+                                                    resultado.indicador &&
+                                                    resultado.indicador.notas
+                                                ) || [];
+
+                                                const fontes = (
+                                                    resultado &&
+                                                    resultado.indicador &&
+                                                    resultado.indicador.fontes
+                                                ) || [];
+                                               
+
+                                                return {
+                                                    tema: item.tema,
+                                                    titulo,
+                                                    periodo,
+                                                    valor,
+                                                    unidade,
+                                                    notas,
+                                                    fontes,
+                                                    id:item.indicadorId
+                                                };
+                                            }).shift();
+                                        
+                    })
+                    return municipio;
+            
+                
+            
+            })
+            return resumo;
+          
+        })  
+       
         
     }
     getIndicadores(estado){

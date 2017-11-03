@@ -42,6 +42,15 @@ export class ResultadoService3 {
             .map(json => Resultado.convertDTOintoParameters(json).map(Resultado.criar))
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
+    getResultadosEstado(indicadoresId: number | number[], localidade: string) {
+        const _indicadores = forceArray(indicadoresId);
+        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${localidade}xxxxx`);
+        const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadores.join(', ')}, localidade: ${localidade}]`
+      
+        return this._request(url)
+            .map(json => Resultado.convertDTOintoParameters(json).map(Resultado.criar))
+            .catch(err => this._handleError(err, new Error(errorMessage)));
+    }
 
     @RxSimpleCache({
         cache: ResultadoService3.cache
@@ -90,6 +99,27 @@ export class ResultadoService3 {
             this._request(url),
             this._indicadorService.getIndicadoresComPesquisaById(_indicadoresId),
             Observable.of(this._localidadeService.getLocalidadesByCodigo(_codigoLocalidades))
+        )
+            .map(([json, indicadores, localidades]: [ResultadoDTO, Indicador[], Localidade[]]) => {
+                return Resultado.convertDTOintoParameters(json).map(parameter => {
+                    const indicador = indicadores.find(_indicador => _indicador.id === parameter.id);
+                    const localidade = localidades.find(_localidade => _localidade.codigo.toString(10) === parameter.codigoLocalidade.toString());
+                    return Resultado.criar(Object.assign({}, parameter, { indicador, localidade }));
+                });
+            })
+            .catch(err => this._handleError(err, new Error(errorMessage)));
+    }
+    getResultadosCompletosSubLocalidade(indicadoresId: number | number[], localidade: string): Observable<Resultado[]> {
+        const _indicadoresId = forceArray(indicadoresId);
+        //const _codigoLocalidades = forceArray(codigolocalidades).filter(codigo => Boolean(codigo) || codigo === 0);
+
+        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${localidade}xxxxx`);
+        const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${localidade}]`
+
+        return Observable.zip(
+            this._request(url),
+            this._indicadorService.getIndicadoresComPesquisaById(_indicadoresId),
+            Observable.of(this._localidadeService.getMunicipios(localidade))
         )
             .map(([json, indicadores, localidades]: [ResultadoDTO, Indicador[], Localidade[]]) => {
                 return Resultado.convertDTOintoParameters(json).map(parameter => {

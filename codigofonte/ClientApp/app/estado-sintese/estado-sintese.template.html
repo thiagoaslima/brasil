@@ -10,11 +10,11 @@
                         <th *ngFor="let indicador of indicadores">{{indicador.titulo}}</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let r of resumo;let i=index">
+                <tbody  *ngFor="let municipio of resumo.municipios;let i=index">
                         <tr class="3300100 par">
-                            <td class="nome">{{r.municipio}}</td>
-                            <td class="gentilico">{{r.gentilico}}</td>
-                            <td  *ngFor="let indicador of r.indicadores" >{{indicador.valor}} <span *ngIf="indicador.valor!='-'">{{indicador.unidade}}</span></td>
+                            <td class="nome">{{municipio.nome}}</td>
+                            <td class="gentilico">{{municipio.gentilico}}</td>
+                            <td  *ngFor="let indicador of municipio.indicadores" >{{indicador.valor}} <span *ngIf="indicador.valor!='-'">{{indicador.unidade}}</span></td>
                         </tr>                
                 </tbody>
                 <tfoot>
