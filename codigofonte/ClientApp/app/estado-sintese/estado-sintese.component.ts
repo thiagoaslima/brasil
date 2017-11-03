@@ -32,7 +32,7 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class EstadoSinteseComponent implements OnInit {
     
     private estado;
-    private resumo;
+    private resumo = <any>{};
     private indicadores = [];
     esconde = true;
     enviado = false;
@@ -56,12 +56,15 @@ export class EstadoSinteseComponent implements OnInit {
         private _indicadorService: IndicadorService3,
         private _pesquisaService: PesquisaService3,
         
-    ) {}
+    ) {
+        
+        this.resumo.municipios = [];
+    }
 
     static timer;
 
     ngOnInit() {
-        
+      
         if(isBrowser){
 
             this._routerParams.params$.subscribe(({ params, queryParams }) => {
@@ -77,7 +80,7 @@ export class EstadoSinteseComponent implements OnInit {
                         if(queryParams.indicadores!=null){
                             let indicadores = queryParams.indicadores.split(',');
             
-                            this._estadoSinteseService.getResumoMunicipios(localidade,indicadores).subscribe((resumo)=>{
+                            /* this._estadoSinteseService.getResumoMunicipios(localidade,indicadores).subscribe((resumo)=>{
                                 this.resumo = resumo;
                                  
                                 if(this.resumo!=null && this.resumo.length>0){
@@ -86,6 +89,16 @@ export class EstadoSinteseComponent implements OnInit {
                                     this.fontes =    this._estadoSinteseService.getFontesResumo(resumo[0]);
                                  }  
                                 
+                            });*/
+                            this._estadoSinteseService.getResumoEstado(localidade,indicadores).subscribe( (resumo)=>{
+                                
+                                this.resumo = resumo;
+                                if(this.resumo!=null && this.resumo.municipios!=null && this.resumo.municipios.length>0){
+                                    this.indicadores = this.resumo.municipios[0].indicadores;
+                                    this.notas  = this._estadoSinteseService.getNotasResumo(this.resumo.municipios[0]);
+                                    this.fontes =    this._estadoSinteseService.getFontesResumo(this.resumo.municipios[0]);
+                                }  
+                                console.log(this.indicadores);
                             });
                         }
 
