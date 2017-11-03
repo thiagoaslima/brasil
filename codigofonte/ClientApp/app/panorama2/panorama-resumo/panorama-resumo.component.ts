@@ -87,8 +87,11 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
                  }
              }else if(event.target.checked){
                  event.target.checked = false;
-                 event.stopPropagation();  
-                 alert('Número máximo de indicadores selecionados atingido');
+                 event.stopPropagation(); 
+                 let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang)['panorama_resumo__numero_maximo_indicadores_selecionados'];
+                 alert(mensagem)
+               
+                
              } 
              if(!event.target.checked){
                 this.opcoesIndicadores = this.opcoesIndicadores.filter(ind=> { 
@@ -163,9 +166,17 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
     gerarSinteseEstado(){
+
         let indicadores = this.getIndicadoresSelecionados();
-        this.sinteseEstadoUrl = '/brasil/sintese/'+this.localidade.sigla.toLowerCase()+'?indicadores='+indicadores.join(',');
-        window.open(this.sinteseEstadoUrl, '_blank');
+        if(indicadores!=null && indicadores.length>0){    
+             this.sinteseEstadoUrl = '/brasil/sintese/'+this.localidade.sigla.toLowerCase()+'?indicadores='+indicadores.join(',');
+             window.open(this.sinteseEstadoUrl, '_blank');
+        }else{
+            
+            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang)['panorama_resumo__numero_minimo_indicadores_selecionados'];
+            alert(mensagem);
+        }
+       
     }
     getIndicadoresSelecionados(){
         return this.opcoesIndicadores.filter(res=>res!==false);
