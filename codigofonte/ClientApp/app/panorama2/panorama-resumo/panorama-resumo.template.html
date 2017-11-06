@@ -83,17 +83,17 @@
 <div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'panorama_resumo__notas_e_fontes' | l10n:lang }}
 </div>
-<!--<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='uf'">
+<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='uf'">
     <i class="fa fa-list" aria-hidden="true"></i> {{ 'panorama_gerar_resumo' | l10n:lang }}
-</div>-->
+</div>
 
 <div class="modal_resumo_filtro" [ngClass]="{'exibir': exibirFiltroResumo}">
         <div class="modal_resumo_filtro_bg"></div>
         <div class="modal_resumo_filtro_bg_container">
             <div class="modal_resumo_titulo_header">
                 <i class="fa fa-times botao_fechar" aria-hidden="true" (click)="exibirFiltroResumo = !exibirFiltroResumo"></i>
-                <h2 class="modal_resumo_titulo">Resumo</h2>
-                <p>Selecione até 6 indicadores para compor seu resumo.</p>
+                <h2 class="modal_resumo_titulo">{{ 'panorama_resumo__titulo_gerar_resumo'  | l10n:lang }}</h2>
+                <p>{{ 'panorama_resumo__indicacao_quantidade_indicadores' | l10n:lang }}</p>
             </div>
 
             <div class="modal_resumo_content">
@@ -110,7 +110,7 @@
                    
                      </div>
                 </template>
-                <button class="gerar_relatorio" (click)="gerarSinteseEstado()">Gerar Relatório</button>
+                <button class="gerar_relatorio" (click)="gerarSinteseEstado()">{{ 'panorama_resumo__gerar_indicadores_municipios' | l10n:lang }}</button>
                 
             </div>
     </div>
