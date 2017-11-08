@@ -22,6 +22,10 @@ describe('ResultadoServiceE2E', () => {
             imports:[HttpModule],
             providers: [
                 {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                },
+                {
                     provide: PesquisaService3,
                     deps: [Http,TraducaoService],
                     useFactory: (http,traducaoService) => new PesquisaService3(http,traducaoService)
