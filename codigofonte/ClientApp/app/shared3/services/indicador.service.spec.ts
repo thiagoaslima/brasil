@@ -34,9 +34,9 @@ describe('IndicadorService', () => {
             }
 
             mockResponse = {
-                [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
-                [servidor.setUrl('pesquisas/indicadores/999999?localidade=')]: new Response(new ResponseOptions({ body: [], status: 200 })),
-                [servidor.setUrl('pesquisas/indicadores/?localidade=')]: new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 })),
+                [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
+                [servidor.setUrl('pesquisas/indicadores/999999?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: [], status: 200 })),
+                [servidor.setUrl('pesquisas/indicadores/?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 })),
             };
 
             serverResponse = null;
@@ -186,9 +186,9 @@ describe('IndicadorService', () => {
                 }
 
                 mockResponse = {
-                    [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
-                    [servidor.setUrl('pesquisas/indicadores/999999?localidade=')]: new Response(new ResponseOptions({ body: [], status: 200 })),
-                    [servidor.setUrl('pesquisas/indicadores/?localidade=')]: new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 })),
+                    [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
+                    [servidor.setUrl('pesquisas/indicadores/999999?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: [], status: 200 })),
+                    [servidor.setUrl('pesquisas/indicadores/?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 })),
                 };
 
                 serverResponse = null;
@@ -208,6 +208,10 @@ describe('IndicadorService', () => {
 
                 TestBed.configureTestingModule({
                     providers: [
+                        {
+                             provide: TraducaoService,
+                             useFactory: () => new TraducaoService()
+                        },
                         {
                             provide: PesquisaService3,
                             deps: [Http,TraducaoService],
@@ -277,9 +281,9 @@ describe('IndicadorService', () => {
             }
 
             mockResponse = {
-                [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
-                [servidor.setUrl('pesquisas/indicadores/999999?localidade=')]: new Response(new ResponseOptions({ body: [], status: 200 })),
-                [servidor.setUrl('pesquisas/indicadores/?localidade=')]: new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 })),
+                [servidor.setUrl('pesquisas/indicadores/5905|5906|28135|28136?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: indicadores, status: 200 })),
+                [servidor.setUrl('pesquisas/indicadores/999999?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: [], status: 200 })),
+                [servidor.setUrl('pesquisas/indicadores/?localidade=&lang=pt')]: new Response(new ResponseOptions({ body: { "message": "An error has occurred." }, status: 500 })),
             };
 
             serverResponse = null;
@@ -300,13 +304,17 @@ describe('IndicadorService', () => {
             TestBed.configureTestingModule({
                 providers: [
                     {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                    },
+                    {
                         provide: PesquisaService3,
                         deps: [Http,TraducaoService],
                         useFactory: (http,traducaoService) => new PesquisaServiceStub(http,traducaoService)
                     },
                     {
                         provide: IndicadorService3,
-                        deps: [Http, PesquisaService3],
+                        deps: [Http, PesquisaService3,TraducaoService],
                         useFactory: (http, pesquisaService,traducaoService) => new IndicadorService3(http, pesquisaService,traducaoService)
                     },
                     MockBackend,
