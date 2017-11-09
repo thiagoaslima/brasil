@@ -28,11 +28,23 @@ const children = [
   },
   {
     path: 'panorama',
-    component: PanoramaShellComponent
+    component: PanoramaShellComponent,
+    data: {
+            meta: {
+              title: 'Panorama',
+             
+            }
+    },
   },
   {
     path: 'historico',
-    component: VisaoHistoricaComponent
+    component: VisaoHistoricaComponent,
+    data: {
+            meta: {
+              title: 'Histórico',
+             
+            }
+    },
   },
   { path: 'pesquisa', component: PesquisaComponent },
   { path: 'pesquisa/:pesquisa', component: PesquisaComponent },
@@ -50,12 +62,19 @@ const children = [
       {
         path: '',
         component: ShellComponent,
+        
         // pathMatch: 'full',
         children: [{
           path: '',
           pathMatch: 'full',
           canActivate: [AuthorizationGuard],
-          component: HomeComponent
+          component: HomeComponent,
+          data: {
+            meta: {
+              title: 'IBGE | Brasil em Síntese',
+             
+            }
+          },
         },
         {
           path: 'pesquisas',
