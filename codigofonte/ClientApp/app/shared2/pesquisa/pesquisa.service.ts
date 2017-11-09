@@ -62,14 +62,17 @@ export class PesquisaService2 {
             return Observable.of(this._byTipoCache[tipoLocalidade]);
         }
         return this.getAllPesquisas()
-            .map(pesquisas => pesquisas.filter(pesquisa => pesquisa.contexto[tipoLocalidade]))
+            .map(pesquisas => pesquisas.filter(pesquisa => {
+                return pesquisa.contexto[tipoLocalidade]
+            }))
             .map(pesquisas => {
                 const pesquisasComDados = this._pesquisasConfig.comDados(tipoLocalidade).reduce( (agg, num) => {
                     agg[num] = true;
                     return agg;
                 }, {});
 
-                return pesquisas.filter(pesquisa => pesquisasComDados[pesquisa.id]);
+                // return pesquisas.filter(pesquisa => pesquisasComDados[pesquisa.id]);
+                return pesquisas.filter(pesquisa => pesquisa.contexto.getListaContextosValidos().indexOf(tipoLocalidade) >= 0);
             })
             .do(pesquisas => this._byTipoCache[tipoLocalidade] = pesquisas);
     }

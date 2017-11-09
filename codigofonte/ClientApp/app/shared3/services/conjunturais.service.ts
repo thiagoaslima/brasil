@@ -8,6 +8,7 @@ import { ServicoDados as servidor } from '../values';
 import { converterObjArrayEmHash } from '../../utils2';
 
 import { Observable } from 'rxjs/Observable';
+import { ENDPOINT } from "../../config/config.service";
 
 
 const headers = new Headers({ 'accept': '*/*' });
@@ -24,7 +25,7 @@ export class ConjunturaisService {
     getIndicador(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<ConjunturalDTO[]> {
 
         const params = categoria ? `?categoria=${categoria}` : '';
-        const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, 2);
+        const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, ENDPOINT.SERVICO_DADOS_CONJUNTURAIS, 2);
         return this._request(url).map(arr => arr.map(obj => this._removeDotFromPropertyName(obj))).catch(err => this._handleError(err));
     }
 

@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { isBrowser } from 'angular2-universal';
 
+export const ENDPOINT = {
+    SERVICO_DADOS: 'ENDPOINT_SERVICO_DADOS',
+    SERVICO_DADOS_CONJUNTURAIS: 'ENDPOINT_SERVICO_DADOS_CONJUNTURAIS',
+    SERVICO_MAPAS: 'ENDPOINT_SERVICO_MAPAS',
+    SERVICO_BIBLIOTECA: 'ENDPOINT_SERVICO_BIBLIOTECA'
+}
 
 @Injectable()
 export class ConfigService {
@@ -10,12 +16,13 @@ export class ConfigService {
 
     // CONFIGURAÇÕES PARA O AMBIENTE DE HOMOLOGAÇÃO
     private hmlConfigurations = {
-
+        
         URL_APLICACAO: 'brasilhomolog.ibge.gov.br',
         URL_APLICACAO_ALTERNATIVA: 'brasil.homolog.ibge.gov.br',
         URL_BIBLIOTECA: 'https://www.biblioteca.ibge.gov.br',
 
         ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api/interno',
+        ENDPOINT_SERVICO_DADOS_CONJUNTURAIS: 'https://servicodados.ibge.gov.br/api',
         ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api',
         ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api'
     };
@@ -28,6 +35,7 @@ export class ConfigService {
         URL_BIBLIOTECA: 'https://www.biblioteca.ibge.gov.br',
 
         ENDPOINT_SERVICO_DADOS: 'https://servicodados.ibge.gov.br/api',
+        ENDPOINT_SERVICO_DADOS_CONJUNTURAIS: 'https://servicodados.ibge.gov.br/api',
         ENDPOINT_SERVICO_MAPAS: 'https://servicomapas.ibge.gov.br/api',
         ENDPOINT_SERVICO_BIBLIOTECA: 'https://servicodados.ibge.gov.br/api'
     };
@@ -39,9 +47,9 @@ export class ConfigService {
 
         if(this.isHML()){
 
-            console.log('-------------------------------------------------')
-            console.log('------------ AMBIENTE DE HOMOLOGAÇÃO ------------')
-            console.log('-------------------------------------------------')
+            console.log('-------------------------------------------------\n' +
+                        '------------ AMBIENTE DE HOMOLOGAÇÃO ------------\n' +
+                        '-------------------------------------------------')
 
             return this.hmlConfigurations[name];
         } 
