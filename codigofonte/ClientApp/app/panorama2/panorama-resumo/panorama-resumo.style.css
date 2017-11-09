@@ -105,7 +105,8 @@
     padding: 10px 5px;
 }
 
-.lista__icone .ico{   
+.lista__icone .ico{
+    display: inline-block;
     width: 16px;
     height: 16px;
     background-image: url('./../../../img/ico/svg-icones.svg');

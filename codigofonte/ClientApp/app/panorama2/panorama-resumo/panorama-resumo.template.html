@@ -40,7 +40,7 @@
         <tr *ngIf="first || item.tema !== temas[idx-1].tema" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" class="lista__cabecalho" [class.recolhido]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <th class="lista__icone">
                 <!-- <img class="ico" [src]="icones[item.tema]" /> -->
-                <img class="ico {{icones[item.tema]}}" src=''/>
+                <span class="ico {{icones[item.tema]}}"></span>
             </th>
 
             <th class="lista__titulo" colspan="2">{{item.tema}}</th>
