@@ -1,3 +1,4 @@
+<title>{{title}}</title>
 <header [class.invisivel]="isHeaderStatic | async">
     <div class="logo">
         <a href="https://www.ibge.gov.br" target="_blank">
@@ -71,9 +72,9 @@
             </ul>
         </nav>
         
-        <a *ngIf="!isHome" id='versaoAnterior' (click)="registrarClick()" href='http://cidades.ibge.gov.br/xtras/home.php '>
+        <!--a *ngIf="!isHome" id='versaoAnterior' (click)="registrarClick()" href='http://cidades.ibge.gov.br/xtras/home.php '>
             {{ 'shell__acesse_a_versao_anterior_do_cidades' | l10n:lang }}
-        </a>
+        </a-->
 
 
     </aside>

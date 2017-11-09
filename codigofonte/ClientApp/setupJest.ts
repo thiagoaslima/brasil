@@ -1,5 +1,4 @@
 import 'jest-preset-angular';
-
 // mocks
 const mock = () => {
   let storage = {};

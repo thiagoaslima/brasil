@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BarraGov } from './barra-gov/barra-gov';
 // import { Ng2PageScrollModule } from 'ng2-page-scroll';
-
+import { MetaModule } from 'ng2-meta';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { SharedModule2 } from './shared2/shared.module';
@@ -34,7 +34,9 @@ import { ConfigService } from './config/config.service';
 
 @NgModule({
     imports: [
+        
         CoreModule,
+        MetaModule.forRoot(),
         SharedModule.forRoot(),
         SharedModule2.forRoot(),
         SharedModule3.forRoot(),

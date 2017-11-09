@@ -16,6 +16,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
+import {MetaService} from 'ng2-meta';
 
 @Component({
     selector: 'shell',
@@ -119,6 +120,7 @@ export class ShellComponent implements OnInit, OnDestroy {
     private _scrollTop$ = new BehaviorSubject(0);
 
     historicoHabilitado = true;
+    private titulo;
 
     @HostListener('window:scroll', ['$event'])
     onScroll({ target }) {
@@ -150,7 +152,8 @@ export class ShellComponent implements OnInit, OnDestroy {
         private router: Router,
         private pageScrollService: PageScrollService,
         private _analytics: AnalyticsService,
-        private _traducaoServ: TraducaoService
+        private _traducaoServ: TraducaoService,
+        private metaService: MetaService
     ) { }
 
     ngOnInit() {
@@ -173,10 +176,10 @@ export class ShellComponent implements OnInit, OnDestroy {
             if (isBrowser) {
                 let url = this.router.url;
                 
-                let titulo = document.title;
-                if(titulo!=null){
+                this.titulo = document.title;
+                if(this.titulo!=null){
 
-                        view.propriedadesCompartilhamento = JSON.stringify({title:titulo});
+                        view.propriedadesCompartilhamento = JSON.stringify({title:this.titulo});
                 }
                 
                 if (url.indexOf('panorama') >= 0) {

@@ -7,6 +7,8 @@ import { MockBackend } from '@angular/http/testing';
 
 import { Ranking } from '../models';
 import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3,RankingService3} from '.';
+import { ConfigService } from '../../config/config.service';
+
 
 
 import { arrayMatcher} from './jest.custom.matcher';
@@ -21,7 +23,15 @@ describe('RankingServiceE2E', () => {
         TestBed.configureTestingModule({
             imports:[HttpModule],
             providers: [
-               
+                {
+                        provide: ConfigService,
+                        useFactory: () => new ConfigService()
+                },
+                {
+                    provide: RankingService3,
+                    deps: [Http, ConfigService],
+                    useFactory: (http, configService, localidadeService) => new RankingService3(http, configService)
+                }
             ]
         })
         jest.addMatchers(arrayMatcher);

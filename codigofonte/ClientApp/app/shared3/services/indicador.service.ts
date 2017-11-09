@@ -109,7 +109,8 @@ export class IndicadorService3 {
 
 
     private _request(url: string) {
-    
+        
+       
         if(this.idioma!=null){
             if(url.indexOf('?')>0){
 

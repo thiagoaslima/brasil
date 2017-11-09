@@ -37,7 +37,7 @@ describe('IndicadorServiceE2E', () => {
             providers: [
                 {
                         provide: TraducaoService,
-                        useFactory: () => new TraducaoService()
+                        useFactory: () => new  TraducaoService()
                 },
                 {
                     provide: PesquisaService3,
@@ -70,25 +70,16 @@ describe('IndicadorServiceE2E', () => {
     })
     describe('testar serviço getIndicadoresById com indicadores válidos', () => {
         
-        it('deve ser instanciado',
-            inject([IndicadorService3],
-                (indicadorService: IndicadorService3) => {
-                   
-                    expect(indicadorService).toBeDefined();
-                })
-        )
         it('deve retornar um  indicador válido', (done) => {
             (inject([IndicadorService3],
                 (indicadorService: IndicadorService3) => {
                     
-                     let serverResponse;
-                     
-
-                     indicadorService.getIndicadoresById([5905]).subscribe(indicadores =>{
+                        let serverResponse;
+                        indicadorService.getIndicadoresById([5905]).subscribe(indicadores =>{
                         
                         try {
                             
-
+                           
                             expect(indicadores).toHaveLength(1);
                             let indicador = indicadores[0];
                             expect(indicador instanceof Indicador).toBeTruthy();

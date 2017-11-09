@@ -4,20 +4,21 @@ import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
 import { Resultado } from '../models';
-import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3 } from '.';
+import { IndicadorService3, PesquisaService3, LocalidadeService3, ResultadoService3 } from '.';.
+import {TraducaoService}  from '../../traducao/traducao.service';
 
 describe('PesquisaService', () => {
     let connection, mockResponse, resultadosDTO, serviceResponse;
 
     class PesquisaServiceStub extends PesquisaService3 {
-        constructor(http: Http) {
-            super(http);
+        constructor(http: Http,traducaoService:TraducaoService) {
+            super(http,traducaoService);
         }
     }
 
     class IndicadorServiceStub extends IndicadorService3 {
-        constructor(http: Http, pesquisaService: PesquisaService3) {
-            super(http, pesquisaService);
+        constructor(http: Http, pesquisaService: PesquisaService3,traducaoService:TraducaoService) {
+            super(http, pesquisaService,traducaoService);
         }
     }
 
@@ -31,19 +32,23 @@ describe('PesquisaService', () => {
                 MockBackend,
                 BaseRequestOptions,
                 {
+                        provide: TraducaoService,
+                        useFactory: () => new TraducaoService()
+                },
+                {
                     provide: Http,
                     deps: [MockBackend, BaseRequestOptions],
                     useFactory: (backend, options) => new Http(backend, options)
                 },
                 {
                     provide: PesquisaService3,
-                    deps: [Http],
-                    useFactory: (http) => new PesquisaServiceStub(http)
+                    deps: [Http,TraducaoService],
+                    useFactory: (http,traducaoService) => new PesquisaServiceStub(http,traducaoService)
                 },
                 {
                     provide: IndicadorService3,
-                    deps: [Http, PesquisaService3],
-                    useFactory: (http, pesquisaService) => new IndicadorServiceStub(http, pesquisaService)
+                    deps: [Http, PesquisaService3,TraducaoService],
+                    useFactory: (http, pesquisaService,traducaoService) => new IndicadorServiceStub(http, pesquisaService,traducaoService)
                 },
                 {
                     provide: ResultadoService3,
