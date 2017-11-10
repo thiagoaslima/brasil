@@ -16,7 +16,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import {MetaService} from 'ng2-meta';
 
 @Component({
     selector: 'shell',
@@ -152,8 +151,7 @@ export class ShellComponent implements OnInit, OnDestroy {
         private router: Router,
         private pageScrollService: PageScrollService,
         private _analytics: AnalyticsService,
-        private _traducaoServ: TraducaoService,
-        private metaService: MetaService
+        private _traducaoServ: TraducaoService
     ) { }
 
     ngOnInit() {

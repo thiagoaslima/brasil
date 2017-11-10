@@ -7,7 +7,7 @@ import { RouterParamsService } from '../../shared/router-params.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { ModalErrorService } from '../modal-erro/modal-erro.service';
 
-import {MetaService} from 'ng2-meta';
+import {MetaService} from '../../ng2-meta';
 /*
 seta o título da página de acordo com a rota
 */
@@ -30,7 +30,7 @@ export class TituloBrowserComponent implements OnInit {
 
     ngOnInit() {
         this._routerParamsService.params$.subscribe(({ params, queryParams }) => {
-            //if (isBrowser && window) {
+            if (isBrowser && window) {
                 let titulo = 'IBGE | Brasil em Síntese | ';
                 let localidade =params.municipio
                     ? this._localidadeService.getMunicipioBySlug(params.uf, params.municipio)
@@ -55,14 +55,14 @@ export class TituloBrowserComponent implements OnInit {
             
                 if (url.indexOf('panorama') >= 0) {
                     titulo += ' | Panorama';
-                    //document.title = titulo; // titulo panorama
-                    this._metaService.setTitle(titulo);
-                    this._metaService.setTag('og:title',titulo);
+                    document.title = titulo; // titulo panorama
+                    // this._metaService.setTitle(titulo);
+                    // this._metaService.setTag('og:title',titulo);
                 } else if (url.indexOf('historico') >= 0) {
                     titulo += ' | História & Fotos';
-                    //document.title = titulo; // titulo histórico
-                    this._metaService.setTitle(titulo);
-                    this._metaService.setTag('og:title',titulo);
+                    document.title = titulo; // titulo histórico
+                    // this._metaService.setTitle(titulo);
+                    // this._metaService.setTag('og:title',titulo);
                 } else if (url.indexOf('pesquisa') >= 0) {
                     titulo += ' | Pesquisa';
 
@@ -90,16 +90,16 @@ export class TituloBrowserComponent implements OnInit {
                                     titulo += ' | ' + queryParams.ano;
                                 }
 
-                                //document.title = titulo; // titulo pesquisa
+                                document.title = titulo; // titulo pesquisa
 
-                                this._metaService.setTitle(titulo);
-                                this._metaService.setTag('og:title',titulo);
+                                // this._metaService.setTitle(titulo);
+                                // this._metaService.setTag('og:title',titulo);
                             },
                             error => this.modalErrorService.showError());
                         });
                     }
                 }
-            //}
+            }
         },
         error => this.modalErrorService.showError());
     }
