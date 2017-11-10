@@ -125,7 +125,7 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         let periodoMaisRecente = this.periodosValidos[this.periodosValidos.length -1];
 
-        this._router.navigateByUrl(`${this._router.url}?ano=${periodoMaisRecente}`)
+        this._router.navigateByUrl(`${this._router.url.split('?')[0]}?ano=${periodoMaisRecente}`)
     }
 
 
