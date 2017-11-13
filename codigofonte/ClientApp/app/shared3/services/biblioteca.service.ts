@@ -13,7 +13,7 @@ export class BibliotecaService {
         private _http: Http
     ) { }
 
-    public getValuesMunicipio(codigoLocalidade: number) {
+    public getValuesMunicipio (codigoLocalidade: number) {
         const url = `${new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&codmun=${codigoLocalidade}`;
         return this._request(url).map(res => res[Object.keys(res)[0]] || null);
     }
