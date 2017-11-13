@@ -86,12 +86,14 @@ export class Panorama2Service {
         }
         return Observable.zip(
             this._getResultadosIndicadores(configuracao, localidade),
-            localidade.tipo === 'municipio' ? this._bibliotecaService.getValues(localidade.codigo) : Observable.of({})
+            localidade.tipo === 'municipio' ? this._bibliotecaService.getValuesMunicipio(localidade.codigo) : this._bibliotecaService.getValuesEstado(localidade.codigo)
         ).map(([resultados, valoresBiblioteca]) => {
-           
+
             return configuracao
                 .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
                 .map(item => {
+                    debugger; 
+
                     const periodo = item.periodo
                         || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
                         || '-';

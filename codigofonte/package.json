@@ -114,6 +114,7 @@
     "webfontloader": "1.6.26",
     "webpack": "^1.13.2",
     "webpack-bundle-analyzer": "^2.7.0",
+    "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "1.16.2",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1",

@@ -700,9 +700,9 @@ export const PANORAMA: {
                 //     visualizacao: PanoramaVisualizacao.numerico
                 // },
                 {
-                    pesquisaId: 48,
-                    indicadorId: 62877,
-                    periodo: '-',
+                    // pesquisaId: 48,
+                    // indicadorId: 62877,
+                    // periodo: '-',
                     titulo: 'Gentílico',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',

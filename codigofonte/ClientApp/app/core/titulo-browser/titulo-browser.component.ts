@@ -7,7 +7,7 @@ import { RouterParamsService } from '../../shared/router-params.service';
 import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
 import { ModalErrorService } from '../modal-erro/modal-erro.service';
 
-import {MetaService} from '../../ng2-meta';
+// import {MetaService} from '../../ng2-meta';
 /*
 seta o título da página de acordo com a rota
 */
@@ -25,7 +25,7 @@ export class TituloBrowserComponent implements OnInit {
         private _localidadeService: LocalidadeService2,
         private _route: ActivatedRoute,
         private modalErrorService: ModalErrorService,
-        private _metaService:MetaService
+        // private _metaService:MetaService
     ) { }
 
     ngOnInit() {

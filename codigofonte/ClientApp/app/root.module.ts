@@ -23,7 +23,7 @@ import { V3RouterGuard } from './v3-router.guard';
 
 // import { SubmenuComponent } from './submenu/submenu.component';
 
-import { ShellModule } from './shell/shell.module'
+import { ShellModule } from './shell/shell.module';
 import { BasicCacheModule } from './cache/basic-cache.module';
 import { AuthorizationGuard } from './authorization.guard';
 import { LoginService } from './core/login/login.service';
