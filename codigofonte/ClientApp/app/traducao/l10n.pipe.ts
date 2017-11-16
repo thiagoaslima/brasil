@@ -11,6 +11,6 @@ export class L10NPipe implements PipeTransform {
     ) { }
 
     transform(value: any, lang: string): string {
-        return this._traducaoServ.L10N(lang)[value];
+        return this._traducaoServ.L10N(lang, value);
     }
 }

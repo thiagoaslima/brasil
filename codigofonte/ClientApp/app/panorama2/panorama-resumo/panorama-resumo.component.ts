@@ -88,7 +88,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
              }else if(event.target.checked){
                  event.target.checked = false;
                  event.stopPropagation(); 
-                 let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang)['panorama_resumo__numero_maximo_indicadores_selecionados'];
+                 let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_maximo_indicadores_selecionados');
                  alert(mensagem)
                
                 
@@ -173,7 +173,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
              window.open(this.sinteseEstadoUrl, '_blank');
         }else{
             
-            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang)['panorama_resumo__numero_minimo_indicadores_selecionados'];
+            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_minimo_indicadores_selecionados');
             alert(mensagem);
         }
        

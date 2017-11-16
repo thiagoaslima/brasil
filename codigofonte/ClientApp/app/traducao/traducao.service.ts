@@ -53,8 +53,12 @@ export class TraducaoService {
 
     }
 
-    public L10N(lang: string) {
-        return this._L10N[lang.toLowerCase()] ? this._L10N[lang.toLowerCase()] : this._L10N.pt;
+    public L10N(lang: string, value:any) {
+        let props = this._L10N[lang.toLowerCase()] ? this._L10N[lang.toLowerCase()] : this._L10N.pt;
+        if(props[value] == undefined || props[value] == "")
+            return this._L10N.pt[value];
+        else
+            return props[value];
     }
 
     public get lang(): string {
