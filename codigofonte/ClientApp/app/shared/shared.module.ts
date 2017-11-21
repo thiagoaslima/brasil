@@ -18,6 +18,7 @@ import { Breadcrumb } from './breadcrumb/breadcrumb.component';
 import { MensagemSetasComponent } from './mensagem-setas/mensagem-setas.component';
 import { NaoAcheiComponent } from './nao-achei/nao-achei.component';
 import { QuestionarioComponent } from './questionario/questionario.component';
+import { MensagemTraducaoComponent } from './mensagem-traducao/mensagem-traducao.component';
 
 const MODULES = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -41,7 +42,8 @@ const COMPONENTS = [
     Breadcrumb,
     MensagemSetasComponent,
     NaoAcheiComponent,
-    QuestionarioComponent
+    QuestionarioComponent,
+    MensagemTraducaoComponent
 ];
 
 const PROVIDERS = [

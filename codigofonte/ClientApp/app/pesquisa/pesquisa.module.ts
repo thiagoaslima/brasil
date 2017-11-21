@@ -2,6 +2,7 @@ import { TraducaoModule } from '../traducao/traducao.module';
 import { NgModule } from '@angular/core';
 
 import { SharedModule2 } from '../shared2/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { PesquisaComponent } from './pesquisa.component';
 import { PesquisaHeaderComponent } from './pesquisa-header/pesquisa-header.component';
 import { BuscaHeaderComponent } from './busca-header/busca-header.component';
@@ -14,6 +15,7 @@ import { PesquisaRankingModule } from './pesquisa-ranking/pesquisa-ranking.modul
 @NgModule({
     imports: [
         SharedModule2,
+        SharedModule,
         PesquisaRankingModule,
         PesquisaGraficosModule,
         PesquisaCartogramaModule,
