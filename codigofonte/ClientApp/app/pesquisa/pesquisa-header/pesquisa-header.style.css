@@ -296,7 +296,7 @@
     padding: 8px 10px; 
 }
 
-.select__submenu__titulo{
+.select__submenu-aberto > div.select__submenu__titulo{
     background-color: #1d779a;
     cursor: default;
 }
