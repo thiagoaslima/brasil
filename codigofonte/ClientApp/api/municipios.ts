@@ -32321,8 +32321,8 @@ export const municipios = [
   {
     "codigoUf": 25,
     "codigo": 2513968,
-    "nome": "São Domingos de Pombal",
-    "slug": "sao-domingos-de-pombal",
+    "nome": "São Domingos",
+    "slug": "sao-domingos",
     "microrregiao": 25003
   },
   {
