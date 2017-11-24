@@ -1,0 +1,295 @@
+.busca{
+    /*background-color: yellow;*/
+    width: calc(100% - 780px);
+    float: left;
+    margin-left: 14px;
+}
+
+.busca__hit{
+    position: fixed;
+    /*background-color: red;*/
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0px;
+    z-index: 1;
+    display: none;
+}
+
+
+.busca__codigo{
+    font-size: 0.6em;
+    vertical-align: text-top;
+}
+
+.busca.aberto .busca__hit{
+    display: block;
+}
+
+
+.busca.aberto{
+    background-color: #333333;
+    z-index: 2;
+    position: relative;
+}
+
+.busca .busca__auto-completar{
+    display: none;
+}
+
+.busca.aberto .busca__auto-completar{
+    display: block;
+    z-index: 1;
+    max-height: 100vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+
+.busca__input{
+    float: left;
+    margin: 10px 1%;
+    height: 30px;
+    width: calc(100% - 20px);
+    padding: 0px 40px 0px 10px;
+}
+
+.busca.aberto .busca__input{
+    z-index: 3;
+    position: relative;
+}
+
+.busca .busca__icone{
+    position: absolute;
+	margin-left: -40px;
+	margin-top: 16px;
+	color: #1B779B;
+	
+        
+}
+
+.busca__auto-completar{
+    width: 79%;
+    background-color: #333333;
+    position: absolute;
+    top: 50px;
+    color: #fff;
+    max-width: 1502px;
+}
+
+.busca__auto-completar__menu ul{
+    padding: 24px 0px 0px;
+    border-bottom: 5px solid #808080;
+    height: 63px;
+    width: 100%;
+}
+
+.busca__auto-completar__menu ul li{
+    float: left;
+    padding: 0px 20px 12px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.busca__auto-completar__menu ul li.selecionado{
+    border-bottom: 5px solid #F7931E;
+}
+
+.busca__auto-completar__menu__total-encontrado{
+    background-color: #CCCCCC;
+    color: #333333;
+    border-radius: 14px;
+    padding: 1px 7px 2px;
+    font-size: .7em;
+    font-weight: bold;
+    margin-left: 4px;
+        display: inline;
+}
+
+.busca__auto-completar__resultado__item{
+    font-size: 1.2em;
+    border-bottom: 1px solid #4D4D4D;
+    padding: 12px 25px;
+    display: block;
+}
+
+.busca__auto-completar__resultado__item:hover{
+    background-color: #4D4D4D;
+}
+
+.busca__sigla{
+    background-color: #4D4D4D;
+    font-size: .6em;
+    padding: 4px 6px;
+    border-radius: 48px;
+}
+
+.busca__tipo{
+    display: block;
+    color: #ccc;
+    font-size: .7em;
+}
+
+.busca__mensagem{
+    padding: 30px;
+    text-align: center;
+    font-style: italic;
+}
+
+.busca__auto-completar__resultado__item__tipo{
+    color: #2995B7;
+    font-size: .7em;
+}
+
+.busca__auto-completar__resultado__item__tipo--municipio{
+    color: #CCCCCC;
+    font-size: .7em;
+}
+
+.busca__respostas{
+    padding: 30px;
+    text-align: center;
+    font-style: italic;
+    display: none;
+}
+
+.busca__respostas div{
+    display: none;
+}
+
+.busca__respostas.sem-resultado, .busca__respostas.load{
+    display: block
+}
+
+.busca__respostas.sem-resultado .busca__resposta--sem-resultado{
+    display: block;
+}
+
+.busca__respostas.load .busca__resposta--load{
+    display: block;
+}
+
+
+
+/*.busca.aberto .aniversarios{
+    color: #fff;
+    border-color: #fff;
+}
+
+.busca.aberto .aniversarios i{
+    color: #fff;
+}*/
+
+
+@media screen and (max-width: 768px) {
+    .busca{
+        width: 100%;
+        position: absolute;
+        padding: 0px;
+    }
+
+    .busca__input{
+        height: 24px;
+        display: none;
+    }
+
+    .busca .busca__icone{
+        display: block;
+        color: #fff;
+        float: right;
+        padding: 10px 15px;
+        font-size: 20px;
+        padding: 12px 6%;
+        z-index: 3;
+		position:relative;
+		margin:0;
+    }
+
+    .busca.digitacao{
+        padding: 0px;
+    }
+
+    .busca.digitacao .busca__input{
+        width: 90%;
+        height: 24px;
+        display: block;
+        margin: 5px 5% 0% 5%;
+        padding: 14px 4% 14px 9px;
+    }
+
+    .busca.digitacao .busca__icone{
+        display: block;
+        color: #333333;
+        font-size: 20px;
+        top: -4px;
+        position: absolute;
+        right: 0%;
+        top: 0px;
+    }
+
+    .busca__auto-completar {
+        width: 100%;
+        top: 42px;
+    }
+
+    .busca__auto-completar__menu{
+        font-size: 0.8em;
+    }
+
+    .busca__auto-completar__menu ul{
+        height: 59px;
+        width: 100%;
+    }
+
+    .busca__auto-completar__menu ul li {
+        padding: 0px 0% 12px;
+        width: 25%;
+        text-align: center;
+    }
+
+    .busca__auto-completar__menu__total-encontrado{
+        position: absolute;
+        transform: translateX(-50%);
+        top:7px;
+    }
+
+    .busca__auto-completar__menu__total-encontrado--todos{
+        margin-left: -16px;
+    }
+
+    .busca__auto-completar__menu__total-encontrado--tema{
+        margin-left: -16px;
+    }
+
+    .busca__auto-completar__menu__total-encontrado--pesquisa{
+        margin-left: -25px;
+    }
+
+    .busca__auto-completar__menu__total-encontrado--locais{
+        margin-left: -17px;
+    }
+}
+
+
+@media screen and (max-width: 682px) {
+    .busca.digitacao .busca__input{
+        padding-right: 6%;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .busca.digitacao .busca__input{
+        padding-right: 8%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .busca{
+        width: calc(100% - 780px);
+    }
+
+    .busca__auto-completar{
+        width: calc(100% - 250px);
+        max-width: 100%;
+    }
+}

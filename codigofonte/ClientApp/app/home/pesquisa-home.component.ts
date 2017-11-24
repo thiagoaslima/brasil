@@ -1,9 +1,13 @@
-import { TraducaoService } from '../traducao/traducao.service';
+import { TraducaoService } from '../shared';
 import { Component, OnInit } from '@angular/core';
 
-import { SeletorLocalidadeService } from '../core/seletor-localidade/seletor-localidade.service';
-import { IndicadorService3 } from '../shared3/services';
-import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
+import {
+    IndicadorService3
+} from '../shared';
+import {
+    SeletorLocalidadeService,
+    ModalErrorService
+} from '../core';
 
 @Component({
     selector: 'pesquisa-home',
@@ -11,7 +15,7 @@ import { ModalErrorService } from '../core/modal-erro/modal-erro.service';
     styleUrls: ['pesquisa-home.component.css']
 })
 export class PesquisaHomeComponent implements OnInit {
-    public versao = require('../version.json');
+    // public versao = require('../version.json');
     public  pesquisas = require('./pesquisas.json');
 
     public get lang() {

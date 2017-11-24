@@ -1,21 +1,26 @@
 import { Router, NavigationEnd } from '@angular/router';
-import { isBrowser } from 'angular2-universal';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()
 export class AnalyticsService {
     private _ga = (...args: any[]) => { };
 
+    isBrowser;
+
     constructor(
         private _key: string,
-        private _router: Router
+        private _router: Router,
+        private platformId: string,
     ) {
-        if (isBrowser && (<any>window).ga) {
+        this.isBrowser = isPlatformBrowser(platformId);
+        
+        if (this.isBrowser && (<any>window).ga) {
             this._ga = (<any>window).ga;
             this._startAnalytics();
         }
 
-        if (isBrowser && !(<any>window).ga) {
+        if (this.isBrowser && !(<any>window).ga) {
             this._loadScript(() => {
                 this._ga = (<any>window).ga;
                 this._startAnalytics();
@@ -32,7 +37,7 @@ export class AnalyticsService {
         this._router.events
             .filter(e => e instanceof NavigationEnd)
             .distinctUntilChanged()
-            .subscribe(e => {
+            .subscribe((e: NavigationEnd) => {
                 this._ga('set', 'page', e.url);
                 this._ga('send', 'pageview');
             });

@@ -1,6 +1,9 @@
-import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Localidade } from '../../shared2/localidade/localidade.model';
+
+import {
+    TraducaoService,
+    Localidade,
+} from '../../shared';
 
 @Component({
     selector: 'geolocation',

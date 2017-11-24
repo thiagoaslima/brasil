@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { niveisTerritoriais } from '../../shared3/values';
+import { niveisTerritoriais } from '../../shared';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';

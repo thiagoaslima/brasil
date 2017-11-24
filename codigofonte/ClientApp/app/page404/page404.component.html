@@ -1,0 +1,54 @@
+aaaa
+<div class="header" role="banner">
+            <img class="header__logo" src="../../img/logo-branco.svg">
+            <h1 class="header__title" role="heading">Não encontramos a página que você procurava.</h1>
+            <h2 class="header__error">Erro 404</h2>
+        </div>
+        <div class="body" role="main">
+            <p>Talvez você tenha digitado algo errado ou clicado em um link antigo.</p>
+            <h3><label for="busca_404">Escolha um município</label></h3>
+            <div>
+                <span class="icon"></span>
+                <input #input name="busca_404" class="search-box" type="search" placeholder="Procure por um município" list="cidades_br" (input)="navegarPara(getLocalidade(input.value))">
+            </div>
+            <button class="btn" geolocation (onLoading)="handleLoading($event)" (onGetLocation)="navegarPara($event)">
+				<span *ngIf="!isLoading">Obter minha localização</span>
+				<span *ngIf="isLoading">Obtendo localização...</span>
+			</button>
+        </div>
+        <div class="capitais">
+            <h3>Capitais</h3>
+			<ul class="mais-acessadas">
+				<li class="mais-acessadas__item"><a routerLink='/brasil/se/aracaju'>Aracaju SE</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/pa/belem'>Belém PA</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/mg/belo-horizonte'>Belo Horizonte MG</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/rr/boa-vista'>Boa Vista RR</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/df/brasilia'>Brasília DF</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ms/campo-grande'>Campo Grande MS</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/mt/cuiaba'>Cuiabá MT</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/pr/curitiba'>Curitiba PR</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/sc/florianopolis'>Florianópolis SC</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ce/fortaleza'>Fortaleza CE</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/go/goiania'>Goiânia GO</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/pb/joao-pessoa'>João Pessoa PB</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ap/macapa'>Macapá AP</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/al/maceio'>Maceió AL</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/am/manaus'>Manaus AM</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/rn/natal'>Natal RN</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/to/palmas'>Palmas TO</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/rs/porto-alegre'>Porto Alegre RS</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ro/porto-velho'>Porto Velho RO</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/pe/recife'>Recife PE</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ac/rio-branco'>Rio Branco AC</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/rj/rio-de-janeiro'>Rio de Janeiro RJ</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ba/salvador'>Salvador BA</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/ma/sao-luis'>São Luís MA</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/sp/sao-paulo'>São Paulo SP</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/pi/teresina'>Teresina PI</a></li>
+				<li class="mais-acessadas__item"><a routerLink='/brasil/es/vitoria'>Vitória ES</a></li>
+			</ul>
+		</div>
+		
+		<datalist id="cidades_br">
+			<option *ngFor="let local of locais" [value]="local">
+		</datalist>

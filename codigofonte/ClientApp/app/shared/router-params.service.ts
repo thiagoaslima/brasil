@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
-import { isBrowser } from 'angular2-universal'
+
+import { isPlatformBrowser } from '@angular/common';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -12,25 +13,29 @@ import 'rxjs/add/operator/share';
 export class RouterParamsService {
 
     public params$: Observable<any>;
+    isBrowser;
 
     constructor(
         private _router: Router,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        @Inject(PLATFORM_ID) platformId,
     ) {
+        this.isBrowser = isPlatformBrowser(platformId);
         this.params$ = this._router.events
             .filter(e => e instanceof NavigationEnd)
             .distinctUntilChanged()
-            .map(e => {
-                   let params =  this.extractParamsFromTree(this._route.snapshot, {});
-                   if(e.url!=null){
-                         
-                        params.params.url=e.url
-                    }
-                    return params;
+            .map((e: NavigationEnd) => {
+                
+                let params =  this.extractParamsFromTree(this._route.snapshot, {});
+                if(e.url!=null){
+                        
+                    params.params.url=e.url
+                }
+                return params;
             })
             .do((params) => {
               
-                if (isBrowser && params && params.params && params.params.uf && params.params.municipio) {
+                if (this.isBrowser && params && params.params && params.params.uf && params.params.municipio) {
                     try {
                         localStorage.setItem('lastParams', JSON.stringify(params));
                     } catch(err) {

@@ -1,0 +1,25 @@
+<div class="busca" [class.digitacao]="modoDigitacao" [class.aberto]="menuAberto" >
+    <div class="busca__hit" (click)="desativarBusca()">
+    </div>
+    <input #campoBusca type="text" class='busca__input' placeholder="O que você procura?" [(ngModel)]="termo" (click)="ativarBusca()">
+    <i class="busca__icone fa" [class.fa-search]="!menuAberto" [class.fa-times]="menuAberto" aria-hidden="true" (click)="!menuAberto ? ativarBusca() : limparBusca()"></i>
+    <div class="busca__auto-completar">
+        <div class="busca__auto-completar__resultado">
+            <div *ngFor="let item of resultados">
+                <a *ngIf="item['type'] != 'mensagem'" class='busca__auto-completar__resultado__item' [routerLink]="[item['link']]" [queryParams]="(item['year'] ? {'ano': item['year']} : undefined)" (click)="limparBusca()">
+                    <span class='busca__auto-completar__resultado__item__nome'>{{item['name']}}</span>
+                    <small class="busca__codigo" *ngIf="item['id']">{{ '[' + item['id'] + ']' }}</small>
+                    <span class='busca__sigla' *ngIf="item['parent']">{{item['parent']}}</span>
+                    
+                    <span class='busca__tipo' *ngIf="item['type'] == 'pais'">{{ 'pais' | l10n:lang }}</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'uf'">{{ 'estado' | l10n:lang }}</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'municipio'">{{ 'municipio' | l10n:lang }}</span>
+                    <span class='busca__tipo' *ngIf="item['type'] == 'pesquisa'">{{ 'pesquisa' | l10n:lang }}</span>
+                </a>
+                <div *ngIf="item['type'] == 'mensagem'" class='busca__mensagem'>
+                    {{item['name']}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
