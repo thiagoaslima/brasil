@@ -1,7 +1,7 @@
 import { niveisTerritoriais } from '../shared3/values';
 import { Injectable } from '@angular/core';
 
-import { PANORAMA,ItemConfiguracao, PanoramaVisualizacao } from './configuration';
+import { PANORAMA, ItemConfiguracao, PanoramaVisualizacao } from './configuration';
 import { dadosGrafico, dadosPainel } from './configuration/panorama.values';
 import { PesquisaConfiguration } from '../shared2/pesquisa/pesquisa.configuration';
 import { BibliotecaService } from '../shared3/services/biblioteca.service';
@@ -32,7 +32,7 @@ export class Panorama2Service {
         this._totalUfs = this._localidadeService.getRoot().children.length;
         this._totalMunicipios = this._localidadeService.getRoot().children.reduce((sum, uf) => sum + uf.children.length, 0);
     }
-    getConfiguracao(tipo){
+    getConfiguracao(tipo) {
 
         const { temas, indicadores } = PANORAMA[tipo] || { temas: [], indicadores: [] };
         const hash = converterObjArrayEmHash(indicadores, 'tema', true);
@@ -88,11 +88,10 @@ export class Panorama2Service {
             this._getResultadosIndicadores(configuracao, localidade),
             localidade.tipo === 'municipio' ? this._bibliotecaService.getValuesMunicipio(localidade.codigo) : this._bibliotecaService.getValuesEstado(localidade.codigo)
         ).map(([resultados, valoresBiblioteca]) => {
-
+            debugger;
             return configuracao
                 .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
                 .map(item => {
-                    debugger; 
 
                     const periodo = item.periodo
                         || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
@@ -124,11 +123,24 @@ export class Panorama2Service {
                         resultados[item.indicadorId].indicador.notas
                     ) || [];
 
-                    const fontes = (
+                    let fontes = [];
+                    if (
                         resultados[item.indicadorId] &&
-                        resultados[item.indicadorId].indicador &&
-                        resultados[item.indicadorId].indicador.fontes
-                    ) || [];
+                        resultados[item.indicadorId].indicador
+                    ) {
+                        const indicador = resultados[item.indicadorId].indicador;
+                        if (indicador.fontes && indicador.fontes.length > 0) {
+                            fontes = indicador.fontes;
+                        } else if (indicador.pesquisa) {
+                            let f = indicador.pesquisa.getFontesDoPeriodo(item.periodo);
+                            if (f[0]) {
+                                fontes = [{
+                                        periodo: item.periodo,
+                                        fontes: f
+                                    }];
+                            }
+                        }
+                    }
 
                     return {
                         tema: item.tema,
@@ -138,7 +150,7 @@ export class Panorama2Service {
                         unidade,
                         notas,
                         fontes,
-                        id:item.indicadorId
+                        id: item.indicadorId
                     };
                 });
         });
@@ -245,7 +257,7 @@ export class Panorama2Service {
         );
 
         return Observable.zip(resConjunturais, resPesquisas)
-            .map( ([conjunturais, pesquisas]) => {
+            .map(([conjunturais, pesquisas]) => {
                 return pesquisas
                     .concat(...conjunturais)
                     .reduce((arr, item) => {
@@ -298,14 +310,14 @@ export class Panorama2Service {
                     break;
 
                 default:
-                if (item.indicadorId) {
-                    itensPesquisas.push(item.indicadorId);
-                }
-                if (item.grafico) {
-                    item.grafico.dados.forEach(obj => {
-                        itensPesquisas.push(obj.indicadorId);
-                    });
-                }
+                    if (item.indicadorId) {
+                        itensPesquisas.push(item.indicadorId);
+                    }
+                    if (item.grafico) {
+                        item.grafico.dados.forEach(obj => {
+                            itensPesquisas.push(obj.indicadorId);
+                        });
+                    }
                     break;
             }
         });
@@ -317,7 +329,7 @@ export class Panorama2Service {
         const resPesquisas = itensPesquisas.length <= 0
             ? Observable.of([])
             : this._resultadoService.getResultadosCompletos(itensPesquisas, localidade.codigo)
-            .map(resultados => converterObjArrayEmHash(resultados, 'indicador.id'));
+                .map(resultados => converterObjArrayEmHash(resultados, 'indicador.id'));
 
         const resConjunturais = itensConjunturais.length <= 0
             ? Observable.of([])
@@ -327,7 +339,7 @@ export class Panorama2Service {
             })).map(resultados => converterObjArrayEmHash([].concat(...resultados), 'indicador.id'));
 
         return Observable.zip(resPesquisas, resConjunturais)
-            .map( ([pesquisas, conjunturais]) => Object.assign({}, pesquisas, conjunturais));
+            .map(([pesquisas, conjunturais]) => Object.assign({}, pesquisas, conjunturais));
     }
 
     private _getPosicaoRankings(
@@ -452,8 +464,8 @@ export class Panorama2Service {
 
     private getUnidade(item: ItemConfiguracao, resultados: { [indicadorId: number]: Resultado }): string[] {
         const indicadorId = item.grafico.dados[0].indicadorId;
-        var res:any = resultados[indicadorId];
-        if(res.indicador && res.indicador.unidade){
+        var res: any = resultados[indicadorId];
+        if (res.indicador && res.indicador.unidade) {
             return res.indicador.unidade;
         }
         return null;
@@ -470,7 +482,7 @@ export class Panorama2Service {
             const resultado = resultados[indicadorId];
             const valores = resultado.valoresValidos.map(valor => this.converterParaNumero(valor));
             const nome = resultado.indicador.nome;
-            return { data: valores, anos: resultado.periodosValidos,  label: nome };
+            return { data: valores, anos: resultado.periodosValidos, label: nome };
         });
     }
 

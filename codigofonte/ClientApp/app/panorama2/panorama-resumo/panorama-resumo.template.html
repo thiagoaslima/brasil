@@ -120,7 +120,7 @@
     <h1>{{ 'panorama_resumo__notas' | l10n:lang }}</h1>
     <ol>
         <li *ngFor="let nota of notas">
-            {{ nota }}
+            <em>{{ nota.titulo }}</em>: {{ nota.texto }}<br /><br />
         </li>
     </ol>
 
@@ -129,7 +129,7 @@
     <h1>{{ 'panorama_resumo__fontes' | l10n:lang }}</h1>
     <ol>
         <li *ngFor="let fonte of fontes">
-            {{ fonte }}
+            <em>{{ fonte.titulo }}</em>: {{ fonte.texto }}<br /><br />
         </li>
     </ol>
 </div>

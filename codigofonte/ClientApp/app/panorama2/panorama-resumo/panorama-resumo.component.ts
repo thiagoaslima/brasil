@@ -68,38 +68,38 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
     ) {
         this.setIcones();
-        
+
     }
 
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
-        this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind=>ind.tema && ind.tema!="");
-        
-         
+        this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind => ind.tema && ind.tema != "");
+
+
     }
-    
-    selecionaIndicadoresFiltro(item,idx,event){
-        
-             if(this.opcoesIndicadores && this.opcoesIndicadores.length<PanoramaResumoComponent.NUM_MAXIMO_INDICADORES_FILTRO){
-                 
-                 if(event.target.checked){
-                     this.opcoesIndicadores.push(item.indicadorId);
-                 }
-             }else if(event.target.checked){
-                 event.target.checked = false;
-                 event.stopPropagation(); 
-                 let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_maximo_indicadores_selecionados');
-                 alert(mensagem)
-               
-                
-             } 
-             if(!event.target.checked){
-                this.opcoesIndicadores = this.opcoesIndicadores.filter(ind=> { 
-                     if(item.indicadorId!=ind) return ind;
-                })
-             }
-          
-            
+
+    selecionaIndicadoresFiltro(item, idx, event) {
+
+        if (this.opcoesIndicadores && this.opcoesIndicadores.length < PanoramaResumoComponent.NUM_MAXIMO_INDICADORES_FILTRO) {
+
+            if (event.target.checked) {
+                this.opcoesIndicadores.push(item.indicadorId);
+            }
+        } else if (event.target.checked) {
+            event.target.checked = false;
+            event.stopPropagation();
+            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_maximo_indicadores_selecionados');
+            alert(mensagem)
+
+
+        }
+        if (!event.target.checked) {
+            this.opcoesIndicadores = this.opcoesIndicadores.filter(ind => {
+                if (item.indicadorId != ind) {return ind; }
+            })
+        }
+
+
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
@@ -110,8 +110,8 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
             changes.hasOwnProperty('localidade') && changes.localidade.currentValue &&
             this.localidade && this.configuracao && this.configuracao.length > 0
         ) {
-            
-           
+
+
             this._panoramaService.getResumo(this.configuracao, this.localidade).subscribe(resp => {
 
                 let temas = resp.slice(0);
@@ -146,40 +146,40 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
                         if (resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-') {
 
-                            return `${resultado.titulo}: ${resultado.notas[i]['notas']}`;
+                            return {titulo: resultado.titulo, texto: resultado.notas[i]['notas'].join(', ')};
                         }
                     }
                 });
-                this.fontes = resp.filter(resultado => {
-                    return !!resultado.fontes
-                        && resultado.fontes.length > 0
-                        && (
-                            resultado.fontes[0]['periodo'] === resultado.periodo
-                            || resultado.fontes[0]['periodo'] === '-'
-                        );
-                }).map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
+
+                this.fontes = resp.reduce((agg, resultado) => {
+                    const fontes = resultado.fontes.filter(f => f.periodo === resultado.periodo || f.periodo === '-');
+                    if (fontes.length > 0) {
+                        agg.push({ titulo: resultado.titulo, texto: fontes[0]['fontes'].join(', ') });
+                    }
+                    return agg;
+                }, []);
             },
-            error => {
-                console.error(error);
-                this.modalErrorService.showError();
-            });
+                error => {
+                    console.error(error);
+                    this.modalErrorService.showError();
+                });
         }
     }
-    gerarSinteseEstado(){
+    gerarSinteseEstado() {
 
         let indicadores = this.getIndicadoresSelecionados();
-        if(indicadores!=null && indicadores.length>0){    
-             this.sinteseEstadoUrl = '/brasil/sintese/'+this.localidade.sigla.toLowerCase()+'?indicadores='+indicadores.join(',');
-             window.open(this.sinteseEstadoUrl, '_blank');
-        }else{
-            
+        if (indicadores != null && indicadores.length > 0) {
+            this.sinteseEstadoUrl = '/brasil/sintese/' + this.localidade.sigla.toLowerCase() + '?indicadores=' + indicadores.join(',');
+            window.open(this.sinteseEstadoUrl, '_blank');
+        } else {
+
             let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_minimo_indicadores_selecionados');
             alert(mensagem);
         }
-       
+
     }
-    getIndicadoresSelecionados(){
-        return this.opcoesIndicadores.filter(res=>res!==false);
+    getIndicadoresSelecionados() {
+        return this.opcoesIndicadores.filter(res => res !== false);
     }
 
     ngOnDestroy() {
@@ -188,7 +188,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     fireTemaSelecionado(tema) {
-        if (this.temaAtual == tema) {
+        if (this.temaAtual === tema) {
             this.temaSelecionado.emit(tema + '-alt');
             this.temaAtual = '';
         } else {
