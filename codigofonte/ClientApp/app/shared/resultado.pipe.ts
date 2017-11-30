@@ -1,4 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
+let isFloat = (n) => Number(n) === n && n % 1 !== 0;
 /*
  * Recebe uma string, transforma em float e 
  * insere formatação com pontos e vírgulas
@@ -53,10 +55,10 @@ export class ResultadoPipe implements PipeTransform {
         //     'unidades habitacionais',
         //     'leitos'
         // ];
-
+        debugger;
         let unidades = ['r$'];
 
-        let float = (typeof(unidade) != "undefined" && unidade != null) ? unidades.indexOf(unidade.toLocaleLowerCase()) >= 0 ? true : false : false; 
+        let float = (typeof (unidade) != "undefined" && unidade != null) ? unidades.indexOf(unidade.toLocaleLowerCase()) >= 0 ? true : false : false;
 
         switch (value) {
             case '99999999999999':
@@ -77,10 +79,9 @@ export class ResultadoPipe implements PipeTransform {
 
             default:
                 if (!isNaN(Number(value))) {
-                    value = Number(value);
-                    let isFloat = (n) => Number(n) === n && n % 1 !== 0;
-                    //let valueStr = float || (float === undefined && isFloat(value)) ? (<number>value).toFixed(2).toString() : value.toString();
-                    let valueStr = (float === true) ? (<number>value).toFixed(2).toString() : value.toString();
+                    let _value = Number(value);
+                    //let valueStr = (float || (float === undefined && isFloat(value))) ? (<number>value).toFixed(2).toString() : value.toString();
+                    let valueStr = (float === true) ? _value.toFixed(2).toString() : value.toString();
                     //return valueStr.replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
                     let [parteInteira, parteDecimal] = valueStr.split('.');
                     parteInteira = this.adicionaSeparadorMilhares(parteInteira, '.');

@@ -92,8 +92,3 @@ export class Resultado {
         return valor !== null && valor !== undefined;
     }
 }
-
-
-function customSort(a, b) {
-
-}
