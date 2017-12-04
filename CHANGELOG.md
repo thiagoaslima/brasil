@@ -1,5 +1,12 @@
 # Change log
 
+## [v4.2.14] - 2017-12-04
+### Changed
+ - Alteração do nome do município de MG de Brasópolis para Brazópolis.
+ - Inclusão das fontes para os indicadores no panorama municial.
+ - Casas decimais até 3 dígitos para indicadores como o índice GINI.
+
+
 ## [v4.2.12] - 2017-11-01
 ### Fixed
 - Correção do bug que gerava múltiplas requisições na pesquisa.
