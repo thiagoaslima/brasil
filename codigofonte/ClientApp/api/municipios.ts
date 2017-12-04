@@ -5308,8 +5308,8 @@ export const municipios = [
   {
     "codigoUf": 31,
     "codigo": 3108909,
-    "nome": "Brasópolis",
-    "slug": "brasopolis",
+    "nome": "Brazópolis",
+    "slug": "brazopolis",
     "microrregiao": 31056
   },
   {
