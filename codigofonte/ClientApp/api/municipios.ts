@@ -1297,7 +1297,7 @@ export const municipios = [
   {
     "codigoUf": 50,
     "codigo": 5000609,
-    "nome": "Amambaí",
+    "nome": "Amambai",
     "slug": "amambai",
     "microrregiao": 50010
   },
@@ -2074,7 +2074,7 @@ export const municipios = [
   {
     "codigoUf": 29,
     "codigo": 2902054,
-    "nome": "Araças",
+    "nome": "Araçás",
     "slug": "aracas",
     "microrregiao": 29017
   },
@@ -2956,7 +2956,7 @@ export const municipios = [
   {
     "codigoUf": 32,
     "codigo": 3200706,
-    "nome": "Atilio Vivacqua",
+    "nome": "Atílio Vivacqua",
     "slug": "atilio-vivacqua",
     "microrregiao": 32012
   },
@@ -4398,7 +4398,7 @@ export const municipios = [
   {
     "codigoUf": 35,
     "codigo": 3506607,
-    "nome": "Biritiba-Mirim",
+    "nome": "Biritiba Mirim",
     "slug": "biritiba-mirim",
     "microrregiao": 35062
   },
@@ -11531,8 +11531,8 @@ export const municipios = [
   {
     "codigoUf": 15,
     "codigo": 1502954,
-    "nome": "Eldorado dos Carajás",
-    "slug": "eldorado-dos-carajas",
+    "nome": "Eldorado do Carajás",
+    "slug": "eldorado-do-carajas",
     "microrregiao": 15019
   },
   {
@@ -16480,7 +16480,7 @@ export const municipios = [
   {
     "codigoUf": 35,
     "codigo": 3522158,
-    "nome": "Itaóca",
+    "nome": "Itaoca",
     "slug": "itaoca",
     "microrregiao": 35044
   },
@@ -17159,7 +17159,7 @@ export const municipios = [
   {
     "codigoUf": 29,
     "codigo": 2917334,
-    "nome": "Iuiú",
+    "nome": "Iuiu",
     "slug": "iuiu",
     "microrregiao": 29026
   },
@@ -19259,7 +19259,7 @@ export const municipios = [
   {
     "codigoUf": 42,
     "codigo": 4209607,
-    "nome": "Lauro Muller",
+    "nome": "Lauro Müller",
     "slug": "lauro-muller",
     "microrregiao": 42019
   },
@@ -22542,8 +22542,8 @@ export const municipios = [
   {
     "codigoUf": 29,
     "codigo": 2922250,
-    "nome": "Muquém de São Francisco",
-    "slug": "muquem-de-sao-francisco",
+    "nome": "Muquém do São Francisco",
+    "slug": "muquem-do-sao-francisco",
     "microrregiao": 29006
   },
   {
@@ -24068,7 +24068,7 @@ export const municipios = [
   {
     "codigoUf": 24,
     "codigo": 2408409,
-    "nome": "Olho-d'Água do Borges",
+    "nome": "Olho d'Água do Borges",
     "slug": "olho-dagua-do-borges",
     "microrregiao": 24007
   },
@@ -25412,7 +25412,7 @@ export const municipios = [
   {
     "codigoUf": 31,
     "codigo": 3147808,
-    "nome": "Passa-Vinte",
+    "nome": "Passa Vinte",
     "slug": "passa-vinte",
     "microrregiao": 31055
   },
@@ -26609,7 +26609,7 @@ export const municipios = [
   {
     "codigoUf": 31,
     "codigo": 3150539,
-    "nome": "Pingo-d'Água",
+    "nome": "Pingo d'Água",
     "slug": "pingo-dagua",
     "microrregiao": 31040
   },
@@ -28954,7 +28954,7 @@ export const municipios = [
   {
     "codigoUf": 43,
     "codigo": 4315503,
-    "nome": "Restinga Seca",
+    "nome": "Restinga Sêca",
     "slug": "restinga-seca",
     "microrregiao": 43019
   },
@@ -31355,8 +31355,8 @@ export const municipios = [
   {
     "codigoUf": 29,
     "codigo": 2928505,
-    "nome": "Santa Teresinha",
-    "slug": "santa-teresinha",
+    "nome": "Santa Terezinha",
+    "slug": "santa-terezinha",
     "microrregiao": 29012
   },
   {
@@ -31579,7 +31579,7 @@ export const municipios = [
   {
     "codigoUf": 43,
     "codigo": 4317103,
-    "nome": "Santana do Livramento",
+    "nome": "Sant'ana do Livramento",
     "slug": "santana-do-livramento",
     "microrregiao": 43030
   },
@@ -32272,7 +32272,7 @@ export const municipios = [
   {
     "codigoUf": 42,
     "codigo": 4216057,
-    "nome": "São Cristovão do Sul",
+    "nome": "São Cristóvão do Sul",
     "slug": "sao-cristovao-do-sul",
     "microrregiao": 42009
   },
@@ -33728,7 +33728,7 @@ export const municipios = [
   {
     "codigoUf": 52,
     "codigo": 5220157,
-    "nome": "São Luíz do Norte",
+    "nome": "São Luiz do Norte",
     "slug": "sao-luiz-do-norte",
     "microrregiao": 52006
   },
@@ -34470,7 +34470,7 @@ export const municipios = [
   {
     "codigoUf": 26,
     "codigo": 2613800,
-    "nome": "São Vicente Ferrer",
+    "nome": "São Vicente Férrer",
     "slug": "sao-vicente-ferrer",
     "microrregiao": 26010
   },
@@ -36913,8 +36913,8 @@ export const municipios = [
   {
     "codigoUf": 33,
     "codigo": 3305901,
-    "nome": "Trajano de Morais",
-    "slug": "trajano-de-morais",
+    "nome": "Trajano de Moraes",
+    "slug": "trajano-de-moraes",
     "microrregiao": 33008
   },
   {
@@ -38383,7 +38383,7 @@ export const municipios = [
   {
     "codigoUf": 43,
     "codigo": 4322855,
-    "nome": "Vespasiano Correa",
+    "nome": "Vespasiano Corrêa",
     "slug": "vespasiano-correa",
     "microrregiao": 43021
   },
@@ -38880,7 +38880,7 @@ export const municipios = [
   {
     "codigoUf": 43,
     "codigo": 4323770,
-    "nome": "Westfalia",
+    "nome": "Westfália",
     "slug": "westfalia",
     "microrregiao": 43021
   },
