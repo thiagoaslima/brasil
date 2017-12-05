@@ -55,7 +55,7 @@ export class ResultadoPipe implements PipeTransform {
         //     'unidades habitacionais',
         //     'leitos'
         // ];
-        debugger;
+
         let unidades = ['r$'];
 
         let float = (typeof (unidade) !== 'undefined' && unidade != null)

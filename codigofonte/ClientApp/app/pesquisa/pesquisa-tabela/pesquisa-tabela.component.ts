@@ -76,7 +76,7 @@ export class PesquisaTabelaComponent implements OnChanges {
             let periodoPesquisado = this.pesquisa['id'] == 1 ? this.periodo : 'all';
 
             let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, EscopoIndicadores.arvore, periodoPesquisado).subscribe((indicadores) => {
-debugger;
+
                 this.indicadores = this.flat(indicadores);
 
                 this.periodosValidos = this.getPeriodosValidos(this.indicadores);
