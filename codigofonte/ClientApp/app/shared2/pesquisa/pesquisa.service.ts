@@ -23,6 +23,19 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class PesquisaService2 {
 
     idioma:string;
+
+    /**
+     * Em algumas pesquisas os indicadores podem ser diferentes de um ano para outro, 
+     * neste caso, deve-se sempre obter os indicadores para cada ano informado, ao 
+     * invés de utilizar o período como all.
+     * Cadastre o código destas pesquisas no array abaixo para que a tabela de pesquisa
+     * envie o período pesquisado ao solicitar os indicadores da pesquisa.
+     * 
+     *  1 - PESQUISA MUNIC
+     * 45 - PESQUISA SÍNTESE DE INDICADORES SOCIAIS
+     */
+    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 1, 45 ];
+
     
     constructor(
         private _http: Http,
@@ -101,5 +114,11 @@ export class PesquisaService2 {
         }
 
         return this._getPesquisaCache[keyCache];
+    }
+    
+
+    public isPesquisaComIndicadoresQueVariamComAno(idPesquisa: number){
+
+        return this.PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO.indexOf(idPesquisa) >= 0;
     }
 }

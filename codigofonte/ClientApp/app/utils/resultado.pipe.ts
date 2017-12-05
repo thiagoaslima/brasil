@@ -59,7 +59,6 @@ export class ResultadoPipe implements PipeTransform {
 
         let unidades = ['r$'];
 
-debugger;
 
         let float = (typeof(unidade) != "undefined" && unidade != null) ? (unidades.indexOf(unidade.toLocaleLowerCase()) >= 0 ? true : false) : false; 
 

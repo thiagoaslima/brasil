@@ -88,7 +88,6 @@ export class Panorama2Service {
             this._getResultadosIndicadores(configuracao, localidade),
             localidade.tipo === 'municipio' ? this._bibliotecaService.getValuesMunicipio(localidade.codigo) : this._bibliotecaService.getValuesEstado(localidade.codigo)
         ).map(([resultados, valoresBiblioteca]) => {
-            debugger;
             return configuracao
                 .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
                 .map(item => {
