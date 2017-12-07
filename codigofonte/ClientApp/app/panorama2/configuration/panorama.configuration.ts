@@ -1268,7 +1268,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 38,
                     indicadorId: 47001,
-                    periodo: '2014',
+                    periodo: '2015',
                     titulo: 'PIB per capita',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
