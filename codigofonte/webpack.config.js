@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var merge = require('webpack-merge');
 var CompressionPlugin = require("compression-webpack-plugin");
-var DashboardPlugin = require('webpack-dashboard/plugin');
+//var DashboardPlugin = require('webpack-dashboard/plugin');
 
 var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
 
