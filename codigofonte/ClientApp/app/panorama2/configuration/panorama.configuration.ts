@@ -828,17 +828,17 @@ export const PANORAMA: {
                 },
                 {
                     pesquisaId: 45,
-                    indicadorId: 62585,
-                    periodo: '2016',
-                    titulo: 'Pessoas de 16 anos ou mais ocupadas na semana de referência',
+                    indicadorId: 63211,
+                    periodo: '2017',
+                    titulo: 'Proporção das pessoas de 16 anos ou mais de idade, ocupadas na semana de referência em trabalhos formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
                 {
                     pesquisaId: 45,
-                    indicadorId: 62590,
-                    periodo: '2016',
-                    titulo: 'Proporção de pessoas de 16 anos ou mais em trabalho formal, considerando apenas as ocupadas na semana de referência',
+                    indicadorId: 63238,
+                    periodo: '2017',
+                    titulo: 'Rendimento médio do trabalho principal das pessoas de 16 anos ou mais de idade, ocupadas na semana de referência em trabalhos formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
