@@ -40,6 +40,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     private exclusiva;
     private periodosValidos: string[];
 
+    private idIndicadorSelecionado;
 
     public get lang() {
         return this._traducaoServ.lang;
@@ -379,5 +380,19 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         let blob = new Blob([content], { type: 'text/csv' });
         FileSaver.saveAs(blob, `${name}.csv`);
+    }
+    
+    private obterNotasIndicador(indicador): string[]{
+
+        let notas: string[] = [];
+
+        indicador.nota.forEach(elementoNivel1 =>  elementoNivel1.notas.forEach( elementoNivel2 => notas.push(elementoNivel2) ));
+
+        return notas;
+    }
+
+    selecionarIndicador(indicador){
+
+        this.idIndicadorSelecionado = indicador.id;
     }
 }
