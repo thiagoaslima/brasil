@@ -110,6 +110,18 @@ export class AppState {
      *
      *
      * @readonly
+     * @type {BehaviorSubject<any>}
+     * @memberOf AppState
+     */
+    public get notify$(): BehaviorSubject<any> {
+
+        return this._notify;
+    }
+
+    /**
+     *
+     *
+     * @readonly
      * @type {Localidade}
      * @memberOf AppState
      */

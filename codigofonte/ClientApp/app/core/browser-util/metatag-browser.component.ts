@@ -70,7 +70,7 @@ export class MetatagBrowserComponent implements OnInit {
                     this.setaMetatag('keywords', 'IBGE,dados,geografia,estatística,cidade,município,país,estado,PIB,IDH,IDEB,população,mapa,censo,história,fotos,' + localidade.nome + (localidade.parent ? ',' + localidade.parent.nome : ''));
                 } else if (url.indexOf('pesquisa') >= 0) {
                     if (params.pesquisa) {
-                        this._pesquisaService.getPesquisa(params.pesquisa).subscribe((pesquisa) => {
+                        this._pesquisaService.getPesquisa(parseInt(params.pesquisa, 10)).subscribe((pesquisa) => {
                             // seta a metatag description
                             this.setaMetatag('description', 'Veja tabelas e gráficos com as pesquisas do IBGE sobre todas as cidades do país. Além disso você pode comparar municípios, ver rankings e séries históricas (pesquisa: ' + pesquisa['nome'] + ' | ' + local + ').');
                             // seta a metatag keywords

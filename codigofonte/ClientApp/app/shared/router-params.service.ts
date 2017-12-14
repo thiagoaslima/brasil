@@ -1,49 +1,49 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, RouterState, RouterStateSnapshot } from '@angular/router';
 
 import { isPlatformBrowser } from '@angular/common';
 
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 
+
+export interface RouterParams {
+    params: { [key: string]: string };
+    queryParams: { [key: string]: string };
+    url: string;
+}
+
 @Injectable()
 export class RouterParamsService {
 
-    public params$: Observable<any>;
-    isBrowser;
+    public params$: BehaviorSubject<RouterParams>;
+    private isBrowser: boolean;
 
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: Object,
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
-        this.params$ = this._router.events
-            .filter(e => e instanceof NavigationEnd)
+
+        this.params$ = new BehaviorSubject({ params: {}, queryParams: {}, url: '' });
+
+        this._router.events
+            .filter((evt) => evt instanceof NavigationEnd)
             .distinctUntilChanged()
-            .map((e: NavigationEnd) => {
-                
-                let params =  this.extractParamsFromTree(this._router.routerState.snapshot.root, {});
-                if(e.url!=null){
-                        
-                    params.params.url=e.url
+            .map((e: any) => {
+                let params = this.extractParamsFromTree(this._router.routerState.snapshot.root, {});
+                if (e.url != null) {
+
+                    params.params.url = e.url
                 }
                 return params;
-            })
-            .do((params) => {
-              
-                if (this.isBrowser && params && params.params && params.params.uf && params.params.municipio) {
-                    try {
-                        localStorage.setItem('lastParams', JSON.stringify(params));
-                    } catch(err) {
-                        // ignore
-                    }
-                }
+            }).subscribe(params => this.params$.next(params));
 
-            });
 
         // this._router.events
         //     .filter(e => e instanceof NavigationEnd)
@@ -58,10 +58,13 @@ export class RouterParamsService {
 
 
     private getActiveChildOnOutlet(route: ActivatedRouteSnapshot, outlet = 'primary'): ActivatedRouteSnapshot | null {
-        return route.children.reduce((agg, rota) => rota.outlet === outlet ? rota : agg, null);
+        // return route.children.reduce((agg, rota) => rota.outlet === outlet ? rota : agg, null);
+        return route.children.find(rota => {
+            return rota.outlet === outlet;
+        }) || null;
     }
 
-    private extractParamsFromTree(route, { params = {}, queryParams = {},url='' }, outlet = 'primary') {
+    private extractParamsFromTree(route: ActivatedRouteSnapshot | null, { params = {}, queryParams = {}, url = '' }, outlet = 'primary'): RouterParams {
         let _params = {
             params,
             queryParams,
@@ -74,12 +77,9 @@ export class RouterParamsService {
             let val = decodeURIComponent(route.params[key]);
             agg[key] = val;
             return agg;
-        }, {}));
+        }, <any>{}));
+
         Object.assign(_params.queryParams, route.queryParams);
-        if(route.url!=null){
-            Object.assign(_params.url, route.url);
-        }
-        
 
         return this.extractParamsFromTree(this.getActiveChildOnOutlet(route), _params, outlet);
     }

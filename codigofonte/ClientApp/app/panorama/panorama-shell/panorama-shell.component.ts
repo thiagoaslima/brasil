@@ -58,7 +58,7 @@ export class PanoramaShellComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this._configuracao$$ = this._appState.observable$
+        this._configuracao$$ = this._appState.notify$
             .map(state => state.localidade)
             .filter(Boolean)
             .distinctUntilChanged()
