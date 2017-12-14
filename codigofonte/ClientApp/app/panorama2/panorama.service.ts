@@ -116,6 +116,12 @@ export class Panorama2Service {
                         resultados[item.indicadorId].indicador.unidade.toString()
                     ) || '';
 
+                    const tipo = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.classe.toString()
+                    ) || '';
+
                     const notas = (
                         resultados[item.indicadorId] &&
                         resultados[item.indicadorId].indicador &&
@@ -147,6 +153,7 @@ export class Panorama2Service {
                         periodo,
                         valor,
                         unidade,
+                        tipo,
                         notas,
                         fontes,
                         id: item.indicadorId

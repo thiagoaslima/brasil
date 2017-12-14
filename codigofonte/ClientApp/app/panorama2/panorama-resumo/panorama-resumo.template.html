@@ -55,7 +55,12 @@
                 <small>{{ '[' + item.periodo + ']' }}</small>
             </td>
             <td class="lista__valor" colspan="2">
-                {{ item.valor | resultado }}
+
+                <!-- EXCEÇÃO NA FORMATAÇÃO DE VALORES MONETÁRIOS PARA O INDICADOR 63238 DA DA PESQUISA 45 QUE DEVE EXIBIR AS CASAS DECIMAIS, CASO NÃO POSSUA -->
+                <span *ngIf="item.id == 63238">{{ item.valor | resultado: item.tipo }}</span>
+                <span *ngIf="item.id != 63238">{{ item.valor | resultado }}</span>
+                <!-- EXCEÇÃO -->
+
                 <span class="lista__unidade">{{ item.unidade }} &nbsp;</span>
 
                 <div class="lista__nota" *ngIf="getNotaEspecial(cabecalho[0]?.valor, item.titulo)" >
