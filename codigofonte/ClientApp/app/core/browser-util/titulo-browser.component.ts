@@ -37,9 +37,7 @@ export class TituloBrowserComponent implements OnInit {
         @Inject(PLATFORM_ID) platformId: string,
     ) {
         this.isBrowser = isPlatformBrowser(PLATFORM_ID);
-    }
 
-    ngOnInit() {
         this._routerParamsService.params$.subscribe(({ params, queryParams }) => {
             if (this.isBrowser && window) {
                 let titulo = 'IBGE | Brasil em Síntese | ';
@@ -113,5 +111,8 @@ export class TituloBrowserComponent implements OnInit {
             }
         },
         error => this.modalErrorService.showError());
+    }
+
+    ngOnInit() {
     }
 }

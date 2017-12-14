@@ -37,9 +37,7 @@ export class MetatagBrowserComponent implements OnInit {
         @Inject(PLATFORM_ID) platformId: string,
     ) {
         this.isBrowser = isPlatformBrowser(PLATFORM_ID);
-    }
 
-    ngOnInit() {
         this._routerParamsService.params$.subscribe(({ params }) => {
             if (this.isBrowser && window) {
                 let local = '';
@@ -84,6 +82,9 @@ export class MetatagBrowserComponent implements OnInit {
             }
         },
         this.exibirError);
+    }
+
+    ngOnInit() {
     }
 
     // // seta a metatag, criando-a caso necessário

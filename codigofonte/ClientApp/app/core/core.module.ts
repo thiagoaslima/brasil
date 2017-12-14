@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
@@ -14,7 +15,13 @@ import {
     ModalErroComponent,
     ShellComponent,
     SeletorLocalidadeComponent,
-
+    BuscaComponent,
+    GeolocationComponent,
+    GeolocationDirective,
+    SubmenuComponent,
+    
+    BuscaService,
+    BuscaCompletaService,
     ModalErrorService,
     SeletorLocalidadeService,
 } from ".";
@@ -26,17 +33,24 @@ const declarations = [
     ModalErroComponent,
     ShellComponent,
     SeletorLocalidadeComponent,
+    BuscaComponent,
+    GeolocationComponent,
+    GeolocationDirective,
+    SubmenuComponent,
 ];
 
 const providers = [
     ModalErrorService,
     SeletorLocalidadeService,
+    BuscaService,
+    BuscaCompletaService,
 ]
 
 @NgModule({
     imports: [
         CommonModule,
         HttpModule,
+        FormsModule,
         SharedModule,
         RouterModule,
         NgxPageScrollModule,

@@ -26,7 +26,7 @@ export class RouterParamsService {
             .distinctUntilChanged()
             .map((e: NavigationEnd) => {
                 
-                let params =  this.extractParamsFromTree(this._route.snapshot, {});
+                let params =  this.extractParamsFromTree(this._router.routerState.snapshot.root, {});
                 if(e.url!=null){
                         
                     params.params.url=e.url

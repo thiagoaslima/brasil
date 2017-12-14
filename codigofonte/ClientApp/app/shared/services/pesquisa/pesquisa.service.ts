@@ -58,8 +58,12 @@ export class PesquisaService3 {
         }
 
         return this.getAllPesquisas()
-            .map(pesquisas => pesquisas.filter(pesquisa => pesquisa.abrangeNivelTerritorial(nivelTerritorial)))
-            .catch(err => this._handleError(err));
+            .map(pesquisas => {
+                return pesquisas.filter(pesquisa => pesquisa.abrangeNivelTerritorial(nivelTerritorial))
+            })
+            .catch(err => {
+                return this._handleError(err)
+            });
     }
 
     @RxSimpleCache({

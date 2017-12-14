@@ -1,0 +1,92 @@
+table.piramide, table.piramide tbody, table.piramide tbody tr, table.piramide tbody tr td {
+    margin: 0;
+    padding:0;
+    font-size: 12px;
+}
+table.piramide {
+    width: 100%;
+    border-collapse: collapse;
+}
+table.piramide tbody tr td.classe {
+    width: 80px;
+}
+table.piramide tbody tr td.impar {
+    background-color: #f9f9f9;
+}
+
+table.piramide tbody tr td.grafico {
+    /*height: 100%;*/
+}
+
+table.piramide tbody tr td.grafico svg {
+    width: 100%;
+    /*height: 100%;*/
+}
+
+table.piramide tbody tr td.grafico svg .faixas rect.par {
+    fill: #FFF;
+    stroke: none;
+    stroke-width: 0;
+}
+table.piramide tbody tr td.grafico svg .faixas rect.impar {
+    fill: #f9f9f9;
+    stroke: none;
+    stroke-width: 0;
+}
+
+table.piramide tbody tr td.grafico svg .labels {
+    font-size: 0.35em;
+    fill: #999;
+}
+table.piramide tbody tr td.grafico svg .labels .par {
+    fill: #ccc;
+}
+
+.cidade .homens {
+    fill: #7FCDBB;
+    stroke: none;
+    stroke-width: 0;
+}
+.cidade .mulheres {
+    fill: #1B779B;
+    stroke: none;
+    stroke-width: 0;
+}
+
+.brasil rect, .escopo svg path {
+    fill: #000;
+    fill-opacity: 0.2;
+}
+
+
+.tool-tip {
+    font-size: 0.7em;
+    color: #666;
+    position: absolute;
+    z-index: 1000;
+    padding: 0.5em;
+    background-color: #fff;
+    outline: 1px solid black;
+}
+.tool-tip h3 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.tool-tip table > td {
+    text-align: left;
+}
+.tool-tip table > th, .tool-tip table > td.number {
+    text-align: right;
+    color: #000;
+    padding: 0.3em;
+}
+
+
+tfoot.legenda tr td {
+    color: #666;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 9px
+}
+

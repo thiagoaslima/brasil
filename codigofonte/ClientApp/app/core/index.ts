@@ -7,6 +7,7 @@ export * from './aniversario';
 export * from './busca';
 export * from './geolocation';
 export * from './login';
+export * from './submenu';
 
 // Módulo sempre por último!
 export * from './core.module';

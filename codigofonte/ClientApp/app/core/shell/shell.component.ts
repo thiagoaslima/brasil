@@ -154,20 +154,6 @@ export class ShellComponent implements OnInit, OnDestroy {
         @Inject(PLATFORM_ID) platformId,
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
-    }
-
-    ngOnInit() {
-        this._localidade$$ = this._appState.observable$
-            .subscribe(({ localidade }) => {
-                this.localidadeSelecionada = localidade;
-                const locais = [localidade];
-                if (localidade) { locais.push(localidade.parent) }
-                if (localidade && localidade.parent) { locais.push(localidade.parent.parent) }
-
-                this.locais = locais.filter(Boolean).reverse();
-            });
-
-        this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
 
         // marca a opção no menu, baseado na rota
         let view = this;
@@ -228,6 +214,21 @@ export class ShellComponent implements OnInit, OnDestroy {
                 // }, 16); // how fast to scroll (this equals roughly 60 fps)
             }
         });
+
+    }
+
+    ngOnInit() {
+        this._localidade$$ = this._appState.observable$
+            .subscribe(({ localidade }) => {
+                this.localidadeSelecionada = localidade;
+                const locais = [localidade];
+                if (localidade) { locais.push(localidade.parent) }
+                if (localidade && localidade.parent) { locais.push(localidade.parent.parent) }
+
+                this.locais = locais.filter(Boolean).reverse();
+            });
+
+        this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
 
     }
 

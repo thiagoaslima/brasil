@@ -1,7 +1,0 @@
-<button geolocation (onLoading)="handleLoading($event)" (onGetLocation)="handleGetLocation($event)">
-
-        <i *ngIf="!isLoading" class="fa fa-map-marker icone-pequeno"  aria-hidden="true" [title]="'geo__obter_localidade' | l10n:lang"></i>
-
-        <i *ngIf="isLoading" class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true" [title]="'geo__obtendo_localidade' | l10n:lang"></i>
-    
-</button>

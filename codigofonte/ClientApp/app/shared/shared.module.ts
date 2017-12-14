@@ -6,11 +6,14 @@ import { ModuleWithProviders, NgModule, PLATFORM_ID } from '@angular/core';
 import { TraducaoModule } from './traducao';
 
 import {
+    ResultadoPipe,
+
     BibliotecaService,
     ConjunturaisService,
     IndicadorService3,
     LocalidadeService3,
     PesquisaService3,
+    PesquisaConfiguration,
     RankingService3,
     ResultadoService3,
     AnalyticsService,
@@ -18,9 +21,13 @@ import {
     RouterParamsService,
     IsMobileService,
     ConfigService,
+    CommonService,
+    TopoJson,
+    TOPOJSON
 } from './';
 
 const declarations = [
+    ResultadoPipe
 ]
 
 const providers = [
@@ -30,6 +37,7 @@ const providers = [
     ConjunturaisService,
     IndicadorService3,
     PesquisaService3,
+    PesquisaConfiguration,
     RankingService3,
     ResultadoService3,
     {
@@ -42,6 +50,11 @@ const providers = [
     AppState,
     RouterParamsService,
     IsMobileService,
+    CommonService,
+    {
+        provide: TOPOJSON,
+        useValue: TopoJson,
+    }
 ]
 
 @NgModule({

@@ -7,13 +7,13 @@
         </a>
     </div>
 
-    <div class="bt-home"><a routerLink="/v4"><i class="fa fa-home" aria-hidden="true"></i>{{ 'shell__pagina_inicial' | l10n:lang }}</a></div>
+    <div class="bt-home"><a routerLink="/"><i class="fa fa-home" aria-hidden="true"></i>{{ 'shell__pagina_inicial' | l10n:lang }}</a></div>
     <aniversario></aniversario>
-    <!-- <busca (buscaAberta)="seletor.fecharSeletor()" [URLEnd]="seletor?.URLEnd"></busca> -->
+    <busca (buscaAberta)="seletor.fecharSeletor()" [URLEnd]="seletor?.URLEnd"></busca> 
 
-    <!--<button class="lang_Button" (click)="mudarIdioma('pt')" [class.lang_Button--selecionado]="lang == 'pt'" title="Português do Brasil">PT</button>
-    <button class="lang_Button" (click)="mudarIdioma('en')" [class.lang_Button--selecionado]="lang == 'en'" title="English">EN</button>-->
-    <!-- <modal-erro></modal-erro>          -->
+    <button class="lang_Button" (click)="mudarIdioma('pt')" [class.lang_Button--selecionado]="lang == 'pt'" title="Português do Brasil">PT</button>
+    <button class="lang_Button" (click)="mudarIdioma('en')" [class.lang_Button--selecionado]="lang == 'en'" title="English">EN</button>
+    <modal-erro></modal-erro>          
 
 </header>
 
@@ -30,11 +30,11 @@
                     <ng-template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
                         <!--Brasil-->
                         <li *ngIf="first && !last">
-                            <!-- <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a> -->
+                            <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a> 
                         </li>
                         <!--Estado-->
                         <li *ngIf="!first && !last">
-                            <!-- <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a> -->
+                            <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a> 
                         </li>
                         <!--Município-->
                         <li *ngIf="last">
@@ -52,13 +52,13 @@
 
             <button (click)="seletor.abrirSeletor()">{{ 'selecionar_local' | l10n:lang }}</button>
             <button #abreMenuGlobal id='menu-principal'><i class="fa fa-bars" aria-hidden="true"></i></button>
-            <!-- <geolocation (location)="navegarPara($event)"></geolocation> -->
+            <geolocation (location)="navegarPara($event)"></geolocation>
         </div>
 
         <nav *ngIf="!isHome" id="menu" [class.aberto]="menuGlobalAberto" role="navigation">
             <ul>
                 <li [class.menu--selecionado]="itemSelecionado == 'panorama'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'panorama'">
-                    <!-- <a style="display:block" [routerLink]="getLink('panorama')">{{ 'shell__panorama' | l10n:lang }}</a> -->
+                    <a style="display:block" [routerLink]="getLink('panorama')">{{ 'shell__panorama' | l10n:lang }}</a> 
                 </li>
 
                 <li [class.menu--selecionado]="itemSelecionado == 'pesquisa' || abrirMenuPesquisa == true">
@@ -66,7 +66,7 @@
                 </li>
 
                 <li [class.menu--selecionado]="itemSelecionado == 'historico'" (click)="abrirMenuPesquisa = false; itemSelecionado = 'historico'" *ngIf="historicoHabilitado">
-                    <!-- <a style="display:block" [routerLink]="getLink('historico')">{{ 'shell__historia_e_fotos' | l10n:lang }}</a> -->
+                    <a style="display:block" [routerLink]="getLink('historico')">{{ 'shell__historia_e_fotos' | l10n:lang }}</a> 
                 </li>
 
             </ul>
@@ -80,7 +80,7 @@
     </aside>
 
     <div class="conteudo__dados--com-scroll submenu">
-        <!-- <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu> -->
+        <submenu *ngIf="abrirMenuPesquisa === true" (closeMenu)="handleCloseMenu($event)" [localidade]="localidadeSelecionada"></submenu> 
     </div>
 
     <div style="width:100%;" [class.position_fixed]="abrirMenuPesquisa || seletor.aberto">

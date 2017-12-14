@@ -12,6 +12,10 @@ const appRoutes: Routes = [
                 loadChildren: './home/home.module#HomeModule',
             },
             {
+                path: 'brasil',
+                loadChildren: './panorama/panorama.module#PanoramaModule',
+            },
+            {
                 path: 'not-found',
                 loadChildren: './page404/page404.module#Page404Module',
         

@@ -43,17 +43,26 @@ export class IndicadorService3 {
     @RxSimpleCache({
         cache: IndicadorService3.cache
     })
-    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
-        return this.getIndicadoresFilhosByPosicao(pesquisaId, '0', { arvoreCompleta, localidades })
+    getIndicadoresDaPesquisaByPeriodo(pesquisaId: number, periodo: string = 'all', { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+
+        return this.getIndicadoresFilhosByPosicao(pesquisaId, '0', periodo, { arvoreCompleta, localidades })
             .catch(err => this._handleError(err));
     }
 
     @RxSimpleCache({
         cache: IndicadorService3.cache
     })
-    getIndicadoresFilhosByPosicao(pesquisaId: number, posicao="0", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresDaPesquisa(pesquisaId: number, { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+        return this.getIndicadoresFilhosByPosicao(pesquisaId, '0', 'all', { arvoreCompleta, localidades })
+            .catch(err => this._handleError(err));
+    }
+
+    @RxSimpleCache({
+        cache: IndicadorService3.cache
+    })
+    getIndicadoresFilhosByPosicao(pesquisaId: number, posicao="0", periodo="all", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return this._request(url)
@@ -64,9 +73,9 @@ export class IndicadorService3 {
     @RxSimpleCache({
         cache: IndicadorService3.cache
     })
-    getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao="0", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
+    getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao="0", periodo="all", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/all/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
+        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
