@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.2.15] - 2017-12-14
+### Changed
+ - Alteração do período de exibição do PIB municipal de 2014 para 2015.
+
+
 ## [v4.2.14] - 2017-12-04
 ### Changed
  - Alteração do nome do município de MG de Brasópolis para Brazópolis.
