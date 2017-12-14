@@ -1,5 +1,9 @@
 # Change log
 
+## [v4.2.16.1] - 2017-12-15
+### Changed
+ - Ajuste no panorama estadual para remover o tratamento especial de casas decimais no indicador 63238 da SIS.
+
 ## [v4.2.16] - 2017-12-15
 ### Changed
  - Alteração no panorama estadual para substituir indicadores de trabalho e rendimento por sua versão mais atual na Síntese de Indicadores Sociais.
