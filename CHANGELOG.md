@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.2.16] - 2017-12-15
+### Changed
+ - Alteração no panorama estadual para substituir indicadores de trabalho e rendimento por sua versão mais atual na Síntese de Indicadores Sociais.
+
+
 ## [v4.2.15] - 2017-12-14
 ### Changed
  - Alteração do período de exibição do PIB municipal de 2014 para 2015.
