@@ -26,13 +26,19 @@ namespace Microsoft.Extensions.Caching.Handler
             string key,
             params string[] members)
         {
-            var result = await cache.ScriptEvaluateAsync(
-                HmGetScript,
-                new RedisKey[] { key },
-                GetRedisMembers(members));
+            try
+            {
+                var result = await cache.ScriptEvaluateAsync(
+                    HmGetScript,
+                    new RedisKey[] { key },
+                    GetRedisMembers(members));
 
-            // TODO: Error checking?
-            return (RedisValue[])result;
+                return (RedisValue[])result;
+            }
+            catch (System.Exception)
+            {
+                return new RedisValue[0];
+            }
         }
 
         private static RedisValue[] GetRedisMembers(params string[] members)
