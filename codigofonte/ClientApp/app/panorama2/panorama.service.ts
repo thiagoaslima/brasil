@@ -88,7 +88,6 @@ export class Panorama2Service {
             this._getResultadosIndicadores(configuracao, localidade),
             localidade.tipo === 'municipio' ? this._bibliotecaService.getValuesMunicipio(localidade.codigo) : this._bibliotecaService.getValuesEstado(localidade.codigo)
         ).map(([resultados, valoresBiblioteca]) => {
-            debugger;
             return configuracao
                 .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
                 .map(item => {
@@ -115,6 +114,12 @@ export class Panorama2Service {
                         resultados[item.indicadorId] &&
                         resultados[item.indicadorId].indicador &&
                         resultados[item.indicadorId].indicador.unidade.toString()
+                    ) || '';
+
+                    const tipo = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.classe.toString()
                     ) || '';
 
                     const notas = (
@@ -148,6 +153,7 @@ export class Panorama2Service {
                         periodo,
                         valor,
                         unidade,
+                        tipo,
                         notas,
                         fontes,
                         id: item.indicadorId

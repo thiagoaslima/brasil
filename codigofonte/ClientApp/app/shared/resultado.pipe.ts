@@ -1,104 +1,100 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-let isFloat = (n) => Number(n) === n && n % 1 !== 0;
+
 /*
- * Recebe uma string, transforma em float e 
- * insere formatação com pontos e vírgulas
+ * Formata o resultado de um indicador conforme os padrões IBGE.
+ * 
 */
 @Pipe({
     name: 'resultado'
 })
-/*
-99999999999999 - Ignorado
-99999999999998 - Não disponível
-99999999999997 - Não informado
-99999999999996 - Não existente
-99999999999995 - *
-99999999999992 - -
-99999999999991 - -
-- - -
-(NULL) - -
-*/
 export class ResultadoPipe implements PipeTransform {
+
+    private CONSTANTES = {
+        SIMBOLO_MONETARIO: '$',
+        // Resultados padronizados conforme o código do valor do indicador
+        CASOS_ESPECIAIS_RESULTADO: {
+            '99999999999999': 'Ignorado',
+            '99999999999998': 'Não disponível',
+            '99999999999997': 'Não informado',
+            '99999999999996': 'Não existente',
+            '99999999999995': '*',
+            '99999999999992': '-',
+            '99999999999991': '-',
+        }
+    };
+
+
+    /**
+     * Formata um dado resultado de indicador de pesquisa segundo os padrões estabelecidos para sua unidade de medida.
+     * 
+     * @value: any - valor a ser formatado.
+     * @unidade?: string - unidade de medida do indicador (opcional).
+     */
     transform(value: any, unidade?: string): any {
 
-        // let unidades = [
-        //     'unidades',
-        //     'frutos',
-        //     'casamentos',
-        //     'divórcios',
-        //     'separações',
-        //     'estabelecimentos',
-        //     'equipamentos',
-        //     'pessoas',
-        //     'domicílios',
-        //     'famílias',
-        //     'docentes',
-        //     'matrículas',
-        //     'escola',
-        //     'automóveis',
-        //     'caminhões',
-        //     'caminhões trator',
-        //     'caminhonetes',
-        //     'caminhonetas',
-        //     'micro-ônibus',
-        //     'motocicletas',
-        //     'motonetes',
-        //     'ônibus',
-        //     'tratores de roda',
-        //     'utilitários',
-        //     'veículos',
-        //     'agências',
-        //     'óbitos',
-        //     'notificações',
-        //     'cabeças',
-        //     'unidades habitacionais',
-        //     'leitos'
-        // ];
-        debugger;
-        let unidades = ['r$'];
+        let resultadoCasoEspecial = this.getResultadoCasoEspecial(value);
+        if(!!resultadoCasoEspecial){
 
-        let float = (typeof (unidade) != "undefined" && unidade != null) ? unidades.indexOf(unidade.toLocaleLowerCase()) >= 0 ? true : false : false;
+            return resultadoCasoEspecial;
+        } 
 
-        switch (value) {
-            case '99999999999999':
-                return 'Ignorado';
-            case '99999999999998':
-                return 'Não disponível';
-            case '99999999999997':
-                return 'Não informado';
-            case '99999999999996':
-                return 'Não existente';
-            case '99999999999995':
-                return '*';
-            case '99999999999992':
-            case '99999999999991':
-            case '-':
-            case null:
-                return '-';
+        if(this.isNumber(value)) {
 
-            default:
-                if (!isNaN(Number(value))) {
-                    let _value = Number(value);
-                    //let valueStr = (float || (float === undefined && isFloat(value))) ? (<number>value).toFixed(2).toString() : value.toString();
-                    let valueStr = (float === true) ? _value.toFixed(2).toString() : value.toString();
-                    //return valueStr.replace(/[.]/g, ",").replace(/\d(?=(?:\d{3})+(?:\D|$))/g, "$&.");
-                    let [parteInteira, parteDecimal] = valueStr.split('.');
-                    parteInteira = this.adicionaSeparadorMilhares(parteInteira, '.');
-                    return parteDecimal ? [parteInteira, parteDecimal].join(',') : parteInteira;
-                } else {
-                    return value;
-                }
-        }
+            let valor = Number(value);
+            let valueStr = this.isTipoMonetario(unidade) ? valor.toFixed(2).toString() : value.toString();
+            let [parteInteira, parteDecimal] = valueStr.split('.');
+            parteInteira = this.incluirSeparadorMilhar(parteInteira, '.');
+
+            return parteDecimal ? [parteInteira, parteDecimal].join(',') : parteInteira;
+        } 
+
+        return value;        
     }
-    private adicionaSeparadorMilhares(n: string, separador = ' ') {
+    
+    private incluirSeparadorMilhar(n: string, separador = ' ') {
+
         let start = 0;
         let next = n.length % 3;
         let r = [];
+
         for (var curr = start; curr < n.length; curr = next, next += 3) {
-            if (next == 0) { continue; }
+
+            if (next == 0) { 
+                continue; 
+            }
+
             r.push(n.substring(curr, next));
         }
+
         return r.join(separador);
+    }
+
+
+    private isNumber(value): boolean{
+
+        return !isNaN(Number(value));
+    }
+
+
+    private isTipoMonetario(unidade: string){
+
+        if(!unidade){
+
+            return false;
+        }
+
+        return unidade.trim().toUpperCase() == this.CONSTANTES.SIMBOLO_MONETARIO;
+    }
+
+
+    private getResultadoCasoEspecial(valor){
+
+        if(!valor){
+
+            return '-';
+        }
+
+        return this.CONSTANTES.CASOS_ESPECIAIS_RESULTADO[valor];
     }
 }

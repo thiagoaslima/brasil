@@ -46,11 +46,15 @@ export class PanoramaCardComponent implements OnChanges {
             this._resultadoPipe.transform(this.valor) === '*' ||
             this._resultadoPipe.transform(this.valor) === '-') {
 
-            this.ranking.BR.hasValor = false;
+            if(!!this.ranking && !!this.ranking.BR){
+                this.ranking.BR.hasValor = false;
+            }
 
         } else {
 
-            this.ranking.BR.hasValor = true;
+            if(!!this.ranking && !!this.ranking.BR){
+                this.ranking.BR.hasValor = true;
+            }
 
         }
 

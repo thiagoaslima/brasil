@@ -193,12 +193,27 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             return
         }
 
-        if(!!this.pesquisa && this.pesquisa.id == 1 && (tipo == 'grafico' || tipo == 'ranking' || tipo ==  'cartograma')){
+        if(!!this.pesquisa && this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id) && (tipo == 'grafico' || tipo == 'ranking' || tipo ==  'cartograma')){
 
             return;
         }
         
         this.navegarPara(null, null, tipo);
+    }
+
+    isExibirGrafico(): boolean{
+
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id);
+    }
+
+    isExibirCartograma(): boolean{
+        
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id);
+    }
+
+    isExibirRanking(): boolean{
+        
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id);
     }
 
     fazerDownload() {

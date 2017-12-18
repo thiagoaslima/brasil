@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+// using Microsoft.Extensions.Logging;
 
 namespace Brasil
 {
@@ -22,6 +23,10 @@ namespace Brasil
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+                // .ConfigureLogging((builder) =>
+                // {
+                //     builder.AddFile("Logs/brasil-{Date}.txt");
+                // })
                 .UseStartup<Startup>()
                 .Build();
 

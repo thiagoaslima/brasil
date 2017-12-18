@@ -1,5 +1,26 @@
 # Change log
 
+## [v4.2.16.1] - 2017-12-15
+### Changed
+ - Ajuste no panorama estadual para remover o tratamento especial de casas decimais no indicador 63238 da SIS.
+
+## [v4.2.16] - 2017-12-15
+### Changed
+ - Alteração no panorama estadual para substituir indicadores de trabalho e rendimento por sua versão mais atual na Síntese de Indicadores Sociais.
+
+
+## [v4.2.15] - 2017-12-14
+### Changed
+ - Alteração do período de exibição do PIB municipal de 2014 para 2015.
+
+
+## [v4.2.14] - 2017-12-04
+### Changed
+ - Alteração do nome do município de MG de Brasópolis para Brazópolis.
+ - Inclusão das fontes para os indicadores no panorama municial.
+ - Casas decimais até 3 dígitos para indicadores como o índice GINI.
+
+
 ## [v4.2.12] - 2017-11-01
 ### Fixed
 - Correção do bug que gerava múltiplas requisições na pesquisa.
