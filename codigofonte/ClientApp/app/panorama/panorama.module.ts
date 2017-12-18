@@ -15,6 +15,12 @@ import { PanoramaCardComponent } from './panorama-card/panorama-card.component';
 
 import { SharedModule } from '../shared';
 
+import { VisaoHistoricaComponent } from './visao-historica/visao-historica.component';
+import { VisaoHistoricaModule } from './visao-historica/visao-historica.module';
+
+import { PesquisaModule } from './pesquisa/pesquisa.module';
+import { PesquisaComponent } from './pesquisa/pesquisa.component';
+
 const routes: Routes = [
     {
         path: '',
@@ -26,6 +32,18 @@ const routes: Routes = [
         component: PanoramaShellComponent,
         pathMatch: 'full',
     },
+    {
+        path: 'historico',
+        component: VisaoHistoricaComponent,
+        data: {
+                meta: {
+                    title: 'Histórico',
+                    
+                }
+        },
+    },
+    { path: 'pesquisa/:pesquisa', component: PesquisaComponent },
+    { path: 'pesquisa/:pesquisa/:indicador', component: PesquisaComponent },
     {
         path: ':uf',
         redirectTo: ':uf/panorama',
@@ -39,7 +57,45 @@ const routes: Routes = [
                 title: 'Panorama'
             }
         }
-    }
+    },
+    {
+        path: ':uf/historico',
+        component: VisaoHistoricaComponent,
+        data: {
+                meta: {
+                    title: 'Histórico',
+                    
+                }
+        },
+    },
+    { path: ':uf/pesquisa/:pesquisa', component: PesquisaComponent },
+    { path: ':uf/pesquisa/:pesquisa/:indicador', component: PesquisaComponent },
+    {
+        path: ':uf/:municipio',
+        redirectTo: ':uf/:municipio/panorama',
+        pathMatch: 'full'
+    },
+    {
+        path: ':uf/:municipio/panorama',
+        component: PanoramaShellComponent,
+        data: {
+            meta: {
+                title: 'Panorama'
+            }
+        }
+    },
+    {
+        path: ':uf/:municipio/historico',
+        component: VisaoHistoricaComponent,
+        data: {
+                meta: {
+                    title: 'Histórico',
+                    
+                }
+        },
+    },
+    { path: ':uf/:municipio/pesquisa/:pesquisa', component: PesquisaComponent },
+    { path: ':uf/:municipio/pesquisa/:pesquisa/:indicador', component: PesquisaComponent },
 ];
 
 export const routedComponents = [
@@ -59,6 +115,8 @@ export const components = [
         InfografiaModule,
         SharedModule,
         NgxPageScrollModule,
+        VisaoHistoricaModule,
+        PesquisaModule,
         RouterModule.forChild(routes),
     ],
     exports: [RouterModule],

@@ -10,6 +10,12 @@ export * from './is-mobile.service';
 export * from './common.service';
 export * from './topojson.v2';
 export * from './resultado.pipe';
+export * from './breadcrumb';
+export * from './mensagem-setas';
+export * from './nao-achei';
+export * from './qrcode';
+export * from './questionario';
+export * from './corta-texto.pipe';
 
 // MÓDULO SEMPRE NO FINAL
 export * from './shared.module';

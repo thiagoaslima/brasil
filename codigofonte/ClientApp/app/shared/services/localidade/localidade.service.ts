@@ -202,7 +202,7 @@ export class LocalidadeService3 {
     /**
      * Retorna a preposição (do, da ou de) mais adequada ao nome da UF.
      */
-    public getPreprosisaoTituloUF(nomeUF: string): string {
+    public getPreprosicaoTituloUF(nomeUF: string): string {
 
         let ufsComPreposicaoDo = ['brasil', 'acre', 'amapá', 'amazonas', 'ceará', 'distrito federal', 'mato grosso', 'mato grosso do sul', 'maranhão', 'paraná', 'pará', 'piauí', 'rio grande do norte', 'rio grande do sul', 'rio de janeiro'];
         let ufsComPreposicaoDa = ['bahia', 'paraíba'];
@@ -251,7 +251,7 @@ export class LocalidadeService3 {
 function searchTest(termo: string, local: Localidade) {
     termo = slugify(termo);
 
-    return local.codigo.toString().indexOf(termo) >= 0
-        || local.sigla.indexOf(termo) >= 0
-        || local.slug.indexOf(termo) >= 0;
+    return (local.codigo && local.codigo.toString().indexOf(termo) >= 0)
+        || (local.sigla && local.sigla.indexOf(termo) >= 0)
+        || (local.slug && local.slug.indexOf(termo) >= 0);
 }

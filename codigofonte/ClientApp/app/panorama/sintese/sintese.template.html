@@ -1,0 +1,17 @@
+<div class="conteudo">
+    <section class="conteudo__dados">
+        <div [ngSwitch]="tipoSintese">
+            <div *ngSwitchCase="1">Síntese Brasil</div>
+            
+            <div *ngSwitchCase="2">Síntese Estado</div>
+            
+            <!--Síntese Município-->
+            <sintese-dados *ngSwitchCase="3" [content]="conteudoSintese" [baseURL]="baseURL"></sintese-dados>
+        </div>
+    </section>
+
+
+    <section class="conteudo__detalhes" [class.aberto]="aberto | async">
+        <router-outlet></router-outlet>
+    </section>
+</div>

@@ -91,6 +91,16 @@ export class Indicador {
         if (dados.res) { this.resultados = Resultado.convertDTOintoParameters({ id: this.id, res: dados.res }).map(Resultado.criar); }
     }
 
+    static converter(data) {
+        data = Object.assign({}, data, {
+            nome: data.indicador,
+            metadados: data.metadado
+        });
+        delete (data.indicador);
+        delete (data.metadado);
+        return data;
+    }
+
     getResultadoByLocal(localidadeCodigo: number): Resultado {
         return this.resultados.find(resultado => resultado.codigoLocalidade === localidadeCodigo) || null;
     }

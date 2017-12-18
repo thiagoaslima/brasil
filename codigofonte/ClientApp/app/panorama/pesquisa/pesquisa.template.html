@@ -1,0 +1,56 @@
+<div class='conteudo'>
+    
+    <pesquisa-header #header (onDownload)="dados.download($event);" (onOcultarValoresVazios)="ocultarValoresVazios($event)" [mostraAno]="tipo == 'tabela'"></pesquisa-header>
+
+    <pesquisa-tabela #dados *ngIf="tipo == 'tabela'"
+        [pesquisa]="pesquisa"
+        [posicaoIndicador]="posicaoIndicador"
+        [localidades]="localidades"
+        [periodo]="periodo"
+        [ocultarValoresVazios]="isOcultarValoresVazios"
+        (onEmpty)="header.vazio($event)"
+    ></pesquisa-tabela>
+    
+    <div *ngIf="tipo == 'grafico'">
+         <pesquisa-indicadores #dados [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios" (onIndicador)="setaIndicador($event)" (onBreadcrumb)="setaBreadcrumb($event)"></pesquisa-indicadores>
+        <div id="pesquisa-dados">
+            <pesquisa-graficos
+                [pesquisa]="pesquisa"
+                [indicadores]="indicadores"
+                [indicadorSelecionado]="indicador"
+                [localidades]="localidades"
+                [breadcrumb]="breadcrumb"
+                (onAno)="header.navegarPara(null, $event)"
+            ></pesquisa-graficos>
+        </div>
+    </div>
+    <div *ngIf="tipo == 'cartograma'">
+        <pesquisa-indicadores #dados [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios" (onIndicador)="setaIndicador($event)" (onBreadcrumb)="setaBreadcrumb($event)"></pesquisa-indicadores>
+        <div id="pesquisa-dados">
+            <pesquisa-cartograma
+                [pesquisa]="pesquisa"
+                [indicadores]="indicadores"
+                [indicadorSelecionado]="indicador"
+                [localidades]="localidades"
+                [periodo]="periodo"
+                [breadcrumb]="breadcrumb"
+                (onAno)="header.navegarPara(null, $event)"
+            ></pesquisa-cartograma>
+        </div>
+    </div>
+    <div *ngIf="tipo == 'ranking'">
+        <pesquisa-indicadores #dados [pesquisa]="pesquisa"  [posicaoIndicador]="posicaoIndicador" [localidades]="localidades" [periodo]="periodo" [ocultarValoresVazios]="isOcultarValoresVazios" (onIndicador)="setaIndicador($event)" (onBreadcrumb)="setaBreadcrumb($event)"></pesquisa-indicadores>
+        <div id="pesquisa-dados">
+            <pesquisa-ranking
+                [pesquisa]="pesquisa"
+                [indicadores]="indicadores"
+                [indicadorSelecionado]="indicador"
+                [localidades]="localidades"
+                [periodo]="periodo"
+                [breadcrumb]="breadcrumb"
+                (onAno)="header.navegarPara(null, $event)"
+            ></pesquisa-ranking>
+        </div>
+    </div>
+   
+</div>

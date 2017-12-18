@@ -8,6 +8,7 @@ import { RxSimpleCache } from '../../cache/decorators';
 import { escopoIndicadores, ServicoDados as servidor } from '../values';
 import { arrayUniqueValues, converterObjArrayEmHash, curry, getProperty } from '../../../../utils';
 import {TraducaoService}  from '../../traducao/traducao.service';
+import { ModalErrorService } from '../../../core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -31,6 +32,7 @@ export class IndicadorService3 {
         private _http: Http,
         private _pesquisaService: PesquisaService3,
         private _traducaoService:TraducaoService,
+        private modalErrorService: ModalErrorService
     ) { 
         if(this._traducaoService.lang!=null){
             this.idioma = this._traducaoService.lang;
@@ -94,6 +96,54 @@ export class IndicadorService3 {
             .map(array => array.map(Indicador.criar))
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
+    
+
+    @RxSimpleCache({
+        cache: IndicadorService3.cache
+    })
+    getIndicadoresByIdByLocalidade(pesquisaId: number, indicadorId: number | number[], escopo: string, localidade?, fontesNotas = false, periodo: string = 'all'): Observable<Indicador[]> {
+
+        periodo = !periodo ? 'all' : periodo;
+
+        const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
+        const queryLocalidade = localidade === undefined || null ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
+        
+        let url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`);
+        return this._http.get(url, options)
+            .retry(3)
+            .catch(err => Observable.of({ json: () => ({}) }))
+            .map(res => res.json())
+            //.map(json => flatTree(json))
+            .map(array => {
+                return array.map(obj => {
+                    return Indicador.criar(Indicador.converter(Object.assign(obj, { pesquisa_id: pesquisaId })))
+                })
+            })
+            //.map(array => this._rebuildTree(array))
+            .do(indicadores => {
+                //adiciona fonte e notas, da pesquisa nos indicadores
+                if (fontesNotas && indicadores.length > 0) {
+                    indicadores[0].pesquisa.subscribe((pesquisa) => {
+                        //organiza os períodos da pesquisa em ordem crescente
+                        pesquisa.periodos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+                        //pega fontes e notas do período mais recente
+                        let fontes = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].fontes : null;
+                        let notas = pesquisa.periodos.length ? pesquisa.periodos[pesquisa.periodos.length - 1].notas : null;
+                        for (let i = 0; i < indicadores.length; i++) {
+                            indicadores[i].fontes = fontes;
+                            indicadores[i].notas = notas;
+                        }
+                    }, 
+                    error => {
+                        console.error(error);
+                        this.modalErrorService.showError();
+                    });
+                }
+                // console.log(`getIndicadorById`, indicadores);
+            })
+            .share();
+    }
+
 
     @RxSimpleCache({
         cache: IndicadorService3.cache
