@@ -34,7 +34,7 @@
     
     <div class="grafico" *ngFor="let obj of item.graficos; let i = index">
 
-        <h2 class="grafico__titulo">{{obj.titulo}}
+        <h2 class="grafico__titulo">{{obj.titulo | l10n:lang}}
             <span class="grafico__unidade" *ngIf="obj.unidade && obj.unidade.nome">
                 ( {{ 'unidade' | l10n:lang }}:
                     {{ obj.unidade.nome}}

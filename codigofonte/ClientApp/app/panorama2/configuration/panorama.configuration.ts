@@ -34,7 +34,7 @@ export const PANORAMA: {
                     indicadorId: 60053,
                     pesquisaId: 10059,
                     periodo: '2010',
-                    titulo: 'Capital',
+                    titulo: 'panorama_configuration_pais_capital',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -43,7 +43,7 @@ export const PANORAMA: {
                     indicadorId: 60280,
                     pesquisaId: 10065,
                     periodo: '2016',
-                    titulo: 'Número de municípios',
+                    titulo: 'panorama_configuration_pais_numero_municipios',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -52,7 +52,7 @@ export const PANORAMA: {
                     indicadorId: 60272,
                     pesquisaId: 10065,
                     periodo: '2017',
-                    titulo: 'Área territorial',
+                    titulo: 'panorama_configuration_pais_area_territorial',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -61,7 +61,7 @@ export const PANORAMA: {
                     indicadorId: 62887,
                     pesquisaId: 10059,
                     periodo: '2017',
-                    titulo: 'Presidente',
+                    titulo: 'panorama_configuration_pais_presidente',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -73,7 +73,7 @@ export const PANORAMA: {
                     pesquisaId: 10059,
                     indicadorId: 60056,
                     periodo: '2017',
-                    titulo: 'População estimada',
+                    titulo: 'panorama_configuration_pais_populacao_estimada',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -84,7 +84,7 @@ export const PANORAMA: {
                     categoria: '86[0]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'População no último censo',
+                    titulo: 'panorama_configuration_pais_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico,
                 },
@@ -93,7 +93,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60284,
                     periodo: '2015',
-                    titulo: 'Taxa de fecundidade',
+                    titulo: 'panorama_configuration_pais_taxa_fecundidade',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -102,7 +102,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60282,
                     periodo: '2015',
-                    titulo: 'Taxa de mortalidade infantil',
+                    titulo: 'panorama_configuration_pais_taxa_mortalidade_infantil',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -111,7 +111,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60404,
                     periodo: '2015',
-                    titulo: 'Domicílios com iluminação elétrica',
+                    titulo: 'panorama_configuration_pais_domicilios_com_iluminacao_eletrica',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -120,7 +120,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60406,
                     periodo: '2015',
-                    titulo: 'Domicílios com coleta de lixo',
+                    titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -129,7 +129,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60407,
                     periodo: '2015',
-                    titulo: 'Domicílios com rede geral de abastecimento de água',
+                    titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -138,7 +138,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60408,
                     periodo: '2015',
-                    titulo: 'Domicílios com esgotamento sanitário adequado (Rede coletora ou fossa séptica)',
+                    titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -147,7 +147,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60234,
                     periodo: '2015',
-                    titulo: 'PIB per capita',
+                    titulo: 'panorama_configuration_pais_pib_per_capita',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -252,7 +252,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60229,
                     periodo: '2015',
-                    titulo: 'Taxa de analfabetismo 10 anos ou mais de idade',
+                    titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -261,7 +261,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60232,
                     periodo: '2015',
-                    titulo: 'Taxa de escolarização de 6 a 14 anos de idade',
+                    titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -276,11 +276,11 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA mensal',
+                    titulo: 'panorama_configuration_pais_precos_ipca_mensal',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA x INPC x IPP - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_ipca_inpc_ipp_acumulado_12_meses',
                         tipo: TiposGrafico.linha,
                         link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
                         dados: [{
@@ -313,7 +313,7 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - INPC',
+                    titulo: 'panorama_configuration_pais_precos_inpc',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -335,11 +335,11 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA15',
+                    titulo: 'panorama_configuration_pais_precos_ipca15',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA15 - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_ipca15_acumulado_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -358,7 +358,7 @@ export const PANORAMA: {
                     categoria: '715[33611]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços Produtor - IPP',
+                    titulo: 'panorama_configuration_pais_preco_produtor_ipp',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1055,7 +1055,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29170,
-                    titulo: 'Prefeito',
+                    titulo: 'panorama_configuration_prefeito',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },

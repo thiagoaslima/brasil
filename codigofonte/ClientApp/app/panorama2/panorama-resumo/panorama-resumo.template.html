@@ -7,7 +7,7 @@
 
     <div  *ngFor="let item of cabecalho; let idx = index" [ngClass]="{'topo__celula-esquerda': idx === 0, 'topo__celula-direita': idx === 1, 'topo__celula-linha': idx > 1}">
         <h3 class="topo__titulo">
-            {{ item.titulo }} 
+            {{ item.titulo | l10n:lang }} 
         </h3>
         <p class="topo__valor">
             {{ item.valor }}
@@ -51,7 +51,7 @@
         <tr class="lista__indicador" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <td></td>
             <td class="lista__nome">
-                {{ item.titulo }}
+                {{ item.titulo | l10n:lang }}
                 <small>{{ '[' + item.periodo + ']' }}</small>
             </td>
             <td class="lista__valor" colspan="2">
@@ -105,7 +105,7 @@
                         </div>
                         <div class="modal_resumo_indicador">
                             <label>
-                                <input type="checkbox" value="{{item.indicadorId}}"  (change)="selecionaIndicadoresFiltro(item,idx,$event)" />  {{ item.titulo }} <small>{{ '[' + item.periodo + ']' }}</small>
+                                <input type="checkbox" value="{{item.indicadorId}}"  (change)="selecionaIndicadoresFiltro(item,idx,$event)" />  {{ item.titulo | l10n:lang }} <small>{{ '[' + item.periodo + ']' }}</small>
                             </label>
                         </div>
                    
