@@ -106,55 +106,35 @@ const children = [
       },
       {
         path: 'brasil',
-        redirectTo: '/',
+        redirectTo: 'brasil/panorama',
         pathMatch: 'full'
       },
       {
         path: 'brasil/panorama',
-        redirectTo: '/',
-        pathMatch: 'full'
+        component: ShellComponent,
+        canActivate: [AuthorizationGuard],
+        children: [
+          { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
+        ]
       },
       {
         path: 'brasil/pesquisa',
-        redirectTo: '/',
-        pathMatch: 'full'
+        component: ShellComponent,
+        canActivate: [AuthorizationGuard],
+        children: [
+          { path: '', component: PesquisaComponent, pathMatch: 'full' },
+          { path: ':pesquisa', component: PesquisaComponent },
+          { path: ':pesquisa/:indicador', component: PesquisaComponent }
+        ]
       },
       {
         path: 'brasil/historico',
-        redirectTo: '/',
-        pathMatch: 'full'
+        component: ShellComponent,
+        canActivate: [AuthorizationGuard],
+        children: [
+          { path: '', component: VisaoHistoricaComponent, pathMatch: 'full' },
+        ]
       },
-      // {
-      //   path: 'brasil',
-      //   redirectTo: 'brasil/panorama',
-      //   pathMatch: 'full'
-      // },
-      // {
-      //   path: 'brasil/panorama',
-      //   component: ShellComponent,
-      //   canActivate: [AuthorizationGuard],
-      //   children: [
-      //     { path: '', component: PanoramaShellComponent, pathMatch: 'full' },
-      //   ]
-      // },
-      // {
-      //   path: 'brasil/pesquisa',
-      //   component: ShellComponent,
-      //   canActivate: [AuthorizationGuard],
-      //   children: [
-      //     { path: '', component: PesquisaComponent, pathMatch: 'full' },
-      //     { path: ':pesquisa', component: PesquisaComponent },
-      //     { path: ':pesquisa/:indicador', component: PesquisaComponent }
-      //   ]
-      // },
-      // {
-      //   path: 'brasil/historico',
-      //   component: ShellComponent,
-      //   canActivate: [AuthorizationGuard],
-      //   children: [
-      //     { path: '', component: VisaoHistoricaComponent, pathMatch: 'full' },
-      //   ]
-      // },
       {
         path: 'brasil/:uf',
         canActivate: [ValidParametersGuard, AuthorizationGuard],
