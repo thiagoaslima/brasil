@@ -426,11 +426,11 @@ export const PANORAMA: {
                     categoria: '11046[90668]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 36,
-                    titulo: 'Serviços - PMS',
+                    titulo: 'panorama_configuration_pais_servicos_pms',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PMS - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pms_variacao_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -451,11 +451,11 @@ export const PANORAMA: {
                     servico: 'conjunturais',
                     categoria: '',
                     quantidadePeriodos: 36,
-                    titulo: 'Taxa de desocupação - PNAD Contínua',
+                    titulo: 'panorama_configuration_pais_taxa_desocupacao_pnad_continua',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PNAD Contínua - Taxa de desocupação',
+                        titulo: 'panorama_configuration_pais_pnad_continua_taxa_desocupacao',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -475,11 +475,11 @@ export const PANORAMA: {
                     servico: 'conjunturais',
                     quantidadePeriodos: 12,
                     periodo: '2º trimestre 2017',
-                    titulo: 'PIB - SCNT',
+                    titulo: 'panorama_configuration_pais_pib_scnt',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PIB - Taxa acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pib_taxa_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/contas-nacionais/2036-np-produto-interno-bruto-dos-municipios/9088-produto-interno-bruto-dos-municipios.html',
                         dados: [{
@@ -502,11 +502,11 @@ export const PANORAMA: {
                     categoria: '',
                     servico: 'conjunturais',
                     quantidadePeriodos: 36,
-                    titulo: 'Construção - SINAPI',
+                    titulo: 'panorama_configuration_pais_construcao_sinapi',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'SINAPI - Construção',
+                        titulo: 'panorama_configuration_pais_sinapi_construcao',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -534,7 +534,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60367,
                     periodo: '2015',
-                    titulo: 'Pessoal ocupado assalariado - Índice acumulado em relação ao mesmo período do ano anterior',
+                    titulo: 'panorama_configuration_pais_industria_pessoal_ocupado',
                     tema: TEMAS.industria.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -543,7 +543,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60368,
                     periodo: '2015',
-                    titulo: 'Produção industrial - Índice acumulado em relação ao mesmo período do ano anterior',
+                    titulo: 'panorama_configuration_pais_industria_producao',
                     tema: TEMAS.industria.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -552,7 +552,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60371,
                     periodo: '2015',
-                    titulo: 'Produtividade - Índice acumulado em relação ao mesmo período do ano anterior',
+                    titulo: 'panorama_configuration_pais_industria_produtividade',
                     tema: TEMAS.industria.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
