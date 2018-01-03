@@ -369,7 +369,7 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA 12 meses',
+                    titulo: 'panorama_configuration_pais_precos_ipca_12_meses',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -380,11 +380,11 @@ export const PANORAMA: {
                     categoria: '544[129314]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Indústria - PIM-PF',
+                    titulo: 'panorama_configuration_pais_industria_pim-pf',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PIM-PF - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pim-pf_variacao_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -403,11 +403,11 @@ export const PANORAMA: {
                     categoria: '11046[90668]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 36,
-                    titulo: 'Comércio - PMC',
+                    titulo: 'panorama_configuration_pais_comercio_pmc',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PMC - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pmc_variacao_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
