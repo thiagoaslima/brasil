@@ -703,7 +703,7 @@ export const PANORAMA: {
                     // pesquisaId: 48,
                     // indicadorId: 62877,
                     // periodo: '-',
-                    titulo: 'Gentílico',
+                    titulo: 'panorama_configuration_estado_gentilico',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',
                     visualizacao: PanoramaVisualizacao.numerico
@@ -719,7 +719,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48981,
                     periodo: '2010',
-                    titulo: 'Capital',
+                    titulo: 'panorama_configuration_estado_capital',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -727,7 +727,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 62876,
                     periodo: '2014',
-                    titulo: 'Governador',
+                    titulo: 'panorama_configuration_estado_governador',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -737,11 +737,11 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48985,
                     periodo: '2017',
-                    titulo: 'População estimada',
+                    titulo: 'panorama_configuration_estado_populacao_estimada',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'População residente por situação domiciliar (urbana/rural)',
+                        titulo: 'panorama_configuration_estado_populacao_residente_situacao_domiciliar',
                         tipo: TiposGrafico.coluna,
                         dados: [{
                             pesquisaId: 23,
@@ -758,7 +758,7 @@ export const PANORAMA: {
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Projeção da População',
+                        titulo: 'panorama_configuration_estado_projecao_populacao',
                         link: "https://www.ibge.gov.br/estatisticas-novoportal/sociais/populacao/9103-estimativas-de-populacao.html",
                         tipo: TiposGrafico.linha,
                         dados: [{
@@ -772,7 +772,7 @@ export const PANORAMA: {
                     pesquisaId: 23,
                     indicadorId: 25207,
                     periodo: '2010',
-                    titulo: 'População no último censo',
+                    titulo: 'panorama_configuration_estado_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                     // grafico: {
@@ -803,7 +803,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48982,
                     periodo: '2010',
-                    titulo: 'Densidade demográfica',
+                    titulo: 'panorama_configuration_estado_densidade_demografica',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -822,7 +822,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48986,
                     periodo: '2016',
-                    titulo: 'Rendimento nominal mensal domiciliar per capita',
+                    titulo: 'panorama_configuration_estado_rendimento_nominal_mensal_domiciliar',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -830,7 +830,7 @@ export const PANORAMA: {
                     pesquisaId: 45,
                     indicadorId: 63211,
                     periodo: '2017',
-                    titulo: 'Proporção das pessoas de 16 anos ou mais de idade, ocupadas na semana de referência em trabalhos formais',
+                    titulo: 'panorama_configuration_estado_proporcao_pessoas_ocupadas_trabalhos_formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -838,7 +838,7 @@ export const PANORAMA: {
                     pesquisaId: 45,
                     indicadorId: 63238,
                     periodo: '2017',
-                    titulo: 'Rendimento médio aproximado do trabalho principal das pessoas de 16 anos ou mais de idade, ocupadas na semana de referência em trabalhos formais',
+                    titulo: 'panorama_configuration_estado_rendimento_medio_trabalhos_formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -846,7 +846,7 @@ export const PANORAMA: {
                     pesquisaId: 19,
                     indicadorId: 59935,
                     periodo: '2015',
-                    titulo: 'Pessoal ocupado na Administração pública, defesa e seguridade social',
+                    titulo: 'panorama_configuration_estado_pessoal_ocupado_administracao_publica',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -864,7 +864,7 @@ export const PANORAMA: {
                     pesquisaId: 13,
                     indicadorId: 5908,
                     periodo: '2015',
-                    titulo: 'Matrículas no ensino fundamental',
+                    titulo: 'panorama_configuration_estado_matriculas_ensino_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -876,7 +876,7 @@ export const PANORAMA: {
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Matrículas',
+                        titulo: 'panorama_configuration_estado_matriculas',
                         tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 13,
@@ -896,7 +896,7 @@ export const PANORAMA: {
                     pesquisaId: 22,
                     indicadorId: 28120,
                     periodo: '2016',
-                    titulo: 'Total de veículos',
+                    titulo: 'panorama_configuration_estado_total_veiculos',
                     tema: TEMAS.frota.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -909,7 +909,7 @@ export const PANORAMA: {
                     tema: TEMAS.frota.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Veículos por tipo',
+                        titulo: 'panorama_configuration_estado_veiculos_tipo',
                         tipo: TiposGrafico.coluna,
                         dados: [
                             {
@@ -937,7 +937,7 @@ export const PANORAMA: {
                     pesquisaId: 37,
                     indicadorId: 30255,
                     periodo: '2010',
-                    titulo: 'Índice de Desenvolvimento Humano (IDH)',
+                    titulo: 'panorama_configuration_estado_idh',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -945,7 +945,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 21,
                     indicadorId: 28141,
-                    titulo: 'Receitas orçamentárias realizadas',
+                    titulo: 'panorama_configuration_estado_receitas_orcamentarias_realizadas',
                     periodo: '2014',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -954,7 +954,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 21,
                     indicadorId: 29749,
-                    titulo: 'Despesas orçamentárias empenhadas',
+                    titulo: 'panorama_configuration_estado_receitas_orcamentarias_empenhadas',
                     periodo: '2014',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel,
@@ -987,7 +987,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48980,
                     periodo: '2016',
-                    titulo: 'Área da unidade territorial',
+                    titulo: 'panorama_configuration_estado_area_unidade_territorial',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 }
@@ -1037,7 +1037,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29169,
-                    titulo: 'Código do Município',
+                    titulo: 'panorama_configuration_municipio_codigo',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1046,7 +1046,7 @@ export const PANORAMA: {
                 {
                     // pesquisaId: 33,
                     // indicadorId: 60409,
-                    titulo: 'Gentílico',
+                    titulo: 'panorama_configuration_municipio_gentilico',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1055,7 +1055,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29170,
-                    titulo: 'panorama_configuration_prefeito',
+                    titulo: 'panorama_configuration_municipio_prefeito',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1065,12 +1065,12 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29171,
-                    titulo: 'População estimada',
+                    titulo: 'panorama_configuration_municipio_populacao_estimada',
                     periodo: '2017',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'População residente por religião',
+                        titulo: 'panorama_configuration_municipio_populacao_residente_religiao',
                         tipo: TiposGrafico.coluna,
                         dados: [{
                             pesquisaId: 23,
@@ -1089,7 +1089,7 @@ export const PANORAMA: {
                     pesquisaId: 23,
                     indicadorId: 25207,
                     periodo: '2010',
-                    titulo: 'População no último censo',
+                    titulo: 'panorama_configuration_municipio_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1098,7 +1098,7 @@ export const PANORAMA: {
                     pesquisaId: 33,
                     indicadorId: 29168,
                     periodo: '2010',
-                    titulo: 'Densidade demográfica',
+                    titulo: 'panorama_configuration_municipio_densidade_demografica',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1110,7 +1110,7 @@ export const PANORAMA: {
                     pesquisaId: 33,
                     indicadorId: 29167,
                     periodo:'2016',
-                    titulo: 'Área da unidade territorial',
+                    titulo: 'panorama_configuration_municipio_area_unidade_territorial',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1118,7 +1118,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60030,
                     periodo: '2010',
-                    titulo: 'Esgotamento sanitário adequado',
+                    titulo: 'panorama_configuration_municipio_esgotamento_sanitario',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1126,7 +1126,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60029,
                     periodo: '2010',
-                    titulo: 'Arborização de vias públicas',
+                    titulo: 'panorama_configuration_municipio_arborizacao',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1134,7 +1134,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60031,
                     periodo: '2010',
-                    titulo: 'Urbanização de vias públicas',
+                    titulo: 'panorama_configuration_municipio_urbanizacao',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1145,7 +1145,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60045,
                     periodo: '2010',
-                    titulo: 'Taxa de escolarização de 6 a 14 anos de idade',
+                    titulo: 'panorama_configuration_municipio_taxa_escolarizacao',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1153,7 +1153,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60041,
                     periodo: '2015',
-                    titulo: 'IDEB – Anos iniciais do ensino fundamental',
+                    titulo: 'panorama_configuration_municipio_ideb_anos_iniciais_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1161,7 +1161,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60042,
                     periodo: '2015',
-                    titulo: 'IDEB – Anos finais do ensino fundamental',
+                    titulo: 'panorama_configuration_municipio_ideb_anos_finais_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1170,11 +1170,11 @@ export const PANORAMA: {
                     pesquisaId: 13,
                     indicadorId: 5908,
                     periodo:'2015',
-                    titulo: 'Matrículas no ensino fundamental',
+                    titulo: 'panorama_configuration_municipio_matriculas_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Matrículas',
+                        titulo: 'panorama_configuration_municipio_matriculas',
                         tipo: TiposGrafico.coluna,
                         dados: [{
                             pesquisaId: 13,
@@ -1196,7 +1196,7 @@ export const PANORAMA: {
                     pesquisaId: 13,
                     indicadorId: 5913,
                     periodo:'2015',
-                    titulo: 'Matrículas no ensino médio',
+                    titulo: 'panorama_configuration_municipio_matriculas_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1207,7 +1207,7 @@ export const PANORAMA: {
                     pesquisaId: 19,
                     indicadorId: 29765,
                     periodo: '2015',
-                    titulo: 'Salário médio mensal dos trabalhadores formais',
+                    titulo: 'panorama_configuration_municipio_salario_trabalhadores_formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1215,7 +1215,7 @@ export const PANORAMA: {
                     pesquisaId: 19,
                     indicadorId: 29763,
                     periodo: '2015',
-                    titulo: 'Pessoal ocupado',
+                    titulo: 'panorama_configuration_municipio_pessoal_ocupado',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1223,7 +1223,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60036,
                     periodo: '2015',
-                    titulo: 'População ocupada',
+                    titulo: 'panorama_configuration_municipio_populacao_ocupada',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1231,7 +1231,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60037,
                     periodo: '2010',
-                    titulo: 'Percentual da população com rendimento nominal mensal per capita de até 1/2 salário mínimo',
+                    titulo: 'panorama_configuration_municipio_pencentual_pupulacao_rendimento_ate_meio_salario',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1241,7 +1241,7 @@ export const PANORAMA: {
                     pesquisaId: 39,
                     indicadorId: 30279,
                     periodo: '2014',
-                    titulo: 'Mortalidade Infantil',
+                    titulo: 'panorama_configuration_municipio_mortalidade_infantil',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.painel,
                     correlacaoNegativaValorQualidade: true
@@ -1250,7 +1250,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60032,
                     periodo: '2016',
-                    titulo: 'Internações por diarreia',
+                    titulo: 'panorama_configuration_municipio_internacoes_diarreia',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.painel,
                     correlacaoNegativaValorQualidade: true
@@ -1259,7 +1259,7 @@ export const PANORAMA: {
                     pesquisaId: 32,
                     indicadorId: 28242,
                     periodo: '2009',
-                    titulo: 'Estabelecimentos de Saúde SUS',
+                    titulo: 'panorama_configuration_municipio_estabelecimento_saude_sus',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1269,7 +1269,7 @@ export const PANORAMA: {
                     pesquisaId: 38,
                     indicadorId: 47001,
                     periodo: '2015',
-                    titulo: 'PIB per capita',
+                    titulo: 'panorama_configuration_municipio_pib_per_capita',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1278,7 +1278,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60048,
                     periodo: '2015',
-                    titulo: 'Percentual das receitas oriundas de fontes externas',
+                    titulo: 'panorama_configuration_municipio_percentual_receitas_fontes_externas',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel,
                     correlacaoNegativaValorQualidade: true
@@ -1288,7 +1288,7 @@ export const PANORAMA: {
                     pesquisaId: 37,
                     indicadorId: 30255,
                     periodo: '2010',
-                    titulo: 'Índice de Desenvolvimento Humano Municipal (IDHM)',
+                    titulo: 'panorama_configuration_municipio_idhm',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 }
