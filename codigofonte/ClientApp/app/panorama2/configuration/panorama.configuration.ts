@@ -1289,8 +1289,6 @@ export const PANORAMA: {
                     visualizacao: PanoramaVisualizacao.painel
                 },
 
-
-
                 // --- Ambiente
                 {
                     pesquisaId: 33,
@@ -1386,7 +1384,38 @@ export const PANORAMA: {
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
-
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5929,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_docentes_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5934,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_docentes_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5950,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_numero_estabelecimentos_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5955,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_numero_estabelecimentos_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // --- Trabalho
                 {
@@ -1470,6 +1499,16 @@ export const PANORAMA: {
                     correlacaoNegativaValorQualidade: true
                 },
 
+                // TODO: Resolver erro ao incluir este indicador.
+                // {
+                //     pesquisaId: 21,
+                //     indicadorId: 28160,
+                //     periodo: '2014',
+                //     titulo: 'panorama_configuration_municipio_valor_fpm',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
+
                 {
                     pesquisaId: 37,
                     indicadorId: 30255,
@@ -1477,8 +1516,25 @@ export const PANORAMA: {
                     titulo: 'panorama_configuration_municipio_idhm',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
-                }
+                },
 
+                {
+                    pesquisaId: 21,
+                    indicadorId: 28141,
+                    //periodo: '2014',
+                    periodo:'2008',
+                    titulo: 'panorama_configuration_municipio_total_receitas_realizadas',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 21,
+                    indicadorId: 29748,
+                    periodo: '2008',
+                    titulo: 'panorama_configuration_municipio_total_despesas_realizadas',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.painel,
+                }
             ]
         }
     };
