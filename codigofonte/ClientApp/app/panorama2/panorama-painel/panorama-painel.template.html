@@ -25,7 +25,7 @@
             [localidade]="localidade?.parent"
             [localidadesMarcadas]="[localidade]"
             [resultados]="resultadosCartograma"
-            [titulo]="cardSelecionado?.titulo"
+            [titulo]="cardSelecionado?.titulo | l10n:lang"
             [indicador]="indicador"
         ></ibge-cartograma>
     </div>
