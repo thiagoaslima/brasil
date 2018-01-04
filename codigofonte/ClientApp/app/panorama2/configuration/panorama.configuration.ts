@@ -911,6 +911,55 @@ export const PANORAMA: {
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 48715,
+                    periodo: '2014',
+                    titulo: 'panorama_configuration_estado_rendimento_medio_per_capita',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+
+                // --- FROTA
+                {
+                    pesquisaId: 22,
+                    indicadorId: 28120,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_total_veiculos',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+
+                {
+                    // pesquisaId: 22,
+                    // indicadorId: 28122,
+                    // periodo: '2016',
+                    // titulo: 'Total de automóveis',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_estado_veiculos_tipo',
+                        tipo: TiposGrafico.coluna,
+                        dados: [
+                            {
+                                pesquisaId: 22,
+                                indicadorId: 28122
+                            },
+                            {
+                                pesquisaId: 22,
+                                indicadorId: 28123
+                            },
+                            {
+                                pesquisaId: 22,
+                                indicadorId: 28130
+                            },
+                            {
+                                pesquisaId: 22,
+                                indicadorId: 28128
+                            }
+                        ]
+                    }
+                },
 
                 // {
                 //     pesquisaId: 20,
@@ -927,6 +976,22 @@ export const PANORAMA: {
                     indicadorId: 48986,
                     periodo: '2016',
                     titulo: 'panorama_configuration_estado_rendimento_nominal_mensal_domiciliar',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 62585,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_pessoas_ocupadas',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 62590,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_proporcao_pessoas_ocupadas_trabalhos_formais_semana_referencia',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -972,6 +1037,14 @@ export const PANORAMA: {
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5913,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_estado_matriculas_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
                 {
                     // pesquisaId: 13,
                     // indicadorId: 5908,
@@ -994,46 +1067,37 @@ export const PANORAMA: {
                         }]
                     }
                 },
-
-                // --- FROTA
-                {
-                    pesquisaId: 22,
-                    indicadorId: 28120,
-                    periodo: '2016',
-                    titulo: 'panorama_configuration_estado_total_veiculos',
-                    tema: TEMAS.frota.label,
-                    visualizacao: PanoramaVisualizacao.painel
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5929,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_docentes_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
-
                 {
-                    // pesquisaId: 22,
-                    // indicadorId: 28122,
-                    // periodo: '2016',
-                    // titulo: 'Total de automóveis',
-                    tema: TEMAS.frota.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_estado_veiculos_tipo',
-                        tipo: TiposGrafico.coluna,
-                        dados: [
-                            {
-                                pesquisaId: 22,
-                                indicadorId: 28122
-                            },
-                            {
-                                pesquisaId: 22,
-                                indicadorId: 28123
-                            },
-                            {
-                                pesquisaId: 22,
-                                indicadorId: 28130
-                            },
-                            {
-                                pesquisaId: 22,
-                                indicadorId: 28128
-                            }
-                        ]
-                    }
+                    pesquisaId: 13,
+                    indicadorId: 5934,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_docentes_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5950,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_numero_estabelecimentos_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5955,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_numero_estabelecimentos_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 // --- ECONOMIA
@@ -1084,6 +1148,24 @@ export const PANORAMA: {
                     //         }
                     //     ]
                     // }
+                },
+
+                {
+                    pesquisaId: 29,
+                    indicadorId: 21910,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_numero_agencias',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 29,
+                    indicadorId: 21906,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_total_depositos',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                  // --- Ambiente
