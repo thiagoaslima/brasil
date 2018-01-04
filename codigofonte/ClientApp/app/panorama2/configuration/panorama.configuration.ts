@@ -95,7 +95,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_taxa_fecundidade',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_fecundidade',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60284
+                        }]
+                    }
                 },
 
                 {
@@ -104,7 +112,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_taxa_mortalidade_infantil',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_mortalidade_infantil',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60282
+                        }]
+                    }
                 },
 
                 {
@@ -113,7 +129,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_iluminacao_eletrica',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_domicilios_com_iluminacao_eletrica',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60404
+                        }]
+                    }
                 },
 
                 {
@@ -122,7 +146,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60406
+                        }]
+                    }
                 },
 
                 {
@@ -131,7 +163,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60407
+                        }]
+                    }
                 },
 
                 {
@@ -140,7 +180,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60408
+                        }]
+                    }
                 },
 
                 {
@@ -149,101 +197,117 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_pib_per_capita',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_pib_per_capita',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60234
+                        }]
+                    }
                 },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47108,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com microcomputador',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Bens duráveis existentes no domicílio',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 44,
-                //             indicadorId: 47103
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47106
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47107
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47108
-                //         }]
-                //     }
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47108,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_domicilios_computador',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_bens_duraveis_domicilio',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47103
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47106
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47107
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47108
+                        }]
+                    }
+                },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47125,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com acesso à Internet',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Tipo de conexão à Internet',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 44,
-                //             indicadorId: 47260
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47261
-                //         }]
-                //     }
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47125,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_domicilio_acesso_internet',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_tipo_conexao_internet',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47260
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47261
+                        }]
+                    }
+                },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47266,
-                //     periodo: '2015',
-                //     titulo: 'Posse de telefone móvel celular',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47266,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_posse_telefone_celular',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_posse_telefone_celular',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47266
+                        }]
+                    }
+                },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47107,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com televisão',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Modalidade de recepção de sinal de televisão',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 44,
-                //             indicadorId: 47251
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47252
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47253
-                //         }]
-                //     }
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47107,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_domicilios_televisao',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_modalidade_recepcao_sinal_tv',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47251
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47252
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47253
+                        }]
+                    }
+                },
 
-                // {
-                //     pesquisaId: 46,
-                //     indicadorId: 60414,
-                //     periodo: '2015',
-                //     titulo: 'Prática de atividade física',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                {
+                    pesquisaId: 46,
+                    indicadorId: 60414,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_pratica_atividade_fisica',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // ------------------------
                 // EDUCAÇÃO
@@ -254,7 +318,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
                     tema: TEMAS.educacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60229,
+                        }]
+                    }
                 },
 
                 {
@@ -263,7 +335,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
                     tema: TEMAS.educacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60232,
+                        }]
+                    }
                 },
 
                 // ----------------------------
@@ -536,7 +616,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_industria_pessoal_ocupado',
                     tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_industria_pessoal_ocupado',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60367,
+                        }]
+                    }
                 },
 
                 {
@@ -545,7 +633,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_industria_producao',
                     tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_industria_producao',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60368,
+                        }]
+                    }
                 },
 
                 {
@@ -554,7 +650,15 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_industria_produtividade',
                     tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_industria_produtividade',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60371,
+                        }]
+                    }
                 },
 
 
