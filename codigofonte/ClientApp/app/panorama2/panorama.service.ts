@@ -89,7 +89,7 @@ export class Panorama2Service {
             localidade.tipo === 'municipio' ? this._bibliotecaService.getValuesMunicipio(localidade.codigo) : this._bibliotecaService.getValuesEstado(localidade.codigo)
         ).map(([resultados, valoresBiblioteca]) => {
             return configuracao
-                .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
+                .filter(item => Boolean(item.indicadorId) || this.isIndicadorGentilico(item.titulo))
                 .map(item => {
 
                     const periodo = item.periodo
@@ -107,7 +107,7 @@ export class Panorama2Service {
                         resultados[item.indicadorId] &&
                         resultados[item.indicadorId].indicador &&
                         resultados[item.indicadorId].getValor(periodo)
-                    ) || (item.titulo === 'Gentílico' ? valoresBiblioteca.GENTILICO : '-');
+                    ) || (this.isIndicadorGentilico(item.titulo) ? valoresBiblioteca.GENTILICO : '-');
 
 
                     const unidade = (
@@ -510,6 +510,16 @@ export class Panorama2Service {
             valor = '0';
         }
         return !!valor ? Number(valor.replace(',', '.')) : Number(valor);
+    }
+
+    private isIndicadorGentilico(tituloIndicador: string): boolean{
+
+        let chaveTraducaoIndicadorGentilico = [
+            'panorama_configuration_municipio_gentilico',
+            'panorama_configuration_estado_gentilico'
+        ];
+
+        return chaveTraducaoIndicadorGentilico.indexOf(tituloIndicador) >= 0;
     }
 
 }
