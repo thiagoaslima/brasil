@@ -6,11 +6,7 @@
     
     <linha-tempo [anos]="listaPeriodos" [anoSelecionado]="periodo" (onAno)="mudaAno($event);"></linha-tempo>
     
-    <div class="mensagem-vazio" *ngIf="vazio">
-        {{ 'pesquisa_cartograma__nenhum_cartograma_para_exibir' | l10n:lang }}
-    </div>
-
-    <div [class.mapas--variosMapas]="mapas.length > 1" *ngIf="isBrowser && !vazio ">
+    <div [class.mapas--variosMapas]="mapas.length > 1" *ngIf="isBrowser">
         
         <div class="mapas__mapa" *ngFor="let mapa of mapas">
             <h4>{{ 'municipios' | l10n:lang }} {{getPreposicaoUF(mapa.localidade.nome) | l10n:lang}} {{mapa.localidade.nome}}</h4>
