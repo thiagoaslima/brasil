@@ -1,8 +1,26 @@
 # Change log
 
+## [v4.3.0] - 2018-01-08
+### Added
+ - Adicionado o panorma e pesquisas do Brasil.
+ - Histórico estadual.
+
+### Changed
+ - Revisão dos indicadores do panorama estadual.
+ - Revisão dos indicadores do panorama municipal.
+
+### Fixed
+ - Geração do resumo da síntese estadual.
+ - Bug que não exibia o cartograma na pesquisa quando não havia dados para a localidade selecionada, mas havia nas localidades vizinhas.
+ - Bug que não traduzia as notas e fontes dos indicadores do panorama.
+ - Bug que não traduzia os títulos dos gráficos.
+ - Bug que não traduzia o indicador Gentílico.
+
+
 ## [v4.2.16.1] - 2017-12-15
 ### Changed
  - Ajuste no panorama estadual para remover o tratamento especial de casas decimais no indicador 63238 da SIS.
+
 
 ## [v4.2.16] - 2017-12-15
 ### Changed
