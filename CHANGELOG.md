@@ -2,19 +2,102 @@
 
 ## [v4.3.0] - 2018-01-08
 ### Added
- - Adicionado o panorma e pesquisas do Brasil.
- - Histórico estadual.
+	- Adicionado o panorama Brasil com os seguintes temas e respectivos indicadores:
+		Geral
+			Capital
+			Número de municípios
+			Área territorial
+			Presidente
+		POPULAÇÃO
+			População estimada
+			População no último censo
+			Taxa de fecundidade
+			Taxa de mortalidade infantil
+			Domicílios com iluminação elétrica
+			Domicílios com coleta de lixo
+			Domicílios com rede geral de abastecimento de água
+			Domicílios com esgotamento sanitário adequado 
+			PIB per capita
+			Domicílios com microcomputador
+			Domicílios com acesso à Internet
+			Posse de telefone móvel celular
+			Domicílios com televisão
+			Prática de atividade física
+		ECONOMIA
+			Preços - IPCA mensal
+			Preços - INPC
+			Preços - IPCA15
+			Preços Produtor - IPP
+			Preços - IPCA 12 meses
+			Indústria - PIM-PF
+			Comércio - PMC
+			Serviços - PMS
+			Taxa de desocupação - PNAD Contínua
+			PIB - SCNT
+			Construção - SINAPI
+		EDUCAÇÃO
+			Taxa de analfabetismo 10 anos ou mais de idade
+			Taxa de escolarização de 6 a 14 anos de idade
+		INDÚSTRIA
+			Pessoal ocupado assalariado - Índice acumulado em relação ao mesmo período do ano anterior
+			Produção industrial - Índice acumulado em relação ao mesmo período do ano anterior
+			Produtividade - Índice acumulado em relação ao mesmo período do ano anterior
+	- No nível Brasil foram adicionadas as pesquisas abaixo:
+		Censo
+		Censo agropecuário
+		Entidades de assistência social privadas sem fins lucrativos
+		Fundações privadas e associações sem fins lucrativos
+		Pesquisa Anual da Indústria da Construção
+		Pesquisa Anual de Comércio
+		Pesquisa Anual de Serviços
+		Pesquisa de serviços de hospedagem
+		Pesquisa Industrial Anual - Empresa
+		Pesquisa nacional de saneamento básico
+		Pesquisa Nacional de Saúde
+		Pesquisa Nacional de Saúde do Escolar
+		PNAD - Pesquisa Nacional por Amostra de Domicílios
+		PNADC - Pesquisa Nacional por Amostra de Domicílios Contínua
+		POF - Pesquisa de Orçamentos Familiares
+		Produção agrícola - Cereais, leguminosas e oleaginosas
+		Projeção da população
+		Registro civil
+		Série estudos e pesquisas: estatísticas de empreendedorismo
+		Serviços de saúde
+    - Em estados, foi incluído o histórico.
 
 ### Changed
- - Revisão dos indicadores do panorama estadual.
- - Revisão dos indicadores do panorama municipal.
+	- Em estados, foram adicionados os seguintes indicadores ao panorama:
+        POPULAÇÃO
+			Rendimento médio mensal per capita
+			Total de veículos	
+		EDUCAÇÃO
+			Matrículas no ensino médio
+			Docentes no ensino fundamental
+			Docentes no ensino médio
+			Número de estabelecimentos de ensino fundamental
+			Número de estabelecimentos de ensino médio
+		TRABALHO E RENDIMENTO
+			Pessoas de 16 anos ou mais ocupadas na semana de referência
+			Proporção de pessoas de 16 anos ou mais em trabalho formal, considerando apenas as ocupadas na semana de referência 
+		ECONOMIA
+			Número de agências
+			Total de depósitos
+	- Em municípios, foram incluídos os seguintes indicadores ao panorama:
+		EDUCAÇÃO
+			Docentes no ensino fundamental
+			Docentes no ensino médio
+			Número de estabelecimentos de ensino fundamental
+			Número de estabelecimentos de ensino médio
+		ECONOMIA
+			Total de receitas realizadas
+			Total das despesas realizadas
 
 ### Fixed
- - Geração do resumo da síntese estadual.
- - Bug que não exibia o cartograma na pesquisa quando não havia dados para a localidade selecionada, mas havia nas localidades vizinhas.
- - Bug que não traduzia as notas e fontes dos indicadores do panorama.
- - Bug que não traduzia os títulos dos gráficos.
- - Bug que não traduzia o indicador Gentílico.
+    - Erro na geração do resumo da síntese estadual.
+    - Bug que não exibia o cartograma na pesquisa quando não havia dados para a localidade selecionada, mas havia nas localidades vizinhas.
+    - Bug que não traduzia as notas e fontes dos indicadores do panorama.
+    - Bug que não traduzia os títulos dos gráficos.
+    - Bug que não traduzia o indicador gentílico.
 
 
 ## [v4.2.16.1] - 2017-12-15
