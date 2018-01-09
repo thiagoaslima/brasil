@@ -1,6 +1,6 @@
 # Change log
 
-## [v4.3.0] - 2018-01-08
+## [v4.3.1] - 2018-01-09
 ### Fixed
     - Exibição das notas especiais de demanda legal sobre a população estimada de alguns municípios.
 
