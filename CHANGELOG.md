@@ -1,6 +1,11 @@
 # Change log
 
 ## [v4.3.0] - 2018-01-08
+### Fixed
+    - Exibição das notas especiais de demanda legal sobre a população estimada de alguns municípios.
+
+
+## [v4.3.0] - 2018-01-08
 ### Added
 	- Adicionado o panorama Brasil com os seguintes temas e respectivos indicadores:
 		Geral
