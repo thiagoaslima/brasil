@@ -1,5 +1,21 @@
 # Change log
 
+## [v4.3.2] - 2018-01-11
+### Added
+    - Inclusão da pesquisa Estadic
+
+### Changed
+	- Ajustes nos graficos do panorama Brasil: 
+		Unificação das séries "Domicílios com iluminacao elétrica, coleta lixo, abastecimento de água e esgotamento sanitário"; 
+		Unificação das séries "Produção industrial x Produtividade";
+		Movimentação da série "Pib per capita" do tema População para o tema Economia; 
+		Remoção das séries "Posse de telefone móvel celular" e "Taxa de escolarização de 6 a 14 anos de idade"; 
+		Ajuste na série "Pib per capita" para exibir os últimos 10 períodos.
+
+### Fixed
+	- Ajuste no pirâmide etária para não repetir as informações do Brasil quando o nível exibido é o nacional
+
+
 ## [v4.3.1] - 2018-01-09
 ### Fixed
     - Exibição das notas especiais de demanda legal sobre a população estimada de alguns municípios.
