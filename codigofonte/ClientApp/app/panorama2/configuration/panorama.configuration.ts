@@ -131,11 +131,23 @@ export const PANORAMA: {
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'panorama_configuration_pais_domicilios_com_iluminacao_eletrica',
+                        titulo: 'panorama_configuration_pais_iluminacao_lixo_agua_esgoto',
                         tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 10065,
                             indicadorId: 60404
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60406
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60407
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60408
                         }]
                     }
                 },
@@ -146,15 +158,7 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60406
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
@@ -163,15 +167,7 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60407
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
@@ -180,32 +176,7 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60408
-                        }]
-                    }
-                },
-
-                {
-                    pesquisaId: 10065,
-                    indicadorId: 60234,
-                    periodo: '2015',
-                    titulo: 'panorama_configuration_pais_pib_per_capita',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_pib_per_capita',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60234
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
@@ -264,15 +235,7 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_posse_telefone_celular',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_posse_telefone_celular',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 44,
-                            indicadorId: 47266
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
@@ -335,20 +298,29 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
                     tema: TEMAS.educacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60232,
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 // ----------------------------
                 // ECONOMIA
                 // ----------------------------
+
+                {
+                    pesquisaId: 10065,
+                    indicadorId: 60234,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_pib_per_capita',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_pib_per_capita',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60234
+                        }]
+                    }
+                },
 
                 {
                     pesquisaId: 1419,
@@ -427,7 +399,7 @@ export const PANORAMA: {
                             indicadorId: 1120,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 36
+                            quantidadePeriodos: 10
                         }]
                     }
                 },
@@ -635,11 +607,15 @@ export const PANORAMA: {
                     tema: TEMAS.industria.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'panorama_configuration_pais_industria_producao',
+                        titulo: 'panorama_configuration_pais_industria_producao_x_produtividade',
                         tipo: TiposGrafico.linha,
                         dados: [{
                             pesquisaId: 10065,
                             indicadorId: 60368,
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60371,
                         }]
                     }
                 },
@@ -650,15 +626,7 @@ export const PANORAMA: {
                     periodo: '2015',
                     titulo: 'panorama_configuration_pais_industria_produtividade',
                     tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_industria_produtividade',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60371,
-                        }]
-                    }
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
 
