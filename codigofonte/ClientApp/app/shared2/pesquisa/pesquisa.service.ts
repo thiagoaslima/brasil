@@ -31,10 +31,11 @@ export class PesquisaService2 {
      * Cadastre o código destas pesquisas no array abaixo para que a tabela de pesquisa
      * envie o período pesquisado ao solicitar os indicadores da pesquisa.
      * 
-     *  1 - PESQUISA MUNIC
-     * 45 - PESQUISA SÍNTESE DE INDICADORES SOCIAIS
+     *     1 - PESQUISA MUNIC
+     *    45 - PESQUISA SÍNTESE DE INDICADORES SOCIAIS
+     * 10072 - ESTADIC
      */
-    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 1, 45 ];
+    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 1, 45, 10072 ];
 
     
     constructor(
