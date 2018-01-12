@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.3] - 2018-01-12
+### Added
+	- Inclusão da notas de população juducial para os municípios Manaquiri, Santa Isabel do Rio Negro, Uarini, Urucará e Barcelos, todos do estado do Amazonas.
+
+
 ## [v4.3.2] - 2018-01-11
 ### Added
     - Inclusão da pesquisa Estadic
