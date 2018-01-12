@@ -12,12 +12,12 @@ export const notasEspeciais = [
     {
         "localidade": 2909208,
         "indicador": 29171,
-        "nota": "População judicial do município Coronel João Sá - BA: 17.422 habitantes. Processo Judicial nº 0002222-53.2017.4.01.3306 - Vara Única de Paulo Afonso - BA."
+        "nota": "População judicial do município de Coronel João Sá - BA: 17.422 habitantes. Processo Judicial nº 0002222-53.2017.4.01.3306 - Vara Única de Paulo Afonso - BA."
     },
     {
         "localidade": 2508505,
         "indicador": 29171,
-        "nota": "População judicial do município Livramento - PB: 7.262 habitantes. Processo Judicial nº 0000301-96.2006.4.05.8200 - Tribunal de Justiça da Paraíba - PB."
+        "nota": "População judicial do município de Livramento - PB: 7.262 habitantes. Processo Judicial nº 0000301-96.2006.4.05.8200 - Tribunal de Justiça da Paraíba - PB."
     },
     {
         "localidade": 2516508,
