@@ -28,5 +28,30 @@ export const notasEspeciais = [
         "localidade": 2107506,
         "indicador": 29171,
         "nota": "População judicial do município de Paço do Lumiar - MA: superior a 156.216 habitantes. Processo Judicial nº 13916-98.2017.4.01.3700 - Seção Judiciária do Maranhão - MA."
-    }
+    },
+    {
+        "localidade": 1302553,
+        "indicador": 29171,
+        "nota": "População judicial do município de Manaquiri-AM: entre 30.565 e 37.356 habitantes. Parecer de Força Executória nº 00010/2017/NUCOB-GEAC/PFAM/PGF/AGU, em trâmite na 3ª VF/AM."
+    },
+    {
+        "localidade": 1303601,
+        "indicador": 29171,
+        "nota": "População judicial do município de Santa Isabel do Rio Negro-AM: entre 23.773 e 30.564 habitantes. Parecer de Força Executória nº 00007/2017/NUCOB-GEAC/PFAM/PGF/AGU, em trâmite na 3ª VF/AM."
+    },
+    {
+        "localidade": 1304260,
+        "indicador": 29171,
+        "nota": "População judicial do município de Uarini-AM: entre 13.585 e 16.980 habitantes. Parecer de Força Executória nº 00006/2017/NUCOB-GEAC/PFAM/PGF/AGU, em trâmite na 3ª VF/AM."
+    },
+    {
+        "localidade": 1304302,
+        "indicador": 29171,
+        "nota": "População judicial do município de Urucará-AM: entre 16.981 e 23.772 habitantes. Parecer de Força Executória nº 00004/2017/NUCOB-GEAC/PFAM/PGF/AGU, em trâmite na 3ª VF/AM."
+    },
+    {
+        "localidade": 1300409,
+        "indicador": 29171,
+        "nota": "População judicial do município de Barcelos-AM: quantitativo suficiente para que o município alcance o coeficiente de rateio do Fundo de Participação dos Municípios em 1,6, que é de 30.565 habitantes. Parecer de Força Executória nº 0000102-98.2017.8.04.2601. Vara Única da Comarca de Barcelos-AM."
+    },
 ]
