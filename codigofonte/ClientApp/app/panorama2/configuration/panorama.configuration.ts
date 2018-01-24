@@ -879,14 +879,6 @@ export const PANORAMA: {
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
-                {
-                    pesquisaId: 44,
-                    indicadorId: 48715,
-                    periodo: '2014',
-                    titulo: 'panorama_configuration_estado_rendimento_medio_per_capita',
-                    tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.painel
-                },
 
                 // --- FROTA
                 {
