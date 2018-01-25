@@ -7,6 +7,8 @@
 
     <div class="comp__conteudo" *ngIf="isHistoricoVazio()">
         <div class="caixa__conteudo">
+            <mensagem-traducao></mensagem-traducao>
+
             <p class="hist__sem-historico">{{ 'historico__nenhum_historico' | l10n:lang }}</p>
         </div>
     </div>
@@ -17,6 +19,8 @@
         <div class="caixa">
             
             <div class="caixa__conteudo">
+                <mensagem-traducao></mensagem-traducao>
+                
                 <h2 class="hist__titulo">{{ 'historico__historia' | l10n:lang }}</h2>
                 <div class="hist__texto" [innerHTML]="historico?.historico"></div>
 

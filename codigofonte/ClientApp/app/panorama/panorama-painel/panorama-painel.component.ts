@@ -9,7 +9,8 @@ import { IsMobileService } from '../../shared/is-mobile.service';
 import { dadosPainel } from '../configuration/panorama.values';
 import {
     Localidade,
-    ResultadoService3, IndicadorService3
+    ResultadoService3, IndicadorService3,
+    TraducaoService
 } from '../../shared';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 
@@ -39,6 +40,9 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     private _novosDados = true;
 
     isBrowser;
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
 
     constructor(
         private element: ElementRef,
@@ -47,6 +51,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         private _indicadorServ: IndicadorService3,
         private _analytics: AnalyticsService,
         private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService,
         @Inject(PLATFORM_ID) platformId,
     ) {
         this.isBrowser = isPlatformBrowser(platformId);

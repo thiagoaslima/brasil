@@ -88,11 +88,11 @@ export class PanoramaService {
         }
         return Observable.zip(
             this._getResultadosIndicadores(configuracao, localidade),
-            localidade.tipo === 'municipio' ? this._bibliotecaService.getValues(localidade.codigo) : Observable.of({})
+            localidade.tipo === 'municipio' ? this._bibliotecaService.getValuesMunicipio(localidade.codigo) : this._bibliotecaService.getValuesEstado(localidade.codigo)
         ).map(([resultados, valoresBiblioteca]) => {
            
             return configuracao
-                .filter(item => Boolean(item.indicadorId) || item.titulo === 'Gentílico')
+                .filter(item => Boolean(item.indicadorId) || this.isIndicadorGentilico(item.titulo))
                 .map(item => {
                     const periodo = item.periodo
                         || resultados[item.indicadorId] && resultados[item.indicadorId].periodoValidoMaisRecente
@@ -109,7 +109,7 @@ export class PanoramaService {
                         resultados[item.indicadorId] &&
                         resultados[item.indicadorId].indicador &&
                         resultados[item.indicadorId].getValor(periodo)
-                    ) || (item.titulo === 'Gentílico' ? valoresBiblioteca.GENTILICO : '-');
+                    ) || (this.isIndicadorGentilico(item.titulo) ? valoresBiblioteca.GENTILICO : '-');
 
 
                     const unidade = (
@@ -118,27 +118,47 @@ export class PanoramaService {
                         resultados[item.indicadorId].indicador.unidade.toString()
                     ) || '';
 
+                    const tipo = (
+                        resultados[item.indicadorId] &&
+                        resultados[item.indicadorId].indicador &&
+                        resultados[item.indicadorId].indicador.unidade.classe.toString()
+                    ) || '';
+
                     const notas = (
                         resultados[item.indicadorId] &&
                         resultados[item.indicadorId].indicador &&
                         resultados[item.indicadorId].indicador.notas
                     ) || [];
-
-                    const fontes = (
+                    
+                    let fontes = [];
+                    if (
                         resultados[item.indicadorId] &&
-                        resultados[item.indicadorId].indicador &&
-                        resultados[item.indicadorId].indicador.fontes
-                    ) || [];
-
+                        resultados[item.indicadorId].indicador
+                    ) {
+                        const indicador = resultados[item.indicadorId].indicador;
+                        if (indicador.fontes && indicador.fontes.length > 0) {
+                            fontes = indicador.fontes;
+                        } else if (indicador.pesquisa) {
+                            let f = indicador.pesquisa.getFontesDoPeriodo(item.periodo);
+                            if (f[0]) {
+                                fontes = [{
+                                    periodo: item.periodo,
+                                    fontes: f,
+                                }];
+                            }
+                        }
+                    }
+                    
                     return {
                         tema: item.tema,
                         titulo,
                         periodo,
                         valor,
                         unidade,
+                        tipo,
                         notas,
                         fontes,
-                        id:item.indicadorId
+                        id: item.indicadorId
                     };
                 });
         });
@@ -493,5 +513,16 @@ export class PanoramaService {
         }
         return !!valor ? Number(valor.replace(',', '.')) : Number(valor);
     }
+
+   private isIndicadorGentilico(tituloIndicador: string): boolean{
+
+        let chaveTraducaoIndicadorGentilico = [
+            'panorama_configuration_municipio_gentilico',
+            'panorama_configuration_estado_gentilico'
+        ];
+
+        return chaveTraducaoIndicadorGentilico.indexOf(tituloIndicador) >= 0;
+    }
+
 
 }

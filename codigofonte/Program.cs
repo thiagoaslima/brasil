@@ -22,6 +22,10 @@ namespace Brasil
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+                // .ConfigureLogging((builder) =>
+                // {
+                //     builder.AddFile("Logs/brasil-{Date}.txt");
+                // })
                 .UseStartup<Startup>()
                 .Build();
 

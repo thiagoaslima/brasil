@@ -140,14 +140,21 @@ namespace Microsoft.Extensions.Caching.Handler
 
             var absoluteExpiration = GetAbsoluteExpiration(creationTime, options);
 
-            await _cache.ScriptEvaluateAsync(SetScript, new RedisKey[] { _instance + key },
-                new RedisValue[]
-                {
-                        absoluteExpiration?.Ticks ?? NotPresent,
-                        options.SlidingExpiration?.Ticks ?? NotPresent,
-                        GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
-                        Compress(value)
-                    });
+            try
+            {
+                await _cache.ScriptEvaluateAsync(SetScript, new RedisKey[] { _instance + key },
+                    new RedisValue[]
+                    {
+                            absoluteExpiration?.Ticks ?? NotPresent,
+                            options.SlidingExpiration?.Ticks ?? NotPresent,
+                            GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
+                            Compress(value)
+                        });
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         public void Refresh(string key)
@@ -434,7 +441,7 @@ namespace Microsoft.Extensions.Caching.Handler
         }
 
         /// <summary>
-        /// Configura os eventos de quando um server cai e é resumido, elegendo um novo master quando necessário.
+        /// Configura os eventos de quando um server cai e ï¿½ resumido, elegendo um novo master quando necessï¿½rio.
         /// </summary>
         private void AddConnectionEvents()
         {

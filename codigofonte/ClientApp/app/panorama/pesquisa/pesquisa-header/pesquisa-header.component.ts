@@ -1,3 +1,4 @@
+import { IndicadorService3 } from '../../../shared/services/indicador';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -49,12 +50,15 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     private subs$$;
     private isOcultarValoresVazios = true;
 
+    public indicadoresDaPesquisa;
+
     public get lang() {
         return this._traducaoServ.lang;
     }
 
     constructor(
         private _pesquisaService: PesquisaService3,
+        private _indicadorService: IndicadorService3,
         private _localidadeService: LocalidadeService3,
         private _routerParamsService: RouterParamsService,
         private _route: ActivatedRoute,
@@ -68,6 +72,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         this.subs$$ = this._routerParamsService.params$.subscribe((params) => {
             this._pesquisaService.getPesquisa(parseInt(params.params.pesquisa)).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
+    
+                this._indicadorService.getIndicadoresDaPesquisa(this.pesquisa.id)
+                    .subscribe((indicadores) => {
+                        this.indicadoresDaPesquisa = indicadores;
+                    });
+
                 this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
 
                 if (params.queryParams.ano) {
@@ -180,7 +190,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     setaTipo(tipo){
 
-        if(this.isNivelNacional && tipo == 'cartograma'){
+        if(this.isNivelNacional && (tipo == 'cartograma' || tipo == 'ranking')){
             return;
         }
 
@@ -196,7 +206,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             return
         }
 
-        if(!!this.pesquisa && this.pesquisa.id == 1 && (tipo == 'grafico' || tipo == 'ranking' || tipo ==  'cartograma')){
+        if(!!this.pesquisa && this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id) && (tipo == 'grafico' || tipo == 'ranking' || tipo ==  'cartograma')){
 
             return;
         }
@@ -204,9 +214,24 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         this.navegarPara(null, null, tipo);
     }
 
-    fazerDownload() {
+    isExibirGrafico(): boolean{
+
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id);
+    }
+
+    isExibirCartograma(): boolean{
+        
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id);
+    }
+
+    isExibirRanking(): boolean{
+        
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id) && !this.isNivelNacional;
+    }
+
+    fazerDownload(tipo: string) {
         this.mostrarOpcoes = false;
-        this.onDownload.emit();
+        this.onDownload.emit({tipo: `${tipo}`});
     }
 
     ocultarValoresVazios() {

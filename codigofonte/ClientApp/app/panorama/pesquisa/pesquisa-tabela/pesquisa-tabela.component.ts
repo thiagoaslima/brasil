@@ -42,6 +42,8 @@ export class PesquisaTabelaComponent implements OnChanges {
     private exclusiva;
     private periodosValidos: string[];
 
+    private idIndicadorSelecionado;
+
     public get lang() {
         return this._traducaoServ.lang;
     }
@@ -75,7 +77,7 @@ export class PesquisaTabelaComponent implements OnChanges {
             let localidade2: string = !this.localidades[1] ? undefined : this.localidades[1].toString();
             let localidade3: string = !this.localidades[2] ? undefined : this.localidades[2].toString();
 
-            let periodoPesquisado = this.pesquisa['id'] == 1 ? this.periodo : 'all';
+            let periodoPesquisado = this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa['id']) ? this.periodo : 'all';
 
             let subscription$$ = this._sintese.getPesquisaLocalidades(this.pesquisa['id'], this.localidades[0].toString(), localidade2, localidade3, this.posicaoIndicador, escopoIndicadores.arvoreCompleta, periodoPesquisado).subscribe((indicadores) => {
 
@@ -262,9 +264,16 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
 
-    public download(){
+    public download(event){
 
-        this.downloadCSVTelaTodosPeriodos();
+        let tipo = event['tipo'];
+
+        if (tipo == 'vizinhos') {
+            this.downloadCSVCompleto();
+        } else {
+            this.downloadCSVTelaTodosPeriodos();
+        }
+
 
         // Analytics
         let localidadeA = this._localidadeService.getLocalidadesByCodigo(this.localidades[0])[0].nome;
@@ -381,4 +390,19 @@ export class PesquisaTabelaComponent implements OnChanges {
         let blob = new Blob([content], { type: 'text/csv' });
         FileSaver.saveAs(blob, `${name}.csv`);
     }
+
+    private obterNotasIndicador(indicador): string[]{
+
+        let notas: string[] = [];
+
+        indicador.nota.forEach(elementoNivel1 =>  elementoNivel1.notas.forEach( elementoNivel2 => notas.push(elementoNivel2) ));
+
+        return notas;
+    }
+
+    selecionarIndicador(indicador){
+
+        this.idIndicadorSelecionado = indicador.id;
+    }
+
 }

@@ -571,4 +571,55 @@ td.compara-blank {
     .nivel-10 .label{
         padding-left:25px;
     }
+    .notas {
+        font-size: small;
+        padding: 2px 5px;
+        float: right;
+        /*margin-top: 25px;*/
+        margin-right: 4px;
+        /*background: #ccc;*/
+    }
+
+    .notas__botao {
+        cursor: pointer;
+    }
+
+    .notas i {
+        color: #1B779B;
+    }
+
+    .notas__lista-container {
+        position: absolute;
+        background: #fff;
+        padding: 20px 15px 15px 30px;
+        width: 450px;
+        border: 1px solid #ccc;
+        margin-left: -5px;
+        z-index: 2;
+        word-wrap: break-word;    font-weight: normal;
+    }
+
+    .notas__lista-container li {
+        margin-bottom: 10px; 
+    }
+
+    .notas.notas__aberto > .notas__lista-container {
+        display: block;
+    }
+
+
+    .area-click{
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 1;
+        display: none;
+    }
+
+    .area-click--visivel{
+        display: block;
+    }
+
 }

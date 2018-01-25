@@ -84,6 +84,7 @@ h2{
 
 .header__descricao{
     /* background-image: url('../../img/iconePesquisa.png'); */
+    background-image: url('../../img/pesquisas.svg');
     background-repeat: no-repeat;
     background-position: top left;
     min-height: 150px;

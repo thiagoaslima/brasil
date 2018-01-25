@@ -74,9 +74,9 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
-        this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind=>ind.tema && ind.tema!="");
+        this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind => ind.tema && ind.tema != "");
         
-         
+        
     }
     
     selecionaIndicadoresFiltro(item,idx,event){
@@ -89,7 +89,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
              }else if(event.target.checked){
                  event.target.checked = false;
                  event.stopPropagation(); 
-                 let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang,'panorama_resumo__numero_maximo_indicadores_selecionados');
+                 let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_maximo_indicadores_selecionados');
                  alert(mensagem)
                
                 
@@ -145,20 +145,20 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
                     for (let i = 0; i < resultado.notas.length; i++) {
 
-                        if (resultado.notas[i]['periodo'] == resultado.periodo || resultado.notas[i]['periodo'] === '-') {
+                        if (resultado.notas[i]['periodo'] === resultado.periodo || resultado.notas[i]['periodo'] === '-') {
 
-                            return `${resultado.titulo}: ${resultado.notas[i]['notas']}`;
+                            return {titulo: resultado.titulo, texto: resultado.notas[i]['notas'].join(', ')};
                         }
                     }
                 });
-                this.fontes = resp.filter(resultado => {
-                    return !!resultado.fontes
-                        && resultado.fontes.length > 0
-                        && (
-                            resultado.fontes[0]['periodo'] === resultado.periodo
-                            || resultado.fontes[0]['periodo'] === '-'
-                        );
-                }).map(resultado => `${resultado.titulo}: ${resultado.fontes[0]['fontes']}`);
+                this.fontes = resp.reduce((agg, resultado) => {
+                    const fontes = resultado.fontes.filter(f => f.periodo === resultado.periodo || f.periodo === '-');
+                    if (fontes.length > 0) {
+                        agg.push({ titulo: resultado.titulo, texto: fontes[0]['fontes'].join(', ') });
+                    }
+                    return agg;
+                }, []);
+
             },
             error => {
                 console.error(error);
@@ -174,7 +174,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
              window.open(this.sinteseEstadoUrl, '_blank');
         }else{
             
-            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang,'panorama_resumo__numero_minimo_indicadores_selecionados');
+            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_minimo_indicadores_selecionados');
             alert(mensagem);
         }
        
@@ -189,7 +189,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     fireTemaSelecionado(tema) {
-        if (this.temaAtual == tema) {
+        if (this.temaAtual === tema) {
             this.temaSelecionado.emit(tema + '-alt');
             this.temaAtual = '';
         } else {

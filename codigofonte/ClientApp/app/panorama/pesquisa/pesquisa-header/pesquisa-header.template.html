@@ -6,7 +6,7 @@
             <span *ngIf="pesquisa?.id == 23"> <!--só mostra no censo-->
                 <select class="select-indicador" (change)="mudaIndicador($event);">
                     <!--<option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.id" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>-->
-                    <template ngFor let-indic [ngForOf]="pesquisa?.indicadores | async">
+                    <template ngFor let-indic [ngForOf]="indicadoresDaPesquisa">
                         <option [value]="indic?.id" *ngIf="indic?.id == indicador" selected>{{ indic?.nome }}</option>
                         <option [value]="indic?.id" *ngIf="indic?.id != indicador">{{ indic?.nome }}</option>
                     </template>
@@ -92,7 +92,7 @@
             </div>
             {{ 'pesquisa_header__tabela' | l10n:lang }}
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="!isVazio ? setaTipo('grafico') : 0" [class.desabilitado]="isVazio || this.listaPeriodos.length <= 1 || (!!this.pesquisa && pesquisa.id == 1)">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="!isVazio ? setaTipo('grafico') : 0" [class.desabilitado]="isVazio || this.listaPeriodos.length <= 1 || (!!this.pesquisa && !isExibirGrafico())">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -110,7 +110,7 @@
             </div>
             {{ 'pesquisa_header__serie_historica' | l10n:lang }}
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="!isVazio ? setaTipo('cartograma') : 0" [class.desabilitado]="isVazio || isNivelNacional || (!!this.pesquisa && pesquisa.id == 1)">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="!isVazio ? setaTipo('cartograma') : 0" [class.desabilitado]="isVazio || isNivelNacional || (!!this.pesquisa && !isExibirCartograma())">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -124,7 +124,7 @@
             </div>
             {{ 'pesquisa_header__cartograma' | l10n:lang }}
         </div>
-        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="!isVazio ? setaTipo('ranking') : 0" [class.desabilitado]="isVazio  || (!!this.pesquisa && pesquisa.id == 1)">
+        <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="!isVazio ? setaTipo('ranking') : 0" [class.desabilitado]="isVazio  || (!!this.pesquisa && !isExibirRanking())">
                 <div>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.449,7.235c1.131,0,2.262,0,3.393,0
@@ -182,7 +182,8 @@
                 
 
                 <div class="select__submenu-aberto" *ngIf="mostrarOpcoes">
-                    <div (click)="fazerDownload();"><span><i class="fa fa-download fa-lg" aria-hidden="true"></i></span> {{ 'download' | l10n:lang }}</div>
+                    <div (click)="fazerDownload('periodos');">{{ 'pesquisa_header__download_dados_todos_periodos' | l10n:lang }}</div>
+                    <div (click)="fazerDownload('vizinhos');">{{ 'pesquisa_header__download_dados_vizinhos' | l10n:lang }}</div>
                     <!--<div (click)="compartilhar();"><span><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i></span> Compartilhar</div>-->
                 </div>
             </div>

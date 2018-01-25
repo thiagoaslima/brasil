@@ -53,9 +53,9 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         this.subscription = this._routerParams.params$.subscribe(urlParams => {
             this._pesquisaService.getPesquisa(parseInt(urlParams.params['pesquisa'])).subscribe((pesquisa) => {
 
-                // Caso seja a pequisa MUNIC, é necessário informar um período para obter os indicadores, pois os indicadores variam por período.
+                // Caso seja uma pesquiasa qem que os indicadores mudam conforme o ano, é necessário informar um período para obter os indicadores.
                 let periodoMaisrecente = null;
-                if (pesquisa.id === 1) {
+                if (this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(pesquisa.id)) {
 
                     periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
                 }                

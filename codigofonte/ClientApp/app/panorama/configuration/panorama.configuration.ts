@@ -34,7 +34,7 @@ export const PANORAMA: {
                     indicadorId: 60053,
                     pesquisaId: 10059,
                     periodo: '2010',
-                    titulo: 'Capital',
+                    titulo: 'panorama_configuration_pais_capital',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -43,7 +43,7 @@ export const PANORAMA: {
                     indicadorId: 60280,
                     pesquisaId: 10065,
                     periodo: '2016',
-                    titulo: 'Número de municípios',
+                    titulo: 'panorama_configuration_pais_numero_municipios',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -52,7 +52,7 @@ export const PANORAMA: {
                     indicadorId: 60272,
                     pesquisaId: 10065,
                     periodo: '2017',
-                    titulo: 'Área territorial',
+                    titulo: 'panorama_configuration_pais_area_territorial',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -61,7 +61,7 @@ export const PANORAMA: {
                     indicadorId: 62887,
                     pesquisaId: 10059,
                     periodo: '2017',
-                    titulo: 'Presidente',
+                    titulo: 'panorama_configuration_pais_presidente',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -73,7 +73,7 @@ export const PANORAMA: {
                     pesquisaId: 10059,
                     indicadorId: 60056,
                     periodo: '2017',
-                    titulo: 'População estimada',
+                    titulo: 'panorama_configuration_pais_populacao_estimada',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -84,7 +84,7 @@ export const PANORAMA: {
                     categoria: '86[0]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'População no último censo',
+                    titulo: 'panorama_configuration_pais_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico,
                 },
@@ -93,34 +93,70 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60284,
                     periodo: '2015',
-                    titulo: 'Taxa de fecundidade',
+                    titulo: 'panorama_configuration_pais_taxa_fecundidade',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_fecundidade',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60284
+                        }]
+                    }
                 },
 
                 {
                     pesquisaId: 10065,
                     indicadorId: 60282,
                     periodo: '2015',
-                    titulo: 'Taxa de mortalidade infantil',
+                    titulo: 'panorama_configuration_pais_taxa_mortalidade_infantil',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_mortalidade_infantil',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60282
+                        }]
+                    }
                 },
 
                 {
                     pesquisaId: 10065,
                     indicadorId: 60404,
                     periodo: '2015',
-                    titulo: 'Domicílios com iluminação elétrica',
+                    titulo: 'panorama_configuration_pais_domicilios_com_iluminacao_eletrica',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_iluminacao_lixo_agua_esgoto',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60404
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60406
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60407
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60408
+                        }]
+                    }
                 },
 
                 {
                     pesquisaId: 10065,
                     indicadorId: 60406,
                     periodo: '2015',
-                    titulo: 'Domicílios com coleta de lixo',
+                    titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -129,7 +165,7 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60407,
                     periodo: '2015',
-                    titulo: 'Domicílios com rede geral de abastecimento de água',
+                    titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -138,112 +174,103 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60408,
                     periodo: '2015',
-                    titulo: 'Domicílios com esgotamento sanitário adequado (Rede coletora ou fossa séptica)',
+                    titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
-                    pesquisaId: 10065,
-                    indicadorId: 60234,
+                    pesquisaId: 44,
+                    indicadorId: 47108,
                     periodo: '2015',
-                    titulo: 'PIB per capita',
+                    titulo: 'panorama_configuration_pais_domicilios_computador',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_bens_duraveis_domicilio',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47103
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47106
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47107
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47108
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47125,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_domicilio_acesso_internet',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_tipo_conexao_internet',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47260
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47261
+                        }]
+                    }
+                },
+
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47266,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_posse_telefone_celular',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47108,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com microcomputador',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Bens duráveis existentes no domicílio',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 44,
-                //             indicadorId: 47103
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47106
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47107
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47108
-                //         }]
-                //     }
-                // },
+                {
+                    pesquisaId: 44,
+                    indicadorId: 47107,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_domicilios_televisao',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_modalidade_recepcao_sinal_tv',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 44,
+                            indicadorId: 47251
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47252
+                        },
+                        {
+                            pesquisaId: 44,
+                            indicadorId: 47253
+                        }]
+                    }
+                },
 
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47125,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com acesso à Internet',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Tipo de conexão à Internet',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 44,
-                //             indicadorId: 47260
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47261
-                //         }]
-                //     }
-                // },
-
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47266,
-                //     periodo: '2015',
-                //     titulo: 'Posse de telefone móvel celular',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
-
-                // {
-                //     pesquisaId: 44,
-                //     indicadorId: 47107,
-                //     periodo: '2015',
-                //     titulo: 'Domicílios com televisão',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.grafico,
-                //     grafico: {
-                //         titulo: 'Modalidade de recepção de sinal de televisão',
-                //         tipo: TiposGrafico.linha,
-                //         dados: [{
-                //             pesquisaId: 44,
-                //             indicadorId: 47251
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47252
-                //         },
-                //         {
-                //             pesquisaId: 44,
-                //             indicadorId: 47253
-                //         }]
-                //     }
-                // },
-
-                // {
-                //     pesquisaId: 46,
-                //     indicadorId: 60414,
-                //     periodo: '2015',
-                //     titulo: 'Prática de atividade física',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.numerico
-                // },
+                {
+                    pesquisaId: 46,
+                    indicadorId: 60414,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_pratica_atividade_fisica',
+                    tema: TEMAS.populacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // ------------------------
                 // EDUCAÇÃO
@@ -252,16 +279,24 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60229,
                     periodo: '2015',
-                    titulo: 'Taxa de analfabetismo 10 anos ou mais de idade',
+                    titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
                     tema: TEMAS.educacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60229,
+                        }]
+                    }
                 },
 
                 {
                     pesquisaId: 10065,
                     indicadorId: 60232,
                     periodo: '2015',
-                    titulo: 'Taxa de escolarização de 6 a 14 anos de idade',
+                    titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -271,16 +306,33 @@ export const PANORAMA: {
                 // ----------------------------
 
                 {
+                    pesquisaId: 10065,
+                    indicadorId: 60234,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_pais_pib_per_capita',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_pib_per_capita',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60234
+                        }]
+                    }
+                },
+
+                {
                     pesquisaId: 1419,
                     indicadorId: 63,
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA mensal',
+                    titulo: 'panorama_configuration_pais_precos_ipca_mensal',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA x INPC x IPP - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_ipca_inpc_ipp_acumulado_12_meses',
                         tipo: TiposGrafico.linha,
                         link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html',
                         dados: [{
@@ -313,7 +365,7 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - INPC',
+                    titulo: 'panorama_configuration_pais_precos_inpc',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -335,11 +387,11 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA15',
+                    titulo: 'panorama_configuration_pais_precos_ipca15',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'IPCA15 - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_ipca15_acumulado_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -347,7 +399,7 @@ export const PANORAMA: {
                             indicadorId: 1120,
                             categoria: '315[7169]',
                             servico: 'conjunturais',
-                            quantidadePeriodos: 36
+                            quantidadePeriodos: 10
                         }]
                     }
                 },
@@ -358,7 +410,7 @@ export const PANORAMA: {
                     categoria: '715[33611]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços Produtor - IPP',
+                    titulo: 'panorama_configuration_pais_preco_produtor_ipp',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -369,7 +421,7 @@ export const PANORAMA: {
                     categoria: '315[7169]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Preços - IPCA 12 meses',
+                    titulo: 'panorama_configuration_pais_precos_ipca_12_meses',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -380,11 +432,11 @@ export const PANORAMA: {
                     categoria: '544[129314]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 1,
-                    titulo: 'Indústria - PIM-PF',
+                    titulo: 'panorama_configuration_pais_industria_pim-pf',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PIM-PF - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pim-pf_variacao_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -403,11 +455,11 @@ export const PANORAMA: {
                     categoria: '11046[90668]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 36,
-                    titulo: 'Comércio - PMC',
+                    titulo: 'panorama_configuration_pais_comercio_pmc',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PMC - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pmc_variacao_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -426,11 +478,11 @@ export const PANORAMA: {
                     categoria: '11046[90668]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 36,
-                    titulo: 'Serviços - PMS',
+                    titulo: 'panorama_configuration_pais_servicos_pms',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PMS - Variação acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pms_variacao_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -451,11 +503,11 @@ export const PANORAMA: {
                     servico: 'conjunturais',
                     categoria: '',
                     quantidadePeriodos: 36,
-                    titulo: 'Taxa de desocupação - PNAD Contínua',
+                    titulo: 'panorama_configuration_pais_taxa_desocupacao_pnad_continua',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PNAD Contínua - Taxa de desocupação',
+                        titulo: 'panorama_configuration_pais_pnad_continua_taxa_desocupacao',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -475,11 +527,11 @@ export const PANORAMA: {
                     servico: 'conjunturais',
                     quantidadePeriodos: 12,
                     periodo: '2º trimestre 2017',
-                    titulo: 'PIB - SCNT',
+                    titulo: 'panorama_configuration_pais_pib_scnt',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'PIB - Taxa acumulada em 12 meses',
+                        titulo: 'panorama_configuration_pais_pib_taxa_acumulada_12_meses',
                         tipo: TiposGrafico.linha,
                         link: 'https://www.ibge.gov.br/estatisticas-novoportal/economicas/contas-nacionais/2036-np-produto-interno-bruto-dos-municipios/9088-produto-interno-bruto-dos-municipios.html',
                         dados: [{
@@ -502,11 +554,11 @@ export const PANORAMA: {
                     categoria: '',
                     servico: 'conjunturais',
                     quantidadePeriodos: 36,
-                    titulo: 'Construção - SINAPI',
+                    titulo: 'panorama_configuration_pais_construcao_sinapi',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'SINAPI - Construção',
+                        titulo: 'panorama_configuration_pais_sinapi_construcao',
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
@@ -534,25 +586,45 @@ export const PANORAMA: {
                     pesquisaId: 10065,
                     indicadorId: 60367,
                     periodo: '2015',
-                    titulo: 'Pessoal ocupado assalariado - Índice acumulado em relação ao mesmo período do ano anterior',
+                    titulo: 'panorama_configuration_pais_industria_pessoal_ocupado',
                     tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_industria_pessoal_ocupado',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60367,
+                        }]
+                    }
                 },
 
                 {
                     pesquisaId: 10065,
                     indicadorId: 60368,
                     periodo: '2015',
-                    titulo: 'Produção industrial - Índice acumulado em relação ao mesmo período do ano anterior',
+                    titulo: 'panorama_configuration_pais_industria_producao',
                     tema: TEMAS.industria.label,
-                    visualizacao: PanoramaVisualizacao.numerico
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_pais_industria_producao_x_produtividade',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 10065,
+                            indicadorId: 60368,
+                        },
+                        {
+                            pesquisaId: 10065,
+                            indicadorId: 60371,
+                        }]
+                    }
                 },
 
                 {
                     pesquisaId: 10065,
                     indicadorId: 60371,
                     periodo: '2015',
-                    titulo: 'Produtividade - Índice acumulado em relação ao mesmo período do ano anterior',
+                    titulo: 'panorama_configuration_pais_industria_produtividade',
                     tema: TEMAS.industria.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -700,10 +772,10 @@ export const PANORAMA: {
                 //     visualizacao: PanoramaVisualizacao.numerico
                 // },
                 {
-                    pesquisaId: 48,
-                    indicadorId: 62877,
-                    periodo: '-',
-                    titulo: 'Gentílico',
+                    // pesquisaId: 48,
+                    // indicadorId: 62877,
+                    // periodo: '-',
+                    titulo: 'panorama_configuration_estado_gentilico',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',
                     visualizacao: PanoramaVisualizacao.numerico
@@ -719,7 +791,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48981,
                     periodo: '2010',
-                    titulo: 'Capital',
+                    titulo: 'panorama_configuration_estado_capital',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -727,7 +799,7 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 62876,
                     periodo: '2014',
-                    titulo: 'Governador',
+                    titulo: 'panorama_configuration_estado_governador',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -737,11 +809,11 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48985,
                     periodo: '2017',
-                    titulo: 'População estimada',
+                    titulo: 'panorama_configuration_estado_populacao_estimada',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'População residente por situação domiciliar (urbana/rural)',
+                        titulo: 'panorama_configuration_estado_populacao_residente_situacao_domiciliar',
                         tipo: TiposGrafico.coluna,
                         dados: [{
                             pesquisaId: 23,
@@ -758,7 +830,7 @@ export const PANORAMA: {
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Projeção da População',
+                        titulo: 'panorama_configuration_estado_projecao_populacao',
                         link: "https://www.ibge.gov.br/estatisticas-novoportal/sociais/populacao/9103-estimativas-de-populacao.html",
                         tipo: TiposGrafico.linha,
                         dados: [{
@@ -772,7 +844,7 @@ export const PANORAMA: {
                     pesquisaId: 23,
                     indicadorId: 25207,
                     periodo: '2010',
-                    titulo: 'População no último censo',
+                    titulo: 'panorama_configuration_estado_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                     // grafico: {
@@ -803,92 +875,9 @@ export const PANORAMA: {
                     pesquisaId: 48,
                     indicadorId: 48982,
                     periodo: '2010',
-                    titulo: 'Densidade demográfica',
+                    titulo: 'panorama_configuration_estado_densidade_demografica',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
-                },
-
-                // {
-                //     pesquisaId: 20,
-                //     indicadorId: 29788,
-                //     periodo: '2015',
-                //     titulo: 'Óbitos ocorridos no estado',
-                //     tema: TEMAS.populacao.label,
-                //     visualizacao: PanoramaVisualizacao.painel
-                // },
-
-                // --- Trabalho
-                {
-                    pesquisaId: 48,
-                    indicadorId: 48986,
-                    periodo: '2016',
-                    titulo: 'Rendimento nominal mensal domiciliar per capita',
-                    tema: TEMAS.trabalho.label,
-                    visualizacao: PanoramaVisualizacao.painel
-                },
-                {
-                    pesquisaId: 45,
-                    indicadorId: 62585,
-                    periodo: '2016',
-                    titulo: 'Pessoas de 16 anos ou mais ocupadas na semana de referência',
-                    tema: TEMAS.trabalho.label,
-                    visualizacao: PanoramaVisualizacao.painel
-                },
-                {
-                    pesquisaId: 45,
-                    indicadorId: 62590,
-                    periodo: '2016',
-                    titulo: 'Proporção de pessoas de 16 anos ou mais em trabalho formal, considerando apenas as ocupadas na semana de referência',
-                    tema: TEMAS.trabalho.label,
-                    visualizacao: PanoramaVisualizacao.painel
-                },
-                {
-                    pesquisaId: 19,
-                    indicadorId: 59935,
-                    periodo: '2015',
-                    titulo: 'Pessoal ocupado na Administração pública, defesa e seguridade social',
-                    tema: TEMAS.trabalho.label,
-                    visualizacao: PanoramaVisualizacao.painel
-                },
-
-                // --- EDUCAÇÃO
-                // {
-                //     pesquisaId: 40,
-                //     indicadorId: 30277,
-                //     periodo: '2015',
-                //     titulo: 'IDEB – Anos iniciais do ensino fundamental',
-                //     tema: TEMAS.educacao.label,
-                //     visualizacao: PanoramaVisualizacao.painel
-                // },
-                 {
-                    pesquisaId: 13,
-                    indicadorId: 5908,
-                    periodo: '2015',
-                    titulo: 'Matrículas no ensino fundamental',
-                    tema: TEMAS.educacao.label,
-                    visualizacao: PanoramaVisualizacao.painel
-                },
-                {
-                    // pesquisaId: 13,
-                    // indicadorId: 5908,
-                    periodo: '2015',
-                    // titulo: 'Matrículas no ensino fundamental',
-                    tema: TEMAS.educacao.label,
-                    visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'Matrículas',
-                        tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 13,
-                            indicadorId: 5903,
-                        }, {
-                            pesquisaId: 13,
-                            indicadorId: 5908,
-                        }, {
-                            pesquisaId: 13,
-                            indicadorId: 5913,
-                        }]
-                    }
                 },
 
                 // --- FROTA
@@ -896,8 +885,8 @@ export const PANORAMA: {
                     pesquisaId: 22,
                     indicadorId: 28120,
                     periodo: '2016',
-                    titulo: 'Total de veículos',
-                    tema: TEMAS.frota.label,
+                    titulo: 'panorama_configuration_estado_total_veiculos',
+                    tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
 
@@ -906,10 +895,10 @@ export const PANORAMA: {
                     // indicadorId: 28122,
                     // periodo: '2016',
                     // titulo: 'Total de automóveis',
-                    tema: TEMAS.frota.label,
+                    tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Veículos por tipo',
+                        titulo: 'panorama_configuration_estado_veiculos_tipo',
                         tipo: TiposGrafico.coluna,
                         dados: [
                             {
@@ -932,12 +921,151 @@ export const PANORAMA: {
                     }
                 },
 
+                // {
+                //     pesquisaId: 20,
+                //     indicadorId: 29788,
+                //     periodo: '2015',
+                //     titulo: 'Óbitos ocorridos no estado',
+                //     tema: TEMAS.populacao.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
+
+                // --- Trabalho
+                {
+                    pesquisaId: 48,
+                    indicadorId: 48986,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_rendimento_nominal_mensal_domiciliar',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 62585,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_pessoas_ocupadas',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 62590,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_proporcao_pessoas_ocupadas_trabalhos_formais_semana_referencia',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 63211,
+                    periodo: '2017',
+                    titulo: 'panorama_configuration_estado_proporcao_pessoas_ocupadas_trabalhos_formais',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 45,
+                    indicadorId: 63238,
+                    periodo: '2017',
+                    titulo: 'panorama_configuration_estado_rendimento_medio_trabalhos_formais',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 19,
+                    indicadorId: 59935,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_estado_pessoal_ocupado_administracao_publica',
+                    tema: TEMAS.trabalho.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+
+                // --- EDUCAÇÃO
+                // {
+                //     pesquisaId: 40,
+                //     indicadorId: 30277,
+                //     periodo: '2015',
+                //     titulo: 'IDEB – Anos iniciais do ensino fundamental',
+                //     tema: TEMAS.educacao.label,
+                //     visualizacao: PanoramaVisualizacao.painel
+                // },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5908,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_estado_matriculas_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5913,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_estado_matriculas_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    // pesquisaId: 13,
+                    // indicadorId: 5908,
+                    periodo: '2015',
+                    // titulo: 'Matrículas no ensino fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.grafico,
+                    grafico: {
+                        titulo: 'panorama_configuration_estado_matriculas',
+                        tipo: TiposGrafico.linha,
+                        dados: [{
+                            pesquisaId: 13,
+                            indicadorId: 5903,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5908,
+                        }, {
+                            pesquisaId: 13,
+                            indicadorId: 5913,
+                        }]
+                    }
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5929,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_docentes_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5934,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_docentes_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5950,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_numero_estabelecimentos_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5955,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_estado_numero_estabelecimentos_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
                 // --- ECONOMIA
                  {
                     pesquisaId: 37,
                     indicadorId: 30255,
                     periodo: '2010',
-                    titulo: 'Índice de Desenvolvimento Humano (IDH)',
+                    titulo: 'panorama_configuration_estado_idh',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -945,7 +1073,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 21,
                     indicadorId: 28141,
-                    titulo: 'Receitas orçamentárias realizadas',
+                    titulo: 'panorama_configuration_estado_receitas_orcamentarias_realizadas',
                     periodo: '2014',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -954,7 +1082,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 21,
                     indicadorId: 29749,
-                    titulo: 'Despesas orçamentárias empenhadas',
+                    titulo: 'panorama_configuration_estado_receitas_orcamentarias_empenhadas',
                     periodo: '2014',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel,
@@ -982,12 +1110,30 @@ export const PANORAMA: {
                     // }
                 },
 
+                {
+                    pesquisaId: 29,
+                    indicadorId: 21910,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_numero_agencias',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
+                {
+                    pesquisaId: 29,
+                    indicadorId: 21906,
+                    periodo: '2016',
+                    titulo: 'panorama_configuration_estado_total_depositos',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+
                  // --- Ambiente
                 {
                     pesquisaId: 48,
                     indicadorId: 48980,
                     periodo: '2016',
-                    titulo: 'Área da unidade territorial',
+                    titulo: 'panorama_configuration_estado_area_unidade_territorial',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 }
@@ -1037,7 +1183,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29169,
-                    titulo: 'Código do Município',
+                    titulo: 'panorama_configuration_municipio_codigo',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1046,7 +1192,7 @@ export const PANORAMA: {
                 {
                     // pesquisaId: 33,
                     // indicadorId: 60409,
-                    titulo: 'Gentílico',
+                    titulo: 'panorama_configuration_municipio_gentilico',
                     tema: TEMAS.nenhum.label,
                     largura: 'half',
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1055,7 +1201,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29170,
-                    titulo: 'Prefeito',
+                    titulo: 'panorama_configuration_municipio_prefeito',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1065,12 +1211,12 @@ export const PANORAMA: {
                 {
                     pesquisaId: 33,
                     indicadorId: 29171,
-                    titulo: 'População estimada',
+                    titulo: 'panorama_configuration_municipio_populacao_estimada',
                     periodo: '2017',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'População residente por religião',
+                        titulo: 'panorama_configuration_municipio_populacao_residente_religiao',
                         tipo: TiposGrafico.coluna,
                         dados: [{
                             pesquisaId: 23,
@@ -1089,7 +1235,7 @@ export const PANORAMA: {
                     pesquisaId: 23,
                     indicadorId: 25207,
                     periodo: '2010',
-                    titulo: 'População no último censo',
+                    titulo: 'panorama_configuration_municipio_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1098,19 +1244,17 @@ export const PANORAMA: {
                     pesquisaId: 33,
                     indicadorId: 29168,
                     periodo: '2010',
-                    titulo: 'Densidade demográfica',
+                    titulo: 'panorama_configuration_municipio_densidade_demografica',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
-
-
 
                 // --- Ambiente
                 {
                     pesquisaId: 33,
                     indicadorId: 29167,
                     periodo:'2016',
-                    titulo: 'Área da unidade territorial',
+                    titulo: 'panorama_configuration_municipio_area_unidade_territorial',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
@@ -1118,7 +1262,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60030,
                     periodo: '2010',
-                    titulo: 'Esgotamento sanitário adequado',
+                    titulo: 'panorama_configuration_municipio_esgotamento_sanitario',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1126,7 +1270,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60029,
                     periodo: '2010',
-                    titulo: 'Arborização de vias públicas',
+                    titulo: 'panorama_configuration_municipio_arborizacao',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1134,7 +1278,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60031,
                     periodo: '2010',
-                    titulo: 'Urbanização de vias públicas',
+                    titulo: 'panorama_configuration_municipio_urbanizacao',
                     tema: TEMAS.meioAmbiente.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1145,7 +1289,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60045,
                     periodo: '2010',
-                    titulo: 'Taxa de escolarização de 6 a 14 anos de idade',
+                    titulo: 'panorama_configuration_municipio_taxa_escolarizacao',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1153,7 +1297,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60041,
                     periodo: '2015',
-                    titulo: 'IDEB – Anos iniciais do ensino fundamental',
+                    titulo: 'panorama_configuration_municipio_ideb_anos_iniciais_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1161,7 +1305,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60042,
                     periodo: '2015',
-                    titulo: 'IDEB – Anos finais do ensino fundamental',
+                    titulo: 'panorama_configuration_municipio_ideb_anos_finais_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1170,11 +1314,11 @@ export const PANORAMA: {
                     pesquisaId: 13,
                     indicadorId: 5908,
                     periodo:'2015',
-                    titulo: 'Matrículas no ensino fundamental',
+                    titulo: 'panorama_configuration_municipio_matriculas_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
                     grafico: {
-                        titulo: 'Matrículas',
+                        titulo: 'panorama_configuration_municipio_matriculas',
                         tipo: TiposGrafico.coluna,
                         dados: [{
                             pesquisaId: 13,
@@ -1196,18 +1340,49 @@ export const PANORAMA: {
                     pesquisaId: 13,
                     indicadorId: 5913,
                     periodo:'2015',
-                    titulo: 'Matrículas no ensino médio',
+                    titulo: 'panorama_configuration_municipio_matriculas_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
-
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5929,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_docentes_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5934,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_docentes_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                {
+                    pesquisaId: 13,
+                    indicadorId: 5950,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_numero_estabelecimentos_ensino_fundamental',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
+                 {
+                    pesquisaId: 13,
+                    indicadorId: 5955,
+                    periodo:'2015',
+                    titulo: 'panorama_configuration_municipio_numero_estabelecimentos_ensino_medio',
+                    tema: TEMAS.educacao.label,
+                    visualizacao: PanoramaVisualizacao.numerico
+                },
 
                 // --- Trabalho
                 {
                     pesquisaId: 19,
                     indicadorId: 29765,
                     periodo: '2015',
-                    titulo: 'Salário médio mensal dos trabalhadores formais',
+                    titulo: 'panorama_configuration_municipio_salario_trabalhadores_formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1215,7 +1390,7 @@ export const PANORAMA: {
                     pesquisaId: 19,
                     indicadorId: 29763,
                     periodo: '2015',
-                    titulo: 'Pessoal ocupado',
+                    titulo: 'panorama_configuration_municipio_pessoal_ocupado',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1223,7 +1398,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60036,
                     periodo: '2015',
-                    titulo: 'População ocupada',
+                    titulo: 'panorama_configuration_municipio_populacao_ocupada',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1231,7 +1406,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60037,
                     periodo: '2010',
-                    titulo: 'Percentual da população com rendimento nominal mensal per capita de até 1/2 salário mínimo',
+                    titulo: 'panorama_configuration_municipio_pencentual_pupulacao_rendimento_ate_meio_salario',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1241,7 +1416,7 @@ export const PANORAMA: {
                     pesquisaId: 39,
                     indicadorId: 30279,
                     periodo: '2014',
-                    titulo: 'Mortalidade Infantil',
+                    titulo: 'panorama_configuration_municipio_mortalidade_infantil',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.painel,
                     correlacaoNegativaValorQualidade: true
@@ -1250,7 +1425,7 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60032,
                     periodo: '2016',
-                    titulo: 'Internações por diarreia',
+                    titulo: 'panorama_configuration_municipio_internacoes_diarreia',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.painel,
                     correlacaoNegativaValorQualidade: true
@@ -1259,17 +1434,17 @@ export const PANORAMA: {
                     pesquisaId: 32,
                     indicadorId: 28242,
                     periodo: '2009',
-                    titulo: 'Estabelecimentos de Saúde SUS',
+                    titulo: 'panorama_configuration_municipio_estabelecimento_saude_sus',
                     tema: TEMAS.saude.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 // --- Economia
                 {
-                    pesquisaId: 10058,
-                    indicadorId: 60047,
-                    periodo: '2014',
-                    titulo: 'PIB per capita',
+                    pesquisaId: 38,
+                    indicadorId: 47001,
+                    periodo: '2015',
+                    titulo: 'panorama_configuration_municipio_pib_per_capita',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
                 },
@@ -1278,21 +1453,48 @@ export const PANORAMA: {
                     pesquisaId: 10058,
                     indicadorId: 60048,
                     periodo: '2015',
-                    titulo: 'Percentual das receitas oriundas de fontes externas',
+                    titulo: 'panorama_configuration_municipio_percentual_receitas_fontes_externas',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel,
                     correlacaoNegativaValorQualidade: true
                 },
 
+                // TODO: Resolver erro ao incluir este indicador.
+                // {
+                //     pesquisaId: 21,
+                //     indicadorId: 28160,
+                //     periodo: '2014',
+                //     titulo: 'panorama_configuration_municipio_valor_fpm',
+                //     tema: TEMAS.economia.label,
+                //     visualizacao: PanoramaVisualizacao.numerico
+                // },
+
                 {
                     pesquisaId: 37,
                     indicadorId: 30255,
                     periodo: '2010',
-                    titulo: 'Índice de Desenvolvimento Humano Municipal (IDHM)',
+                    titulo: 'panorama_configuration_municipio_idhm',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.numerico
-                }
+                },
 
+                {
+                    pesquisaId: 21,
+                    indicadorId: 28141,
+                    //periodo: '2014',
+                    periodo:'2008',
+                    titulo: 'panorama_configuration_municipio_total_receitas_realizadas',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.painel
+                },
+                {
+                    pesquisaId: 21,
+                    indicadorId: 29748,
+                    periodo: '2008',
+                    titulo: 'panorama_configuration_municipio_total_despesas_realizadas',
+                    tema: TEMAS.economia.label,
+                    visualizacao: PanoramaVisualizacao.painel,
+                }
             ]
         }
     };

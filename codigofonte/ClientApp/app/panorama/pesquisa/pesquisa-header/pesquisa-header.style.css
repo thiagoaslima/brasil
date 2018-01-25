@@ -256,7 +256,6 @@
 	line-height: normal;
 	position: absolute;
 	z-index: 2;
-	padding: 10px;
 	min-width: 219px;
 	margin-top: -19px;
 	margin-left:-35px;
@@ -279,7 +278,7 @@
 
 
 .select__submenu-aberto > div {
-    padding: 10px;
+    padding: 17px;
     letter-spacing: initial;
     cursor: pointer;
 }
@@ -296,6 +295,15 @@
     background-color: #1B779B;
     border-radius: 20px;
     padding: 8px 10px; 
+}
+
+.select__submenu-aberto > .select__submenu__titulo{
+    background-color: #1d779a;
+    cursor: default;
+}
+
+.select__submenu__titulo:hover{
+    background-color: #1d779a !important;
 }
 
 /*

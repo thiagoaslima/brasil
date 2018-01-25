@@ -37,8 +37,15 @@ export class HistoricoComponent implements OnInit {
             .filter(state => Boolean(state.localidade) /*&& state.tipo == 'municipio'*/)
             .map(state => state.localidade)
             .flatMap(localidade => {
+                
                 this.isCarregando = true;
-                return this._sinteseService.getHistorico(localidade.codigo);
+                let codigoLocalidade = localidade.codigo;
+
+                if (localidade.tipo == 'uf') {
+                    codigoLocalidade = this.incluirPaddingParaCodigoUF(localidade.codigo);
+                }
+
+                return this._sinteseService.getHistorico(codigoLocalidade);
             }).subscribe(historico => {
                 if (historico.historico)
                     historico.historico = historico.historico.replace(/\n/g, '<br>');
@@ -62,5 +69,9 @@ export class HistoricoComponent implements OnInit {
         return  !this.historico || (!this.historico.historico && 
                 !this.historico.fonte &&
                 !this.historico.formacaoAdministrativa);
+    }
+
+    private incluirPaddingParaCodigoUF(codigoUF) {
+        return parseInt(`${codigoUF}00000`);
     }
 }

@@ -16,6 +16,7 @@ export * from './nao-achei';
 export * from './qrcode';
 export * from './questionario';
 export * from './corta-texto.pipe';
+export * from './mensagem-traducao';
 
 // MÓDULO SEMPRE NO FINAL
 export * from './shared.module';

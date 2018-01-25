@@ -99,7 +99,7 @@ const routes: Routes = [
 ];
 
 export const routedComponents = [
-    PanoramaShellComponent
+    PanoramaShellComponent,
 ];
 
 export const components = [
@@ -125,7 +125,7 @@ export const components = [
         ...routedComponents,
     ],
     providers: [
-        PanoramaService
+        PanoramaService,
     ]
 })
 export class PanoramaModule { }

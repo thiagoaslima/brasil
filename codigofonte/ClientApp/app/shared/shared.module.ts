@@ -15,6 +15,7 @@ import {
     QRCodeComponent,
     QuestionarioComponent,
     CortaTextoPipe,
+    MensagemTraducaoComponent,
 
     BibliotecaService,
     ConjunturaisService,
@@ -42,6 +43,7 @@ const declarations = [
     QRCodeComponent,
     QuestionarioComponent,
     CortaTextoPipe,
+    MensagemTraducaoComponent,
 ]
 
 const providers = [

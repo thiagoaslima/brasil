@@ -62,6 +62,12 @@ export class PesquisaCartogramaComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
+
+        // Atualiza o cartograma caso exista uma mudança no período selecionado.
+        if(!!changes['periodo']){
+           return;
+        }
+
         if(this.pesquisa && this.localidades && this.localidades.length > 0) {
             this.listaPeriodos = this.pesquisa.periodos.map((periodo) => {
                 return periodo.nome;
@@ -102,13 +108,6 @@ export class PesquisaCartogramaComponent implements OnChanges {
         
         Observable.zip(...resultadosCartograma$)
             .subscribe(resultados => {
-                //verifica se o resultado é vazio
-                this.vazio = true;
-                for(let item in resultados[0]){
-                    this.vazio = false;
-                    break;
-                }
-                //---------
                 let mapas = [];
                 for(let i=0; i<resultados.length; i++) {
                     mapas.push({
@@ -125,22 +124,6 @@ export class PesquisaCartogramaComponent implements OnChanges {
                 this.modalErrorService.showError();
             });
 
-        // this.localidades.forEach(localidade => {
-        //     let mun = this._localidadeServ.getMunicipioByCodigo(localidade)
-
-        //     if(mun === undefined) {
-        //         return;
-        //     }
-
-        //     this._resultadoServ.getResultadosCartograma(this.indicadorSelecionado, mun.parent.codigo)
-        //         .subscribe((resultados) => {
-        //             this.mapas.push({
-        //                 mun,
-        //                 resultados
-        //             });
-        //         });
-        // });
-        
     }
 
     public getPreposicaoUF(nomeUf: string): string{
