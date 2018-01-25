@@ -1,5 +1,5 @@
 // https://github.com/topojson/topojson-client Version 2.1.0. Copyright 2016 Mike Bostock.
-import { OpaqueToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 interface featureObj {
     type: any;
@@ -518,4 +518,4 @@ export const TopoJson = {
     untransform
 };
 
-export let TOPOJSON = new OpaqueToken('TopoJson');
+export let TOPOJSON = new InjectionToken('TopoJson');

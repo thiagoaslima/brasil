@@ -6,10 +6,10 @@
             <span *ngIf="pesquisa?.id == 23"> <!--só mostra no censo-->
                 <select class="select-indicador" (change)="mudaIndicador($event);">
                     <!--<option *ngFor="let indic of (pesquisa?.indicadores | async)" [value]="indic?.id" [selected]="indic?.id == indicador">{{ indic?.nome }}</option>-->
-                    <template ngFor let-indic [ngForOf]="pesquisa?.indicadores | async">
+                    <ng-template ngFor let-indic [ngForOf]="pesquisa?.indicadores | async">
                         <option [value]="indic?.id" *ngIf="indic?.id == indicador" selected>{{ indic?.nome }}</option>
                         <option [value]="indic?.id" *ngIf="indic?.id != indicador">{{ indic?.nome }}</option>
-                    </template>
+                    </ng-template>
                 </select>
             </span>
         </div>
@@ -18,14 +18,14 @@
             Ano:
             <select class="select-ano" (change)="mudaAno($event)">
                 <!--<option *ngFor="let periodo of listaPeriodos" [selected]="periodo.nome == ano">{{ periodo.nome }}</option>-->
-                <template ngFor let-periodo [ngForOf]="listaPeriodos">
+                <ng-template ngFor let-periodo [ngForOf]="listaPeriodos">
                     <option *ngIf="periodo.nome == ano" selected>{{ periodo.nome }}</option>
                     <option *ngIf="periodo.nome != ano">{{ periodo.nome }}</option>
-                </template>
+                </ng-template>
             </select>
         </div>
         <!--fontes-->
-        <template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
+        <ng-template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
             <div class="notas" *ngIf="periodo.nome == ano && periodo.fontes.length > 0">
                 <div class="area-click" [class.area-click--visivel]="mostrarFontes" (click)="mostrarFontes=false"></div>
                 <div class="notas__botao" (click)="mostrarFontes=true">
@@ -37,9 +37,9 @@
                     </ol>
                 </div>
             </div>
-        </template>
+        </ng-template>
         <!--notas-->
-        <template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
+        <ng-template ngFor let-periodo [ngForOf]="pesquisa?.periodos">
             <div class="notas" *ngIf="periodo.nome == ano && periodo.notas.length > 0">
                 <div class="area-click" [class.area-click--visivel]="mostrarNotas" (click)="mostrarNotas=false"></div>
                 <div class="notas__botao" (click)="mostrarNotas=true">
@@ -51,7 +51,7 @@
                     </ol>
                 </div>
             </div>
-        </template>
+        </ng-template>
     </div>
     <div class="cabecalho__seletor-visualizacao-dados">
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == ''" (click)="setaTipo('')">

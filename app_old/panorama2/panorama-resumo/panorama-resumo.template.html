@@ -18,7 +18,7 @@
 
 <!-- Para fixar na rolagem, adicionar/remover a classe "resumo-fixo" na div abaixo -->
 <div class='container-temas'>
-    <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
+    <ng-template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
             <div *ngIf="first || temas[idx-1].tema !== item.tema" [ngClass]="'resumo__icons__'+idx" [ngClass]="{'resumo-fixo': isHeaderStatic | async}">
 
                 <div class="mobile__exclusive temas__horizontais ">
@@ -30,12 +30,12 @@
                     </div>
                 </div>
             </div>
-    </template>
+    </ng-template>
 </div>
 
 <!-- <table class="lista"  [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()"> -->
 <table class="lista">
-<template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
+<ng-template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temas">
 
         <tr *ngIf="first || item.tema !== temas[idx-1].tema" (click)="fireTemaSelecionado('#'+item.tema.substr(0,2).toLowerCase())" class="lista__cabecalho" [class.recolhido]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <th class="lista__icone">
@@ -77,7 +77,7 @@
             </td>
         </tr>
 
-    </template>
+    </ng-template>
 </table>
 
 <div (click)="exibirFontesENotas = !exibirFontesENotas" class='fontes-e-nota-geral'>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="modal_resumo_content">
-                <template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temasModalFiltroPanorama">
+                <ng-template ngFor let-item let-idx="index" let-first="first" [ngForOf]="temasModalFiltroPanorama">
                     <div class="modal_resumo_wrapTema">
                         <div class="modal_resumo__tema" *ngIf="first || (item.tema && item.tema) !== temasModalFiltroPanorama[idx-1].tema">
                             {{item.tema}}
@@ -109,7 +109,7 @@
                         </div>
                    
                      </div>
-                </template>
+                </ng-template>
                 <button class="gerar_relatorio" (click)="gerarSinteseEstado()">{{ 'panorama_resumo__gerar_indicadores_municipios' | l10n:lang }}</button>
                 
             </div>

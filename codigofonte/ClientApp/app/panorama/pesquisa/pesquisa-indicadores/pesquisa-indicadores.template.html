@@ -1,5 +1,5 @@
 <table cellspacing="0" border='0' class='mobile-table'>
-    <template ngFor let-indicador [ngForOf]="indicadores">
+    <ng-template ngFor let-indicador [ngForOf]="indicadores">
         <tr class='{{getStyleClass(indicador.posicao)}} mobile-tr linha' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
             
             <td class='label' (click)="controlarExibicao(indicador)" [attr.colspan]="hasValue(indicador, periodo) ? 1 : 2"
@@ -19,7 +19,7 @@
             </td>-->
             
         </tr>
-    </template>
+    </ng-template>
     
     <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
         {{ 'pesquisa_indicador__nenhum_indicador_para_exibir' | l10n:lang }}

@@ -27,7 +27,7 @@
         <div id="localidade">
             <div id='local'>
                 <ul *ngIf="!isHome">
-                    <template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
+                    <ng-template ngFor let-local [ngForOf]="locais" let-last="last" let-first="first">
                         <!--Brasil-->
                         <li *ngIf="first && !last">
                             <a [routerLink]="local.link + seletor?.URLEnd">{{local.nome}}</a>
@@ -45,7 +45,7 @@
                                 {{local.nome}}
                             </h1>
                         </li>
-                    </template>
+                    </ng-template>
                 </ul>
                 <p *ngIf="isHome" style="margin-bottom:30px">{{ 'shell__para_ter_acesso_as_informacoes' | l10n:lang }}</p>
             </div>

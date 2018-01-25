@@ -1,5 +1,5 @@
 <table class='mobile-table'>
-    <template ngFor let-indicador [ngForOf]="indicadores">
+    <ng-template ngFor let-indicador [ngForOf]="indicadores">
         <tr class='{{getStyleClass(indicador.posicao)}} mobile-tr' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
             
             <td class='label p '>
@@ -35,7 +35,7 @@
             <td class='valor s' [class.compara-blank]="!localidades[2]" [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeC ? (indicador.localidadeC[periodo] | resultado: indicador?.unidade?.classe) : "" }}</td>
             <td class='valor s desk-unidade'> <span *ngIf="indicador.unidade?.multiplicador > 1">(x {{indicador.unidade?.multiplicador}})</span> {{ indicador.unidade?.id }}</td>  
         </tr>
-    </template>
+    </ng-template>
     
     <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
         {{ 'pesquisa_tabela__nenhum_valor_para_exibir' | l10n:lang }} <span *ngIf="exclusiva">{{ 'pesquisa_tabela__pesquisa_exclusiva_para_estados' | l10n:lang }}</span>.

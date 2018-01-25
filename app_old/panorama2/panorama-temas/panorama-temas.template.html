@@ -1,4 +1,4 @@
-<template ngFor let-item [ngForOf]="temas" let-first="first" let-idx="index">
+<ng-template ngFor let-item [ngForOf]="temas" let-first="first" let-idx="index">
     <div [id]="item.tema.substr(0,2).toLowerCase()" *ngIf="first || temas[idx-1].tema !== item.tema" class="ancora-click-resumo">
         <div [id]="item.tema.substr(0,2).toLowerCase()+'-alt'"></div>
     </div>
@@ -38,9 +38,9 @@
             <span class="grafico__unidade" *ngIf="obj.unidade && obj.unidade.nome">
                 ( {{ 'unidade' | l10n:lang }}:
                     {{ obj.unidade.nome}}
-                    <template [ngIf]="obj.unidade.multiplicador > 1">
+                    <ng-template [ngIf]="obj.unidade.multiplicador > 1">
                         x{{ obj.unidade.multiplicador}}
-                    </template>
+                    </ng-template>
                 )
             </span>
         </h2>
@@ -89,4 +89,4 @@
     </div>
     
 
-</template> 
+</ng-template> 
