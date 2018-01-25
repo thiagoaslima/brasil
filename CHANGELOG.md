@@ -1,5 +1,13 @@
 # Change log
 
+## [v4.3.5] - 2018-01-25
+### Added
+	- Implementação do download dos dados da pesqiosa para todos os municípios do mesmo esatdo.
+
+### Fixed
+	- Correção da exibição dos temas do censo na pesquisa censo.
+
+
 ## [v4.3.4] - 2018-01-24
 ### Changed
 	- Remoção do indicador "Rendimento médio mensal per capita" do panorama estadual.
