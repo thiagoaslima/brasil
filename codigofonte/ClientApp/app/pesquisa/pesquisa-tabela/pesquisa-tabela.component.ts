@@ -262,9 +262,18 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
 
-    public download() {
+    public download(event) {
 
-        this.downloadCSVTelaTodosPeriodos();
+        let tipo = event['tipo'];
+
+        if(tipo == 'vizinhos'){
+
+            this.downloadCSVCompleto();
+        } 
+        else {
+
+            this.downloadCSVTelaTodosPeriodos();
+        }        
 
         // Analytics
         let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;

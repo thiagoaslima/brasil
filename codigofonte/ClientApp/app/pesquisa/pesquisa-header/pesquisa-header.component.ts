@@ -216,9 +216,10 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id) && !this.isNivelNacional;
     }
 
-    fazerDownload() {
+    fazerDownload(tipo: string) {
+        
         this.mostrarOpcoes = false;
-        this.onDownload.emit();
+        this.onDownload.emit({tipo: `${tipo}`});
     }
 
     ocultarValoresVazios() {

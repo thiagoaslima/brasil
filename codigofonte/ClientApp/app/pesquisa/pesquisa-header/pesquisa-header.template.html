@@ -183,7 +183,8 @@
 
                 <div class="select__submenu-aberto" *ngIf="mostrarOpcoes">
                     <div class='select__submenu__titulo'>{{ 'download' | l10n:lang }}</div>
-                    <div (click)="fazerDownload();">{{ 'download' | l10n:lang }}</div>
+                    <div (click)="fazerDownload('periodos');">{{ 'pesquisa_header__download_dados_todos_periodos' | l10n:lang }}</div>
+                    <div (click)="fazerDownload('vizinhos');">{{ 'pesquisa_header__download_dados_vizinhos' | l10n:lang }}</div>                    
                     <!--<div (click)="compartilhar();"><span><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i></span> Compartilhar</div>-->
                 </div>
             </div>
