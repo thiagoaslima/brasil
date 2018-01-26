@@ -110,7 +110,7 @@ export class ShellComponent implements OnInit, OnDestroy {
     //Indicará às redes sociais propriedades da página a ser compartilhada
     public propriedadesCompartilhamento = <any>{};
 
-    // public versao = require('../version.json');
+    public versao = require('../../version.json');
 
     public isBrowser;
 
