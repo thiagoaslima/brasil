@@ -40,7 +40,7 @@ export class AppState {
     private _pesquisa: Pesquisa;
 
     private _notify = new BehaviorSubject<any>(_initialState);
-    private _appState$ = this._notify.asObservable().share();
+    private _appState$ = this._notify;//.asObservable().share();
 
 
     /**

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import {
     TraducaoService,
@@ -27,17 +27,22 @@ export class HistoricoComponent implements OnInit {
         return this._traducaoServ.lang;
     }
 
+    private _subscriptions: { [key: string]: Subscription } = {};
+
     constructor(
         private _appState: AppState,
         private _sinteseService: SinteseService,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService
     ) {
-        this._appState.observable$
+
+    }
+
+    ngOnInit() {
+        this._subscriptions.appState = this._appState.observable$
             .filter(state => Boolean(state.localidade) /*&& state.tipo == 'municipio'*/)
             .map(state => state.localidade)
             .flatMap(localidade => {
-                
                 this.isCarregando = true;
                 let codigoLocalidade = localidade.codigo;
 
@@ -58,17 +63,17 @@ export class HistoricoComponent implements OnInit {
                 console.error(error);
                 this.modalErrorService.showError();
             });
+
     }
 
-    ngOnInit() {
-
-
+    ngOnDestroy() {
+        Object.values(this._subscriptions).forEach((subscription: Subscription) => subscription.unsubscribe());
     }
 
     isHistoricoVazio(): boolean {
-        return  !this.historico || (!this.historico.historico && 
-                !this.historico.fonte &&
-                !this.historico.formacaoAdministrativa);
+        return !this.historico || (!this.historico.historico &&
+            !this.historico.fonte &&
+            !this.historico.formacaoAdministrativa);
     }
 
     private incluirPaddingParaCodigoUF(codigoUF) {

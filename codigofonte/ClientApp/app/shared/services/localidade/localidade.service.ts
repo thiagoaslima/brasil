@@ -33,7 +33,7 @@ class LocalidadeCache {
     }
 
     buscarPorCodigo(codigo: number) {
-        codigo = codigo > 1000000 ? Math.floor(codigo/10) : codigo;
+        codigo = codigo > 1000000 ? Math.floor(codigo / 10) : codigo;
         return this._codigo[codigo];
     }
 
@@ -71,7 +71,7 @@ export class LocalidadeService3 {
 
     constructor(private _http: Http) {
         this._buildLocalidadesTree();
-        Localidade.setLocalidadeStrategy({ retrieve: this.getByCodigo.bind(this) })
+        Localidade.setLocalidadeStrategy({ retrieve: this.getByCodigo.bind(this) });
     }
 
     public getRoot(): Localidade {
@@ -100,6 +100,7 @@ export class LocalidadeService3 {
                 return escopo === 'proprio' ? [uf] : this._municipios.buscarPorIdentificador(uf.codigo.toString());
 
             case niveisTerritoriais.municipio.codeLength: // Municipio
+            case niveisTerritoriais.municipio.codeLength + 1: // Codigo Municipio completo (com dígito verificador)
                 if (escopo === 'filhos') {
                     throw new Error('Municipio não tem filhos');
                 }
