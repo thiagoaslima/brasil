@@ -74,6 +74,11 @@ export class Pesquisa {
             this[property] = data[property];
         });
     }
+
+    get indicadores(){
+
+        return this.getIndicadores();
+    }
 }
 
 

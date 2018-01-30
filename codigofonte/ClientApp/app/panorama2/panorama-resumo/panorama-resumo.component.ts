@@ -1,4 +1,3 @@
-import { TraducaoService } from '../../traducao/traducao.service';
 import {
     Component,
     EventEmitter,
@@ -18,6 +17,8 @@ import 'rxjs/add/operator/debounceTime';
 import { TEMAS } from '../../panorama2/configuration';
 import { Panorama2Service } from '../panorama.service';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { TraducaoService } from '../../traducao/traducao.service';
+
 
 @Component({
     selector: 'panorama-resumo',
@@ -64,7 +65,7 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private _panoramaService: Panorama2Service,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService,
+        private _traducaoServ: TraducaoService
 
     ) {
         this.setIcones();

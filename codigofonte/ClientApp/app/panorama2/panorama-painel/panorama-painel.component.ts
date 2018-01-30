@@ -9,6 +9,7 @@ import { dadosPainel } from '../configuration/panorama.values';
 import { Localidade } from '../../shared3/models';
 import { ResultadoService3, IndicadorService3 } from '../../shared3/services';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { TraducaoService } from '../../traducao/traducao.service';
 
 
 @Component({
@@ -36,13 +37,18 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
     public shouldAppear$: Observable<Boolean>;
     private _novosDados = true;
 
+    public get lang() {
+        return this._traducaoServ.lang;
+    }
+
     constructor(
         private element: ElementRef,
         private _isMobileServ: IsMobileService,
         private _resultadoServ: ResultadoService3,
         private _indicadorServ: IndicadorService3,
         private _analytics: AnalyticsService,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private _traducaoServ: TraducaoService,
     ) { }
 
     isMobile() {

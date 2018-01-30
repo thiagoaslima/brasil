@@ -177,7 +177,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     setaTipo(tipo){
 
-        if(this.isNivelNacional && tipo == 'cartograma'){
+        if(this.isNivelNacional && (tipo == 'cartograma' || tipo == 'ranking')){
             return;
         }
 
@@ -213,12 +213,13 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     isExibirRanking(): boolean{
         
-        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id);
+        return !this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(this.pesquisa.id) && !this.isNivelNacional;
     }
 
-    fazerDownload() {
+    fazerDownload(tipo: string) {
+        
         this.mostrarOpcoes = false;
-        this.onDownload.emit();
+        this.onDownload.emit({tipo: `${tipo}`});
     }
 
     ocultarValoresVazios() {

@@ -17,19 +17,19 @@
                         <tr>
                             <th></th>
                             <th>Localidade</th>
-                            <th>Brasil</th>
+                            <th *ngIf="codmun != 0">Brasil</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Homens</td>
                             <td class="number">{{data.piramide[data.selectedIndex].cidade.homens | resultado}}</td>
-                            <td class="number">{{data.piramide[data.selectedIndex].brasil.homens | resultado}}</td>
+                            <td class="number" *ngIf="codmun != 0">{{data.piramide[data.selectedIndex].brasil.homens | resultado}}</td>
                         </tr>
                         <tr>
                             <td>Mulheres</td>
                             <td class="number">{{data.piramide[data.selectedIndex].cidade.mulheres | resultado}}</td>
-                            <td class="number">{{data.piramide[data.selectedIndex].brasil.mulheres | resultado}}</td>
+                            <td class="number" *ngIf="codmun != 0">{{data.piramide[data.selectedIndex].brasil.mulheres | resultado}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -45,7 +45,7 @@
                                     <g class="faixas">
                                         <rect *ngFor="let item of data.piramide; let i = index;" (mouseover)='setTip(i)' (mouseleave)='setTip(null)' [attr.class]="(i%2 ? 'par' : 'impar')" [attr.x]="-100" [attr.y]="data.py*i" [attr.width]="200" [attr.height]="data.py" />
                                     </g>
-                                    <g class="brasil">
+                                    <g class="brasil" *ngIf="codmun != 0">
                                         <rect *ngFor="let item of data.piramide; let i = index;" (mouseover)='setTip(i)' (mouseleave)='setTip(null)' class="brasil" [attr.x]="0" [attr.y]="data.py*i" [attr.width]="(item.brasil.mulheres/data.max.brasil)*100" [attr.height]="data.py" />
                                         <rect *ngFor="let item of data.piramide; let i = index;" (mouseover)='setTip(i)' (mouseleave)='setTip(null)' class="brasil" [attr.x]="(item.brasil.homens/data.max.brasil)*-100" [attr.y]="data.py*i" [attr.width]="(item.brasil.homens/data.max.brasil)*100" [attr.height]="data.py" />
                                     </g>
@@ -63,7 +63,7 @@
                         <td></td>
                         <td class="sexo">Homens &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mulheres</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="codmun != 0">
                         <td></td>
                         <td class="escopo"><svg width="15" height="10" viewBox="0 0 15 10" preserveAspectRatio="none"><path d="M 0 10 L 7.5 0 L 15 10 Z" /></svg> Brasil</td>
                     </tr>

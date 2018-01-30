@@ -1,8 +1,151 @@
 # Change log
 
+## [v4.3.5] - 2018-01-25
+### Added
+	- Implementação do download dos dados da pesqiosa para todos os municípios do mesmo esatdo.
+
+### Fixed
+	- Correção da exibição dos temas do censo na pesquisa censo.
+
+
+## [v4.3.4] - 2018-01-24
+### Changed
+	- Remoção do indicador "Rendimento médio mensal per capita" do panorama estadual.
+
+### Fixed
+	- Correção da exibição do icone de pesquisa na página home - pesquisas.
+
+
+## [v4.3.3] - 2018-01-12
+### Added
+	- Inclusão da notas de população juducial para os municípios Manaquiri, Santa Isabel do Rio Negro, Uarini, Urucará e Barcelos, todos do estado do Amazonas.
+
+
+## [v4.3.2] - 2018-01-11
+### Added
+    - Inclusão da pesquisa Estadic
+
+### Changed
+	- Ajustes nos graficos do panorama Brasil: 
+		Unificação das séries "Domicílios com iluminacao elétrica, coleta lixo, abastecimento de água e esgotamento sanitário"; 
+		Unificação das séries "Produção industrial x Produtividade";
+		Movimentação da série "Pib per capita" do tema População para o tema Economia; 
+		Remoção das séries "Posse de telefone móvel celular" e "Taxa de escolarização de 6 a 14 anos de idade"; 
+		Ajuste na série "Pib per capita" para exibir os últimos 10 períodos.
+
+### Fixed
+	- Ajuste no pirâmide etária para não repetir as informações do Brasil quando o nível exibido é o nacional
+
+
+## [v4.3.1] - 2018-01-09
+### Fixed
+    - Exibição das notas especiais de demanda legal sobre a população estimada de alguns municípios.
+
+
+## [v4.3.0] - 2018-01-08
+### Added
+	- Adicionado o panorama Brasil com os seguintes temas e respectivos indicadores:
+		Geral
+			Capital
+			Número de municípios
+			Área territorial
+			Presidente
+		POPULAÇÃO
+			População estimada
+			População no último censo
+			Taxa de fecundidade
+			Taxa de mortalidade infantil
+			Domicílios com iluminação elétrica
+			Domicílios com coleta de lixo
+			Domicílios com rede geral de abastecimento de água
+			Domicílios com esgotamento sanitário adequado 
+			PIB per capita
+			Domicílios com microcomputador
+			Domicílios com acesso à Internet
+			Posse de telefone móvel celular
+			Domicílios com televisão
+			Prática de atividade física
+		ECONOMIA
+			Preços - IPCA mensal
+			Preços - INPC
+			Preços - IPCA15
+			Preços Produtor - IPP
+			Preços - IPCA 12 meses
+			Indústria - PIM-PF
+			Comércio - PMC
+			Serviços - PMS
+			Taxa de desocupação - PNAD Contínua
+			PIB - SCNT
+			Construção - SINAPI
+		EDUCAÇÃO
+			Taxa de analfabetismo 10 anos ou mais de idade
+			Taxa de escolarização de 6 a 14 anos de idade
+		INDÚSTRIA
+			Pessoal ocupado assalariado - Índice acumulado em relação ao mesmo período do ano anterior
+			Produção industrial - Índice acumulado em relação ao mesmo período do ano anterior
+			Produtividade - Índice acumulado em relação ao mesmo período do ano anterior
+	- No nível Brasil foram adicionadas as pesquisas abaixo:
+		Censo
+		Censo agropecuário
+		Entidades de assistência social privadas sem fins lucrativos
+		Fundações privadas e associações sem fins lucrativos
+		Pesquisa Anual da Indústria da Construção
+		Pesquisa Anual de Comércio
+		Pesquisa Anual de Serviços
+		Pesquisa de serviços de hospedagem
+		Pesquisa Industrial Anual - Empresa
+		Pesquisa nacional de saneamento básico
+		Pesquisa Nacional de Saúde
+		Pesquisa Nacional de Saúde do Escolar
+		PNAD - Pesquisa Nacional por Amostra de Domicílios
+		PNADC - Pesquisa Nacional por Amostra de Domicílios Contínua
+		POF - Pesquisa de Orçamentos Familiares
+		Produção agrícola - Cereais, leguminosas e oleaginosas
+		Projeção da população
+		Registro civil
+		Série estudos e pesquisas: estatísticas de empreendedorismo
+		Serviços de saúde
+    - Em estados, foi incluído o histórico.
+
+### Changed
+	- Em estados, foram adicionados os seguintes indicadores ao panorama:
+        POPULAÇÃO
+			Rendimento médio mensal per capita
+			Total de veículos	
+		EDUCAÇÃO
+			Matrículas no ensino médio
+			Docentes no ensino fundamental
+			Docentes no ensino médio
+			Número de estabelecimentos de ensino fundamental
+			Número de estabelecimentos de ensino médio
+		TRABALHO E RENDIMENTO
+			Pessoas de 16 anos ou mais ocupadas na semana de referência
+			Proporção de pessoas de 16 anos ou mais em trabalho formal, considerando apenas as ocupadas na semana de referência 
+		ECONOMIA
+			Número de agências
+			Total de depósitos
+	- Em municípios, foram incluídos os seguintes indicadores ao panorama:
+		EDUCAÇÃO
+			Docentes no ensino fundamental
+			Docentes no ensino médio
+			Número de estabelecimentos de ensino fundamental
+			Número de estabelecimentos de ensino médio
+		ECONOMIA
+			Total de receitas realizadas
+			Total das despesas realizadas
+
+### Fixed
+    - Erro na geração do resumo da síntese estadual.
+    - Bug que não exibia o cartograma na pesquisa quando não havia dados para a localidade selecionada, mas havia nas localidades vizinhas.
+    - Bug que não traduzia as notas e fontes dos indicadores do panorama.
+    - Bug que não traduzia os títulos dos gráficos.
+    - Bug que não traduzia o indicador gentílico.
+
+
 ## [v4.2.16.1] - 2017-12-15
 ### Changed
  - Ajuste no panorama estadual para remover o tratamento especial de casas decimais no indicador 63238 da SIS.
+
 
 ## [v4.2.16] - 2017-12-15
 ### Changed

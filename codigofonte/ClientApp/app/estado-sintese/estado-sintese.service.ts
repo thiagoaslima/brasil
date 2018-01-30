@@ -1,10 +1,11 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/of';
+
 import { Panorama2Service } from '../panorama2/panorama.service';
 import { LocalidadeService2 } from '../shared2/localidade/localidade.service';
 import { RouterParamsService } from '../shared/router-params.service';
-import { Subscription } from 'rxjs/Subscription';
 import { AppState } from '../shared2/app-state';
 import { converterObjArrayEmHash } from '../utils2';
 import { PANORAMA, ItemConfiguracao } from '../panorama2/configuration';
@@ -27,12 +28,15 @@ export class EstadoSinteseService {
         private _routerParams: RouterParamsService,
         private _traducaoService: TraducaoService,
         private _bibliotecaService: BibliotecaService,
-        private _resultadoService: ResultadoService3
+        private _resultadoService: ResultadoService3,
     ) {
 
-        this.idioma = this._traducaoService.lang;
-
     }
+
+    public get lang() {
+        return this._traducaoService.lang;
+    }
+
     getResumoMunicipios(estado, indicadores) {
 
         let municipios = estado.children;
@@ -125,13 +129,12 @@ export class EstadoSinteseService {
                     municipio.indicadores = resultados[municipio.codigo].map(resultado => {
 
                         let codigoLocalidade = Object.keys(valoresBiblioteca).filter(valor => valor.substring(0, 6) == resultado.codigoLocalidade + "").shift();
-                        let valorBiblioteca = valoresBiblioteca[codigoLocalidade];
                         let configuracao = this.getConfiguracao('municipio');
                         return configuracao
                             .filter(item => Boolean(item.indicadorId) && resultado.indicador.id == item.indicadorId)
                             .map(item => {
 
-                                municipio.gentilico = valorBiblioteca.GENTILICO;
+                                municipio.gentilico = valoresBiblioteca.GENTILICO;
                                 const periodo = item.periodo
                                     || resultado && resultado.periodoValidoMaisRecente
                                     || '-';

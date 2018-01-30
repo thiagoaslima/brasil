@@ -7,7 +7,7 @@
 
     <div  *ngFor="let item of cabecalho; let idx = index" [ngClass]="{'topo__celula-esquerda': idx === 0, 'topo__celula-direita': idx === 1, 'topo__celula-linha': idx > 1}">
         <h3 class="topo__titulo">
-            {{ item.titulo }} 
+            {{ item.titulo | l10n:lang }} 
         </h3>
         <p class="topo__valor">
             {{ item.valor }}
@@ -51,7 +51,7 @@
         <tr class="lista__indicador" [class.hide-content]="temaAtual != '#'+item.tema.substr(0,2).toLowerCase()">
             <td></td>
             <td class="lista__nome">
-                {{ item.titulo }}
+                {{ item.titulo | l10n:lang }}
                 <small>{{ '[' + item.periodo + ']' }}</small>
             </td>
             <td class="lista__valor" colspan="2">
@@ -59,14 +59,14 @@
                 {{ item.valor | resultado }}
 
                 <span class="lista__unidade">{{ item.unidade }} &nbsp;</span>
-                <div class="lista__nota" *ngIf="getNotaEspecial(cabecalho[0]?.valor, item.titulo)" >
+                <div class="lista__nota" *ngIf="getNotaEspecial(cabecalho[0]?.valor, item.id)" >
                     <i (click)="nota = !nota" item.titulo class="fa fa-exclamation-triangle lista__nota__icone" aria-hidden="true"></i>
                     <!--<i (click)="nota = !nota" style='cursor:pointer; font-style: normal; font-size: 0.6em; vertical-align: 3px; color: #1b779b;'>
                         <i (click)="nota = !nota" item.titulo class="fa fa-exclamation-triangle lista__nota__icone" aria-hidden="true"></i>
                         NOTAS
                     </i>-->
                     <div class="lista__nota__content" *ngIf="nota">
-                        {{getNotaEspecial(cabecalho[0].valor, item.titulo)}}
+                        {{ getNotaEspecial(cabecalho[0].valor, item.id) }}
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@
                         </div>
                         <div class="modal_resumo_indicador">
                             <label>
-                                <input type="checkbox" value="{{item.indicadorId}}"  (change)="selecionaIndicadoresFiltro(item,idx,$event)" />  {{ item.titulo }} <small>{{ '[' + item.periodo + ']' }}</small>
+                                <input type="checkbox" value="{{item.indicadorId}}"  (change)="selecionaIndicadoresFiltro(item,idx,$event)" />  {{ item.titulo | l10n:lang }} <small>{{ '[' + item.periodo + ']' }}</small>
                             </label>
                         </div>
                    
@@ -121,7 +121,7 @@
     <h1>{{ 'panorama_resumo__notas' | l10n:lang }}</h1>
     <ol>
         <li *ngFor="let nota of notas">
-            <em>{{ nota.titulo }}</em>: {{ nota.texto }}<br /><br />
+            <em>{{ nota.titulo | l10n:lang }}</em>: {{ nota.texto }}<br /><br />
         </li>
     </ol>
 
@@ -130,7 +130,7 @@
     <h1>{{ 'panorama_resumo__fontes' | l10n:lang }}</h1>
     <ol>
         <li *ngFor="let fonte of fontes">
-            <em>{{ fonte.titulo }}</em>: {{ fonte.texto }}<br /><br />
+            <em>{{ fonte.titulo | l10n:lang }}</em>: {{ fonte.texto }}<br /><br />
         </li>
     </ol>
 </div>
