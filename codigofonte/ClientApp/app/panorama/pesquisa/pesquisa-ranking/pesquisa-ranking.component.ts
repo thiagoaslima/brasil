@@ -70,6 +70,8 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
 
+        debugger;
+
         this.localidadeByContexto = this.getLocalidadesByContexto(this.localidades);
 
         this._carregarRanking(this._activatedRoute.snapshot);

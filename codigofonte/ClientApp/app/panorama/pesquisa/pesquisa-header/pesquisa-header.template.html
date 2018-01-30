@@ -55,7 +55,7 @@
     </div>
     <div class="cabecalho__seletor-visualizacao-dados">
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == ''" (click)="setaTipo('')">
-            <div>
+            <div *ngIf='isBrowser'>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.995,12.973c-1.535,0-3.073,0-4.61,0
@@ -93,7 +93,7 @@
             {{ 'pesquisa_header__tabela' | l10n:lang }}
         </div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'grafico'" (click)="!isVazio ? setaTipo('grafico') : 0" [class.desabilitado]="isVazio || this.listaPeriodos.length <= 1 || (!!this.pesquisa && !isExibirGrafico())">
-            <div>
+            <div *ngIf='isBrowser'>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.179,12.36c-0.453-0.452-0.872-0.871-1.308-1.306
@@ -111,7 +111,7 @@
             {{ 'pesquisa_header__serie_historica' | l10n:lang }}
         </div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'cartograma'" (click)="!isVazio ? setaTipo('cartograma') : 0" [class.desabilitado]="isVazio || isNivelNacional || (!!this.pesquisa && !isExibirCartograma())">
-            <div>
+            <div *ngIf='isBrowser'>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                         <path d="M10.459,12.205c-0.052,0.044,0.021,0.999,0.021,0.999l-1.557,2.311l-1.573-1.342l0.489-0.774l0.78-0.587
@@ -125,7 +125,7 @@
             {{ 'pesquisa_header__cartograma' | l10n:lang }}
         </div>
         <div class="cabecalho__seletor-visualizacao-dados__item" [class.selecionado]="tipo == 'ranking'" (click)="!isVazio ? setaTipo('ranking') : 0" [class.desabilitado]="isVazio  || (!!this.pesquisa && !isExibirRanking())">
-                <div>
+                <div *ngIf='isBrowser'>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.449,7.235c1.131,0,2.262,0,3.393,0
                                 c0.262,0,0.303,0.041,0.304,0.3c0.001,0.309,0.003,0.618-0.001,0.927c-0.003,0.199-0.059,0.251-0.258,0.253

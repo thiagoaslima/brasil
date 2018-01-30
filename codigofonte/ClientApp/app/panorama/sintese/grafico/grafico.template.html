@@ -6,7 +6,9 @@
     <div *ngIf="!carregando">
         <div *ngIf="!!datasets && datasets.length > 0">
             
-            <canvas baseChart
+
+
+            <canvas *ngIf="isBrowser" baseChart
                 class="chart"
                 width="500" 
                 height="400"

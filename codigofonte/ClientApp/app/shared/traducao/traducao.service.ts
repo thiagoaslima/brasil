@@ -14,7 +14,7 @@ export class TraducaoService {
 
     private _lang;
 
-    private getParameterByName(name, url = location.href) {
+    private getParameterByName(name, url = location && location.href) {
         name = name.replace(/[\[\]]/g, "\\$&");
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
             results = regex.exec(url);
@@ -29,8 +29,8 @@ export class TraducaoService {
         this.isBrowser = isPlatformBrowser(platformId);
         const prerenderURL: string = Zone.current.get('originUrl');
 
-        const queryLanguage = this.getParameterByName('lang', prerenderURL ? prerenderURL : undefined);
-
+        //const queryLanguage = this.getParameterByName('lang', prerenderURL ? prerenderURL : undefined);
+        const queryLanguage = undefined;
 
         if (this.isBrowser) {
 

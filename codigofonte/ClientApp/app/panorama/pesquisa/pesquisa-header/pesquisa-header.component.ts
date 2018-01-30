@@ -1,6 +1,7 @@
 import { IndicadorService3 } from '../../../shared/services/indicador';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, PLATFORM_ID, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { isPlatformBrowser } from '@angular/common';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -50,6 +51,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     private subs$$;
     private isOcultarValoresVazios = true;
 
+    public isBrowser;
+
     public indicadoresDaPesquisa;
 
     public get lang() {
@@ -64,8 +67,12 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _router: Router,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService
-    ) { }
+        private _traducaoServ: TraducaoService,
+        @Inject(PLATFORM_ID) platformId
+    ) {
+
+        this.isBrowser = isPlatformBrowser(platformId);
+     }
 
     ngOnInit() {
 
