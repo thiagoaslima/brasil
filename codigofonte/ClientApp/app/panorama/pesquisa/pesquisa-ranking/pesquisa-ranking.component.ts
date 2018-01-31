@@ -70,8 +70,6 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
 
-        debugger;
-
         this.localidadeByContexto = this.getLocalidadesByContexto(this.localidades);
 
         this._carregarRanking(this._activatedRoute.snapshot);
@@ -260,7 +258,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                 contextos.push(localidade.parent.codigo.toString());
             }
 
-            requests.push(this._rankingService.getRankingsIndicador([{indicadorId, periodo}], contextos, localidade.codigo));
+            requests.push(this._rankingService.getRankingIndicador(indicadorId, periodo, contextos, localidade.codigo));
         });
 
         return Observable.zip(...requests);
@@ -320,7 +318,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
 
             if (mergedRanking.hasOwnProperty(key)) {
 
-                mergedRanking[key].listaGrupos = mergedRanking[key].listaGrupos.sort((a, b) => a.posicao >= b.posicao ? 1 : -1);
+                mergedRanking[key].listaGrupos = (mergedRanking[key].listaGrupos).sort((a, b) => a.posicao >= b.posicao ? 1 : -1);
                 ranking.push(mergedRanking[key]);
             }
         }

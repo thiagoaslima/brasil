@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Ranking } from '.';
+import { Ranking, RankingLocalidade, ItemRanking } from '.';
 import { niveisTerritoriais } from '../values';
 import { ConfigService } from '../../';
-
+import { LocalidadeService3 } from '../localidade/localidade.service';
 
 const headers = new Headers({ 'accept': '*/*' });
 const options = new RequestOptions({ headers: headers, withCredentials: false });
@@ -14,7 +14,8 @@ export class RankingService3 {
 
     constructor(
         private _http: Http,
-        private configService: ConfigService
+        private configService: ConfigService,
+        private localidadeService: LocalidadeService3
     ) { }
 
     public getRankingsIndicador(indicadores: Array<{ indicadorId: number, periodo: string }>, contextos: string[], codigoLocalidade: number) {
@@ -27,6 +28,64 @@ export class RankingService3 {
         const url = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/indicadores/ranking/${_indicadores}?localidade=${codigoLocalidade}&contexto=${_contexto}&upper=0&lower=0&natureza=${naturezaParams}`;
 
         return this._request(url).map(response => response.map(item => new Ranking(item)));
+    }
+
+    private _obterLocalidade(id: number){
+
+        // Se o código for de uma UF
+        if(String(id).length == 2){
+
+            return this.localidadeService.getUfByCodigo(id);
+        }
+
+        return this.localidadeService.getMunicipioByCodigo(id);
+    }
+
+
+    public getRankingIndicador(indicadorId: number, periodo: string, contexto: string[], localidade: number, natureza: number = 4){
+
+        const _contexto = contexto.join(',');
+
+        const url = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_DADOS')}/v1/pesquisas/indicadores/ranking/${indicadorId}(${periodo})?localidade=${localidade}&contexto=${_contexto}&natureza=${natureza}&appCidades=1`;
+
+        return this._request(url)
+            .map(rankings => {
+
+                return rankings.map(rankings => {
+
+                    let grupo: ItemRanking[] = [];
+
+                    rankings.res.map(ranking => {
+
+                        let item = new ItemRanking(
+                            this._obterLocalidade(parseInt(ranking['localidade'], 10)),
+                            ranking['#'],
+                            ranking['res']);
+
+                        if(!!rankings.unidade){
+                            item.fatorMultiplicativo = rankings.unidade.multiplicador;
+                            item.unidadeMedida = rankings.unidade.id;
+                        }
+
+                        grupo.push(item);
+                    });
+
+                    return grupo;
+                });
+
+            })
+            .map(res => {
+
+                let listaRankingLocalidade: RankingLocalidade[] = [];
+                for(let i = 0; i < contexto.length; i++){
+
+                    let rankingLocalidade: RankingLocalidade = new RankingLocalidade(indicadorId, periodo, contexto[i], localidade, res[i]);
+
+                    listaRankingLocalidade.push(rankingLocalidade);
+                }
+
+                return listaRankingLocalidade;
+            });
     }
 
     private _getTipoLocalidade(codigoLocalidade: number): string {
