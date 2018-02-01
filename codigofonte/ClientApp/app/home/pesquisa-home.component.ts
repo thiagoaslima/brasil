@@ -15,7 +15,7 @@ import {
     styleUrls: ['pesquisa-home.component.css']
 })
 export class PesquisaHomeComponent implements OnInit {
-    // public versao = require('../version.json');
+    public versao = require('../version.json');
     public  pesquisas = require('./pesquisas.json');
 
     public get lang() {
