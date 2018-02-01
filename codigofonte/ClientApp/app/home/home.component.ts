@@ -11,7 +11,8 @@ import { TraducaoService } from "../shared";
     styleUrls: [ 'home.component.css' ],
 })
 export class HomeComponent implements OnInit {
-    // public versao = require('../version.json');
+
+    public versao = require('../version.json');
 
     public get lang() {
         return this._traducaoServ.lang;
