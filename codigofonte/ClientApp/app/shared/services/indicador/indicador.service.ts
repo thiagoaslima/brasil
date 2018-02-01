@@ -68,7 +68,13 @@ export class IndicadorService3 {
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return this._request(url)
-            .map(arr => arr.map(obj => Indicador.criar(Object.assign(obj, { pesquisa_id: pesquisaId }))))
+            .map(arr => arr.map(obj => {
+
+                obj['pesquisa_id'] = pesquisaId;
+
+                return Indicador.criar(obj);
+            }
+            ))
             .catch(err => this._handleError(err, new Error(errorMessage)))
     }
 

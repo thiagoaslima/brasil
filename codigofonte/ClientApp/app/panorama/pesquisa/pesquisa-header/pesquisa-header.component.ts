@@ -80,10 +80,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             this._pesquisaService.getPesquisa(parseInt(params.params.pesquisa)).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
     
-                this._indicadorService.getIndicadoresDaPesquisa(this.pesquisa.id)
-                    .subscribe((indicadores) => {
-                        this.indicadoresDaPesquisa = indicadores;
-                    });
+
 
                 this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
 
@@ -94,6 +91,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     this.ano = Number(this.pesquisa.periodos.sort((a, b) => a.nome > b.nome ? 1 : -1)[(this.pesquisa.periodos.length - 1)].nome);
                 }
+
+                this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, this.ano.toString())
+                    .subscribe((indicadores) => {
+                        this.indicadoresDaPesquisa = indicadores;
+                    });
 
                 this.isNivelMunicipal = !!params.params.uf && !!params.params.municipio;
                 this.isNivelEstadual = !!params.params.uf && !params.params.municipio;
