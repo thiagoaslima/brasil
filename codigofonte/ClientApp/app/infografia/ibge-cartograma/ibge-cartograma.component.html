@@ -53,7 +53,7 @@
                                     <polygon *ngFor="let poly of item.polys" [attr.points]="poly" [style.stroke-width.px]="strokeWidth" />
                                 </svg:g>
                             </svg:g>
-                            <svg:use href="#marcador" xlink:href="img/marcador.svg#marcador" *ngFor="let marcador of marcadores"
+                            <svg:use href="#marcador" xlink:href="../../../img/marcador.svg#marcador" *ngFor="let marcador of marcadores"
                                 [attr.x]="marcador.x"
                                 [attr.y]="marcador.y"
                                 [attr.width]="marcador.width"
@@ -81,7 +81,7 @@
                     <p class="legenda__texto">{{ 'cartograma__sem_informacao' | l10n:lang }}</p>
                 </div>
                 <div class="legenda__item legenda__item--municipio">
-                    <p class="legenda__texto"><img src="img/marcador.svg"> {{ 'cartograma__local_selecionado' | l10n:lang }}</p>
+                    <p class="legenda__texto"><img src="../../../img/marcador.svg"> {{ 'cartograma__local_selecionado' | l10n:lang }}</p>
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 
-import { isBrowser } from 'angular2-universal';
+import { isPlatformBrowser } from '@angular/common';
 
 import { RouterParamsService } from '../router-params.service';
 
@@ -14,13 +14,16 @@ export class QRCodeComponent implements OnInit {
     static readonly servicoMin = 'https://cod.ibge.gov.br/min?u=';
     static readonly servicoQR = 'https://cod.ibge.gov.br/qr?d=';
 
-    public isBrowser = isBrowser;
+    public isBrowser;
 
     qrURL = '';
 
     constructor(
-        private _routerParamsServ: RouterParamsService
-    ) { }
+        private _routerParamsServ: RouterParamsService,
+        @Inject(PLATFORM_ID) platformId,
+    ) {
+        this.isBrowser = isPlatformBrowser(platformId)
+    }
 
     ngOnInit() {
         this._routerParamsServ.params$.subscribe(params => {

@@ -1,7 +1,10 @@
-import { TraducaoService } from '../../traducao/traducao.service';
-import { Indicador } from '../../shared3/models/indicador.model';
 import { Component, Input, OnChanges, OnInit, SimpleChange, ViewChild, ElementRef } from '@angular/core';
-import { Localidade } from '../../shared2/localidade/localidade.model';
+
+import {
+    TraducaoService,
+    Indicador,
+    Localidade,
+} from '../../shared';
 
 import { MapaService } from './mapa.service';
 

@@ -1,0 +1,43 @@
+<table class='mobile-table'>
+    <ng-template ngFor let-indicador [ngForOf]="indicadores">
+        <tr class='{{getStyleClass(indicador.posicao)}} mobile-tr' [class.aberto]="isListaAberta(indicador)" [class.sem-filho]="isFolha(indicador)" (click)="controlarExibicao(indicador)" *ngIf="indicador.visivel && !(indicador.isVazio && isOcultarValoresVazios)">
+            
+            <td class='label p '>
+                <div class="seta">
+                    <i class="fa fa-chevron-right" aria-hidden="true" *ngIf="!isListaAberta(indicador)"></i>
+                    <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="isListaAberta(indicador)"></i>
+                </div>
+                <div class='label--com-acao'>
+                    {{ indicador.indicador }} 
+                    <!--notas-->
+                    <div class="notas" *ngIf="obterNotasIndicador(indicador) != ''">
+                        <div class="area-click" [class.area-click--visivel]="indicador.id == idIndicadorSelecionado" (click)="idIndicadorSelecionado = 0"></div>
+                        <div class="notas__botao" (click)=" selecionarIndicador(indicador) ">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                        <div class="notas__lista-container" *ngIf="indicador.id == idIndicadorSelecionado">
+                            <ol>
+                                <li *ngFor="let nota of obterNotasIndicador(indicador)">
+                                    {{ nota }}
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <span class='mobile-unidade' *ngIf='indicador.unidade?.id'>({{ indicador.unidade?.id }})</span>
+                    <span class='mobile-unidade' *ngIf="indicador.unidade?.multiplicador > 1"> x {{indicador.unidade?.multiplicador}}</span>
+                </div>
+                <div class='acoes'></div>
+            </td>  
+
+            <td class='valor s' [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeA ? (indicador.localidadeA[periodo] | resultado: indicador?.unidade?.classe) : "" }}</td>
+            <td class='valor s' [class.compara-blank]="!localidades[1]" [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeB ? (indicador.localidadeB[periodo] | resultado: indicador?.unidade?.classe) : "" }}</td>
+            <td class='valor s' [class.compara-blank]="!localidades[2]" [class.sem-valor]="!indicador?.unidade?.id">{{ !!indicador.localidadeC ? (indicador.localidadeC[periodo] | resultado: indicador?.unidade?.classe) : "" }}</td>
+            <td class='valor s desk-unidade'> <span *ngIf="indicador.unidade?.multiplicador > 1">(x {{indicador.unidade?.multiplicador}})</span> {{ indicador.unidade?.id }}</td>  
+        </tr>
+    </ng-template>
+    
+    <div class="mensagem-vazio" *ngIf="isVazio && isOcultarValoresVazios">
+        {{ 'pesquisa_tabela__nenhum_valor_para_exibir' | l10n:lang }} <span *ngIf="exclusiva">{{ 'pesquisa_tabela__pesquisa_exclusiva_para_estados' | l10n:lang }}</span>.
+    </div>
+</table>

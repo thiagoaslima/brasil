@@ -14,17 +14,18 @@
                         <tr class="3300100 par">
                             <td class="nome">{{ municipio.nome }}</td>
                             <td class="gentilico">{{ municipio.gentilico }}</td>
-                            <td  *ngFor="let indicador of municipio.indicadores" >{{ indicador.valor | resultado }} <span *ngIf="indicador.valor!='-'">{{ indicador.unidade }}</span></td>
+                            <td  *ngFor="let indicador of municipio.indicadores" >{{ indicador.valor | resultado}} <span *ngIf="indicador.valor!='-'">{{ indicador.unidade }}</span></td>
                         </tr>                
                 </tbody>
                 <tfoot>
                     <tr>
                         <td [attr.colspan]="indicadores && (indicadores.length+2)">
                              <div *ngFor="let fonte of fontes;let i=index">
-                                 <br/>{{ "panorama_resumo__fonte" | l10n:lang }} {{i+1}} - {{ fonte.indicador | l10n:lang }}: {{ fonte.descricao }} 
+                                 <br/>{{ "panorama_resumo__fonte" | l10n:lang }} {{i+1}} - {{fonte.indicador}}: {{fonte.descricao}} 
                              </div>   
                             <div *ngFor="let nota of notas;let i=index">
-                                <br/>{{ "panorama_resumo__nota" | l10n:lang }} {{i+1}} - {{ nota.indicador | l10n:lang }}: {{ nota.descricao }}
+                                <br/>{{ "panorama_resumo__nota" | l10n:lang }} {{i+1}} - {{nota.indicador}}: {{nota.descricao}}
+
                             </div>
                         </td>
                     </tr>

@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { DOCUMENT } from '@angular/platform-browser';
-import { isBrowser } from 'angular2-universal';
+import { isPlatformBrowser } from '@angular/common';
 
 import { RouterParamsService } from '../router-params.service';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
@@ -25,18 +25,21 @@ export class QuestionarioComponent implements OnInit {
     pergunta = 1;
     ultimaPergunta = 7;
 
-    public isBrowser = isBrowser;
+    public isBrowser;
 
     constructor(
         private _routerParamsServ: RouterParamsService,
         private _http: Http,
         @Inject(DOCUMENT) private document: any,
-        private modalErrorService: ModalErrorService
-    ) { }
+        private modalErrorService: ModalErrorService,
+        @Inject(PLATFORM_ID) platformId,
+    ) {
+        this.isBrowser = isPlatformBrowser(platformId)
+    }
 
     ngOnInit() {
 
-        if(!this.getCookie("questionario.respondido") && isBrowser){
+        if(!this.getCookie("questionario.respondido") && this.isBrowser){
 
             setTimeout(() => { this.esconde = false }, 1 * 60 *  1000);
         }        
@@ -54,7 +57,7 @@ export class QuestionarioComponent implements OnInit {
         //envia o formulário
         if(this.pergunta == this.ultimaPergunta){
 
-            if(isBrowser){
+            if(this.isBrowser){
 
                 this.setCookie("questionario.respondido", "true", 365);
             }
@@ -103,7 +106,7 @@ export class QuestionarioComponent implements OnInit {
 
     private setCookie(cname, cvalue, exdays) {
 
-        if(!isBrowser){
+        if(!this.isBrowser){
             return;
         }
 
@@ -115,7 +118,7 @@ export class QuestionarioComponent implements OnInit {
 
     private getCookie(cname) {
 
-        if(!isBrowser){
+        if(!this.isBrowser){
             return "";
         }
 

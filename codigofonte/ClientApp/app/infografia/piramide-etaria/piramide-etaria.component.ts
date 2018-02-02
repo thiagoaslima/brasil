@@ -2,7 +2,7 @@ import { Component, OnChanges, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PiramideEtariaService } from './piramide-etaria.service';
-import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import { ModalErrorService } from '../../core';
 
 
 @Component({

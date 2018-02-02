@@ -1,60 +1,75 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { SharedModule } from '../shared';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
-import { SharedModule } from '../shared/shared.module';
-import { SharedModule2 } from '../shared2/shared.module';
-import { SeletorLocalidadeComponent } from './seletor-localidade/seletor-localidade.component';
-import { SeletorLocalidadeService } from './seletor-localidade/seletor-localidade.service';
-import { BuscaComponent } from './busca/busca.component';
-import { BuscaService } from './busca/busca.service';
-import { BuscaCompletaService } from './busca/busca-completa.service';
-import { TituloBrowserComponent } from './titulo-browser/titulo-browser.component';
-import { GeolocationComponent } from './geolocation/geolocation.component';
-import { MetatagBrowserComponent } from './metatag-browser/metatag-browser.component';
-import { Page404Component } from './page404/page404.component';
-import { ModalErroComponent } from './modal-erro/modal-erro.component';
-import { ModalErrorService } from './modal-erro/modal-erro.service';
-import { throwIfAlreadyLoaded } from './core.guard';
-import { TraducaoModule } from '../traducao/traducao.module';
-import { LoginComponent } from './login/login.component';
+import {
+    AniversarioModule,
 
-
-
-@NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    SharedModule2,
-    TraducaoModule
-  ],
-  declarations: [
-    SeletorLocalidadeComponent,
-    BuscaComponent,
+    BarraGov,
     TituloBrowserComponent,
-    GeolocationComponent,
-    MetatagBrowserComponent,
-    Page404Component,
-    ModalErroComponent,
-    LoginComponent
-  ],
-  exports: [
-    SeletorLocalidadeComponent,
-    BuscaComponent,
-    TituloBrowserComponent,
-    GeolocationComponent,
     MetatagBrowserComponent,
     ModalErroComponent,
-    LoginComponent
-  ],
-  providers: [
+    ShellComponent,
+    SeletorLocalidadeComponent,
+    BuscaComponent,
+    GeolocationComponent,
+    GeolocationDirective,
+    SubmenuComponent,
+    
     BuscaService,
     BuscaCompletaService,
+    ModalErrorService,
     SeletorLocalidadeService,
-    ModalErrorService
-  ]
+} from ".";
+
+const declarations = [
+    BarraGov,
+    TituloBrowserComponent,
+    MetatagBrowserComponent,
+    ModalErroComponent,
+    ShellComponent,
+    SeletorLocalidadeComponent,
+    BuscaComponent,
+    GeolocationComponent,
+    GeolocationDirective,
+    SubmenuComponent,
+];
+
+const providers = [
+    ModalErrorService,
+    SeletorLocalidadeService,
+    BuscaService,
+    BuscaCompletaService,
+]
+
+@NgModule({
+    imports: [
+        CommonModule,
+        HttpModule,
+        FormsModule,
+        SharedModule,
+        RouterModule,
+        NgxPageScrollModule,
+        AniversarioModule,
+    ],
+    declarations: [
+        ...declarations,
+    ],
+    providers: [
+        ...providers,
+    ],
+    exports: [
+        ...declarations,
+    ],
 })
 export class CoreModule {
-  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
-  }
+    constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
+        if (parentModule) {
+            throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+        }
+    }
 }

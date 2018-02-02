@@ -1,0 +1,69 @@
+.loading{
+    padding-top: 30px;
+    color: #999;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.grafico{
+    padding: 2% 0;
+}
+
+button{
+    border: none;
+    background-color: #E6E6E6;
+    padding: 2px 3px;
+    font-size: .8em;
+}
+
+button .fa{
+    color: #1B779B;
+}
+
+.notas__lista-container {
+    margin-left: 128px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    margin-top: 56px;
+    font-size: .9em;
+}
+
+.fontes__lista-container {
+    position: absolute;
+    background: #fff;
+    padding: 10px 15px 15px 26px;
+    width: 200px;
+    border: 1px solid #ccc;
+    z-index: 2;
+    font-size: .9em;
+    margin-left: -138px;
+}
+
+.area-click{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    display: none;
+}
+
+.area-click--visivel{
+    display: block;
+}
+
+.botao{
+    cursor: pointer;
+    padding: 0 0 5px 5px;
+}
+
+
+.botao-container{
+    text-align: right;
+    color: #999;
+}

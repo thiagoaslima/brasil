@@ -1,77 +1,95 @@
-import { TraducaoModule } from '../traducao/traducao.module';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BasicCacheModule } from './cache/basic-cache.module';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModuleWithProviders, NgModule, PLATFORM_ID } from '@angular/core';
 
+import { TraducaoModule } from './traducao';
 import { WindowEventsModule } from './window-events/window-events.module';
-import { TopoJson, TOPOJSON } from './topojson.v2';
 
-import { AnalyticsService } from './analytics.service';
-import { RouterParamsService } from './router-params.service';
-import { CommonService } from './common.service';
-import { ResultadoPipe } from './resultado.pipe';
-import { CortaTextoPipe } from './corta-texto.pipe';
-import { IsMobileService } from './is-mobile.service';
-import { QRCodeComponent } from './qrcode/qrcode.component';
-import { Breadcrumb } from './breadcrumb/breadcrumb.component';
-import { MensagemSetasComponent } from './mensagem-setas/mensagem-setas.component';
-import { NaoAcheiComponent } from './nao-achei/nao-achei.component';
-import { QuestionarioComponent } from './questionario/questionario.component';
-import { MensagemTraducaoComponent } from './mensagem-traducao/mensagem-traducao.component';
-
-const MODULES = [
-    // Do NOT include UniversalModule, HttpModule, or JsonpModule here
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    WindowEventsModule,
-    ReactiveFormsModule,
-    TraducaoModule
-];
-
-const PIPES = [
-    // put pipes here
+import {
     ResultadoPipe,
-    CortaTextoPipe
-];
-
-const COMPONENTS = [
-    // put shared components here
-    QRCodeComponent,
     Breadcrumb,
     MensagemSetasComponent,
     NaoAcheiComponent,
+    QRCodeComponent,
     QuestionarioComponent,
-    MensagemTraducaoComponent
-];
+    CortaTextoPipe,
+    MensagemTraducaoComponent,
 
-const PROVIDERS = [
+    BibliotecaService,
+    ConjunturaisService,
+    IndicadorService3,
+    LocalidadeService3,
+    PesquisaService3,
+    PesquisaConfiguration,
+    RankingService3,
+    ResultadoService3,
+    AnalyticsService,
+    AppState,
     RouterParamsService,
-    CommonService,
     IsMobileService,
+    ConfigService,
+    CommonService,
+    TopoJson,
+    TOPOJSON,
+} from './';
+
+const declarations = [
+    ResultadoPipe,
+    Breadcrumb,
+    MensagemSetasComponent,
+    NaoAcheiComponent,
+    QRCodeComponent,
+    QuestionarioComponent,
+    CortaTextoPipe,
+    MensagemTraducaoComponent,
+]
+
+const providers = [
+    ConfigService,
+    BibliotecaService,
+    LocalidadeService3,
+    ConjunturaisService,
+    IndicadorService3,
+    PesquisaService3,
+    PesquisaConfiguration,
+    RankingService3,
+    ResultadoService3,
     {
         provide: AnalyticsService,
-        deps: [Router],
-        useFactory: (router: Router) => {
-            return new AnalyticsService('UA-285486-1', router);
+        deps: [Router, PLATFORM_ID],
+        useFactory: (router: Router, platformId: string) => {
+            return new AnalyticsService('UA-285486-1', router, platformId)
         }
     },
-    { provide: TOPOJSON, useValue: TopoJson }
+    AppState,
+    RouterParamsService,
+    IsMobileService,
+    CommonService,
+    {
+        provide: TOPOJSON,
+        useValue: TopoJson,
+    }
 ]
 
 @NgModule({
     imports: [
-        ...MODULES
+        CommonModule,
+        FormsModule,
+        TraducaoModule.forRoot(),
+        BasicCacheModule,
+        WindowEventsModule,
     ],
     declarations: [
-        ...PIPES,
-        ...COMPONENTS
+        ...declarations,
     ],
     exports: [
-        ...MODULES,
-        ...PIPES,
-        ...COMPONENTS
+        ...declarations,
+        CommonModule,
+        FormsModule,
+        TraducaoModule,
+        WindowEventsModule,
     ]
 })
 export class SharedModule {
@@ -79,7 +97,7 @@ export class SharedModule {
         return {
             ngModule: SharedModule,
             providers: [
-                ...PROVIDERS
+                ...providers
             ]
         };
     }

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { isBrowser } from 'angular2-universal';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'breadcrumb',
@@ -14,10 +14,15 @@ export class Breadcrumb implements OnInit, OnChanges {
     @Input() urlBase = '';
     @Input() breadcrumb;
 
+    isBrowser;
+
     constructor(
         private _route: ActivatedRoute,
-        private _router: Router
-    ){}
+        private _router: Router,
+        @Inject(PLATFORM_ID) platformId,
+    ){
+        this.isBrowser = isPlatformBrowser(platformId);
+    }
 
     ngOnChanges(){
         
@@ -28,7 +33,7 @@ export class Breadcrumb implements OnInit, OnChanges {
     }
 
     navegarPara(indicador){
-        if (isBrowser) {
+        if (this.isBrowser) {
             let url = window.location.href;
             let path:any = url.split('?')[0];
             let queryParams = {};

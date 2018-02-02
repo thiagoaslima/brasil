@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { isBrowser, isNode } from 'angular2-universal/browser';
 
 import { brasil } from '../../../api/brasil';
 import { ufs } from '../../../api/ufs';

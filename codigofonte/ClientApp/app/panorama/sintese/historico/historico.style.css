@@ -1,0 +1,53 @@
+.hist__titulo{
+    margin: 10px 0px;
+}
+
+.hist__texto{
+    line-height: 145%;
+}
+
+.hist__sem-historico{
+    background-color: #E6E6E6;
+	padding: 10px; 
+	text-align:center;
+}
+
+.caixa{
+    background-color: white;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.caixa__cabecalho{
+    position: relative;
+}
+
+.caixa__titulo{
+    margin: 0px;
+    padding: 10px;
+    display: inline-block;
+    width: 90%;
+}
+
+.caixa__conteudo{
+    line-height: 2em;
+    font-size: .95em;
+    padding: 16px 48px 48px 48px;
+	width: 100%;
+    max-width: 900px;
+}
+
+@media screen and (max-width: 768px) {
+	.caixa__conteudo{
+	    padding-left:0;
+	}
+}
+
+/*tela gigante*/
+@media screen and (min-width: 1600px) {
+    .caixa__conteudo{
+        width: 60%;
+        max-width: none;
+        padding-right: 0px;
+    }
+}

@@ -1,88 +1,86 @@
-var isDevBuild = process.argv.indexOf('--env.prod') < 0;
-var path = require('path');
-var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
-var merge = require('webpack-merge');
-var CompressionPlugin = require("compression-webpack-plugin");
-//var DashboardPlugin = require('webpack-dashboard/plugin');
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const AotPlugin = require('@ngtools/webpack').AngularCompiler;
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
-var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
+module.exports = (env) => {
+    // Configuration in common to both client-side and server-side bundles
+    const isDevBuild = !(env && env.prod);
+    const sharedConfig = {
+        stats: { modules: false },
+        context: __dirname,
+        resolve: { extensions: [ '.js', '.ts' ] },
+        output: {
+            filename: '[name].js',
+            chunkFilename: '[name]-chunk.js',
+            publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+        },
+        module: {
+            rules: [
+                { test: /\.ts$/, include: /ClientApp/, use: isDevBuild ? ['awesome-typescript-loader?silent=true', 'angular-router-loader', 'angular2-template-loader'] : '@ngtools/webpack' },
+                { test: /\.html$/, use: 'html-loader?minimize=false' },
+                { test: /\.css$/, use: [ 'to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] },
+                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
+                { test: /\.properties$/, use: 'properties-loader' }
+            ]
+        },
+        plugins: [new CheckerPlugin()]
+    };
 
-// Configuration in common to both client-side and server-side bundles
-var sharedConfig = {
-    resolve: { extensions: [ '', '.js', '.ts' ] },
-    output: {
-        filename: '[name].js',
-        publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
-    },  
-    module: {
-        preLoaders: [
-            { test: /\.json$/, loader: 'json'},
-        ],
-        loaders: [
-            { test: /\.ts$/, include: [/ClientApp/, /node_modules/], loaders: ['ts', 'angular2-template-loader'] },
-            { test: /\.html$/, loader: 'raw' },
-            { test: /\.css$/, loader: 'to-string!css' },
-            { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url', query: { limit: 25000 } },
-            { test: /\.properties$/, loader: 'properties-loader' }
-        ]
-    }
+    // Configuration for client-side bundle suitable for running in browsers
+    const clientBundleOutputDir = './wwwroot/dist';
+    const clientBundleConfig = merge(sharedConfig, {
+        entry: { 'main-client': './ClientApp/boot.browser.ts' },
+        output: { path: path.join(__dirname, clientBundleOutputDir) },
+        plugins: [
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./wwwroot/dist/vendor-manifest.json')
+            })
+        ].concat(isDevBuild ? [
+            // Plugins that apply in development builds only
+            new webpack.SourceMapDevToolPlugin({
+                filename: '[file].map', // Remove this line if you prefer inline source maps
+                moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
+            })
+        ] : [
+            // Plugins that apply in production builds only
+            new webpack.optimize.UglifyJsPlugin(),
+            new AotPlugin({
+                tsConfigPath: './tsconfig.json',
+                entryModule: path.join(__dirname, 'ClientApp/app/app.module.browser#AppModule'),
+                exclude: ['./**/*.server.ts']
+            })
+        ])
+    });
+
+    // Configuration for server-side (prerendering) bundle suitable for running in Node
+    const serverBundleConfig = merge(sharedConfig, {
+        resolve: { mainFields: ['main'] },
+        entry: { 'main-server': './ClientApp/boot.server.ts' },
+        plugins: [
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./ClientApp/dist/vendor-manifest.json'),
+                sourceType: 'commonjs2',
+                name: './vendor'
+            })
+        ].concat(isDevBuild ? [] : [
+            // Plugins that apply in production builds only
+            new AotPlugin({
+                tsConfigPath: './tsconfig.json',
+                entryModule: path.join(__dirname, 'ClientApp/app/app.module.server#AppModule'),
+                exclude: ['./**/*.browser.ts']
+            })
+        ]),
+        output: {
+            libraryTarget: 'commonjs',
+            path: path.join(__dirname, './ClientApp/dist')
+        },
+        target: 'node',
+        devtool: 'inline-source-map'
+    });
+
+    return [clientBundleConfig, serverBundleConfig];
 };
-
-// Configuration for client-side bundle suitable for running in browsers
-var clientBundleOutputDir = './wwwroot/dist';
-var clientBundleConfig = merge(sharedConfig, {
-    entry: { 'main-client': './ClientApp/boot-client.ts' },
-    output: { path: path.join(__dirname, clientBundleOutputDir) },
-    devtool: 'cheap-module-source-map',
-    plugins: [
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./wwwroot/dist/vendor-manifest.json')
-        }),
-        new webpack.DefinePlugin({
-                'process.env.NODE_ENV': '"production"'
-        }),
-        // new DashboardPlugin()
-    ].concat(isDevBuild ? [
-        // Plugins that apply in development builds only
-        new webpack.SourceMapDevToolPlugin({
-            filename: '[file].map', // Remove this line if you prefer inline source maps
-            moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-        })
-    ] : [
-        // Plugins that apply in production builds only
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.AggressiveMergingPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            pure_getters: true,
-            unsafe: true,
-            unsafe_comps: true,
-            screw_ie8: true
-        }),
-        new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
-        new webpack.NoErrorsPlugin(),
-        new CompressionPlugin({
-            asset: "[path].gz[query]",
-            algorithm: "gzip",
-            test: /\.js$|\.css$|\.html$/,
-            threshold: 10240,
-            minRatio: 0
-        })
-    ])
-});
-
-// Configuration for server-side (prerendering) bundle suitable for running in Node
-var serverBundleConfig = merge(sharedConfig, {
-    entry: { 'main-server': './ClientApp/boot-server.ts' },
-    output: {
-        libraryTarget: 'commonjs',
-        path: path.join(__dirname, './ClientApp/dist')
-    },
-    target: 'node',
-    devtool: 'inline-source-map',
-    externals: [nodeExternals({ whitelist: [allFilenamesExceptJavaScript] })] // Don't bundle .js files from node_modules
-});
-
-module.exports = [clientBundleConfig, serverBundleConfig];

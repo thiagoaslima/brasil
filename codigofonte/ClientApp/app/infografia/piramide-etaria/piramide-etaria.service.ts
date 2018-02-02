@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
-import { TraducaoService } from '../../traducao/traducao.service';
-import { ConfigService } from '../../config/config.service';
+import { ModalErrorService } from '../../core/';
+import {
+    TraducaoService,
+    ConfigService
+} from '../../shared/';
 
 
 @Injectable()

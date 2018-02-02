@@ -1,9 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { TopoJson, TOPOJSON } from '../../shared/topojson.v2';
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
+import {
+    TopoJson, TOPOJSON,
+    Localidade,
+    LocalidadeService3,
+} from '../../shared';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -24,7 +26,7 @@ export class MapaService {
 
     constructor(
         private _http: Http,
-        private _localidadeService: LocalidadeService2,
+        private _localidadeService: LocalidadeService3,
         @Inject(TOPOJSON) private _topojson
     ) { }
 

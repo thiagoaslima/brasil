@@ -145,16 +145,16 @@ namespace Microsoft.Extensions.Caching.Handler
                 await _cache.ScriptEvaluateAsync(SetScript, new RedisKey[] { _instance + key },
                     new RedisValue[]
                     {
-                        absoluteExpiration?.Ticks ?? NotPresent,
-                        options.SlidingExpiration?.Ticks ?? NotPresent,
-                        GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
-                        Compress(value)
+                            absoluteExpiration?.Ticks ?? NotPresent,
+                            options.SlidingExpiration?.Ticks ?? NotPresent,
+                            GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
+                            Compress(value)
                         });
             }
             catch (Exception)
             {
                 return;
-            } 
+            }
         }
 
         public void Refresh(string key)

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { isBrowser } from 'angular2-universal';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()
 export class IsMobileService {
@@ -12,9 +12,14 @@ export class IsMobileService {
 
 
     private _userAgent = "";
+
+    private isBrowser;
     
-    constructor() {
-        if (isBrowser) {
+    constructor(
+        @Inject(PLATFORM_ID) platformId
+    ) {
+        this.isBrowser = isPlatformBrowser(platformId);
+        if (this.isBrowser) {
             this._userAgent = navigator.userAgent;
         }
     }

@@ -8,17 +8,19 @@ import {
 	Output,
 	NgModule,
 	SimpleChanges,
-	Directive
+	Directive,
+	Inject,
+	PLATFORM_ID
 } from '@angular/core';
 
-import { isBrowser } from 'angular2-universal';
+import { isPlatformBrowser } from '@angular/common';
 
 declare var Chart: any;
 
 /* tslint:disable-next-line */
 @Directive({ selector: 'canvas[baseChart]', exportAs: 'base-chart' })
 export class BaseChartDirective implements OnDestroy, OnChanges, OnInit {
-	public isBrowser = isBrowser;
+	public isBrowser;
 	public static defaultColors: Array<number[]> = [
 		[255, 99, 132],
 		[54, 162, 235],
@@ -52,8 +54,12 @@ export class BaseChartDirective implements OnDestroy, OnChanges, OnInit {
 
 	private element: ElementRef;
 
-	public constructor(element: ElementRef) {
+	public constructor(
+		element: ElementRef,
+		@Inject(PLATFORM_ID) platformId,
+	) {
 		this.element = element;
+		this.isBrowser = isPlatformBrowser(platformId);
 	}
 
 	public ngOnInit(): any {

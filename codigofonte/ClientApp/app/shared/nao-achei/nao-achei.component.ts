@@ -1,7 +1,6 @@
-import { TraducaoService } from '../../traducao/traducao.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { isBrowser } from 'angular2-universal';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -11,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/share';
 
+import { TraducaoService } from '..';
 import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
 import { RouterParamsService } from '../router-params.service';
 
@@ -34,6 +34,8 @@ export class NaoAcheiComponent implements OnInit {
     enviado = false;
     url = '';
 
+    public isBrowser;
+
     public get lang() {
         return this._traducaoServ.lang;
     }
@@ -42,20 +44,23 @@ export class NaoAcheiComponent implements OnInit {
         private _routerParamsServ: RouterParamsService,
         private _http: Http,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService
-    ) {}
+        private _traducaoServ: TraducaoService,
+        @Inject(PLATFORM_ID) platformId,
+    ) {
+        this.isBrowser = isPlatformBrowser(platformId)
+    }
 
     static timer;
 
     ngOnInit() {
-        if(isBrowser){
+        if(this.isBrowser){
             if(NaoAcheiComponent.timer == undefined)
                 NaoAcheiComponent.timer = setTimeout(()=>this.esconde = false, 1);
         }
     }
 
     enviar(email, assunto, mensagem){
-        if(isBrowser){
+        if(this.isBrowser){
             this.url = '\n\nPágina de origem: ' + window.location.href;
         }
         this._http.post("/feedback", {

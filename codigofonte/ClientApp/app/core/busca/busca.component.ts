@@ -1,13 +1,15 @@
-import { TraducaoService } from '../../traducao/traducao.service';
 import { Component, OnInit, Renderer, ElementRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState } from '../../shared2/app-state';
 import { BuscaService } from './busca.service';
 import { BuscaCompletaService } from './busca-completa.service';
-import { Pesquisa } from '../../shared2/pesquisa/pesquisa.model';
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+import {
+    TraducaoService,
+    AppState,
+    Pesquisa,
+    Localidade
+} from '../../shared';
+import { ModalErrorService } from '..';
 
 
 @Component({

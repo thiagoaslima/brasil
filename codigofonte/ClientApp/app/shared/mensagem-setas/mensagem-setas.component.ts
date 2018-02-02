@@ -1,5 +1,5 @@
-import { TraducaoService } from '../../traducao/traducao.service';
 import { Component } from '@angular/core';
+import { TraducaoService } from '..';
 
 @Component({
     selector: 'mensagem-setas',

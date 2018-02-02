@@ -7,6 +7,7 @@ import 'rxjs/add/observable/fromEventPattern';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/scan';
 
 export class ScrollEvent {
     toTop = false;
@@ -65,7 +66,7 @@ export class ScrollDirective {
         this.scrollEl$ = Observable
             .fromEventPattern(this._createElListener.bind(this), this._removeListener.bind(this, 'el'))
             .throttleTime(this.timer)
-            .scan<ScrollEvent>((acc: ScrollEvent, evt: Event) => this.setScrollEvent(acc, evt.target))
+            .scan<Event, ScrollEvent>((acc: ScrollEvent, evt: Event, index: number) => this.setScrollEvent(acc, evt.target))
             .share()
             .startWith(this.setScrollEvent(new ScrollEvent, el));
     }
@@ -80,7 +81,7 @@ export class ScrollDirective {
     ) {
         this.window$ = this.windowEvents
             .scroll$.throttleTime(this.timer)
-            .scan<ScrollEvent>((acc: ScrollEvent, evt: Event) => {
+            .scan<Event, ScrollEvent>((acc: ScrollEvent, evt: Event, index: number) => {
                 return this.setScrollEvent(acc, evt.target)
             })
             .share()
@@ -89,7 +90,7 @@ export class ScrollDirective {
         this.host$ = Observable
             .fromEventPattern(this._createHostListener.bind(this), this._removeListener.bind(this, 'host'))
             .throttleTime(this.timer)
-            .scan<ScrollEvent>((acc: ScrollEvent, evt: Event) => this.setScrollEvent(acc, evt.target))
+            .scan<Event, ScrollEvent>((acc: ScrollEvent, evt: Event, index: number) => this.setScrollEvent(acc, evt.target))
             .share()
             .startWith(this.setScrollEvent(new ScrollEvent, this.host.nativeElement));
     }
@@ -112,7 +113,7 @@ export class ScrollDirective {
 
         Object.keys(this._listeners).forEach(key => this._listeners[key]());
     }
-    private setScrollEvent(acc: ScrollEvent, evt) {
+    private setScrollEvent(acc: ScrollEvent, evt): ScrollEvent {
         let target;
         let top = 0, left = 0;
 

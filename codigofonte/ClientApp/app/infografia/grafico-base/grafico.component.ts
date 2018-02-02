@@ -9,7 +9,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { CommonService } from '../../shared/common.service';
+import { CommonService } from '../../shared';
 import { dicionarioTiposGrafico, TiposGrafico } from './grafico.values';
 
 const FileSaver = require('file-saver');

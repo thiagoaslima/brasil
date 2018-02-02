@@ -1,9 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-
+let isFloat = (n) => Number(n) === n && n % 1 !== 0;
 /*
  * Formata o resultado de um indicador conforme os padrões IBGE.
- * 
 */
 @Pipe({
     name: 'resultado'
@@ -24,7 +23,6 @@ export class ResultadoPipe implements PipeTransform {
         }
     };
 
-
     /**
      * Formata um dado resultado de indicador de pesquisa segundo os padrões estabelecidos para sua unidade de medida.
      * 
@@ -32,7 +30,6 @@ export class ResultadoPipe implements PipeTransform {
      * @unidade?: string - unidade de medida do indicador (opcional).
      */
     transform(value: any, unidade?: string): any {
-
         let resultadoCasoEspecial = this.getResultadoCasoEspecial(value);
         if(!!resultadoCasoEspecial){
 
@@ -49,7 +46,9 @@ export class ResultadoPipe implements PipeTransform {
             return parteDecimal ? [parteInteira, parteDecimal].join(',') : parteInteira;
         } 
 
-        return value;        
+
+        return value;      
+
     }
     
     private incluirSeparadorMilhar(n: string, separador = ' ') {
@@ -59,17 +58,15 @@ export class ResultadoPipe implements PipeTransform {
         let r = [];
 
         for (var curr = start; curr < n.length; curr = next, next += 3) {
-
-            if (next == 0) { 
-                continue; 
+            
+            if (next == 0) {
+                continue;
             }
-
             r.push(n.substring(curr, next));
         }
 
         return r.join(separador);
     }
-
 
     private isNumber(value): boolean{
 
@@ -97,4 +94,5 @@ export class ResultadoPipe implements PipeTransform {
 
         return this.CONSTANTES.CASOS_ESPECIAIS_RESULTADO[valor];
     }
+
 }

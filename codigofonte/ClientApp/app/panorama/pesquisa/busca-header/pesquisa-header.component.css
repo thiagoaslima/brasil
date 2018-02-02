@@ -1,0 +1,533 @@
+.cabecalho{
+    background-color: #E6E6E6;
+    width: 100%;
+    display: table;
+}
+
+.cabecalho select {
+    border: none;
+    /*width: 100%;*/
+}
+
+.cabecalho select:first-child {
+    background-color: transparent;
+}
+
+.cabecalho .select-ano-container {
+    font-weight: bold;
+    font-size: small;
+    margin-top: 25px;
+    float: left;
+}
+
+.cabecalho select.select-ano {
+    width: initial;
+    font-weight: normal;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    margin-top: -8px;
+    -webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;
+}
+
+.cabecalho select.select-ano:hover {
+    background-color: #CCC;
+    -webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;
+}
+
+.desabilitado{
+    opacity: 0.3;
+    cursor: auto !important;
+}
+
+.notas {
+    font-size: small;
+    padding: 2px 5px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 4px;
+    background: #ccc;
+}
+
+.notas__botao {
+    cursor: pointer;
+}
+
+.notas i {
+    color: #1B779B;
+}
+
+.notas:hover {
+    background: #999;
+}
+
+.notas__lista-container {
+    position: absolute;
+    background: #fff;
+    padding: 20px 15px 15px 30px;
+    width: 450px;
+    border: 1px solid #ccc;
+    margin-left: -5px;
+    z-index: 2;
+    word-wrap: break-word;
+}
+
+.notas__lista-container li {
+    margin-bottom: 10px; 
+}
+
+.notas.notas__aberto > .notas__lista-container {
+    display: block;
+}
+	
+.titulo-pesquisa {
+	font-weight:bold;
+	font-size: 1.3em;
+	margin:0;
+    padding:0;
+}
+
+
+.cabecalho__nome-pesquisa{
+    float: left;
+    background-color: #E6E6E6;	
+    width: 36%; 
+    height: 120px;
+    padding: 1% 15px;
+    border-bottom: 3px solid #E2871A;
+    border-right: 3px solid #fff;
+	
+}
+
+.cabecalho__nome-pesquisa span, .cabecalho__nome-pesquisa span select:first-child{
+    font-weight: bold;
+    width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+
+.cabecalho__nome-pesquisa span{
+	-webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;	
+}
+
+.cabecalho__nome-pesquisa span:hover{
+	background-color: #ccc;
+	-webkit-transition: background 400ms ease;
+	-moz-transition: background 400ms ease;
+	-ms-transition: background 400ms ease;
+	-o-transition: background 400ms ease;
+	transition: background 400ms ease;	
+}
+
+.cabecalho__visualizacao-dados, .cabecalho__seletor-visualizacao-dados{
+    float: left;
+    width: 64%;
+}
+
+.cabecalho__visualizacao-dados {
+    height: 55px;
+    line-height: 55px;
+    border-bottom: 3px solid #E2871A;
+}
+
+.cabecalho__visualizacao-dados select {
+    width: 100%;
+}
+
+.cabecalho__seletor-visualizacao-dados{
+    background-color: #fff;
+    color: #727272;
+}
+
+.cabecalho__visualizacao-dados__item select:first-child, .cabecalho__seletor-visualizacao-dados__item select:first-child{
+    padding-left: 20px;
+}
+
+.cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
+    float: left;
+    width: 25%;
+    text-align: center;
+    font-size: small;
+    /*padding-left: 20px;*/
+}
+
+.cabecalho__seletor-visualizacao-dados__item{
+    border-bottom: 3px solid #CCC;
+    height: 65px;
+    /*padding-top: 15px;*/
+    cursor: pointer;
+    text-transform: uppercase;
+    background-repeat: no-repeat;
+    background-position: center 15px;
+    fill: #727272;
+    padding-top: 14px;
+}
+
+.cabecalho__seletor-visualizacao-dados__item:hover{
+    border-bottom: 3px solid #333;
+    color:#333;
+    fill: #333;
+}
+
+.cabecalho__seletor-visualizacao-dados__item.selecionado{
+    border-bottom: 3px solid #E2871A;
+    color:#E2871A;
+    fill: #E2871A;
+}
+
+.cabecalho__seletor-visualizacao-dados i {
+    display: block;
+}
+
+/*
+* mini-menu compartilhar / download
+*/
+
+.cabecalho .select__sub-menu {
+    position: relative;
+}
+
+.select__sub-menu__botao{
+    width: 45px;
+    height: 25px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    display: inline-block;
+    line-height: 25px;
+    letter-spacing: 5px;
+    color: #999;
+    margin-top: 17px;
+    cursor: pointer;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+
+.select__sub-menu__botao:hover {
+	background-color: rgb(208, 208, 208);
+	}
+
+.select__sub-menu__botao--olho{
+    margin-right: 14px;
+}
+
+.select__sub-menu__botao--olho i{
+    font-size: 19px; 
+    text-align: center; 
+    width: 112%;
+}
+
+
+.select__sub-menu.submenu-aberto {
+    background-color: #CCC;
+    color: initial;
+    border: none;
+
+}
+
+.select__submenu-aberto{
+   /* background-color: #ccc;
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    z-index: 2;*/
+	text-align: left;
+	background: #333;
+	color: #fff;
+	line-height: normal;
+	position: absolute;
+	z-index: 2;
+	padding: 10px;
+	min-width: 219px;
+	margin-top: -19px;
+	margin-left:-35px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+.select__sub-menu__botao--aberto {
+    background-color: #333;
+    color: #fff;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+
+.select__submenu-aberto > div {
+    padding: 10px;
+    letter-spacing: initial;
+    cursor: pointer;
+}
+
+.select__submenu-aberto > div:hover {
+    background-color: #999;
+}
+
+.select__submenu-aberto i{
+    color: #fff;
+}
+
+.select__submenu-aberto span{
+    background-color: #1B779B;
+    border-radius: 20px;
+    padding: 8px 10px; 
+}
+
+/*
+* menu adicionar comparação (lista municípios)
+*/
+
+.add-municipio {
+    /*cursor: pointer;*/
+    position: relative;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+.add-municipio:hover {
+	background-color: rgb(208, 208, 208);
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+.add-municipio button {
+    width: 100%;
+    height: 55px;
+    vertical-align: middle;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.estado-selecionado span {
+    display: inline-block;
+    height: 30px;
+    /*padding: 0 17px;*/
+    border-bottom: 3px solid #ccc;
+    margin-bottom: 10px;
+    width: 33%;
+    text-align: center;
+}
+
+.estado-selecionado span.selecionado {
+    border-bottom-color: #F15A24;
+    color: #F15A24;
+}
+
+.por-estado__selecionar-municipio {
+    display: none;
+    text-align: left;
+    background: #333;
+    color: #fff;
+    line-height: normal;
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    padding: 10px;
+    min-width: 260px;
+}
+
+.por-estado__selecionar-municipio .estado-selecionado {
+    float: left;
+    font-weight: bold;
+    margin-top: 17px;
+    font-size: .93em;
+    width: 100%;
+}
+
+.por-estado__selecionar-municipio .total-encontrado {
+    float: right;
+    font-size: .8em;
+    margin-top: 20px;
+    margin-right: 9px;
+}
+
+.por-estado__selecionar-municipio input {
+    width: 100%;
+    color: #4D4D4D;
+    height: 32px;
+}
+
+.por-estado__selecionar-municipio ul {
+    list-style-type: none;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.por-estado__selecionar-municipio ul li {
+    border-bottom: 1px solid #737373;
+    font-size: .9em;
+    padding: 10px 0px;
+    transition: padding-left 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.por-estado__selecionar-municipio ul li:last-child {
+    border-bottom: none;
+}
+
+.por-estado__selecionar-municipio ul li:hover {
+    padding: 10px;
+    background-color: #4D4D4D;
+    transition: padding-left 0.3s, background-color 0.3s;
+}
+
+.por-estado__selecionar-municipio ul li span {
+    background-color: #4D4D4D;
+    border-radius: 30px;
+    padding: 4px 6px;
+    font-size: .7em;
+    margin-left: 8px;
+}
+
+.submenu-aberto > div {
+    display: block;
+}
+
+.add-municipio.submenu-aberto {
+    background-color: #333;
+    color: #fff;
+}
+
+.todos-municipios__titulo {
+    font-weight: bold;
+    margin: 5px 0px;
+    font-size: .9em;
+}
+
+.botao_remove {
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: .9em;
+    margin-bottom: 8px;
+}
+
+.area-click{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    display: none;
+}
+
+.area-click--visivel{
+    display: block;
+}
+
+
+
+
+
+    .cabecalho__visualizacao-dados__item--local__atual{
+        display: table;
+        height: 52px;
+    }
+
+    .cabecalho__visualizacao-dados__item__label{
+        display: table-cell;
+        vertical-align: middle;
+        line-height: 16px;
+        height: 56px;
+        width: 1%;
+    }
+
+@media screen and (max-width: 1000px) {
+    .select__sub-menu__botao{
+        width: 31px;
+    }
+
+    .select__sub-menu .fa.fa-caret-down{
+        display: none
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /*Mobile*/
+    .cabecalho{
+        padding-top: 37px;
+    }
+
+    .cabecalho__nome-pesquisa{
+        width: 100%;
+        border-right: 0px;
+    }
+
+    .notas__lista-container{
+        position: absolute;
+        right: 14px;
+        max-width: 70vw;
+        margin-top: 4px;
+    }
+
+    .cabecalho__visualizacao-dados{
+        width: 100%;
+    }
+
+    .cabecalho__seletor-visualizacao-dados{
+        width: 100%;
+        display: none;
+    }
+
+    .cabecalho__visualizacao-dados__item--compartilhar{
+        display: none;
+    }
+
+    .cabecalho__visualizacao-dados__item, .cabecalho__seletor-visualizacao-dados__item{
+        width: 33%;
+    }
+    
+    .cabecalho__seletor-visualizacao-dados__item{
+         /*display: none*/
+    }
+
+    .cabecalho__seletor-visualizacao-dados__item:first-child{
+         /*display: block*/
+    }
+
+ 
+
+    .por-estado__selecionar-municipio{
+        min-width: 207px;
+        max-width: 207px;
+        width: 207px;
+    }
+
+    .cabecalho .select-ano-container{
+        margin-top: 17px;
+    }
+
+    .cabecalho select:first-child {
+        width: 100%;
+    }
+}

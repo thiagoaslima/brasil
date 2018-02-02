@@ -1,27 +1,34 @@
-import { TraducaoService } from '../../traducao/traducao.service';
-import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
-import { isBrowser } from 'angular2-universal';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TraducaoService } from '../../shared';
+import { isPlatformBrowser } from '@angular/common';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/pluck';
 import 'rxjs/add/observable/fromEvent';
-import { PageScrollService } from 'ng2-page-scroll';
+
+import { PageScrollService } from 'ngx-page-scroll';
 
 import { SeletorLocalidadeService } from './seletor-localidade.service';
-import { AppState } from '../../shared2/app-state';
-import { Localidade } from '../../shared2/localidade/localidade.model';
-import { LocalidadeService2 } from '../../shared2/localidade/localidade.service';
-import { slugify } from '../../utils/slug';
-import { IsMobileService } from '../../shared/is-mobile.service';
-import { ModalErrorService } from '../../core/modal-erro/modal-erro.service';
+
+import {
+    AppState,
+    Localidade,
+    IsMobileService,
+    LocalidadeService3,
+} from '../../shared';
+
+import { slugify } from '../../../utils/slug';
+import { ModalErrorService } from '../../core';
 
 
 @Component({
     selector: 'seletor-localidade',
-    templateUrl: 'seletor-localidade.template.html',
-    styleUrls: ['seletor-localidade.styles.css'],
+    templateUrl: 'seletor-localidade.component.html',
+    styleUrls: ['seletor-localidade.component.css'],
     exportAs: 'seletor-localidade'
 })
 export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
@@ -40,7 +47,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
     private hist = null; // guarda a referência para o objeto 'history' do browser
 
-    public isBrowser = isBrowser;
+    public isBrowser ;
 
     public URLEnd = '';
     private _forced = false;
@@ -48,7 +55,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     public listaMunicipios = {
         maisVistos: <Localidade[]>[],
         base: <Localidade[]>[],
-        atual: <Localidade[]>[],
+        atual: [],
         totalAtual: 0,
 
         build(array, termo = '') {
@@ -107,7 +114,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         'municipiosMunicipios': false
     };
 
-    public niveisTerritoriais = {};
+    public niveisTerritoriais: any = {};
 
     private _stateSelecionado = '';
     private _subscriptions = [];
@@ -141,14 +148,17 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
     }
     constructor(
         private _appState: AppState,
-        private _localidadeService: LocalidadeService2,
+        private _localidadeService: LocalidadeService3,
         private pageScrollService: PageScrollService,
         private _isMobileService: IsMobileService,
         private _router: Router,
         private _seletorService: SeletorLocalidadeService,
         private modalErrorService: ModalErrorService,
-        private _traducaoServ: TraducaoService
+        private _traducaoServ: TraducaoService,
+        @Inject(PLATFORM_ID) platformId,
     ) {
+        this.isBrowser = isPlatformBrowser(platformId);
+
         let sub1 = this._seletorService.isAberto$.subscribe(isAberto => this.aberto = isAberto, this.exibirError);
         let sub2 = this._seletorService.state$.subscribe(states => this.states = states, this.exibirError);
         let sub3 = this._seletorService.niveisTerrioriais$.subscribe(niveis => this.niveisTerritoriais = niveis, this.exibirError);
@@ -156,7 +166,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
 
         // escuta e guarda a rota para manter o usuário na mesma página ao mudar a localidade
         // o codigo poderia ser simplificado mas é preciso ignorar tanto o início quanto os query parameters
-        let sub5 = this._router.events.filter(event => event instanceof NavigationEnd).subscribe(route => {
+        let sub5 = this._router.events.filter(event => event instanceof NavigationEnd).subscribe((route: NavigationEnd) => {
 
             if (route.url.indexOf('/panorama') >= 0) {
                 this.URLEnd = '/panorama';
@@ -186,8 +196,8 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
                 return locais.filter(Boolean).reverse();
             });
 
-        this.ufs = this._localidadeService.getUfs().sort((a, b) => a.nome < b.nome ? -1 : 1);
-        this.listaMunicipios.maisVistos = this.ufs.map(uf => uf.capital).sort((a, b) => a.slug < b.slug ? -1 : 1);
+        this.ufs = this._localidadeService.getAllUfs().sort((a, b) => a.nome < b.nome ? -1 : 1);
+        this.listaMunicipios.maisVistos = this.ufs.map(uf => this._localidadeService.getMunicipioByCodigo(uf.codigoCapital)).sort((a, b) => a.slug < b.slug ? -1 : 1);
 
         this._subscriptions.push(sub1, sub2, sub3, sub4, sub5);
     }
