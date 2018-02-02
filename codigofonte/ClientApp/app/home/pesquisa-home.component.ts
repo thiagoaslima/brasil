@@ -31,6 +31,10 @@ export class PesquisaHomeComponent implements OnInit {
 
     ngOnInit() { }
 
+    abrirSeletorLocalidade() {
+        this._seletorLocalidadeService.abrirSeletor();
+    }
+
     selectPesquisa(id: number, niveis: string[]) {
         this._seletorLocalidadeService.bloquearNiveisTerritoriais(niveis);
 

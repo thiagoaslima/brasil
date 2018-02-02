@@ -103,7 +103,7 @@
         <footer class="clearfix">
             <h3 class="footer__text">
                 {{ 'nao_sabe_por_onde_comecar' | l10n:lang }}
-                <button class="button__action footer__button" type="button">{{ 'selecionar_local' | l10n:lang }}</button>
+                <button class="button__action footer__button" type="button" (click)="abrirSeletorLocalidade()">{{ 'selecionar_local' | l10n:lang }}</button>
             </h3>
 
             <p class="rodape-copyright">© 2017 IBGE <span>- Instituto Brasileiro de Geografia e Estatística </span>| {{ versao }}</p>
