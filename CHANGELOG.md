@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.5.1] - 2018-02-05
+### Changed
+	- Alteração não funcional. Mudança da versão do framework angular de 2 para 5.
+
+
 ## [v4.3.5] - 2018-01-25
 ### Added
 	- Implementação do download dos dados da pesqiosa para todos os municípios do mesmo esatdo.
