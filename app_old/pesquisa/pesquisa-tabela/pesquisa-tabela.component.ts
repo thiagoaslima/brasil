@@ -260,9 +260,18 @@ export class PesquisaTabelaComponent implements OnChanges {
     }
 
 
-    public download(){
+    public download(event) {
 
-        this.downloadCSVTelaTodosPeriodos();
+        let tipo = event['tipo'];
+
+        if(tipo == 'vizinhos'){
+
+            this.downloadCSVCompleto();
+        } 
+        else {
+
+            this.downloadCSVTelaTodosPeriodos();
+        }        
 
         // Analytics
         let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
@@ -276,15 +285,15 @@ export class PesquisaTabelaComponent implements OnChanges {
         })
     }
 
-    public downloadCSVTela(){
+    public downloadCSVTela() {
 
         let ind = this.indicadores;
         let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
         let localidadeB = !!this.localidades[1] && this.localidades[1] != 0 ? this._localidadeService.getLocalidadeById(this.localidades[1]).nome : '';
         let localidadeC = !!this.localidades[2] && this.localidades[2] != 0 ? this._localidadeService.getLocalidadeById(this.localidades[2]).nome : '';
-        let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n' ;
+        let csv = "Nível;Indicador;" + localidadeA + ';' + localidadeB + ';' + localidadeC + ';Unidade\n';
         //valores dos indicadores
-        for(let i = 0; i < ind.length; i++){
+        for (let i = 0; i < ind.length; i++) {
             csv += ind[i].posicao + ';' + ind[i].indicador + ';';
             csv += (ind[i].localidadeA && ind[i].localidadeA[this.periodo] ? ind[i].localidadeA[this.periodo] : "") + ';';
             csv += (ind[i].localidadeB && ind[i].localidadeB[this.periodo] ? ind[i].localidadeB[this.periodo] : "") + ';';
@@ -298,19 +307,19 @@ export class PesquisaTabelaComponent implements OnChanges {
         this.downloadCSVFile(csv, `${this.pesquisa['nome']}(${this.periodo})`);
     }
 
-    public downloadCSVTelaTodosPeriodos(){
+    public downloadCSVTelaTodosPeriodos() {
 
         let ind = this.indicadores;
         let localidadeA = this._localidadeService.getLocalidadeById(this.localidades[0]).nome;
         let csv = "Nível;Indicador;" + this.periodosValidos.join(';') + ';Unidade\n';
         //valores dos indicadores
-        for(let i = 0; i < ind.length; i++){
+        for (let i = 0; i < ind.length; i++) {
             csv += ind[i].posicao + ';' + ind[i].indicador + ';';
 
             this.periodosValidos.forEach(periodo => {
                 csv += (ind[i].localidadeA && ind[i].localidadeA[periodo] && this.isValor(ind[i].localidadeA[periodo]) ? ind[i].localidadeA[periodo] : "") + ';';
             });
-            
+
             csv += (ind[i].unidade ? ind[i].unidade.id : '') + '\n';
         }
 
@@ -320,34 +329,35 @@ export class PesquisaTabelaComponent implements OnChanges {
         this.downloadCSVFile(csv, `${this.pesquisa['nome']} - ${localidadeA}`);
     }
 
-    public downloadCSVCompleto(){
+    public downloadCSVCompleto() {
 
         let localidadeSelecionada = this._localidadeService.getLocalidadeById(this.localidades[0]);
         let posicaoIndicadorSelecionado = this.indicadores[0].posicao;
-        
+
         // Recupera os indicadores e seus resultados
         this._sintese.getPesquisaCompletaLocalidades(this.pesquisa.id, !!localidadeSelecionada.parent ? localidadeSelecionada.parent.codigo : localidadeSelecionada.codigo, posicaoIndicadorSelecionado).subscribe(res => {
 
             this._sintese.getInfoPesquisa(this.pesquisa.id.toString()).subscribe(pesquisa => {
 
-                let periodosDisponiveis = pesquisa.periodos.map(info => info.periodo );
+                let periodosDisponiveis = pesquisa.periodos.map(info => info.periodo);
 
                 var fields = ['posicao', 'nome', 'resultado.nomeLocalidade', ...periodosDisponiveis.map(periodo => `resultado.res.${periodo}`), 'unidade', 'multiplicador'];
                 var fieldNames = ['Posição', 'Nome', 'Localidade', ...periodosDisponiveis, 'Unidade', 'Multiplicador'];
-                var csv = json2csv({data: res , fields, fieldNames: fieldNames, unwindPath: ['resultado', 'resultado.res']});
-                
+                var csv = json2csv({ data: res, fields, fieldNames: fieldNames, unwindPath: ['resultado', 'resultado.res'] });
+
                 //fontes e notas
                 csv = csv + this.obterFontesENotasPesquisaEmCSV();
 
                 this.downloadCSVFile(csv, `${this.pesquisa['nome']}`);
             });
         },
-        error => {
-            console.error(error);
-            this.modalErrorService.showError();
-        });
+            error => {
+                console.error(error);
+                this.modalErrorService.showError();
+            });
 
     }
+
 
     private obterFontesENotasPesquisaEmCSV(){
 
