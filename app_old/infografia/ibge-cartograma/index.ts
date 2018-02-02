@@ -1,1 +1,0 @@
-export { IBGECartogramaModule } from './ibge-cartograma.module';
