@@ -66,7 +66,7 @@ export class ScrollDirective {
         this.scrollEl$ = Observable
             .fromEventPattern(this._createElListener.bind(this), this._removeListener.bind(this, 'el'))
             .throttleTime(this.timer)
-            .scan<Event, ScrollEvent>((acc: ScrollEvent, evt: Event, index: number) => this.setScrollEvent(acc, evt.target))
+            .scan<any, ScrollEvent>((acc: ScrollEvent, evt: any, index: number) => this.setScrollEvent(acc, evt.target))
             .share()
             .startWith(this.setScrollEvent(new ScrollEvent, el));
     }
@@ -81,7 +81,7 @@ export class ScrollDirective {
     ) {
         this.window$ = this.windowEvents
             .scroll$.throttleTime(this.timer)
-            .scan<Event, ScrollEvent>((acc: ScrollEvent, evt: Event, index: number) => {
+            .scan<any, ScrollEvent>((acc: ScrollEvent, evt: any, index: number) => {
                 return this.setScrollEvent(acc, evt.target)
             })
             .share()
@@ -90,7 +90,7 @@ export class ScrollDirective {
         this.host$ = Observable
             .fromEventPattern(this._createHostListener.bind(this), this._removeListener.bind(this, 'host'))
             .throttleTime(this.timer)
-            .scan<Event, ScrollEvent>((acc: ScrollEvent, evt: Event, index: number) => this.setScrollEvent(acc, evt.target))
+            .scan<any, ScrollEvent>((acc: ScrollEvent, evt: any, index: number) => this.setScrollEvent(acc, evt.target))
             .share()
             .startWith(this.setScrollEvent(new ScrollEvent, this.host.nativeElement));
     }

@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 const appRoutes: Routes = [
     {
         path: 'brasil/sintese',
-        loadChildren: './estado-sintese/estado-sintese.module.ts#EstadoSinteseModule',
+        loadChildren: './estado-sintese/estado-sintese.module#EstadoSinteseModule',
     },
     {
         path: '',

@@ -37,12 +37,12 @@ export class PesquisaTabelaComponent implements OnChanges {
 
     @Output() onEmpty = new EventEmitter();
 
-    private indicadores;
-    private isVazio;
-    private exclusiva;
-    private periodosValidos: string[];
+    public indicadores;
+    public isVazio;
+    public exclusiva;
+    public periodosValidos: string[];
 
-    private idIndicadorSelecionado;
+    public idIndicadorSelecionado;
 
     public get lang() {
         return this._traducaoServ.lang;

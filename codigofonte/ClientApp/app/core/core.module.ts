@@ -24,6 +24,9 @@ import {
     BuscaCompletaService,
     ModalErrorService,
     SeletorLocalidadeService,
+
+    LoginComponent,
+    LoginService
 } from ".";
 
 const declarations = [
@@ -37,6 +40,7 @@ const declarations = [
     GeolocationComponent,
     GeolocationDirective,
     SubmenuComponent,
+    LoginComponent
 ];
 
 const providers = [
@@ -44,6 +48,7 @@ const providers = [
     SeletorLocalidadeService,
     BuscaService,
     BuscaCompletaService,
+    LoginService
 ]
 
 @NgModule({

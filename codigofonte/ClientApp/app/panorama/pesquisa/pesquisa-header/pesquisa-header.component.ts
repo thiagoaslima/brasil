@@ -49,7 +49,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     isNivelNacional;
 
     private subs$$;
-    private isOcultarValoresVazios = true;
+    public isOcultarValoresVazios = true;
 
     public isBrowser;
 

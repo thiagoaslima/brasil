@@ -38,9 +38,9 @@ export class PesquisaIndicadoresComponent implements OnChanges {
     @Output() onIndicador = new EventEmitter;
     @Output() onBreadcrumb = new EventEmitter;
 
-    private indicadores;
-    private isVazio;
-    private indicadorComparacao;
+    public indicadores;
+    public isVazio;
+    public indicadorComparacao;
 
     isBrowser
 

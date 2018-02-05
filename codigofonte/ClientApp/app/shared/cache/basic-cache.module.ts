@@ -6,6 +6,7 @@ import { CacheFactory } from './cacheFactory.service';
     imports: [
     ],
     declarations: [
+        
     ],
     providers: [
         { provide: 'CacheService', useFactory: CacheFactory }

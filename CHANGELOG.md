@@ -7,7 +7,7 @@
 
 ## [v4.3.5] - 2018-01-25
 ### Added
-	- Implementação do download dos dados da pesqiosa para todos os municípios do mesmo esatdo.
+	- Implementação do download dos dados da pesqiosa para todos os municípios do mesmo estado.
 
 ### Fixed
 	- Correção da exibição dos temas do censo na pesquisa censo.

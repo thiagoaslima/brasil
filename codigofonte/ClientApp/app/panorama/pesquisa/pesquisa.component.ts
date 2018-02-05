@@ -1,3 +1,4 @@
+import { PesquisaTabelaComponent } from './pesquisa-tabela/pesquisa-tabela.component';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Rx';
@@ -23,7 +24,7 @@ import { ModalErrorService } from '../../core';
 })
 
 export class PesquisaComponent implements OnInit, OnDestroy {
-    @ViewChild('dados') dados: ElementRef;
+    @ViewChild('dados') dados: PesquisaTabelaComponent;
 
     posicaoIndicador = '2';
     localidades: string[];

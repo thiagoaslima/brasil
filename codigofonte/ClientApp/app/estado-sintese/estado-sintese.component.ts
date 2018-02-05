@@ -35,15 +35,15 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 })
 export class EstadoSinteseComponent implements OnInit {
     
-    private estado;
-    private resumo = <any>{};
-    private indicadores = [];
+    public estado;
+    public resumo = <any>{};
+    public indicadores = [];
     esconde = true;
     enviado = false;
     url = '';
     private _localidade$$: Subscription;
-    private notas = [];
-    private fontes = [];
+    public notas = [];
+    public fontes = [];
     public get lang() {
         return this._traducaoServ.lang;
     }

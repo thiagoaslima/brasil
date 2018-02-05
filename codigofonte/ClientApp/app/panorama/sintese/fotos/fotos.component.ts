@@ -19,34 +19,34 @@ import { ModalErrorService } from '../../../core/';
 })
 export class FotosComponent implements OnInit, OnDestroy {
    
-    private servicoImagem: string;
-    private servicoThumbs: string;
-    private urlDetalhes: string;
-    private urlDownload: string;
+    public servicoImagem: string;
+    public servicoThumbs: string;
+    public urlDetalhes: string;
+    public urlDownload: string;
 
-    private mostraGaleria = false;
-    private mostraDetalhe = false;
+    public mostraGaleria = false;
+    public mostraDetalhe = false;
 
-    private fotos;
-    private index = 0;
+    public fotos;
+    public index = 0;
 
-    private imagem = "";
-    private preview1 = "";
-    private preview2 = "";
-    private preview3 = "";
-    private preview4 = "";
-    private preview5 = "";
-    private preview6 = "";
-    private alt_preview1 = "";
-    private alt_preview2 = "";
-    private alt_preview3 = "";
-    private alt_preview4 = "";
-    private alt_preview5 = "";
-    private alt_preview6 = "";
-    private titulo = "";
-    private detalhes = "";
-    private downloadLink = "";
-    private downloadNome = "";
+    public imagem = "";
+    public preview1 = "";
+    public preview2 = "";
+    public preview3 = "";
+    public preview4 = "";
+    public preview5 = "";
+    public preview6 = "";
+    public alt_preview1 = "";
+    public alt_preview2 = "";
+    public alt_preview3 = "";
+    public alt_preview4 = "";
+    public alt_preview5 = "";
+    public alt_preview6 = "";
+    public titulo = "";
+    public detalhes = "";
+    public downloadLink = "";
+    public downloadNome = "";
     private _subscription: Subscription;
 
     //variável estática que guarda a referencia para o timer, precisa ser estática para evitar que dois timers sobrevivam ao mesmo tempo, criando um bug de flicking

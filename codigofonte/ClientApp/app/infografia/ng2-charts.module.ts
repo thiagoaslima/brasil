@@ -242,7 +242,7 @@ function getRandomInt(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function formatLineColor(colors: Array<number>): Color {
+function formatLineColor(colors: number[]): Color {
 	return {
 		backgroundColor: rgba(colors, 0.4),
 		borderColor: rgba(colors, 1),
@@ -253,7 +253,7 @@ function formatLineColor(colors: Array<number>): Color {
 	};
 }
 
-function formatBarColor(colors: Array<number>): Color {
+function formatBarColor(colors: number[]): Color {
 	return {
 		backgroundColor: rgba(colors, 0.6),
 		borderColor: rgba(colors, 1),
@@ -262,7 +262,7 @@ function formatBarColor(colors: Array<number>): Color {
 	};
 }
 
-function formatPieColors(colors: Array<number[]>): Colors {
+function formatPieColors(colors: number[][]): Colors {
 	return {
 		backgroundColor: colors.map((color: number[]) => rgba(color, 0.6)),
 		borderColor: colors.map(() => '#fff'),
@@ -273,7 +273,7 @@ function formatPieColors(colors: Array<number[]>): Colors {
 	};
 }
 
-function formatPolarAreaColors(colors: Array<number[]>): Color {
+function formatPolarAreaColors(colors: number[][]): Color {
 	return {
 		backgroundColor: colors.map((color: number[]) => rgba(color, 0.6)),
 		borderColor: colors.map((color: number[]) => rgba(color, 1)),
@@ -289,7 +289,7 @@ function getRandomColor(): number[] {
 /**
  * Generate colors for line|bar charts
  * @param index
- * @returns {number[]|Color}
+ * @returns {number[]}
  */
 function generateColor(index: number): number[] {
 	return BaseChartDirective.defaultColors[index] || getRandomColor();
@@ -300,7 +300,7 @@ function generateColor(index: number): number[] {
  * @param count
  * @returns {Colors}
  */
-function generateColors(count: number): Array<number[]> {
+function generateColors(count: number): number[][] {
 	let colorsArr: Array<number[]> = new Array(count);
 	for (let i = 0; i < count; i++) {
 		colorsArr[i] = BaseChartDirective.defaultColors[i] || getRandomColor();
@@ -315,7 +315,7 @@ function generateColors(count: number): Array<number[]> {
  * @param count
  * @returns {Color}
  */
-function getColors(chartType: string, index: number, count: number): Color {
+function getColors(chartType: string, index: number, count: number): number[]|Color {
 	if (chartType === 'pie' || chartType === 'doughnut') {
 		return formatPieColors(generateColors(count));
 	}

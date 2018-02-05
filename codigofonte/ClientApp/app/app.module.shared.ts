@@ -1,4 +1,3 @@
-import { EmptyComponent } from './empty.component';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
@@ -8,6 +7,9 @@ import { CommonModule }  from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { AuthorizationGuard } from './authorization.guard';
+import { EmptyComponent } from './empty.component';
+
 // import { RootRoutingModule } from './root-routing.module';
 // import { RootModule } from './root.module';
 
@@ -17,6 +19,7 @@ import { AppComponent } from './app.component';
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
+        EmptyComponent
     ],
     imports: [
         CommonModule,
@@ -24,10 +27,11 @@ import { AppComponent } from './app.component';
         RouterModule,
         CoreModule,
         AppRoutingModule,
-        SharedModule.forRoot(),
+        SharedModule.forRoot()        
     ],
     providers: [
         // ValidParametersGuard
+        AuthorizationGuard
     ]
 })
 export class AppModuleShared {
