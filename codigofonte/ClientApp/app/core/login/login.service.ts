@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+
 
 @Injectable()
 export class LoginService {
@@ -6,23 +7,44 @@ export class LoginService {
     private usuarioLogado: string;
 
 
-    constructor() { }
+    constructor() { 
+
+    }
     
 
     public isLogado(){
 
-        return !!this.usuarioLogado;
+        // Verifica se o usuário já está logado
+        if(!!this.usuarioLogado){
+
+            return true;
+        }
+
+        // Verifica se o usuário já se logou em algum momento e 
+        // valida se o token ainda é válido para que não 
+        // precise ficar digitando a senha varia vezes no mesmo dia
+        let codigo = this.getCookie('brasilemsintese.autorizacao');
+        if(!!codigo && this.verificaCodigo(codigo)){
+
+            this.usuarioLogado = 'ibge';
+
+            return true;
+        }
+
+        return false;
     }
 
     public logar(usuario: string, senha: string){
 
         let loginValido: string = 'ibge';
-        let senhaValida: string = 'hml%405';
 
         // if(usuario == loginValido && senha == senhaValida){
         if(usuario == loginValido && this.verificaCodigo(senha)){
 
             this.usuarioLogado = usuario;
+
+            // armazema o acesso do usuário em um token
+            this.setCookie('brasilemsintese.autorizacao', senha, 1);
 
             return true;
 
@@ -63,5 +85,34 @@ export class LoginService {
         let codigoCerto = geraCodigo(numSemana, numAno);
 
         return cod === codigoCerto.toString();
+    }
+
+    private setCookie(cname, cvalue, exdays) {
+
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    private getCookie(cname) {
+
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+
+        for(let i = 0; i <ca.length; i++) {
+
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+
+        return "";
     }
 }
