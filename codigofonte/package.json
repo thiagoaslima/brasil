@@ -6,13 +6,13 @@
     "test:watch": "jest --watch",
     "old:prestart": "webpack --config webpack.config.vendor.js && webpack --config webpack.config.js --watch",
     "old:start": "webpack-dev-server --content-base wwwroot/ --history-api-fallback",
-    "old:build": "npm run version && webpack --env.prod --config webpack.config.vendor.js && webpack --env.prod --config webpack.config.js",
+    "old:build": "npm run version && webpack --config webpack.config.vendor.js && webpack --config webpack.config.js",
     "prestart": "webpack --config webpack.config.vendor.js",
     "dev:build": "webpack --config webpack.config.js --watch",
     "dev:serve": "webpack-dev-server --content-base wwwroot/ --history-api-fallback",
     "start": "concurrently \"npm run dev:build\" \"npm run dev:serve\"",
     "start:prerender": "concurrently \"npm run dev:build\" \"dotnet run\"",
-    "build": "npm run version && webpack --env.prod --config webpack.config.vendor.js && webpack --env.prod --config webpack.config.js",
+    "build": "npm run version && webpack  --config webpack.config.vendor.js && webpack --config webpack.config.js",
     "version": "ibge-version ./ClientApp/app/version.json"
   },
   "dependencies": {
