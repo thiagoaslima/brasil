@@ -1,6 +1,6 @@
 # Change log
 
-## [v4.3.5.1] - 2018-02-07
+## [v4.3.5.2] - 
 ### Changed
 	- Alteração não funcional. Mudança da versão do framework angular de 2 para 5.
 
