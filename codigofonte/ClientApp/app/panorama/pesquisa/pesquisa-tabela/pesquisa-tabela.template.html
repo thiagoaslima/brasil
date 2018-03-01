@@ -9,13 +9,27 @@
                 </div>
                 <div class='label--com-acao'>
                     {{ indicador.indicador }} 
+                    <!--fontes-->
+                    <div class="notas" *ngIf="obterFontesIndicador(indicador) != ''">
+                        <div class="area-click" [class.area-click--visivel]="indicador.id == idIndicadorSelecionado && notaOuFonte == 'nota'" (click)="idIndicadorSelecionado = 0"></div>
+                        <div class="notas__botao" (click)=" selecionarIndicador(indicador, 'fonte') ">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="notas__lista-container" *ngIf="indicador.id == idIndicadorSelecionado && notaOuFonte == 'fonte'">
+                            <ol>
+                                <li *ngFor="let nota of obterFontesIndicador(indicador)">
+                                    {{ nota }}
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
                     <!--notas-->
                     <div class="notas" *ngIf="obterNotasIndicador(indicador) != ''">
-                        <div class="area-click" [class.area-click--visivel]="indicador.id == idIndicadorSelecionado" (click)="idIndicadorSelecionado = 0"></div>
-                        <div class="notas__botao" (click)=" selecionarIndicador(indicador) ">
+                        <div class="area-click" [class.area-click--visivel]="indicador.id == idIndicadorSelecionado && notaOuFonte == 'nota'" (click)="idIndicadorSelecionado = 0"></div>
+                        <div class="notas__botao" (click)=" selecionarIndicador(indicador, 'nota') ">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         </div>
-                        <div class="notas__lista-container" *ngIf="indicador.id == idIndicadorSelecionado">
+                        <div class="notas__lista-container" *ngIf="indicador.id == idIndicadorSelecionado && notaOuFonte == 'nota'">
                             <ol>
                                 <li *ngFor="let nota of obterNotasIndicador(indicador)">
                                     {{ nota }}
