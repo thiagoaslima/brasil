@@ -43,6 +43,7 @@ export class PesquisaTabelaComponent implements OnChanges {
     public periodosValidos: string[];
 
     public idIndicadorSelecionado;
+    public notaOuFonte;
 
     public get lang() {
         return this._traducaoServ.lang;
@@ -395,14 +396,34 @@ export class PesquisaTabelaComponent implements OnChanges {
 
         let notas: string[] = [];
 
-        indicador.nota.forEach(elementoNivel1 =>  elementoNivel1.notas.forEach( elementoNivel2 => notas.push(elementoNivel2) ));
+        indicador.nota.forEach(elementoNivel1 =>  {
+            if (elementoNivel1.periodo == this.periodo) {
+                elementoNivel1.notas.forEach( elementoNivel2 => notas.push(elementoNivel2) )
+            }
+        });
 
         return notas;
     }
 
-    selecionarIndicador(indicador){
+    private obterFontesIndicador(indicador): string[]{
+
+        let fontes: string[] = [];
+        if (indicador.fonte) {
+            indicador.fonte.forEach(elementoNivel1 =>  {
+                if (elementoNivel1.periodo == this.periodo) {
+                    elementoNivel1.fontes.forEach( elementoNivel2 => fontes.push(elementoNivel2) )
+                }
+            });
+        }
+
+        return fontes;
+    }
+
+    selecionarIndicador(indicador, notaOuFonte){
 
         this.idIndicadorSelecionado = indicador.id;
+        this.notaOuFonte = notaOuFonte;
+
     }
 
 }
