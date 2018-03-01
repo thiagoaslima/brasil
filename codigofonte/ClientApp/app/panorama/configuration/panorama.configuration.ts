@@ -49,9 +49,9 @@ export const PANORAMA: {
                 },
 
                 {
-                    indicadorId: 60272,
-                    pesquisaId: 10065,
-                    periodo: '2017',
+                    indicadorId: 60052,
+                    pesquisaId: 10059,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_area_territorial',
                     tema: TEMAS.nenhum.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -153,36 +153,36 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 10065,
-                    indicadorId: 60406,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 62912,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
-                    pesquisaId: 10065,
-                    indicadorId: 60407,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 62914,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
-                    pesquisaId: 10065,
-                    indicadorId: 60408,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 62916,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
-                    pesquisaId: 44,
-                    indicadorId: 47108,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 64508,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_domicilios_computador',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -209,9 +209,9 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 44,
-                    indicadorId: 47125,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 64517,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_domicilio_acesso_internet',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -230,18 +230,18 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 44,
-                    indicadorId: 47266,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 62921,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_posse_telefone_celular',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
-                    pesquisaId: 44,
-                    indicadorId: 47107,
-                    periodo: '2015',
+                    pesquisaId: 10070,
+                    indicadorId: 64511,
+                    periodo: '2016',
                     titulo: 'panorama_configuration_pais_domicilios_televisao',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -934,7 +934,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 48,
                     indicadorId: 48986,
-                    periodo: '2016',
+                    periodo: '2017',
                     titulo: 'panorama_configuration_estado_rendimento_nominal_mensal_domiciliar',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
