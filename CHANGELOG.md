@@ -1,7 +1,13 @@
 # Change log
 
-## [v4.3.5.2] - 
+## [v4.3.6] - 
+### Added
+	- Inclusão da fonte por indicador na tabela de pesquisa.
+	
 ### Changed
+	- Alteração do panorama Brasil com os dados mais recentes dos indicadores: Domicílios com lixo coletado diretamente, 
+	Domicílios com rede geral de abastecimento de água, Domicílios com esgotamento sanitário (Rede geral, pluvial ou fossa ligada à rede),
+	Domicílios com microcomputador ou tablet, Domicílios com acesso à Internet, Posse de telefone móvel celular e Domicílios com televisão.
 	- Alteração não funcional. Mudança da versão do framework angular de 2 para 5.
 
 
