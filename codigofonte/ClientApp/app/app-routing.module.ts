@@ -13,33 +13,32 @@ const appRoutes: Routes = [
         canActivate: [AuthorizationGuard]
     },
     {
+        path: 'login',
+        component: LoginComponent,
+    },
+    {
         path: '',
         component: ShellComponent,
         children: [
             {
                 path: '',
                 loadChildren: './home/home.module#HomeModule',
-                canActivate: [AuthorizationGuard]
+                canActivateChild: [AuthorizationGuard]
             },
             {
                 path: 'brasil',
                 loadChildren: './panorama/panorama.module#PanoramaModule',
-                canActivate: [AuthorizationGuard]
-            },
-            {
-                path: 'login',
-                component: LoginComponent,
+                canActivateChild: [AuthorizationGuard]
             },
             {
                 path: 'not-found',
                 loadChildren: './page404/page404.module#Page404Module',
-                canActivate: [AuthorizationGuard]
+                canActivateChild: [AuthorizationGuard]
         
             },
             {
                 path: '**',
-                redirectTo: 'not-found',
-                canActivate: [AuthorizationGuard]
+                redirectTo: 'not-found'
             },
         ]
     }

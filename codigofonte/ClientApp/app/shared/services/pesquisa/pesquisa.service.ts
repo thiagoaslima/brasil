@@ -58,6 +58,7 @@ export class PesquisaService3 {
         
         return this._request(url)
             .map(arr => arr.map(Pesquisa.criar))
+            .map(pesquisas => pesquisas.sort((a, b) => a.nome < b.nome ? -1 : 1))
             .catch(err => this._handleError(err, new Error(errorMessage)));
     }
     @RxSimpleCache({

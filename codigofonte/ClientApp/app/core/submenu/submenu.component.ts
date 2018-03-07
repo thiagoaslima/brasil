@@ -62,7 +62,9 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
             this._pesquisaService.
                 getPesquisasPorAbrangenciaTerritorial(this.localidade.tipo)
                 .subscribe(pesquisas => {
-                    this.pesquisas = pesquisas;
+                    this.pesquisas = pesquisas.sort((a,b) => {
+                        return a.nome.localeCompare(b.nome);
+                    });
                 });
 
             if (this.localidade.tipo === 'municipio' && this.localidade.codigo !== this.localidade.parent.codigoCapital) {
