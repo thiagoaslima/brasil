@@ -63,11 +63,11 @@ export class ConfigService {
 
     public isHML(){
 
-        // if(this.isBrowser && (this.hmlConfigurations.URL_APLICACAO == document.location.hostname || this.hmlConfigurations.URL_APLICACAO_ALTERNATIVA == document.location.hostname)){
+        if(this.isBrowser && (this.hmlConfigurations.URL_APLICACAO == document.location.hostname || this.hmlConfigurations.URL_APLICACAO_ALTERNATIVA == document.location.hostname)){
 
             return true;
-        // }
+        }
 
-        // return false;
+        return false;
     }
 }
