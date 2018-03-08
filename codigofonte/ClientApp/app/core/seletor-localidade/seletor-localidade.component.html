@@ -24,7 +24,7 @@
         <nav>
             <ul>                
                 <li *ngIf="niveisTerritoriais.pais" id='menu__brasil'>
-                    <a class="seletor-localidade__link" routerLink="/brasil" routerLinkActive="active">
+                    <a class="seletor-localidade__link" routerLink="/brasil" routerLinkActive="active" (click)="fecharSeletor()">
                         {{ 'seletor_localidade__brasil' | l10n:lang }} <i class="fa fa-chevron-right" aria-hidden="true"></i> 
                     </a>
                 </li>
