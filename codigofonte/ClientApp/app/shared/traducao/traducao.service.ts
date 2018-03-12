@@ -32,24 +32,26 @@ export class TraducaoService {
         //const queryLanguage = this.getParameterByName('lang', prerenderURL ? prerenderURL : undefined);
         const queryLanguage = undefined;
 
-        if (this.isBrowser) {
+        this.lang = 'pt';
 
-            const navigatorLanguage = navigator.language;
-            const sessionLanguage = sessionStorage.getItem('lang');
+        // if (this.isBrowser) {
 
-            if (queryLanguage) {
-                this.lang = queryLanguage;
-            } else if(sessionLanguage) {
-                this.lang = sessionLanguage;
-            } else if(navigatorLanguage) {
-                this.lang = navigatorLanguage;
-            } else {
-                this.lang = 'pt';
-            }
+        //     const navigatorLanguage = navigator.language;
+        //     const sessionLanguage = sessionStorage.getItem('lang');
 
-        } else {
-            this.lang = 'pt';
-        }
+        //     if (queryLanguage) {
+        //         this.lang = queryLanguage;
+        //     } else if(sessionLanguage) {
+        //         this.lang = sessionLanguage;
+        //     } else if(navigatorLanguage) {
+        //         this.lang = navigatorLanguage;
+        //     } else {
+        //         this.lang = 'pt';
+        //     }
+
+        // } else {
+        //     this.lang = 'pt';
+        // }
 
     }
 
