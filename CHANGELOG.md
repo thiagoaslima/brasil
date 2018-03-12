@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.6.1] - 
+### Changed
+	- Desabilitada tradução.
+
+
 ## [v4.3.6] - 
 ### Added
 	- Inclusão da fonte por indicador na tabela de pesquisa.
