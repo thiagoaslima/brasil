@@ -3,11 +3,12 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { ResultadoDTO } from '.';
 import { Indicador, Localidade, Resultado } from '..';
-import { ServicoDados as servidor } from '../values';
+import { ConfigService } from '../../config';
 import { IndicadorService3, LocalidadeService3 } from '..';
 import { forceArray } from '../../../../utils';
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { RxSimpleCache } from '../../cache/decorators';
+import { ENDPOINT } from "../../";
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -26,7 +27,8 @@ export class ResultadoService3 {
     constructor(
         private _http: Http,
         private _indicadorService: IndicadorService3,
-        private _localidadeService: LocalidadeService3
+        private _localidadeService: LocalidadeService3,
+        private configService: ConfigService
     ) { }
 
     @RxSimpleCache({
@@ -35,7 +37,7 @@ export class ResultadoService3 {
     getResultados(indicadoresId: number | number[], codigolocalidades: number | number[]) {
         const _indicadores = forceArray(indicadoresId);
         const _localidades = forceArray(codigolocalidades);
-        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${_localidades.join('|')}`);
+        const url = this.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${_localidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadores.join(', ')}, localidades: ${_localidades.join(', ')}]`
       
         return this._request(url)
@@ -44,7 +46,7 @@ export class ResultadoService3 {
     }
     getResultadosEstado(indicadoresId: number | number[], localidade: string) {
         const _indicadores = forceArray(indicadoresId);
-        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${localidade}xxxxx`);
+        const url = this.setUrl(`pesquisas/indicadores/${_indicadores.join('|')}/resultados/${localidade}xxxxx`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadores.join(', ')}, localidade: ${localidade}]`
       
         return this._request(url)
@@ -70,7 +72,7 @@ export class ResultadoService3 {
                 throw new Error('Código de localidade deve ter 1 (país) ou 2 dígitos (uf)');
         }
 
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${requisicaoLocalidade}`);
+        const url = this.setUrl(`pesquisas/indicadores/${indicadorId}/resultados/${requisicaoLocalidade}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicador: ${indicadorId}, localidade: ${codigoLocalidade}]`
 
         return this._request(url)
@@ -92,7 +94,7 @@ export class ResultadoService3 {
         const _indicadoresId = forceArray(indicadoresId);
         const _codigoLocalidades = forceArray(codigolocalidades).filter(codigo => Boolean(codigo) || codigo === 0);
 
-        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
+        const url = this.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${_codigoLocalidades.join('|')}`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${_codigoLocalidades.join(', ')}]`
 
         return Observable.zip(
@@ -113,7 +115,7 @@ export class ResultadoService3 {
         const _indicadoresId = forceArray(indicadoresId);
         //const _codigoLocalidades = forceArray(codigolocalidades).filter(codigo => Boolean(codigo) || codigo === 0);
 
-        const url = servidor.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${localidade}xxxxx`);
+        const url = this.setUrl(`pesquisas/indicadores/${_indicadoresId.join('|')}/resultados/${localidade}xxxxx`);
         const errorMessage = `Não foi possível recuperar os resultados solicitados. [indicadores: ${_indicadoresId.join(', ')}, localidades: ${localidade}]`
 
         return Observable.zip(
@@ -159,5 +161,13 @@ export class ResultadoService3 {
 
     private _isServerError(res) {
         return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
+    }
+
+    private setUrl(path, endpoint = ENDPOINT.SERVICO_DADOS, version = 1) {
+
+        if (path.indexOf('/') === 0) {
+            path = path.substring(1);
+        }
+        return `${this.configService.getConfigurationValue(endpoint)}/v${version}/${path}`;
     }
 }

@@ -4,9 +4,11 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { converterObjArrayEmHash } from '../../../../utils';
 import { PesquisaDTO } from '.';
 import { Indicador, Pesquisa } from '..';
-import { escopoIndicadores, listaNiveisTerritoriais, ServicoDados as servidor } from '../values';
+import { escopoIndicadores, listaNiveisTerritoriais } from '../values';
+import { ConfigService } from '../../config';
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { RxSimpleCache } from '../../cache/decorators';
+import { ENDPOINT } from "../../";
 
 import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -40,6 +42,7 @@ export class PesquisaService3 {
     constructor(
         private _http: Http,
         private _traducaoService:TraducaoService,
+        private configService: ConfigService
     ) { 
 
         if(this._traducaoService.lang!=null){
@@ -53,7 +56,7 @@ export class PesquisaService3 {
         cache: PesquisaService3.cache
     })
     getAllPesquisas(): Observable<Pesquisa[]> {
-        const url = servidor.setUrl('pesquisas');
+        const url = this.setUrl('pesquisas');
         const errorMessage = `Não foi possível recuperar as pesquisas`;
         
         return this._request(url)
@@ -95,7 +98,7 @@ export class PesquisaService3 {
         cache: PesquisaService3.cache
     })
     getPesquisa(pesquisaId: number): Observable<Pesquisa> {
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}`);
+        const url = this.setUrl(`pesquisas/${pesquisaId}`);
         const errorMessage = `Não foi possível recuperar a pesquisa solicitada. Verifique a solicitação ou tente novamente mais tarde. [id: ${pesquisaId}]`;
         
         return this._request(url)
@@ -155,6 +158,14 @@ export class PesquisaService3 {
         }
 
         return obj.pesquisas;
+    }
+
+    private setUrl(path, endpoint = ENDPOINT.SERVICO_DADOS, version = 1) {
+
+        if (path.indexOf('/') === 0) {
+            path = path.substring(1);
+        }
+        return `${this.configService.getConfigurationValue(endpoint)}/v${version}/${path}`;
     }
 
 }
