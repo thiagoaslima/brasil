@@ -45,7 +45,7 @@ export class NaoAcheiComponent implements OnInit {
         private _http: Http,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId)
     }

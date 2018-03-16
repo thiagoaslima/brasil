@@ -20,7 +20,7 @@ export class QRCodeComponent implements OnInit {
 
     constructor(
         private _routerParamsServ: RouterParamsService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId)
     }

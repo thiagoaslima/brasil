@@ -52,7 +52,7 @@ export class PanoramaPainelComponent implements OnInit, OnChanges {
         private _analytics: AnalyticsService,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
     }

@@ -26,7 +26,7 @@ export class RouterParamsService {
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
-        @Inject(PLATFORM_ID) platformId: Object,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
 

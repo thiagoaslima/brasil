@@ -58,7 +58,7 @@ export class PesquisaIndicadoresComponent implements OnChanges {
         private _router: Router,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
     }

@@ -39,7 +39,7 @@ export class GeolocationDirective {
     constructor(
         private _localidadeService: LocalidadeService3,
         private modalErrorService: ModalErrorService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
     }

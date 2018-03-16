@@ -48,8 +48,8 @@ export class PanoramaTemasComponent implements OnChanges {
         private _panoramaService: PanoramaService,
         private pageScrollService: PageScrollService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
-        @Optional() @Inject(DOCUMENT) private document,
+        @Inject(PLATFORM_ID) platformId: string,
+        @Optional() @Inject(DOCUMENT) private document
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
     }

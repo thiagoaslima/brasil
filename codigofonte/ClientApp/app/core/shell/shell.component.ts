@@ -151,7 +151,7 @@ export class ShellComponent implements OnInit, OnDestroy {
         private pageScrollService: PageScrollService,
         private _analytics: AnalyticsService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
 

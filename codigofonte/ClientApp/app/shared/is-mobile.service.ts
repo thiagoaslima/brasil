@@ -16,7 +16,7 @@ export class IsMobileService {
     private isBrowser;
     
     constructor(
-        @Inject(PLATFORM_ID) platformId
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
         if (this.isBrowser) {

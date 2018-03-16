@@ -60,7 +60,7 @@ export class EstadoSinteseComponent implements OnInit {
         private _estadoSinteseService : EstadoSinteseService,
         private _indicadorService: IndicadorService3,
         private _pesquisaService: PesquisaService3,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         
         this.resumo.municipios = [];

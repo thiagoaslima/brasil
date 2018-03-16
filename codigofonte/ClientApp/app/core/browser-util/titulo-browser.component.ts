@@ -35,11 +35,14 @@ export class TituloBrowserComponent implements OnInit {
         private _route: ActivatedRoute,
         private modalErrorService: ModalErrorService,
         // private _metaService:MetaService,
-        @Inject(PLATFORM_ID) platformId: string,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
-        this.isBrowser = isPlatformBrowser(PLATFORM_ID);
+        this.isBrowser = isPlatformBrowser(platformId);
 
         this._routerParamsService.params$.subscribe(({ params, queryParams }) => {
+
+            debugger;
+
             if (this.isBrowser && window) {
                 let titulo = 'IBGE | Brasil em Síntese | ';
                 let localidade =params.municipio
@@ -58,7 +61,11 @@ export class TituloBrowserComponent implements OnInit {
                     }
                 }
                
-                let url=params.url;
+                if(!params.url){
+                    return;
+                }
+
+                let url = params.url;
                 /*if (isBrowser){
                     url = window.location.href;
                 }*/

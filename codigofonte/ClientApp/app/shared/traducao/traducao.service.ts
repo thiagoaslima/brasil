@@ -24,7 +24,7 @@ export class TraducaoService {
     }
 
     constructor(
-        @Inject(PLATFORM_ID) platformId
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
         const prerenderURL: string = Zone.current.get('originUrl');
