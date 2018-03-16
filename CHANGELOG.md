@@ -3,6 +3,7 @@
 ## [v4.3.6.2] - 
 ### Fixed
 	- Corrigido o acesso ao serviço de dados em homologação.
+	- Corrigida a verificação se a aplicação está no browser.
 
 
 ## [v4.3.6.1] - 
