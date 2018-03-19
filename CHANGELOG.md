@@ -1,17 +1,22 @@
 # Change log
 
-## [v4.3.6.2] - 
+## [v4.3.6.3] - Não publicado em Produção
+### Fixed
+	- Alteração do indicador PIB - SCNT para sempre exibir a informação mais recente.
+
+
+## [v4.3.6.2] - Não publicado em Produção
 ### Fixed
 	- Corrigido o acesso ao serviço de dados em homologação.
 	- Corrigida a verificação se a aplicação está no browser.
 
 
-## [v4.3.6.1] - 
+## [v4.3.6.1] - Não publicado em Produção
 ### Changed
 	- Desabilitada tradução.
 
 
-## [v4.3.6] - 
+## [v4.3.6] - Não publicado em Produção
 ### Added
 	- Inclusão da fonte por indicador na tabela de pesquisa.
 	
