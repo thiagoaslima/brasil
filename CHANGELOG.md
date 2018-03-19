@@ -1,5 +1,12 @@
 # Change log
 
+## [v4.3.6.4] - Não publicado em Produção
+### Changed
+	- Alteração do nome do indicador PIB - SCNT para PIB (Taxa acumulada em quatro trimestres) - SCNT. Alteração do período exibido no indicador Taxa de desocupação - PNAD Contínua para exibir o
+último trimestre.
+	- Ajustes no ródulo do download de dados da pesquisa.
+
+
 ## [v4.3.6.3] - Não publicado em Produção
 ### Fixed
 	- Alteração do indicador PIB - SCNT para sempre exibir a informação mais recente.
