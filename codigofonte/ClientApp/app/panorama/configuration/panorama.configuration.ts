@@ -526,7 +526,7 @@ export const PANORAMA: {
                     categoria: '11255[90707]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 12,
-                    periodo: '2º trimestre 2017',
+                    periodo: '',
                     titulo: 'panorama_configuration_pais_pib_scnt',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,
