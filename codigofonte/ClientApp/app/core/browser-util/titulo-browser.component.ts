@@ -41,8 +41,6 @@ export class TituloBrowserComponent implements OnInit {
 
         this._routerParamsService.params$.subscribe(({ params, queryParams }) => {
 
-            debugger;
-
             if (this.isBrowser && window) {
                 let titulo = 'IBGE | Brasil em Síntese | ';
                 let localidade =params.municipio
