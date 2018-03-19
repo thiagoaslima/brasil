@@ -498,10 +498,10 @@ export const PANORAMA: {
 
                 // Taxa de desocupação
                 {
-                    pesquisaId: 6381,
+                    pesquisaId: 4094,
                     indicadorId: 4099,
                     servico: 'conjunturais',
-                    categoria: '',
+                    categoria: '58(95253)',
                     quantidadePeriodos: 36,
                     titulo: 'panorama_configuration_pais_taxa_desocupacao_pnad_continua',
                     tema: TEMAS.economia.label,
@@ -511,9 +511,9 @@ export const PANORAMA: {
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
-                            pesquisaId: 6381,
+                            pesquisaId: 4094,
                             indicadorId: 4099,
-                            categoria: '',
+                            categoria: '58(95253)',
                             servico: 'conjunturais',
                             quantidadePeriodos: 36
                         }]
