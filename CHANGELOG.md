@@ -1,37 +1,23 @@
 # Change log
 
 ## [v4.3.6.4] - Não publicado em Produção
+### Added
+	- Inclusão da fonte por indicador na tabela de pesquisa.
+
 ### Changed
 	- Alteração do nome do indicador PIB - SCNT para PIB (Taxa acumulada em quatro trimestres) - SCNT. Alteração do período exibido no indicador Taxa de desocupação - PNAD Contínua para exibir o
 último trimestre.
 	- Ajustes no ródulo do download de dados da pesquisa.
-
-
-## [v4.3.6.3] - Não publicado em Produção
-### Fixed
-	- Alteração do indicador PIB - SCNT para sempre exibir a informação mais recente.
-
-
-## [v4.3.6.2] - Não publicado em Produção
-### Fixed
-	- Corrigido o acesso ao serviço de dados em homologação.
-	- Corrigida a verificação se a aplicação está no browser.
-
-
-## [v4.3.6.1] - Não publicado em Produção
-### Changed
 	- Desabilitada tradução.
-
-
-## [v4.3.6] - Não publicado em Produção
-### Added
-	- Inclusão da fonte por indicador na tabela de pesquisa.
-	
-### Changed
 	- Alteração do panorama Brasil com os dados mais recentes dos indicadores: Domicílios com lixo coletado diretamente, 
 	Domicílios com rede geral de abastecimento de água, Domicílios com esgotamento sanitário (Rede geral, pluvial ou fossa ligada à rede),
 	Domicílios com microcomputador ou tablet, Domicílios com acesso à Internet, Posse de telefone móvel celular e Domicílios com televisão.
 	- Alteração não funcional. Mudança da versão do framework angular de 2 para 5.
+
+### Fixed
+	- Alteração do indicador PIB - SCNT para sempre exibir a informação mais recente.
+	- Corrigido o acesso ao serviço de dados em homologação.
+	- Corrigida a verificação se a aplicação está no browser.
 
 
 ## [v4.3.5] - 2018-01-25
