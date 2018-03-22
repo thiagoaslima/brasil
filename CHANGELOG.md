@@ -1,6 +1,6 @@
 # Change log
 
-## [v4.3.6.4] - Não publicado em Produção
+## [v4.3.6.4] - 2018-03-22
 ### Added
 	- Inclusão da fonte por indicador na tabela de pesquisa.
 
