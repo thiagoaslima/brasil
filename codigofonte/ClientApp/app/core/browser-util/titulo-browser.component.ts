@@ -91,7 +91,7 @@ export class TituloBrowserComponent implements OnInit {
                                 periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
                             }
                             
-                            this._indicadorService.getIndicadoresDaPesquisa(pesquisa.id).subscribe((indicadores) => {
+                            this._indicadorService.getIndicadoresDaPesquisaByPeriodo(pesquisa.id, periodoMaisrecente).subscribe((indicadores) => {
                                 let indicadorNome = indicadores.length > 0 ? indicadores[0].nome : '';
 
                                 for (let i = 0; i < indicadores.length; i++) {
