@@ -7,7 +7,6 @@ import { CommonModule }  from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AuthorizationGuard } from './authorization.guard';
 import { EmptyComponent } from './empty.component';
 
 // import { RootRoutingModule } from './root-routing.module';
@@ -31,7 +30,6 @@ import { EmptyComponent } from './empty.component';
     ],
     providers: [
         // ValidParametersGuard
-        AuthorizationGuard
     ]
 })
 export class AppModuleShared {
