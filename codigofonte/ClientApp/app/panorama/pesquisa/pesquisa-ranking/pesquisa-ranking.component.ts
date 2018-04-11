@@ -258,7 +258,7 @@ export class PesquisaRankingComponent implements OnInit, OnChanges {
                 contextos.push(localidade.parent.codigo.toString());
             }
 
-            requests.push(this._rankingService.getRankingIndicador(indicadorId, periodo, contextos, localidade.codigo));
+            requests.push(this._rankingService.getRankingIndicador(indicadorId, periodo, contextos, localidade.codigo, localidade.tipo == 'uf'? 3 : 4));
         });
 
         return Observable.zip(...requests);
