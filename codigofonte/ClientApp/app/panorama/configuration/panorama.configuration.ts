@@ -79,14 +79,12 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 3145,
-                    indicadorId: 93,
-                    categoria: '86[0]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
+                    pesquisaId: 10059,
+                    indicadorId: 60055,
+                    periodo: '2010',
                     titulo: 'panorama_configuration_pais_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico,
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
