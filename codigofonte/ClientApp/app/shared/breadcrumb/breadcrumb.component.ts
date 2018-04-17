@@ -19,7 +19,7 @@ export class Breadcrumb implements OnInit, OnChanges {
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ){
         this.isBrowser = isPlatformBrowser(platformId);
     }

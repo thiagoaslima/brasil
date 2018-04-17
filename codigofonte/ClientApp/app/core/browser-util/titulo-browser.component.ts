@@ -35,11 +35,12 @@ export class TituloBrowserComponent implements OnInit {
         private _route: ActivatedRoute,
         private modalErrorService: ModalErrorService,
         // private _metaService:MetaService,
-        @Inject(PLATFORM_ID) platformId: string,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
-        this.isBrowser = isPlatformBrowser(PLATFORM_ID);
+        this.isBrowser = isPlatformBrowser(platformId);
 
         this._routerParamsService.params$.subscribe(({ params, queryParams }) => {
+
             if (this.isBrowser && window) {
                 let titulo = 'IBGE | Brasil em Síntese | ';
                 let localidade =params.municipio
@@ -58,7 +59,11 @@ export class TituloBrowserComponent implements OnInit {
                     }
                 }
                
-                let url=params.url;
+                if(!params.url){
+                    return;
+                }
+
+                let url = params.url;
                 /*if (isBrowser){
                     url = window.location.href;
                 }*/
@@ -80,13 +85,13 @@ export class TituloBrowserComponent implements OnInit {
                         this._pesquisaService.getPesquisa(parseInt(params.pesquisa)).subscribe((pesquisa) => {
 
                             // Caso seja a pequisa cujos indicadores variam ccom o ano, é necessário informar um período para obter os indicadores, pois os indicadores variam por período.
-                            let periodoMaisrecente = null;
+                            let periodoMaisrecente = undefined;
                             if (this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(pesquisa.id)) {
 
                                 periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
                             }
                             
-                            this._indicadorService.getIndicadoresDaPesquisa(pesquisa.id).subscribe((indicadores) => {
+                            this._indicadorService.getIndicadoresDaPesquisaByPeriodo(pesquisa.id, periodoMaisrecente).subscribe((indicadores) => {
                                 let indicadorNome = indicadores.length > 0 ? indicadores[0].nome : '';
 
                                 for (let i = 0; i < indicadores.length; i++) {

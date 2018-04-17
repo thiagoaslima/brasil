@@ -13,7 +13,7 @@ module.exports = (env) => {
         resolve: { extensions: [ '.js', '.ts' ] },
         output: {
             filename: '[name].js',
-            chunkFilename: '[name]-chunk.js',
+            chunkFilename: '[name]-chunk.[chunkhash].js',
             publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
         },
         module: {

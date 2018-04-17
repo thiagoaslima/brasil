@@ -155,7 +155,7 @@ export class SeletorLocalidadeComponent implements OnInit, OnDestroy {
         private _seletorService: SeletorLocalidadeService,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
 

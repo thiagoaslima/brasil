@@ -41,9 +41,9 @@ export class ConfigService {
     };
 
     constructor(
-        @Inject(PLATFORM_ID) platformId: string = "server",
+        @Inject(PLATFORM_ID) platformId: string,
     ) {
-        this.isBrowser = isPlatformBrowser(PLATFORM_ID);
+        this.isBrowser = isPlatformBrowser(platformId);
     }
 
 

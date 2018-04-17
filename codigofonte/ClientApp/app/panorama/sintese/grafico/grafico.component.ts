@@ -39,7 +39,7 @@ export class GraficoComponent implements OnInit, OnChanges{
     constructor( 
         private _render: Renderer, 
         private _commonService: CommonService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ){
         this.isBrowser = isPlatformBrowser(platformId);
     }

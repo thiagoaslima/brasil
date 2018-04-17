@@ -5,10 +5,12 @@ import { PesquisaService3, Pesquisa } from '..';
 import { Indicador } from '.';
 import { CacheFactory } from '../../cache/cacheFactory.service';
 import { RxSimpleCache } from '../../cache/decorators';
-import { escopoIndicadores, ServicoDados as servidor } from '../values';
+import { escopoIndicadores } from '../values';
+import { ConfigService } from '../../config';
 import { arrayUniqueValues, converterObjArrayEmHash, curry, getProperty } from '../../../../utils';
 import {TraducaoService}  from '../../traducao/traducao.service';
 import { ModalErrorService } from '../../../core';
+import { ENDPOINT } from "../../";
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -32,7 +34,8 @@ export class IndicadorService3 {
         private _http: Http,
         private _pesquisaService: PesquisaService3,
         private _traducaoService:TraducaoService,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private configService: ConfigService
     ) { 
         if(this._traducaoService.lang!=null){
             this.idioma = this._traducaoService.lang;
@@ -64,7 +67,7 @@ export class IndicadorService3 {
     })
     getIndicadoresFilhosByPosicao(pesquisaId: number, posicao="0", periodo="all", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
+        const url = this.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return this._request(url)
@@ -83,7 +86,7 @@ export class IndicadorService3 {
     })
     getIndicadoresFilhosComPesquisaByPosicao(pesquisaId: number, posicao="0", periodo="all", { arvoreCompleta = false, localidades = [] as Array<number | string> } = {}): Observable<Indicador[]> {
         const escopo = arvoreCompleta ? escopoIndicadores.arvoreCompleta : escopoIndicadores.filhos;
-        const url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
+        const url = this.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicao}?scope=${escopo}&localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível recuperar os indicadores solicitados. [pesquisaId: ${pesquisaId}, escopo: ${escopo}]`;
 
         return Observable.zip(this._request(url), this._pesquisaService.getPesquisa(pesquisaId))
@@ -95,7 +98,7 @@ export class IndicadorService3 {
         cache: IndicadorService3.cache
     })
     getIndicadoresById(indicadoresId: number[], localidades = [] as Array<number | string>): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+        const url = this.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível retornar indicadores para os parâmetros informados. [id: ${indicadoresId.join(', ') || 'nenhum valor informado'}]`
 
         return this._request(url)
@@ -114,7 +117,7 @@ export class IndicadorService3 {
         const ids = Array.isArray(indicadorId) ? indicadorId.join('|') : indicadorId.toString();
         const queryLocalidade = localidade === undefined || null ? '' : `&localidade=${Array.isArray(localidade) ? localidade.join(',') : localidade}`;
         
-        let url = servidor.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`);
+        let url = this.setUrl(`pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${ids}?scope=${escopo}${queryLocalidade}&lang=${this.idioma}`);
         return this._http.get(url, options)
             .retry(3)
             .catch(err => Observable.of({ json: () => ({}) }))
@@ -155,7 +158,7 @@ export class IndicadorService3 {
         cache: IndicadorService3.cache
     })
     getIndicadoresComPesquisaById(indicadoresId: number[], localidades = [] as Array<number | string>): Observable<Indicador[]> {
-        const url = servidor.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
+        const url = this.setUrl(`pesquisas/indicadores/${indicadoresId.join('|')}?localidade=${localidades.join(',')}`);
         const errorMessage = `Não foi possível retornar indicadores para os parâmetros informados. [id: ${indicadoresId.join(', ') || 'nenhum valor informado'}}]`
 
         return this._request(url)
@@ -212,6 +215,14 @@ export class IndicadorService3 {
 
     private _isServerError(res) {
         return res && typeof res === 'object' && !Array.isArray(res) && Object.prototype.hasOwnProperty.apply(res, 'message') && Object.keys(res).length === 1;
+    }
+
+    private setUrl(path, endpoint = ENDPOINT.SERVICO_DADOS, version = 1) {
+
+        if (path.indexOf('/') === 0) {
+            path = path.substring(1);
+        }
+        return `${this.configService.getConfigurationValue(endpoint)}/v${version}/${path}`;
     }
 
 }

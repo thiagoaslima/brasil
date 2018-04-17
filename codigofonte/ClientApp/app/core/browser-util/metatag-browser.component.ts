@@ -34,9 +34,9 @@ export class MetatagBrowserComponent implements OnInit {
         private _localidadeService: LocalidadeService3,
         private _route: ActivatedRoute,
         private modalErrorService: ModalErrorService,
-        @Inject(PLATFORM_ID) platformId: string,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
-        this.isBrowser = isPlatformBrowser(PLATFORM_ID);
+        this.isBrowser = isPlatformBrowser(platformId);
 
         this._routerParamsService.params$.subscribe(({ params }) => {
             if (this.isBrowser && window) {

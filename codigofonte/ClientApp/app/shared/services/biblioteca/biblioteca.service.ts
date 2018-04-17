@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { ServicoDados as servidor } from '../values';
 import { ConfigService } from '../../';
 
 const headers = new Headers({ 'accept': '*/*' });
@@ -11,15 +10,16 @@ const options = new RequestOptions({ headers: headers, withCredentials: false })
 export class BibliotecaService {
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private configService: ConfigService
     ) { }
 
     public getValuesMunicipio (codigoLocalidade: number) {
-        const url = `${new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&codmun=${codigoLocalidade}`;
+        const url = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&codmun=${codigoLocalidade}`;
         return this._request(url).map(res => res[Object.keys(res)[0]] || null);
     }
     public getValuesEstado(codigoLocalidade: number) {
-        const url = `${new ConfigService().getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&coduf=${codigoLocalidade}`;
+        const url = `${this.configService.getConfigurationValue('ENDPOINT_SERVICO_BIBLIOTECA')}/v1/biblioteca?aspas=3&coduf=${codigoLocalidade}`;
         return this._request(url).map(res => res[Object.keys(res)[0]] || null);
     }
 

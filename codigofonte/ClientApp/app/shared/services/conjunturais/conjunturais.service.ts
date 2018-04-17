@@ -4,8 +4,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { ConjunturalDTO } from '.';
 import { Resultado, Indicador } from '..';
 import { LocalidadeService3 } from '..';
-import { ServicoDados as servidor } from '../values';
 import { converterObjArrayEmHash } from '../../../../utils';
+import { ConfigService } from '../../config';
 
 import { Observable } from 'rxjs/Observable';
 import { ENDPOINT } from "../../";
@@ -19,13 +19,14 @@ export class ConjunturaisService {
 
     constructor(
         private _http: Http,
-        private _localidadeService: LocalidadeService3
+        private _localidadeService: LocalidadeService3,
+        private configService: ConfigService
     ) { }
 
     getIndicador(pesquisaId: number, indicadorId: number, qtdePeriodos = 100, categoria?: string): Observable<ConjunturalDTO[]> {
 
         const params = categoria ? `?categoria=${categoria}` : '';
-        const url = servidor.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, ENDPOINT.SERVICO_DADOS_CONJUNTURAIS, 2);
+        const url = this.setUrl(`conjunturais/${pesquisaId}/periodos/-${qtdePeriodos}/indicadores/${indicadorId}${params}`, ENDPOINT.SERVICO_DADOS_CONJUNTURAIS, 2);
         return this._request(url).map(arr => arr.map(obj => this._removeDotFromPropertyName(obj))).catch(err => this._handleError(err));
     }
 
@@ -161,6 +162,14 @@ export class ConjunturaisService {
 
     private _handleError(error: Error, customError?: Error): Observable<any> {
         return Observable.throw(error.message ? error : customError);
+    }
+
+    private setUrl(path, endpoint = ENDPOINT.SERVICO_DADOS, version = 1) {
+
+        if (path.indexOf('/') === 0) {
+            path = path.substring(1);
+        }
+        return `${this.configService.getConfigurationValue(endpoint)}/v${version}/${path}`;
     }
 
 }

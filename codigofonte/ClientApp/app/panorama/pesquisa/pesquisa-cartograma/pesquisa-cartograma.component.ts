@@ -56,7 +56,7 @@ export class PesquisaCartogramaComponent implements OnChanges {
         private _routerParamsService: RouterParamsService,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
     }

@@ -32,7 +32,7 @@ export class QuestionarioComponent implements OnInit {
         private _http: Http,
         @Inject(DOCUMENT) private document: any,
         private modalErrorService: ModalErrorService,
-        @Inject(PLATFORM_ID) platformId,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId)
     }

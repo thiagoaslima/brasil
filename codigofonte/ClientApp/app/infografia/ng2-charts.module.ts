@@ -56,7 +56,7 @@ export class BaseChartDirective implements OnDestroy, OnChanges, OnInit {
 
 	public constructor(
 		element: ElementRef,
-		@Inject(PLATFORM_ID) platformId,
+		@Inject(PLATFORM_ID) platformId: string
 	) {
 		this.element = element;
 		this.isBrowser = isPlatformBrowser(platformId);

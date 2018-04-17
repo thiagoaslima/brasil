@@ -27,3 +27,7 @@ npm-debug.log
 **/*.metadata.json
 **/*.shim.ngstyle.ts
 **/_app/
+
+
+# Visual Studio Code #
+.vscode/

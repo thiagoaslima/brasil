@@ -17,7 +17,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
         private router: Router,
         private loginService: LoginService,
         private configService: ConfigService,
-        @Inject(PLATFORM_ID) platformId
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
     }

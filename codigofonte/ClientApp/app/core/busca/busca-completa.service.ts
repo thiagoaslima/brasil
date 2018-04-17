@@ -7,6 +7,7 @@ import { links } from '../../../api/links'; //links metadata
 
 @Injectable()
 export class BuscaCompletaService {
+    private MAX_RESULTADOS = 10;
 
     constructor(){
         //transform link's keywords
@@ -63,9 +64,12 @@ export class BuscaCompletaService {
             if(placesFound.indexOf(places[i]) >= 0) continue; //dont push twice
             var index = transformedText.indexOf(places[i].slug);
             var length = places[i].slug.length;
-            if((index == 0 || transformedText.charAt(index - 1) == '-') && 
-                (index + length == transformedText.length || transformedText.charAt(index + length) == '-')) //match whole word
+            if(
+                (index == 0 || transformedText.charAt(index - 1) == '-')
+                && (index + length == transformedText.length || transformedText.charAt(index + length) == '-')
+            ) { //match whole word
                 placesFound.push(places[i]);
+            }
         }
         //big matches first
         placesFound.sort(function(a, b){return (b.slug.split('-').length * b.slug.length) - (a.slug.split('-').length * a.slug.length)});
@@ -78,13 +82,13 @@ export class BuscaCompletaService {
         if(textWords.length >= 1 && textWords[textWords.length - 1].length >= 3) words1 = textWords[textWords.length - 1];
         for(i = 0; i < places.length; i++){
             if(placesFound.indexOf(places[i]) >= 0) continue; //dont push twice
-            if(words4 && places[i].slug.indexOf(words4) == 0)
+            if(words4 && places[i].slug.indexOf(words4) >= 0)
                 sug4.push(places[i]);
-            else if(words3 && places[i].slug.indexOf(words3) == 0)
+            else if(words3 && places[i].slug.indexOf(words3) >= 0)
                 sug3.push(places[i]);
-            else if(words2 && places[i].slug.indexOf(words2) == 0)
+            else if(words2 && places[i].slug.indexOf(words2) >= 0)
                 sug2.push(places[i]);
-            else if(words1 && places[i].slug.indexOf(words1) == 0)
+            else if(words1 && places[i].slug.indexOf(words1) >= 0)
                 sug1.push(places[i]);
         }
         //pick suggetions that matches the biggest names only (the best matches)
@@ -149,8 +153,8 @@ export class BuscaCompletaService {
                 links[0]["points"] = 0;
         }
         //pick only first results
-        if(places.length > 6)
-            places = places.slice(0, 6);
+        if(places.length > this.MAX_RESULTADOS)
+            places = places.slice(0, this.MAX_RESULTADOS);
         //find year
         var textWords = text.split('-');
         for(i = 0; i < textWords.length; i++){

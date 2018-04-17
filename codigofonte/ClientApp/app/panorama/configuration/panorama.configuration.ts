@@ -79,14 +79,12 @@ export const PANORAMA: {
                 },
 
                 {
-                    pesquisaId: 3145,
-                    indicadorId: 93,
-                    categoria: '86[0]',
-                    servico: 'conjunturais',
-                    quantidadePeriodos: 1,
+                    pesquisaId: 10059,
+                    indicadorId: 60055,
+                    periodo: '2010',
                     titulo: 'panorama_configuration_pais_populacao_ultimo_censo',
                     tema: TEMAS.populacao.label,
-                    visualizacao: PanoramaVisualizacao.numerico,
+                    visualizacao: PanoramaVisualizacao.numerico
                 },
 
                 {
@@ -498,10 +496,10 @@ export const PANORAMA: {
 
                 // Taxa de desocupação
                 {
-                    pesquisaId: 6381,
+                    pesquisaId: 4094,
                     indicadorId: 4099,
                     servico: 'conjunturais',
-                    categoria: '',
+                    categoria: '58(95253)',
                     quantidadePeriodos: 36,
                     titulo: 'panorama_configuration_pais_taxa_desocupacao_pnad_continua',
                     tema: TEMAS.economia.label,
@@ -511,9 +509,9 @@ export const PANORAMA: {
                         tipo: TiposGrafico.linha,
                         link: '',
                         dados: [{
-                            pesquisaId: 6381,
+                            pesquisaId: 4094,
                             indicadorId: 4099,
-                            categoria: '',
+                            categoria: '58(95253)',
                             servico: 'conjunturais',
                             quantidadePeriodos: 36
                         }]
@@ -526,7 +524,7 @@ export const PANORAMA: {
                     categoria: '11255[90707]',
                     servico: 'conjunturais',
                     quantidadePeriodos: 12,
-                    periodo: '2º trimestre 2017',
+                    periodo: '',
                     titulo: 'panorama_configuration_pais_pib_scnt',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.grafico,

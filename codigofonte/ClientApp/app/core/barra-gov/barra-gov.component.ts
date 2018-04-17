@@ -28,10 +28,10 @@ export class BarraGov implements OnInit {
     constructor(
         private _http: Http,
         private modalErrorService: ModalErrorService,
-        @Inject(PLATFORM_ID) platformId: string,
+        @Inject(PLATFORM_ID) platformId: string
     ) {
         this.desktop = !this.isMobile.any();
-        this.isBrowser = isPlatformBrowser(PLATFORM_ID);
+        this.isBrowser = isPlatformBrowser(platformId);
     }
 
     private isMobile = {
