@@ -12,6 +12,18 @@ const appRoutes: Routes = [
         loadChildren: './estado-sintese/estado-sintese.module#EstadoSinteseModule',
         canActivate: [AuthorizationGuard]
     },
+
+
+
+    {
+        path: 'brasil/sintese',
+        loadChildren: './municipio-sintese/municipio-sintese.module#MunicipioSinteseModule',
+        canActivate: [AuthorizationGuard]
+    },
+
+
+
+
     {
         path: 'login',
         component: LoginComponent,

@@ -43,6 +43,10 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
     public IsMobileService: boolean;
     public exibirFiltroResumo = false;
     public sinteseEstadoUrl;
+
+    public sinteseMunicipioUrl;
+
+
     public temasModalFiltroPanorama;
     private _scrollTop$ = new BehaviorSubject(0);
 
@@ -74,6 +78,8 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.isHeaderStatic = this._scrollTop$.debounceTime(100).map(scrollTop => scrollTop > 100).distinctUntilChanged();
+
+        
         this.temasModalFiltroPanorama = this._panoramaService.getConfiguracao('municipio').filter(ind => ind.tema && ind.tema != "");
         
         
@@ -166,11 +172,16 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
             });
         }
     }
+
+    
     gerarSinteseEstado(){
 
+        // debugger;
         let indicadores = this.getIndicadoresSelecionados();
         if(indicadores!=null && indicadores.length>0){    
              this.sinteseEstadoUrl = '/brasil/sintese/'+this.localidade.sigla.toLowerCase()+'?indicadores='+indicadores.join(',');
+
+             // debugger;
              window.open(this.sinteseEstadoUrl, '_blank');
         }else{
             
@@ -179,6 +190,27 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
         }
        
     }
+
+
+   
+     gerarSinteseMunicipio(){
+
+        //debugger;
+
+        let indicadores = this.getIndicadoresSelecionados();
+        if(indicadores!=null && indicadores.length>0){    
+             this.sinteseMunicipioUrl = '/brasil/sintese/'+this.localidade.parent.sigla.toLowerCase()+'/'+this.localidade.slug+'?indicadores='+indicadores.join(',');
+             window.open(this.sinteseMunicipioUrl, '_blank');
+        }else{
+            
+            let mensagem = this._traducaoServ.L10N(this._traducaoServ.lang, 'panorama_resumo__numero_minimo_indicadores_selecionados');
+            alert(mensagem);
+        } 
+       
+    } 
+
+
+   
     getIndicadoresSelecionados(){
         return this.opcoesIndicadores.filter(res=>res!==false);
     }
