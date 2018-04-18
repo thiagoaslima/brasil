@@ -152,8 +152,8 @@ export const PANORAMA: {
 
                 {
                     pesquisaId: 10070,
-                    indicadorId: 62912,
-                    periodo: '2016',
+                    indicadorId: 62912,                   
+                    periodo: '2017',
                     titulo: 'panorama_configuration_pais_domicilios_com_coleta_de_lixo',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -161,8 +161,8 @@ export const PANORAMA: {
 
                 {
                     pesquisaId: 10070,
-                    indicadorId: 62914,
-                    periodo: '2016',
+                    indicadorId: 62914,                   
+                    periodo: '2017',
                     titulo: 'panorama_configuration_pais_domicilios_com_abastecimento_de_agua',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -170,8 +170,8 @@ export const PANORAMA: {
 
                 {
                     pesquisaId: 10070,
-                    indicadorId: 62916,
-                    periodo: '2016',
+                    indicadorId: 62916,                    
+                    periodo: '2017',
                     titulo: 'panorama_configuration_pais_domicilios_com_esgotamento_sanitario',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -208,8 +208,8 @@ export const PANORAMA: {
 
                 {
                     pesquisaId: 10070,
-                    indicadorId: 64517,
-                    periodo: '2016',
+                    indicadorId: 62918,                    
+                    periodo: '2017',
                     titulo: 'panorama_configuration_pais_domicilio_acesso_internet',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -229,8 +229,8 @@ export const PANORAMA: {
 
                 {
                     pesquisaId: 10070,
-                    indicadorId: 62921,
-                    periodo: '2016',
+                    indicadorId: 62921,                    
+                    periodo: '2017',
                     titulo: 'panorama_configuration_pais_posse_telefone_celular',
                     tema: TEMAS.populacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
