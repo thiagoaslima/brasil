@@ -1,5 +1,13 @@
 # Change log
 
+## [v4.3.8] - 2018-04-26
+### Changed
+	- Alterações no Panorama Brasil.
+	- Alteração no indicador População no Último Censo do brasil da pesquisaId: 3145 e indicadorId: 93 para pesquisaId: 10059 e indicadorId: 60055.
+	- Otimização do cartograma.
+	- Correção de bug es6-sham.
+
+
 ## [v4.3.6.4] - 2018-03-22
 ### Added
 	- Inclusão da fonte por indicador na tabela de pesquisa.
