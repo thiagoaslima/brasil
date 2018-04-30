@@ -1,5 +1,11 @@
 # Change log
 
+## [v4.3.8.1] - 2018-04-30
+### Fixed
+	- Correção da exibição de valores monetários negativos.
+	- Correção do pre-render.
+	
+
 ## [v4.3.8] - 2018-04-26
 ### Changed
 	- Alterações no Panorama Brasil.
