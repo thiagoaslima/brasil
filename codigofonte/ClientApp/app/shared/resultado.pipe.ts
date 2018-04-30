@@ -50,7 +50,7 @@ export class ResultadoPipe implements PipeTransform {
             let [parteInteira, parteDecimal] = valueStr.split(".");
             parteInteira = this.incluirSeparadorMilhar(parteInteira, ".");
 
-            return parteDecimal ? [parteInteira, parteDecimal].join(",") : sinal + parteInteira;
+            return parteDecimal ? sinal + [parteInteira, parteDecimal].join(",") : sinal + parteInteira;
         }
 
 
