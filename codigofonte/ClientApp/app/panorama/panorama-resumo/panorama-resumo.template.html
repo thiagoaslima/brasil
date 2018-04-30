@@ -86,8 +86,8 @@
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'panorama_resumo__notas_e_fontes' | l10n:lang }}
 </div>
 
-<div *ngIf="localidade.tipo=='uf'">
-<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='uf'">
+<div *ngIf="localidade?.tipo=='uf'">
+<div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade?.tipo && localidade?.tipo =='uf'">
     <i class="fa fa-list" aria-hidden="true"></i> {{ 'panorama_gerar_resumo' | l10n:lang }}
 </div>
 
@@ -124,8 +124,8 @@
 
 
 
-<!--<div *ngIf="localidade.tipo=='municipio'">
-    <div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade.tipo && localidade.tipo=='municipio'">
+<!--<div *ngIf="localidade?.tipo == 'municipio'">
+    <div (click)="exibirFiltroResumo = !exibirFiltroResumo" class='fontes-e-nota-geral' *ngIf="localidade && localidade?.tipo && localidade?.tipo == 'municipio'">
         <i class="fa fa-list" aria-hidden="true"></i> {{ 'panorama_gerar_resumo' | l10n:lang }}
     </div>
 
