@@ -46,7 +46,7 @@ export class ResultadoPipe implements PipeTransform {
                 valor = Math.abs(valor);
                 sinal = "-";
             }
-            let valueStr: string = this.isTipoMonetario(unidade) ? valor.toFixed(2).toString() : value.toString();
+            let valueStr: string = this.isTipoMonetario(unidade) ? valor.toFixed(2).toString() : valor.toString();
             let [parteInteira, parteDecimal] = valueStr.split(".");
             parteInteira = this.incluirSeparadorMilhar(parteInteira, ".");
 
