@@ -10,7 +10,7 @@
             {{ item.titulo | l10n:lang }} 
         </h3>
         <p class="topo__valor">
-            {{ item.valor }}
+            {{ item.valor | resultado }} {{ item.unidade }}
         </p>
     </div>
 </div>
