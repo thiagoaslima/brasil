@@ -1,5 +1,26 @@
 # Change log
 
+## [v4.3.8.2] - 2018-05-04 (EM HOMOLOGAÇÃO)
+### Fixed
+	- Correção do bug que exibia dois sinais nos números negativos.
+
+### Changed
+	- Configuração das pesquisas abaixo para permitir que as variáveis mudem conforme muda o ano selecionado:
+         *    45 - PESQUISA SÍNTESE DE INDICADORES SOCIAIS
+         *     1 - PESQUISA MUNIC
+         * 10075 - PESQUISA MUNIC (Suplemento Finanças públicas)
+         * 10077 - PESQUISA MUNIC (Suplemento Esporte)
+         * 10078 - PESQUISA MUNIC (Suplemento Meio Ambiente)
+         * 10079 - PESQUISA MUNIC (Suplemento Assistência Social)
+         * 10084 - PESQUISA MUNIC (Suplemento Inclusão Produtiva)
+         * 10072 - PESQUISA ESTADIC
+         * 10080 - PESQUISA ESTADIC (Suplemento Cultura)
+         * 10081 - PESQUISA ESTADIC (Suplemento Inclusão Produtiva)
+         * 10082 - PESQUISA ESTADIC (Suplemento Assistência Social)
+         * 10076 - PESQUISA ESTADIC (Suplemento Esporte)
+	- Formatação da área territorial e inclusão da unidade de medida.
+
+
 ## [v4.3.8.1] - 2018-04-30
 ### Fixed
 	- Correção da exibição de valores monetários negativos.
