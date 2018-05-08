@@ -1,6 +1,11 @@
 # Change log
 
-## [v4.3.8.2] - 2018-05-04 (EM HOMOLOGAÇÃO)
+## [v4.3.8.3] - 2018-05-08 (EM HOMOLOGAÇÃO)
+### Changed
+	- Configuração das pesquisas 10085 - PESQUISA MUNIC (Suplemento Cultura), para permitir que as variáveis mudem conforme muda o ano selecionado:
+
+
+## [v4.3.8.2] - 2018-05-08
 ### Fixed
 	- Correção do bug que exibia dois sinais nos números negativos.
 
