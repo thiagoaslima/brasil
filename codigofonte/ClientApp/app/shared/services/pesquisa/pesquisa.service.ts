@@ -41,6 +41,7 @@ export class PesquisaService3 {
      * 10078 - PESQUISA MUNIC (Suplemento Meio Ambiente)
      * 10079 - PESQUISA MUNIC (Suplemento Assistência Social)
      * 10084 - PESQUISA MUNIC (Suplemento Inclusão Produtiva)
+     * 10085 - PESQUISA MUNIC (Suplemento Cultura)
      * 10072 - PESQUISA ESTADIC
      * 10080 - PESQUISA ESTADIC (Suplemento Cultura)
      * 10081 - PESQUISA ESTADIC (Suplemento Inclusão Produtiva)
@@ -48,7 +49,7 @@ export class PesquisaService3 {
      * 10076 - PESQUISA ESTADIC (Suplemento Esporte)
      *
      */
-    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 45, 1, 10075, 10077, 10078, 10079, 10084, 10072, 10080, 10081, 10082, 10076 ];
+    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 45, 1, 10075, 10077, 10078, 10079, 10084, 10085, 10072, 10080, 10081, 10082, 10076 ];
 
     constructor(
         private _http: Http,
