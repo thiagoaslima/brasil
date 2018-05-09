@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-let isFloat = (n) => Number(n) === n && n % 1 !== 0;
+
+export var isFloat: (n: any) => boolean = (n: any) => Number(n) === n && n % 1 !== 0;
 
 /*
  * Formata o resultado de um indicador conforme os padrões IBGE.
@@ -11,7 +12,15 @@ let isFloat = (n) => Number(n) === n && n % 1 !== 0;
 export class ResultadoPipe implements PipeTransform {
 
     private CONSTANTES = {
-        SIMBOLO_MONETARIO: "$",
+
+        TIPO_NUMERICO: "N",
+        TIPO_MONETARIO: "$",
+
+        UNIDADE_PERCENTUAL: "%",
+        UNIDADE_AREA: "km²",
+        UNIDADE_PESSOAS: "pessoas",
+        UNIDADE_MONETARIA: "R$",
+
         // resultados padronizados conforme o código do valor do indicador
         CASOS_ESPECIAIS_RESULTADO: {
             "99999999999999": "Ignorado",
@@ -30,69 +39,109 @@ export class ResultadoPipe implements PipeTransform {
      * @value: any - valor a ser formatado.
      * @unidade?: string - unidade de medida do indicador (opcional).
      */
-    transform(value: any, unidade?: string): any {
+    transform(valor: any, unidade?: string, tipo?: string): any {
 
-        let resultadoCasoEspecial: string = this.getResultadoCasoEspecial(value);
-        if(!!resultadoCasoEspecial) {
-
-            return resultadoCasoEspecial;
+        if(!this.isNumber(valor)) {
+            return valor;
         }
 
-        if(this.isNumber(value)) {
+        // verifica se o valor possui um caso especial definido
+        if(this.isCasoEspecial(valor)) {
+            return this.getResultadoParaCasoEspecial(valor);
+        }
 
-            let valor: number = Number(value);
-            var sinal: string = "";
-            if (valor < 0) {
-                valor = Math.abs(valor);
-                sinal = "-";
-            }
-            let valueStr: string = this.isTipoMonetario(unidade) ? valor.toFixed(2).toString() : valor.toString();
-            let [parteInteira, parteDecimal] = valueStr.split(".");
-            parteInteira = this.incluirSeparadorMilhar(parteInteira, ".");
+        if(this.isUnidadePercentual(unidade)) {
+            return String(valor).replace(".", ",");
+        }
 
-            return parteDecimal ? sinal + [parteInteira, parteDecimal].join(",") : sinal + parteInteira;
+        if(this.isUnidadeArea(unidade)) {
+            return this.formatarComoNumero(Number(valor));
+        }
+
+        if(this.isUnidadePessoas(unidade)) {
+            return this.formatarComoNumero(Number(valor));
+        }
+
+        if(this.isUnidadeMonetaria(unidade)) {
+            return this.formatarComoNumero(valor, ".", true);
+        }
+
+        if(this.isTipoNumerico(tipo)) {
+            return this.formatarComoNumero(valor);
+        }
+
+        if(this.isTipoMonetario(tipo)) {
+            return this.formatarComoNumero(valor, ".", true);
         }
 
 
-        return value;
+        return String(valor).replace(".", ",");
     }
 
-    private incluirSeparadorMilhar(n: string, separador: string = " "): string {
+    private formatarComoNumero(numero: number, separadorMilhar: string = ".", isMonetario: boolean = false): string {
 
-        let start: number = 0;
-        let next: number = n.length % 3;
-        let r:any[] = [];
+        let sinal: string = "";
+        let valorNumerico: number = numero;
+        if (valorNumerico < 0) {
+            valorNumerico = Math.abs(valorNumerico);
+            sinal = "-";
+        }
+        let valueStr: string = isMonetario ? Number(valorNumerico).toFixed(2).toString() : valorNumerico.toString();
+        let [parteInteira, parteDecimal] = valueStr.split(".");
 
-        for (var curr: number = start; curr < n.length; curr = next, next += 3) {
+        let inicio: number = 0;
+        let fim: number = parteInteira.toString().length % 3;
+        let resultado:any[] = [];
 
-            if (next === 0) {
+        for (var curr: number = inicio; curr < parteInteira.toString().length; curr = fim, fim += 3) {
+
+            if (fim === 0) {
                 continue;
             }
-            r.push(n.substring(curr, next));
+            resultado.push(parteInteira.toString().substring(curr, fim));
         }
 
-        return r.join(separador);
+        return parteDecimal ? sinal + [resultado.join(separadorMilhar), parteDecimal].join(",") : sinal + resultado.join(separadorMilhar);
+    }
+
+    private isTipoMonetario(tipo: string): boolean {
+        return tipo === this.CONSTANTES.TIPO_MONETARIO;
+    }
+
+    private isTipoNumerico(tipo: string): boolean {
+        return tipo === this.CONSTANTES.TIPO_NUMERICO;
+    }
+
+    private isUnidadePercentual(unidade: string): boolean {
+        return unidade === this.CONSTANTES.UNIDADE_PERCENTUAL;
+    }
+
+    private isUnidadeArea(unidade: string): boolean {
+        return unidade === this.CONSTANTES.UNIDADE_AREA;
+    }
+
+    private isUnidadePessoas(unidade: string): boolean {
+        return unidade === this.CONSTANTES.UNIDADE_PESSOAS;
+    }
+
+    private isUnidadeMonetaria(unidade: string): boolean {
+        return unidade === this.CONSTANTES.UNIDADE_MONETARIA;
+    }
+
+    private isCasoEspecial(valor: string): boolean {
+        return !!this.getResultadoParaCasoEspecial(valor);
     }
 
     private isNumber(value: string): boolean {
-
         return !isNaN(Number(value));
     }
 
+    /**
+     * Recupera o resultado padronizado definido para os casos especias de valores.
+     */
+    private getResultadoParaCasoEspecial(valor: string): string {
 
-    private isTipoMonetario(unidade: string): boolean{
-
-        if(!unidade) {
-
-            return false;
-        }
-
-        return unidade.trim().toUpperCase() === this.CONSTANTES.SIMBOLO_MONETARIO;
-    }
-
-
-    private getResultadoCasoEspecial(valor: string): string {
-
+        // caso não possua valor, exibir o traço "-"
         if(!valor) {
 
             return "-";
