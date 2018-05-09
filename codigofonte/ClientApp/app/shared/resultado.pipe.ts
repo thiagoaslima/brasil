@@ -41,6 +41,9 @@ export class ResultadoPipe implements PipeTransform {
      */
     transform(valor: any, unidade?: string, tipo?: string): any {
 
+        console.log(`Valor ${valor} Tipo ${tipo} unidade: ${unidade}`);
+        debugger;
+
         if(!this.isNumber(valor)) {
             return valor;
         }
@@ -125,7 +128,7 @@ export class ResultadoPipe implements PipeTransform {
     }
 
     private isUnidadeMonetaria(unidade: string): boolean {
-        return unidade === this.CONSTANTES.UNIDADE_MONETARIA;
+        return !!unidade && unidade.indexOf(this.CONSTANTES.UNIDADE_MONETARIA) > -1;
     }
 
     private isCasoEspecial(valor: string): boolean {
