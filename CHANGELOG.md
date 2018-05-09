@@ -2,7 +2,8 @@
 
 ## [v4.3.8.3] - 2018-05-08 (EM HOMOLOGAÇÃO)
 ### Changed
-	- Configuração das pesquisas 10085 - PESQUISA MUNIC (Suplemento Cultura), para permitir que as variáveis mudem conforme muda o ano selecionado:
+	- Configuração das pesquisas 10085 - PESQUISA MUNIC (Suplemento Cultura), para permitir que as variáveis mudem conforme muda o ano selecionado.
+	- Ajustes na formatação de resultados exibidos.
 
 
 ## [v4.3.8.2] - 2018-05-08
