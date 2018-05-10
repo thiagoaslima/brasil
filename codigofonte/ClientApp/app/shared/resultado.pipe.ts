@@ -41,9 +41,6 @@ export class ResultadoPipe implements PipeTransform {
      */
     transform(valor: any, unidade?: string, tipo?: string): any {
 
-        console.log(`Valor ${valor} Tipo ${tipo} unidade: ${unidade}`);
-        debugger;
-
         if(!this.isNumber(valor)) {
             return valor;
         }
