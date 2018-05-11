@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.8.4] - 2018-05-11 (EM HOMOLOGAÇÃO)
+### Changed
+	- Atualização dos indicadores do tema Educação no Panorama Brasil.
+	
+	
 ## [v4.3.8.3] - 2018-05-10
 ### Changed
 	- Configuração das pesquisas 10085 - PESQUISA MUNIC (Suplemento Cultura), para permitir que as variáveis mudem conforme muda o ano selecionado.
