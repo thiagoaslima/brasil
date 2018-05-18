@@ -273,28 +273,28 @@ export const PANORAMA: {
                 // ------------------------
                 // EDUCAÇÃO
                 // ------------------------
-                {
-                    pesquisaId: 10065,
-                    indicadorId: 60229,
-                    periodo: '2015',
-                    titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
+                {                    
+                    pesquisaId: 10070,                    
+                    indicadorId: 63311,                    
+                    periodo: '2017',                    
+                    titulo: 'panorama_configuration_pais_taxa_analfabetismo_15_anos_ou_mais',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
-                    grafico: {
-                        titulo: 'panorama_configuration_pais_taxa_analfabetismo_10_anos_ou_mais',
+                    grafico: {                        
+                        titulo: 'panorama_configuration_pais_taxa_analfabetismo_15_anos_ou_mais',
                         tipo: TiposGrafico.linha,
-                        dados: [{
-                            pesquisaId: 10065,
-                            indicadorId: 60229,
+                        dados: [{                            
+                            pesquisaId: 10070,                            
+                            indicadorId: 63311,
                         }]
                     }
                 },
 
-                {
-                    pesquisaId: 10065,
-                    indicadorId: 60232,
-                    periodo: '2015',
-                    titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',
+                {                    
+                    pesquisaId: 10070,                    
+                    indicadorId: 63306,                    
+                    periodo: '2017',
+                    titulo: 'panorama_configuration_pais_taxa_escolarizacao_6_a_14_anos',                  
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
                 },
