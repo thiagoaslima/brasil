@@ -54,4 +54,9 @@ export const notasEspeciais = [
         "indicador": 29171,
         "nota": "População judicial do município de Barcelos-AM: quantitativo suficiente para que o município alcance o coeficiente de rateio do Fundo de Participação dos Municípios em 1,6, que é de 30.565 habitantes. Parecer de Força Executória nº 0000102-98.2017.8.04.2601. Vara Única da Comarca de Barcelos-AM."
     },
+    {
+        "localidade": 2612000,
+        "indicador": 29171,
+        "nota": "População judicial do município Sairé-PE: 10.247. habitantes. Processo Judicial nº 0800362-83.20184.05.8302 (37ª Vara Federal-PE)."
+    }
 ]
