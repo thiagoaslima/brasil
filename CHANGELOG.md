@@ -1,6 +1,11 @@
 # Change log
 
-## [v4.3.8.4] - 2018-05-11 (EM HOMOLOGAÇÃO)
+## [v4.3.8.5] - 2018-05-18
+### Changed
+	- Alteração da população judicial do município de Sairé-PE.
+
+
+## [v4.3.8.4] - 2018-05-18
 ### Changed
 	- Atualização dos indicadores do tema Educação no Panorama Brasil.
 	
