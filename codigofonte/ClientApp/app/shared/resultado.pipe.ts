@@ -75,7 +75,7 @@ export class ResultadoPipe implements PipeTransform {
         }
 
 
-        return String(valor).replace(".", ",");
+        return valor;
     }
 
     private formatarComoNumero(numero: number, separadorMilhar: string = ".", isMonetario: boolean = false): string {
