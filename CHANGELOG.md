@@ -1,5 +1,9 @@
 # Change log
 
+## [v4.3.8.6] - 2018-06-04
+### Changed
+	- Correção da formatação de valores.
+
 ## [v4.3.8.5] - 2018-05-18
 ### Changed
 	- Alteração da população judicial do município de Sairé-PE.
