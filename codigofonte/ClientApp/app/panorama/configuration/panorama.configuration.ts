@@ -1479,8 +1479,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 21,
                     indicadorId: 28141,
-                    //periodo: '2014',
-                    periodo:'2008',
+                    periodo: '2014',
                     titulo: 'panorama_configuration_municipio_total_receitas_realizadas',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel
