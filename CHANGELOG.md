@@ -1,6 +1,11 @@
 # Change log
 
 
+## [v4.3.8.8] - 2018-06-05
+### Changed
+	- Alteração do campo Total de despesas realizadas para Total de despesas empenhadas, no panorama municipal.
+
+
 ## [v4.3.8.7] - 2018-06-05
 ### Changed
 	- Correção do ano de exibição do indicador total receitas realizadas no panorama municipal.

@@ -1486,8 +1486,8 @@ export const PANORAMA: {
                 },
                 {
                     pesquisaId: 21,
-                    indicadorId: 29748,
-                    periodo: '2008',
+                    indicadorId: 29749,
+                    periodo: '2014',
                     titulo: 'panorama_configuration_municipio_total_despesas_realizadas',
                     tema: TEMAS.economia.label,
                     visualizacao: PanoramaVisualizacao.painel,
