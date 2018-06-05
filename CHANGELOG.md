@@ -1,7 +1,14 @@
 # Change log
 
+
+## [v4.3.8.7] - 2018-06-05
+### Changed
+	- Correção do ano de exibição do indicador total receitas realizadas no panorama municipal.
+
+
 ## [v4.3.8.6] - 2018-06-04
 ### Changed
+
 	- Correção da formatação de valores.
 
 ## [v4.3.8.5] - 2018-05-18
