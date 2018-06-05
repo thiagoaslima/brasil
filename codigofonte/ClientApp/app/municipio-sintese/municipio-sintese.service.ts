@@ -107,7 +107,6 @@ export class EstadoSinteseService {
         return this._panoramaService.getResumo(configuracao, municipio)
             .map((res) => {
 
-                debugger;
                 let resumo = <any>{};
                 resumo.municipio = municipio.nome;
                 res = res.map(res => {
@@ -115,12 +114,7 @@ export class EstadoSinteseService {
                         resumo.gentilico = res.valor;
                     }
                     return res;
-                }).filter(res => {
-                    
-                    debugger;
-                    
-                    return res.titulo != 'panorama_configuration_municipio_gentilico' && indicadores.includes(res.id + "");
-                } );
+                }).filter(res => res.titulo != 'panorama_configuration_municipio_gentilico' && indicadores.includes(res.id + "") );
 
                 resumo.indicadores = res;
                 return resumo;
