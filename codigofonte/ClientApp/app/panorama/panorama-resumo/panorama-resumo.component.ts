@@ -121,8 +121,6 @@ export class PanoramaResumoComponent implements OnInit, OnChanges, OnDestroy {
            
             this._panoramaService.getResumo(this.configuracao, this.localidade).subscribe(resp => {
 
-                debugger;
-
                 let temas = resp.slice(0);
                 let cabecalho = [];
                 let i = 0;
