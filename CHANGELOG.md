@@ -1,6 +1,11 @@
 # Change log
 
 
+## [v4.3.8.9] - HML
+### Changed
+	- Inclusão da pesquisa 24 (Censo Agro) na lista de pesquisa cujos indicadores agora variam de ano para ano.
+
+
 ## [v4.3.8.8] - 2018-06-05
 ### Changed
 	- Alteração do campo Total de despesas realizadas para Total de despesas empenhadas, no panorama municipal.
