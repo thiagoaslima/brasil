@@ -34,6 +34,7 @@ export class PesquisaService3 {
      * Cadastre o código destas pesquisas no array abaixo para que a tabela de pesquisa
      * envie o período pesquisado ao solicitar os indicadores da pesquisa.
      * 
+     *    24 - CENSO AGROPECUÁRIO
      *    45 - PESQUISA SÍNTESE DE INDICADORES SOCIAIS
      *     1 - PESQUISA MUNIC
      * 10075 - PESQUISA MUNIC (Suplemento Finanças públicas)
