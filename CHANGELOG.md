@@ -5,6 +5,9 @@
 ### Changed
 	- Inclusão da pesquisa 24 (Censo Agro) na lista de pesquisa cujos indicadores agora variam de ano para ano.
 
+### Fixed
+	- Correção do erro ao exibir a pesquisa Censo Agro.
+
 
 ## [v4.3.8.8] - 2018-06-05
 ### Changed
