@@ -1,10 +1,9 @@
-import { IndicadorService3 } from '../../../shared/services/indicador';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, PLATFORM_ID, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { isPlatformBrowser } from '@angular/common';
-
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import { IndicadorService3 } from '../../../shared/services/indicador';
 import { TraducaoService,
     Pesquisa,
     PesquisaService3,
@@ -12,8 +11,8 @@ import { TraducaoService,
     LocalidadeService3,
     RouterParamsService,
 } from '../../../shared';
-
 import { ModalErrorService } from '../../../core/';
+import { ConfigService } from '../../../shared/config/config.service';
 
 
 @Component({
@@ -68,7 +67,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         private _router: Router,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId: string
+        @Inject(PLATFORM_ID) platformId: string,
+        private configService: ConfigService
     ) {
 
         this.isBrowser = isPlatformBrowser(platformId);
@@ -276,6 +276,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     getPeriodosValidos(periodos: any[]): any[] {
+
+        if(this.configService.isHML()){
+            return periodos;
+        }
+
         return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
     }
 

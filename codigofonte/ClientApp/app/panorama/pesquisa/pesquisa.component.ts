@@ -1,8 +1,8 @@
-import { PesquisaTabelaComponent } from './pesquisa-tabela/pesquisa-tabela.component';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Rx';
 
+import { PesquisaTabelaComponent } from './pesquisa-tabela/pesquisa-tabela.component';
 import { SinteseService } from '../sintese/sintese.service';
 import {
     Localidade,
@@ -15,6 +15,7 @@ import {
 } from '../../shared';
 import { flatTree } from '../../../utils';
 import { ModalErrorService } from '../../core';
+import { ConfigService } from '../../shared/config/config.service';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         private _pesquisaService: PesquisaService3,
         private _sintese: SinteseService,
         private _indicadorService: IndicadorService3,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private configService: ConfigService
     ) { }
 
     ngOnInit() {
@@ -150,6 +152,11 @@ export class PesquisaComponent implements OnInit, OnDestroy {
     }
 
     getPeriodosValidos(periodos: any[]): any[] {
+
+        if(this.configService.isHML()){
+            return periodos;
+        }
+
         return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
     }
 
