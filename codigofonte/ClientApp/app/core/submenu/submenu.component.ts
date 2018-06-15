@@ -95,7 +95,7 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
             let periodoMaisrecente = undefined;
             if ( this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(pesquisa.id) ) {
 
-                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
+                periodoMaisrecente = this.getPeriodosMaisRecente(this.getPeriodosValidos(pesquisa.periodos)).nome;
             }
             
             this._indicadorService
@@ -114,4 +114,15 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
 
     }
 
+    getPeriodosValidos(periodos: any[]): any[] {
+        return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
+    }
+
+    ordenarPeriodos(periodos: any[]): any[] {
+        return periodos.sort((periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1);
+    }
+
+    getPeriodosMaisRecente(periodos: any[]): any {
+        return this.ordenarPeriodos(periodos)[0];
+    }
 }

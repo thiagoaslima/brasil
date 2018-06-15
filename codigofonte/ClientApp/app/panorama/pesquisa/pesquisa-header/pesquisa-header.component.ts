@@ -80,16 +80,14 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             this._pesquisaService.getPesquisa(parseInt(params.params.pesquisa)).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
     
-
-
-                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
+                this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
 
                 if (params.queryParams.ano) {
                     this.ano = parseInt(params.queryParams.ano);
                 }
                 else {
                     // Quando não houver um período selecionado, é exibido o período mais recente
-                    this.ano = Number(this.pesquisa.periodos.sort((a, b) => a.nome > b.nome ? 1 : -1)[(this.pesquisa.periodos.length - 1)].nome);
+                    this.ano = this.getPeriodosMaisRecente(this.listaPeriodos).nome;
                 }
 
                 this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, this.ano.toString())
@@ -275,5 +273,17 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     vazio(isVazio){
         this.isVazio = isVazio;
+    }
+
+    getPeriodosValidos(periodos: any[]): any[] {
+        return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
+    }
+
+    ordenarPeriodos(periodos: any[]): any[] {
+        return periodos.sort((periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1);
+    }
+
+    getPeriodosMaisRecente(periodos: any[]): any {
+        return this.ordenarPeriodos(periodos)[0];
     }
 }
