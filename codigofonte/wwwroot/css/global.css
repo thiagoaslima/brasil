@@ -447,7 +447,7 @@ sintese>dados
         border-bottom: none;
         z-index: 6;
         top:0;
-        margin-top: 0px;
+        margin-top: 30px;
     }
 
     header .logo {
@@ -497,6 +497,7 @@ sintese>dados
     aside.aside--municipio{
         padding-top: 65px;
         padding-bottom: 5px;
+        BORDER-right: none;
         /*height: 200px;*/
 
         -webkit-transition: margin-top 200ms ease;
