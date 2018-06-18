@@ -57,6 +57,6 @@ export const notasEspeciais = [
     {
         "localidade": 2933208,
         "indicador": 29171,
-        "nota": "População judicial do município de Vera Cruz-BA: entre 44.149 a 50.940 habitantes. Processo Judicial nº 8000464-59.2018.8.05.0124 (Vara dos Feitos Relativos às Relações de Consumo, Cíveis e Comerciais, Registros Públicos e Acidentes de Trabalho e Juizado Especial da Comarca de Itaparica)."
+        "nota": "População judicial do município de Vera Cruz-BA: entre 44.149 a 50.940 habitantes. Processo Judicial nº 8000464-59.2018.8.05.0124 (Vara dos Feitos Relativos às Relações de Consumo, Cíveis e Comerciais, Registros Públicos e Acidentes de Trabalho e Juizado Especial Adjunto da Comarca de Itaparica."
     }
 ]
