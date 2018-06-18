@@ -1,5 +1,9 @@
 # Change log
 
+## [v4.3.8.10] - HML
+### Added
+	- Inclusão de nota de população judicial estimada para os municípios Vera Cruz-BA e Ibiassucê-BA.
+
 
 ## [v4.3.8.9] - HML
 ### Changed
