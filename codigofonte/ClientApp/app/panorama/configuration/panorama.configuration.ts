@@ -1379,7 +1379,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 19,
                     indicadorId: 29765,
-                    periodo: '2015',
+                    periodo: '2016',
                     titulo: 'panorama_configuration_municipio_salario_trabalhadores_formais',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -1387,7 +1387,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 19,
                     indicadorId: 29763,
-                    periodo: '2015',
+                    periodo: '2016',
                     titulo: 'panorama_configuration_municipio_pessoal_ocupado',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -1395,7 +1395,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 10058,
                     indicadorId: 60036,
-                    periodo: '2015',
+                    periodo: '2016',
                     titulo: 'panorama_configuration_municipio_populacao_ocupada',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel

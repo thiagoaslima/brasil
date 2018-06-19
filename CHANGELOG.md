@@ -1,11 +1,16 @@
 # Change log
 
-## [v4.3.8.10] - HML
+## [v4.3.8.11] - HML
+### Changed
+	- Alteração do ano dos indicadores do panorama municial "Pessoal ocupado" (29765), "Pessoal ocupado" (29763) e "População ocupada" (60036) para 2016.
+
+
+## [v4.3.8.10] - 2018-06-18
 ### Added
 	- Inclusão de nota de população judicial estimada para os municípios Vera Cruz-BA e Ibiassucê-BA.
 
 
-## [v4.3.8.9] - HML
+## [v4.3.8.9] - 2018-06-15
 ### Changed
 	- Inclusão da pesquisa 24 (Censo Agro) na lista de pesquisa cujos indicadores agora variam de ano para ano.
 
