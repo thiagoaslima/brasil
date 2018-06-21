@@ -971,8 +971,8 @@ export const PANORAMA: {
                 },
                 {
                     pesquisaId: 19,
-                    indicadorId: 59935,
-                    periodo: '2015',
+                    indicadorId: 59935,         
+                    periodo: '2016',
                     titulo: 'panorama_configuration_estado_pessoal_ocupado_administracao_publica',
                     tema: TEMAS.trabalho.label,
                     visualizacao: PanoramaVisualizacao.painel

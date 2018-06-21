@@ -1,8 +1,12 @@
 # Change log
 
-## [v4.3.8.11] - HML
+## [v4.3.8.12] - 2018-06-27
 ### Changed
-	- Alteração do ano dos indicadores do panorama municial "Pessoal ocupado" (29765), "Pessoal ocupado" (29763) e "População ocupada" (60036) para 2016.
+	- Alteração do ano do indicador do panorama estadual "Pessoal ocupado na Administração pública, defesa e seguridade social" (59935)
+
+## [v4.3.8.11] - 2018-06-27
+### Changed
+	- Alteração do ano dos indicadores do panorama municipal "Pessoal ocupado" (29765), "Pessoal ocupado" (29763) e "População ocupada" (60036) para 2016.
 
 
 ## [v4.3.8.10] - 2018-06-18
