@@ -55,7 +55,7 @@ export class ResultadoPipe implements PipeTransform {
         }
 
         if(this.isUnidadeArea(unidade)) {
-            return this.formatarComoNumero(Number(valor));
+            return this.formatarComoNumero(Number(valor), ".", 3);
         }
 
         if(this.isUnidadePessoas(unidade)) {
@@ -63,7 +63,7 @@ export class ResultadoPipe implements PipeTransform {
         }
 
         if(this.isUnidadeMonetaria(unidade)) {
-            return this.formatarComoNumero(valor, ".", true);
+            return this.formatarComoNumero(valor, ".", 2);
         }
 
         if(this.isTipoNumerico(tipo)) {
@@ -71,14 +71,14 @@ export class ResultadoPipe implements PipeTransform {
         }
 
         if(this.isTipoMonetario(tipo)) {
-            return this.formatarComoNumero(valor, ".", true);
+            return this.formatarComoNumero(valor, ".", 2);
         }
 
 
         return valor;
     }
 
-    private formatarComoNumero(numero: number, separadorMilhar: string = ".", isMonetario: boolean = false): string {
+    private formatarComoNumero(numero: number, separadorMilhar: string = ".", qtdCasasDecimais: number = -1): string {
 
         let sinal: string = "";
         let valorNumerico: number = numero;
@@ -86,7 +86,7 @@ export class ResultadoPipe implements PipeTransform {
             valorNumerico = Math.abs(valorNumerico);
             sinal = "-";
         }
-        let valueStr: string = isMonetario ? Number(valorNumerico).toFixed(2).toString() : valorNumerico.toString();
+        let valueStr: string = qtdCasasDecimais >= 0 ? Number(valorNumerico).toFixed(qtdCasasDecimais).toString() : valorNumerico.toString();
         let [parteInteira, parteDecimal] = valueStr.split(".");
 
         let inicio: number = 0;

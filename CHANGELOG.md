@@ -1,5 +1,10 @@
 # Change log
 
+## [4.3.8.14] - 2018-06-28
+### Fixed
+	- Correção da exibição da quantidade de casas decimais do indicador "Área da unidade territorial" nos panomaras Brasil, estados e municípios.
+
+
 ## [4.3.8.13] - 2018-06-28
 ### Changed
 	- Alteração do ano do indicador do panorama municipal "Área da unidade territorial" (29167), do indicador do panorama estadual "Área da unidade territorial" (48980) e do 
