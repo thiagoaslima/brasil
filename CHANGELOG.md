@@ -1,8 +1,15 @@
 # Change log
 
+## [4.3.8.13] - 2018-06-28
+### Changed
+	- Alteração do ano do indicador do panorama municipal "Área da unidade territorial" (29167), do indicador do panorama estadual "Área da unidade territorial" (48980) e do 
+	indicador do panorama Brasil "Área territorial" (60052) para 2017.
+
+
 ## [v4.3.8.12] - 2018-06-27
 ### Changed
-	- Alteração do ano do indicador do panorama estadual "Pessoal ocupado na Administração pública, defesa e seguridade social" (59935)
+	- Alteração do ano do indicador do panorama estadual "Pessoal ocupado na Administração pública, defesa e seguridade social" (59935).
+
 
 ## [v4.3.8.11] - 2018-06-27
 ### Changed
