@@ -50,13 +50,13 @@ export const notasEspeciais = [
         "nota": "População judicial do município de Urucará-AM: entre 16.981 e 23.772 habitantes. Parecer de Força Executória nº 00004/2017/NUCOB-GEAC/PFAM/PGF/AGU, em trâmite na 3ª VF/AM."
     },
     {
-        "localidade": 1300409,
+        "localidade": 2912004,
         "indicador": 29171,
-        "nota": "População judicial do município de Barcelos-AM: quantitativo suficiente para que o município alcance o coeficiente de rateio do Fundo de Participação dos Municípios em 1,6, que é de 30.565 habitantes. Parecer de Força Executória nº 0000102-98.2017.8.04.2601. Vara Única da Comarca de Barcelos-AM."
+        "nota": "População judicial do município Ibiassucê-BA: entre 10.189 e 16.980 habitantes. Processo Judicial nº 1018608-53.2017.4.01.3400 (14ª VARA FEDERAL CÍVEL DA SJDF)."
     },
     {
-        "localidade": 2612000,
+        "localidade": 2933208,
         "indicador": 29171,
-        "nota": "População judicial do município Sairé-PE: 10.247. habitantes. Processo Judicial nº 0800362-83.20184.05.8302 (37ª Vara Federal-PE)."
+        "nota": "População judicial do município de Vera Cruz-BA: entre 44.149 a 50.940 habitantes. Processo Judicial nº 8000464-59.2018.8.05.0124 (Vara dos Feitos Relativos às Relações de Consumo, Cíveis e Comerciais, Registros Públicos e Acidentes de Trabalho e Juizado Especial Adjunto da Comarca de Itaparica)."
     }
 ]

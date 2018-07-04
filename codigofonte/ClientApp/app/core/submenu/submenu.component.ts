@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, SimpleChange } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/take';
 
 import {
     Localidade,
@@ -8,10 +11,8 @@ import {
     IndicadorService3,
     RouterParamsService
 } from '../../shared';
+import { ConfigService } from '../../shared/config/config.service';
 
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/take';
 
 @Component({
     selector: 'submenu',
@@ -37,6 +38,7 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
         private router: Router,
         private _pesquisaService: PesquisaService3,
         private _indicadorService: IndicadorService3,
+        private configService: ConfigService
     ) {
 
         // pega a rota atual
@@ -95,7 +97,7 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
             let periodoMaisrecente = undefined;
             if ( this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(pesquisa.id) ) {
 
-                periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
+                periodoMaisrecente = this.getPeriodosMaisRecente(this.getPeriodosValidos(pesquisa.periodos)).nome;
             }
             
             this._indicadorService
@@ -114,4 +116,20 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
 
     }
 
+    getPeriodosValidos(periodos: any[]): any[] {
+
+        if(this.configService.isHML()){
+            return periodos;
+        }
+
+        return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
+    }
+
+    ordenarPeriodos(periodos: any[]): any[] {
+        return periodos.sort((periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1);
+    }
+
+    getPeriodosMaisRecente(periodos: any[]): any {
+        return this.ordenarPeriodos(periodos)[0];
+    }
 }

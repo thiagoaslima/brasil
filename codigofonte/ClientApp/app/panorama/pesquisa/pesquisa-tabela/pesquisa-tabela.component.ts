@@ -425,5 +425,4 @@ export class PesquisaTabelaComponent implements OnChanges {
         this.notaOuFonte = notaOuFonte;
 
     }
-
 }

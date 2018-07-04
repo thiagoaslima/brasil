@@ -1,10 +1,9 @@
-import { IndicadorService3 } from '../../../shared/services/indicador';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, PLATFORM_ID, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { isPlatformBrowser } from '@angular/common';
-
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import { IndicadorService3 } from '../../../shared/services/indicador';
 import { TraducaoService,
     Pesquisa,
     PesquisaService3,
@@ -12,8 +11,8 @@ import { TraducaoService,
     LocalidadeService3,
     RouterParamsService,
 } from '../../../shared';
-
 import { ModalErrorService } from '../../../core/';
+import { ConfigService } from '../../../shared/config/config.service';
 
 
 @Component({
@@ -68,7 +67,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         private _router: Router,
         private modalErrorService: ModalErrorService,
         private _traducaoServ: TraducaoService,
-        @Inject(PLATFORM_ID) platformId: string
+        @Inject(PLATFORM_ID) platformId: string,
+        private configService: ConfigService
     ) {
 
         this.isBrowser = isPlatformBrowser(platformId);
@@ -80,16 +80,14 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             this._pesquisaService.getPesquisa(parseInt(params.params.pesquisa)).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
     
-
-
-                this.listaPeriodos = pesquisa.periodos.slice(0).reverse();
+                this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
 
                 if (params.queryParams.ano) {
                     this.ano = parseInt(params.queryParams.ano);
                 }
                 else {
                     // Quando não houver um período selecionado, é exibido o período mais recente
-                    this.ano = Number(this.pesquisa.periodos.sort((a, b) => a.nome > b.nome ? 1 : -1)[(this.pesquisa.periodos.length - 1)].nome);
+                    this.ano = this.getPeriodosMaisRecente(this.listaPeriodos).nome;
                 }
 
                 this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, this.ano.toString())
@@ -275,5 +273,22 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
     vazio(isVazio){
         this.isVazio = isVazio;
+    }
+
+    getPeriodosValidos(periodos: any[]): any[] {
+
+        if(this.configService.isHML()){
+            return periodos;
+        }
+
+        return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
+    }
+
+    ordenarPeriodos(periodos: any[]): any[] {
+        return periodos.sort((periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1);
+    }
+
+    getPeriodosMaisRecente(periodos: any[]): any {
+        return this.ordenarPeriodos(periodos)[0];
     }
 }

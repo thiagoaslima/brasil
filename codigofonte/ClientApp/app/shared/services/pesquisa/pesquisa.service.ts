@@ -34,6 +34,7 @@ export class PesquisaService3 {
      * Cadastre o código destas pesquisas no array abaixo para que a tabela de pesquisa
      * envie o período pesquisado ao solicitar os indicadores da pesquisa.
      * 
+     *    24 - CENSO AGROPECUÁRIO
      *    45 - PESQUISA SÍNTESE DE INDICADORES SOCIAIS
      *     1 - PESQUISA MUNIC
      * 10075 - PESQUISA MUNIC (Suplemento Finanças públicas)
@@ -49,7 +50,7 @@ export class PesquisaService3 {
      * 10076 - PESQUISA ESTADIC (Suplemento Esporte)
      *
      */
-    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 45, 1, 10075, 10077, 10078, 10079, 10084, 10085, 10072, 10080, 10081, 10082, 10076 ];
+    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 24, 45, 1, 10075, 10077, 10078, 10079, 10084, 10085, 10072, 10080, 10081, 10082, 10076 ];
 
     constructor(
         private _http: Http,

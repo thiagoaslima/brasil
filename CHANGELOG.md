@@ -1,5 +1,38 @@
 # Change log
 
+## [v4.3.8.14] - 2018-06-28
+### Fixed
+	- Correção da exibição da quantidade de casas decimais do indicador "Área da unidade territorial" nos panomaras Brasil, estados e municípios.
+
+
+## [v4.3.8.13] - 2018-06-28
+### Changed
+	- Alteração do ano do indicador do panorama municipal "Área da unidade territorial" (29167), do indicador do panorama estadual "Área da unidade territorial" (48980) e do 
+	indicador do panorama Brasil "Área territorial" (60052) para 2017.
+
+
+## [v4.3.8.12] - 2018-06-27
+### Changed
+	- Alteração do ano do indicador do panorama estadual "Pessoal ocupado na Administração pública, defesa e seguridade social" (59935).
+
+
+## [v4.3.8.11] - 2018-06-27
+### Changed
+	- Alteração do ano dos indicadores do panorama municipal "Pessoal ocupado" (29765), "Pessoal ocupado" (29763) e "População ocupada" (60036) para 2016.
+
+
+## [v4.3.8.10] - 2018-06-18
+### Added
+	- Inclusão de nota de população judicial estimada para os municípios Vera Cruz-BA e Ibiassucê-BA.
+
+
+## [v4.3.8.9] - 2018-06-15
+### Changed
+	- Inclusão da pesquisa 24 (Censo Agro) na lista de pesquisa cujos indicadores agora variam de ano para ano.
+
+### Fixed
+	- Correção do erro ao exibir a pesquisa Censo Agro.
+
 
 ## [v4.3.8.8] - 2018-06-05
 ### Changed

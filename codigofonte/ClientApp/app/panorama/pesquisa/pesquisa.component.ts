@@ -1,8 +1,8 @@
-import { PesquisaTabelaComponent } from './pesquisa-tabela/pesquisa-tabela.component';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Rx';
 
+import { PesquisaTabelaComponent } from './pesquisa-tabela/pesquisa-tabela.component';
 import { SinteseService } from '../sintese/sintese.service';
 import {
     Localidade,
@@ -15,6 +15,7 @@ import {
 } from '../../shared';
 import { flatTree } from '../../../utils';
 import { ModalErrorService } from '../../core';
+import { ConfigService } from '../../shared/config/config.service';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         private _pesquisaService: PesquisaService3,
         private _sintese: SinteseService,
         private _indicadorService: IndicadorService3,
-        private modalErrorService: ModalErrorService
+        private modalErrorService: ModalErrorService,
+        private configService: ConfigService
     ) { }
 
     ngOnInit() {
@@ -58,8 +60,8 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                 let periodoMaisrecente = null;
                 if (this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(pesquisa.id)) {
 
-                    periodoMaisrecente = pesquisa.periodos.sort( (periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1)[0].nome;
-                }                
+                    periodoMaisrecente = this.getPeriodosMaisRecente(this.getPeriodosValidos(pesquisa.periodos)).nome;
+                }
 
                 this._indicadorService
                 .getIndicadoresByIdByLocalidade(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), escopoIndicadores.filhos, null, false, periodoMaisrecente)
@@ -101,10 +103,12 @@ export class PesquisaComponent implements OnInit, OnDestroy {
 
                     // Quando não houver um período selecionado, é exibido o período mais recente
                     let periodos = pesquisa['periodos'];
-                    if(urlParams.queryParams['ano'])
+                    if(urlParams.queryParams['ano']) {
                         this.periodo = urlParams.queryParams['ano'];
-                    else
-                        this.periodo = periodos.sort((a, b) =>  a.nome > b.nome ? 1 : -1 )[(periodos.length - 1)].nome;
+                    }
+                    else {
+                        this.periodo = this.getPeriodosMaisRecente(this.getPeriodosValidos(periodos)).nome;
+                    }
                     this.indicadores = indicadores;
                     if(parseInt(urlParams.params['pesquisa']) != 23) //23 = censo
                         this.posicaoIndicador = '0';
@@ -145,5 +149,22 @@ export class PesquisaComponent implements OnInit, OnDestroy {
     ngOnDestroy(){
 
         this.subscription.unsubscribe();
+    }
+
+    getPeriodosValidos(periodos: any[]): any[] {
+
+        if(this.configService.isHML()){
+            return periodos;
+        }
+
+        return periodos.filter(periodo => periodo.dataPublicacao.getTime() <=  new Date().getTime());
+    }
+
+    ordenarPeriodos(periodos: any[]): any[] {
+        return periodos.sort((periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1);
+    }
+
+    getPeriodosMaisRecente(periodos: any[]): any {
+        return this.ordenarPeriodos(periodos)[0];
     }
 }
