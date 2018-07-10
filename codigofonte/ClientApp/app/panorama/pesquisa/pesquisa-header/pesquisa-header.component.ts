@@ -77,43 +77,48 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.subs$$ = this._routerParamsService.params$.subscribe((params) => {
-            this._pesquisaService.getPesquisa(parseInt(params.params.pesquisa)).subscribe((pesquisa) => {
+            this._pesquisaService.getPesquisa(parseInt(params.params["pesquisa"])).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
-    
+
+                // Lista de periodos disponíveis exibidos na lista de seleção para o usuário
                 this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
 
-                if (params.queryParams.ano) {
-                    this.ano = parseInt(params.queryParams.ano);
+                // Se na URL já houver o parâmetro ano, este é selecionado para exibir os dados da pesquisa
+                if (params.queryParams["ano"]) {
+                    this.ano = parseInt(params.queryParams["ano"]);
                 }
                 else {
-                    // Quando não houver um período selecionado, é exibido o período mais recente
-                    this.ano = this.getPeriodosMaisRecente(this.listaPeriodos).nome;
+                    // Quando não houver o parâmetro ano, selecionado e exibido o período mais recente disponível na pesquisa
+                    let periodoMaisRecente = this.getPeriodosMaisRecente(this.listaPeriodos);
+                    
+                    // Se a pesquisa não possuir nenhum período disponível, este é confugurado como null
+                    this.ano = !!periodoMaisRecente ? periodoMaisRecente.nome : null;
                 }
 
-                this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, this.ano.toString())
+                this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, !!this.ano ? this.ano.toString() : null)
                     .subscribe((indicadores) => {
                         this.indicadoresDaPesquisa = indicadores;
                     });
 
-                this.isNivelMunicipal = !!params.params.uf && !!params.params.municipio;
-                this.isNivelEstadual = !!params.params.uf && !params.params.municipio;
-                this.isNivelNacional = !params.params.uf && !params.params.municipio;
+                this.isNivelMunicipal = !!params.params["uf"] && !!params.params["municipio"];
+                this.isNivelEstadual = !!params.params["uf"] && !params.params["municipio"];
+                this.isNivelNacional = !params.params["uf"] && !params.params["municipio"];
 
-                this.indicador = parseInt(params.params.indicador);
-                if (params.params.municipio) {
-                    this.localidade = this._localidadeService.getMunicipioBySlug(params.params.uf, params.params.municipio);
-                } else if (params.params.uf) {
-                    this.localidade = this._localidadeService.getUfBySigla(params.params.uf);
+                this["indicador"] = parseInt(params.params["indicador"]);
+                if (params.params["municipio"]) {
+                    this.localidade = this._localidadeService.getMunicipioBySlug(params.params["uf"], params.params["municipio"]);
+                } else if (params.params["uf"]) {
+                    this.localidade = this._localidadeService.getUfBySigla(params.params["uf"]);
                 }
 
-                this.localidade1 = this.obterLocalidade(params.queryParams.localidade1);
-                this.localidade2 = this.obterLocalidade(params.queryParams.localidade2);
-                this.tipo = params.queryParams.tipo ? params.queryParams.tipo : '';
+                this.localidade1 = this.obterLocalidade(params.queryParams["localidade1"]);
+                this.localidade2 = this.obterLocalidade(params.queryParams["localidade2"]);
+                this.tipo = params.queryParams["tipo"] ? params.queryParams["tipo"] : '';
 
-                this.objetoURL.uf = params.params.uf;
-                this.objetoURL.municipio = params.params.municipio;
-                this.objetoURL.pesquisa = params.params.pesquisa;
-                this.objetoURL.indicador = params.params.indicador ? params.params.indicador : 0;
+                this.objetoURL.uf = params.params["uf"];
+                this.objetoURL["municipio"] = params.params["municipio"];
+                this.objetoURL.pesquisa = params.params["pesquisa"];
+                this.objetoURL["indicador"] = params.params["indicador"] ? params.params["indicador"] : 0;
                 this.objetoURL.queryParams = params.queryParams ? params.queryParams : {};
             },
             error => {
@@ -152,15 +157,15 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
         let url = [];
         url.push('brasil');
 
-        if (!!this.objetoURL.uf) {
+        if (!!this.objetoURL["uf"]) {
 
-            url.push(this.objetoURL.uf);
+            url.push(this.objetoURL["uf"]);
         }
 
 
-        if (!!this.objetoURL.municipio) {
+        if (!!this.objetoURL["municipio"]) {
 
-            url.push(this.objetoURL.municipio);
+            url.push(this.objetoURL["municipio"]);
         }
 
         url.push('pesquisa');
@@ -289,6 +294,11 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     }
 
     getPeriodosMaisRecente(periodos: any[]): any {
+
+        if(!periodos || periodos.length == 0){
+            return null;
+        }
+
         return this.ordenarPeriodos(periodos)[0];
     }
 }

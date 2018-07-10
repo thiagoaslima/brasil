@@ -44,8 +44,8 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
         // pega a rota atual
         this._routerParams.params$.subscribe(({ params }) => {
             // pega o indicador e a pesquisa a partir da rota
-            this.idPesquisaSelecionada = params.pesquisa;
-            this.idIndicadorSelecionado = params.indicador;
+            this.idPesquisaSelecionada = params["pesquisa"];
+            this.idIndicadorSelecionado = params["indicador"];
         });
 
     }
@@ -60,7 +60,7 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
 
-        if (changes.localidade && changes.localidade.currentValue) {
+        if (changes["localidade"] && changes["localidade"].currentValue) {
             this._pesquisaService.
                 getPesquisasPorAbrangenciaTerritorial(this.localidade.tipo)
                 .subscribe(pesquisas => {

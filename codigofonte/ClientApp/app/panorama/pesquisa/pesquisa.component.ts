@@ -56,15 +56,18 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         this.subscription = this._routerParams.params$.subscribe(urlParams => {
             this._pesquisaService.getPesquisa(parseInt(urlParams.params['pesquisa'])).subscribe((pesquisa) => {
 
-                // Caso seja uma pesquiasa qem que os indicadores mudam conforme o ano, é necessário informar um período para obter os indicadores.
-                let periodoMaisrecente = null;
+                // Caso seja uma pesquisa em que os indicadores mudam conforme o ano, é necessário informar um período para obter os indicadores.
+                let anoMaisrecente = null;
                 if (this._pesquisaService.isPesquisaComIndicadoresQueVariamComAno(pesquisa.id)) {
 
-                    periodoMaisrecente = this.getPeriodosMaisRecente(this.getPeriodosValidos(pesquisa.periodos)).nome;
+                    let periodoMaisrecente = this.getPeriodoMaisRecente(this.getPeriodosValidos(pesquisa.periodos));
+                    
+                    // Se a pesquisa não possui nenhum período disponível, o ano é configurado como null
+                    anoMaisrecente = !!periodoMaisrecente ? periodoMaisrecente.nome : null;
                 }
 
                 this._indicadorService
-                .getIndicadoresByIdByLocalidade(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), escopoIndicadores.filhos, null, false, periodoMaisrecente)
+                .getIndicadoresByIdByLocalidade(Number(urlParams.params['pesquisa']), Number(urlParams.params['indicador']), escopoIndicadores.filhos, null, false, anoMaisrecente)
                 .subscribe((indicadores) => {
                     this.pesquisa = pesquisa;
                     this.localidades = new Array(3);
@@ -107,7 +110,9 @@ export class PesquisaComponent implements OnInit, OnDestroy {
                         this.periodo = urlParams.queryParams['ano'];
                     }
                     else {
-                        this.periodo = this.getPeriodosMaisRecente(this.getPeriodosValidos(periodos)).nome;
+
+                        let periodoMaisRecente = this.getPeriodoMaisRecente(this.getPeriodosValidos(periodos));
+                        this.periodo = !!periodoMaisRecente ? periodoMaisRecente.nome : null;
                     }
                     this.indicadores = indicadores;
                     if(parseInt(urlParams.params['pesquisa']) != 23) //23 = censo
@@ -164,7 +169,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
         return periodos.sort((periodoA, periodoB) => periodoA.nome < periodoB.nome ? 1 : -1);
     }
 
-    getPeriodosMaisRecente(periodos: any[]): any {
+    getPeriodoMaisRecente(periodos: any[]): any {
         return this.ordenarPeriodos(periodos)[0];
     }
 }
