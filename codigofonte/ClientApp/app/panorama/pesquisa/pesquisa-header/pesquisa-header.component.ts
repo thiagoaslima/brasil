@@ -73,6 +73,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
         this.isBrowser = isPlatformBrowser(platformId);
      }
+    
 
     ngOnInit() {
 
@@ -83,9 +84,16 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 // Lista de periodos disponíveis exibidos na lista de seleção para o usuário
                 this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
 
+                // Se for a pesquisa Projeção da população, código 53, somente são exibidos os anos a partir de 2010
+                if (this.pesquisa.id == 53)
+                {                    
+                    this.listaPeriodos = this.listaPeriodos.filter(ano => ano.nome >= 2010);
+                } 
+
                 // Se na URL já houver o parâmetro ano, este é selecionado para exibir os dados da pesquisa
                 if (params.queryParams["ano"]) {
                     this.ano = parseInt(params.queryParams["ano"]);
+
                 }
                 else {
                     // Quando não houver o parâmetro ano, selecionado e exibido o período mais recente disponível na pesquisa
