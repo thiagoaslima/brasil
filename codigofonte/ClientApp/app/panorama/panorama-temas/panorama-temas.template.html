@@ -27,7 +27,7 @@
 
     <!-- Pirâmide etária -->
     
-    <div class="piramide-etaria" *ngIf="item.tema.toLowerCase() == 'população'">
+    <div class="piramide-etaria" *ngIf="item.tema.toLowerCase() == 'população' && !isMobile()">
         <piramide-etaria [codmun]="localidade.codigo.toString()"></piramide-etaria>
     </div>
 

@@ -18,6 +18,7 @@ import { PanoramaService } from '../panorama.service';
 import {
     TraducaoService,
     ResultadoPipe,
+    IsMobileService,
     Ranking,
     Localidade, Resultado
 } from '../../shared';
@@ -48,6 +49,7 @@ export class PanoramaTemasComponent implements OnChanges {
         private _panoramaService: PanoramaService,
         private pageScrollService: PageScrollService,
         private _traducaoServ: TraducaoService,
+        private _isMobileService: IsMobileService,
         @Inject(PLATFORM_ID) platformId: string,
         @Optional() @Inject(DOCUMENT) private document
     ) {
@@ -114,6 +116,11 @@ export class PanoramaTemasComponent implements OnChanges {
             this.pageScrollService.start(pageScrollInstance);
         }
     };
+
+    public isMobile(){
+
+        return !!this._isMobileService.any();
+    }
 
     private atualizaTextos(): void {
         this.temas.forEach(({ tema }) => this.textos[tema] = this._textos[tema] ? this._textos[tema]() : '');
@@ -278,6 +285,8 @@ export class PanoramaTemasComponent implements OnChanges {
         }
 
     }
+
+    
 
 
 }
