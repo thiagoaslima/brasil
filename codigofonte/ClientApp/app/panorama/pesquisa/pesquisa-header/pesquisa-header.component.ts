@@ -73,6 +73,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
         this.isBrowser = isPlatformBrowser(platformId);
      }
+    
 
     ngOnInit() {
 
@@ -80,7 +81,15 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             this._pesquisaService.getPesquisa(parseInt(params.params.pesquisa)).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
     
+                // this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
+                
                 this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
+
+                if (this.pesquisa.id == 53)
+                {                    
+                    this.listaPeriodos = this.listaPeriodos.filter(ano => ano.nome >= 2010);
+                } 
+
 
                 if (params.queryParams.ano) {
                     this.ano = parseInt(params.queryParams.ano);
