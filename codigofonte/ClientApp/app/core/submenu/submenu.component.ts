@@ -132,4 +132,14 @@ export class SubmenuComponent implements OnInit, OnDestroy, OnChanges {
     getPeriodosMaisRecente(periodos: any[]): any {
         return this.ordenarPeriodos(periodos)[0];
     }
+
+    // Chamada para o método do Serviço que verifica se a Pesquisa deve ser visualizada ou não. 
+
+    verificaPesquisaVisualizada(idPesquisaSelecionada : number)
+    {        
+        return this._pesquisaService.isPesquisaVisualizada(idPesquisaSelecionada);
+
+    }
+
+    
 }

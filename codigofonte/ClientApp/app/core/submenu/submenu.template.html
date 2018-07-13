@@ -5,30 +5,38 @@
         <li class="submenu__item" *ngFor="let pesquisa of pesquisas; let i = index;"
             [class.submenu__item--selecionado]="pesquisa.id == idPesquisaSelecionada || pesquisa.visivel">
             
-            <!--botão-->
-                <p class="submenu__texto" (click)="onClick(i)">
-                <!--<span class="submenu__texto">-->
-                    {{ pesquisa.nome }}
-                    <!--</span>-->
-                <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"
-                    [class.fa-chevron-right]="!pesquisa.visivel"
-                    [class.fa-chevron-down]="pesquisa.visivel"
-                    [class.submenu__seta--selecionado]="pesquisa.visivel"
-                    ></i>
-            </p>
-            <!--submenu-->
-            <ul class="submenu__submenu" *ngIf="pesquisa.id === idPesquisaSubmenu">
-                <li class="submenu__subitem" *ngFor="let indicador of indicadores" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
-                    <a class="submenu__subtexto" (click)="closeMenu.emit()" routerLink="{{ localidade.link + '/pesquisa/' + pesquisa.id + '/' + indicador.id }}" [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
-                        <!--<span class="submenu__texto">-->
-                            {{ indicador.nome }}
-                            <!--</span>-->
-                        <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
-                    </a>
-                    <span class="submenu__separador"></span>
-                </li>
-                <!--<li class="submenu__separador"></li>-->
-            </ul>
+
+           <div *ngIf="!verificaPesquisaVisualizada(pesquisa.id)">
+           <!-- Este if verifica se a Pesquisa deve ser visualizada. As Pesquisas que não devem ser visualizadas
+                são Sinopse Municipal (id = 33) e Sinopse Estadual (id = 48). -->
+
+                <!--botão-->
+                    <p class="submenu__texto" (click)="onClick(i)">
+                    <!--<span class="submenu__texto">-->
+                        {{ pesquisa.nome }}
+                        <!--</span>-->
+                    <i class="fa fa-chevron-right submenu__seta" aria-hidden="true"
+                        [class.fa-chevron-right]="!pesquisa.visivel"
+                        [class.fa-chevron-down]="pesquisa.visivel"
+                        [class.submenu__seta--selecionado]="pesquisa.visivel"
+                        ></i>
+                    </p>
+                <!--submenu-->
+                    <ul class="submenu__submenu" *ngIf="pesquisa.id === idPesquisaSubmenu">
+                        <li class="submenu__subitem" *ngFor="let indicador of indicadores" [class.submenu__subitem--selecionado]="indicador.id == idIndicadorSelecionado">
+                            <a class="submenu__subtexto" (click)="closeMenu.emit()" routerLink="{{ localidade.link + '/pesquisa/' + pesquisa.id + '/' + indicador.id }}" [queryParams]="{detalhes: 'true'}" routerLinkActive="active">
+                                <!--<span class="submenu__texto">-->
+                                    {{ indicador.nome }}
+                                <!--</span>-->
+                                <i class="fa fa-chevron-right submenu__subseta" aria-hidden="true" [class.submenu__subseta--selecionada]="indicador.id == idIndicadorSelecionado"></i>
+                            </a>
+                            <span class="submenu__separador"></span>
+                        </li>
+                        <!--<li class="submenu__separador"></li>-->
+                    </ul>
+
+           </div> 
+
             <span class="submenu__separador"></span>
         </li>
         <!--<li class="submenu__separador"></li>-->
