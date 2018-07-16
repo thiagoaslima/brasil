@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.8.14.1] - 2018-07-16
+### Fixed
+	- Correção da descrição da pesquisa 49, Pesquisa Anual da Indústria da Construção - PAIC.
+
+
 ## [v4.3.8.14] - 2018-06-28
 ### Fixed
 	- Correção da exibição da quantidade de casas decimais do indicador "Área da unidade territorial" nos panomaras Brasil, estados e municípios.
