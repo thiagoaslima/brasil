@@ -50,7 +50,22 @@ export class PesquisaService3 {
      * 10076 - PESQUISA ESTADIC (Suplemento Esporte)
      *
      */
+
     private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 24, 45, 1, 10075, 10077, 10078, 10079, 10084, 10085, 10072, 10080, 10081, 10082, 10076 ];
+
+    /** 
+    * Algumas Pesquisas não devem ser visualizadas na lista de Pesquisas. Elas são as seguintes:
+    *
+    * 33 - SINOPSE MUNICIPAL
+    * 48 - SINOPSE ESTADUAL
+    *
+    * Está sendo utilizado um array com os códigos destas Pesquisas. Este array é verificado
+    * para saber se a Pesquisa deve ser visualizada ou não.
+    *
+    */
+
+    private PESQUISAS_QUE_NAO_DEVEM_SER_VISUALIZADAS: number[] = [ 33, 48 ];
+
 
     constructor(
         private _http: Http,
@@ -123,7 +138,13 @@ export class PesquisaService3 {
 
         return this.PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO.indexOf(idPesquisa) >= 0;
     }
+    
+    public isPesquisaVisualizada(idPesquisa: number){
 
+        return this.PESQUISAS_QUE_NAO_DEVEM_SER_VISUALIZADAS.indexOf(idPesquisa) >= 0;
+
+    }
+  
     private _request(url: string): Observable<any> {
 
         if(this.idioma!=null){

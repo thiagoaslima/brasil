@@ -1,5 +1,16 @@
 # Change log
 
+## [v4.3.8.15] - 2018-07-13 em homologação
+### Fixed
+	- Correção de erro que não exibia os indicadores corretamente na Pesquisa Retroprojeção da População.
+	- Remoção da biblioteca https://wzrd.in/standalone/es7-shim@latest
+
+### Changed
+	- Alteração no Panorama para não exibir a pirâmide etária em dispositivos mobile.
+	- Alteração dos anos da Pesquisa Projeção da População para que sejam exibidos os anos maiores ou iguais a 2010.
+	- Alteração para que as Pesquisas Sinopse Municipal e Sinopse Estadual não sejam visualizadas na lista de Pesquisas.
+
+
 ## [v4.3.8.14] - 2018-06-28
 ### Fixed
 	- Correção da exibição da quantidade de casas decimais do indicador "Área da unidade territorial" nos panomaras Brasil, estados e municípios.
