@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.8.15.1] - 2018-07-17 em homologação
+### Changed
+	- Merge com a branch hotfix_v4.3.8.14
+
+
 ## [v4.3.8.15] - 2018-07-13 em homologação
 ### Fixed
 	- Correção de erro que não exibia os indicadores corretamente na Pesquisa Retroprojeção da População.
