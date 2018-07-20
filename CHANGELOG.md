@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.8.15.2] - 2018-07-20 em homologação
+### Fixed
+	- Correção de falha ao exibir o período preliminar na pesquisa Censo Agro. 
+
+
 ## [v4.3.8.15.1] - 2018-07-17 em homologação
 ### Changed
 	- Merge com a branch hotfix_v4.3.8.14
