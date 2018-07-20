@@ -33,7 +33,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     localidade: Localidade;
     localidade1: Localidade = null;
     localidade2: Localidade = null;
-    ano = 0;
+    ano: string;
     indicador = 0;
     mostrarNotas = false;
     mostrarOpcoes = false;
@@ -81,6 +81,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
             this._pesquisaService.getPesquisa(parseInt(params.params["pesquisa"])).subscribe((pesquisa) => {
                 this.pesquisa = pesquisa;
 
+                debugger;
+
                 // Lista de periodos disponíveis exibidos na lista de seleção para o usuário
                 this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
 
@@ -92,7 +94,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
                 // Se na URL já houver o parâmetro ano, este é selecionado para exibir os dados da pesquisa
                 if (params.queryParams["ano"]) {
-                    this.ano = parseInt(params.queryParams["ano"]);
+                    this.ano = params.queryParams["ano"];
 
                 }
                 else {
@@ -103,7 +105,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                     this.ano = !!periodoMaisRecente ? periodoMaisRecente.nome : null;
                 }
 
-                this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, !!this.ano ? this.ano.toString() : null)
+                debugger;
+                this._indicadorService.getIndicadoresDaPesquisaByPeriodo(this.pesquisa.id, !!this.ano ? this.ano : null)
                     .subscribe((indicadores) => {
                         this.indicadoresDaPesquisa = indicadores;
                     });
