@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.8.15.3] - 2018-07-24 em homologação
+### Changed
+	- Alteração dos anos da Pesquisa Censo Agropecuário para que não seja exibida a opção 2017-V2
+
+
 ## [v4.3.8.15.2] - 2018-07-20 em homologação
 ### Fixed
 	- Correção de falha ao exibir o período preliminar na pesquisa Censo Agro. 
