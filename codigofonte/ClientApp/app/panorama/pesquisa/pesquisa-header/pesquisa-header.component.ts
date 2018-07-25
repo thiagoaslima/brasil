@@ -47,6 +47,8 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
     isNivelEstadual;
     isNivelNacional;
 
+    indice;
+
     private subs$$;
     public isOcultarValoresVazios = true;
 
@@ -85,6 +87,27 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
 
                 // Lista de periodos disponíveis exibidos na lista de seleção para o usuário
                 this.listaPeriodos = this.ordenarPeriodos(this.getPeriodosValidos(pesquisa.periodos));
+
+
+                // Se a pesquisa for Censo Agropecuário, código 24, não será exibida a opção '2017-V2' na lista de anos 
+                if (this.pesquisa.id == 24)
+                {
+                    // debugger;
+
+                    for (this.indice=0; this.indice <= this.listaPeriodos.length; this.indice++)
+                    {
+                        if (this.listaPeriodos[this.indice].nome == '2017-V2')
+                        {
+                            break;
+
+                        }
+                    }
+                    
+                    let listaPeriodos_inicial = this.listaPeriodos.slice(0, this.indice);
+                    let listaPeriodos_final = this.listaPeriodos.slice(this.indice + 1, this.listaPeriodos.length);
+                    this.listaPeriodos = listaPeriodos_inicial.concat(listaPeriodos_final);
+
+                }
 
                 // Se for a pesquisa Projeção da população, código 53, somente são exibidos os anos a partir de 2010
                 if (this.pesquisa.id == 53)
