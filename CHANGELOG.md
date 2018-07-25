@@ -1,6 +1,10 @@
 # Change log
 
-## [v4.3.8.15.4]
+## [v4.3.8.15.5] - 2018-07-25 em homologação
+### Changed
+	- Alteração do label 2017-preliminar da lista de anos da Pesquisa Censo Agropecuário para 2017 Resultados preliminares.
+	
+## [v4.3.8.15.4] - 2018-07-25
 ### Changed
 	- Otimimização de velocidade no primeiro acessso.	
 
