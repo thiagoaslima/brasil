@@ -1,5 +1,10 @@
 # Change log
 
+## [v4.3.8.15.4]
+### Changed
+	- Otimimização de velocidade no primeiro acessso.	
+
+
 ## [v4.3.8.15.3] - 2018-07-24 em homologação
 ### Changed
 	- Alteração dos anos da Pesquisa Censo Agropecuário para que não seja exibida a opção 2017-V2
