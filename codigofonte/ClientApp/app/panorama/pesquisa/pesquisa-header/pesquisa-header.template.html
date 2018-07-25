@@ -20,9 +20,9 @@
                 <!--<option *ngFor="let periodo of listaPeriodos" [selected]="periodo.nome == ano">{{ periodo.nome }}</option>-->
                 <ng-template ngFor let-periodo [ngForOf]="listaPeriodos">
 
-                    <!-- Se a Pesquisa for o Censo Agropecuário e o ano for '2017-preliminar' deverá ser exibido o label '2017 - resultado preliminar' -->
-                    <option *ngIf="periodo.nome == ano" [value]="periodo.nome" selected>{{ periodo.nome == '2017-preliminar' ? '2017 - resultado preliminar' :  periodo.nome}}</option>
-                    <option *ngIf="periodo.nome != ano" [value]="periodo.nome">{{ periodo.nome == '2017-preliminar' ? '2017 - resultado preliminar' :  periodo.nome}}</option>
+                    <!-- Se a Pesquisa for o Censo Agropecuário e o ano for '2017-preliminar' deverá ser exibido o label '2017 Resultados preliminares' -->
+                    <option *ngIf="periodo.nome == ano" [value]="periodo.nome" selected>{{ periodo.nome == '2017-preliminar' ? '2017 Resultados preliminares' :  periodo.nome}}</option>
+                    <option *ngIf="periodo.nome != ano" [value]="periodo.nome">{{ periodo.nome == '2017-preliminar' ? '2017 Resultados preliminares' :  periodo.nome}}</option>
                 </ng-template>
             </select>
         </div>
