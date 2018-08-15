@@ -94,7 +94,7 @@ export class PesquisaHeaderComponent implements OnInit, OnDestroy {
                 {
                     // debugger;
 
-                    for (this.indice=0; this.indice <= this.listaPeriodos.length; this.indice++)
+                    for (this.indice=0; this.indice < this.listaPeriodos.length; this.indice++)
                     {
                         if (this.listaPeriodos[this.indice].nome == '2017-V2')
                         {

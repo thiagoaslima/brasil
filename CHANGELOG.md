@@ -1,5 +1,13 @@
 # Change log
 
+## [v4.3.8.16] - 2018-08-15
+### Changed
+	- Inclusão das Notas Técnicas dos municípios de Sairé - PE e São Gonçalo do Amarante - RN.
+
+### Fixed
+	- Correção na exibição do período do Censo Agropecuário 2017.
+
+
 ## [v4.3.8.15.5] - 2018-07-25 em homologação
 ### Changed
 	- Alteração do label 2017-preliminar da lista de anos da Pesquisa Censo Agropecuário para 2017 Resultados preliminares.
