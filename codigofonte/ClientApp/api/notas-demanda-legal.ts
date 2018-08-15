@@ -58,5 +58,15 @@ export const notasEspeciais = [
         "localidade": 2933208,
         "indicador": 29171,
         "nota": "População judicial do município de Vera Cruz-BA: entre 44.149 a 50.940 habitantes. Processo Judicial nº 8000464-59.2018.8.05.0124 (Vara dos Feitos Relativos às Relações de Consumo, Cíveis e Comerciais, Registros Públicos e Acidentes de Trabalho e Juizado Especial Adjunto da Comarca de Itaparica)."
+    },
+    {
+        "localidade": 2612000,
+        "indicador": 29171,
+        "nota": "População judicial do município Sairé-PE: 10.247 habitantes. Processo Judicial nº 0800362-83.20184.05.8302 (37ª Vara Federal-PE)."
+    },
+    {
+        "localidade": 2412005,
+        "indicador": 29171,
+        "nota": "População judicial do município de São Gonçalo do Amarante-RN: entre 101.881 e 115.464 habitantes. Processo Judicial nº: 0813188-75.2017.4.05.8400 (4ª Vara Federal - RN)."
     }
 ]
