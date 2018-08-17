@@ -990,7 +990,7 @@ export const PANORAMA: {
                  {
                     pesquisaId: 13,
                     indicadorId: 5908,
-                    periodo: '2015',
+                    periodo: '2017',
                     titulo: 'panorama_configuration_estado_matriculas_ensino_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -998,7 +998,7 @@ export const PANORAMA: {
                  {
                     pesquisaId: 13,
                     indicadorId: 5913,
-                    periodo: '2015',
+                    periodo: '2017',
                     titulo: 'panorama_configuration_estado_matriculas_ensino_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.painel
@@ -1006,7 +1006,7 @@ export const PANORAMA: {
                 {
                     // pesquisaId: 13,
                     // indicadorId: 5908,
-                    periodo: '2015',
+                    periodo: '2017',
                     // titulo: 'Matrículas no ensino fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -1036,7 +1036,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 13,
                     indicadorId: 5934,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_estado_docentes_ensino_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1044,7 +1044,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 13,
                     indicadorId: 5950,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_estado_numero_estabelecimentos_ensino_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1052,7 +1052,7 @@ export const PANORAMA: {
                  {
                     pesquisaId: 13,
                     indicadorId: 5955,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_estado_numero_estabelecimentos_ensino_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1311,7 +1311,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 13,
                     indicadorId: 5908,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_municipio_matriculas_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.grafico,
@@ -1337,7 +1337,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 13,
                     indicadorId: 5913,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_municipio_matriculas_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1353,7 +1353,7 @@ export const PANORAMA: {
                  {
                     pesquisaId: 13,
                     indicadorId: 5934,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_municipio_docentes_ensino_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1361,7 +1361,7 @@ export const PANORAMA: {
                 {
                     pesquisaId: 13,
                     indicadorId: 5950,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_municipio_numero_estabelecimentos_ensino_fundamental',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
@@ -1369,7 +1369,7 @@ export const PANORAMA: {
                  {
                     pesquisaId: 13,
                     indicadorId: 5955,
-                    periodo:'2015',
+                    periodo:'2017',
                     titulo: 'panorama_configuration_municipio_numero_estabelecimentos_ensino_medio',
                     tema: TEMAS.educacao.label,
                     visualizacao: PanoramaVisualizacao.numerico
