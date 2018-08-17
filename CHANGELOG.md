@@ -1,5 +1,11 @@
 # Change log
 
+
+## [v4.3.8.18] - 2018-08-17 em homologação
+### Changed
+	- Inclusão da pesquisa 10087 - PESQUISA MUNIC (Suplemento Saneamento Básico) na lista de pesquisas e na configuração de pesquisas que variam com o ano.
+
+
 ## [v4.3.8.17] - 2018-08-17 em homologação
 ### Changed
 	- Atualização do tema educação nos panoramas municipal e estadual.
