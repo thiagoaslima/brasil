@@ -43,6 +43,7 @@ export class PesquisaService3 {
      * 10079 - PESQUISA MUNIC (Suplemento Assistência Social)
      * 10084 - PESQUISA MUNIC (Suplemento Inclusão Produtiva)
      * 10085 - PESQUISA MUNIC (Suplemento Cultura)
+     * 10087 - PESQUISA MUNIC (Suplemento Saneamento Básico)
      * 10072 - PESQUISA ESTADIC
      * 10080 - PESQUISA ESTADIC (Suplemento Cultura)
      * 10081 - PESQUISA ESTADIC (Suplemento Inclusão Produtiva)
@@ -51,7 +52,7 @@ export class PesquisaService3 {
      *
      */
 
-    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 24, 45, 1, 10075, 10077, 10078, 10079, 10084, 10085, 10072, 10080, 10081, 10082, 10076 ];
+    private PESQUISAS_COM_INDICADORES_QUE_VARIAM_COM_ANO: number[] = [ 24, 45, 1, 10075, 10077, 10078, 10079, 10084, 10085, 10072, 10080, 10081, 10082, 10076, 10087 ];
 
     /** 
     * Algumas Pesquisas não devem ser visualizadas na lista de Pesquisas. Elas são as seguintes:
