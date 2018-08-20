@@ -1,5 +1,9 @@
 # Change log
 
+## [v4.3.8.18.1] - 2018-08-20 em homologação
+### Changed
+	- Aumento do tamanho máximo de caracteres exibidos no título da pesquisa de 55 para 80.
+
 
 ## [v4.3.8.18] - 2018-08-17 em homologação
 ### Changed
