@@ -1,0 +1,41 @@
+<div style="margin: 100px">
+    <h1>Dump</h1>
+
+    <ul>
+        <ng-template ngFor let-pesquisa [ngForOf]="lista$ | async">
+        <li (click)="download(pesquisa)">
+            <strong>{{ pesquisa.nome }}</strong>
+
+            <ul *ngIf="localidades && localidades.length > 0" style="font-size: 11px">
+                <li *ngFor="let localidade of localidades"
+                    [class.success]="isSucess(pesquisa.id, localidade.codigo)"
+                    [class.fail]="isFail(pesquisa.id, localidade.codigo)"
+                >
+                {{ localidade.nome }}
+                </li>
+            </ul>
+        </li>
+        </ng-template>
+    </ul>    
+
+    <div style="display: flex; flex-direction: row">
+
+        <ul>
+            <li>
+                <h3>Downloaded</h3>
+            </li>
+            <li *ngFor="let item of pesquisas">
+                {{item[0]}} - {{ item[1]}}
+            </li>
+        </ul>
+
+        <ul style="margin-left: 100px">
+            <li>
+                <h3>Errors</h3>
+            </li>
+            <li *ngFor="let item of errors">
+                {{item[0]}} - {{ item[1]}}
+            </li>
+        </ul>
+    </div>
+</div>

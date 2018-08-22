@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 import { AuthorizationGuard } from './authorization.guard';
 import { EmptyComponent } from './empty.component';
 import { ShellComponent } from './core';
 import { LoginComponent } from './core/login';
 import { V3RouterGuard } from './v3-router.guard';
+import { DumpComponent } from "./dump/dump.component";
+import { Dump2Component } from "./dump/dump2.component";
 
 
 const appRoutes: Routes = [
+
     {
         path: 'brasil/sintese',
         loadChildren: './estado-sintese/estado-sintese.module#EstadoSinteseModule',
@@ -33,7 +36,16 @@ const appRoutes: Routes = [
     {
         path: '',
         component: ShellComponent,
-        children: [{
+        children: [
+            {
+                path: 'dump2',
+                component: Dump2Component
+            },
+            {
+                path: 'dump',
+                component: DumpComponent
+            },
+            {
                 path: '',
                 loadChildren: './home/home.module#HomeModule',
                 canActivateChild: [AuthorizationGuard]
@@ -121,7 +133,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(
             appRoutes, {
                 // enableTracing: true,
-                // preloadingStrategy: PreloadAllModules
+                preloadingStrategy: PreloadAllModules
             },
         ),
     ],
@@ -130,7 +142,7 @@ const appRoutes: Routes = [
         V3RouterGuard
     ],
     declarations: [
-
+        
     ]
     // exports: [
     //     RouterModule

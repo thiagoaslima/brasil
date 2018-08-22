@@ -104,7 +104,7 @@ export class SinteseService {
 
     public getResultadoPesquisa2(pesquisaId: number, posicaoIndicador: string, codigoUF: number, escopo = escopoIndicadores.arvoreCompleta, periodo: string = 'all') {
 
-        let codigoCoringaTodosMunucipiosUF = codigoUF == 0 ? 'xx' : `${codigoUF}xxxx`;
+        let codigoCoringaTodosMunucipiosUF = codigoUF == -1 ? 0 : (codigoUF == 0 ? 'xx' : `${codigoUF}xxxx`);
 
         const serviceEndpoint = `${this.ENDPOINT_SERVICO_DADOS}/v1/pesquisas/${pesquisaId}/periodos/${periodo}/indicadores/${posicaoIndicador}/resultados/${codigoCoringaTodosMunucipiosUF}?scope=${escopo}&${this.idioma}`;
 

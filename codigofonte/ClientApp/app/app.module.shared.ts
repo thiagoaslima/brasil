@@ -8,6 +8,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { EmptyComponent } from './empty.component';
+import { DumpComponent } from "./dump/dump.component";
+import { SinteseModule } from "./panorama/sintese/sintese.module";
+import { Dump2Component } from "./dump/dump2.component";
 
 // import { RootRoutingModule } from './root-routing.module';
 // import { RootModule } from './root.module';
@@ -18,7 +21,9 @@ import { EmptyComponent } from './empty.component';
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
-        EmptyComponent
+        EmptyComponent,
+        DumpComponent,
+        Dump2Component
     ],
     imports: [
         CommonModule,
@@ -26,7 +31,8 @@ import { EmptyComponent } from './empty.component';
         RouterModule,
         CoreModule,
         AppRoutingModule,
-        SharedModule.forRoot()        
+        SharedModule.forRoot()  ,
+        SinteseModule      
     ],
     providers: [
         // ValidParametersGuard

@@ -1,0 +1,43 @@
+<style>
+    span + span:before {
+        content: '|';
+        margin: 0 5px;
+    }
+
+</style>
+
+<div style="margin: 100px">
+    <h1>Dump</h1>
+
+    <button *ngIf="canStart" (click)="start()">Start</button>
+
+
+    <p>Downloading: {{ downloading }}</p>
+
+       
+
+    <div style="display: flex; flex-direction: row">
+
+        <ul *ngIf="pesquisasBaixadas.length > 0">
+            <li>
+                <h3>Downloaded</h3>
+            </li>
+            <li *ngFor="let item of pesquisasBaixadas; let i = index; trackBy: trackByFn">
+                <strong>{{ item.nome + '(' + i + ')' }}: </strong> 
+                <br> 
+                <span *ngFor="let item of localidadesBaixadas[i]; let j = index; trackBy: trackByFn">{{ item.identificador + '(' + j + ')' }} </span>
+            </li>
+        </ul>
+
+         <ul *ngIf="pesquisasErro.length > 0">
+            <li>
+                <h3>Erro</h3>
+            </li>
+            <li *ngFor="let item of pesquisasErro; let i = index; trackBy: trackByFn">
+                <strong>{{ item.nome + '(' + i + ')' }}: </strong> 
+                <br> 
+                <span *ngFor="let item of localidadesErro[i]; let j = index; trackBy: trackByFn">{{ item.identificador + '(' + j + ')' }} </span>
+            </li>
+        </ul>
+    </div>
+</div>
